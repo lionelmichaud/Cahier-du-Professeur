@@ -29,7 +29,6 @@ final class ObservationStore: ObservableObject {
         }
     }
 
-
     static let exemple : ObservationStore = {
         let store = ObservationStore()
         store.items.append(Observation.exemple)

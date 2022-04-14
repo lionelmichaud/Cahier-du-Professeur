@@ -44,6 +44,20 @@
 		79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABF72808818D00D068D9 /* ColleManager.swift */; };
 		79F3ABFB2808845400D068D9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFA2808845400D068D9 /* Store.swift */; };
 		79F3ABFC2808845400D068D9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFA2808845400D068D9 /* Store.swift */; };
+		79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFD2808C68700D068D9 /* UIState.swift */; };
+		79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFD2808C68700D068D9 /* UIState.swift */; };
+		79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC002808C76A00D068D9 /* MainScene.swift */; };
+		79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC002808C76A00D068D9 /* MainScene.swift */; };
+		79F3AC042808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */; };
+		79F3AC052808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */; };
+		79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */; };
+		79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */; };
+		79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */; };
+		79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */; };
+		79F3AC0D2808CA8700D068D9 /* ColleSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */; };
+		79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */; };
+		79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
+		79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +104,13 @@
 		79F3ABF4280880CC00D068D9 /* ObservationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationManager.swift; sourceTree = "<group>"; };
 		79F3ABF72808818D00D068D9 /* ColleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleManager.swift; sourceTree = "<group>"; };
 		79F3ABFA2808845400D068D9 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		79F3ABFD2808C68700D068D9 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
+		79F3AC002808C76A00D068D9 /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementSidebarView.swift; sourceTree = "<group>"; };
+		79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseSidebarView.swift; sourceTree = "<group>"; };
+		79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveSidebarView.swift; sourceTree = "<group>"; };
+		79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleSidebarView.swift; sourceTree = "<group>"; };
+		79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSidebarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +162,9 @@
 		79F3AB8D2808218100D068D9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				79F3ABFD2808C68700D068D9 /* UIState.swift */,
 				79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */,
+				79F3AC002808C76A00D068D9 /* MainScene.swift */,
 				79F3ABCA280821CE00D068D9 /* Model */,
 				79F3ABCB280821E700D068D9 /* Views */,
 				79F3AB902808218300D068D9 /* Assets.xcassets */,
@@ -203,6 +226,11 @@
 			isa = PBXGroup;
 			children = (
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
+				79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */,
+				79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */,
+				79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */,
+				79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */,
+				79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -424,11 +452,18 @@
 			files = (
 				79F3ABFB2808845400D068D9 /* Store.swift in Sources */,
 				79F3ABCD2808222C00D068D9 /* Etablissement.swift in Sources */,
+				79F3AC0D2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
+				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				79F3ABEA28086C4F00D068D9 /* EtablissementManager.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
+				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
+				79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDC280826A400D068D9 /* Sexe.swift in Sources */,
+				79F3AC042808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */,
+				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
+				79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */,
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
@@ -446,11 +481,18 @@
 			files = (
 				79F3ABFC2808845400D068D9 /* Store.swift in Sources */,
 				79F3ABCE2808222C00D068D9 /* Etablissement.swift in Sources */,
+				79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
+				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				79F3ABEB28086C4F00D068D9 /* EtablissementManager.swift in Sources */,
 				79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */,
+				79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
+				79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
+				79F3AC052808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */,
+				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
+				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
 				79F3ABE8280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79F3ABB92808218300D068D9 /* ContentView.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,

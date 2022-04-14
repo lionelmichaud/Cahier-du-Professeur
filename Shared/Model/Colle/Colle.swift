@@ -6,9 +6,48 @@
 //
 
 import Foundation
-import AppFoundation
 
-class Colle: ObservableObject, Identifiable {
+final class ColleStore: ObservableObject {
+    @Published
+    var items: [Colle] = [ ]
+
+    func add(_ item: Colle) {
+        items.insert(item, at: 0)
+    }
+
+    func delete(_ item  : Colle) {
+        // zeroize du pointeur de la classe vers l'élève
+        if let eleve = item.eleve {
+            let colleManager = ColleManager()
+            colleManager.retirer(colle: item,
+                                 deEleve: eleve)
+        }
+
+        // retirer la colle de la liste
+        items.removeAll {
+            $0.id == item.id
+        }
+    }
+
+    static let exemple : ColleStore = {
+        let store = ColleStore()
+        store.items.append(Colle.exemple)
+        store.items.append(Colle.exemple)
+        return store
+    }()
+}
+
+extension ColleStore: CustomStringConvertible {
+    var description: String {
+        var str = ""
+        items.forEach { item in
+            str += (String(describing: item) + "\n")
+        }
+        return str
+    }
+}
+
+final class Colle: ObservableObject, Identifiable {
     var id = UUID()
     @Published
     var eleve: Eleve?
@@ -37,7 +76,7 @@ class Colle: ObservableObject, Identifiable {
 extension Colle: CustomStringConvertible {
     var description: String {
         """
-        
+
         COLLE:
            Date: \(date.stringShortDate)
            Eleve: \(eleve?.displayName ?? "nil")

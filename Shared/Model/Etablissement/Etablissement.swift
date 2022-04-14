@@ -7,7 +7,51 @@
 
 import Foundation
 
-class Etablissement: ObservableObject, Identifiable {
+final class EtablissementStore: ObservableObject {
+    @Published
+    var items: [Etablissement] = [ ]
+
+    func add(_ item: Etablissement) {
+        items.insert(item, at: 0)
+    }
+
+    func delete(_ item  : Etablissement,
+                classes : ClasseStore,
+                eleves  : EleveStore,
+                observs : ObservationStore,
+                colles  : ColleStore) {
+        // supprimer toutes les classes de l'établissement
+        item.classes.forEach { classe in
+            classes.delete(classe,
+                           eleves: eleves,
+                           observs: observs,
+                           colles: colles)
+        }
+        // retirer l'établissement de la liste
+        items.removeAll {
+            $0.id == item.id
+        }
+    }
+
+    static let exemple : EtablissementStore = {
+        let store = EtablissementStore()
+        store.items.append(Etablissement.exemple)
+        store.items.append(Etablissement(niveau: .lycee, nom: "Sainte-Marie"))
+        return store
+    }()
+}
+
+extension EtablissementStore: CustomStringConvertible {
+    var description: String {
+        var str = ""
+        items.forEach { item in
+            str += (String(describing: item) + "\n")
+        }
+        return str
+    }
+}
+
+final class Etablissement: ObservableObject, Identifiable {
     var id = UUID()
     @Published
     var niveau: NiveauEtablissement = .college
@@ -20,8 +64,8 @@ class Etablissement: ObservableObject, Identifiable {
         "\(niveau.displayString) \(nom)"
     }
 
-    internal init(niveau: NiveauEtablissement,
-                  nom: String) {
+    init(niveau: NiveauEtablissement,
+         nom: String) {
         self.niveau = niveau
         self.nom = nom
     }
@@ -36,7 +80,7 @@ extension Etablissement: CustomStringConvertible {
         ETABLISSEMENT: \(displayString)
            Niveau: \(niveau.displayString)
            Nom: \(nom)
-           Classe: \(classes.description)
+           Classes: \(String(describing: classes).withPrefixedSplittedLines("     "))
         """
     }
 }

@@ -7,7 +7,61 @@
 
 import Foundation
 
-class Eleve: ObservableObject, Identifiable {
+final class EleveStore: ObservableObject {
+    @Published
+    var items: [Eleve] = [ ]
+
+    func add(_ item: Eleve) {
+        items.insert(item, at: 0)
+    }
+
+    func delete(_ item  : Eleve,
+                observs : ObservationStore,
+                colles  : ColleStore) {
+        // zeroize du pointeur des colles vers l'élève
+        // supprimer la colle de son store
+        item.colles.forEach { colle in
+            colles.delete(colle)
+        }
+
+        // zeroize du pointeur des observations vers l'élève
+        // supprimer l'observation de son store
+        item.observs.forEach { observ in
+            observs.delete(observ)
+        }
+
+        // zeroize du pointeur de la classe vers l'élève
+        if let classe = item.classe {
+            let classeManager = ClasseManager()
+            classeManager.retirer(eleve: item,
+                                  deClasse: classe)
+        }
+
+        // retirer l'élève de la liste
+        items.removeAll {
+            $0.id == item.id
+        }
+    }
+
+    static let exemple : EleveStore = {
+        let store = EleveStore()
+        store.items.append(Eleve.exemple)
+        store.items.append(Eleve.exemple)
+        return store
+    }()
+}
+
+extension EleveStore: CustomStringConvertible {
+    var description: String {
+        var str = ""
+        items.forEach { item in
+            str += (String(describing: item) + "\n")
+        }
+        return str
+    }
+}
+
+final class Eleve: ObservableObject, Identifiable {
     var id = UUID()
     @Published
     var sexe   : Sexe = .male
@@ -15,6 +69,10 @@ class Eleve: ObservableObject, Identifiable {
     var name   : PersonNameComponents = PersonNameComponents()
     @Published
     var classe : Classe?
+    @Published
+    var colles : [Colle] = [ ]
+    @Published
+    var observs : [Observation] = [ ]
 
     var displayName : String {
         "\(sexe.displayString) \(name.formatted(.name(style: .long)))"
@@ -43,6 +101,8 @@ extension Eleve: CustomStringConvertible {
            Sexe: \(sexe.pickerString)
            Nom: \(name.formatted(.name(style: .long)))
            Classe: \(classe?.displayString ?? "inconnue")
+           Observations: \(String(describing: observs).withPrefixedSplittedLines("     "))
+           Colles: \(String(describing: colles).withPrefixedSplittedLines("     "))
         """
     }
 }

@@ -7,7 +7,48 @@
 
 import Foundation
 
-class Observation: ObservableObject, Identifiable {
+final class ObservationStore: ObservableObject {
+    @Published
+    var items: [Observation] = [ ]
+
+    func add(_ item: Observation) {
+        items.insert(item, at: 0)
+    }
+
+    func delete(_ item  : Observation) {
+        // zeroize du pointeur de la classe vers l'élève
+        if let eleve = item.eleve {
+            let observationManager = ObservationManager()
+            observationManager.retirer(observ: item,
+                                       deEleve: eleve)
+        }
+
+        // retirer l'observ de la liste
+        items.removeAll {
+            $0.id == item.id
+        }
+    }
+
+
+    static let exemple : ObservationStore = {
+        let store = ObservationStore()
+        store.items.append(Observation.exemple)
+        store.items.append(Observation.exemple)
+        return store
+    }()
+}
+
+extension ObservationStore: CustomStringConvertible {
+    var description: String {
+        var str = ""
+        items.forEach { item in
+            str += (String(describing: item) + "\n")
+        }
+        return str
+    }
+}
+
+final class Observation: ObservableObject, Identifiable {
     var id = UUID()
     @Published
     var eleve: Eleve?
@@ -24,8 +65,8 @@ class Observation: ObservableObject, Identifiable {
         self.date  = date
     }
 
-    static let exemple = Colle(eleve : Eleve.exemple,
-                               date  : Date.now)
+    static let exemple = Observation(eleve : Eleve.exemple,
+                                     date  : Date.now)
 }
 
 extension Observation: CustomStringConvertible {

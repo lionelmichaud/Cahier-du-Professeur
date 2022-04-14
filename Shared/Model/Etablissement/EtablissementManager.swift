@@ -8,14 +8,14 @@
 import Foundation
 
 struct EtablissementManager {
-    static func ajouter(classe : Classe,
-                        aEtablissement etablissement : Etablissement) {
-        etablissement.classes.append(classe)
+    func ajouter(classe : Classe,
+                 aEtablissement etablissement : Etablissement) {
+        etablissement.classes.insert(classe, at: 0)
         classe.etablissement = etablissement
     }
 
-    static func supprimer(classe : Classe,
-                          deEtablissement etablissement : Etablissement) {
+    func retirer(classe : Classe,
+                 deEtablissement etablissement : Etablissement) {
         etablissement.classes.removeAll { $0.id == classe.id }
         classe.etablissement = nil
     }

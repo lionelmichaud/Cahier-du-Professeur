@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @SceneStorage("selectedTab") var selection = UIState.Tab.etablissement
+    @SceneStorage("selectedTab")
+    var selection = UIState.Tab.etablissement
     
     var body: some View {
         TabView(selection: $selection) {
@@ -43,5 +44,10 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(EtablissementStore.exemple)
+            .environmentObject(ClasseStore.exemple)
+            .environmentObject(EleveStore.exemple)
+            .environmentObject(ColleStore.exemple)
+            .environmentObject(ObservationStore.exemple)
     }
 }

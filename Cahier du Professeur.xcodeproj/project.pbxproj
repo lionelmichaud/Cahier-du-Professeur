@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		795FAB292809C4E2004CB120 /* EtablissementBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */; };
+		795FAB2B2809C813004CB120 /* EtablissementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2A2809C813004CB120 /* EtablissementRow.swift */; };
+		795FAB2D2809C830004CB120 /* EtablissementEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2C2809C830004CB120 /* EtablissementEditor.swift */; };
 		79F3ABA72808218300D068D9 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA62808218300D068D9 /* Tests_iOS.swift */; };
 		79F3ABA92808218300D068D9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA82808218300D068D9 /* Tests_iOSLaunchTests.swift */; };
 		79F3ABB32808218300D068D9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB22808218300D068D9 /* Tests_macOS.swift */; };
@@ -78,6 +81,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementBrowserView.swift; sourceTree = "<group>"; };
+		795FAB2A2809C813004CB120 /* EtablissementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementRow.swift; sourceTree = "<group>"; };
+		795FAB2C2809C830004CB120 /* EtablissementEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementEditor.swift; sourceTree = "<group>"; };
 		79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cahier_du_ProfesseurApp.swift; sourceTree = "<group>"; };
 		79F3AB8F2808218100D068D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79F3AB902808218300D068D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +152,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		795FAB272809C4D0004CB120 /* Etablissement */ = {
+			isa = PBXGroup;
+			children = (
+				795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */,
+				795FAB2A2809C813004CB120 /* EtablissementRow.swift */,
+				795FAB2C2809C830004CB120 /* EtablissementEditor.swift */,
+			);
+			path = Etablissement;
+			sourceTree = "<group>";
+		};
 		79F3AB882808218000D068D9 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +241,7 @@
 		79F3ABCB280821E700D068D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				795FAB272809C4D0004CB120 /* Etablissement */,
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
 				79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */,
 				79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */,
@@ -451,15 +468,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F3ABFB2808845400D068D9 /* Store.swift in Sources */,
+				795FAB2B2809C813004CB120 /* EtablissementRow.swift in Sources */,
 				79F3ABCD2808222C00D068D9 /* Etablissement.swift in Sources */,
 				79F3AC0D2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
+				795FAB2D2809C830004CB120 /* EtablissementEditor.swift in Sources */,
 				79F3ABEA28086C4F00D068D9 /* EtablissementManager.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
 				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
 				79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDC280826A400D068D9 /* Sexe.swift in Sources */,
+				795FAB292809C4E2004CB120 /* EtablissementBrowserView.swift in Sources */,
 				79F3AC042808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */,
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,

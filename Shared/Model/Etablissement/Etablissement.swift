@@ -64,8 +64,8 @@ final class Etablissement: ObservableObject, Identifiable {
         "\(niveau.displayString) \(nom)"
     }
 
-    init(niveau: NiveauEtablissement,
-         nom: String) {
+    init(niveau : NiveauEtablissement = .college,
+         nom    : String = "") {
         self.niveau = niveau
         self.nom = nom
     }

@@ -13,13 +13,17 @@ struct ClassRow: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Text("Classe de \(classe.displayString) de \(classe.nbOfEleves) élèves")
+        }
     }
 }
 
 struct ClassRow_Previews: PreviewProvider {
     static var previews: some View {
         ClassRow(classe: .constant(Classe.exemple), isEditing: false)
+            .previewLayout(.sizeThatFits)
         ClassRow(classe: .constant(Classe.exemple), isEditing: true)
+            .previewLayout(.sizeThatFits)
     }
 }

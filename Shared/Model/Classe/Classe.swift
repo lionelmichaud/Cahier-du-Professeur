@@ -70,6 +70,10 @@ final class Classe: ObservableObject, Identifiable {
     @Published
     var eleves: [Eleve] = []
 
+    var nbOfEleves: Int {
+        eleves.count
+    }
+
     var displayString: String {
         "\(niveau.displayString)\(numero)"
     }

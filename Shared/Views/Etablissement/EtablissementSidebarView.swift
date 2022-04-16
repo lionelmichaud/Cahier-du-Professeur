@@ -16,17 +16,19 @@ struct EtablissementSidebarView: View {
             Text("Sélectionner un établissement")
                 .foregroundStyle(.secondary)
         }
-        .navigationViewStyle(.columns)
+        //.navigationViewStyle(.columns)
     }
 }
 
 struct EtablissementSidebarView_Previews: PreviewProvider {
     static var previews: some View {
-        EtablissementSidebarView()
-            .environmentObject(EtablissementStore.exemple)
-            .environmentObject(ClasseStore.exemple)
-            .environmentObject(EleveStore.exemple)
-            .environmentObject(ColleStore.exemple)
-            .environmentObject(ObservationStore.exemple)
+        TestEnvir.createFakes()
+        return EtablissementSidebarView()
+            .environmentObject(TestEnvir.etabStore)
+            .environmentObject(TestEnvir.classStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colStore)
+            .environmentObject(TestEnvir.obsStore)
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

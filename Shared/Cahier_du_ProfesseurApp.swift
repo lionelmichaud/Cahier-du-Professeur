@@ -22,5 +22,8 @@ struct Cahier_du_ProfesseurApp: App {
                   colleStore  : colleStore ,
                   observStore : observStore)
     }
+
+    init() {
+    }
 }
 

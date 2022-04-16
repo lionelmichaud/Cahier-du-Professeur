@@ -5,11 +5,18 @@
 //  Created by Lionel MICHAUD on 14/04/2022.
 //
 
-import Foundation
+import SwiftUI
 
 final class EtablissementStore: ObservableObject {
     @Published
     var items: [Etablissement] = [ ]
+    var nbOfItems: Int {
+        items.count
+    }
+
+    func exists(_ item: Etablissement) -> Bool {
+        items.contains(where: { item.id == $0.id})
+    }
 
     func add(_ item: Etablissement) {
         items.insert(item, at: 0)
@@ -33,12 +40,26 @@ final class EtablissementStore: ObservableObject {
         }
     }
 
-    static let exemple : EtablissementStore = {
-        let store = EtablissementStore()
-        store.items.append(Etablissement.exemple)
-        store.items.append(Etablissement(niveau: .lycee, nom: "Sainte-Marie"))
-        return store
-    }()
+    func sorted(niveau: NiveauEtablissement) -> Binding<[Etablissement]> {
+        Binding<[Etablissement]>(
+            get: {
+                self.items
+                    .filter {
+                        $0.niveau == niveau
+                    }
+                    .sorted { $0.nom < $1.nom }
+            },
+            set: { items in
+                for etablissement in items {
+                    if let index = self.items.firstIndex(where: { $0.id == etablissement.id }) {
+                        self.items[index] = etablissement
+                    }
+                }
+            }
+        )
+    }
+
+    static var exemple = EtablissementStore()
 }
 
 extension EtablissementStore: CustomStringConvertible {
@@ -59,6 +80,9 @@ final class Etablissement: ObservableObject, Identifiable {
     var nom: String = ""
     @Published
     var classes : [Classe] = []
+    var nbOfClasses: Int {
+        classes.count
+    }
 
     var displayString: String {
         "\(niveau.displayString) \(nom)"

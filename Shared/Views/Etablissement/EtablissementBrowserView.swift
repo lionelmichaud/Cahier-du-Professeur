@@ -20,24 +20,48 @@ struct EtablissementBrowserView: View {
 
     var body: some View {
         List {
-            ForEach($etabStore.items) { $etablissement in
-                NavigationLink {
-                    EtablissementEditor(etablissement: $etablissement)
-                } label: {
-                    EtablissementRow(etablissement: etablissement)
-                }
-                .swipeActions {
-                    Button(role: .destructive) {
-                        etabStore.delete(etablissement,
-                                         classes : classeStore,
-                                         eleves  : eleveStore,
-                                         observs : observStore,
-                                         colles  : colleStore)
-                    } label: {
-                        Label("Supprimer", systemImage: "trash")
+            ForEach(NiveauEtablissement.allCases) { niveau in
+                if etabStore.sorted(niveau: niveau).isNotEmpty {
+                    Section {
+                        ForEach(etabStore.sorted(niveau: niveau)) { $etablissement in
+                            NavigationLink {
+                                EtablissementEditor(etablissement: $etablissement)
+                            } label: {
+                                EtablissementRow(etablissement: etablissement)
+                            }
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        etabStore.delete(etablissement,
+                                                         classes : classeStore,
+                                                         eleves  : eleveStore,
+                                                         observs : observStore,
+                                                         colles  : colleStore)
+                                    }
+                                } label: {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
+                            }
+                        }
+                    } header: {
+                        Text(niveau.displayString)
+                            .font(.callout)
+                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
                     }
                 }
             }
+            Button {
+                TestEnvir.populateWithFakes(
+                    etabStore  : etabStore,
+                    classStore : classeStore,
+                    eleveStore : eleveStore,
+                    obsStore   : observStore,
+                    colStore   : colleStore)
+            } label: {
+                Text("Test").foregroundColor(.primary)
+            }
+
         }
         //.listStyle(.sidebar)
         .navigationTitle("Etabissements")
@@ -62,13 +86,15 @@ struct EtablissementBrowserView: View {
 
 struct EtablissementBrowserView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        TestEnvir.createFakes()
+        return NavigationView {
             EtablissementBrowserView()
-                .environmentObject(EtablissementStore.exemple)
-                .environmentObject(ClasseStore.exemple)
-                .environmentObject(EleveStore.exemple)
-                .environmentObject(ColleStore.exemple)
-                .environmentObject(ObservationStore.exemple)
+                .environmentObject(TestEnvir.etabStore)
+                .environmentObject(TestEnvir.classStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colStore)
+                .environmentObject(TestEnvir.obsStore)
         }
+        .previewInterfaceOrientation(.landscapeLeft)
     }
 }

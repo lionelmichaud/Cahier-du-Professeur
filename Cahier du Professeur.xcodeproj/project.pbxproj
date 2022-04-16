@@ -10,6 +10,11 @@
 		795FAB292809C4E2004CB120 /* EtablissementBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */; };
 		795FAB2B2809C813004CB120 /* EtablissementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2A2809C813004CB120 /* EtablissementRow.swift */; };
 		795FAB2D2809C830004CB120 /* EtablissementEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2C2809C830004CB120 /* EtablissementEditor.swift */; };
+		795FAB2F2809E54C004CB120 /* EtablissementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2E2809E54C004CB120 /* EtablissementDetail.swift */; };
+		795FAB312809FB0B004CB120 /* HelpersView in Frameworks */ = {isa = PBXBuildFile; productRef = 795FAB302809FB0B004CB120 /* HelpersView */; };
+		795FAB33280A1C33004CB120 /* ClassRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB32280A1C33004CB120 /* ClassRow.swift */; };
+		797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
+		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		79F3ABA72808218300D068D9 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA62808218300D068D9 /* Tests_iOS.swift */; };
 		79F3ABA92808218300D068D9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA82808218300D068D9 /* Tests_iOSLaunchTests.swift */; };
 		79F3ABB32808218300D068D9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB22808218300D068D9 /* Tests_macOS.swift */; };
@@ -52,7 +57,6 @@
 		79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC002808C76A00D068D9 /* MainScene.swift */; };
 		79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC002808C76A00D068D9 /* MainScene.swift */; };
 		79F3AC042808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */; };
-		79F3AC052808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */; };
 		79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */; };
 		79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */; };
 		79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */; };
@@ -84,6 +88,9 @@
 		795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementBrowserView.swift; sourceTree = "<group>"; };
 		795FAB2A2809C813004CB120 /* EtablissementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementRow.swift; sourceTree = "<group>"; };
 		795FAB2C2809C830004CB120 /* EtablissementEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementEditor.swift; sourceTree = "<group>"; };
+		795FAB2E2809E54C004CB120 /* EtablissementDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementDetail.swift; sourceTree = "<group>"; };
+		795FAB32280A1C33004CB120 /* ClassRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRow.swift; sourceTree = "<group>"; };
+		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cahier_du_ProfesseurApp.swift; sourceTree = "<group>"; };
 		79F3AB8F2808218100D068D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79F3AB902808218300D068D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F3ABE02808305400D068D9 /* AppFoundation in Frameworks */,
+				795FAB312809FB0B004CB120 /* HelpersView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,9 +163,11 @@
 		795FAB272809C4D0004CB120 /* Etablissement */ = {
 			isa = PBXGroup;
 			children = (
+				79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */,
 				795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */,
 				795FAB2A2809C813004CB120 /* EtablissementRow.swift */,
 				795FAB2C2809C830004CB120 /* EtablissementEditor.swift */,
+				795FAB2E2809E54C004CB120 /* EtablissementDetail.swift */,
 			);
 			path = Etablissement;
 			sourceTree = "<group>";
@@ -228,12 +238,13 @@
 		79F3ABCA280821CE00D068D9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				79F3ABED2808707C00D068D9 /* Observation */,
-				79F3ABEC2808707300D068D9 /* Colle */,
 				79F3ABE1280830D000D068D9 /* Etablissement */,
 				79F3ABE2280830E000D068D9 /* Classe */,
 				79F3ABE3280830F300D068D9 /* Eleve */,
+				79F3ABED2808707C00D068D9 /* Observation */,
+				79F3ABEC2808707300D068D9 /* Colle */,
 				79F3ABFA2808845400D068D9 /* Store.swift */,
+				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,9 +252,8 @@
 		79F3ABCB280821E700D068D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				795FAB272809C4D0004CB120 /* Etablissement */,
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
-				79F3AC032808CA2500D068D9 /* EtablissementSidebarView.swift */,
+				795FAB272809C4D0004CB120 /* Etablissement */,
 				79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */,
 				79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */,
 				79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */,
@@ -275,6 +285,7 @@
 				79F3ABCF2808225800D068D9 /* Classe.swift */,
 				79F3ABD5280822BD00D068D9 /* NiveauClasse.swift */,
 				79F3ABE6280844C000D068D9 /* ClasseManager.swift */,
+				795FAB32280A1C33004CB120 /* ClassRow.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -324,6 +335,7 @@
 			name = "Cahier du Professeur (iOS)";
 			packageProductDependencies = (
 				79F3ABDF2808305400D068D9 /* AppFoundation */,
+				795FAB302809FB0B004CB120 /* HelpersView */,
 			);
 			productName = "Cahier du Professeur (iOS)";
 			productReference = 79F3AB952808218300D068D9 /* Cahier du Professeur.app */;
@@ -482,6 +494,7 @@
 				795FAB292809C4E2004CB120 /* EtablissementBrowserView.swift in Sources */,
 				79F3AC042808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */,
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
+				795FAB33280A1C33004CB120 /* ClassRow.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
 				79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */,
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
@@ -490,8 +503,10 @@
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
+				797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauEtablissement.swift in Sources */,
+				795FAB2F2809E54C004CB120 /* EtablissementDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,9 +522,9 @@
 				79F3ABEB28086C4F00D068D9 /* EtablissementManager.swift in Sources */,
 				79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */,
 				79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
+				797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */,
 				79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
-				79F3AC052808CA2500D068D9 /* EtablissementSidebarView.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
 				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
@@ -916,6 +931,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		795FAB302809FB0B004CB120 /* HelpersView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HelpersView;
+		};
 		79F3ABDF2808305400D068D9 /* AppFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFoundation;

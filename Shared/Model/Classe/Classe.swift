@@ -10,6 +10,13 @@ import Foundation
 final class ClasseStore: ObservableObject {
     @Published
     var items: [Classe] = [ ]
+    var nbOfItems: Int {
+        items.count
+    }
+
+    func exists(_ item: Classe) -> Bool {
+        items.contains(where: { item.id == $0.id})
+    }
 
     func add(_ item: Classe) {
         items.insert(item, at: 0)
@@ -39,12 +46,7 @@ final class ClasseStore: ObservableObject {
         }
     }
 
-    static let exemple : ClasseStore = {
-        let store = ClasseStore()
-        store.items.append(Classe.exemple)
-        store.items.append(Classe.exemple)
-        return store
-    }()
+    static var exemple = ClasseStore()
 }
 
 extension ClasseStore: CustomStringConvertible {
@@ -80,9 +82,8 @@ final class Classe: ObservableObject, Identifiable {
         self.numero        = numero
     }
 
-    static let exemple = Classe(etablissement : Etablissement.exemple,
-                                niveau        : .n6ieme,
-                                numero        : 1)
+    static let exemple = Classe(niveau : .n6ieme,
+                                numero : 1)
 
 }
 

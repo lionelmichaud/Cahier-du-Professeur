@@ -10,6 +10,13 @@ import Foundation
 final class ColleStore: ObservableObject {
     @Published
     var items: [Colle] = [ ]
+    var nbOfItems: Int {
+        items.count
+    }
+
+    func exists(_ item: Colle) -> Bool {
+        items.contains(where: { item.id == $0.id})
+    }
 
     func add(_ item: Colle) {
         items.insert(item, at: 0)
@@ -29,9 +36,8 @@ final class ColleStore: ObservableObject {
         }
     }
 
-    static let exemple : ColleStore = {
+    static var exemple : ColleStore = {
         let store = ColleStore()
-        store.items.append(Colle.exemple)
         store.items.append(Colle.exemple)
         return store
     }()

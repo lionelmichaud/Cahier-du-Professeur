@@ -11,12 +11,25 @@ struct EtablissementRow: View {
     let etablissement: Etablissement
 
     var body: some View {
-        Text(etablissement.displayString)
+        Label(
+            title: {
+                Text(etablissement.displayString)
+            },
+            icon: {
+                Image(systemName: etablissement.niveau == .lycee ? "building.2" : "building")
+                    .imageScale(.large)
+                    .foregroundColor(etablissement.niveau == .lycee ? .mint : .orange)
+            }
+        )
+        .badge(etablissement.nbOfClasses)
     }
 }
 
 struct EtablissementRow_Previews: PreviewProvider {
     static var previews: some View {
-        EtablissementRow(etablissement: Etablissement.exemple)
+        TestEnvir.createFakes()
+        return EtablissementRow(etablissement: TestEnvir.etabStore.items.first!)
+            .preferredColorScheme(.dark)
+            .previewLayout(.sizeThatFits)
     }
 }

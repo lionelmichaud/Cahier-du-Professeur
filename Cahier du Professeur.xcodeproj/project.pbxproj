@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7953631C280DC44C00AB8600 /* EtablissementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631B280DC44B00AB8600 /* EtablissementStore.swift */; };
+		7953631D280DC44C00AB8600 /* EtablissementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631B280DC44B00AB8600 /* EtablissementStore.swift */; };
+		7953631F280DC4D800AB8600 /* ClassStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631E280DC4D800AB8600 /* ClassStore.swift */; };
+		79536320280DC4D800AB8600 /* ClassStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631E280DC4D800AB8600 /* ClassStore.swift */; };
 		795FAB292809C4E2004CB120 /* EtablissementBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */; };
 		795FAB2B2809C813004CB120 /* EtablissementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2A2809C813004CB120 /* EtablissementRow.swift */; };
 		795FAB2D2809C830004CB120 /* EtablissementEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2C2809C830004CB120 /* EtablissementEditor.swift */; };
@@ -85,6 +89,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7953631B280DC44B00AB8600 /* EtablissementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementStore.swift; sourceTree = "<group>"; };
+		7953631E280DC4D800AB8600 /* ClassStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassStore.swift; sourceTree = "<group>"; };
 		795FAB282809C4E2004CB120 /* EtablissementBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementBrowserView.swift; sourceTree = "<group>"; };
 		795FAB2A2809C813004CB120 /* EtablissementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementRow.swift; sourceTree = "<group>"; };
 		795FAB2C2809C830004CB120 /* EtablissementEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtablissementEditor.swift; sourceTree = "<group>"; };
@@ -272,6 +278,7 @@
 		79F3ABE1280830D000D068D9 /* Etablissement */ = {
 			isa = PBXGroup;
 			children = (
+				7953631B280DC44B00AB8600 /* EtablissementStore.swift */,
 				79F3ABCC2808222C00D068D9 /* Etablissement.swift */,
 				79F3ABD8280823D900D068D9 /* NiveauEtablissement.swift */,
 				79F3ABE928086C4F00D068D9 /* EtablissementManager.swift */,
@@ -282,6 +289,7 @@
 		79F3ABE2280830E000D068D9 /* Classe */ = {
 			isa = PBXGroup;
 			children = (
+				7953631E280DC4D800AB8600 /* ClassStore.swift */,
 				79F3ABCF2808225800D068D9 /* Classe.swift */,
 				79F3ABD5280822BD00D068D9 /* NiveauClasse.swift */,
 				79F3ABE6280844C000D068D9 /* ClasseManager.swift */,
@@ -489,6 +497,7 @@
 				79F3ABEA28086C4F00D068D9 /* EtablissementManager.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
 				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
+				7953631F280DC4D800AB8600 /* ClassStore.swift in Sources */,
 				79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDC280826A400D068D9 /* Sexe.swift in Sources */,
 				795FAB292809C4E2004CB120 /* EtablissementBrowserView.swift in Sources */,
@@ -500,6 +509,7 @@
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
+				7953631C280DC44C00AB8600 /* EtablissementStore.swift in Sources */,
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
@@ -528,6 +538,7 @@
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
 				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
+				7953631D280DC44C00AB8600 /* EtablissementStore.swift in Sources */,
 				79F3ABE8280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79F3ABB92808218300D068D9 /* ContentView.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
@@ -535,6 +546,7 @@
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				79F3ABF02808709100D068D9 /* Colle.swift in Sources */,
+				79536320280DC4D800AB8600 /* ClassStore.swift in Sources */,
 				79F3ABDA280823D900D068D9 /* NiveauEtablissement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

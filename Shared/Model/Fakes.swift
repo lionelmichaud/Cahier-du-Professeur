@@ -22,7 +22,7 @@ struct TestEnvir {
         colStore   : ColleStore) {
             let etabManager = EtablissementManager()
             // ajouter une classe à l'établissement
-            etabManager.ajouter(classe: Classe.exemple, aEtablissement: Etablissement.exemple)
+            etabManager.ajouter(classe: Classe.exemple, aEtablissement: &Etablissement.exemple)
             // ajouter l'établissement à son store
             etabStore.add(Etablissement.exemple)
             // ajouter la classe à son store
@@ -38,7 +38,7 @@ struct TestEnvir {
 
         let etabManager = EtablissementManager()
         // ajouter une classe à l'établissement
-        etabManager.ajouter(classe: Classe.exemple, aEtablissement: Etablissement.exemple)
+        etabManager.ajouter(classe: Classe.exemple, aEtablissement: &Etablissement.exemple)
         // ajouter l'établissement à son store
         etabStore.add(Etablissement.exemple)
         // ajouter la classe à son store

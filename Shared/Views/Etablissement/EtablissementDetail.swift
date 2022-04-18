@@ -68,7 +68,7 @@ struct EtablissementDetail: View {
                 withAnimation {
                     EtablissementManager()
                         .ajouter(classe: newClasse,
-                                 aEtablissement: etablissement)
+                                 aEtablissement: &etablissement)
                 }
             } label: {
                 HStack {

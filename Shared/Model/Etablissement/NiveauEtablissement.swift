@@ -1,5 +1,5 @@
 //
-//  NiveauEtablissement.swift
+//  NiveauSchool.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 14/04/2022.
@@ -8,7 +8,7 @@
 import Foundation
 import AppFoundation
 
-enum NiveauEtablissement: Int, PickableEnumP, Codable, Identifiable {
+enum NiveauSchool: Int, PickableEnumP, Codable, Identifiable, Equatable {
     case college
     case lycee
 

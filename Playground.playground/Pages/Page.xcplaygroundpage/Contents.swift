@@ -2,9 +2,9 @@
 
 import Foundation
 
-var etablissementStore = EtablissementStore.exemple
-print("\n** etablissementStore **")
-print(String(describing: etablissementStore))
+var schoolStore = SchoolStore.exemple
+print("\n** schoolStore **")
+print(String(describing: schoolStore))
 
 var classeStore = ClasseStore.exemple
 print("\n** classeStore **")
@@ -22,47 +22,47 @@ var observationStore = ObservationStore.exemple
 print("\n** observationStore **")
 print(String(describing: observationStore))
 
-var etablissement = Etablissement.exemple
-print(String(describing: etablissement))
+var school = School.exemple
+print(String(describing: school))
 
 var classe = Classe.exemple
-let etablissementManager = EtablissementManager()
-etablissementManager.ajouter(classe: classe,
-                             aEtablissement: etablissement)
-print(String(describing: etablissement))
+let schoolManager = SchoolManager()
+schoolManager.ajouter(classe: classe,
+                             aSchool: school)
+print(String(describing: school))
 
 var eleve = Eleve.exemple
 let classeManager = ClasseManager()
 classeManager.ajouter(eleve: eleve,
                       aClasse: classe)
-print(String(describing: etablissement))
+print(String(describing: school))
 
 var observ = Observation.exemple
 let observationManager = ObservationManager()
 observationManager.ajouter(observ: observ,
                            aEleve: eleve)
-print(String(describing: etablissement))
+print(String(describing: school))
 
 var colle = Colle.exemple
 let colleManager = ColleManager()
 colleManager.ajouter(colle: colle,
                      aEleve: eleve)
-print(String(describing: etablissement))
+print(String(describing: school))
 
 colleManager.retirer(colle: colle,
                      deEleve: eleve)
-print(String(describing: etablissement))
+print(String(describing: school))
 
 observationManager.retirer(observ: observ,
                            deEleve: eleve)
-print(String(describing: etablissement))
+print(String(describing: school))
 
 classeManager.retirer(eleve: eleve,
                       deClasse: classe)
-print(String(describing: etablissement))
+print(String(describing: school))
 
-etablissementManager.retirer(classe: classe,
-                             deEtablissement: etablissement)
-print(String(describing: etablissement))
+schoolManager.retirer(classe: classe,
+                             deSchool: school)
+print(String(describing: school))
 
 //: [Next](@next)

@@ -8,11 +8,14 @@
 import Foundation
 
 struct Classe: Identifiable {
+
+    // MARK: - Properties
+
     var id = UUID()
-    var etablissement: Etablissement?
-    var niveau: NiveauClasse = .n6ieme
-    var numero: Int = 1
-    var eleves: [Eleve] = []
+    var schoolId : UUID?
+    var niveau   : NiveauClasse = .n6ieme
+    var numero   : Int          = 1
+    private(set) var eleves: [UUID] = []
 
     var nbOfEleves: Int {
         eleves.count
@@ -22,12 +25,14 @@ struct Classe: Identifiable {
         "\(niveau.displayString)\(numero)"
     }
 
-    internal init(etablissement : Etablissement? = nil,
-                  niveau        : NiveauClasse,
-                  numero        : Int) {
-        self.etablissement = etablissement
-        self.niveau        = niveau
-        self.numero        = numero
+    // MARK: - Initializers
+
+    internal init(schoolId : UUID?  = nil,
+                  niveau   : NiveauClasse,
+                  numero   : Int) {
+        self.schoolId = schoolId
+        self.niveau   = niveau
+        self.numero   = numero
     }
 
     static let exemple = Classe(niveau : .n6ieme,
@@ -40,10 +45,11 @@ extension Classe: CustomStringConvertible {
         """
         
         CLASSE: \(displayString)
-           Niveau: \(niveau.displayString)
-           Numéro: \(numero)
-           Etablissement: \(etablissement?.displayString ?? "inconnu")
-           Eleves: \(String(describing: eleves).withPrefixedSplittedLines("     "))
+           ID      : \(id)
+           Niveau  : \(niveau.displayString)
+           Numéro  : \(numero)
+           SchoolID: \(String(describing: schoolId))
+           Eleves  : \(String(describing: eleves).withPrefixedSplittedLines("     "))
         """
     }
 }

@@ -1,38 +1,45 @@
 //
-//  EtablissementStore.swift
+//  SchoolStore.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 18/04/2022.
 //
 
-import Foundation
+import SwiftUI
 
-final class EtablissementStore: ObservableObject {
+final class SchoolStore: ObservableObject {
+
+    // MARK: - Properties
+
     @Published
-    var items: [Etablissement] = [ ]
+    var items: [School] = [ ]
+    
     var nbOfItems: Int {
         items.count
     }
 
-    func exists(_ item: Etablissement) -> Bool {
+    // MARK: - Methods
+
+    func exists(_ item: School) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 
-    func add(_ item: Etablissement) {
+    func school(withID ID: UUID) -> School? {
+        items.first(where: { ID == $0.id})
+    }
+
+    func add(_ item: School) {
         items.insert(item, at: 0)
     }
 
-    func delete(_ item  : Etablissement,
+    func delete(_ item  : School,
                 classes : ClasseStore,
                 eleves  : EleveStore,
                 observs : ObservationStore,
                 colles  : ColleStore) {
         // supprimer toutes les classes de l'établissement
-        item.classes.forEach { classe in
-            classes.delete(classe,
-                           eleves: eleves,
-                           observs: observs,
-                           colles: colles)
+        item.classesID.forEach { classeId in
+            classes.deleteClasse(withID: classeId)
         }
         // retirer l'établissement de la liste
         items.removeAll {
@@ -40,8 +47,8 @@ final class EtablissementStore: ObservableObject {
         }
     }
 
-    func sorted(niveau: NiveauEtablissement) -> Binding<[Etablissement]> {
-        Binding<[Etablissement]>(
+    func sorted(niveau: NiveauSchool) -> Binding<[School]> {
+        Binding<[School]>(
             get: {
                 self.items
                     .filter {
@@ -50,19 +57,19 @@ final class EtablissementStore: ObservableObject {
                     .sorted { $0.nom < $1.nom }
             },
             set: { items in
-                for etablissement in items {
-                    if let index = self.items.firstIndex(where: { $0.id == etablissement.id }) {
-                        self.items[index] = etablissement
+                for school in items {
+                    if let index = self.items.firstIndex(where: { $0.id == school.id }) {
+                        self.items[index] = school
                     }
                 }
             }
         )
     }
 
-    static var exemple = EtablissementStore()
+    static var exemple = SchoolStore()
 }
 
-extension EtablissementStore: CustomStringConvertible {
+extension SchoolStore: CustomStringConvertible {
     var description: String {
         var str = ""
         items.forEach { item in

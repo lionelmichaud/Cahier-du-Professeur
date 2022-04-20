@@ -1,5 +1,5 @@
 //
-//  EtablissementEditor.swift
+//  SchoolEditor.swift
 //  Cahier du Professeur (iOS)
 //
 //  Created by Lionel MICHAUD on 15/04/2022.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct EtablissementEditor: View {
-    @Binding var etablissement: Etablissement
+struct SchoolEditor: View {
+    @Binding var school: School
     var isNew = false
 
     @State private var isDeleted = false
-    @EnvironmentObject var etabStore   : EtablissementStore
+    @EnvironmentObject var etabStore   : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -21,17 +21,24 @@ struct EtablissementEditor: View {
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
     // This is important for when the niveau changes and puts the établissement in a different section.
-    @State private var itemCopy = Etablissement()
-    @State private var isEditing = false
+    @State private var itemCopy   = School()
+    // true si le mode édition est engagé
+    @State private var isEditing  = false
+    // true les modifs faites en mode édition sont sauvegardées
+    @State private var isSaved    = false
+    // true si des modifiction sont faites hors du mode édition
+    @State private var isModified = false
 
     private var isItemDeleted: Bool {
-        !etabStore.exists(etablissement) && !isNew
+        !etabStore.exists(school) && !isNew
     }
 
     var body: some View {
         VStack {
-            EtablissementDetail(etablissement: $itemCopy,
-                                isEditing: isNew ? true : isEditing)
+            SchoolDetail(school    : $itemCopy,
+                         isEditing : isEditing,
+                         isNew     : isNew,
+                         isModified: $isModified)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         if isNew {
@@ -51,9 +58,10 @@ struct EtablissementEditor: View {
                             } else {
                                 // Appliquer les modifications faites à l'établissement
                                 if isEditing && !isDeleted {
-                                    print("Done, saving any changes to \(etablissement.displayString).")
+                                    print("Done, saving any changes to \(school.displayString).")
                                     withAnimation {
-                                        etablissement = itemCopy // Put edits (if any) back in the store.
+                                        school = itemCopy // Put edits (if any) back in the store.
+                                        isSaved = true
                                     }
                                 }
                                 isEditing.toggle()
@@ -63,8 +71,14 @@ struct EtablissementEditor: View {
                         }
                     }
                 }
-                .onAppear {
-                    itemCopy = etablissement // Grab a copy in case we decide to make edits.
+//                .onAppear {
+//                    itemCopy = school // Grab a copy in case we decide to make edits.
+//                }
+                .onDisappear {
+                    if isModified && !isSaved {
+                        // Appliquer les modifications faites à l'établissement hors du mode édition
+                        school = itemCopy
+                    }
                 }
                 .disabled(isItemDeleted)
 
@@ -74,7 +88,7 @@ struct EtablissementEditor: View {
                     action: {
                         isDeleted = true
                         withAnimation {
-                            etabStore.delete(etablissement,
+                            etabStore.delete(school,
                                              classes : classeStore,
                                              eleves  : eleveStore,
                                              observs : observStore,
@@ -97,19 +111,26 @@ struct EtablissementEditor: View {
             }
         }
     }
+
+    init(school: Binding<School>,
+         isNew: Bool = false) {
+        self.isNew = isNew
+        self._school = school
+        self._itemCopy = State(initialValue: school.wrappedValue)
+    }
 }
 
-struct EtablissementEditor_Previews: PreviewProvider {
+struct SchoolEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return NavigationView {
             EmptyView()
-            EtablissementEditor(etablissement: .constant(TestEnvir.etabStore.items.first!), isNew: false)
+            SchoolEditor(school: .constant(TestEnvir.etabStore.items.first!), isNew: false)
                 .environmentObject(TestEnvir.etabStore)
-                .environmentObject(TestEnvir.classStore)
+                .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colStore)
-                .environmentObject(TestEnvir.obsStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
             //.previewInterfaceOrientation(.landscapeRight)
         }
     }

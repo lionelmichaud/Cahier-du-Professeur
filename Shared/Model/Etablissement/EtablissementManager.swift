@@ -1,5 +1,5 @@
 //
-//  EtablissementManager.swift
+//  SchoolManager.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 14/04/2022.
@@ -7,16 +7,19 @@
 
 import Foundation
 
-struct EtablissementManager {
+struct SchoolManager {
     func ajouter(classe : inout Classe,
-                 aEtablissement etablissement : inout Etablissement) {
-        etablissement.classes.insert(classe, at: 0)
-        classe.etablissement = etablissement
+                 aSchool school : inout School) {
+        school.addClasse(withID: classe.id)
+        classe.schoolId = school.id
     }
 
-    func retirer(classe : inout Classe,
-                 deEtablissement etablissement : inout Etablissement) {
-        etablissement.classes.removeAll { $0.id == classe.id }
-        classe.etablissement = nil
+    func retirer(classeId            : UUID,
+                 deSchoolId schoolId : UUID,
+                 schools             : SchoolStore) {
+        guard let schoolIndex = schools.items.firstIndex(where: { $0.id == schoolId }) else {
+            return
+        }
+        schools.items[schoolIndex].removeClasse(withID: classeId)
     }
 }

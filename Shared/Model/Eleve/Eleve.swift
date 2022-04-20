@@ -40,8 +40,8 @@ final class EleveStore: ObservableObject {
         // zeroize du pointeur de la classe vers l'élève
         if let classe = item.classe {
             let classeManager = ClasseManager()
-            classeManager.retirer(eleve: item,
-                                  deClasse: classe)
+//            classeManager.retirer(eleve: item,
+//                                  deClasse: classe)
         }
 
         // retirer l'élève de la liste

@@ -1,5 +1,5 @@
 //
-//  EtablissementSidebarView.swift
+//  SchoolSidebarView.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 14/04/2022.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct EtablissementSidebarView: View {
+struct SchoolSidebarView: View {
     var body: some View {
         NavigationView {
             /// Primary view
-            EtablissementBrowserView()
+            SchoolBrowserView()
             /// vue par défaut
             Text("Sélectionner un établissement")
                 .foregroundStyle(.secondary)
@@ -20,15 +20,15 @@ struct EtablissementSidebarView: View {
     }
 }
 
-struct EtablissementSidebarView_Previews: PreviewProvider {
+struct SchoolSidebarView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return EtablissementSidebarView()
+        return SchoolSidebarView()
             .environmentObject(TestEnvir.etabStore)
-            .environmentObject(TestEnvir.classStore)
+            .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colStore)
-            .environmentObject(TestEnvir.obsStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewInterfaceOrientation(.landscapeLeft)
     }
 }

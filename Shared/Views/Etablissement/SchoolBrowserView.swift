@@ -1,5 +1,5 @@
 //
-//  EtablissementBrowserView.swift
+//  SchoolBrowserView.swift
 //  Cahier du Professeur (iOS)
 //
 //  Created by Lionel MICHAUD on 15/04/2022.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct EtablissementBrowserView: View {
-    @EnvironmentObject var etabStore   : EtablissementStore
+struct SchoolBrowserView: View {
+    @EnvironmentObject var etabStore   : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -16,23 +16,25 @@ struct EtablissementBrowserView: View {
     @State
     private var isAddingNewEtab = false
     @State
-    private var newEtab = Etablissement()
+    private var newEtab = School()
 
     var body: some View {
         List {
-            ForEach(NiveauEtablissement.allCases) { niveau in
-                if etabStore.sorted(niveau: niveau).isNotEmpty {
-                    Section {
-                        ForEach(etabStore.sorted(niveau: niveau)) { $etablissement in
+            ForEach(NiveauSchool.allCases) { niveau in
+                Section {
+                    if etabStore.sorted(niveau: niveau).isEmpty {
+                        Text("Aucun établissement").foregroundColor(.secondary)
+                    } else {
+                        ForEach(etabStore.sorted(niveau: niveau)) { $school in
                             NavigationLink {
-                                EtablissementEditor(etablissement: $etablissement)
+                                SchoolEditor(school: $school)
                             } label: {
-                                EtablissementRow(etablissement: etablissement)
+                                SchoolRow(school: school)
                             }
                             .swipeActions {
                                 Button(role: .destructive) {
                                     withAnimation {
-                                        etabStore.delete(etablissement,
+                                        etabStore.delete(school,
                                                          classes : classeStore,
                                                          eleves  : eleveStore,
                                                          observs : observStore,
@@ -43,21 +45,21 @@ struct EtablissementBrowserView: View {
                                 }
                             }
                         }
-                    } header: {
-                        Text(niveau.displayString)
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                            .fontWeight(.bold)
                     }
+                } header: {
+                    Text(niveau.displayString)
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                        .fontWeight(.bold)
                 }
             }
             Button {
                 TestEnvir.populateWithFakes(
-                    etabStore  : etabStore,
-                    classStore : classeStore,
-                    eleveStore : eleveStore,
-                    obsStore   : observStore,
-                    colStore   : colleStore)
+                    etabStore   : etabStore,
+                    classeStore : classeStore,
+                    eleveStore  : eleveStore,
+                    observStore : observStore,
+                    colleStore  : colleStore)
             } label: {
                 Text("Test").foregroundColor(.primary)
             }
@@ -69,7 +71,7 @@ struct EtablissementBrowserView: View {
         .toolbar {
             ToolbarItem {
                 Button {
-                    newEtab = Etablissement()
+                    newEtab = School()
                     isAddingNewEtab = true
                 } label: {
                     Image(systemName: "plus")
@@ -78,22 +80,22 @@ struct EtablissementBrowserView: View {
         }
         .sheet(isPresented: $isAddingNewEtab) {
             NavigationView {
-                EtablissementEditor(etablissement: $newEtab, isNew: true)
+                SchoolEditor(school: $newEtab, isNew: true)
             }
         }
     }
 }
 
-struct EtablissementBrowserView_Previews: PreviewProvider {
+struct SchoolBrowserView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return NavigationView {
-            EtablissementBrowserView()
+            SchoolBrowserView()
                 .environmentObject(TestEnvir.etabStore)
-                .environmentObject(TestEnvir.classStore)
+                .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colStore)
-                .environmentObject(TestEnvir.obsStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
         }
         .previewInterfaceOrientation(.landscapeLeft)
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Cahier_du_ProfesseurApp: App {
-    @StateObject private var etabStore   = EtablissementStore()
+    @StateObject private var etabStore   = SchoolStore()
     @StateObject private var classeStore = ClasseStore()
     @StateObject private var eleveStore  = EleveStore()
     @StateObject private var colleStore  = ColleStore()

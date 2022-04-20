@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct ClassRow: View {
-    @Binding var classe: Classe
-    var isEditing: Bool
+    var classe: Classe
     @FocusState private var isFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Classe de \(classe.displayString) de \(classe.nbOfEleves) élèves")
+            Text("Classe de \(classe.displayString) de \(classe.nbOfEleves) élèves \(classe.id)")
         }
     }
 }
 
 struct ClassRow_Previews: PreviewProvider {
     static var previews: some View {
-        ClassRow(classe: .constant(Classe.exemple), isEditing: false)
+        ClassRow(classe: Classe.exemple)
             .previewLayout(.sizeThatFits)
-        ClassRow(classe: .constant(Classe.exemple), isEditing: true)
+        ClassRow(classe: Classe.exemple)
             .previewLayout(.sizeThatFits)
     }
 }

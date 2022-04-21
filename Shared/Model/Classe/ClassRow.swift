@@ -12,7 +12,10 @@ struct ClassRow: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading) {
+        HStack {
+            Image(systemName: "person.3.fill")
+                .imageScale(.large)
+                .foregroundColor(classe.niveau.color)
             Text("Classe de \(classe.displayString) de \(classe.nbOfEleves) élèves \(classe.id)")
         }
     }

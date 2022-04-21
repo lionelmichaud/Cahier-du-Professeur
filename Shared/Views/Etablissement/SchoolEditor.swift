@@ -11,7 +11,6 @@ struct SchoolEditor: View {
     @Binding var school: School
     var isNew = false
 
-    @State private var isDeleted = false
     @EnvironmentObject var etabStore   : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
@@ -28,6 +27,8 @@ struct SchoolEditor: View {
     @State private var isSaved    = false
     // true si des modifiction sont faites hors du mode édition
     @State private var isModified = false
+    // true si l'item va être détruit
+    @State private var isDeleted = false
 
     private var isItemDeleted: Bool {
         !etabStore.exists(school) && !isNew
@@ -71,9 +72,6 @@ struct SchoolEditor: View {
                         }
                     }
                 }
-//                .onAppear {
-//                    itemCopy = school // Grab a copy in case we decide to make edits.
-//                }
                 .onDisappear {
                     if isModified && !isSaved {
                         // Appliquer les modifications faites à l'établissement hors du mode édition
@@ -125,7 +123,8 @@ struct SchoolEditor_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return NavigationView {
             EmptyView()
-            SchoolEditor(school: .constant(TestEnvir.etabStore.items.first!), isNew: false)
+            SchoolEditor(school : .constant(TestEnvir.etabStore.items.first!),
+                         isNew  : false)
                 .environmentObject(TestEnvir.etabStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)

@@ -5,7 +5,7 @@
 //  Created by Lionel MICHAUD on 14/04/2022.
 //
 
-import Foundation
+import SwiftUI
 import AppFoundation
 
 enum NiveauClasse: Int, PickableEnumP, Codable {
@@ -39,19 +39,23 @@ enum NiveauClasse: Int, PickableEnumP, Codable {
     var displayString: String {
         switch self {
             case .n6ieme:
-                return "6°"
+                return "6E"
             case .n5ieme:
-                return "5°"
+                return "5E"
             case .n4ieme:
-                return "4°"
+                return "4E"
             case .n3ieme:
-                return "3°"
+                return "3E"
             case .n2nd:
-                return "2°"
+                return "2E"
             case .n1ere:
-                return "1°"
+                return "1E"
             case .terminale:
-                return "T°"
+                return "T"
         }
+    }
+
+    var color: Color {
+        ColorOptions.all[self.rawValue]
     }
 }

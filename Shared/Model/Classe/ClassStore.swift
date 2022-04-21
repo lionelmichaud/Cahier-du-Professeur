@@ -43,27 +43,24 @@ final class ClasseStore: ObservableObject {
         }
     }
 
-    func delete(_ item  : Classe,
-                schools : SchoolStore) {
-        // supprimer tous les élèves de la classe
-        //        item.eleves.forEach { eleve in
-        //            eleves.delete(eleve,
-        //                          observs: observs,
-        //                          colles: colles)
-        //        }
-
-        // zeroize du pointeur de l'établissement vers la classe
-        if let schoolId = item.schoolId {
-            let schoolManager = SchoolManager()
-            schoolManager.retirer(classeId   : item.id,
-                                  deSchoolId : schoolId,
-                                  schools    : schools)
+    func insert(classe         : Classe,
+                `in` classesID : inout [UUID]) {
+        guard classesID.isNotEmpty else {
+            classesID = [classe.id]
+            return
         }
 
-        // retirer la classe de la liste
-        items.removeAll {
-            $0.id == item.id
+        guard let index = classesID.firstIndex(where: {
+            guard let c0 = self.classe(withID: $0) else {
+                return false
+            }
+            return classe.niveau.rawValue < c0.niveau.rawValue ||
+            (classe.niveau.rawValue == c0.niveau.rawValue && classe.numero < c0.numero)
+        }) else {
+            classesID.append(classe.id)
+            return
         }
+        classesID.insert(classe.id, at: index)
     }
 
     static var exemple = ClasseStore()

@@ -14,7 +14,7 @@ struct School: Identifiable, Equatable {
     var id = UUID()
     var niveau    : NiveauSchool = .college
     var nom       : String       = ""
-    private(set) var classesID : [UUID] = []
+    var classesID : [UUID] = []
 
     var nbOfClasses: Int {
         classesID.count
@@ -44,6 +44,10 @@ struct School: Identifiable, Equatable {
 
     mutating func removeClasse(at index : Int) {
         classesID.remove(at: index)
+    }
+
+    mutating func moveClasse(from indexes: IndexSet, to destination: Int) {
+        classesID.move(fromOffsets: indexes, toOffset: destination)
     }
 
     static var exemple = School(niveau: .college, nom: "Galilée")

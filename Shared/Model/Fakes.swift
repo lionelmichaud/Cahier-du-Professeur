@@ -24,8 +24,9 @@ struct TestEnvir {
             var classe = Classe.exemple
             var school = School.exemple
             // ajouter une classe à l'établissement
-            etabManager.ajouter(classe: &classe,
-                                aSchool: &school)
+            etabManager.ajouter(classe      : &classe,
+                                aSchool     : &school,
+                                classeStore : classeStore)
             // ajouter l'établissement à son store
             etabStore.add(school)
             // ajouter la classe à son store
@@ -43,8 +44,9 @@ struct TestEnvir {
         var classe = Classe.exemple
         var school = School.exemple
         // ajouter une classe à l'établissement
-        etabManager.ajouter(classe: &classe,
-                            aSchool: &school)
+        etabManager.ajouter(classe      : &classe,
+                            aSchool     : &school,
+                            classeStore : classeStore)
         // ajouter l'établissement à son store
         etabStore.add(school)
         // ajouter la classe à son store

@@ -11,14 +11,19 @@ import HelpersView
 struct SchoolDetail: View {
     @Binding
     var school: School
-    @EnvironmentObject var classeStore : ClasseStore
-    @EnvironmentObject var eleveStore  : EleveStore
-    @EnvironmentObject var colleStore  : ColleStore
-    @EnvironmentObject var observStore : ObservationStore
     let isEditing: Bool
     let isNew: Bool
     @Binding
     var isModified: Bool
+
+    @EnvironmentObject var classeStore : ClasseStore
+    @EnvironmentObject var eleveStore  : EleveStore
+    @EnvironmentObject var colleStore  : ColleStore
+    @EnvironmentObject var observStore : ObservationStore
+    @State
+    private var isAddingNewClasse = false
+    @State
+    private var newClasse = Classe(niveau: .n6ieme, numero: 1)
 
     var body: some View {
         List {
@@ -43,71 +48,69 @@ struct SchoolDetail: View {
             if isNew || isEditing {
                 CasePicker(pickedCase: $school.niveau,
                            label: "Type d'établissement")
-//                .onChange(of: school.niveau,
-//                          perform: { newValue in
-//                    isModified = true
-//                })
                 .pickerStyle(.segmented)
                 .listRowSeparator(.hidden)
             }
 
             // classes
-            Text("Classes (\(school.nbOfClasses))")
-                .fontWeight(.bold)
+            if !isNew {
+                Text("Classes (\(school.nbOfClasses))")
+                    .fontWeight(.bold)
 
-            if school.nbOfClasses == 0 {
-                Text("Auncune classe dans cet établissement")
-                    .foregroundColor(.secondary)
-            } else {
-                ForEach(school.classesID, id: \.self) { classeId in
-                    if let classe = classeStore.classe(withID: classeId) {
-                        ClassRow(classe: classe)
-                    } else {
-                        Text("classe non trouvée: \(classeId)")
+                if school.nbOfClasses == 0 {
+                    Text("Auncune classe dans cet établissement")
+                        .foregroundColor(.secondary)
+                } else {
+                    ForEach(school.classesID, id: \.self) { classeId in
+                        if let classe = classeStore.classe(withID: classeId) {
+                            ClassRow(classe: classe)
+                        } else {
+                            Text("classe non trouvée: \(classeId)")
+                        }
+                    }
+                    .onDelete(perform: { indexSet in
+                        for index in indexSet {
+                            isModified = true
+                            delete(classeIndex: index)
+                        }
+                    })
+                    .onMove(perform: moveClasse)
+                }
+
+                Button {
+                    isModified = true
+                    newClasse = Classe(niveau: .n6ieme, numero: 1)
+                    isAddingNewClasse = true
+                } label: {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Ajouter une classe")
                     }
                 }
-                .onDelete(perform: { indexSet in
-                    for index in indexSet {
-                        isModified = true
-                        delete(classeIndex: index)
-                    }
-                })
+                .buttonStyle(.borderless)
             }
-
-            Button {
-                var newClasse = Classe(niveau: .n6ieme, numero: 0)
-                isModified = true
-                withAnimation {
-                    SchoolManager()
-                        .ajouter(classe  : &newClasse,
-                                 aSchool : &school)
-                }
-                classeStore.add(newClasse)
-            } label: {
-                HStack {
-                    Image(systemName: "plus")
-                    Text("Ajouter une classe")
-                }
-            }
-            .buttonStyle(.borderless)
         }
         #if os(iOS)
         .navigationTitle("Etablissement")
         .navigationBarTitleDisplayMode(.inline)
         #endif
+        .sheet(isPresented: $isAddingNewClasse) {
+            NavigationView {
+                ClasseEditor(school : $school,
+                             classe : $newClasse,
+                             isNew  : true)
+            }
+        }
+    }
+
+    private func moveClasse(from indexes: IndexSet, to destination: Int) {
+        school.moveClasse(from: indexes, to: destination)
     }
 
     func delete(classeIndex: Int) {
-        print("Avant:")
-        print(String(describing: classeStore))
-        print(String(describing: school))
-        // supprimer la classe de la liste de classes
-        classeStore.deleteClasse(withID: school.classesID[classeIndex])
-        // supprimer la classe de l'établissement
-        school.removeClasse(at: classeIndex)
-        print("Après:")
-        print(String(describing: classeStore))
-        print(String(describing: school))
+        SchoolManager().retirer(classeIndex: classeIndex,
+                                deSchool: &school,
+                                classeStore: classeStore)
     }
 }
 

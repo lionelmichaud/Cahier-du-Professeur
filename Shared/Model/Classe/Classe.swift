@@ -27,9 +27,9 @@ struct Classe: Identifiable {
 
     // MARK: - Initializers
 
-    internal init(schoolId : UUID?  = nil,
-                  niveau   : NiveauClasse,
-                  numero   : Int) {
+    init(schoolId : UUID?  = nil,
+         niveau   : NiveauClasse,
+         numero   : Int) {
         self.schoolId = schoolId
         self.niveau   = niveau
         self.numero   = numero

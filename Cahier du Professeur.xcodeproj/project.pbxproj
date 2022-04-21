@@ -60,8 +60,6 @@
 		79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABF4280880CC00D068D9 /* ObservationManager.swift */; };
 		79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABF72808818D00D068D9 /* ColleManager.swift */; };
 		79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABF72808818D00D068D9 /* ColleManager.swift */; };
-		79F3ABFB2808845400D068D9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFA2808845400D068D9 /* Store.swift */; };
-		79F3ABFC2808845400D068D9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFA2808845400D068D9 /* Store.swift */; };
 		79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFD2808C68700D068D9 /* UIState.swift */; };
 		79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABFD2808C68700D068D9 /* UIState.swift */; };
 		79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC002808C76A00D068D9 /* MainScene.swift */; };
@@ -131,7 +129,6 @@
 		79F3ABF128087D5600D068D9 /* Observation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 		79F3ABF4280880CC00D068D9 /* ObservationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationManager.swift; sourceTree = "<group>"; };
 		79F3ABF72808818D00D068D9 /* ColleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleManager.swift; sourceTree = "<group>"; };
-		79F3ABFA2808845400D068D9 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		79F3ABFD2808C68700D068D9 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
 		79F3AC002808C76A00D068D9 /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		79F3AC032808CA2500D068D9 /* SchoolSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSidebarView.swift; sourceTree = "<group>"; };
@@ -270,7 +267,6 @@
 				79F3ABE3280830F300D068D9 /* Eleve */,
 				79F3ABED2808707C00D068D9 /* Observation */,
 				79F3ABEC2808707300D068D9 /* Colle */,
-				79F3ABFA2808845400D068D9 /* Store.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -507,7 +503,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F3ABFB2808845400D068D9 /* Store.swift in Sources */,
 				795FAB2B2809C813004CB120 /* SchoolRow.swift in Sources */,
 				79F3ABCD2808222C00D068D9 /* School.swift in Sources */,
 				79F3AC0D2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
@@ -547,7 +542,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F3ABFC2808845400D068D9 /* Store.swift in Sources */,
 				79F3ABCE2808222C00D068D9 /* School.swift in Sources */,
 				79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,

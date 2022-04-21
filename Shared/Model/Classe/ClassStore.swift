@@ -30,6 +30,7 @@ final class ClasseStore: ObservableObject {
     /// True si une classe existe déjà avec les mêmes
     /// niveaux, numéro et établissements
     /// - Parameter classe: Classe
+    /// - Parameter schoolID: ID de l'établissement
     func exists(classe       : Classe,
                 `in`schoolID : UUID) -> Bool {
         var c = classe

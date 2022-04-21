@@ -6,17 +6,21 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct ClassRow: View {
     var classe: Classe
-    @FocusState private var isFocused: Bool
 
     var body: some View {
         HStack {
             Image(systemName: "person.3.fill")
-                .imageScale(.large)
+                .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
-            Text("Classe de \(classe.displayString) de \(classe.nbOfEleves) élèves \(classe.id)")
+            Text("Classe de \(classe.displayString)")
+            Spacer()
+            Text("\(classe.nbOfEleves) élèves")
+            Spacer()
+            Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) heures")
         }
     }
 }

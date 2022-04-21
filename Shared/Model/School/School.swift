@@ -20,6 +20,16 @@ struct School: Identifiable, Equatable {
         classesID.count
     }
 
+   var classesLabel: String {
+        if nbOfClasses == 0 {
+            return "Aucune Classe"
+        } else if nbOfClasses == 1 {
+            return "1 Classe"
+        } else {
+            return "\(nbOfClasses) Classes"
+        }
+    }
+
     var displayString: String {
         "\(niveau.displayString) \(nom)"
     }

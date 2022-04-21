@@ -15,6 +15,7 @@ struct Classe: Identifiable {
     var schoolId : UUID?
     var niveau   : NiveauClasse = .n6ieme
     var numero   : Int          = 1
+    var heures   : Double       = 0
     private(set) var eleves: [UUID] = []
 
     var nbOfEleves: Int {
@@ -29,14 +30,17 @@ struct Classe: Identifiable {
 
     init(schoolId : UUID?  = nil,
          niveau   : NiveauClasse,
-         numero   : Int) {
+         numero   : Int,
+         heures   : Double = 0) {
         self.schoolId = schoolId
         self.niveau   = niveau
         self.numero   = numero
+        self.heures   = heures
     }
 
     static let exemple = Classe(niveau : .n6ieme,
-                                numero : 1)
+                                numero : 1,
+                                heures : 1.5)
 
 }
 

@@ -25,6 +25,10 @@ struct SchoolDetail: View {
     @State
     private var newClasse = Classe(niveau: .n6ieme, numero: 1)
 
+    var heures: Double {
+        SchoolManager().heures(dans: school, classeStore: classeStore)
+    }
+
     var body: some View {
         List {
             // nom
@@ -44,7 +48,7 @@ struct SchoolDetail: View {
             }
             .listRowSeparator(.hidden)
 
-            // Type d'établissement
+            // édition du type d'établissement
             if isNew || isEditing {
                 CasePicker(pickedCase: $school.niveau,
                            label: "Type d'établissement")
@@ -54,28 +58,30 @@ struct SchoolDetail: View {
 
             // classes
             if !isNew {
-                Text("Classes (\(school.nbOfClasses))")
-                    .fontWeight(.bold)
-
-                if school.nbOfClasses == 0 {
-                    Text("Auncune classe dans cet établissement")
-                        .foregroundColor(.secondary)
-                } else {
-                    ForEach(school.classesID, id: \.self) { classeId in
-                        if let classe = classeStore.classe(withID: classeId) {
-                            ClassRow(classe: classe)
-                        } else {
-                            Text("classe non trouvée: \(classeId)")
-                        }
-                    }
-                    .onDelete(perform: { indexSet in
-                        for index in indexSet {
-                            isModified = true
-                            delete(classeIndex: index)
-                        }
-                    })
-                    .onMove(perform: moveClasse)
+                HStack {
+                    Text(school.classesLabel)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    Spacer()
+                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) heures")
+                        .font(.title3)
+                        .fontWeight(.bold)
                 }
+
+                ForEach(school.classesID, id: \.self) { classeId in
+                    if let classe = classeStore.classe(withID: classeId) {
+                        ClassRow(classe: classe)
+                    } else {
+                        Text("classe non trouvée: \(classeId)")
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    for index in indexSet {
+                        isModified = true
+                        delete(classeIndex: index)
+                    }
+                })
+                .onMove(perform: moveClasse)
 
                 Button {
                     isModified = true

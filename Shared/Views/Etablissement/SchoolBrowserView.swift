@@ -21,10 +21,8 @@ struct SchoolBrowserView: View {
     var body: some View {
         List {
             ForEach(NiveauSchool.allCases) { niveau in
-                Section {
-                    if etabStore.sorted(niveau: niveau).isEmpty {
-                        Text("Aucun établissement").foregroundColor(.secondary)
-                    } else {
+                if !etabStore.sorted(niveau: niveau).isEmpty {
+                    Section {
                         ForEach(etabStore.sorted(niveau: niveau)) { $school in
                             NavigationLink {
                                 SchoolEditor(school: $school)
@@ -45,12 +43,12 @@ struct SchoolBrowserView: View {
                                 }
                             }
                         }
+                    } header: {
+                        Text(niveau.displayString)
+                            .font(.callout)
+                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
                     }
-                } header: {
-                    Text(niveau.displayString)
-                        .font(.callout)
-                        .foregroundColor(.secondary)
-                        .fontWeight(.bold)
                 }
             }
             Button {
@@ -63,11 +61,10 @@ struct SchoolBrowserView: View {
             } label: {
                 Text("Test").foregroundColor(.primary)
             }
-
         }
         //.listStyle(.sidebar)
         .navigationTitle("Etabissements")
-        .navigationViewStyle(.columns)
+        //.navigationViewStyle(.columns)
         .toolbar {
             ToolbarItem {
                 Button {

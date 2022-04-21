@@ -264,13 +264,13 @@
 		79F3ABCA280821CE00D068D9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
 				79F3ABE1280830D000D068D9 /* School */,
 				79F3ABE2280830E000D068D9 /* Classe */,
 				79F3ABE3280830F300D068D9 /* Eleve */,
 				79F3ABED2808707C00D068D9 /* Observation */,
 				79F3ABEC2808707300D068D9 /* Colle */,
 				79F3ABFA2808845400D068D9 /* Store.swift */,
-				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

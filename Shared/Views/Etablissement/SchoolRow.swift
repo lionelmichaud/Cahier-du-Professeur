@@ -6,21 +6,35 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct SchoolRow: View {
     let school: School
+    @EnvironmentObject var classeStore : ClasseStore
+
+    var heures: Double {
+        SchoolManager().heures(dans: school, classeStore: classeStore)
+    }
 
     var body: some View {
-        Label(
-            title: {
+        HStack {
+            Image(systemName: school.niveau == .lycee ? "building.2" : "building")
+                .sfSymbolStyling()
+                .foregroundColor(school.niveau == .lycee ? .mint : .orange)
+
+            VStack(alignment: .leading, spacing: 5) {
                 Text(school.displayString)
-            },
-            icon: {
-                Image(systemName: school.niveau == .lycee ? "building.2" : "building")
-                    .imageScale(.large)
-                    .foregroundColor(school.niveau == .lycee ? .mint : .orange)
+                    .fontWeight(.bold)
+
+                HStack {
+                    Text(school.classesLabel)
+                    Spacer()
+                    Text(heures == 0 ? "Aucune heure" : "\(heures.formatted(.number.precision(.fractionLength(1)))) heures")
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
             }
-        )
+        }
         .badge(school.nbOfClasses)
     }
 }

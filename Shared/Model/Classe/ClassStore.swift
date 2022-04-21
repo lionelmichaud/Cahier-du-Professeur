@@ -20,11 +20,11 @@ final class ClasseStore: ObservableObject {
 
     // MARK: - Methods
 
-    func exists(_ item: Classe) -> Bool {
+    func isPresent(_ item: Classe) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 
-    func exists(_ ID: UUID) -> Bool {
+    func isPresent(_ ID: UUID) -> Bool {
         items.contains(where: { ID == $0.id})
     }
 
@@ -61,6 +61,14 @@ final class ClasseStore: ObservableObject {
             return
         }
         classesID.insert(classe.id, at: index)
+    }
+
+    func heures(dans classesID : [UUID]) -> Double {
+        var total = 0.0
+        for c in classesID {
+            total += classe(withID: c)?.heures ?? 0.0
+        }
+        return total
     }
 
     static var exemple = ClasseStore()

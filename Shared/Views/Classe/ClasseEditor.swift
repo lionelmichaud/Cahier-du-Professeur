@@ -33,7 +33,7 @@ struct ClasseEditor: View {
     @State private var isDeleted = false
 
     private var isItemDeleted: Bool {
-        !classeStore.exists(classe) && !isNew
+        !classeStore.isPresent(classe) && !isNew
     }
 
     var body: some View {

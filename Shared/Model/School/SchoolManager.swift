@@ -33,6 +33,10 @@ struct SchoolManager {
         classeStore.deleteClasse(withID: school.classesID[classeIndex])
         // supprimer la classe de l'établissement
         school.removeClasse(at: classeIndex)
+    }
 
+    func heures(dans school : School,
+                classeStore : ClasseStore) -> Double {
+        classeStore.heures(dans: school.classesID)
     }
 }

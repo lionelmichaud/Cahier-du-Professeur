@@ -20,10 +20,31 @@ final class ClasseStore: ObservableObject {
 
     // MARK: - Methods
 
+    /// True si une classe existe déjà avec les mêmes
+    /// niveaux, numéro et établissements
+    /// - Parameter classe: Classe
+    func exists(classe: Classe) -> Bool {
+        items.contains(classe)
+    }
+
+    /// True si une classe existe déjà avec les mêmes
+    /// niveaux, numéro et établissements
+    /// - Parameter classe: Classe
+    func exists(classe       : Classe,
+                `in`schoolID : UUID) -> Bool {
+        var c = classe
+        c.schoolId = schoolID
+        return items.contains(c)
+    }
+
+    /// True si une classe existe déjà avec le même ID
+    /// - Parameter item: Classe
     func isPresent(_ item: Classe) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 
+    /// True si une classe existe déjà avec le même ID
+    /// - Parameter ID: ID de la Calsse
     func isPresent(_ ID: UUID) -> Bool {
         items.contains(where: { ID == $0.id})
     }

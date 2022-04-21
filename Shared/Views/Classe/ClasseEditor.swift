@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct ClasseEditor: View {
     @Binding
@@ -31,6 +32,7 @@ struct ClasseEditor: View {
     @State private var isModified = false
     // true si l'item va être détruit
     @State private var isDeleted = false
+    @State private var alertItem : AlertItem?
 
     private var isItemDeleted: Bool {
         !classeStore.isPresent(classe) && !isNew
@@ -52,13 +54,19 @@ struct ClasseEditor: View {
                 Button {
                     if isNew {
                         // Ajouter le nouvel établissement
-                        withAnimation {
-                            SchoolManager()
-                                .ajouter(classe      : &itemCopy,
-                                         aSchool     : &school,
-                                         classeStore : classeStore)
+                        if classeStore.exists(classe: itemCopy, in: school.id) {
+                            self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                       message       : Text("Cette classe existe déjà dans cet établissement"),
+                                                       dismissButton : .default(Text("OK")))
+                        } else {
+                            withAnimation {
+                                SchoolManager()
+                                    .ajouter(classe      : &itemCopy,
+                                             aSchool     : &school,
+                                             classeStore : classeStore)
+                            }
+                            dismiss()
                         }
-                        dismiss()
                     } else {
                         // Appliquer les modifications faites à l'établissement
                         if isEditing && !isDeleted {
@@ -75,6 +83,7 @@ struct ClasseEditor: View {
                 }
             }
         }
+        .alert(item: $alertItem, content: newAlert)
     }
 }
 

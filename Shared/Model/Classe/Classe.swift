@@ -57,3 +57,11 @@ extension Classe: CustomStringConvertible {
         """
     }
 }
+
+extension Classe: Equatable {
+    static func == (lhs: Classe, rhs: Classe) -> Bool {
+        lhs.niveau == rhs.niveau &&
+        lhs.numero == rhs.numero &&
+        lhs.schoolId == rhs.schoolId
+    }
+}

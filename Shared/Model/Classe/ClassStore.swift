@@ -80,8 +80,7 @@ final class ClasseStore: ObservableObject {
             guard let c0 = self.classe(withID: $0) else {
                 return false
             }
-            return classe.niveau.rawValue < c0.niveau.rawValue ||
-            (classe.niveau.rawValue == c0.niveau.rawValue && classe.numero < c0.numero)
+            return classe < c0
         }) else {
             classesID.append(classe.id)
             return

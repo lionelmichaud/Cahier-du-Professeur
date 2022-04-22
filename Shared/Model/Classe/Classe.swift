@@ -9,6 +9,16 @@ import Foundation
 
 struct Classe: Identifiable {
 
+    // MARK: - Type Methods
+
+    static func < (lhs: Classe, rhs: Classe) -> Bool {
+        if lhs.niveau.rawValue != rhs.niveau.rawValue {
+            return lhs.niveau.rawValue < rhs.niveau.rawValue
+        } else {
+            return lhs.numero < rhs.numero
+        }
+    }
+
     // MARK: - Properties
 
     var id = UUID()
@@ -46,7 +56,7 @@ struct Classe: Identifiable {
         self.schoolId == classe.schoolId
     }
     
-    static let exemple = Classe(niveau : .n6ieme,
+   static let exemple = Classe(niveau : .n6ieme,
                                 numero : 1,
                                 heures : 1.5)
 

@@ -107,6 +107,7 @@ final class ClasseStore: ObservableObject {
                             return false
                         }
                     }
+                    .sorted(by: <)
             },
             set: { items in
                 for classe in items {

@@ -24,7 +24,9 @@ final class ClasseStore: ObservableObject {
     /// niveaux, numéro et établissements
     /// - Parameter classe: Classe
     func exists(classe: Classe) -> Bool {
-        items.contains(classe)
+        items.contains {
+            $0.isSameAs(classe)
+        }
     }
 
     /// True si une classe existe déjà avec les mêmes
@@ -35,7 +37,9 @@ final class ClasseStore: ObservableObject {
                 `in`schoolID : UUID) -> Bool {
         var c = classe
         c.schoolId = schoolID
-        return items.contains(c)
+        return items.contains {
+            $0.isSameAs(c)
+        }
     }
 
     /// True si une classe existe déjà avec le même ID
@@ -91,6 +95,28 @@ final class ClasseStore: ObservableObject {
             total += classe(withID: c)?.heures ?? 0.0
         }
         return total
+    }
+
+    func classes(dans school: School) -> Binding<[Classe]> {
+        Binding<[Classe]>(
+            get: {
+                self.items
+                    .filter {
+                        if let schoolId = $0.schoolId {
+                            return schoolId == school.id
+                        } else {
+                            return false
+                        }
+                    }
+            },
+            set: { items in
+                for classe in items {
+                    if let index = self.items.firstIndex(where: { $0.id == classe.id }) {
+                        self.items[index] = classe
+                    }
+                }
+            }
+        )
     }
 
     static var exemple = ClasseStore()

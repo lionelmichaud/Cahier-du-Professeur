@@ -11,7 +11,7 @@ struct SchoolEditor: View {
     @Binding var school: School
     var isNew = false
 
-    @EnvironmentObject var etabStore   : SchoolStore
+    @EnvironmentObject var schoolStore   : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -31,7 +31,7 @@ struct SchoolEditor: View {
     @State private var isDeleted = false
 
     private var isItemDeleted: Bool {
-        !etabStore.exists(school) && !isNew
+        !schoolStore.exists(school) && !isNew
     }
 
     var body: some View {
@@ -53,7 +53,7 @@ struct SchoolEditor: View {
                             if isNew {
                                 // Ajouter le nouvel établissement
                                 withAnimation {
-                                    etabStore.add(itemCopy)
+                                    schoolStore.add(itemCopy)
                                 }
                                 dismiss()
                             } else {
@@ -86,7 +86,7 @@ struct SchoolEditor: View {
                     action: {
                         isDeleted = true
                         withAnimation {
-                            etabStore.delete(school,
+                            schoolStore.delete(school,
                                              classes : classeStore,
                                              eleves  : eleveStore,
                                              observs : observStore,
@@ -123,9 +123,9 @@ struct SchoolEditor_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return NavigationView {
             EmptyView()
-            SchoolEditor(school : .constant(TestEnvir.etabStore.items.first!),
+            SchoolEditor(school : .constant(TestEnvir.schoolStore.items.first!),
                          isNew  : false)
-                .environmentObject(TestEnvir.etabStore)
+                .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)

@@ -92,7 +92,7 @@ struct ClasseEditor_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return NavigationView {
             EmptyView()
-            ClasseEditor(school : .constant(TestEnvir.etabStore.items.first!),
+            ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
                          classe : .constant(TestEnvir.classeStore.items.first!),
                          isNew  : true)
             .environmentObject(TestEnvir.classeStore)

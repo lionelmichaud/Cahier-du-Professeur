@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SchoolBrowserView: View {
-    @EnvironmentObject var etabStore   : SchoolStore
+    @EnvironmentObject var schoolStore : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -21,9 +21,9 @@ struct SchoolBrowserView: View {
     var body: some View {
         List {
             ForEach(NiveauSchool.allCases) { niveau in
-                if !etabStore.sorted(niveau: niveau).isEmpty {
+                if !schoolStore.sorted(niveau: niveau).isEmpty {
                     Section {
-                        ForEach(etabStore.sorted(niveau: niveau)) { $school in
+                        ForEach(schoolStore.sorted(niveau: niveau)) { $school in
                             NavigationLink {
                                 SchoolEditor(school: $school)
                             } label: {
@@ -32,7 +32,7 @@ struct SchoolBrowserView: View {
                             .swipeActions {
                                 Button(role: .destructive) {
                                     withAnimation {
-                                        etabStore.delete(school,
+                                        schoolStore.delete(school,
                                                          classes : classeStore,
                                                          eleves  : eleveStore,
                                                          observs : observStore,
@@ -53,7 +53,7 @@ struct SchoolBrowserView: View {
             }
             Button {
                 TestEnvir.populateWithFakes(
-                    etabStore   : etabStore,
+                    schoolStore : schoolStore,
                     classeStore : classeStore,
                     eleveStore  : eleveStore,
                     observStore : observStore,
@@ -88,7 +88,7 @@ struct SchoolBrowserView_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return NavigationView {
             SchoolBrowserView()
-                .environmentObject(TestEnvir.etabStore)
+                .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)

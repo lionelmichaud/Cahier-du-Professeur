@@ -38,6 +38,14 @@ struct Classe: Identifiable {
         self.heures   = heures
     }
 
+    // MARK: - Methods
+
+    func isSameAs(_ classe: Classe) -> Bool {
+        self.niveau == classe.niveau &&
+        self.numero == classe.numero &&
+        self.schoolId == classe.schoolId
+    }
+    
     static let exemple = Classe(niveau : .n6ieme,
                                 numero : 1,
                                 heures : 1.5)
@@ -58,10 +66,10 @@ extension Classe: CustomStringConvertible {
     }
 }
 
-extension Classe: Equatable {
-    static func == (lhs: Classe, rhs: Classe) -> Bool {
-        lhs.niveau == rhs.niveau &&
-        lhs.numero == rhs.numero &&
-        lhs.schoolId == rhs.schoolId
-    }
-}
+//extension Classe: Equatable {
+//    static func == (lhs: Classe, rhs: Classe) -> Bool {
+//        lhs.niveau == rhs.niveau &&
+//        lhs.numero == rhs.numero &&
+//        lhs.schoolId == rhs.schoolId
+//    }
+//}

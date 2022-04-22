@@ -24,7 +24,7 @@ struct SchoolSidebarView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return SchoolSidebarView()
-            .environmentObject(TestEnvir.etabStore)
+            .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)

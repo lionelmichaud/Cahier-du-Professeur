@@ -42,7 +42,7 @@ struct SchoolRow: View {
 struct SchoolRow_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return SchoolRow(school: TestEnvir.etabStore.items.first!)
+        return SchoolRow(school: TestEnvir.schoolStore.items.first!)
             .preferredColorScheme(.dark)
             .previewLayout(.sizeThatFits)
     }

@@ -16,7 +16,7 @@ struct MainScene: Scene {
 
     // MARK: - Properties
 
-    @ObservedObject var etabStore   : SchoolStore
+    @ObservedObject var schoolStore   : SchoolStore
     @ObservedObject var classeStore : ClasseStore
     @ObservedObject var eleveStore  : EleveStore
     @ObservedObject var colleStore  : ColleStore
@@ -29,7 +29,7 @@ struct MainScene: Scene {
         WindowGroup {
             /// defines the views hierachy of the scene
             ContentView()
-                .environmentObject(etabStore)
+                .environmentObject(schoolStore)
                 .environmentObject(classeStore)
                 .environmentObject(eleveStore)
                 .environmentObject(colleStore)

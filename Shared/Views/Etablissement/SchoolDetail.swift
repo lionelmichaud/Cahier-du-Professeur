@@ -124,7 +124,7 @@ struct SchoolDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            SchoolDetail(school    : .constant(TestEnvir.etabStore.items.first!),
+            SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
                          isEditing : false,
                          isNew     : false,
                          isModified: .constant(false))
@@ -133,7 +133,7 @@ struct SchoolDetail_Previews: PreviewProvider {
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
-            SchoolDetail(school    : .constant(TestEnvir.etabStore.items.first!),
+            SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
                          isEditing : true,
                          isNew     : false,
                          isModified: .constant(false))
@@ -143,7 +143,7 @@ struct SchoolDetail_Previews: PreviewProvider {
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewInterfaceOrientation(.portraitUpsideDown)
-            SchoolDetail(school    : .constant(TestEnvir.etabStore.items.first!),
+            SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
                          isEditing : false,
                          isNew     : true,
                          isModified: .constant(false))

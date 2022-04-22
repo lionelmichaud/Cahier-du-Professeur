@@ -8,14 +8,14 @@
 import Foundation
 
 struct TestEnvir {
-    static var etabStore   : SchoolStore!
+    static var schoolStore   : SchoolStore!
     static var classeStore : ClasseStore!
     static var eleveStore  : EleveStore!
     static var observStore : ObservationStore!
     static var colleStore  : ColleStore!
 
     static func populateWithFakes(
-        etabStore   : SchoolStore,
+        schoolStore   : SchoolStore,
         classeStore : ClasseStore,
         eleveStore  : EleveStore,
         observStore : ObservationStore,
@@ -28,13 +28,13 @@ struct TestEnvir {
                                 aSchool     : &school,
                                 classeStore : classeStore)
             // ajouter l'établissement à son store
-            etabStore.add(school)
+            schoolStore.add(school)
             // ajouter la classe à son store
             classeStore.add(classe)
         }
     
     static func createFakes() {
-        etabStore   = SchoolStore()
+        schoolStore   = SchoolStore()
         classeStore = ClasseStore()
         eleveStore  = EleveStore()
         observStore = ObservationStore()
@@ -48,7 +48,7 @@ struct TestEnvir {
                             aSchool     : &school,
                             classeStore : classeStore)
         // ajouter l'établissement à son store
-        etabStore.add(school)
+        schoolStore.add(school)
         // ajouter la classe à son store
         classeStore.add(classe)
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 import HelpersView
 
-struct ClassRow: View {
+struct SchoolClassRow: View {
     var classe: Classe
 
     var body: some View {
@@ -25,11 +25,9 @@ struct ClassRow: View {
     }
 }
 
-struct ClassRow_Previews: PreviewProvider {
+struct SchoolClassRow_Previews: PreviewProvider {
     static var previews: some View {
-        ClassRow(classe: Classe.exemple)
-            .previewLayout(.sizeThatFits)
-        ClassRow(classe: Classe.exemple)
+        SchoolClassRow(classe: Classe.exemple)
             .previewLayout(.sizeThatFits)
     }
 }

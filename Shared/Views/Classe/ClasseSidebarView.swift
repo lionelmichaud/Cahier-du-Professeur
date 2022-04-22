@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ClasseSidebarView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            /// Primary view
+            ClasseBrowserView()
+            /// vue par défaut
+            Text("Sélectionner une classe")
+                .foregroundStyle(.secondary)
+        }
     }
 }
 

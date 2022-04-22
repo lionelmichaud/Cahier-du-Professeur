@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var etabStore   : SchoolStore
+    @EnvironmentObject var schoolStore   : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -23,7 +23,7 @@ struct ContentView: View {
             SchoolSidebarView()
                 .tabItem { Label("Etablissement", systemImage: "building.2").symbolVariant(.none) }
                 .tag(UIState.Tab.school)
-                .badge(etabStore.nbOfItems)
+                .badge(schoolStore.nbOfItems)
 
             /// composition de la famille
             ClasseSidebarView()
@@ -56,7 +56,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return ContentView()
-            .environmentObject(TestEnvir.etabStore)
+            .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)

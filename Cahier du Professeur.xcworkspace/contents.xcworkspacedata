@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../Packages/HelpersView">
+      location = "group:../Packages/AppFoundation">
    </FileRef>
    <FileRef
-      location = "group:../Packages/AppFoundation">
+      location = "group:../Packages/HelpersView">
    </FileRef>
    <FileRef
       location = "group:Cahier du Professeur.xcodeproj">

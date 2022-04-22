@@ -7,87 +7,84 @@
 
 import Foundation
 
-final class ClasseStore: ObservableObject {
-    @Published
-    var items: [Classe] = [ ]
-    var nbOfItems: Int {
-        items.count
-    }
+struct Classe: Identifiable {
 
-    func exists(_ item: Classe) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
+    // MARK: - Type Methods
 
-    func add(_ item: Classe) {
-        items.insert(item, at: 0)
-    }
-
-    func delete(_ item  : Classe,
-                eleves  : EleveStore,
-                observs : ObservationStore,
-                colles  : ColleStore) {
-        // supprimer tous les élèves de la classe
-        item.eleves.forEach { eleve in
-            eleves.delete(eleve,
-                          observs: observs,
-                          colles: colles)
-        }
-
-        // zeroize du pointeur de l'établissement vers la classe
-        if let etablissement = item.etablissement {
-            let etablissementManager = EtablissementManager()
-            etablissementManager.retirer(classe: item,
-                                         deEtablissement: etablissement)
-        }
-
-        // retirer la classe de la liste
-        items.removeAll {
-            $0.id == item.id
+    static func < (lhs: Classe, rhs: Classe) -> Bool {
+        if lhs.niveau.rawValue != rhs.niveau.rawValue {
+            return lhs.niveau.rawValue < rhs.niveau.rawValue
+        } else {
+            return lhs.numero < rhs.numero
         }
     }
 
-    static var exemple = ClasseStore()
-}
+    // MARK: - Properties
 
-extension ClasseStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
-    }
-}
-
-final class Classe: ObservableObject, Identifiable {
     var id = UUID()
-    @Published
-    var etablissement: Etablissement?
-    @Published
-    var niveau: NiveauClasse = .n6ieme
-    @Published
-    var numero: Int = 1
-    @Published
-    var eleves: [Eleve] = []
+    var schoolId : UUID?
+    var niveau   : NiveauClasse = .n6ieme
+    var numero   : Int          = 1
+    var heures   : Double       = 0
+    var elevesID : [UUID] = []
 
     var nbOfEleves: Int {
-        eleves.count
+        elevesID.count
+    }
+
+    var elevesLabel: String {
+        if nbOfEleves == 0 {
+            return "Aucun Élève"
+        } else if nbOfEleves == 1 {
+            return "1 Élève"
+        } else {
+            return "\(nbOfEleves) Élèves"
+        }
     }
 
     var displayString: String {
         "\(niveau.displayString)\(numero)"
     }
 
-    internal init(etablissement : Etablissement? = nil,
-                  niveau        : NiveauClasse,
-                  numero        : Int) {
-        self.etablissement = etablissement
-        self.niveau        = niveau
-        self.numero        = numero
+    // MARK: - Initializers
+
+    init(schoolId : UUID?  = nil,
+         niveau   : NiveauClasse,
+         numero   : Int,
+         heures   : Double = 0) {
+        self.schoolId = schoolId
+        self.niveau   = niveau
+        self.numero   = numero
+        self.heures   = heures
     }
 
-    static let exemple = Classe(niveau : .n6ieme,
-                                numero : 1)
+    // MARK: - Methods
+
+    func isSameAs(_ classe: Classe) -> Bool {
+        self.niveau == classe.niveau &&
+        self.numero == classe.numero &&
+        self.schoolId == classe.schoolId
+    }
+    
+    mutating func addEleve(withID eleveID: UUID) {
+        elevesID.insert(eleveID, at: 0)
+    }
+
+    mutating func removeEleve(withID eleveID: UUID) {
+        elevesID.removeAll(where: { $0 == eleveID })
+    }
+
+    mutating func removeEleve(at index : Int) {
+        elevesID.remove(at: index)
+    }
+
+    mutating func moveEleve(from indexes: IndexSet, to destination: Int) {
+        elevesID.move(fromOffsets: indexes, toOffset: destination)
+    }
+
+   static let exemple = Classe(niveau : .n6ieme,
+                                numero : 1,
+                                heures : 1.5)
 
 }
 
@@ -96,10 +93,20 @@ extension Classe: CustomStringConvertible {
         """
         
         CLASSE: \(displayString)
-           Niveau: \(niveau.displayString)
-           Numéro: \(numero)
-           Etablissement: \(etablissement?.displayString ?? "inconnu")
-           Eleves: \(String(describing: eleves).withPrefixedSplittedLines("     "))
+           ID      : \(id)
+           Niveau  : \(niveau.displayString)
+           Numéro  : \(numero)
+           Heures  : \(heures)
+           SchoolID: \(String(describing: schoolId))
+           Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
         """
     }
 }
+
+//extension Classe: Equatable {
+//    static func == (lhs: Classe, rhs: Classe) -> Bool {
+//        lhs.niveau == rhs.niveau &&
+//        lhs.numero == rhs.numero &&
+//        lhs.schoolId == rhs.schoolId
+//    }
+//}

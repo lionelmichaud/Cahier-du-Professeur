@@ -7,96 +7,58 @@
 
 import Foundation
 
-final class EleveStore: ObservableObject {
-    @Published
-    var items: [Eleve] = [ ]
-    var nbOfItems: Int {
-        items.count
-    }
+struct Eleve: Identifiable {
 
-    func exists(_ item: Eleve) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
+    // MARK: - Type Methods
 
-    func add(_ item: Eleve) {
-        items.insert(item, at: 0)
-    }
-
-    func delete(_ item  : Eleve,
-                observs : ObservationStore,
-                colles  : ColleStore) {
-        // zeroize du pointeur des colles vers l'élève
-        // supprimer la colle de son store
-        item.colles.forEach { colle in
-            colles.delete(colle)
-        }
-
-        // zeroize du pointeur des observations vers l'élève
-        // supprimer l'observation de son store
-        item.observs.forEach { observ in
-            observs.delete(observ)
-        }
-
-        // zeroize du pointeur de la classe vers l'élève
-        if let classe = item.classe {
-            let classeManager = ClasseManager()
-            classeManager.retirer(eleve: item,
-                                  deClasse: classe)
-        }
-
-        // retirer l'élève de la liste
-        items.removeAll {
-            $0.id == item.id
+    static func < (lhs: Eleve, rhs: Eleve) -> Bool {
+        if lhs.name.familyName! != rhs.name.familyName! {
+            return lhs.name.familyName! < rhs.name.familyName!
+        } else {
+            return lhs.name.givenName! < rhs.name.givenName!
         }
     }
 
-    static var exemple : EleveStore = {
-        let store = EleveStore()
-        store.items.append(Eleve.exemple)
-        return store
-    }()
-}
+    // MARK: - Properties
 
-extension EleveStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
-    }
-}
-
-final class Eleve: ObservableObject, Identifiable {
     var id = UUID()
-    @Published
-    var sexe   : Sexe = .male
-    @Published
-    var name   : PersonNameComponents = PersonNameComponents()
-    @Published
-    var classe : Classe?
-    @Published
-    var colles : [Colle] = [ ]
-    @Published
-    var observs : [Observation] = [ ]
+    var sexe      : Sexe                 = .male
+    var name      : PersonNameComponents = PersonNameComponents()
+    var classeId  : UUID?
+    var collesID  : [UUID] = [ ]
+    var observsID : [UUID] = [ ]
+
+    var nbOfColles: Int {
+        collesID.count
+    }
+
+    var nbOfObservs: Int {
+        observsID.count
+    }
 
     var displayName : String {
         "\(sexe.displayString) \(name.formatted(.name(style: .long)))"
     }
 
+    // MARK: - Initializers
+
     init(sexe   : Sexe,
          nom    : String,
-         prenom : String,
-         classe : Classe?  = nil) {
+         prenom : String) {
         self.sexe   = sexe
-        self.name   = PersonNameComponents(givenName: prenom, middleName: nom)
-        self.classe = classe
+        self.name   = PersonNameComponents(givenName: prenom, familyName: nom)
+    }
+
+    // MARK: - Methods
+
+    func isSameAs(_ eleve: Eleve) -> Bool {
+        self.name.familyName == eleve.name.familyName &&
+        self.name.givenName == eleve.name.givenName
     }
 
     static let exemple = Eleve(sexe   : .male,
                                nom    : "Nom",
-                               prenom : "Prénom",
-                               classe : Classe.exemple)
+                               prenom : "Prénom")
 }
 
 extension Eleve: CustomStringConvertible {
@@ -104,11 +66,12 @@ extension Eleve: CustomStringConvertible {
         """
         
         ELEVE: \(displayName)
-           Sexe: \(sexe.pickerString)
-           Nom: \(name.formatted(.name(style: .long)))
-           Classe: \(classe?.displayString ?? "inconnue")
-           Observations: \(String(describing: observs).withPrefixedSplittedLines("     "))
-           Colles: \(String(describing: colles).withPrefixedSplittedLines("     "))
+           ID      : \(id)
+           Sexe    : \(sexe.pickerString)
+           Nom     : \(name.formatted(.name(style: .long)))
+           ClasseID: \(String(describing: classeId))
+           Observations: \(String(describing: observsID).withPrefixedSplittedLines("     "))
+           Colles: \(String(describing: collesID).withPrefixedSplittedLines("     "))
         """
     }
 }

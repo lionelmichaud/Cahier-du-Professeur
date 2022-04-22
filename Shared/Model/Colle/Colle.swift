@@ -26,8 +26,8 @@ final class ColleStore: ObservableObject {
         // zeroize du pointeur de la classe vers l'élève
         if let eleve = item.eleve {
             let colleManager = ColleManager()
-            colleManager.retirer(colle: item,
-                                 deEleve: eleve)
+//            colleManager.retirer(colle: item,
+//                                 deEleve: eleve)
         }
 
         // retirer la colle de la liste

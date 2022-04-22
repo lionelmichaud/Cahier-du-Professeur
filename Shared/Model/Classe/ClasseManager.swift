@@ -8,15 +8,29 @@
 import Foundation
 
 struct ClasseManager {
-    func ajouter(eleve          : Eleve,
-                 aClasse classe : Classe) {
-        classe.eleves.insert(eleve, at: 0)
-        eleve.classe = classe
+    func ajouter(eleve          : inout Eleve,
+                 aClasse classe : inout Classe,
+                 eleveStore     : EleveStore) {
+        eleveStore.insert(eleve: eleve, in: &classe.elevesID)
+        eleve.classeId = classe.id
+        eleveStore.add(eleve)
     }
-    
-    func retirer(eleve           : Eleve,
-                 deClasse classe : Classe) {
-        classe.eleves.removeAll { $0.id == eleve.id }
-        eleve.classe = nil
+
+    func retirer(eleveId             : UUID,
+                 deClasseId classeId : UUID,
+                 classeStore         : ClasseStore) {
+        guard let classeIndex = classeStore.items.firstIndex(where: { $0.id == classeId }) else {
+            return
+        }
+        classeStore.items[classeIndex].removeEleve(withID: eleveId)
+    }
+
+    func retirer(eleveIndex      : Int,
+                 deClasse classe : inout Classe,
+                 eleveStore      : EleveStore) {
+        // supprimer l'élève de la liste d'élèves
+        eleveStore.deleteEleve(withID: classe.elevesID[eleveIndex])
+        // supprimer l'élève de la classe
+        classe.removeEleve(at: eleveIndex)
     }
 }

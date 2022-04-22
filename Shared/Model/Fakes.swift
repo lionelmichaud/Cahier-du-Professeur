@@ -8,40 +8,48 @@
 import Foundation
 
 struct TestEnvir {
-    static var etabStore  : EtablissementStore!
-    static var classStore : ClasseStore!
-    static var eleveStore : EleveStore!
-    static var obsStore   : ObservationStore!
-    static var colStore   : ColleStore!
+    static var schoolStore   : SchoolStore!
+    static var classeStore : ClasseStore!
+    static var eleveStore  : EleveStore!
+    static var observStore : ObservationStore!
+    static var colleStore  : ColleStore!
 
     static func populateWithFakes(
-        etabStore  : EtablissementStore,
-        classStore : ClasseStore,
-        eleveStore : EleveStore,
-        obsStore   : ObservationStore,
-        colStore   : ColleStore) {
-            let etabManager = EtablissementManager()
+        schoolStore   : SchoolStore,
+        classeStore : ClasseStore,
+        eleveStore  : EleveStore,
+        observStore : ObservationStore,
+        colleStore  : ColleStore) {
+            let etabManager = SchoolManager()
+            var classe = Classe.exemple
+            var school = School.exemple
             // ajouter une classe à l'établissement
-            etabManager.ajouter(classe: Classe.exemple, aEtablissement: Etablissement.exemple)
+            etabManager.ajouter(classe      : &classe,
+                                aSchool     : &school,
+                                classeStore : classeStore)
             // ajouter l'établissement à son store
-            etabStore.add(Etablissement.exemple)
+            schoolStore.add(school)
             // ajouter la classe à son store
-            classStore.add(Classe.exemple)
+            classeStore.add(classe)
         }
     
     static func createFakes() {
-        etabStore  = EtablissementStore()
-        classStore = ClasseStore()
-        eleveStore = EleveStore()
-        obsStore   = ObservationStore()
-        colStore   = ColleStore()
+        schoolStore   = SchoolStore()
+        classeStore = ClasseStore()
+        eleveStore  = EleveStore()
+        observStore = ObservationStore()
+        colleStore  = ColleStore()
 
-        let etabManager = EtablissementManager()
+        let etabManager = SchoolManager()
+        var classe = Classe.exemple
+        var school = School.exemple
         // ajouter une classe à l'établissement
-        etabManager.ajouter(classe: Classe.exemple, aEtablissement: Etablissement.exemple)
+        etabManager.ajouter(classe      : &classe,
+                            aSchool     : &school,
+                            classeStore : classeStore)
         // ajouter l'établissement à son store
-        etabStore.add(Etablissement.exemple)
+        schoolStore.add(school)
         // ajouter la classe à son store
-        classStore.add(Classe.exemple)
+        classeStore.add(classe)
     }
 }

@@ -22,8 +22,8 @@ final class ObservationStore: ObservableObject {
         // zeroize du pointeur de la classe vers l'élève
         if let eleve = item.eleve {
             let observationManager = ObservationManager()
-            observationManager.retirer(observ: item,
-                                       deEleve: eleve)
+//            observationManager.retirer(observ: item,
+//                                       deEleve: eleve)
         }
 
         // retirer l'observ de la liste

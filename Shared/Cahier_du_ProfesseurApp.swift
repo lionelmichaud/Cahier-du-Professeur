@@ -9,17 +9,17 @@ import SwiftUI
 
 @main
 struct Cahier_du_ProfesseurApp: App {
-    @StateObject private var etabStore   = EtablissementStore()
+    @StateObject private var schoolStore = SchoolStore()
     @StateObject private var classeStore = ClasseStore()
     @StateObject private var eleveStore  = EleveStore()
     @StateObject private var colleStore  = ColleStore()
     @StateObject private var observStore = ObservationStore()
 
     var body: some Scene {
-        MainScene(etabStore   : etabStore  ,
+        MainScene(schoolStore : schoolStore,
                   classeStore : classeStore,
-                  eleveStore  : eleveStore ,
-                  colleStore  : colleStore ,
+                  eleveStore  : eleveStore,
+                  colleStore  : colleStore,
                   observStore : observStore)
     }
 

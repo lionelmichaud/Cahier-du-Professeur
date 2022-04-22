@@ -37,7 +37,7 @@ struct Eleve: Identifiable {
     }
 
     var displayName : String {
-        "\(sexe.displayString) \(name.formatted(.name(style: .long)))"
+        name.formatted(.name(style: .long))
     }
 
     // MARK: - Initializers

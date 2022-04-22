@@ -15,7 +15,7 @@ struct ClasseEleveRow: View {
         HStack {
             Image(systemName: "person.fill")
                 .sfSymbolStyling()
-                //.foregroundColor(eleve.niveau.color)
+                .foregroundColor(eleve.sexe.color)
             Text(eleve.displayName)
             Spacer()
             Text("\(eleve.nbOfColles) colles")

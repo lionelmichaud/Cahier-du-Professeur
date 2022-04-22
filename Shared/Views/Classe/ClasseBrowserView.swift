@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ClasseBrowserView: View {
-    @EnvironmentObject var schoolStore : SchoolStore
-    @EnvironmentObject var classeStore : ClasseStore
-    @EnvironmentObject var eleveStore  : EleveStore
+    @EnvironmentObject private var schoolStore : SchoolStore
+    @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore  : EleveStore
 
     var body: some View {
         List {
@@ -19,9 +19,11 @@ struct ClasseBrowserView: View {
                     Section {
                         ForEach(classeStore.classes(dans: school)) { $classe in
                             NavigationLink {
-                                EmptyView()
+                                ClasseEditor(school : .constant(school),
+                                             classe : $classe,
+                                             isNew  : false)
                             } label: {
-                                ClassRow(classe: classe)
+                                ClassBrowserRow(classe: classe)
                             }
                         }
                     } header: {

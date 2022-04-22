@@ -15,10 +15,10 @@ struct ClasseEditor: View {
     var classe: Classe
     var isNew = false
 
-    @EnvironmentObject var classeStore : ClasseStore
-    @EnvironmentObject var eleveStore  : EleveStore
-    @EnvironmentObject var colleStore  : ColleStore
-    @EnvironmentObject var observStore : ObservationStore
+    @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
     @Environment(\.dismiss) private var dismiss
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
@@ -34,14 +34,11 @@ struct ClasseEditor: View {
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
 
-    private var isItemDeleted: Bool {
-        !classeStore.isPresent(classe) && !isNew
-    }
-
     var body: some View {
-        ClassDetail(classe    : $itemCopy,
-                    isEditing : isEditing,
-                    isNew     : true)
+        ClassDetail(classe     : $itemCopy,
+                    isEditing  : isEditing,
+                    isNew      : isNew,
+                    isModified : $isModified)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 if isNew {
@@ -53,7 +50,7 @@ struct ClasseEditor: View {
             ToolbarItem {
                 Button {
                     if isNew {
-                        // Ajouter le nouvel établissement
+                        // Ajouter une nouvelle classe
                         if classeStore.exists(classe: itemCopy, in: school.id) {
                             self.alertItem = AlertItem(title         : Text("Ajout impossible"),
                                                        message       : Text("Cette classe existe déjà dans cet établissement"),
@@ -68,13 +65,13 @@ struct ClasseEditor: View {
                             dismiss()
                         }
                     } else {
-                        // Appliquer les modifications faites à l'établissement
+                        // Appliquer les modifications faites à la classe
                         if isEditing && !isDeleted {
                             print("Done, saving any changes to \(classe.displayString).")
                             withAnimation {
                                 classe = itemCopy // Put edits (if any) back in the store.
-                                isSaved = true
                             }
+                            isSaved = true
                         }
                         isEditing.toggle()
                     }
@@ -83,7 +80,22 @@ struct ClasseEditor: View {
                 }
             }
         }
+        .onDisappear {
+            if isModified && !isSaved {
+                // Appliquer les modifications faites à la classe hors du mode édition
+                classe = itemCopy
+            }
+        }
         .alert(item: $alertItem, content: newAlert)
+    }
+
+    init(school: Binding<School>,
+         classe: Binding<Classe>,
+         isNew: Bool = false) {
+        self.isNew = isNew
+        self._school = school
+        self._classe = classe
+        self._itemCopy = State(initialValue: classe.wrappedValue)
     }
 }
 

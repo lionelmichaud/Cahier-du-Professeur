@@ -26,10 +26,20 @@ struct Classe: Identifiable {
     var niveau   : NiveauClasse = .n6ieme
     var numero   : Int          = 1
     var heures   : Double       = 0
-    private(set) var eleves: [UUID] = []
+    var elevesID : [UUID] = []
 
     var nbOfEleves: Int {
-        eleves.count
+        elevesID.count
+    }
+
+    var elevesLabel: String {
+        if nbOfEleves == 0 {
+            return "Aucun Élève"
+        } else if nbOfEleves == 1 {
+            return "1 Élève"
+        } else {
+            return "\(nbOfEleves) Élèves"
+        }
     }
 
     var displayString: String {
@@ -56,6 +66,22 @@ struct Classe: Identifiable {
         self.schoolId == classe.schoolId
     }
     
+    mutating func addEleve(withID eleveID: UUID) {
+        elevesID.insert(eleveID, at: 0)
+    }
+
+    mutating func removeEleve(withID eleveID: UUID) {
+        elevesID.removeAll(where: { $0 == eleveID })
+    }
+
+    mutating func removeEleve(at index : Int) {
+        elevesID.remove(at: index)
+    }
+
+    mutating func moveEleve(from indexes: IndexSet, to destination: Int) {
+        elevesID.move(fromOffsets: indexes, toOffset: destination)
+    }
+
    static let exemple = Classe(niveau : .n6ieme,
                                 numero : 1,
                                 heures : 1.5)
@@ -70,8 +96,9 @@ extension Classe: CustomStringConvertible {
            ID      : \(id)
            Niveau  : \(niveau.displayString)
            Numéro  : \(numero)
+           Heures  : \(heures)
            SchoolID: \(String(describing: schoolId))
-           Eleves  : \(String(describing: eleves).withPrefixedSplittedLines("     "))
+           Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
         """
     }
 }

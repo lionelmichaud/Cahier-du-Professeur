@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SchoolBrowserView: View {
-    @EnvironmentObject var schoolStore : SchoolStore
-    @EnvironmentObject var classeStore : ClasseStore
-    @EnvironmentObject var eleveStore  : EleveStore
-    @EnvironmentObject var colleStore  : ColleStore
-    @EnvironmentObject var observStore : ObservationStore
+    @EnvironmentObject private var schoolStore : SchoolStore
+    @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
     @State
     private var isAddingNewEtab = false
     @State
@@ -27,7 +27,7 @@ struct SchoolBrowserView: View {
                             NavigationLink {
                                 SchoolEditor(school: $school)
                             } label: {
-                                SchoolRow(school: school)
+                                SchoolBrowserRow(school: school)
                             }
                             .swipeActions {
                                 Button(role: .destructive) {

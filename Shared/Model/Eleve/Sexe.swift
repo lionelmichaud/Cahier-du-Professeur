@@ -17,9 +17,9 @@ public enum Sexe: Int, PickableEnumP, Codable {
     public var displayString: String {
         switch self {
             case .male:
-                return "M."
+                return "G"
             case .female:
-                return "Mlle"
+                return "F"
         }
     }
     public var pickerString: String {

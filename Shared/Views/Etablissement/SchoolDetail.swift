@@ -10,9 +10,9 @@ import HelpersView
 
 struct SchoolDetail: View {
     @Binding
-    var school: School
-    let isEditing: Bool
-    let isNew: Bool
+    var school    : School
+    let isEditing : Bool
+    let isNew     : Bool
     @Binding
     var isModified: Bool
 
@@ -23,7 +23,7 @@ struct SchoolDetail: View {
     @State
     private var isAddingNewClasse = false
     @State
-    private var newClasse = Classe(niveau: .n6ieme, numero: 1)
+    private var newClasse = Classe.exemple
 
     var heures: Double {
         SchoolManager().heures(dans: school, classeStore: classeStore)
@@ -31,7 +31,7 @@ struct SchoolDetail: View {
 
     var body: some View {
         List {
-            // nom
+            // nom de l'établissement
             HStack {
                 Image(systemName: school.niveau == .lycee ? "building.2" : "building")
                     .imageScale(.large)
@@ -48,7 +48,7 @@ struct SchoolDetail: View {
             }
             .listRowSeparator(.hidden)
 
-            // édition du type d'établissement
+            // type d'établissement
             if isNew || isEditing {
                 CasePicker(pickedCase: $school.niveau,
                            label: "Type d'établissement")
@@ -56,8 +56,9 @@ struct SchoolDetail: View {
                 .listRowSeparator(.hidden)
             }
 
-            // classes
+            // classes dans l'établissement
             if !isNew {
+                // titre
                 HStack {
                     Text(school.classesLabel)
                         .font(.title3)
@@ -68,9 +69,10 @@ struct SchoolDetail: View {
                         .fontWeight(.bold)
                 }
 
+                // édition de la liste des classes
                 ForEach(school.classesID, id: \.self) { classeId in
                     if let classe = classeStore.classe(withID: classeId) {
-                        ClassRow(classe: classe)
+                        SchoolClassRow(classe: classe)
                     } else {
                         Text("classe non trouvée: \(classeId)")
                     }
@@ -83,6 +85,7 @@ struct SchoolDetail: View {
                 })
                 .onMove(perform: moveClasse)
 
+                // ajouter une classe
                 Button {
                     isModified = true
                     newClasse = Classe(niveau: .n6ieme, numero: 1)

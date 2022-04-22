@@ -8,7 +8,7 @@
 import SwiftUI
 import HelpersView
 
-struct SchoolRow: View {
+struct SchoolBrowserRow: View {
     let school: School
     @EnvironmentObject var classeStore : ClasseStore
 
@@ -42,7 +42,7 @@ struct SchoolRow: View {
 struct SchoolRow_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return SchoolRow(school: TestEnvir.schoolStore.items.first!)
+        return SchoolBrowserRow(school: TestEnvir.schoolStore.items.first!)
             .preferredColorScheme(.dark)
             .previewLayout(.sizeThatFits)
     }

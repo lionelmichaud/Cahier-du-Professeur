@@ -20,7 +20,7 @@ final class ClasseStore: ObservableObject {
 
     // MARK: - Methods
 
-    /// True si une classe existe déjà avec les mêmes
+    /// True si une classe existe déjà dans le strore avec les mêmes
     /// niveaux, numéro et établissements
     /// - Parameter classe: Classe
     func exists(classe: Classe) -> Bool {
@@ -29,7 +29,7 @@ final class ClasseStore: ObservableObject {
         }
     }
 
-    /// True si une classe existe déjà avec les mêmes
+    /// True si une classe existe déjà dans l'établissement avec les mêmes
     /// niveaux, numéro et établissements
     /// - Parameter classe: Classe
     /// - Parameter schoolID: ID de l'établissement

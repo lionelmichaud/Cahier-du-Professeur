@@ -19,11 +19,11 @@ struct SchoolManager {
 
     func retirer(classeId            : UUID,
                  deSchoolId schoolId : UUID,
-                 schools             : SchoolStore) {
-        guard let schoolIndex = schools.items.firstIndex(where: { $0.id == schoolId }) else {
+                 schoolstore         : SchoolStore) {
+        guard let schoolIndex = schoolstore.items.firstIndex(where: { $0.id == schoolId }) else {
             return
         }
-        schools.items[schoolIndex].removeClasse(withID: classeId)
+        schoolstore.items[schoolIndex].removeClasse(withID: classeId)
     }
 
     func retirer(classeIndex     : Int,

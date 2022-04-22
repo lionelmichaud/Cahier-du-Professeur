@@ -40,46 +40,47 @@ struct SchoolEditor: View {
                          isEditing : isEditing,
                          isNew     : isNew,
                          isModified: $isModified)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    if isNew {
+                        Button("Annuler") {
+                            dismiss()
+                        }
+                    }
+                }
+                ToolbarItem {
+                    Button {
                         if isNew {
-                            Button("Annuler") {
-                                dismiss()
+                            // Ajouter le nouvel établissement
+                            withAnimation {
+                                schoolStore.add(itemCopy)
                             }
-                        }
-                    }
-                    ToolbarItem {
-                        Button {
-                            if isNew {
-                                // Ajouter le nouvel établissement
+                            dismiss()
+                        } else {
+                            // Appliquer les modifications faites à l'établissement
+                            if isEditing && !isDeleted {
+                                print("Done, saving any changes to \(school.displayString).")
                                 withAnimation {
-                                    schoolStore.add(itemCopy)
+                                    school = itemCopy // Put edits (if any) back in the store.
                                 }
-                                dismiss()
-                            } else {
-                                // Appliquer les modifications faites à l'établissement
-                                if isEditing && !isDeleted {
-                                    print("Done, saving any changes to \(school.displayString).")
-                                    withAnimation {
-                                        school = itemCopy // Put edits (if any) back in the store.
-                                        isSaved = true
-                                    }
-                                }
-                                isEditing.toggle()
+                                isSaved = true
                             }
-                        } label: {
-                            Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                            isEditing.toggle()
                         }
+                    } label: {
+                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
                 }
-                .onDisappear {
-                    if isModified && !isSaved {
-                        // Appliquer les modifications faites à l'établissement hors du mode édition
-                        school = itemCopy
-                    }
+            }
+            .onDisappear {
+                if isModified && !isSaved {
+                    // Appliquer les modifications faites à l'établissement hors du mode édition
+                    school = itemCopy
                 }
-                .disabled(isItemDeleted)
+            }
+            .disabled(isItemDeleted)
 
+            // supprimer l'établissement
             if isEditing && !isNew {
                 Button(
                     role: .destructive,

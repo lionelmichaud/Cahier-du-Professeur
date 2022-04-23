@@ -9,32 +9,48 @@ import SwiftUI
 
 struct EleveBrowserRow: View {
     let eleve: Eleve
-
+    
     var body: some View {
         HStack {
             Image(systemName: "person.fill")
                 .sfSymbolStyling()
                 .foregroundColor(eleve.sexe.color)
-
-            VStack(alignment: .leading, spacing: 5) {
-                Text(eleve.displayName)
-                    .fontWeight(.bold)
-
-//                HStack {
-//                    Text("\(classe.nbOfEleves) élèves")
-//                    Spacer()
-//                    Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) heures")
-//                }
-//                .font(.caption)
-//                .foregroundStyle(.secondary)
+            //            VStack(alignment: .leading, spacing: 5) {
+            Text(eleve.displayName)
+                .fontWeight(.semibold)
+            Spacer()
+            HStack {
+                EleveColleLabel(eleve: eleve, scale: .small)
+                EleveObservLabel(eleve: eleve, scale: .small)
             }
+            //            }
         }
     }
 }
 
 struct EleveBrowserRow_Previews: PreviewProvider {
     static var previews: some View {
-        EleveBrowserRow(eleve: Eleve.exemple)
-            .previewLayout(.sizeThatFits)
+        TestEnvir.createFakes()
+        return Group {
+            List {
+                DisclosureGroup("Group", isExpanded: .constant(true)) {
+                    EleveBrowserRow(eleve: Eleve.exemple)
+                        .environmentObject(TestEnvir.eleveStore)
+                        .environmentObject(TestEnvir.colleStore)
+                        .environmentObject(TestEnvir.observStore)
+                }
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            List {
+                DisclosureGroup("Group", isExpanded: .constant(true)) {
+                    EleveBrowserRow(eleve: Eleve.exemple)
+                        .environmentObject(TestEnvir.eleveStore)
+                        .environmentObject(TestEnvir.colleStore)
+                        .environmentObject(TestEnvir.observStore)
+                }
+            }
+            .previewDevice("iPhone 11")
+        }
     }
 }

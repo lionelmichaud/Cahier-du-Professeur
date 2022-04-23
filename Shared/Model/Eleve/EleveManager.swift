@@ -56,20 +56,20 @@ struct EleveManager {
         eleveStore.items[index].removeColle(withID: colleId)
     }
 
-    func retirer(observIndex   : Int,
+    func retirer(colleIndex    : Int,
                  deEleve eleve : inout Eleve,
-                 colleStore   : ColleStore) {
+                 colleStore    : ColleStore) {
         // supprimer l'élève de la liste d'élèves
-        colleStore.deleteColle(withID: eleve.collesID[observIndex])
+        colleStore.deleteColle(withID: eleve.collesID[colleIndex])
         // supprimer l'élève de la eleve
-        eleve.removeColle(at: observIndex)
+        eleve.removeColle(at: colleIndex)
     }
 
     // MARK: - Getters
 
     func nbOfObservations(de eleve     : Eleve,
-                          isConsignee  : Bool? = false,
-                          isVerified   : Bool? = false,
+                          isConsignee  : Bool? = nil,
+                          isVerified   : Bool? = nil,
                           observStore  : ObservationStore) -> Int {
         switch (isConsignee, isVerified) {
             case (nil, nil):
@@ -93,14 +93,14 @@ struct EleveManager {
                 return observStore
                     .observations(de: eleve)
                     .wrappedValue
-                    .filter { $0.isConsignee == c && $0.isVerified == v }
+                    .filter { $0.isConsignee == c || $0.isVerified == v }
                     .count
         }
     }
 
     func nbOfColles(de eleve    : Eleve,
-                    isConsignee : Bool?  = false,
-                    isVerified  : Bool?  = false,
+                    isConsignee : Bool?  = nil,
+                    isVerified  : Bool?  = nil,
                     colleStore  : ColleStore) -> Int {
         switch (isConsignee, isVerified) {
             case (nil, nil):
@@ -124,7 +124,7 @@ struct EleveManager {
                 return colleStore
                     .colles(de: eleve)
                     .wrappedValue
-                    .filter { $0.isConsignee == c && $0.isVerified == v }
+                    .filter { $0.isConsignee == c || $0.isVerified == v }
                     .count
         }
     }

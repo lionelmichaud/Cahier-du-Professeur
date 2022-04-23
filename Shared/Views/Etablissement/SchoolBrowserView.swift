@@ -20,6 +20,9 @@ struct SchoolBrowserView: View {
 
     var body: some View {
         List {
+            if schoolStore.items.isEmpty {
+                Text("Aucun établissement")
+            }
             ForEach(NiveauSchool.allCases) { niveau in
                 if !schoolStore.sorted(niveau: niveau).isEmpty {
                     Section {

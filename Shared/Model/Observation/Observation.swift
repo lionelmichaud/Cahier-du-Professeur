@@ -12,8 +12,8 @@ struct Observation: Identifiable {
     // MARK: - Type Methods
 
     static func < (lhs: Observation, rhs: Observation) -> Bool {
-        if lhs.verified != rhs.verified {
-            return !lhs.verified
+        if lhs.isVerified != rhs.isVerified {
+            return !lhs.isVerified
         } else {
             return lhs.date > rhs.date
         }
@@ -22,10 +22,10 @@ struct Observation: Identifiable {
     // MARK: - Properties
 
     var id = UUID()
-    var eleveId   : UUID?
-    var consignee : Bool = false
-    var verified  : Bool = false
-    var date      : Date = Date.now
+    var eleveId     : UUID?
+    var isConsignee : Bool = false
+    var isVerified  : Bool = false
+    var date        : Date = Date.now
 
     // MARK: - Initializers
 
@@ -44,8 +44,8 @@ extension Observation: CustomStringConvertible {
            ID       : \(id)
            Date     : \(date.stringShortDate)
            EleveID  : \(String(describing: eleveId))
-           Consignée: \(consignee.frenchString)
-           Vérifiée : \(verified.frenchString)
+           Consignée: \(isConsignee.frenchString)
+           Vérifiée : \(isVerified.frenchString)
         """
     }
 }

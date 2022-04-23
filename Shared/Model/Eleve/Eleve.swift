@@ -89,23 +89,6 @@ struct Eleve: Identifiable {
         collesID.move(fromOffsets: indexes, toOffset: destination)
     }
 
-   func nbOfColles(consignee : Bool? = false,
-                    verified  : Bool? = false) -> Int {
-        switch (consignee, verified) {
-            case (nil, nil):
-                return nbOfColles
-
-            case (.some(_), nil):
-                return 1
-
-            case (nil, .some(_)):
-                return 2
-
-            case (.some(_), .some(_)):
-                return 3
-        }
-    }
-
     static let exemple = Eleve(sexe   : .male,
                                nom    : "NomDeFamille",
                                prenom : "Prénom")

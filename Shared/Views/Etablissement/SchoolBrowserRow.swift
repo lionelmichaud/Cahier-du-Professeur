@@ -29,7 +29,7 @@ struct SchoolBrowserRow: View {
                 HStack {
                     Text(school.classesLabel)
                     Spacer()
-                    Text(heures == 0 ? "Aucune heure" : "\(heures.formatted(.number.precision(.fractionLength(1)))) heures")
+                    Text(heures == 0 ? "Aucune heure" : "\(heures.formatted(.number.precision(.fractionLength(1)))) h")
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -45,5 +45,6 @@ struct SchoolRow_Previews: PreviewProvider {
         return SchoolBrowserRow(school: TestEnvir.schoolStore.items.first!)
             .preferredColorScheme(.dark)
             .previewLayout(.sizeThatFits)
+
     }
 }

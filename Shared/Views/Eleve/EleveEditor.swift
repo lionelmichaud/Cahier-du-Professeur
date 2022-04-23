@@ -1,26 +1,28 @@
 //
-//  ClasseEditor.swift
+//  EleveEditor.swift
 //  Cahier du Professeur
 //
-//  Created by Lionel MICHAUD on 20/04/2022.
+//  Created by Lionel MICHAUD on 22/04/2022.
 //
 
 import SwiftUI
 import HelpersView
 
-struct ClasseEditor: View {
-    @Binding
-    var school: School
+struct EleveEditor: View {
     @Binding
     var classe: Classe
+    @Binding
+    var eleve: Eleve
     var isNew = false
 
-    @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore : EleveStore
     @Environment(\.dismiss) private var dismiss
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
     // This is important for when the niveau changes and puts the établissement in a different section.
-    @State private var itemCopy   = Classe(niveau: .n6ieme, numero: 1)
+    @State private var itemCopy   = Eleve(sexe   : .male,
+                                          nom    : "",
+                                          prenom : "")
     // true si le mode édition est engagé
     @State private var isEditing  = false
     // true les modifs faites en mode édition sont sauvegardées
@@ -32,7 +34,7 @@ struct ClasseEditor: View {
     @State private var alertItem : AlertItem?
 
     var body: some View {
-        ClasseDetail(classe     : $itemCopy,
+        EleveDetail(eleve      : $itemCopy,
                     isEditing  : isEditing,
                     isNew      : isNew,
                     isModified : $isModified)
@@ -47,26 +49,26 @@ struct ClasseEditor: View {
             ToolbarItem {
                 Button {
                     if isNew {
-                        // Ajouter une nouvelle classe
-                        if classeStore.exists(classe: itemCopy, in: school.id) {
+                        // Ajouter un nouvel élève à la classe
+                        if eleveStore.exists(eleve: itemCopy, in: classe.id) {
                             self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                                       message       : Text("Cette classe existe déjà dans cet établissement"),
+                                                       message       : Text("Cet élève existe déjà dans cette classe"),
                                                        dismissButton : .default(Text("OK")))
                         } else {
                             withAnimation {
-                                SchoolManager()
-                                    .ajouter(classe      : &itemCopy,
-                                             aSchool     : &school,
-                                             classeStore : classeStore)
+                                ClasseManager()
+                                    .ajouter(eleve      : &itemCopy,
+                                             aClasse    : &classe,
+                                             eleveStore : eleveStore)
                             }
                             dismiss()
                         }
                     } else {
                         // Appliquer les modifications faites à la classe
                         if isEditing && !isDeleted {
-                            print("Done, saving any changes to \(classe.displayString).")
+                            print("Done, saving any changes to \(eleve.displayName).")
                             withAnimation {
-                                classe = itemCopy // Put edits (if any) back in the store.
+                                eleve = itemCopy // Put edits (if any) back in the store.
                             }
                             isSaved = true
                         }
@@ -80,32 +82,31 @@ struct ClasseEditor: View {
         .onDisappear {
             if isModified && !isSaved {
                 // Appliquer les modifications faites à la classe hors du mode édition
-                classe = itemCopy
+                eleve = itemCopy
             }
         }
         .alert(item: $alertItem, content: newAlert)
     }
 
-    init(school: Binding<School>,
-         classe: Binding<Classe>,
-         isNew: Bool = false) {
+    init(classe : Binding<Classe>,
+         eleve  : Binding<Eleve>,
+         isNew  : Bool = false) {
         self.isNew = isNew
-        self._school = school
         self._classe = classe
-        self._itemCopy = State(initialValue: classe.wrappedValue)
+        self._eleve = eleve
+        self._itemCopy = State(initialValue: eleve.wrappedValue)
     }
 }
 
-struct ClasseEditor_Previews: PreviewProvider {
+struct EleveEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
             NavigationView {
                 EmptyView()
-                ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                             classe : .constant(TestEnvir.classeStore.items.first!),
-                             isNew  : true)
-                .environmentObject(TestEnvir.classeStore)
+                EleveEditor(classe: .constant(TestEnvir.classeStore.items.first!),
+                            eleve: .constant(TestEnvir.eleveStore.items.first!),
+                            isNew  : true)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
@@ -113,26 +114,14 @@ struct ClasseEditor_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
 
             NavigationView {
-                ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                             classe : .constant(TestEnvir.classeStore.items.first!),
-                             isNew  : true)
-                .environmentObject(TestEnvir.classeStore)
+                EleveEditor(classe: .constant(TestEnvir.classeStore.items.first!),
+                            eleve: .constant(TestEnvir.eleveStore.items.first!),
+                            isNew  : true)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPhone 11")
-
-            NavigationView {
-                ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                             classe : .constant(TestEnvir.classeStore.items.first!),
-                             isNew  : false)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
-            .previewDevice("iPhone 11")
-        }
+       }
     }
 }

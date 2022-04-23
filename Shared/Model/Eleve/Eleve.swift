@@ -53,11 +53,61 @@ struct Eleve: Identifiable {
 
     func isSameAs(_ eleve: Eleve) -> Bool {
         self.name.familyName == eleve.name.familyName &&
-        self.name.givenName == eleve.name.givenName
+        self.name.givenName == eleve.name.givenName &&
+        self.classeId == eleve.classeId
+    }
+
+    mutating func addObservation(withID observID: UUID) {
+        observsID.insert(observID, at: 0)
+    }
+
+    mutating func removeObservation(withID observID: UUID) {
+        observsID.removeAll(where: { $0 == observID })
+    }
+
+    mutating func removeObservation(at index : Int) {
+        observsID.remove(at: index)
+    }
+
+    mutating func moveObservation(from indexes: IndexSet, to destination: Int) {
+        observsID.move(fromOffsets: indexes, toOffset: destination)
+    }
+
+    mutating func addColle(withID colleID: UUID) {
+        collesID.insert(colleID, at: 0)
+    }
+
+    mutating func removeColle(withID colleID: UUID) {
+        collesID.removeAll(where: { $0 == colleID })
+    }
+
+    mutating func removeColle(at index : Int) {
+        collesID.remove(at: index)
+    }
+
+    mutating func moveColle(from indexes: IndexSet, to destination: Int) {
+        collesID.move(fromOffsets: indexes, toOffset: destination)
+    }
+
+   func nbOfColles(consignee : Bool? = false,
+                    verified  : Bool? = false) -> Int {
+        switch (consignee, verified) {
+            case (nil, nil):
+                return nbOfColles
+
+            case (.some(_), nil):
+                return 1
+
+            case (nil, .some(_)):
+                return 2
+
+            case (.some(_), .some(_)):
+                return 3
+        }
     }
 
     static let exemple = Eleve(sexe   : .male,
-                               nom    : "Nom",
+                               nom    : "NomDeFamille",
                                prenom : "Prénom")
 }
 

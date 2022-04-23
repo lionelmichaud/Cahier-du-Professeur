@@ -7,71 +7,33 @@
 
 import Foundation
 
-final class ObservationStore: ObservableObject {
-    @Published
-    var items: [Observation] = [ ]
-    var nbOfItems: Int {
-        items.count
-    }
+struct Observation: Identifiable {
 
-    func add(_ item: Observation) {
-        items.insert(item, at: 0)
-    }
+    // MARK: - Type Methods
 
-    func delete(_ item  : Observation) {
-        // zeroize du pointeur de la classe vers l'élève
-        if let eleve = item.eleve {
-            let observationManager = ObservationManager()
-//            observationManager.retirer(observ: item,
-//                                       deEleve: eleve)
-        }
-
-        // retirer l'observ de la liste
-        items.removeAll {
-            $0.id == item.id
+    static func < (lhs: Observation, rhs: Observation) -> Bool {
+        if lhs.verified != rhs.verified {
+            return !lhs.verified
+        } else {
+            return lhs.date > rhs.date
         }
     }
 
-    func exists(_ item: Observation) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
+    // MARK: - Properties
 
-    static var exemple : ObservationStore = {
-        let store = ObservationStore()
-        store.items.append(Observation.exemple)
-        return store
-    }()
-}
-
-extension ObservationStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
-    }
-}
-
-final class Observation: ObservableObject, Identifiable {
     var id = UUID()
-    @Published
-    var eleve: Eleve?
-    @Published
-    var consignee: Bool = false
-    @Published
-    var verifiee: Bool = false
-    @Published
-    var date: Date = Date.now
+    var eleveId   : UUID?
+    var consignee : Bool = false
+    var verified  : Bool = false
+    var date      : Date = Date.now
 
-    init(eleve : Eleve?  = nil,
-         date  : Date    = Date.now) {
-        self.eleve = eleve
-        self.date  = date
+    // MARK: - Initializers
+
+    init(date: Date = Date.now) {
+        self.date = date
     }
 
-    static let exemple = Observation(eleve : Eleve.exemple,
-                                     date  : Date.now)
+    static let exemple = Observation()
 }
 
 extension Observation: CustomStringConvertible {
@@ -79,10 +41,11 @@ extension Observation: CustomStringConvertible {
         """
 
         OBSERVATION:
-           Date: \(date.stringShortDate)
-           Eleve: \(eleve?.displayName ?? "nil")
+           ID       : \(id)
+           Date     : \(date.stringShortDate)
+           EleveID  : \(String(describing: eleveId))
            Consignée: \(consignee.frenchString)
-           Vérifiée: \(verifiee.frenchString)
+           Vérifiée : \(verified.frenchString)
         """
     }
 }

@@ -24,6 +24,8 @@ struct SchoolDetail: View {
     private var isAddingNewClasse = false
     @State
     private var newClasse = Classe.exemple
+    @FocusState
+    private var isNameFocused: Bool
 
     var heures: Double {
         SchoolManager().heures(dans: school, classeStore: classeStore)
@@ -40,6 +42,7 @@ struct SchoolDetail: View {
                     TextField("Nouvel établissement", text: $school.nom)
                         .font(.title2)
                         .textFieldStyle(.roundedBorder)
+                        .focused($isNameFocused)
                 } else {
                     Text(school.displayString)
                         .font(.title2)
@@ -64,7 +67,7 @@ struct SchoolDetail: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     Spacer()
-                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) heures")
+                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
                         .font(.title3)
                         .fontWeight(.bold)
                 }
@@ -72,7 +75,7 @@ struct SchoolDetail: View {
                 // édition de la liste des classes
                 ForEach(school.classesID, id: \.self) { classeId in
                     if let classe = classeStore.classe(withID: classeId) {
-                        SchoolClassRow(classe: classe)
+                        SchoolClasseRow(classe: classe)
                     } else {
                         Text("classe non trouvée: \(classeId)")
                     }
@@ -101,8 +104,10 @@ struct SchoolDetail: View {
         }
         #if os(iOS)
         .navigationTitle("Etablissement")
-        .navigationBarTitleDisplayMode(.inline)
         #endif
+        .onAppear {
+            isNameFocused = isNew
+        }
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {
                 ClasseEditor(school : $school,

@@ -18,7 +18,7 @@ struct ClassBrowserRow: View {
                 .foregroundColor(classe.niveau.color)
 
             VStack(alignment: .leading, spacing: 5) {
-                Text("Classe de \(classe.displayString)")
+                Text(classe.displayString)
                     .fontWeight(.bold)
 
                 HStack {

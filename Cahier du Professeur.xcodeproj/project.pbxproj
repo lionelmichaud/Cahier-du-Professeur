@@ -11,8 +11,14 @@
 		7918D1FB2810997700C24C5A /* ColorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D1F92810997700C24C5A /* ColorOptions.swift */; };
 		7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D1FD2810A60400C24C5A /* ClasseEditor.swift */; };
 		7918D1FF2810A60400C24C5A /* ClasseEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D1FD2810A60400C24C5A /* ClasseEditor.swift */; };
-		7918D2012810A86100C24C5A /* ClassDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D2002810A86100C24C5A /* ClassDetail.swift */; };
-		7918D2022810A86100C24C5A /* ClassDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D2002810A86100C24C5A /* ClassDetail.swift */; };
+		7918D2012810A86100C24C5A /* ClasseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D2002810A86100C24C5A /* ClasseDetail.swift */; };
+		7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7918D2002810A86100C24C5A /* ClasseDetail.swift */; };
+		791C26D128142B6300686F0C /* ObservationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D028142B6300686F0C /* ObservationStore.swift */; };
+		791C26D228142B6300686F0C /* ObservationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D028142B6300686F0C /* ObservationStore.swift */; };
+		791C26D428142D7100686F0C /* ColleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D328142D7100686F0C /* ColleStore.swift */; };
+		791C26D528142D7100686F0C /* ColleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D328142D7100686F0C /* ColleStore.swift */; };
+		791C26D72814378A00686F0C /* EleveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D62814378A00686F0C /* EleveManager.swift */; };
+		791C26D82814378A00686F0C /* EleveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D62814378A00686F0C /* EleveManager.swift */; };
 		7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631B280DC44B00AB8600 /* SchoolStore.swift */; };
 		7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631B280DC44B00AB8600 /* SchoolStore.swift */; };
 		7953631F280DC4D800AB8600 /* ClassStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631E280DC4D800AB8600 /* ClassStore.swift */; };
@@ -21,12 +27,16 @@
 		795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D12812E0B100C22271 /* ClasseBrowserView.swift */; };
 		795BC3D52812E0D700C22271 /* ClassBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D42812E0D700C22271 /* ClassBrowserRow.swift */; };
 		795BC3D62812E0D700C22271 /* ClassBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D42812E0D700C22271 /* ClassBrowserRow.swift */; };
-		795BC3D82812E0FF00C22271 /* SchoolClassRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D72812E0FF00C22271 /* SchoolClassRow.swift */; };
-		795BC3D92812E0FF00C22271 /* SchoolClassRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D72812E0FF00C22271 /* SchoolClassRow.swift */; };
+		795BC3D82812E0FF00C22271 /* SchoolClasseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D72812E0FF00C22271 /* SchoolClasseRow.swift */; };
+		795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D72812E0FF00C22271 /* SchoolClasseRow.swift */; };
 		795BC3DB2813055200C22271 /* EleveStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3DA2813055200C22271 /* EleveStore.swift */; };
 		795BC3DC2813055200C22271 /* EleveStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3DA2813055200C22271 /* EleveStore.swift */; };
 		795BC3DF2813105A00C22271 /* ClasseEleveRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */; };
 		795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */; };
+		795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3E12813277B00C22271 /* EleveEditor.swift */; };
+		795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3E12813277B00C22271 /* EleveEditor.swift */; };
+		795BC3E5281337E600C22271 /* EleveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3E4281337E600C22271 /* EleveDetail.swift */; };
+		795BC3E6281337E600C22271 /* EleveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3E4281337E600C22271 /* EleveDetail.swift */; };
 		795FAB292809C4E2004CB120 /* SchoolBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB282809C4E2004CB120 /* SchoolBrowserView.swift */; };
 		795FAB2B2809C813004CB120 /* SchoolBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2A2809C813004CB120 /* SchoolBrowserRow.swift */; };
 		795FAB2D2809C830004CB120 /* SchoolEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795FAB2C2809C830004CB120 /* SchoolEditor.swift */; };
@@ -104,14 +114,19 @@
 /* Begin PBXFileReference section */
 		7918D1F92810997700C24C5A /* ColorOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptions.swift; sourceTree = "<group>"; };
 		7918D1FD2810A60400C24C5A /* ClasseEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseEditor.swift; sourceTree = "<group>"; };
-		7918D2002810A86100C24C5A /* ClassDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDetail.swift; sourceTree = "<group>"; };
+		7918D2002810A86100C24C5A /* ClasseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseDetail.swift; sourceTree = "<group>"; };
+		791C26D028142B6300686F0C /* ObservationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationStore.swift; sourceTree = "<group>"; };
+		791C26D328142D7100686F0C /* ColleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleStore.swift; sourceTree = "<group>"; };
+		791C26D62814378A00686F0C /* EleveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveManager.swift; sourceTree = "<group>"; };
 		7953631B280DC44B00AB8600 /* SchoolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolStore.swift; sourceTree = "<group>"; };
 		7953631E280DC4D800AB8600 /* ClassStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassStore.swift; sourceTree = "<group>"; };
 		795BC3D12812E0B100C22271 /* ClasseBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClasseBrowserView.swift; sourceTree = "<group>"; };
 		795BC3D42812E0D700C22271 /* ClassBrowserRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassBrowserRow.swift; sourceTree = "<group>"; };
-		795BC3D72812E0FF00C22271 /* SchoolClassRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolClassRow.swift; sourceTree = "<group>"; };
+		795BC3D72812E0FF00C22271 /* SchoolClasseRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolClasseRow.swift; sourceTree = "<group>"; };
 		795BC3DA2813055200C22271 /* EleveStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveStore.swift; sourceTree = "<group>"; };
 		795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseEleveRow.swift; sourceTree = "<group>"; };
+		795BC3E12813277B00C22271 /* EleveEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveEditor.swift; sourceTree = "<group>"; };
+		795BC3E4281337E600C22271 /* EleveDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveDetail.swift; sourceTree = "<group>"; };
 		795FAB282809C4E2004CB120 /* SchoolBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolBrowserView.swift; sourceTree = "<group>"; };
 		795FAB2A2809C813004CB120 /* SchoolBrowserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolBrowserRow.swift; sourceTree = "<group>"; };
 		795FAB2C2809C830004CB120 /* SchoolEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEditor.swift; sourceTree = "<group>"; };
@@ -191,9 +206,9 @@
 				79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */,
 				795BC3D12812E0B100C22271 /* ClasseBrowserView.swift */,
 				795BC3D42812E0D700C22271 /* ClassBrowserRow.swift */,
-				795BC3D72812E0FF00C22271 /* SchoolClassRow.swift */,
+				795BC3D72812E0FF00C22271 /* SchoolClasseRow.swift */,
 				7918D1FD2810A60400C24C5A /* ClasseEditor.swift */,
-				7918D2002810A86100C24C5A /* ClassDetail.swift */,
+				7918D2002810A86100C24C5A /* ClasseDetail.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -203,6 +218,8 @@
 			children = (
 				79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */,
 				795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */,
+				795BC3E12813277B00C22271 /* EleveEditor.swift */,
+				795BC3E4281337E600C22271 /* EleveDetail.swift */,
 			);
 			path = Eleve;
 			sourceTree = "<group>";
@@ -344,6 +361,7 @@
 				795BC3DA2813055200C22271 /* EleveStore.swift */,
 				79F3ABD22808229A00D068D9 /* Eleve.swift */,
 				79F3ABDB280826A400D068D9 /* Sexe.swift */,
+				791C26D62814378A00686F0C /* EleveManager.swift */,
 			);
 			path = Eleve;
 			sourceTree = "<group>";
@@ -351,6 +369,7 @@
 		79F3ABEC2808707300D068D9 /* Colle */ = {
 			isa = PBXGroup;
 			children = (
+				791C26D328142D7100686F0C /* ColleStore.swift */,
 				79F3ABEE2808709100D068D9 /* Colle.swift */,
 				79F3ABF72808818D00D068D9 /* ColleManager.swift */,
 			);
@@ -360,6 +379,7 @@
 		79F3ABED2808707C00D068D9 /* Observation */ = {
 			isa = PBXGroup;
 			children = (
+				791C26D028142B6300686F0C /* ObservationStore.swift */,
 				79F3ABF128087D5600D068D9 /* Observation.swift */,
 				79F3ABF4280880CC00D068D9 /* ObservationManager.swift */,
 			);
@@ -538,17 +558,20 @@
 				795FAB2D2809C830004CB120 /* SchoolEditor.swift in Sources */,
 				79F3ABEA28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
-				795BC3D82812E0FF00C22271 /* SchoolClassRow.swift in Sources */,
+				791C26D128142B6300686F0C /* ObservationStore.swift in Sources */,
+				795BC3D82812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				795BC3D52812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
 				7953631F280DC4D800AB8600 /* ClassStore.swift in Sources */,
+				795BC3E5281337E600C22271 /* EleveDetail.swift in Sources */,
 				79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				795BC3D22812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79F3ABDC280826A400D068D9 /* Sexe.swift in Sources */,
 				795FAB292809C4E2004CB120 /* SchoolBrowserView.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
+				791C26D72814378A00686F0C /* EleveManager.swift in Sources */,
 				7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */,
-				7918D2012810A86100C24C5A /* ClassDetail.swift in Sources */,
+				7918D2012810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79F3AC042808CA2500D068D9 /* SchoolSidebarView.swift in Sources */,
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
@@ -558,12 +581,14 @@
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
 				7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
+				795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
 				795FAB2F2809E54C004CB120 /* SchoolDetail.swift in Sources */,
+				791C26D428142D7100686F0C /* ColleStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,30 +600,35 @@
 				79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
+				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				79F3ABEB28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */,
 				79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
 				795BC3DC2813055200C22271 /* EleveStore.swift in Sources */,
+				795BC3E6281337E600C22271 /* EleveDetail.swift in Sources */,
 				795BC3D62812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */,
+				791C26D82814378A00686F0C /* EleveManager.swift in Sources */,
 				79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
-				7918D2022810A86100C24C5A /* ClassDetail.swift in Sources */,
+				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
 				7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				79F3ABE8280844C000D068D9 /* ClasseManager.swift in Sources */,
 				7918D1FB2810997700C24C5A /* ColorOptions.swift in Sources */,
 				79F3ABB92808218300D068D9 /* ContentView.swift in Sources */,
+				791C26D528142D7100686F0C /* ColleStore.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
-				795BC3D92812E0FF00C22271 /* SchoolClassRow.swift in Sources */,
+				795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				79F3ABF02808709100D068D9 /* Colle.swift in Sources */,
+				791C26D228142B6300686F0C /* ObservationStore.swift in Sources */,
 				7918D1FF2810A60400C24C5A /* ClasseEditor.swift in Sources */,
 				79536320280DC4D800AB8600 /* ClassStore.swift in Sources */,
 				79F3ABDA280823D900D068D9 /* NiveauSchool.swift in Sources */,

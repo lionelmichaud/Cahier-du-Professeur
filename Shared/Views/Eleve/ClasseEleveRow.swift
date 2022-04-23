@@ -18,16 +18,29 @@ struct ClasseEleveRow: View {
                 .foregroundColor(eleve.sexe.color)
             Text(eleve.displayName)
             Spacer()
-            Text("\(eleve.nbOfColles) colles")
-            Spacer()
-            Text("\(eleve.nbOfObservs) observations")
+            Text("\(eleve.nbOfColles)")
+            Image(systemName: "lock.fill")
+                .foregroundColor(.red)
+            Text("\(eleve.nbOfObservs)")
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.red)
         }
     }
 }
 
 struct ClasseEleveRow_Previews: PreviewProvider {
     static var previews: some View {
-        ClasseEleveRow(eleve: Eleve.exemple)
-            .previewLayout(.sizeThatFits)
+        Group {
+            List {
+                ClasseEleveRow(eleve: Eleve.exemple)
+                ClasseEleveRow(eleve: Eleve.exemple)
+            }
+            .previewDevice("iPad mini (6th generation)")
+            List {
+                ClasseEleveRow(eleve: Eleve.exemple)
+                ClasseEleveRow(eleve: Eleve.exemple)
+            }
+            .previewDevice("iPhone 11")
+        }
     }
 }

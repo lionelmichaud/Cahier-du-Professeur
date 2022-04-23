@@ -9,7 +9,7 @@ import SwiftUI
 import AppFoundation
 import HelpersView
 
-struct ClassDetail: View {
+struct ClasseDetail: View {
     @Binding
     var classe    : Classe
     let isEditing : Bool
@@ -36,25 +36,18 @@ struct ClassDetail: View {
                     .foregroundColor(classe.niveau.color)
 
                 // niveau de cette classe
-                HStack {
-                    if isNew {
-                        Text("Niveau")
-                        CasePicker(pickedCase: $classe.niveau, label: "Niveau")
-                            .pickerStyle(.menu)
-                    } else {
-                        Text(classe.displayString)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                    }
+                if isNew {
+                    CasePicker(pickedCase: $classe.niveau, label: "Niveau")
+                        .pickerStyle(.menu)
+                } else {
+                    Text(classe.displayString)
+                        .font(.title2)
+                        .fontWeight(.semibold)
                 }
-                .padding(.horizontal)
-
-                Spacer()
 
                 // numéro de cette classe
                 if isNew {
-                    Text("Numéro")
-                    Picker("Numéro de classe", selection: $classe.numero) {
+                    Picker("Numéro", selection: $classe.numero) {
                         ForEach(1...8, id: \.self) { num in
                             Text(String(num))
                         }
@@ -73,7 +66,7 @@ struct ClassDetail: View {
                     .focused($isHoursFocused)
                     .frame(maxWidth: 150)
                 } else {
-                    Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) heures")
+                    Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) h")
                         .font(.title2)
                         .fontWeight(.semibold)
                 }
@@ -106,7 +99,9 @@ struct ClassDetail: View {
                 // ajouter un élève
                 Button {
                     isModified = true
-                    newEleve = Eleve.exemple
+                    newEleve = Eleve(sexe   : .male,
+                                     nom    : "",
+                                     prenom : "")
                     isAddingNewEleve = true
                 } label: {
                     HStack {
@@ -120,17 +115,15 @@ struct ClassDetail: View {
         }
         #if os(iOS)
         .navigationTitle("Classe")
-        .navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
             isHoursFocused = isNew
         }
         .sheet(isPresented: $isAddingNewEleve) {
             NavigationView {
-                Text("Hello")
-//                ClasseEditor(school : $school,
-//                             classe : $newClasse,
-//                             isNew  : true)
+                EleveEditor(classe : $classe,
+                            eleve  : $newEleve,
+                            isNew  : true)
             }
         }
     }
@@ -151,11 +144,12 @@ struct ClassDetail_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return Group {
             NavigationView {
-                EmptyView()
-                ClassDetail(classe    : .constant(TestEnvir.classeStore.items.first!),
+                //EmptyView()
+                ClasseDetail(classe   : .constant(TestEnvir.classeStore.items.first!),
                             isEditing : false,
                             isNew     : true,
                             isModified: .constant(false))
+                .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
@@ -164,11 +158,12 @@ struct ClassDetail_Previews: PreviewProvider {
             .previewDisplayName("NewClasse")
 
             NavigationView {
-                EmptyView()
-                ClassDetail(classe    : .constant(TestEnvir.classeStore.items.first!),
+                //EmptyView()
+                ClasseDetail(classe    : .constant(TestEnvir.classeStore.items.first!),
                             isEditing : false,
                             isNew     : false,
                             isModified: .constant(false))
+                .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)

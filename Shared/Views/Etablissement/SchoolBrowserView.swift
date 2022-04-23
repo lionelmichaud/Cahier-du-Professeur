@@ -51,6 +51,7 @@ struct SchoolBrowserView: View {
                     }
                 }
             }
+            #if targetEnvironment(simulator)
             Button {
                 TestEnvir.populateWithFakes(
                     schoolStore : schoolStore,
@@ -61,6 +62,7 @@ struct SchoolBrowserView: View {
             } label: {
                 Text("Test").foregroundColor(.primary)
             }
+            #endif
         }
         //.listStyle(.sidebar)
         .navigationTitle("Etabissements")

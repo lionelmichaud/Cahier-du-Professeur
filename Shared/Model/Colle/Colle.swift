@@ -7,76 +7,36 @@
 
 import Foundation
 
-final class ColleStore: ObservableObject {
-    @Published
-    var items: [Colle] = [ ]
-    var nbOfItems: Int {
-        items.count
-    }
+struct Colle: Identifiable {
 
-    func exists(_ item: Colle) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
+    // MARK: - Type Methods
 
-    func add(_ item: Colle) {
-        items.insert(item, at: 0)
-    }
-
-    func delete(_ item  : Colle) {
-        // zeroize du pointeur de la classe vers l'élève
-        if let eleve = item.eleve {
-            let colleManager = ColleManager()
-//            colleManager.retirer(colle: item,
-//                                 deEleve: eleve)
-        }
-
-        // retirer la colle de la liste
-        items.removeAll {
-            $0.id == item.id
+    static func < (lhs: Colle, rhs: Colle) -> Bool {
+        if lhs.verified != rhs.verified {
+            return !lhs.verified
+        } else {
+            return lhs.date > rhs.date
         }
     }
 
-    static var exemple : ColleStore = {
-        let store = ColleStore()
-        store.items.append(Colle.exemple)
-        return store
-    }()
-}
+    // MARK: - Properties
 
-extension ColleStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
-    }
-}
-
-final class Colle: ObservableObject, Identifiable {
     var id = UUID()
-    @Published
-    var eleve: Eleve?
-    @Published
-    var duree: Int = 1
-    @Published
-    var consignee: Bool = false
-    @Published
-    var verifiee: Bool = false
-    @Published
-    var date: Date = Date.now
+    var eleveId   : UUID?
+    var duree     : Int  = 1
+    var consignee : Bool = false
+    var verified  : Bool = false
+    var date      : Date = Date.now
 
-    init(eleve : Eleve?  = nil,
-         duree : Int     = 1,
+    // MARK: - Initializers
+
+    init(duree : Int     = 1,
          date  : Date    = Date.now) {
-        self.eleve = eleve
         self.duree = duree
         self.date  = date
     }
 
-    static let exemple = Colle(eleve : Eleve.exemple,
-                               duree : 1,
-                               date  : Date.now)
+    static let exemple = Colle()
 }
 
 extension Colle: CustomStringConvertible {
@@ -84,11 +44,11 @@ extension Colle: CustomStringConvertible {
         """
 
         COLLE:
-           Date: \(date.stringShortDate)
-           Eleve: \(eleve?.displayName ?? "nil")
-           Durée: \(duree) heures
+           Date     : \(date.stringShortDate)
+           EleveID  : \(String(describing: eleveId))
+           Durée    : \(duree) heures
            Consignée: \(consignee.frenchString)
-           Vérifiée: \(verifiee.frenchString)
+           Vérifiée : \(verified.frenchString)
         """
     }
 }

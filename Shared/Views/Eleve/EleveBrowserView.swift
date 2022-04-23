@@ -1,13 +1,13 @@
 //
-//  ClasseBrowserView.swift
+//  EleveBrowserView.swift
 //  Cahier du Professeur
 //
-//  Created by Lionel MICHAUD on 21/04/2022.
+//  Created by Lionel MICHAUD on 23/04/2022.
 //
 
 import SwiftUI
 
-struct ClasseBrowserView: View {
+struct EleveBrowserView: View {
     @EnvironmentObject private var schoolStore : SchoolStore
     @EnvironmentObject private var classeStore : ClasseStore
 
@@ -16,15 +16,13 @@ struct ClasseBrowserView: View {
             // pour chaque Etablissement
             ForEach(schoolStore.items.sorted(by: { $0.niveau.rawValue < $1.niveau.rawValue })) { school in
                 if school.nbOfClasses != 0 {
-                    Section {
+                    Section() {
                         // pour chaque Classe
                         ForEach(classeStore.classes(dans: school)) { $classe in
-                            NavigationLink {
-                                ClasseEditor(school : .constant(school),
-                                             classe : $classe,
-                                             isNew  : false)
-                            } label: {
-                                ClassBrowserRow(classe: classe)
+                            // pour chaque Elève
+                            if classe.nbOfEleves != 0 {
+                                ClasseSubview(classe: $classe,
+                                              school: school)
                             }
                         }
                     } header: {
@@ -36,15 +34,44 @@ struct ClasseBrowserView: View {
                 }
             }
         }
-        .navigationTitle("Classes")
+        .navigationTitle("Élèves")
     }
 }
 
-struct ClasseBrowserView_Previews: PreviewProvider {
+struct ClasseSubview : View {
+    @Binding var classe: Classe
+    let school: School
+
+    @EnvironmentObject private var eleveStore: EleveStore
+
+    var body: some View {
+        if classe.nbOfEleves != 0 {
+            DisclosureGroup() {
+                ForEach(eleveStore.eleves(dans: classe)) { $eleve in
+                    NavigationLink {
+                        EleveEditor(classe : .constant(classe),
+                                    eleve  : $eleve,
+                                    isNew  : false)
+                    } label: {
+                        EleveBrowserRow(eleve: eleve)
+                    }
+                }
+            } label: {
+                Text(classe.displayString)
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+                    .fontWeight(.bold)
+            }
+        }
+    }
+}
+
+
+struct EleveBrowserView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return NavigationView {
-            ClasseBrowserView()
+            EleveBrowserView()
                 .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)

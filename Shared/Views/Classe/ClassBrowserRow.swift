@@ -9,7 +9,7 @@ import SwiftUI
 import HelpersView
 
 struct ClassBrowserRow: View {
-    var classe: Classe
+    let classe: Classe
 
     var body: some View {
         HStack {

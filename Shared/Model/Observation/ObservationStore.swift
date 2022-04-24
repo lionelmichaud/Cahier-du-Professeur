@@ -44,6 +44,18 @@ final class ObservationStore: ObservableObject {
         }
     }
 
+    func sort(observesID : inout [UUID]) {
+        observesID = sorted(observesID: observesID)
+    }
+
+    func sorted(observesID : [UUID]) -> [UUID] {
+        var observs = observesID.compactMap {
+            observation(withID: $0)
+        }
+        observs.sort(by: <)
+        return observs.map { $0.id }
+    }
+
     func insert(observation     : Observation,
                 `in` observesID : inout [UUID]) {
         guard observesID.isNotEmpty else {

@@ -94,27 +94,25 @@ struct ColleEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            NavigationView {
-                EmptyView()
-                ColleEditor(eleve: .constant(TestEnvir.eleveStore.items.first!),
-                            colle: .constant(TestEnvir.colleStore.items.first!),
-                            isNew: true)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
+            ColleEditor(eleve: .constant(TestEnvir.eleveStore.items.first!),
+                        colle: .constant(TestEnvir.colleStore.items.first!),
+                        isNew: true)
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
-            NavigationView {
-                EmptyView()
-                ColleEditor(eleve: .constant(TestEnvir.eleveStore.items.first!),
-                            colle: .constant(TestEnvir.colleStore.items.first!),
-                            isNew: true)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
-            .previewDevice("iPhone 11")
+            ColleEditor(eleve: .constant(TestEnvir.eleveStore.items.first!),
+                        colle: .constant(TestEnvir.colleStore.items.first!),
+                        isNew: true)
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPhone Xs")
         }
     }
 }

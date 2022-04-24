@@ -33,13 +33,14 @@ struct SchoolBrowserView: View {
                                 SchoolBrowserRow(school: school)
                             }
                             .swipeActions {
+                                // supprimer un établissement
                                 Button(role: .destructive) {
                                     withAnimation {
-                                        schoolStore.delete(school,
-                                                         classes : classeStore,
-                                                         eleves  : eleveStore,
-                                                         observs : observStore,
-                                                         colles  : colleStore)
+                                        schoolStore.deleteSchool(school,
+                                                                 classeStore : classeStore,
+                                                                 eleveStore  : eleveStore,
+                                                                 observStore : observStore,
+                                                                 colleStore  : colleStore)
                                     }
                                 } label: {
                                     Label("Supprimer", systemImage: "trash")
@@ -71,6 +72,7 @@ struct SchoolBrowserView: View {
         .navigationTitle("Etabissements")
         //.navigationViewStyle(.columns)
         .toolbar {
+            // ajouter un établissement
             ToolbarItem {
                 Button {
                     newEtab = School()

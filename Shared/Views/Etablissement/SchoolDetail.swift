@@ -83,7 +83,7 @@ struct SchoolDetail: View {
                 .onDelete(perform: { indexSet in
                     for index in indexSet {
                         isModified = true
-                        delete(classeIndex: index)
+                        deleteClasse(atIndex: index)
                     }
                 })
                 .onMove(perform: moveClasse)
@@ -121,10 +121,13 @@ struct SchoolDetail: View {
         school.moveClasse(from: indexes, to: destination)
     }
 
-    func delete(classeIndex: Int) {
-        SchoolManager().retirer(classeIndex: classeIndex,
-                                deSchool: &school,
-                                classeStore: classeStore)
+    func deleteClasse(atIndex: Int) {
+        SchoolManager().retirer(classeIndex : atIndex,
+                                deSchool    : &school,
+                                classeStore : classeStore,
+                                eleveStore  : eleveStore,
+                                observStore : observStore,
+                                colleStore  : colleStore)
     }
 }
 

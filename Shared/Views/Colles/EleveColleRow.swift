@@ -6,17 +6,22 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct EleveColleRow: View {
     let colle: Colle
     @EnvironmentObject var colleStore: ColleStore
+    @Environment(\.horizontalSizeClass) var hClass
 
     var body: some View {
         HStack {
             Image(systemName: "lock")
-                .sfSymbolStyling()
                 .foregroundColor(.red)
-            Text(colle.date.stringShortDate)
+            if hClass == .compact {
+                Text(colle.date.stringShortDate)
+            } else {
+                Text(colle.date.stringLongDateTime)
+            }
 
             Spacer()
 
@@ -29,7 +34,11 @@ struct EleveColleRow: View {
             } label: {
                 Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(.gray)
-                Text("Notifié")
+                if hClass == .compact {
+                    Text("Notifié")
+                } else {
+                    Text("Notifiée à la vie scolaire")
+                }
             }
             .buttonStyle(.plain)
             .padding(.trailing)
@@ -43,7 +52,11 @@ struct EleveColleRow: View {
             } label: {
                 Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(.gray)
-                Text("Vérifié")
+                if hClass == .compact {
+                    Text("Exéc.")
+                } else {
+                    Text("Exécutée par l'élève")
+                }
             }
             .buttonStyle(.plain)
         }
@@ -52,6 +65,13 @@ struct EleveColleRow: View {
 
 struct EleveColleRow_Previews: PreviewProvider {
     static var previews: some View {
-        EleveColleRow(colle: Colle.exemple)
+        Group {
+            EleveColleRow(colle: Colle.exemple)
+                .previewDevice("iPad mini (6th generation)")
+                .previewLayout(.sizeThatFits)
+            EleveColleRow(colle: Colle.exemple)
+                .previewDevice("iPhone Xs")
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

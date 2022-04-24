@@ -40,7 +40,7 @@ struct SchoolClassRow_Previews: PreviewProvider {
                 SchoolClasseRow(classe: Classe.exemple)
                 SchoolClasseRow(classe: Classe.exemple)
             }
-            .previewDevice("iPhone 11")
+            .previewDevice("iPhone Xs")
         }
     }
 }

@@ -23,7 +23,7 @@ final class EleveStore: ObservableObject {
     /// True si un élève existe dans le strore déjà avec les mêmes
     /// nom et prénom
     /// - Parameter eleve: Elève
-    func exists(eleve: Eleve) -> Bool {
+    func exists(_ eleve: Eleve) -> Bool {
         items.contains {
             $0.isSameAs(eleve)
         }
@@ -62,9 +62,30 @@ final class EleveStore: ObservableObject {
         items.insert(item, at: 0)
     }
 
-    func deleteEleve(withID: UUID) {
+    func deleteEleve(_ eleve     : Eleve,
+                     observStore : ObservationStore,
+                     colleStore  : ColleStore) {
+        deleteEleve(withID      : eleve.id,
+                    observStore : observStore,
+                    colleStore  : colleStore)
+    }
+
+    func deleteEleve(withID id   : UUID,
+                     observStore : ObservationStore,
+                     colleStore  : ColleStore) {
+        guard let eleve = eleve(withID: id) else {
+            return
+        }
+        // supprimer toutes les observations et colles de l'élève
+        eleve.observsID.forEach { observID in
+            observStore.deleteObservation(withID: observID)
+        }
+        eleve.collesID.forEach { colleID in
+            colleStore.deleteColle(withID: colleID)
+        }
+        // retirer l'élève de la liste
         items.removeAll {
-            $0.id == withID
+            $0.id == eleve.id
         }
     }
 

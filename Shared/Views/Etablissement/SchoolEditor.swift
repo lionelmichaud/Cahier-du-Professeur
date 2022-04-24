@@ -11,7 +11,7 @@ struct SchoolEditor: View {
     @Binding var school: School
     var isNew = false
 
-    @EnvironmentObject var schoolStore   : SchoolStore
+    @EnvironmentObject var schoolStore : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -72,10 +72,17 @@ struct SchoolEditor: View {
                     }
                 }
             }
+            .onAppear {
+                itemCopy   = school
+                isModified = false
+                isSaved    = false
+            }
             .onDisappear {
                 if isModified && !isSaved {
                     // Appliquer les modifications faites à l'établissement hors du mode édition
-                    school = itemCopy
+                    school     = itemCopy
+                    isModified = false
+                    isSaved    = true
                 }
             }
             .disabled(isItemDeleted)
@@ -87,11 +94,11 @@ struct SchoolEditor: View {
                     action: {
                         isDeleted = true
                         withAnimation {
-                            schoolStore.delete(school,
-                                             classes : classeStore,
-                                             eleves  : eleveStore,
-                                             observs : observStore,
-                                             colles  : colleStore)
+                            schoolStore.deleteSchool(school,
+                                                     classeStore : classeStore,
+                                                     eleveStore  : eleveStore,
+                                                     observStore : observStore,
+                                                     colleStore  : colleStore)
                         }
                         dismiss()
                     }, label: {
@@ -123,7 +130,7 @@ struct SchoolEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return NavigationView {
-            EmptyView()
+            //EmptyView()
             SchoolEditor(school : .constant(TestEnvir.schoolStore.items.first!),
                          isNew  : false)
                 .environmentObject(TestEnvir.schoolStore)

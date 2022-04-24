@@ -177,6 +177,7 @@ struct EleveDetail_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
+            .previewDevice("iPhone Xs Pro")
             .previewDisplayName("New Classe")
 
             NavigationView {
@@ -189,6 +190,7 @@ struct EleveDetail_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
+            .previewDevice("iPhone Xs")
             .previewDisplayName("Display Classe")
         }
     }

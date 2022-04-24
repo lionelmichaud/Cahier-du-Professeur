@@ -16,21 +16,31 @@ struct ClasseManager {
         eleveStore.add(eleve)
     }
 
-    func retirer(eleveId             : UUID,
-                 deClasseId classeId : UUID,
-                 classeStore         : ClasseStore) {
-        guard let classeIndex = classeStore.items.firstIndex(where: { $0.id == classeId }) else {
-            return
-        }
-        classeStore.items[classeIndex].removeEleve(withID: eleveId)
+    func retirer(eleve           : Eleve,
+                 deClasse classe : inout Classe,
+                 eleveStore      : EleveStore,
+                 observStore     : ObservationStore,
+                 colleStore      : ColleStore) {
+        // Détruire l'élève et tous ses descendants
+        eleveStore.deleteEleve(eleve,
+                               observStore : observStore,
+                               colleStore  : colleStore)
+        // retirer l'élève de la classe à laquelle il appartient
+        classe.removeEleve(withID: eleve.id)
     }
 
+    /// Détruire l'élève et tous ses descendants
+    /// puis retirer l'élève de la classe à laquelle il appartient
     func retirer(eleveIndex      : Int,
                  deClasse classe : inout Classe,
-                 eleveStore      : EleveStore) {
-        // supprimer l'élève de la liste d'élèves
-        eleveStore.deleteEleve(withID: classe.elevesID[eleveIndex])
-        // supprimer l'élève de la classe
+                 eleveStore      : EleveStore,
+                 observStore     : ObservationStore,
+                 colleStore      : ColleStore) {
+        // Détruire l'élève et tous ses descendants
+        eleveStore.deleteEleve(withID      : classe.elevesID[eleveIndex],
+                               observStore : observStore,
+                               colleStore  : colleStore)
+        // retirer l'élève de la classe à laquelle il appartient
         classe.removeEleve(at: eleveIndex)
     }
 

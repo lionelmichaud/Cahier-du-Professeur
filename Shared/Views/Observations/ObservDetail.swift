@@ -26,7 +26,7 @@ struct ObservDetail: View {
                     DatePicker("Date", selection: $observ.date)
                         .labelsHidden()
                         .listRowSeparator(.hidden)
-
+                        .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 } else {
                     Text(observ.date.formatted(date: .abbreviated, time: .shortened))
                 }
@@ -38,7 +38,7 @@ struct ObservDetail: View {
                 } label: {
                     Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
                         .foregroundColor(.gray)
-                    Text("Notifié")
+                    Text("Notifiée aux parents")
                 }
                 .buttonStyle(.plain)
                 .padding(.leading)
@@ -48,7 +48,7 @@ struct ObservDetail: View {
                 } label: {
                     Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
                         .foregroundColor(.gray)
-                    Text("Vérifié")
+                    Text("Signature des parents vérifiée")
                 }
                 .buttonStyle(.plain)
                 .padding(.leading)
@@ -65,16 +65,29 @@ struct ObservDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            NavigationView {
-                ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
-                             isEditing  : false,
-                             isNew      : false,
-                             isModified : .constant(false))
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
-            .previewDisplayName("Display Classe")
+            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+                         isEditing  : false,
+                         isNew      : true,
+                         isModified : .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPad mini (6th generation)")
+            .previewDisplayName("Observ isNew")
+
+            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+                         isEditing  : false,
+                         isNew      : true,
+                         isModified : .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPhone Xs")
+            .previewDisplayName("Observ isNew")
         }
     }
 }

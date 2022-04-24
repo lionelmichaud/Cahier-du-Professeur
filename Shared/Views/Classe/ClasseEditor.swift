@@ -15,7 +15,11 @@ struct ClasseEditor: View {
     var classe: Classe
     var isNew = false
 
+    @EnvironmentObject private var schoolStore : SchoolStore
     @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
     @Environment(\.dismiss) private var dismiss
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
@@ -31,56 +35,100 @@ struct ClasseEditor: View {
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
 
+    private var isItemDeleted: Bool {
+        !classeStore.exists(classe) && !isNew
+    }
+
     var body: some View {
-        ClasseDetail(classe     : $itemCopy,
-                    isEditing  : isEditing,
-                    isNew      : isNew,
-                    isModified : $isModified)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                if isNew {
-                    Button("Annuler") {
-                        dismiss()
-                    }
-                }
-            }
-            ToolbarItem {
-                Button {
+        VStack {
+            ClasseDetail(classe     : $itemCopy,
+                         isEditing  : isEditing,
+                         isNew      : isNew,
+                         isModified : $isModified)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
                     if isNew {
-                        // Ajouter une nouvelle classe
-                        if classeStore.exists(classe: itemCopy, in: school.id) {
-                            self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                                       message       : Text("Cette classe existe déjà dans cet établissement"),
-                                                       dismissButton : .default(Text("OK")))
-                        } else {
-                            withAnimation {
-                                SchoolManager()
-                                    .ajouter(classe      : &itemCopy,
-                                             aSchool     : &school,
-                                             classeStore : classeStore)
-                            }
+                        Button("Annuler") {
                             dismiss()
                         }
-                    } else {
-                        // Appliquer les modifications faites à la classe
-                        if isEditing && !isDeleted {
-                            print("Done, saving any changes to \(classe.displayString).")
-                            withAnimation {
-                                classe = itemCopy // Put edits (if any) back in the store.
-                            }
-                            isSaved = true
-                        }
-                        isEditing.toggle()
                     }
-                } label: {
-                    Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                }
+                ToolbarItem {
+                    Button {
+                        if isNew {
+                            // Ajouter une nouvelle classe
+                            if classeStore.exists(classe: itemCopy, in: school.id) {
+                                self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                           message       : Text("Cette classe existe déjà dans cet établissement"),
+                                                           dismissButton : .default(Text("OK")))
+                            } else {
+                                withAnimation {
+                                    SchoolManager()
+                                        .ajouter(classe      : &itemCopy,
+                                                 aSchool     : &school,
+                                                 classeStore : classeStore)
+                                }
+                                dismiss()
+                            }
+                        } else {
+                            // Appliquer les modifications faites à la classe
+                            if isEditing && !isDeleted {
+                                print("Done, saving any changes to \(classe.displayString).")
+                                withAnimation {
+                                    classe = itemCopy // Put edits (if any) back in the store.
+                                }
+                                isSaved = true
+                            }
+                            isEditing.toggle()
+                        }
+                    } label: {
+                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                    }
                 }
             }
+            .onAppear {
+                itemCopy   = classe
+                isModified = false
+                isSaved    = false
+            }
+            .onDisappear {
+                if isModified && !isSaved {
+                    // Appliquer les modifications faites à la classe hors du mode édition
+                    classe     = itemCopy
+                    isModified = false
+                    isSaved    = true
+                }
+            }
+            .disabled(isItemDeleted)
+
+            // supprimer la classe
+            if isEditing && !isNew {
+                Button(
+                    role: .destructive,
+                    action: {
+                        isDeleted = true
+                        withAnimation {
+                            // supprimer la classe et tous ses descendants
+                            // retirer la classe de l'établissement auquelle elle appartient
+                            classeStore.deleteClasse(classe,
+                                                     eleveStore  : eleveStore,
+                                                     observStore : observStore,
+                                                     colleStore  : colleStore)
+                        }
+                        dismiss()
+                    }, label: {
+                        Label("Supprimer", systemImage: "trash.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                    })
+                .padding()
+            }
         }
-        .onDisappear {
-            if isModified && !isSaved {
-                // Appliquer les modifications faites à la classe hors du mode édition
-                classe = itemCopy
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Classe supprimée. Sélectionner une classe.")
+                    .foregroundStyle(.secondary)
             }
         }
         .alert(item: $alertItem, content: newAlert)
@@ -121,7 +169,7 @@ struct ClasseEditor_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
-            .previewDevice("iPhone 11")
+            .previewDevice("iPhone Xs")
 
             NavigationView {
                 ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
@@ -132,7 +180,7 @@ struct ClasseEditor_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
-            .previewDevice("iPhone 11")
+            .previewDevice("iPhone Xs")
         }
     }
 }

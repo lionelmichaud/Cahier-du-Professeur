@@ -19,14 +19,14 @@ struct ColleDetail: View {
     var body: some View {
         List {
             HStack {
-                Image(systemName: "magnifyingglass")
+                Image(systemName: "lock")
                     .sfSymbolStyling()
                     .foregroundColor(.red)
                 if isNew || isEditing {
                     DatePicker("Date", selection: $colle.date)
                         .labelsHidden()
                         .listRowSeparator(.hidden)
-
+                        .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 } else {
                     Text(colle.date.formatted(date: .abbreviated, time: .shortened))
                 }
@@ -38,7 +38,7 @@ struct ColleDetail: View {
                 } label: {
                     Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
                         .foregroundColor(.gray)
-                    Text("Notifié")
+                    Text("Notifiée à la vie scolaire")
                 }
                 .buttonStyle(.plain)
                 .padding(.leading)
@@ -48,7 +48,7 @@ struct ColleDetail: View {
                 } label: {
                     Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")
                         .foregroundColor(.gray)
-                    Text("Vérifié")
+                    Text("Exécutée par l'élève")
                 }
                 .buttonStyle(.plain)
                 .padding(.leading)
@@ -65,16 +65,29 @@ struct ColleDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            NavigationView {
-                ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!),
-                            isEditing  : false,
-                            isNew      : false,
-                            isModified : .constant(false))
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
-            .previewDisplayName("Display Classe")
+            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!),
+                        isEditing  : false,
+                        isNew      : true,
+                        isModified : .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPad mini (6th generation)")
+            .previewDisplayName("Colle isNew")
+
+            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!),
+                        isEditing  : false,
+                        isNew      : true,
+                        isModified : .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPhone Xs")
+            .previewDisplayName("Colle isNew")
         }
     }
 }

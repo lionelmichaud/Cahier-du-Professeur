@@ -110,7 +110,6 @@ struct ClasseDetail: View {
                     }
                 }
                 .buttonStyle(.borderless)
-
             }
         }
         #if os(iOS)
@@ -133,9 +132,11 @@ struct ClasseDetail: View {
     }
 
     func delete(eleveIndex: Int) {
-        ClasseManager().retirer(eleveIndex : eleveIndex,
-                                deClasse   : &classe,
-                                eleveStore : eleveStore)
+        ClasseManager().retirer(eleveIndex  : eleveIndex,
+                                deClasse    : &classe,
+                                eleveStore  : eleveStore,
+                                observStore : observStore,
+                                colleStore  : colleStore)
     }
 }
 
@@ -143,32 +144,27 @@ struct ClassDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            NavigationView {
-                //EmptyView()
-                ClasseDetail(classe   : .constant(TestEnvir.classeStore.items.first!),
-                            isEditing : false,
-                            isNew     : true,
-                            isModified: .constant(false))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
+            ClasseDetail(classe   : .constant(TestEnvir.classeStore.items.first!),
+                         isEditing : false,
+                         isNew     : true,
+                         isModified: .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDisplayName("NewClasse")
 
-            NavigationView {
-                //EmptyView()
-                ClasseDetail(classe    : .constant(TestEnvir.classeStore.items.first!),
-                            isEditing : false,
-                            isNew     : false,
-                            isModified: .constant(false))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
+            ClasseDetail(classe    : .constant(TestEnvir.classeStore.items.first!),
+                         isEditing : false,
+                         isNew     : false,
+                         isModified: .constant(false))
+            .previewDevice("iPhone Xs")
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDisplayName("DisplayClasse")
         }
     }

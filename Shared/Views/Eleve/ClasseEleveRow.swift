@@ -43,7 +43,7 @@ struct ClasseEleveRow_Previews: PreviewProvider {
                     .environmentObject(TestEnvir.colleStore)
                     .environmentObject(TestEnvir.observStore)
             }
-            .previewDevice("iPhone 11")
+            .previewDevice("iPhone Xs")
         }
     }
 }

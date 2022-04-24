@@ -17,21 +17,37 @@ struct SchoolManager {
         classeStore.add(classe)
     }
 
-    func retirer(classeId            : UUID,
-                 deSchoolId schoolId : UUID,
-                 schoolstore         : SchoolStore) {
-        guard let schoolIndex = schoolstore.items.firstIndex(where: { $0.id == schoolId }) else {
-            return
-        }
-        schoolstore.items[schoolIndex].removeClasse(withID: classeId)
+    /// Détuire la Classe et tous ses descendants
+    /// puis retirer la classe de l'établissement auquel elle appartient
+    func retirer(classe          : Classe,
+                 deSchool school : inout School,
+                 classeStore     : ClasseStore,
+                 eleveStore      : EleveStore,
+                 observStore     : ObservationStore,
+                 colleStore      : ColleStore) {
+        // Détuire la Classe et tous ses descendants
+        classeStore.deleteClasse(classe,
+                                 eleveStore  : eleveStore,
+                                 observStore : observStore,
+                                 colleStore  : colleStore)
+        // retirer la classe de l'établissement auquel elle appartient
+        school.removeClasse(withID: classe.id)
     }
 
+    /// Détuire la Classe et tous ses descendants
+    /// puis retirer la classe de l'établissement auquel elle appartient
     func retirer(classeIndex     : Int,
                  deSchool school : inout School,
-                 classeStore     : ClasseStore) {
-        // supprimer la classe de la liste de classes
-        classeStore.deleteClasse(withID: school.classesID[classeIndex])
-        // supprimer la classe de l'établissement
+                 classeStore     : ClasseStore,
+                 eleveStore      : EleveStore,
+                 observStore     : ObservationStore,
+                 colleStore      : ColleStore) {
+        // Détuire la Classe et tous ses descendants
+        classeStore.deleteClasse(withID      : school.classesID[classeIndex],
+                                 eleveStore  : eleveStore,
+                                 observStore : observStore,
+                                 colleStore  : colleStore)
+        // retirer la classe de l'établissement auquel elle appartient
         school.removeClasse(at: classeIndex)
     }
 

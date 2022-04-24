@@ -9,27 +9,24 @@ import SwiftUI
 
 struct EleveBrowserView: View {
     @EnvironmentObject private var schoolStore : SchoolStore
-    @EnvironmentObject private var classeStore : ClasseStore
 
     var body: some View {
         List {
-            // pour chaque Etablissement
-            ForEach(schoolStore.items.sorted(by: { $0.niveau.rawValue < $1.niveau.rawValue })) { school in
-                if school.nbOfClasses != 0 {
-                    Section() {
-                        // pour chaque Classe
-                        ForEach(classeStore.classes(dans: school)) { $classe in
-                            // pour chaque Elève
-                            if classe.nbOfEleves != 0 {
-                                ClasseSubview(classe: $classe,
-                                              school: school)
-                            }
+            if schoolStore.items.isEmpty {
+                Text("Aucun établissement")
+            } else {
+                // pour chaque Etablissement
+                ForEach(schoolStore.items.sorted(by: { $0.niveau.rawValue < $1.niveau.rawValue })) { school in
+                    if school.nbOfClasses != 0 {
+                        Section() {
+                            // pour chaque Classe
+                            EleveBrowserSchoolSubiew(school: school)
+                        } header: {
+                            Text(school.displayString)
+                                .font(.callout)
+                                .foregroundColor(.secondary)
+                                .fontWeight(.bold)
                         }
-                    } header: {
-                        Text(school.displayString)
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                            .fontWeight(.bold)
                     }
                 }
             }
@@ -38,29 +35,54 @@ struct EleveBrowserView: View {
     }
 }
 
-struct ClasseSubview : View {
-    @Binding var classe: Classe
+struct EleveBrowserSchoolSubiew : View {
     let school: School
 
-    @EnvironmentObject private var eleveStore: EleveStore
+    @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
 
     var body: some View {
-        if classe.nbOfEleves != 0 {
-            DisclosureGroup() {
-                ForEach(eleveStore.eleves(dans: classe)) { $eleve in
-                    NavigationLink {
-                        EleveEditor(classe : .constant(classe),
-                                    eleve  : $eleve,
-                                    isNew  : false)
+        if classeStore.items.isEmpty {
+            Text("Aucune classe")
+        } else {
+            ForEach(classeStore.classes(dans: school)) { $classe in
+                // pour chaque Elève
+                if classe.nbOfEleves != 0 {
+                    DisclosureGroup() {
+                        ForEach(eleveStore.eleves(dans: classe)) { $eleve in
+                            NavigationLink {
+                                EleveEditor(classe : .constant(classe),
+                                            eleve  : $eleve,
+                                            isNew  : false)
+                            } label: {
+                                EleveBrowserRow(eleve: eleve)
+                            }
+                            .swipeActions {
+                                // supprimer un élève
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        // supprimer l'élève et tous ses descendants
+                                        // puis retirer l'élève de la classe auquelle il appartient
+                                        ClasseManager().retirer(eleve       : eleve,
+                                                                deClasse    : &classe,
+                                                                eleveStore  : eleveStore,
+                                                                observStore : observStore,
+                                                                colleStore  : colleStore)
+                                    }
+                                } label: {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
+                            }
+                        }
                     } label: {
-                        EleveBrowserRow(eleve: eleve)
+                        Text(classe.displayString)
+                            .font(.callout)
+                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
                     }
                 }
-            } label: {
-                Text(classe.displayString)
-                    .font(.callout)
-                    .foregroundColor(.secondary)
-                    .fontWeight(.bold)
             }
         }
     }

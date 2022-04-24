@@ -15,7 +15,9 @@ struct EleveEditor: View {
     var eleve: Eleve
     var isNew = false
 
-    @EnvironmentObject private var eleveStore : EleveStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
     @Environment(\.dismiss) private var dismiss
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
@@ -33,56 +35,101 @@ struct EleveEditor: View {
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
 
-    var body: some View {
-        EleveDetail(eleve      : $itemCopy,
-                    isEditing  : isEditing,
-                    isNew      : isNew,
-                    isModified : $isModified)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                if isNew {
-                    Button("Annuler") {
-                        dismiss()
-                    }
-                }
-            }
-            ToolbarItem {
-                Button {
+    private var isItemDeleted: Bool {
+        !eleveStore.exists(eleve) && !isNew
+    }
+
+var body: some View {
+        VStack {
+            EleveDetail(eleve      : $itemCopy,
+                        isEditing  : isEditing,
+                        isNew      : isNew,
+                        isModified : $isModified)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
                     if isNew {
-                        // Ajouter un nouvel élève à la classe
-                        if eleveStore.exists(eleve: itemCopy, in: classe.id) {
-                            self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                                       message       : Text("Cet élève existe déjà dans cette classe"),
-                                                       dismissButton : .default(Text("OK")))
-                        } else {
-                            withAnimation {
-                                ClasseManager()
-                                    .ajouter(eleve      : &itemCopy,
-                                             aClasse    : &classe,
-                                             eleveStore : eleveStore)
-                            }
+                        Button("Annuler") {
                             dismiss()
                         }
-                    } else {
-                        // Appliquer les modifications faites à la classe
-                        if isEditing && !isDeleted {
-                            print("Done, saving any changes to \(eleve.displayName).")
-                            withAnimation {
-                                eleve = itemCopy // Put edits (if any) back in the store.
-                            }
-                            isSaved = true
-                        }
-                        isEditing.toggle()
                     }
-                } label: {
-                    Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                }
+                ToolbarItem {
+                    Button {
+                        if isNew {
+                            // Ajouter un nouvel élève à la classe
+                            if eleveStore.exists(eleve: itemCopy, in: classe.id) {
+                                self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                           message       : Text("Cet élève existe déjà dans cette classe"),
+                                                           dismissButton : .default(Text("OK")))
+                            } else {
+                                withAnimation {
+                                    ClasseManager()
+                                        .ajouter(eleve      : &itemCopy,
+                                                 aClasse    : &classe,
+                                                 eleveStore : eleveStore)
+                                }
+                                dismiss()
+                            }
+                        } else {
+                            // Appliquer les modifications faites à l'élève
+                            if isEditing && !isDeleted {
+                                print("Done, saving any changes to \(eleve.displayName).")
+                                withAnimation {
+                                    eleve = itemCopy // Put edits (if any) back in the store.
+                                }
+                                isSaved = true
+                            }
+                            isEditing.toggle()
+                        }
+                    } label: {
+                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                    }
                 }
             }
+            .onAppear {
+                itemCopy   = eleve
+                isModified = false
+                isSaved    = false
+            }
+            .onDisappear {
+                if isModified && !isSaved {
+                    // Appliquer les modifications faites à la classe hors du mode édition
+                    eleve      = itemCopy
+                    isModified = false
+                    isSaved    = true
+                }
+            }
+            .disabled(isItemDeleted)
+
+            // supprimer l'élève
+            if isEditing && !isNew {
+                Button(
+                    role: .destructive,
+                    action: {
+                        isDeleted = true
+                        withAnimation {
+                            // supprimer l'élève et tous ses descendants
+                            // puis retirer l'élève de la classe auquelle il appartient
+                            ClasseManager().retirer(eleve       : eleve,
+                                                    deClasse    : &classe,
+                                                    eleveStore  : eleveStore,
+                                                    observStore : observStore,
+                                                    colleStore  : colleStore)
+                        }
+                        dismiss()
+                    }, label: {
+                        Label("Supprimer", systemImage: "trash.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                    })
+                .padding()
+            }
         }
-        .onDisappear {
-            if isModified && !isSaved {
-                // Appliquer les modifications faites à la classe hors du mode édition
-                eleve = itemCopy
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Elève supprimé. Sélectionner un élève.")
+                    .foregroundStyle(.secondary)
             }
         }
         .alert(item: $alertItem, content: newAlert)
@@ -102,26 +149,21 @@ struct EleveEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            NavigationView {
-                EmptyView()
-                EleveEditor(classe: .constant(TestEnvir.classeStore.items.first!),
-                            eleve: .constant(TestEnvir.eleveStore.items.first!),
-                            isNew  : true)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
+            EleveEditor(classe: .constant(TestEnvir.classeStore.items.first!),
+                        eleve: .constant(TestEnvir.eleveStore.items.first!),
+                        isNew  : true)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
-            NavigationView {
-                EleveEditor(classe: .constant(TestEnvir.classeStore.items.first!),
-                            eleve: .constant(TestEnvir.eleveStore.items.first!),
-                            isNew  : true)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
-            .previewDevice("iPhone 11")
-       }
+            EleveEditor(classe: .constant(TestEnvir.classeStore.items.first!),
+                        eleve: .constant(TestEnvir.eleveStore.items.first!),
+                        isNew  : true)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPhone Xs")
+        }
     }
 }

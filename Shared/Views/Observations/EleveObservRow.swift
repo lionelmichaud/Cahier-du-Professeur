@@ -16,12 +16,11 @@ struct EleveObservRow: View {
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .sfSymbolStyling()
                 .foregroundColor(.red)
             if hClass == .compact {
                 Text(observ.date.stringShortDate)
             } else {
-                Text(observ.date.formatted(date: .long, time: .shortened))
+                Text(observ.date.stringLongDateTime)
             }
 
             Spacer()
@@ -35,21 +34,27 @@ struct EleveObservRow: View {
             } label: {
                 Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(.gray)
-                Text("Notifié")
+                if hClass == .compact {
+                    Text("Notifié")
+                } else {
+                    Text("Notifiée aux parents")
+                }
             }
             .buttonStyle(.plain)
             .padding(.trailing)
 
             Button {
-                if let index = observStore.items.firstIndex(where: {
-                    $0.id == observ.id
-                }) {
+                if let index = observStore.items.firstIndex(where: { $0.id == observ.id }) {
                     observStore.items[index].isVerified.toggle()
                 }
             } label: {
                 Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(.gray)
-                Text("Vérifié")
+                if hClass == .compact {
+                    Text("Vérifié")
+                } else {
+                    Text("Signature des parents vérifiée")
+                }
             }
             .buttonStyle(.plain)
         }
@@ -58,7 +63,13 @@ struct EleveObservRow: View {
 
 struct EleveObservRow_Previews: PreviewProvider {
     static var previews: some View {
-        EleveObservRow(observ: Observation.exemple)
-            .previewLayout(.sizeThatFits)
+        Group {
+            EleveObservRow(observ: Observation.exemple)
+                .previewDevice("iPad mini (6th generation)")
+                .previewLayout(.sizeThatFits)
+            EleveObservRow(observ: Observation.exemple)
+                .previewDevice("iPhone Xs")
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

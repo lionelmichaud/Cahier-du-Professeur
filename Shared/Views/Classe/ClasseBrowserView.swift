@@ -9,34 +9,71 @@ import SwiftUI
 
 struct ClasseBrowserView: View {
     @EnvironmentObject private var schoolStore : SchoolStore
-    @EnvironmentObject private var classeStore : ClasseStore
 
     var body: some View {
         List {
-            // pour chaque Etablissement
-            ForEach(schoolStore.items.sorted(by: { $0.niveau.rawValue < $1.niveau.rawValue })) { school in
-                if school.nbOfClasses != 0 {
-                    Section {
-                        // pour chaque Classe
-                        ForEach(classeStore.classes(dans: school)) { $classe in
-                            NavigationLink {
-                                ClasseEditor(school : .constant(school),
-                                             classe : $classe,
-                                             isNew  : false)
-                            } label: {
-                                ClassBrowserRow(classe: classe)
-                            }
+            if schoolStore.items.isEmpty {
+                Text("Aucun établissement")
+            } else {
+                // pour chaque Etablissement
+                ForEach(schoolStore.items.sorted(by: { $0.niveau.rawValue < $1.niveau.rawValue })) { school in
+                    if school.nbOfClasses != 0 {
+                        Section {
+                            // pour chaque Classe
+                            ClasseBrowserSchoolSubview(school: school)
+                        } header: {
+                            Text(school.displayString)
+                                .font(.callout)
+                                .foregroundColor(.secondary)
+                                .fontWeight(.bold)
                         }
-                    } header: {
-                        Text(school.displayString)
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                            .fontWeight(.bold)
                     }
                 }
             }
         }
         .navigationTitle("Classes")
+    }
+}
+
+struct ClasseBrowserSchoolSubview : View {
+    var school: School
+
+    @EnvironmentObject private var classeStore : ClasseStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
+
+    var body: some View {
+        if classeStore.items.isEmpty {
+            Text("Aucune classe")
+        } else {
+            ForEach(classeStore.classes(dans: school)) { $classe in
+                NavigationLink {
+                    ClasseEditor(school : .constant(school),
+                                 classe : $classe,
+                                 isNew  : false)
+                } label: {
+                    ClassBrowserRow(classe: classe)
+                }
+                .swipeActions {
+                    // supprimer une classe
+                    Button(role: .destructive) {
+                        withAnimation {
+                            // supprimer la classe et tous ses descendants
+                            // puis retirer la classe de l'établissement auquelle elle appartient
+//                            SchoolManager().retirer(classe      : classe,
+//                                                    deSchool    : &school,
+//                                                    classeStore : classeStore,
+//                                                    eleveStore  : eleveStore,
+//                                                    observStore : observStore,
+//                                                    colleStore  : colleStore)
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
+                }
+            }
+        }
     }
 }
 

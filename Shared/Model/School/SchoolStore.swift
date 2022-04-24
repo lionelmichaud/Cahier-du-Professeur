@@ -32,14 +32,17 @@ final class SchoolStore: ObservableObject {
         items.insert(item, at: 0)
     }
 
-    func delete(_ item  : School,
-                classes : ClasseStore,
-                eleves  : EleveStore,
-                observs : ObservationStore,
-                colles  : ColleStore) {
+    func deleteSchool(_ item      : School,
+                      classeStore : ClasseStore,
+                      eleveStore  : EleveStore,
+                      observStore : ObservationStore,
+                      colleStore  : ColleStore) {
         // supprimer toutes les classes de l'établissement
         item.classesID.forEach { classeId in
-            classes.deleteClasse(withID: classeId)
+            classeStore.deleteClasse(withID      : classeId,
+                                     eleveStore  : eleveStore,
+                                     observStore : observStore,
+                                     colleStore  : colleStore)
         }
         // retirer l'établissement de la liste
         items.removeAll {

@@ -12,7 +12,9 @@ struct Observation: Identifiable {
     // MARK: - Type Methods
 
     static func < (lhs: Observation, rhs: Observation) -> Bool {
-        if lhs.isVerified != rhs.isVerified {
+        if lhs.isConsignee != rhs.isConsignee {
+            return !lhs.isConsignee
+        } else if lhs.isVerified != rhs.isVerified {
             return !lhs.isVerified
         } else {
             return lhs.date > rhs.date

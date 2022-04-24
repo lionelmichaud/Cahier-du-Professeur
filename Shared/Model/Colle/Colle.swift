@@ -12,8 +12,8 @@ struct Colle: Identifiable {
     // MARK: - Type Methods
 
     static func < (lhs: Colle, rhs: Colle) -> Bool {
-        if lhs.isVerified != rhs.isVerified {
-            return !lhs.isVerified
+        if lhs.isConsignee != rhs.isConsignee {
+            return !lhs.isConsignee
         } else {
             return lhs.date > rhs.date
         }

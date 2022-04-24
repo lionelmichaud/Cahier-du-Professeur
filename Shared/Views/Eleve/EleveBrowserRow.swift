@@ -50,7 +50,7 @@ struct EleveBrowserRow_Previews: PreviewProvider {
                         .environmentObject(TestEnvir.observStore)
                 }
             }
-            .previewDevice("iPhone 11")
+            .previewDevice("iPhone Xs")
         }
     }
 }

@@ -9,9 +9,44 @@ import SwiftUI
 
 struct EleveColleRow: View {
     let colle: Colle
+    @EnvironmentObject var colleStore: ColleStore
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(systemName: "lock")
+                .sfSymbolStyling()
+                .foregroundColor(.red)
+            Text(colle.date.stringShortDate)
+
+            Spacer()
+
+            Button {
+                if let index = colleStore.items.firstIndex(where: {
+                    $0.id == colle.id
+                }) {
+                    colleStore.items[index].isConsignee.toggle()
+                }
+            } label: {
+                Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(.gray)
+                Text("Notifié")
+            }
+            .buttonStyle(.plain)
+            .padding(.trailing)
+
+            Button {
+                if let index = colleStore.items.firstIndex(where: {
+                    $0.id == colle.id
+                }) {
+                    colleStore.items[index].isVerified.toggle()
+                }
+            } label: {
+                Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(.gray)
+                Text("Vérifié")
+            }
+            .buttonStyle(.plain)
+        }
     }
 }
 

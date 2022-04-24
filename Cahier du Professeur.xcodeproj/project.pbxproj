@@ -31,6 +31,18 @@
 		791C26EA28146B4300686F0C /* EleveObservRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26E828146B4300686F0C /* EleveObservRow.swift */; };
 		791C26EC28146F8F00686F0C /* EleveColleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26EB28146F8F00686F0C /* EleveColleRow.swift */; };
 		791C26ED28146F8F00686F0C /* EleveColleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26EB28146F8F00686F0C /* EleveColleRow.swift */; };
+		791C26EF281475CC00686F0C /* ClasseObservLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26EE281475CC00686F0C /* ClasseObservLabel.swift */; };
+		791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26EE281475CC00686F0C /* ClasseObservLabel.swift */; };
+		791C26F22814847B00686F0C /* ClasseColleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26F12814847B00686F0C /* ClasseColleLabel.swift */; };
+		791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26F12814847B00686F0C /* ClasseColleLabel.swift */; };
+		791C26F528148D2D00686F0C /* ObservEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26F428148D2D00686F0C /* ObservEditor.swift */; };
+		791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26F428148D2D00686F0C /* ObservEditor.swift */; };
+		791C26F828149E7E00686F0C /* ObservDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26F728149E7E00686F0C /* ObservDetail.swift */; };
+		791C26F928149E7E00686F0C /* ObservDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26F728149E7E00686F0C /* ObservDetail.swift */; };
+		791C26FB2814A43400686F0C /* ColleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FA2814A43400686F0C /* ColleEditor.swift */; };
+		791C26FC2814A43400686F0C /* ColleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FA2814A43400686F0C /* ColleEditor.swift */; };
+		791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FD2814A64E00686F0C /* ColleDetail.swift */; };
+		791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FD2814A64E00686F0C /* ColleDetail.swift */; };
 		7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631B280DC44B00AB8600 /* SchoolStore.swift */; };
 		7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631B280DC44B00AB8600 /* SchoolStore.swift */; };
 		7953631F280DC4D800AB8600 /* ClassStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7953631E280DC4D800AB8600 /* ClassStore.swift */; };
@@ -136,6 +148,12 @@
 		791C26E428145F8E00686F0C /* EleveObservLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveObservLabel.swift; sourceTree = "<group>"; };
 		791C26E828146B4300686F0C /* EleveObservRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveObservRow.swift; sourceTree = "<group>"; };
 		791C26EB28146F8F00686F0C /* EleveColleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveColleRow.swift; sourceTree = "<group>"; };
+		791C26EE281475CC00686F0C /* ClasseObservLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseObservLabel.swift; sourceTree = "<group>"; };
+		791C26F12814847B00686F0C /* ClasseColleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseColleLabel.swift; sourceTree = "<group>"; };
+		791C26F428148D2D00686F0C /* ObservEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservEditor.swift; sourceTree = "<group>"; };
+		791C26F728149E7E00686F0C /* ObservDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservDetail.swift; sourceTree = "<group>"; };
+		791C26FA2814A43400686F0C /* ColleEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleEditor.swift; sourceTree = "<group>"; };
+		791C26FD2814A64E00686F0C /* ColleDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleDetail.swift; sourceTree = "<group>"; };
 		7953631B280DC44B00AB8600 /* SchoolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolStore.swift; sourceTree = "<group>"; };
 		7953631E280DC4D800AB8600 /* ClassStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassStore.swift; sourceTree = "<group>"; };
 		795BC3D12812E0B100C22271 /* ClasseBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClasseBrowserView.swift; sourceTree = "<group>"; };
@@ -227,6 +245,8 @@
 				795BC3D72812E0FF00C22271 /* SchoolClasseRow.swift */,
 				7918D1FD2810A60400C24C5A /* ClasseEditor.swift */,
 				7918D2002810A86100C24C5A /* ClasseDetail.swift */,
+				791C26EE281475CC00686F0C /* ClasseObservLabel.swift */,
+				791C26F12814847B00686F0C /* ClasseColleLabel.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -236,6 +256,8 @@
 			children = (
 				79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */,
 				791C26E828146B4300686F0C /* EleveObservRow.swift */,
+				791C26F428148D2D00686F0C /* ObservEditor.swift */,
+				791C26F728149E7E00686F0C /* ObservDetail.swift */,
 			);
 			path = Observations;
 			sourceTree = "<group>";
@@ -245,6 +267,8 @@
 			children = (
 				79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */,
 				791C26EB28146F8F00686F0C /* EleveColleRow.swift */,
+				791C26FA2814A43400686F0C /* ColleEditor.swift */,
+				791C26FD2814A64E00686F0C /* ColleDetail.swift */,
 			);
 			path = Colles;
 			sourceTree = "<group>";
@@ -594,6 +618,7 @@
 				795BC3DF2813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				791C26E528145F8E00686F0C /* EleveObservLabel.swift in Sources */,
 				7918D1FA2810997700C24C5A /* ColorOptions.swift in Sources */,
+				791C26FB2814A43400686F0C /* ColleEditor.swift in Sources */,
 				791C26DF28144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
@@ -602,6 +627,7 @@
 				791C26DC281447BD00686F0C /* EleveBrowserView.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
 				791C26D128142B6300686F0C /* ObservationStore.swift in Sources */,
+				791C26EF281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				795BC3D82812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				795BC3D52812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
@@ -615,10 +641,13 @@
 				795FAB292809C4E2004CB120 /* SchoolBrowserView.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
 				791C26D72814378A00686F0C /* EleveManager.swift in Sources */,
+				791C26F828149E7E00686F0C /* ObservDetail.swift in Sources */,
 				7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */,
+				791C26F22814847B00686F0C /* ClasseColleLabel.swift in Sources */,
 				7918D2012810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79F3AC042808CA2500D068D9 /* SchoolSidebarView.swift in Sources */,
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
+				791C26F528148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
 				791C26EC28146F8F00686F0C /* EleveColleRow.swift in Sources */,
 				79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */,
@@ -629,6 +658,7 @@
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
+				791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
@@ -645,6 +675,7 @@
 				79F3ABCE2808222C00D068D9 /* School.swift in Sources */,
 				79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
+				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
@@ -659,6 +690,7 @@
 				79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
+				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
 				791C26E628145F8E00686F0C /* EleveObservLabel.swift in Sources */,
@@ -673,16 +705,20 @@
 				791C26ED28146F8F00686F0C /* EleveColleRow.swift in Sources */,
 				79F3ABB92808218300D068D9 /* ContentView.swift in Sources */,
 				791C26D528142D7100686F0C /* ColleStore.swift in Sources */,
+				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
+				791C26FC2814A43400686F0C /* ColleEditor.swift in Sources */,
 				79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
+				791C26F928149E7E00686F0C /* ObservDetail.swift in Sources */,
 				79F3ABF02808709100D068D9 /* Colle.swift in Sources */,
 				791C26E028144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				791C26D228142B6300686F0C /* ObservationStore.swift in Sources */,
 				7918D1FF2810A60400C24C5A /* ClasseEditor.swift in Sources */,
 				79536320280DC4D800AB8600 /* ClassStore.swift in Sources */,
+				791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F3ABDA280823D900D068D9 /* NiveauSchool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

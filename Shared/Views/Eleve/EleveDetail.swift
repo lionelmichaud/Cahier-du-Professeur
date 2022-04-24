@@ -136,18 +136,16 @@ struct EleveDetail: View {
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {
-                Text("Observations")
-                //                EleveEditor(eleve : $eleve,
-                //                            eleve  : $newEleve,
-                //                            isNew  : true)
+                ObservEditor(eleve  : $eleve,
+                             observ : $newObserv,
+                             isNew  : true)
             }
         }
         .sheet(isPresented: $isAddingNewColle) {
             NavigationView {
-                Text("Colles")
-                //                EleveEditor(eleve : $eleve,
-                //                            eleve  : $newEleve,
-                //                            isNew  : true)
+                ColleEditor(eleve : $eleve,
+                            colle : $newColle,
+                            isNew : true)
             }
         }
     }
@@ -179,7 +177,7 @@ struct EleveDetail_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
-            .previewDisplayName("NewClasse")
+            .previewDisplayName("New Classe")
 
             NavigationView {
                 //EmptyView()
@@ -191,7 +189,7 @@ struct EleveDetail_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
-            .previewDisplayName("DisplayClasse")
+            .previewDisplayName("Display Classe")
         }
     }
 }

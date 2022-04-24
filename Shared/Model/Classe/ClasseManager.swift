@@ -33,4 +33,110 @@ struct ClasseManager {
         // supprimer l'élève de la classe
         classe.removeEleve(at: eleveIndex)
     }
+
+    // MARK: - Getters
+
+    func nbOfObservations(de classe    : Classe,
+                          isConsignee  : Bool? = nil,
+                          isVerified   : Bool? = nil,
+                          eleveStore   : EleveStore,
+                          observStore  : ObservationStore) -> Int {
+        switch (isConsignee, isVerified) {
+            case (nil, nil):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfObservations(de          : eleve,
+                                          observStore : observStore)
+                }
+                return total
+
+            case (.some(let c), nil):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfObservations(de          : eleve,
+                                          isConsignee : c,
+                                          observStore : observStore)
+                }
+                return total
+
+            case (nil, .some(let v)):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfObservations(de          : eleve,
+                                          isVerified  : v,
+                                          observStore : observStore)
+                }
+                return total
+
+            case (.some(let c), .some(let v)):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfObservations(de          : eleve,
+                                          isConsignee : c,
+                                          isVerified  : v,
+                                          observStore : observStore)
+                }
+                return total
+        }
+    }
+
+    func nbOfColles(de classe   : Classe,
+                    isConsignee : Bool?  = nil,
+                    isVerified  : Bool?  = nil,
+                    eleveStore  : EleveStore,
+                    colleStore  : ColleStore) -> Int {
+        switch (isConsignee, isVerified) {
+            case (nil, nil):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfColles(de         : eleve,
+                                    colleStore : colleStore)
+                }
+                return total
+
+            case (.some(let c), nil):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfColles(de          : eleve,
+                                    isConsignee : c,
+                                    colleStore  : colleStore)
+                }
+                return total
+
+            case (nil, .some(let v)):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfColles(de         : eleve,
+                                    isVerified : v,
+                                    colleStore : colleStore)
+                }
+                return total
+
+            case (.some(let c), .some(let v)):
+                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                var total = 0
+                eleves.forEach { eleve in
+                    total += EleveManager()
+                        .nbOfColles(de          : eleve,
+                                    isConsignee : c,
+                                    isVerified  : v,
+                                    colleStore  : colleStore)
+                }
+                return total
+        }
+    }
 }

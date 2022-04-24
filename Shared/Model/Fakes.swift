@@ -8,23 +8,26 @@
 import Foundation
 
 struct TestEnvir {
-    static var schoolStore   : SchoolStore!
+    static var schoolStore : SchoolStore!
     static var classeStore : ClasseStore!
     static var eleveStore  : EleveStore!
     static var observStore : ObservationStore!
     static var colleStore  : ColleStore!
 
     static func populateWithFakes(
-        schoolStore   : SchoolStore,
+        schoolStore : SchoolStore,
         classeStore : ClasseStore,
         eleveStore  : EleveStore,
         observStore : ObservationStore,
         colleStore  : ColleStore) {
             let etabManager   = SchoolManager()
             let classeManager = ClasseManager()
+            let eleveManager  = EleveManager()
             var classe = Classe.exemple
             var school = School.exemple
             var eleve  = Eleve.exemple
+            var observ = Observation.exemple
+            var colle  = Colle.exemple
 
             // ajouter une classe à l'établissement
             etabManager.ajouter(classe      : &classe,
@@ -35,13 +38,25 @@ struct TestEnvir {
 
             // ajouter un élève à la classe
             classeManager.ajouter(eleve      : &eleve,
-                                  aClasse    : &classe,
-                                  eleveStore : eleveStore)
+                                  aClasse     : &classe,
+                                  eleveStore  : eleveStore)
             // ajouter la classe à son store
             classeStore.add(classe)
 
+            // ajouter une observation à une élève
+            eleveManager.ajouter(observation : &observ,
+                                 aEleve      : &eleve,
+                                 observStore : observStore)
+            // ajouter une colle à une élève
+            eleveManager.ajouter(colle       : &colle,
+                                 aEleve      : &eleve,
+                                 colleStore: colleStore)
             // ajouter l'élève à son store
             eleveStore.add(eleve)
+            // ajouter l'observation à son store
+            observStore.add(observ)
+            // ajouter la colle à son store
+            colleStore.add(colle)
         }
     
     static func createFakes() {
@@ -53,9 +68,12 @@ struct TestEnvir {
 
         let etabManager   = SchoolManager()
         let classeManager = ClasseManager()
+        let eleveManager  = EleveManager()
         var classe = Classe.exemple
         var school = School.exemple
         var eleve  = Eleve.exemple
+        var observ = Observation.exemple
+        var colle  = Colle.exemple
 
         // ajouter une classe à l'établissement
         etabManager.ajouter(classe      : &classe,
@@ -71,7 +89,19 @@ struct TestEnvir {
         // ajouter la classe à son store
         classeStore.add(classe)
 
+        // ajouter une observation à une élève
+        eleveManager.ajouter(observation : &observ,
+                             aEleve      : &eleve,
+                             observStore : observStore)
+        // ajouter une colle à une élève
+        eleveManager.ajouter(colle       : &colle,
+                             aEleve      : &eleve,
+                             colleStore: colleStore)
         // ajouter l'élève à son store
         eleveStore.add(eleve)
+        // ajouter l'observation à son store
+        observStore.add(observ)
+        // ajouter la colle à son store
+        colleStore.add(colle)
     }
 }

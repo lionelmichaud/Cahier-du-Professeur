@@ -27,6 +27,8 @@ struct EleveDetail: View {
     private var newObserv = Observation.exemple
     @State
     private var newColle  = Colle.exemple
+    @FocusState
+    private var isPrenomFocused: Bool
 
     var body: some View {
         List {
@@ -42,6 +44,7 @@ struct EleveDetail: View {
                         .pickerStyle(.menu)
                     TextField("Prénom", text: $eleve.name.givenName.bound)
                         .textFieldStyle(.roundedBorder)
+                        .focused($isPrenomFocused)
                     TextField("Nom", text: $eleve.name.familyName.bound)
                         .textFieldStyle(.roundedBorder)
                 } else {
@@ -55,39 +58,73 @@ struct EleveDetail: View {
             // observations de l'élève
             if !isNew {
                 // titre
-                //                Text(eleve.elevesLabel)
-                //                    .font(.title3)
-                //                    .fontWeight(.bold)
-                //
-                //                // édition de la liste des élèves
-                //                ForEach(eleve.elevesID, id: \.self) { eleveId in
-                //                    if let eleve = eleveStore.eleve(withID: eleveId) {
-                //                        ClasseEleveRow(eleve: eleve)
-                //                    } else {
-                //                        Text("élève non trouvé: \(eleveId)")
-                //                    }
-                //                }
-                //                .onDelete(perform: { indexSet in
-                //                    for index in indexSet {
-                //                        isModified = true
-                //                        delete(eleveIndex: index)
-                //                    }
-                //                })
-                //                .onMove(perform: moveEleve)
-                //
-                //                // ajouter un élève
-                //                Button {
-                //                    isModified = true
-                //                    newEleve = Eleve.exemple
-                //                    isAddingNewEleve = true
-                //                } label: {
-                //                    HStack {
-                //                        Image(systemName: "plus")
-                //                        Text("Ajouter un élève")
-                //                    }
-                //                }
-                //                .buttonStyle(.borderless)
-                EmptyView()
+                HStack {
+                    Text("Observations")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    Spacer()
+                    // ajouter un élève
+                    Button {
+                        isModified = true
+                        newObserv = Observation()
+                        isAddingNewObserv = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                    }
+                    .buttonStyle(.borderless)
+                }
+
+                // édition de la liste des observations
+                ForEach(eleve.observsID, id: \.self) { observId in
+                    if let observ = observStore.observation(withID: observId) {
+                        EleveObservRow(observ: observ)
+                    } else {
+                        Text("élève non trouvé: \(observId)")
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    for index in indexSet {
+                        isModified = true
+                        deleteObserv(index: index)
+                    }
+                })
+            }
+
+            // observations de l'élève
+            if !isNew {
+                // titre
+                HStack {
+                    Text("Colles")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    Spacer()
+                    // ajouter un élève
+                    Button {
+                        isModified = true
+                        newColle = Colle()
+                        isAddingNewColle = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                    }
+                    .buttonStyle(.borderless)
+                }
+
+                // édition de la liste des observations
+                ForEach(eleve.collesID, id: \.self) { colleId in
+                    if let colle = colleStore.colle(withID: colleId) {
+                        EleveColleRow(colle: colle)
+                    } else {
+                        Text("élève non trouvé: \(colleId)")
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    for index in indexSet {
+                        isModified = true
+                        deleteColle(index: index)
+                    }
+                })
             }
         }
         #if os(iOS)
@@ -95,35 +132,35 @@ struct EleveDetail: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
-            //isHoursFocused = isNew
+            isPrenomFocused = isNew
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {
-                Text("Observations")
-                //                EleveEditor(eleve : $eleve,
-                //                            eleve  : $newEleve,
-                //                            isNew  : true)
+                ObservEditor(eleve  : $eleve,
+                             observ : $newObserv,
+                             isNew  : true)
             }
         }
         .sheet(isPresented: $isAddingNewColle) {
             NavigationView {
-                Text("Colles")
-                //                EleveEditor(eleve : $eleve,
-                //                            eleve  : $newEleve,
-                //                            isNew  : true)
+                ColleEditor(eleve : $eleve,
+                            colle : $newColle,
+                            isNew : true)
             }
         }
     }
 
-    //    private func moveEleve(from indexes: IndexSet, to destination: Int) {
-    //        eleve.moveEleve(from: indexes, to: destination)
-    //    }
-    //
-    //    func delete(eleveIndex: Int) {
-    //        ClasseManager().retirer(eleveIndex : eleveIndex,
-    //                                deClasse   : &eleve,
-    //                                eleveStore : eleveStore)
-    //    }
+    func deleteObserv(index: Int) {
+        EleveManager().retirer(observIndex : index,
+                               deEleve     : &eleve,
+                               observStore : observStore)
+    }
+
+    func deleteColle(index: Int) {
+        EleveManager().retirer(colleIndex : index,
+                               deEleve    : &eleve,
+                               colleStore : colleStore)
+    }
 }
 
 struct EleveDetail_Previews: PreviewProvider {
@@ -131,7 +168,7 @@ struct EleveDetail_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return Group {
             NavigationView {
-                EmptyView()
+                //EmptyView()
                 EleveDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                             isEditing  : false,
                             isNew      : true,
@@ -140,7 +177,19 @@ struct EleveDetail_Previews: PreviewProvider {
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
             }
-            .previewDisplayName("NewClasse")
+            .previewDisplayName("New Classe")
+
+            NavigationView {
+                //EmptyView()
+                EleveDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
+                            isEditing  : false,
+                            isNew      : false,
+                            isModified : .constant(false))
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+            }
+            .previewDisplayName("Display Classe")
         }
     }
 }

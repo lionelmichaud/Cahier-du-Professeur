@@ -9,7 +9,7 @@ import SwiftUI
 import HelpersView
 
 struct ClassBrowserRow: View {
-    var classe: Classe
+    let classe: Classe
 
     var body: some View {
         HStack {
@@ -18,8 +18,13 @@ struct ClassBrowserRow: View {
                 .foregroundColor(classe.niveau.color)
 
             VStack(alignment: .leading, spacing: 5) {
-                Text(classe.displayString)
-                    .fontWeight(.bold)
+                HStack {
+                    Text(classe.displayString)
+                        .fontWeight(.bold)
+                    Spacer()
+                    ClasseColleLabel(classe: classe, scale: .large)
+                    ClasseObservLabel(classe: classe, scale: .large)
+                }
 
                 HStack {
                     Text("\(classe.nbOfEleves) élèves")
@@ -35,7 +40,13 @@ struct ClassBrowserRow: View {
 
 struct ClassRow_Previews: PreviewProvider {
     static var previews: some View {
-        ClassBrowserRow(classe: Classe.exemple)
-            .previewLayout(.sizeThatFits)
+        TestEnvir.createFakes()
+        return Group {
+            ClassBrowserRow(classe: TestEnvir.classeStore.items.first!)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.observStore)
+                .environmentObject(TestEnvir.colleStore)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

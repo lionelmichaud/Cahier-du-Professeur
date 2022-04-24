@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import HelpersView
 
 struct ClasseEleveRow: View {
     let eleve: Eleve
@@ -17,28 +16,32 @@ struct ClasseEleveRow: View {
                 .sfSymbolStyling()
                 .foregroundColor(eleve.sexe.color)
             Text(eleve.displayName)
+
             Spacer()
-            Text("\(eleve.nbOfColles)")
-            Image(systemName: "lock.fill")
-                .foregroundColor(.red)
-            Text("\(eleve.nbOfObservs)")
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(.red)
+
+            EleveColleLabel(eleve: eleve, scale: .large)
+            EleveObservLabel(eleve: eleve, scale: .large)
         }
     }
 }
 
 struct ClasseEleveRow_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        TestEnvir.createFakes()
+        return Group {
             List {
-                ClasseEleveRow(eleve: Eleve.exemple)
-                ClasseEleveRow(eleve: Eleve.exemple)
+                ClasseEleveRow(eleve: TestEnvir.eleveStore.items.first!)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPad mini (6th generation)")
+            
             List {
-                ClasseEleveRow(eleve: Eleve.exemple)
-                ClasseEleveRow(eleve: Eleve.exemple)
+                ClasseEleveRow(eleve: TestEnvir.eleveStore.items.first!)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPhone 11")
         }

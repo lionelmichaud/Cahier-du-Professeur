@@ -56,12 +56,76 @@ struct EleveManager {
         eleveStore.items[index].removeColle(withID: colleId)
     }
 
-    func retirer(observIndex   : Int,
+    func retirer(colleIndex    : Int,
                  deEleve eleve : inout Eleve,
-                 colleStore   : ColleStore) {
+                 colleStore    : ColleStore) {
         // supprimer l'élève de la liste d'élèves
-        colleStore.deleteColle(withID: eleve.collesID[observIndex])
+        colleStore.deleteColle(withID: eleve.collesID[colleIndex])
         // supprimer l'élève de la eleve
-        eleve.removeColle(at: observIndex)
+        eleve.removeColle(at: colleIndex)
+    }
+
+    // MARK: - Getters
+
+    func nbOfObservations(de eleve     : Eleve,
+                          isConsignee  : Bool? = nil,
+                          isVerified   : Bool? = nil,
+                          observStore  : ObservationStore) -> Int {
+        switch (isConsignee, isVerified) {
+            case (nil, nil):
+                return eleve.nbOfObservs
+
+            case (.some(let c), nil):
+                return observStore
+                    .observations(de: eleve)
+                    .wrappedValue
+                    .filter { $0.isConsignee == c }
+                    .count
+
+            case (nil, .some(let v)):
+                return observStore
+                    .observations(de: eleve)
+                    .wrappedValue
+                    .filter { $0.isVerified == v }
+                    .count
+
+            case (.some(let c), .some(let v)):
+                return observStore
+                    .observations(de: eleve)
+                    .wrappedValue
+                    .filter { $0.isConsignee == c || $0.isVerified == v }
+                    .count
+        }
+    }
+
+    func nbOfColles(de eleve    : Eleve,
+                    isConsignee : Bool?  = nil,
+                    isVerified  : Bool?  = nil,
+                    colleStore  : ColleStore) -> Int {
+        switch (isConsignee, isVerified) {
+            case (nil, nil):
+                return eleve.nbOfColles
+
+            case (.some(let c), nil):
+                return colleStore
+                    .colles(de: eleve)
+                    .wrappedValue
+                    .filter { $0.isConsignee == c }
+                    .count
+
+            case (nil, .some(let v)):
+                return colleStore
+                    .colles(de: eleve)
+                    .wrappedValue
+                    .filter { $0.isVerified == v }
+                    .count
+
+            case (.some(let c), .some(let v)):
+                return colleStore
+                    .colles(de: eleve)
+                    .wrappedValue
+                    .filter { $0.isConsignee == c || $0.isVerified == v }
+                    .count
+        }
     }
 }

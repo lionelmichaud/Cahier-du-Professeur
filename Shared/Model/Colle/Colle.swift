@@ -12,8 +12,8 @@ struct Colle: Identifiable {
     // MARK: - Type Methods
 
     static func < (lhs: Colle, rhs: Colle) -> Bool {
-        if lhs.verified != rhs.verified {
-            return !lhs.verified
+        if lhs.isVerified != rhs.isVerified {
+            return !lhs.isVerified
         } else {
             return lhs.date > rhs.date
         }
@@ -22,11 +22,11 @@ struct Colle: Identifiable {
     // MARK: - Properties
 
     var id = UUID()
-    var eleveId   : UUID?
-    var duree     : Int  = 1
-    var consignee : Bool = false
-    var verified  : Bool = false
-    var date      : Date = Date.now
+    var eleveId     : UUID?
+    var duree       : Int  = 1
+    var isConsignee : Bool = false
+    var isVerified  : Bool = false
+    var date        : Date = Date.now
 
     // MARK: - Initializers
 
@@ -47,8 +47,8 @@ extension Colle: CustomStringConvertible {
            Date     : \(date.stringShortDate)
            EleveID  : \(String(describing: eleveId))
            Durée    : \(duree) heures
-           Consignée: \(consignee.frenchString)
-           Vérifiée : \(verified.frenchString)
+           Consignée: \(isConsignee.frenchString)
+           Vérifiée : \(isVerified.frenchString)
         """
     }
 }

@@ -91,7 +91,7 @@ struct EleveDetail: View {
                 })
             }
 
-            // observations de l'élève
+            // colles de l'élève
             if !isNew {
                 // titre
                 HStack {

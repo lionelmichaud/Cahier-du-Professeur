@@ -9,6 +9,16 @@ import SwiftUI
 
 struct School: Identifiable, Equatable {
 
+    // MARK: - Type Methods
+
+    static func < (lhs: School, rhs: School) -> Bool {
+        if lhs.niveau.rawValue != rhs.niveau.rawValue {
+            return lhs.niveau.rawValue < rhs.niveau.rawValue
+        } else {
+            return lhs.nom < rhs.nom
+        }
+    }
+
     // MARK: - Properties
 
     var id = UUID()

@@ -70,6 +70,10 @@
 		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
 		79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
+		79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4C28170CEC002AAABA /* MotifView.swift */; };
+		79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4C28170CEC002AAABA /* MotifView.swift */; };
+		79BB0B502817138D002AAABA /* MotifEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4F2817138D002AAABA /* MotifEditor.swift */; };
+		79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4F2817138D002AAABA /* MotifEditor.swift */; };
 		79F3ABA72808218300D068D9 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA62808218300D068D9 /* Tests_iOS.swift */; };
 		79F3ABA92808218300D068D9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA82808218300D068D9 /* Tests_iOSLaunchTests.swift */; };
 		79F3ABB32808218300D068D9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB22808218300D068D9 /* Tests_macOS.swift */; };
@@ -171,6 +175,8 @@
 		795FAB2E2809E54C004CB120 /* SchoolDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetail.swift; sourceTree = "<group>"; };
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
+		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
+		79BB0B4F2817138D002AAABA /* MotifEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifEditor.swift; sourceTree = "<group>"; };
 		79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cahier_du_ProfesseurApp.swift; sourceTree = "<group>"; };
 		79F3AB8F2808218100D068D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79F3AB902808218300D068D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -303,6 +309,15 @@
 			path = Etablissement;
 			sourceTree = "<group>";
 		};
+		79BB0B4B28170CC5002AAABA /* MotifView */ = {
+			isa = PBXGroup;
+			children = (
+				79BB0B4C28170CEC002AAABA /* MotifView.swift */,
+				79BB0B4F2817138D002AAABA /* MotifEditor.swift */,
+			);
+			path = MotifView;
+			sourceTree = "<group>";
+		};
 		79F3AB882808218000D068D9 = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +405,7 @@
 				795BC3DD2813102A00C22271 /* Eleve */,
 				791C26D92814463C00686F0C /* Observations */,
 				791C26DA2814465C00686F0C /* Colles */,
+				79BB0B4B28170CC5002AAABA /* MotifView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -646,6 +662,7 @@
 				791C26E928146B4300686F0C /* EleveObservRow.swift in Sources */,
 				795FAB292809C4E2004CB120 /* SchoolBrowserView.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
+				79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */,
 				791C26D72814378A00686F0C /* EleveManager.swift in Sources */,
 				791C26F828149E7E00686F0C /* ObservDetail.swift in Sources */,
 				7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */,
@@ -666,6 +683,7 @@
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
+				79BB0B502817138D002AAABA /* MotifEditor.swift in Sources */,
 				797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
@@ -682,6 +700,7 @@
 				79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
+				79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
@@ -697,6 +716,7 @@
 				79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
+				79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */,
 				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,

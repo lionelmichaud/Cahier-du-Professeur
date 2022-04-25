@@ -42,5 +42,5 @@ enum MotifEnum: PickableEnumP, Codable {
 
 struct Motif {
     var nature: MotifEnum = .autre
-    var description: String?
+    var description: String = ""
 }

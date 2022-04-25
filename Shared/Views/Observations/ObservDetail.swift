@@ -57,39 +57,9 @@ struct ObservDetail: View {
 
             // motif
             if isNew || isEditing {
-                HStack(alignment: .center) {
-                    Text("Motif")
-                        .foregroundColor(.secondary)
-                        .padding(.trailing)
-                    Divider()
-                    VStack (alignment: .leading) {
-                        CasePicker(pickedCase: $observ.motif.nature,
-                                   label: "Motif")
-                        .pickerStyle(.menu)
-                        if observ.motif.nature == .autre {
-                            TextField("description", text: $observ.motif.description.bound)
-                                .multilineTextAlignment(.leading)
-                                .lineLimit(3)
-                        }
-                    }
-                }
+                MotifEditor(motif: $observ.motif)
             } else {
-                HStack(alignment: .center) {
-                    Text("Motif")
-                        .foregroundColor(.secondary)
-                        .padding(.trailing)
-                    Divider()
-                    if observ.motif.nature == .autre {
-                        Text(observ.motif.description ?? "Autre motif")
-                    } else {
-                        VStack (alignment: .leading) {
-                            Text(observ.motif.nature.displayString)
-                            if let description = observ.motif.description {
-                                Text(description)
-                            }
-                        }
-                    }
-                }
+                MotifView(motif: observ.motif)
             }
 
             // checkbox isConsignee

@@ -53,7 +53,7 @@ struct ClasseManager {
                           observStore  : ObservationStore) -> Int {
         switch (isConsignee, isVerified) {
             case (nil, nil):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -63,7 +63,7 @@ struct ClasseManager {
                 return total
 
             case (.some(let c), nil):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -74,7 +74,7 @@ struct ClasseManager {
                 return total
 
             case (nil, .some(let v)):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -85,7 +85,7 @@ struct ClasseManager {
                 return total
 
             case (.some(let c), .some(let v)):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -105,7 +105,7 @@ struct ClasseManager {
                     colleStore  : ColleStore) -> Int {
         switch (isConsignee, isVerified) {
             case (nil, nil):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -115,7 +115,7 @@ struct ClasseManager {
                 return total
 
             case (.some(let c), nil):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -126,7 +126,7 @@ struct ClasseManager {
                 return total
 
             case (nil, .some(let v)):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()
@@ -137,7 +137,7 @@ struct ClasseManager {
                 return total
 
             case (.some(let c), .some(let v)):
-                let eleves = eleveStore.eleves(dans: classe).wrappedValue
+                let eleves = eleveStore.filteredSortedEleves(dans: classe).wrappedValue
                 var total = 0
                 eleves.forEach { eleve in
                     total += EleveManager()

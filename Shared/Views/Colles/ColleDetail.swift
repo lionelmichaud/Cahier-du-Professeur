@@ -33,6 +33,16 @@ struct ColleDetail: View {
             }
 
             if isNew || isEditing {
+                HStack {
+                    Stepper("Durée",
+                            value : $colle.duree,
+                            in    : 1 ... 4,
+                            step  : 1)
+                    .padding(.horizontal)
+                    Text("\(colle.duree) heures")
+                }
+                .frame(width: 280)
+
                 Button {
                     colle.isConsignee.toggle()
                 } label: {

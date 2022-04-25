@@ -50,12 +50,12 @@ final class SchoolStore: ObservableObject {
         }
     }
 
-    func sorted(niveau: NiveauSchool) -> Binding<[School]> {
+    func sortedSchools(niveau: NiveauSchool) -> Binding<[School]> {
         Binding<[School]>(
             get: {
                 self.items
-                    .filter {
-                        $0.niveau == niveau
+                    .filter { school in
+                        school.niveau == niveau
                     }
                     .sorted { $0.nom < $1.nom }
             },
@@ -69,7 +69,7 @@ final class SchoolStore: ObservableObject {
         )
     }
 
-    func sorted() -> Binding<[School]> {
+    func sortedSchools() -> Binding<[School]> {
         Binding<[School]>(
             get: {
                 self.items

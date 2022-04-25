@@ -13,7 +13,7 @@ struct EleveObservLabel: View {
     let scale: Image.Scale
     @EnvironmentObject private var obserStore : ObservationStore
 
-    private var nbObservNonNotifee: Int {
+    private var nbObservWithActionToDo: Int {
         EleveManager().nbOfObservations(de          : eleve,
                                         isConsignee : false,
                                         isVerified  : false,
@@ -21,7 +21,7 @@ struct EleveObservLabel: View {
     }
 
     var body: some View {
-        let nb = nbObservNonNotifee
+        let nb = nbObservWithActionToDo
         return HStack {
             if nb > 0 {
                 Text("\(nb)")

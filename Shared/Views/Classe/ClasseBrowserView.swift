@@ -17,7 +17,7 @@ struct ClasseBrowserView: View {
                 Text("Aucune classe")
             } else {
                 // pour chaque Etablissement
-                ForEach(schoolStore.sorted()) { $school in
+                ForEach(schoolStore.sortedSchools()) { $school in
                     if school.nbOfClasses != 0 {
                         Section {
                             // pour chaque Classe
@@ -45,7 +45,7 @@ struct ClasseBrowserSchoolSubview : View {
     @EnvironmentObject private var observStore : ObservationStore
 
     var body: some View {
-        ForEach(classeStore.classes(dans: school)) { $classe in
+        ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             NavigationLink {
                 ClasseEditor(school : .constant(school),
                              classe : $classe,

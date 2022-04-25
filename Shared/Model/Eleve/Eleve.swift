@@ -57,6 +57,31 @@ struct Eleve: Identifiable {
         self.classeId == eleve.classeId
     }
 
+    /// True si au moins un des deux critères est satisfait.
+    ///
+    /// - Parameters:
+    ///   - withObservation: si `nil`on ne tient pas compte du critère
+    ///   - withColle: si `nil`on ne tient pas compte du critère
+    /// - Note: Si les deux critères sont `nil`, retourne true
+    func satisfiesEitherOf(withObservation : Bool? = nil,
+                           withColle       : Bool? = nil) -> Bool {
+        switch (withObservation, withColle) {
+            case (nil, nil):
+                return true
+
+            case (.some(let withObservation), nil):
+                return withObservation ? observsID.isNotEmpty : observsID.isEmpty
+
+            case (nil, .some(let withColle)):
+                return withColle ? collesID.isNotEmpty : collesID.isEmpty
+
+            case (.some(let withObservation), .some(let withColle)):
+                let obs = withObservation ? observsID.isNotEmpty : observsID.isEmpty
+                let col = withColle ? collesID.isNotEmpty : collesID.isEmpty
+                return obs || col
+        }
+    }
+
     mutating func addObservation(withID observID: UUID) {
         observsID.insert(observID, at: 0)
     }

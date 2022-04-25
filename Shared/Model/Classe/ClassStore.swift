@@ -118,13 +118,37 @@ final class ClasseStore: ObservableObject {
         return total
     }
 
-    func classes(dans school: School) -> Binding<[Classe]> {
+    func sortedClasses(dans school: School) -> Binding<[Classe]> {
         Binding<[Classe]>(
             get: {
                 self.items
                     .filter {
                         if let schoolId = $0.schoolId {
                             return schoolId == school.id
+                        } else {
+                            return false
+                        }
+                    }
+                    .sorted(by: <)
+            },
+            set: { items in
+                for classe in items {
+                    if let index = self.items.firstIndex(where: { $0.id == classe.id }) {
+                        self.items[index] = classe
+                    }
+                }
+            }
+        )
+    }
+
+    func filteredClasses(dans school: School,
+                         _ isIncluded: @escaping (Classe) -> Bool) -> Binding<[Classe]> {
+        Binding<[Classe]>(
+            get: {
+                self.items
+                    .filter { classe in
+                        if let schoolId = classe.schoolId {
+                            return (schoolId == school.id) && isIncluded(classe)
                         } else {
                             return false
                         }

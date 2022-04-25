@@ -24,9 +24,9 @@ struct SchoolBrowserView: View {
                 Text("Aucun établissement")
             }
             ForEach(NiveauSchool.allCases) { niveau in
-                if !schoolStore.sorted(niveau: niveau).isEmpty {
+                if !schoolStore.sortedSchools(niveau: niveau).isEmpty {
                     Section {
-                        ForEach(schoolStore.sorted(niveau: niveau)) { $school in
+                        ForEach(schoolStore.sortedSchools(niveau: niveau)) { $school in
                             NavigationLink {
                                 SchoolEditor(school: $school)
                             } label: {
@@ -69,7 +69,7 @@ struct SchoolBrowserView: View {
             #endif
         }
         //.listStyle(.sidebar)
-        .navigationTitle("Etabissements")
+        .navigationTitle("Etablissements")
         //.navigationViewStyle(.columns)
         .toolbar {
             // ajouter un établissement

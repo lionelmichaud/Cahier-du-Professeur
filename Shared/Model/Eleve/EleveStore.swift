@@ -108,13 +108,39 @@ final class EleveStore: ObservableObject {
         elevesID.insert(eleve.id, at: index)
     }
 
-    func eleves(dans classe: Classe) -> Binding<[Eleve]> {
+//    func filteredEleves(dans classe: Classe) -> Binding<[Eleve]> {
+//        Binding<[Eleve]>(
+//            get: {
+//                self.items
+//                    .filter { eleve in
+//                        if let classeId = eleve.classeId {
+//                            return classeId == classe.id
+//                        } else {
+//                            return false
+//                        }
+//                    }
+//                    .sorted(by: <)
+//            },
+//            set: { items in
+//                for classe in items {
+//                    if let index = self.items.firstIndex(where: { $0.id == classe.id }) {
+//                        self.items[index] = classe
+//                    }
+//                }
+//            }
+//        )
+//    }
+//
+    func filteredSortedEleves
+    (dans classe: Classe,
+     _ isIncluded: @escaping (Eleve) -> Bool = { _ in true}) -> Binding<[Eleve]> {
+
         Binding<[Eleve]>(
             get: {
                 self.items
-                    .filter {
-                        if let classeId = $0.classeId {
-                            return classeId == classe.id
+                    .filter { eleve in
+                        if let classeId = eleve.classeId {
+                            return (classeId == classe.id) && isIncluded(eleve)
                         } else {
                             return false
                         }

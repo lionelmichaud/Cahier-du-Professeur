@@ -59,7 +59,7 @@ struct EleveDetail: View {
             if !isNew {
                 VStack(alignment: .leading) {
                     Text("Appréciation")
-                        .font(.title3)
+                        .font(.headline)
                         .fontWeight(.bold)
                     TextEditor(text: $eleve.appreciation)
                         .multilineTextAlignment(.leading)
@@ -73,80 +73,81 @@ struct EleveDetail: View {
 
             // observations de l'élève
             if !isNew {
-                // titre
-                HStack {
-                    Text("Observations")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                    Spacer()
-                    // ajouter une observation
-                    Button {
-                        isModified        = true
-                        newObserv         = Observation()
-                        isAddingNewObserv = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .imageScale(.large)
+                Section {
+                    // édition de la liste des observations
+                    ForEach(observStore.observations(de: eleve)) { $observ in
+                        NavigationLink {
+                            ObservEditor(eleve  : $eleve,
+                                         observ : $observ,
+                                         isNew  : false)
+                        } label: {
+                            EleveObservRow(observ: observ)
+                        }
                     }
-                    .buttonStyle(.borderless)
+                    .onDelete(perform: { indexSet in
+                        for index in indexSet {
+                            isModified = true
+                            deleteObserv(index: index)
+                        }
+                    })
+                } header: {
+                    HStack {
+                        Text("Observations")
+                            .font(.headline)
+                        Spacer()
+                        // ajouter une observation
+                        Button {
+                            isModified        = true
+                            newObserv         = Observation()
+                            isAddingNewObserv = true
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .imageScale(.large)
+                        }
+                        .buttonStyle(.borderless)
+                    }
                 }
-
-                // édition de la liste des observations
-                ForEach(observStore.observations(de: eleve)) { $observ in
-                    NavigationLink {
-                        ObservEditor(eleve  : $eleve,
-                                     observ : $observ,
-                                     isNew  : false)
-                    } label: {
-                        EleveObservRow(observ: observ)
-                    }
-                }
-                .onDelete(perform: { indexSet in
-                    for index in indexSet {
-                        isModified = true
-                        deleteObserv(index: index)
-                    }
-                })
             }
 
             // colles de l'élève
             if !isNew {
-                // titre
-                HStack {
-                    Text("Colles")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                    Spacer()
-                    // ajouter une colle
-                    Button {
-                        isModified       = true
-                        newColle         = Colle()
-                        isAddingNewColle = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .imageScale(.large)
+                Section {
+                    // édition de la liste des colles
+                    ForEach(colleStore.colles(de: eleve)) { $colle in
+                        NavigationLink {
+                            ColleEditor(eleve : $eleve,
+                                        colle : $colle,
+                                        isNew : false)
+                        } label: {
+                            EleveColleRow(colle: colle)
+                        }
                     }
-                    .buttonStyle(.borderless)
+                    .onDelete(perform: { indexSet in
+                        for index in indexSet {
+                            isModified = true
+                            deleteColle(index: index)
+                        }
+                    })
+                } header: {
+                    HStack {
+                        Text("Colles")
+                            .font(.headline)
+                        Spacer()
+                        // ajouter une colle
+                        Button {
+                            isModified       = true
+                            newColle         = Colle()
+                            isAddingNewColle = true
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .imageScale(.large)
+                        }
+                        .buttonStyle(.borderless)
+                    }
                 }
-
-                // édition de la liste des colles
-                ForEach(colleStore.colles(de: eleve)) { $colle in
-                    NavigationLink {
-                        ColleEditor(eleve : $eleve,
-                                    colle : $colle,
-                                    isNew : false)
-                    } label: {
-                        EleveColleRow(colle: colle)
-                    }
-                }
-                .onDelete(perform: { indexSet in
-                    for index in indexSet {
-                        isModified = true
-                        deleteColle(index: index)
-                    }
-                })
             }
         }
+        //.listStyle(.sidebar)
         #if os(iOS)
         .navigationTitle("Élève")
         .navigationBarTitleDisplayMode(.inline)

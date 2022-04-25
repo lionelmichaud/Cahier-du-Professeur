@@ -16,15 +16,23 @@ struct MotifEditor: View {
         HStack(alignment: .center) {
             Text("Motif")
                 .foregroundColor(.secondary)
-                .padding(.trailing)
+
             Divider()
-            VStack (alignment: .leading) {
+
+            VStack(alignment: .leading) {
                 CasePicker(pickedCase: $motif.nature,
                            label: "Motif")
                 .pickerStyle(.menu)
+                .onChange(of: motif.nature) { newValue in
+                    if newValue != .autre {
+                        motif.description = ""
+                    }
+                }
+
                 if motif.nature == .autre {
                     TextEditor(text: $motif.description)
                         .multilineTextAlignment(.leading)
+                        .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 }
             }
         }

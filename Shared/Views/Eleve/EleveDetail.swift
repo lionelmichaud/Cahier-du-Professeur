@@ -55,6 +55,22 @@ struct EleveDetail: View {
             }
             .listRowSeparator(.hidden)
 
+            // appréciation de l'élève
+            if !isNew {
+                VStack(alignment: .leading) {
+                    Text("Appréciation")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    TextEditor(text: $eleve.appreciation)
+                        .multilineTextAlignment(.leading)
+                        .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                        .frame(minHeight: 80)
+                }
+                .onChange(of: eleve.appreciation) {newValue in
+                    isModified = true
+                }
+            }
+
             // observations de l'élève
             if !isNew {
                 // titre
@@ -65,8 +81,8 @@ struct EleveDetail: View {
                     Spacer()
                     // ajouter une observation
                     Button {
-                        isModified = true
-                        newObserv = Observation()
+                        isModified        = true
+                        newObserv         = Observation()
                         isAddingNewObserv = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
@@ -103,8 +119,8 @@ struct EleveDetail: View {
                     Spacer()
                     // ajouter une colle
                     Button {
-                        isModified = true
-                        newColle = Colle()
+                        isModified       = true
+                        newColle         = Colle()
                         isAddingNewColle = true
                     } label: {
                         Image(systemName: "plus.circle.fill")

@@ -55,6 +55,13 @@ struct ColleDetail: View {
                 }
             }
 
+            // motif
+            if isNew || isEditing {
+                MotifEditor(motif: $colle.motif)
+            } else {
+                MotifView(motif: colle.motif)
+            }
+
             // Durée
             if isNew || isEditing {
                 HStack {
@@ -62,10 +69,9 @@ struct ColleDetail: View {
                             value : $colle.duree,
                             in    : 1 ... 4,
                             step  : 1)
-                    .padding(.horizontal)
                     Text("\(colle.duree) heures")
                 }
-                .frame(width: 280)
+                .frame(width: 225)
             } else {
                 Text("Durée: \(colle.duree) heures")
             }

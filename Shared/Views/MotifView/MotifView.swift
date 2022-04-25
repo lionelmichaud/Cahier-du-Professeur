@@ -15,17 +15,15 @@ struct MotifView: View {
             Text("Motif")
                 .foregroundColor(.secondary)
                 .padding(.trailing)
+
             Divider()
+
             if motif.nature == .autre {
                 Text(motif.description.isEmpty ? "Autre motif" : motif.description)
             } else {
                 VStack (alignment: .leading) {
                     Text(motif.nature.displayString)
                         .fontWeight(.semibold)
-                        .padding(.bottom, 4)
-                    if let description = motif.description {
-                        Text(description)
-                    }
                 }
             }
         }

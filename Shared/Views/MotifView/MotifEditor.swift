@@ -20,7 +20,7 @@ struct MotifEditor: View {
             Divider()
 
             VStack(alignment: .leading) {
-                CasePicker(pickedCase: $motif.nature,
+                CasePicker(pickedCase: $motif.nature.animation(),
                            label: "Motif")
                 .pickerStyle(.menu)
                 .onChange(of: motif.nature) { newValue in

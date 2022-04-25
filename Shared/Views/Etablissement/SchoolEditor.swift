@@ -86,28 +86,6 @@ struct SchoolEditor: View {
                 }
             }
             .disabled(isItemDeleted)
-
-            // supprimer l'établissement
-            if isEditing && !isNew {
-                Button(
-                    role: .destructive,
-                    action: {
-                        isDeleted = true
-                        withAnimation {
-                            schoolStore.deleteSchool(school,
-                                                     classeStore : classeStore,
-                                                     eleveStore  : eleveStore,
-                                                     observStore : observStore,
-                                                     colleStore  : colleStore)
-                        }
-                        dismiss()
-                    }, label: {
-                        Label("Supprimer", systemImage: "trash.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.red)
-                    })
-                .padding()
-            }
         }
         .overlay(alignment: .center) {
             if isItemDeleted {

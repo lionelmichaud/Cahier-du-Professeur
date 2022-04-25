@@ -100,29 +100,6 @@ struct ClasseEditor: View {
                 }
             }
             .disabled(isItemDeleted)
-
-            // supprimer la classe
-            if isEditing && !isNew {
-                Button(
-                    role: .destructive,
-                    action: {
-                        isDeleted = true
-                        withAnimation {
-                            // supprimer la classe et tous ses descendants
-                            // retirer la classe de l'établissement auquelle elle appartient
-                            classeStore.deleteClasse(classe,
-                                                     eleveStore  : eleveStore,
-                                                     observStore : observStore,
-                                                     colleStore  : colleStore)
-                        }
-                        dismiss()
-                    }, label: {
-                        Label("Supprimer", systemImage: "trash.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.red)
-                    })
-                .padding()
-            }
         }
         .overlay(alignment: .center) {
             if isItemDeleted {

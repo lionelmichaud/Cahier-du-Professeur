@@ -51,7 +51,7 @@ struct ObservDetail: View {
                         .listRowSeparator(.hidden)
                         .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 } else {
-                    Text(observ.date.formatted(date: .abbreviated, time: .shortened))
+                    Text(observ.date.stringLongDateTime)
                 }
             }
 

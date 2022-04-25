@@ -73,11 +73,13 @@ struct SchoolDetail: View {
                 }
 
                 // édition de la liste des classes
-                ForEach(school.classesID, id: \.self) { classeId in
-                    if let classe = classeStore.classe(withID: classeId) {
+                ForEach(classeStore.sortedClasses(dans: school)) { $classe in
+                    NavigationLink {
+                        ClasseEditor(school : $school,
+                                     classe : $classe,
+                                     isNew  : false)
+                    } label: {
                         SchoolClasseRow(classe: classe)
-                    } else {
-                        Text("classe non trouvée: \(classeId)")
                     }
                 }
                 .onDelete(perform: { indexSet in

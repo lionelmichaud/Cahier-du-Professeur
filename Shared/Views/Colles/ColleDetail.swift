@@ -51,7 +51,7 @@ struct ColleDetail: View {
                         .listRowSeparator(.hidden)
                         .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 } else {
-                    Text(colle.date.formatted(date: .abbreviated, time: .shortened))
+                    Text(colle.date.stringLongDateTime)
                 }
             }
 

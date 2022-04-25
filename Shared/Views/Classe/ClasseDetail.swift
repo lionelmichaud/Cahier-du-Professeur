@@ -81,11 +81,13 @@ struct ClasseDetail: View {
                     .fontWeight(.bold)
 
                 // édition de la liste des élèves
-                ForEach(classe.elevesID, id: \.self) { eleveId in
-                    if let eleve = eleveStore.eleve(withID: eleveId) {
+                ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
+                    NavigationLink {
+                        EleveEditor(classe : $classe,
+                                    eleve  : $eleve,
+                                    isNew  : false)
+                    } label: {
                         ClasseEleveRow(eleve: eleve)
-                    } else {
-                        Text("élève non trouvé: \(eleveId)")
                     }
                 }
                 .onDelete(perform: { indexSet in

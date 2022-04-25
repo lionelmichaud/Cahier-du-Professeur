@@ -100,30 +100,6 @@ var body: some View {
                 }
             }
             .disabled(isItemDeleted)
-
-            // supprimer l'élève
-            if isEditing && !isNew {
-                Button(
-                    role: .destructive,
-                    action: {
-                        isDeleted = true
-                        withAnimation {
-                            // supprimer l'élève et tous ses descendants
-                            // puis retirer l'élève de la classe auquelle il appartient
-                            ClasseManager().retirer(eleve       : eleve,
-                                                    deClasse    : &classe,
-                                                    eleveStore  : eleveStore,
-                                                    observStore : observStore,
-                                                    colleStore  : colleStore)
-                        }
-                        dismiss()
-                    }, label: {
-                        Label("Supprimer", systemImage: "trash.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.red)
-                    })
-                .padding()
-            }
         }
         .overlay(alignment: .center) {
             if isItemDeleted {

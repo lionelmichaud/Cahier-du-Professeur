@@ -19,6 +19,7 @@ struct EleveColleRow: View {
                 .foregroundColor(.red)
             if hClass == .compact {
                 Text(colle.date.stringShortDate)
+                    .font(.callout)
             } else {
                 Text(colle.date.stringLongDateTime)
             }
@@ -33,9 +34,10 @@ struct EleveColleRow: View {
                 }
             } label: {
                 Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(.gray)
+                    .foregroundColor(colle.isConsignee ? .green : .gray)
                 if hClass == .compact {
                     Text("Notifié")
+                        .font(.callout)
                 } else {
                     Text("Notifiée à la vie scolaire")
                 }
@@ -44,16 +46,15 @@ struct EleveColleRow: View {
             .padding(.trailing)
 
             Button {
-                if let index = colleStore.items.firstIndex(where: {
-                    $0.id == colle.id
-                }) {
+                if let index = colleStore.items.firstIndex(where: { $0.id == colle.id }) {
                     colleStore.items[index].isVerified.toggle()
                 }
             } label: {
                 Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(.gray)
+                    .foregroundColor(colle.isVerified ? .green : .gray)
                 if hClass == .compact {
                     Text("Exéc.")
+                        .font(.callout)
                 } else {
                     Text("Exécutée par l'élève")
                 }

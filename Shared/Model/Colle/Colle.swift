@@ -23,6 +23,7 @@ struct Colle: Identifiable {
 
     var id = UUID()
     var eleveId     : UUID?
+    var motif       : Motif = Motif()
     var duree       : Int  = 1
     var isConsignee : Bool = false
     var isVerified  : Bool = false

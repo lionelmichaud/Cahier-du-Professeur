@@ -25,9 +25,10 @@ struct Observation: Identifiable {
 
     var id = UUID()
     var eleveId     : UUID?
-    var isConsignee : Bool = false
-    var isVerified  : Bool = false
-    var date        : Date = Date.now
+    var motif       : Motif = Motif()
+    var isConsignee : Bool  = false
+    var isVerified  : Bool  = false
+    var date        : Date  = Date.now
 
     // MARK: - Initializers
 

@@ -55,6 +55,22 @@ struct EleveDetail: View {
             }
             .listRowSeparator(.hidden)
 
+            // appréciation de l'élève
+            if !isNew {
+                VStack(alignment: .leading) {
+                    Text("Appréciation")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    TextEditor(text: $eleve.appreciation)
+                        .multilineTextAlignment(.leading)
+                        .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                        .frame(minHeight: 80)
+                }
+                .onChange(of: eleve.appreciation) {newValue in
+                    isModified = true
+                }
+            }
+
             // observations de l'élève
             if !isNew {
                 // titre
@@ -63,10 +79,10 @@ struct EleveDetail: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     Spacer()
-                    // ajouter un élève
+                    // ajouter une observation
                     Button {
-                        isModified = true
-                        newObserv = Observation()
+                        isModified        = true
+                        newObserv         = Observation()
                         isAddingNewObserv = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
@@ -76,11 +92,13 @@ struct EleveDetail: View {
                 }
 
                 // édition de la liste des observations
-                ForEach(eleve.observsID, id: \.self) { observId in
-                    if let observ = observStore.observation(withID: observId) {
+                ForEach(observStore.observations(de: eleve)) { $observ in
+                    NavigationLink {
+                        ObservEditor(eleve  : $eleve,
+                                     observ : $observ,
+                                     isNew  : false)
+                    } label: {
                         EleveObservRow(observ: observ)
-                    } else {
-                        Text("élève non trouvé: \(observId)")
                     }
                 }
                 .onDelete(perform: { indexSet in
@@ -99,10 +117,10 @@ struct EleveDetail: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     Spacer()
-                    // ajouter un élève
+                    // ajouter une colle
                     Button {
-                        isModified = true
-                        newColle = Colle()
+                        isModified       = true
+                        newColle         = Colle()
                         isAddingNewColle = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
@@ -111,12 +129,14 @@ struct EleveDetail: View {
                     .buttonStyle(.borderless)
                 }
 
-                // édition de la liste des observations
-                ForEach(eleve.collesID, id: \.self) { colleId in
-                    if let colle = colleStore.colle(withID: colleId) {
+                // édition de la liste des colles
+                ForEach(colleStore.colles(de: eleve)) { $colle in
+                    NavigationLink {
+                        ColleEditor(eleve : $eleve,
+                                    colle : $colle,
+                                    isNew : false)
+                    } label: {
                         EleveColleRow(colle: colle)
-                    } else {
-                        Text("élève non trouvé: \(colleId)")
                     }
                 }
                 .onDelete(perform: { indexSet in

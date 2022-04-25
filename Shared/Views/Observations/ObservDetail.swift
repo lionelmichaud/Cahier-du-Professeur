@@ -10,11 +10,33 @@ import HelpersView
 
 struct ObservDetail: View {
     @Binding
-    var observ     : Observation
+    var observ    : Observation
     let isEditing : Bool
     var isNew     : Bool
     @Binding
     var isModified: Bool
+
+    var isConsigneeLabel: some View {
+        Label(
+            title: {
+                Text("Notifiée aux parents")
+            }, icon: {
+                Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(observ.isConsignee ? .green : .gray)
+            }
+        )
+    }
+
+    var isVerifiedLabel: some View {
+        Label(
+            title: {
+                Text("Signature des parents vérifiée")
+            }, icon: {
+                Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(observ.isVerified ? .green : .gray)
+            }
+        )
+    }
 
     var body: some View {
         List {
@@ -22,6 +44,7 @@ struct ObservDetail: View {
                 Image(systemName: "magnifyingglass")
                     .sfSymbolStyling()
                     .foregroundColor(.red)
+                // date
                 if isNew || isEditing {
                     DatePicker("Date", selection: $observ.date)
                         .labelsHidden()
@@ -32,26 +55,35 @@ struct ObservDetail: View {
                 }
             }
 
+            // motif
+            if isNew || isEditing {
+                MotifEditor(motif: $observ.motif)
+            } else {
+                MotifView(motif: observ.motif)
+            }
+
+            // checkbox isConsignee
             if isNew || isEditing {
                 Button {
                     observ.isConsignee.toggle()
                 } label: {
-                    Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(.gray)
-                    Text("Notifiée aux parents")
+                    isConsigneeLabel
                 }
                 .buttonStyle(.plain)
-                .padding(.leading)
+            } else {
+                isConsigneeLabel
+            }
 
+            // checkbox isVerified
+            if isNew || isEditing {
                 Button {
                     observ.isVerified.toggle()
                 } label: {
-                    Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(.gray)
-                    Text("Signature des parents vérifiée")
+                    isVerifiedLabel
                 }
                 .buttonStyle(.plain)
-                .padding(.leading)
+            } else {
+                isVerifiedLabel
             }
         }
 #if os(iOS)
@@ -88,6 +120,18 @@ struct ObservDetail_Previews: PreviewProvider {
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPhone Xs")
             .previewDisplayName("Observ isNew")
+
+            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+                         isEditing  : false,
+                         isNew      : false,
+                         isModified : .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPhone Xs")
+            .previewDisplayName("Observ display")
         }
     }
 }

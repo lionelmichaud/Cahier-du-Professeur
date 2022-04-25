@@ -22,11 +22,12 @@ struct Eleve: Identifiable {
     // MARK: - Properties
 
     var id = UUID()
-    var sexe      : Sexe                 = .male
-    var name      : PersonNameComponents = PersonNameComponents()
-    var classeId  : UUID?
-    var collesID  : [UUID] = [ ]
-    var observsID : [UUID] = [ ]
+    var sexe         : Sexe = .male
+    var name         : PersonNameComponents = PersonNameComponents()
+    var classeId     : UUID?
+    var appreciation : String = ""
+    var collesID     : [UUID] = [ ]
+    var observsID    : [UUID] = [ ]
 
     var nbOfColles: Int {
         collesID.count

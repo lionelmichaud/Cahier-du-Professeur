@@ -69,7 +69,7 @@ struct SchoolBrowserView: View {
             #endif
         }
         //.listStyle(.sidebar)
-        .navigationTitle("Etablissements")
+        .navigationTitle("Les Etablissements")
         //.navigationViewStyle(.columns)
         .toolbar {
             // ajouter un établissement
@@ -78,7 +78,7 @@ struct SchoolBrowserView: View {
                     newEtab = School()
                     isAddingNewEtab = true
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.circle.fill")
                 }
             }
         }

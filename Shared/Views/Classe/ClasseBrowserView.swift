@@ -32,7 +32,7 @@ struct ClasseBrowserView: View {
                 }
             }
         }
-        .navigationTitle("Classes")
+        .navigationTitle("Les Classes")
     }
 }
 

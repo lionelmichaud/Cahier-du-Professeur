@@ -36,7 +36,7 @@ struct EleveEditor: View {
     @State private var alertItem : AlertItem?
 
     private var isItemDeleted: Bool {
-        !eleveStore.exists(eleve) && !isNew
+        !eleveStore.isPresent(eleve) && !isNew
     }
 
 var body: some View {

@@ -55,7 +55,7 @@ struct EleveBrowserView: View {
                 .toggleStyle(.button)
             }
         }
-        .navigationTitle("Élèves")
+        .navigationTitle("Les Élèves")
     }
 }
 

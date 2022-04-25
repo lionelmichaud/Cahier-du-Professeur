@@ -16,6 +16,28 @@ struct ObservDetail: View {
     @Binding
     var isModified: Bool
 
+    var isConsigneeLabel: some View {
+        Label(
+            title: {
+                Text("Notifiée aux parents")
+            }, icon: {
+                Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(observ.isConsignee ? .green : .gray)
+            }
+        )
+    }
+
+    var isVerifiedLabel: some View {
+        Label(
+            title: {
+                Text("Signature des parents vérifiée")
+            }, icon: {
+                Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(observ.isVerified ? .green : .gray)
+            }
+        )
+    }
+
     var body: some View {
         List {
             HStack {
@@ -33,28 +55,65 @@ struct ObservDetail: View {
                 }
             }
 
+            // motif
             if isNew || isEditing {
-                // checkbox isConsignee
+                HStack(alignment: .center) {
+                    Text("Motif")
+                        .foregroundColor(.secondary)
+                        .padding(.trailing)
+                    Divider()
+                    VStack (alignment: .leading) {
+                        CasePicker(pickedCase: $observ.motif.nature,
+                                   label: "Motif")
+                        .pickerStyle(.menu)
+                        if observ.motif.nature == .autre {
+                            TextField("description", text: $observ.motif.description.bound)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(3)
+                        }
+                    }
+                }
+            } else {
+                HStack(alignment: .center) {
+                    Text("Motif")
+                        .foregroundColor(.secondary)
+                        .padding(.trailing)
+                    Divider()
+                    if observ.motif.nature == .autre {
+                        Text(observ.motif.description ?? "Autre motif")
+                    } else {
+                        VStack (alignment: .leading) {
+                            Text(observ.motif.nature.displayString)
+                            if let description = observ.motif.description {
+                                Text(description)
+                            }
+                        }
+                    }
+                }
+            }
+
+            // checkbox isConsignee
+            if isNew || isEditing {
                 Button {
                     observ.isConsignee.toggle()
                 } label: {
-                    Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(.gray)
-                    Text("Notifiée aux parents")
+                    isConsigneeLabel
                 }
                 .buttonStyle(.plain)
-                .padding(.leading)
+            } else {
+                isConsigneeLabel
+            }
 
-                // checkbox isCoisVerifiednsignee
+            // checkbox isVerified
+            if isNew || isEditing {
                 Button {
                     observ.isVerified.toggle()
                 } label: {
-                    Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(.gray)
-                    Text("Signature des parents vérifiée")
+                    isVerifiedLabel
                 }
                 .buttonStyle(.plain)
-                .padding(.leading)
+            } else {
+                isVerifiedLabel
             }
         }
 #if os(iOS)
@@ -91,6 +150,18 @@ struct ObservDetail_Previews: PreviewProvider {
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPhone Xs")
             .previewDisplayName("Observ isNew")
+
+            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+                         isEditing  : false,
+                         isNew      : false,
+                         isModified : .constant(false))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
+            .previewDevice("iPhone Xs")
+            .previewDisplayName("Observ display")
         }
     }
 }

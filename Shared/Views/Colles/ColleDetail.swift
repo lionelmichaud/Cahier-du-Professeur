@@ -16,12 +16,35 @@ struct ColleDetail: View {
     @Binding
     var isModified: Bool
 
+    var isConsigneeLabel: some View {
+        Label(
+            title: {
+                Text("Notifiée à la vie scolaire")
+            }, icon: {
+                Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(colle.isConsignee ? .green : .gray)
+            }
+        )
+    }
+
+    var isVerifiedLabel: some View {
+        Label(
+            title: {
+                Text("Exécutée par l'élève")
+            }, icon: {
+                Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(colle.isVerified ? .green : .gray)
+            }
+        )
+   }
+
     var body: some View {
         List {
             HStack {
                 Image(systemName: "lock")
                     .sfSymbolStyling()
                     .foregroundColor(.red)
+                // date
                 if isNew || isEditing {
                     DatePicker("Date", selection: $colle.date)
                         .labelsHidden()
@@ -32,6 +55,7 @@ struct ColleDetail: View {
                 }
             }
 
+            // Durée
             if isNew || isEditing {
                 HStack {
                     Stepper("Durée",
@@ -42,26 +66,32 @@ struct ColleDetail: View {
                     Text("\(colle.duree) heures")
                 }
                 .frame(width: 280)
+            } else {
+                Text("Durée: \(colle.duree) heures")
+            }
 
+            // checkbox isConsignee
+            if isNew || isEditing {
                 Button {
                     colle.isConsignee.toggle()
                 } label: {
-                    Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(.gray)
-                    Text("Notifiée à la vie scolaire")
+                    isConsigneeLabel
                 }
                 .buttonStyle(.plain)
-                .padding(.leading)
+            } else {
+                isConsigneeLabel
+            }
 
+            // checkbox isVerified
+            if isNew || isEditing {
                 Button {
                     colle.isVerified.toggle()
                 } label: {
-                    Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(.gray)
-                    Text("Exécutée par l'élève")
+                    isVerifiedLabel
                 }
                 .buttonStyle(.plain)
-                .padding(.leading)
+            } else {
+                isVerifiedLabel
             }
         }
         #if os(iOS)

@@ -29,55 +29,74 @@ struct ObservEditor: View {
     @State private var isModified = false
     // true si l'item va être détruit
     @State private var isDeleted = false
-    @State private var alertItem : AlertItem?
+
+    private var isItemDeleted: Bool {
+        !observStore.isPresent(observ) && !isNew
+    }
 
     var body: some View {
-        ObservDetail(observ     : $itemCopy,
-                     isEditing  : isEditing,
-                     isNew      : isNew,
-                     isModified : $isModified)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                if isNew {
-                    Button("Annuler") {
-                        dismiss()
-                    }
-                }
-            }
-            ToolbarItem {
-                Button {
+        VStack {
+            ObservDetail(observ     : $itemCopy,
+                         isEditing  : isEditing,
+                         isNew      : isNew,
+                         isModified : $isModified)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
                     if isNew {
-                        // Ajouter un nouvel élève à la classe
-                        withAnimation {
-                            EleveManager()
-                                .ajouter(observation : &itemCopy,
-                                         aEleve      : &eleve,
-                                         observStore : observStore)
+                        Button("Annuler") {
+                            dismiss()
                         }
-                        dismiss()
-                    } else {
-                        // Appliquer les modifications faites à l'observation
-                        if isEditing && !isDeleted {
-                            print("Done, saving any changes to \(observ.id).")
-                            withAnimation {
-                                observ = itemCopy // Put edits (if any) back in the store.
-                            }
-                            isSaved = true
-                        }
-                        isEditing.toggle()
                     }
-                } label: {
-                    Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                }
+                ToolbarItem {
+                    Button {
+                        if isNew {
+                            // Ajouter un nouvel élève à la classe
+                            withAnimation {
+                                EleveManager()
+                                    .ajouter(observation : &itemCopy,
+                                             aEleve      : &eleve,
+                                             observStore : observStore)
+                            }
+                            dismiss()
+                        } else {
+                            // Appliquer les modifications faites à l'observation
+                            if isEditing && !isDeleted {
+                                print("Done, saving any changes to \(observ.id).")
+                                withAnimation {
+                                    observ = itemCopy // Put edits (if any) back in the store.
+                                }
+                                isSaved = true
+                            }
+                            isEditing.toggle()
+                        }
+                    } label: {
+                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                    }
                 }
             }
+            .onAppear {
+                itemCopy   = observ
+                isModified = false
+                isSaved    = false
+            }
+            .onDisappear {
+                if isModified && !isSaved {
+                    // Appliquer les modifications faites à la classe hors du mode édition
+                    observ     = itemCopy
+                    isModified = false
+                    isSaved    = true
+                }
+            }
+            .disabled(isItemDeleted)
         }
-        .onDisappear {
-            if isModified && !isSaved {
-                // Appliquer les modifications faites à la classe hors du mode édition
-                observ = itemCopy
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Observation supprimée. Sélectionner une observation.")
+                    .foregroundStyle(.secondary)
             }
         }
-        .alert(item: $alertItem, content: newAlert)
     }
 
     init(eleve  : Binding<Eleve>,

@@ -63,7 +63,7 @@ struct EleveDetail: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     Spacer()
-                    // ajouter un élève
+                    // ajouter une observation
                     Button {
                         isModified = true
                         newObserv = Observation()
@@ -101,7 +101,7 @@ struct EleveDetail: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     Spacer()
-                    // ajouter un élève
+                    // ajouter une colle
                     Button {
                         isModified = true
                         newColle = Colle()
@@ -113,12 +113,14 @@ struct EleveDetail: View {
                     .buttonStyle(.borderless)
                 }
 
-                // édition de la liste des observations
-                ForEach(eleve.collesID, id: \.self) { colleId in
-                    if let colle = colleStore.colle(withID: colleId) {
+                // édition de la liste des colles
+                ForEach(colleStore.colles(de: eleve)) { $colle in
+                    NavigationLink {
+                        ColleEditor(eleve : $eleve,
+                                    colle : $colle,
+                                    isNew : false)
+                    } label: {
                         EleveColleRow(colle: colle)
-                    } else {
-                        Text("élève non trouvé: \(colleId)")
                     }
                 }
                 .onDelete(perform: { indexSet in

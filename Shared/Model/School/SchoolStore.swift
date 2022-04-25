@@ -20,7 +20,7 @@ final class SchoolStore: ObservableObject {
 
     // MARK: - Methods
 
-    func exists(_ item: School) -> Bool {
+    func isPresent(_ item: School) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 

@@ -68,6 +68,8 @@
 		795FAB312809FB0B004CB120 /* HelpersView in Frameworks */ = {isa = PBXBuildFile; productRef = 795FAB302809FB0B004CB120 /* HelpersView */; };
 		797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
+		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
+		79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
 		79F3ABA72808218300D068D9 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA62808218300D068D9 /* Tests_iOS.swift */; };
 		79F3ABA92808218300D068D9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA82808218300D068D9 /* Tests_iOSLaunchTests.swift */; };
 		79F3ABB32808218300D068D9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB22808218300D068D9 /* Tests_macOS.swift */; };
@@ -168,6 +170,7 @@
 		795FAB2C2809C830004CB120 /* SchoolEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEditor.swift; sourceTree = "<group>"; };
 		795FAB2E2809E54C004CB120 /* SchoolDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetail.swift; sourceTree = "<group>"; };
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
+		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cahier_du_ProfesseurApp.swift; sourceTree = "<group>"; };
 		79F3AB8F2808218100D068D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79F3AB902808218300D068D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -373,6 +376,7 @@
 				79F3ABE3280830F300D068D9 /* Eleve */,
 				79F3ABED2808707C00D068D9 /* Observation */,
 				79F3ABEC2808707300D068D9 /* Colle */,
+				79BB0B482816FAE5002AAABA /* Motif.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -624,6 +628,7 @@
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				795FAB2D2809C830004CB120 /* SchoolEditor.swift in Sources */,
+				79BB0B492816FAE5002AAABA /* Motif.swift in Sources */,
 				79F3ABEA28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				791C26DC281447BD00686F0C /* EleveBrowserView.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
@@ -682,6 +687,7 @@
 				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				79F3ABEB28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */,
+				79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */,
 				79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
 				795BC3DC2813055200C22271 /* EleveStore.swift in Sources */,
 				795BC3E6281337E600C22271 /* EleveDetail.swift in Sources */,

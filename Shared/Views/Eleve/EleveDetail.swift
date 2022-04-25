@@ -76,12 +76,8 @@ struct EleveDetail: View {
                 }
 
                 // édition de la liste des observations
-                ForEach(eleve.observsID, id: \.self) { observId in
-                    if let observ = observStore.observation(withID: observId) {
+                ForEach(observStore.observations(de: eleve)) { $observ in
                         EleveObservRow(observ: observ)
-                    } else {
-                        Text("élève non trouvé: \(observId)")
-                    }
                 }
                 .onDelete(perform: { indexSet in
                     for index in indexSet {

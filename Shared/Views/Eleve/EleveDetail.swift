@@ -77,7 +77,13 @@ struct EleveDetail: View {
 
                 // édition de la liste des observations
                 ForEach(observStore.observations(de: eleve)) { $observ in
+                    NavigationLink {
+                        ObservEditor(eleve  : $eleve,
+                                     observ : $observ,
+                                     isNew  : false)
+                    } label: {
                         EleveObservRow(observ: observ)
+                    }
                 }
                 .onDelete(perform: { indexSet in
                     for index in indexSet {

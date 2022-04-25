@@ -10,7 +10,7 @@ import HelpersView
 
 struct ObservDetail: View {
     @Binding
-    var observ     : Observation
+    var observ    : Observation
     let isEditing : Bool
     var isNew     : Bool
     @Binding
@@ -22,6 +22,7 @@ struct ObservDetail: View {
                 Image(systemName: "magnifyingglass")
                     .sfSymbolStyling()
                     .foregroundColor(.red)
+                // date
                 if isNew || isEditing {
                     DatePicker("Date", selection: $observ.date)
                         .labelsHidden()
@@ -33,6 +34,7 @@ struct ObservDetail: View {
             }
 
             if isNew || isEditing {
+                // checkbox isConsignee
                 Button {
                     observ.isConsignee.toggle()
                 } label: {
@@ -43,6 +45,7 @@ struct ObservDetail: View {
                 .buttonStyle(.plain)
                 .padding(.leading)
 
+                // checkbox isCoisVerifiednsignee
                 Button {
                     observ.isVerified.toggle()
                 } label: {

@@ -19,6 +19,7 @@ struct EleveObservRow: View {
                 .foregroundColor(.red)
             if hClass == .compact {
                 Text(observ.date.stringShortDate)
+                    .font(.callout)
             } else {
                 Text(observ.date.stringLongDateTime)
             }
@@ -33,15 +34,16 @@ struct EleveObservRow: View {
                 }
             } label: {
                 Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(.gray)
+                    .foregroundColor(observ.isConsignee ? .green : .gray)
                 if hClass == .compact {
                     Text("Notifié")
+                        .font(.callout)
                 } else {
                     Text("Notifiée aux parents")
                 }
             }
             .buttonStyle(.plain)
-            .padding(.trailing)
+            .padding(.trailing, 4)
 
             Button {
                 if let index = observStore.items.firstIndex(where: { $0.id == observ.id }) {
@@ -49,9 +51,10 @@ struct EleveObservRow: View {
                 }
             } label: {
                 Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(.gray)
+                    .foregroundColor(observ.isVerified ? .green : .gray)
                 if hClass == .compact {
                     Text("Vérifié")
+                        .font(.callout)
                 } else {
                     Text("Signature des parents vérifiée")
                 }

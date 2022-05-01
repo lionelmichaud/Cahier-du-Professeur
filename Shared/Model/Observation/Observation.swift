@@ -36,6 +36,25 @@ struct Observation: Identifiable {
         self.date = date
     }
 
+    // MARK: - Methods
+
+    func satisfies(isConsignee : Bool?  = nil,
+                   isVerified  : Bool?  = nil) -> Bool {
+        switch (isConsignee, isVerified) {
+            case (nil, nil):
+                return true
+
+            case (.some(let c), nil):
+                return self.isConsignee == c
+
+            case (nil, .some(let v)):
+                return self.isVerified == v
+
+            case (.some(let c), .some(let v)):
+                return self.isConsignee == c || self.isVerified == v
+        }
+    }
+
     static let exemple = Observation()
 }
 
@@ -47,6 +66,7 @@ extension Observation: CustomStringConvertible {
            ID       : \(id)
            Date     : \(date.stringShortDate)
            EleveID  : \(String(describing: eleveId))
+           Motif    : \(String(describing: motif).withPrefixedSplittedLines("     "))
            Consignée: \(isConsignee.frenchString)
            Vérifiée : \(isVerified.frenchString)
         """

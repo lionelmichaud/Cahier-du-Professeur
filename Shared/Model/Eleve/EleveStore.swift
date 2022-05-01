@@ -108,29 +108,6 @@ final class EleveStore: ObservableObject {
         elevesID.insert(eleve.id, at: index)
     }
 
-//    func filteredEleves(dans classe: Classe) -> Binding<[Eleve]> {
-//        Binding<[Eleve]>(
-//            get: {
-//                self.items
-//                    .filter { eleve in
-//                        if let classeId = eleve.classeId {
-//                            return classeId == classe.id
-//                        } else {
-//                            return false
-//                        }
-//                    }
-//                    .sorted(by: <)
-//            },
-//            set: { items in
-//                for classe in items {
-//                    if let index = self.items.firstIndex(where: { $0.id == classe.id }) {
-//                        self.items[index] = classe
-//                    }
-//                }
-//            }
-//        )
-//    }
-//
     func filteredSortedEleves
     (dans classe: Classe,
      _ isIncluded: @escaping (Eleve) -> Bool = { _ in true}) -> Binding<[Eleve]> {
@@ -151,6 +128,44 @@ final class EleveStore: ObservableObject {
                 for classe in items {
                     if let index = self.items.firstIndex(where: { $0.id == classe.id }) {
                         self.items[index] = classe
+                    }
+                }
+            }
+        )
+    }
+
+    func filteredSortedObservations
+    (dans classe : Classe,
+     observStore : ObservationStore,
+     _ isIncluded: @escaping (Observation) -> Bool = { _ in true}) -> Binding<[Observation]> {
+
+        Binding<[Observation]>(
+            get: {
+                var observs = [Observation]()
+
+                self.items.filter { eleve in
+                    if let classeId = eleve.classeId {
+                        return (classeId == classe.id)
+                    } else {
+                        return false
+                    }
+                }
+                .forEach { eleve in
+                    observStore
+                        .observations(de: eleve)
+                        .forEach { $observ in
+                            if isIncluded(observ) {
+                                observs.append(observ)
+                            }
+                    }
+                }
+
+                return observs.sorted(by: <)
+            },
+            set: { items in
+                for observ in items {
+                    if let index = observStore.items.firstIndex(where: { $0.id == observ.id }) {
+                        observStore.items[index] = observ
                     }
                 }
             }

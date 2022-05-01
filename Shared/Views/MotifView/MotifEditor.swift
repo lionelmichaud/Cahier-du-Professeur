@@ -25,12 +25,12 @@ struct MotifEditor: View {
                 .pickerStyle(.menu)
                 .onChange(of: motif.nature) { newValue in
                     if newValue != .autre {
-                        motif.description = ""
+                        motif.descriptionMotif = ""
                     }
                 }
 
                 if motif.nature == .autre {
-                    TextEditor(text: $motif.description)
+                    TextEditor(text: $motif.descriptionMotif)
                         .multilineTextAlignment(.leading)
                         .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 }
@@ -41,6 +41,6 @@ struct MotifEditor: View {
 
 struct MotifEditor_Previews: PreviewProvider {
     static var previews: some View {
-        MotifEditor(motif: .constant(Motif(nature: .autre, description: "Une description")))
+        MotifEditor(motif: .constant(Motif(nature: .autre, descriptionMotif: "Une description")))
     }
 }

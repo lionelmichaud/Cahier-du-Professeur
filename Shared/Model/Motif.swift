@@ -40,7 +40,14 @@ enum MotifEnum: PickableEnumP, Codable {
     }
 }
 
-struct Motif {
+struct Motif: Codable {
     var nature: MotifEnum = .autre
-    var description: String = ""
+    var descriptionMotif: String = ""
+}
+
+extension Motif: CustomStringConvertible {
+    var description: String {
+        let natureStr = nature.displayString
+        return nature == .autre ? natureStr + "\n \(descriptionMotif)" : natureStr
+    }
 }

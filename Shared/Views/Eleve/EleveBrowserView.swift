@@ -11,7 +11,7 @@ struct EleveBrowserView: View {
     @EnvironmentObject private var schoolStore : SchoolStore
     @EnvironmentObject private var eleveStore  : EleveStore
     @State private var filterObservation = false
-    @State private var filterColle  = false
+    @State private var filterColle       = false
 
     var body: some View {
         List {
@@ -19,7 +19,7 @@ struct EleveBrowserView: View {
                 Text("Aucun élève")
             } else {
                 // pour chaque Etablissement
-                ForEach(schoolStore.items.sorted(by: { $0.niveau.rawValue < $1.niveau.rawValue })) { school in
+                ForEach(schoolStore.sortedSchools()) { $school in
                     if school.nbOfClasses != 0 {
                         Section() {
                             // pour chaque Classe
@@ -69,38 +69,6 @@ struct EleveBrowserSchoolSubiew : View {
     @EnvironmentObject private var colleStore  : ColleStore
     @EnvironmentObject private var observStore : ObservationStore
 
-    func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
-        eleveStore.filteredSortedEleves(dans: classe) { eleve in
-
-            lazy var nbObservWithActionToDo : Int = {
-                EleveManager().nbOfObservations(de          : eleve,
-                                                isConsignee : false,
-                                                isVerified  : false,
-                                                observStore : observStore)
-            }()
-            lazy var nbColleWithActionToDo : Int = {
-                EleveManager().nbOfColles(de          : eleve,
-                                          isConsignee : false,
-                                          colleStore  : colleStore)
-            }()
-
-            switch (filterObservation, filterColle) {
-                case (false, false):
-                    // on ne filtre pas
-                    return true
-
-                case (true, false):
-                    return nbObservWithActionToDo > 0
-
-                case (false, true):
-                    return nbColleWithActionToDo > 0
-
-                case (true, true):
-                    return nbObservWithActionToDo + nbColleWithActionToDo > 0
-            }
-        }
-    }
-
     var body: some View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
@@ -140,6 +108,41 @@ struct EleveBrowserSchoolSubiew : View {
             }
         }
     }
+
+    // MARK: - Methods
+
+    func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
+        eleveStore.filteredSortedEleves(dans: classe) { eleve in
+
+            lazy var nbObservWithActionToDo : Int = {
+                EleveManager().nbOfObservations(de          : eleve,
+                                                isConsignee : false,
+                                                isVerified  : false,
+                                                observStore : observStore)
+            }()
+            lazy var nbColleWithActionToDo : Int = {
+                EleveManager().nbOfColles(de          : eleve,
+                                          isConsignee : false,
+                                          colleStore  : colleStore)
+            }()
+
+            switch (filterObservation, filterColle) {
+                case (false, false):
+                    // on ne filtre pas
+                    return true
+
+                case (true, false):
+                    return nbObservWithActionToDo > 0
+
+                case (false, true):
+                    return nbColleWithActionToDo > 0
+
+                case (true, true):
+                    return nbObservWithActionToDo + nbColleWithActionToDo > 0
+            }
+        }
+    }
+
 }
 
 

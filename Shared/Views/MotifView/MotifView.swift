@@ -33,10 +33,10 @@ struct MotifView: View {
 struct MotifView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MotifView(motif: Motif(nature: .autre, description: "Une description"))
+            MotifView(motif: Motif(nature: .autre, descriptionMotif: "Une description"))
                 .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/))
 
-            MotifView(motif: Motif(nature: .leconNonApprise, description: "Une description suffisamment longue pour tenir sur plusieurs lignes"))
+            MotifView(motif: Motif(nature: .leconNonApprise, descriptionMotif: "Une description suffisamment longue pour tenir sur plusieurs lignes"))
                 .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/))
 
         }

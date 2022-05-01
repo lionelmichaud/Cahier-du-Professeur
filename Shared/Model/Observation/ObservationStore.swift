@@ -18,6 +18,12 @@ final class ObservationStore: ObservableObject {
         items.count
     }
 
+    var nbOfItemsToCheck: Int {
+        items.filter {
+            $0.isVerified == false || $0.isConsignee == false
+        }.count
+    }
+
     /// True si une observation existe déjà avec le même ID
     /// - Parameter item: Observation
     func isPresent(_ item: Observation) -> Bool {

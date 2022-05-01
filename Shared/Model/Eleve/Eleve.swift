@@ -129,6 +129,7 @@ extension Eleve: CustomStringConvertible {
            Sexe    : \(sexe.pickerString)
            Nom     : \(name.formatted(.name(style: .long)))
            ClasseID: \(String(describing: classeId))
+           Appréciation: \(appreciation)
            Observations: \(String(describing: observsID).withPrefixedSplittedLines("     "))
            Colles: \(String(describing: collesID).withPrefixedSplittedLines("     "))
         """

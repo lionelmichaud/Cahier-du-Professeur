@@ -18,10 +18,18 @@ struct EleveObservRow: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.red)
             if hClass == .compact {
-                Text(observ.date.stringShortDate)
-                    .font(.callout)
+                VStack(alignment: .leading) {
+                    Text(observ.date.stringShortDate)
+                    Text(observ.motif.nature.displayString)
+                        .foregroundColor(.secondary)
+                }
+                .font(.callout)
             } else {
-                Text(observ.date.stringLongDateTime)
+                VStack(alignment: .leading) {
+                    Text(observ.date.stringLongDateTime)
+                    Text(observ.motif.nature.displayString)
+                        .foregroundColor(.secondary)
+                }
             }
 
             Spacer()

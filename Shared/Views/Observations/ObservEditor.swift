@@ -51,7 +51,7 @@ struct ObservEditor: View {
                 ToolbarItem {
                     Button {
                         if isNew {
-                            // Ajouter un nouvel élève à la classe
+                            // Ajouter une nouvelle observation à l'élève
                             withAnimation {
                                 EleveManager()
                                     .ajouter(observation : &itemCopy,

@@ -47,7 +47,7 @@ struct ContentView: View {
             ObservSidebarView()
                 .tabItem { Label("Observations", systemImage: "rectangle.and.text.magnifyingglass").symbolVariant(.none) }
                 .tag(UIState.Tab.observation)
-                .badge(observStore.nbOfItems)
+                .badge(observStore.nbOfItemsToCheck)
         }
     }
 }

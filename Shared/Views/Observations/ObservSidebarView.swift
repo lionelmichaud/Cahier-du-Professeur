@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ObservSidebarView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            /// Primary view
+            ObservBrowserView()
+            /// vue par défaut
+            Text("Sélectionner une classe")
+                .foregroundStyle(.secondary)
+        }
     }
 }
 

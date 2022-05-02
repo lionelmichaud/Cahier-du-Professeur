@@ -41,7 +41,7 @@ struct ContentView: View {
             ColleSidebarView()
                 .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
                 .tag(UIState.Tab.colle)
-                .badge(colleStore.nbOfItems)
+                .badge(colleStore.nbOfItemsToCheck)
 
             /// scenario paramètrique de simulation
             ObservSidebarView()

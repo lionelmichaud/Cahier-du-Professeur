@@ -9,12 +9,15 @@ import SwiftUI
 import HelpersView
 
 struct ObservEditor: View {
+    var classe: Classe
     @Binding
     var eleve: Eleve
     @Binding
     var observ: Observation
+    var filterObservation : Bool
     var isNew = false
 
+    @EnvironmentObject private var eleveStore  : EleveStore
     @EnvironmentObject private var observStore : ObservationStore
     @Environment(\.dismiss) private var dismiss
 
@@ -28,84 +31,117 @@ struct ObservEditor: View {
     // true si des modifiction sont faites hors du mode édition
     @State private var isModified = false
     // true si l'item va être détruit
-    @State private var isDeleted = false
+    @State private var isDeleted  = false
 
     private var isItemDeleted: Bool {
         !observStore.isPresent(observ) && !isNew
     }
 
-    var body: some View {
-        VStack {
-            ObservDetail(observ     : $itemCopy,
-                         isEditing  : isEditing,
-                         isNew      : isNew,
-                         isModified : $isModified)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    if isNew {
-                        Button("Annuler") {
-                            dismiss()
-                        }
-                    }
-                }
-                ToolbarItem {
-                    Button {
-                        if isNew {
-                            // Ajouter une nouvelle observation à l'élève
-                            withAnimation {
-                                EleveManager()
-                                    .ajouter(observation : &itemCopy,
-                                             aEleve      : &eleve,
-                                             observStore : observStore)
-                            }
-                            dismiss()
-                        } else {
-                            // Appliquer les modifications faites à l'observation
-                            if isEditing && !isDeleted {
-                                print("Done, saving any changes to \(observ.id).")
-                                withAnimation {
-                                    observ = itemCopy // Put edits (if any) back in the store.
-                                }
-                                isSaved = true
-                            }
-                            isEditing.toggle()
-                        }
-                    } label: {
-                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
-                    }
-                }
-            }
-            .onAppear {
-                itemCopy   = observ
-                isModified = false
-                isSaved    = false
-            }
-            .onDisappear {
-                if isModified && !isSaved {
-                    // Appliquer les modifications faites à la classe hors du mode édition
-                    observ     = itemCopy
-                    isModified = false
-                    isSaved    = true
-                }
-            }
-            .disabled(isItemDeleted)
-        }
-        .overlay(alignment: .center) {
-            if isItemDeleted {
-                Color(UIColor.systemBackground)
-                Text("Observation supprimée. Sélectionner une observation.")
-                    .foregroundStyle(.secondary)
-            }
+    private var isItemFiltred: Bool {
+        !filteredSortedObservs(dans: classe).contains {
+            $0.wrappedValue.id == observ.id
         }
     }
 
-    init(eleve  : Binding<Eleve>,
+    var body: some View {
+        if (isNew || !isItemFiltred) {
+            VStack {
+                ObservDetail(observ     : $itemCopy,
+                             isEditing  : isEditing,
+                             isNew      : isNew,
+                             isModified : $isModified)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        if isNew {
+                            Button("Annuler") {
+                                dismiss()
+                            }
+                        }
+                    }
+                    ToolbarItem {
+                        Button {
+                            if isNew {
+                                // Ajouter une nouvelle observation à l'élève
+                                withAnimation {
+                                    EleveManager()
+                                        .ajouter(observation : &itemCopy,
+                                                 aEleve      : &eleve,
+                                                 observStore : observStore)
+                                }
+                                dismiss()
+                            } else {
+                                // Appliquer les modifications faites à l'observation
+                                if isEditing && !isDeleted {
+                                    print("Done, saving any changes to \(observ.id).")
+                                    withAnimation {
+                                        observ = itemCopy // Put edits (if any) back in the store.
+                                    }
+                                    isSaved = true
+                                }
+                                isEditing.toggle()
+                            }
+                        } label: {
+                            Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                        }
+                    }
+                }
+                .onAppear {
+                    if (isNew || !isItemFiltred) {
+                        itemCopy   = observ
+                        isModified = false
+                        isSaved    = false
+                    }
+                }
+                .onDisappear {
+                    if isModified && !isSaved {
+                        // Appliquer les modifications faites à la classe hors du mode édition
+                        observ     = itemCopy
+                        isModified = false
+                        isSaved    = true
+                    }
+                }
+                .disabled(isItemDeleted)
+            }
+            .overlay(alignment: .center) {
+                if isItemDeleted {
+                    Color(UIColor.systemBackground)
+                    Text("Observation supprimée. Sélectionner une observation.")
+                        .foregroundStyle(.secondary)
+                }
+            }
+        } else {
+            Text("Aucune observation sélectionnée.")
+        }
+    }
+
+    init(classe : Classe,
+         eleve  : Binding<Eleve>,
          observ : Binding<Observation>,
-         isNew  : Bool = false) {
-        self.isNew     = isNew
-        self._eleve    = eleve
-        self._observ   = observ
-        self._itemCopy = State(initialValue : observ.wrappedValue)
+         isNew  : Bool = false,
+         filterObservation : Bool) {
+        self.classe            = classe
+        self._eleve            = eleve
+        self._observ           = observ
+        self.isNew             = isNew
+        self.filterObservation = filterObservation
+        self._itemCopy         = State(initialValue : observ.wrappedValue)
+    }
+
+    // MARK: - Methods
+
+    func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
+        eleveStore.filteredSortedObservations(dans        : classe,
+                                              observStore : observStore) { observ in
+            switch filterObservation {
+                case false:
+                    // on ne filtre pas
+                    return true
+
+                case true:
+                    return observ.satisfies(isConsignee: false,
+                                            isVerified : false)
+            }
+        }
     }
 }
 
@@ -113,9 +149,11 @@ struct ObservEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ObservEditor(eleve: .constant(TestEnvir.eleveStore.items.first!),
-                         observ: .constant(TestEnvir.observStore.items.first!),
-                         isNew: true)
+            ObservEditor(classe            : TestEnvir.classeStore.items.first!,
+                         eleve             : .constant(TestEnvir.eleveStore.items.first!),
+                         observ            : .constant(TestEnvir.observStore.items.first!),
+                         isNew             : true,
+                         filterObservation : false)
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
@@ -123,9 +161,11 @@ struct ObservEditor_Previews: PreviewProvider {
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
-            ObservEditor(eleve: .constant(TestEnvir.eleveStore.items.first!),
-                         observ: .constant(TestEnvir.observStore.items.first!),
-                         isNew: true)
+            ObservEditor(classe            : TestEnvir.classeStore.items.first!,
+                         eleve             : .constant(TestEnvir.eleveStore.items.first!),
+                         observ            : .constant(TestEnvir.observStore.items.first!),
+                         isNew             : true,
+                         filterObservation : false)
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)

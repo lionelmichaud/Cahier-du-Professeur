@@ -37,6 +37,25 @@ struct Colle: Identifiable {
         self.date  = date
     }
 
+    // MARK: - Methods
+
+    func satisfies(isConsignee : Bool?  = nil,
+                   isVerified  : Bool?  = nil) -> Bool {
+        switch (isConsignee, isVerified) {
+            case (nil, nil):
+                return true
+
+            case (.some(let c), nil):
+                return self.isConsignee == c
+
+            case (nil, .some(let v)):
+                return self.isVerified == v
+
+            case (.some(let c), .some(let v)):
+                return self.isConsignee == c || self.isVerified == v
+        }
+    }
+
     static let exemple = Colle()
 }
 

@@ -18,6 +18,12 @@ final class ColleStore: ObservableObject {
         items.count
     }
 
+    var nbOfItemsToCheck: Int {
+        items.filter {
+            $0.isConsignee == false
+        }.count
+    }
+
     /// True si une colle existe déjà avec le même ID
     /// - Parameter item: Eleve
     func isPresent(_ item: Colle) -> Bool {
@@ -63,13 +69,16 @@ final class ColleStore: ObservableObject {
         observesID.insert(colle.id, at: index)
     }
 
-    func colles(de eleve: Eleve) -> Binding<[Colle]> {
+    func colles(de eleve    : Eleve,
+                isConsignee : Bool? = nil,
+                isVerified  : Bool? = nil) -> Binding<[Colle]> {
         Binding<[Colle]>(
             get: {
                 self.items
                     .filter {
                         if let eleveId = $0.eleveId {
-                            return eleveId == eleve.id
+                            return (eleveId == eleve.id) && $0.satisfies(isConsignee : isConsignee,
+                                                                         isVerified  : isVerified)
                         } else {
                             return false
                         }

@@ -76,9 +76,11 @@ struct EleveBrowserSchoolSubiew : View {
                 DisclosureGroup() {
                     ForEach(filteredSortedEleves(dans: classe)) { $eleve in
                         NavigationLink {
-                            EleveEditor(classe : .constant(classe),
-                                        eleve  : $eleve,
-                                        isNew  : false)
+                            EleveEditor(classe            : .constant(classe),
+                                        eleve             : $eleve,
+                                        isNew             : false,
+                                        filterObservation : filterObservation,
+                                        filterColle       : filterColle)
                         } label: {
                             EleveBrowserRow(eleve: eleve)
                         }
@@ -112,39 +114,14 @@ struct EleveBrowserSchoolSubiew : View {
     // MARK: - Methods
 
     func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
-        eleveStore.filteredSortedEleves(dans: classe) { eleve in
-
-            lazy var nbObservWithActionToDo : Int = {
-                EleveManager().nbOfObservations(de          : eleve,
-                                                isConsignee : false,
-                                                isVerified  : false,
-                                                observStore : observStore)
-            }()
-            lazy var nbColleWithActionToDo : Int = {
-                EleveManager().nbOfColles(de          : eleve,
-                                          isConsignee : false,
-                                          colleStore  : colleStore)
-            }()
-
-            switch (filterObservation, filterColle) {
-                case (false, false):
-                    // on ne filtre pas
-                    return true
-
-                case (true, false):
-                    return nbObservWithActionToDo > 0
-
-                case (false, true):
-                    return nbColleWithActionToDo > 0
-
-                case (true, true):
-                    return nbObservWithActionToDo + nbColleWithActionToDo > 0
-            }
-        }
+        EleveManager().filteredSortedEleves(dans              : classe,
+                                            eleveStore        : eleveStore,
+                                            observStore       : observStore,
+                                            colleStore        : colleStore,
+                                            filterObservation : filterObservation,
+                                            filterColle       : filterColle)
     }
-
 }
-
 
 struct EleveBrowserView_Previews: PreviewProvider {
     static var previews: some View {

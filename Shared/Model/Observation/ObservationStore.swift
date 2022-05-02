@@ -81,13 +81,16 @@ final class ObservationStore: ObservableObject {
         observesID.insert(observation.id, at: index)
     }
 
-    func observations(de eleve: Eleve) -> Binding<[Observation]> {
+    func observations(de eleve    : Eleve,
+                      isConsignee : Bool? = nil,
+                      isVerified  : Bool? = nil) -> Binding<[Observation]> {
         Binding<[Observation]>(
             get: {
                 self.items
                     .filter {
                         if let eleveId = $0.eleveId {
-                            return eleveId == eleve.id
+                            return (eleveId == eleve.id) && $0.satisfies(isConsignee : isConsignee,
+                                                                         isVerified  : isVerified)
                         } else {
                             return false
                         }

@@ -46,7 +46,7 @@ struct ObservBrowserView: View {
                 .toggleStyle(.button)
             }
         }
-        .navigationTitle("Les Élèves")
+        .navigationTitle("Les Observations")
     }
 }
 
@@ -58,21 +58,6 @@ struct ObservBrowserSchoolSubiew : View {
     @EnvironmentObject private var eleveStore  : EleveStore
     @EnvironmentObject private var observStore : ObservationStore
 
-    func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
-        eleveStore.filteredSortedObservations(dans        : classe,
-                                              observStore : observStore) { observ in
-            switch filterObservation {
-                case false:
-                    // on ne filtre pas
-                    return true
-
-                case true:
-                    return observ.satisfies(isConsignee: false,
-                                            isVerified : false)
-            }
-        }
-    }
-
     var body: some View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
@@ -80,9 +65,11 @@ struct ObservBrowserSchoolSubiew : View {
                 DisclosureGroup() {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
                         NavigationLink {
-                            ObservEditor(eleve  : .constant(Eleve.exemple),
-                                         observ : $observ,
-                                         isNew  : false)
+                            ObservEditor(classe            : classe,
+                                         eleve             : .constant(Eleve.exemple),
+                                         observ            : $observ,
+                                         isNew             : false,
+                                         filterObservation : filterObservation)
                         } label: {
                             ObservBrowserRow(observ: observ)
                         }
@@ -109,6 +96,23 @@ struct ObservBrowserSchoolSubiew : View {
                         .foregroundColor(.secondary)
                         .fontWeight(.bold)
                 }
+            }
+        }
+    }
+
+    // MARK: - Methods
+
+    func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
+        eleveStore.filteredSortedObservations(dans        : classe,
+                                              observStore : observStore) { observ in
+            switch filterObservation {
+                case false:
+                    // on ne filtre pas
+                    return true
+
+                case true:
+                    return observ.satisfies(isConsignee: false,
+                                            isVerified : false)
             }
         }
     }

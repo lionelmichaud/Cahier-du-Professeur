@@ -109,8 +109,8 @@ final class EleveStore: ObservableObject {
     }
 
     func filteredSortedEleves
-    (dans classe: Classe,
-     _ isIncluded: @escaping (Eleve) -> Bool = { _ in true}) -> Binding<[Eleve]> {
+    (dans classe  : Classe,
+     _ isIncluded : @escaping (Eleve) -> Bool = { _ in true}) -> Binding<[Eleve]> {
 
         Binding<[Eleve]>(
             get: {

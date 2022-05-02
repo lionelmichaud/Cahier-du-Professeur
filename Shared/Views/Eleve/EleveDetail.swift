@@ -9,10 +9,13 @@ import SwiftUI
 import HelpersView
 
 struct EleveDetail: View {
+    var classe            : Classe
     @Binding
-    var eleve     : Eleve
-    let isEditing : Bool
-    var isNew     : Bool
+    var eleve             : Eleve
+    let isEditing         : Bool
+    var isNew             : Bool
+    var filterObservation : Bool
+    var filterColle       : Bool
     @Binding
     var isModified: Bool
 
@@ -30,121 +33,136 @@ struct EleveDetail: View {
     @FocusState
     private var isPrenomFocused: Bool
 
+    var name: some View {
+        HStack {
+            Image(systemName: "person.fill")
+                .sfSymbolStyling()
+                .foregroundColor(eleve.sexe.color)
+
+            // Sexe de cet eleve
+            if isNew || isEditing {
+                CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
+                    .pickerStyle(.menu)
+                TextField("Prénom", text: $eleve.name.givenName.bound)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($isPrenomFocused)
+                TextField("Nom", text: $eleve.name.familyName.bound)
+                    .textFieldStyle(.roundedBorder)
+            } else {
+                Text(eleve.displayName)
+                    .font(.title2)
+                    .textFieldStyle(.roundedBorder)
+            }
+        }
+        .listRowSeparator(.hidden)
+    }
+
+    var appreciation: some View {
+        VStack(alignment: .leading) {
+            Text("Appréciation")
+                .font(.headline)
+                .fontWeight(.bold)
+            TextEditor(text: $eleve.appreciation)
+                .multilineTextAlignment(.leading)
+                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                .frame(minHeight: 80)
+        }
+        .onChange(of: eleve.appreciation) {newValue in
+            isModified = true
+        }
+    }
+
+    var observations: some View {
+        Section {
+            // édition de la liste des observations
+            ForEach(observStore.observations(de          : eleve,
+                                             isConsignee : filterObservation ? false : nil,
+                                             isVerified  : filterObservation ? false : nil)) { $observ in
+                NavigationLink {
+                    ObservEditor(classe            : classe,
+                                 eleve             : $eleve,
+                                 observ            : $observ,
+                                 isNew             : false,
+                                 filterObservation : filterObservation)
+                } label: {
+                    EleveObservRow(observ: observ)
+                }
+            }
+            .onDelete(perform: { indexSet in
+                for index in indexSet {
+                    isModified = true
+                    deleteObserv(index: index)
+                }
+            })
+        } header: {
+            HStack {
+                Text("Observations")
+                    .font(.headline)
+                Spacer()
+                // ajouter une observation
+                Button {
+                    isModified        = true
+                    newObserv         = Observation()
+                    isAddingNewObserv = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                }
+                .buttonStyle(.borderless)
+            }
+        }
+    }
+
+    var colles: some View {
+        Section {
+            // édition de la liste des colles
+            ForEach(colleStore.colles(de          : eleve,
+                                      isConsignee : filterColle ? false : nil)) { $colle in
+                NavigationLink {
+                    ColleEditor(eleve : $eleve,
+                                colle : $colle,
+                                isNew : false)
+                } label: {
+                    EleveColleRow(colle: colle)
+                }
+            }
+            .onDelete(perform: { indexSet in
+                for index in indexSet {
+                    isModified = true
+                    deleteColle(index: index)
+                }
+            })
+        } header: {
+            HStack {
+                Text("Colles")
+                    .font(.headline)
+                Spacer()
+                // ajouter une colle
+                Button {
+                    isModified       = true
+                    newColle         = Colle()
+                    isAddingNewColle = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                }
+                .buttonStyle(.borderless)
+            }
+        }
+    }
+
     var body: some View {
         List {
             // nom
-            HStack {
-                Image(systemName: "person.fill")
-                    .sfSymbolStyling()
-                    .foregroundColor(eleve.sexe.color)
+            name
 
-                // Sexe de cet eleve
-                if isNew || isEditing {
-                    CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
-                        .pickerStyle(.menu)
-                    TextField("Prénom", text: $eleve.name.givenName.bound)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($isPrenomFocused)
-                    TextField("Nom", text: $eleve.name.familyName.bound)
-                        .textFieldStyle(.roundedBorder)
-                } else {
-                    Text(eleve.displayName)
-                        .font(.title2)
-                        .textFieldStyle(.roundedBorder)
-                }
-            }
-            .listRowSeparator(.hidden)
-
-            // appréciation de l'élève
             if !isNew {
-                VStack(alignment: .leading) {
-                    Text("Appréciation")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                    TextEditor(text: $eleve.appreciation)
-                        .multilineTextAlignment(.leading)
-                        .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                        .frame(minHeight: 80)
-                }
-                .onChange(of: eleve.appreciation) {newValue in
-                    isModified = true
-                }
-            }
-
-            // observations de l'élève
-            if !isNew {
-                Section {
-                    // édition de la liste des observations
-                    ForEach(observStore.observations(de: eleve)) { $observ in
-                        NavigationLink {
-                            ObservEditor(eleve  : $eleve,
-                                         observ : $observ,
-                                         isNew  : false)
-                        } label: {
-                            EleveObservRow(observ: observ)
-                        }
-                    }
-                    .onDelete(perform: { indexSet in
-                        for index in indexSet {
-                            isModified = true
-                            deleteObserv(index: index)
-                        }
-                    })
-                } header: {
-                    HStack {
-                        Text("Observations")
-                            .font(.headline)
-                        Spacer()
-                        // ajouter une observation
-                        Button {
-                            isModified        = true
-                            newObserv         = Observation()
-                            isAddingNewObserv = true
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .imageScale(.large)
-                        }
-                        .buttonStyle(.borderless)
-                    }
-                }
-            }
-
-            // colles de l'élève
-            if !isNew {
-                Section {
-                    // édition de la liste des colles
-                    ForEach(colleStore.colles(de: eleve)) { $colle in
-                        NavigationLink {
-                            ColleEditor(eleve : $eleve,
-                                        colle : $colle,
-                                        isNew : false)
-                        } label: {
-                            EleveColleRow(colle: colle)
-                        }
-                    }
-                    .onDelete(perform: { indexSet in
-                        for index in indexSet {
-                            isModified = true
-                            deleteColle(index: index)
-                        }
-                    })
-                } header: {
-                    HStack {
-                        Text("Colles")
-                            .font(.headline)
-                        Spacer()
-                        // ajouter une colle
-                        Button {
-                            isModified       = true
-                            newColle         = Colle()
-                            isAddingNewColle = true
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .imageScale(.large)
-                        }
-                        .buttonStyle(.borderless)
-                    }
-                }
+                // appréciation de l'élève
+                appreciation
+                // observations de l'élève
+                observations
+                // colles de l'élève
+                colles
             }
         }
         //.listStyle(.sidebar)
@@ -157,9 +175,11 @@ struct EleveDetail: View {
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {
-                ObservEditor(eleve  : $eleve,
-                             observ : $newObserv,
-                             isNew  : true)
+                ObservEditor(classe            : classe,
+                             eleve             : $eleve,
+                             observ            : $newObserv,
+                             isNew             : true,
+                             filterObservation : false)
             }
         }
         .sheet(isPresented: $isAddingNewColle) {
@@ -190,10 +210,13 @@ struct EleveDetail_Previews: PreviewProvider {
         return Group {
             NavigationView {
                 //EmptyView()
-                EleveDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
-                            isEditing  : false,
-                            isNew      : true,
-                            isModified : .constant(false))
+                EleveDetail(classe            : TestEnvir.classeStore.items.first!,
+                            eleve             : .constant(TestEnvir.eleveStore.items.first!),
+                            isEditing         : false,
+                            isNew             : true,
+                            filterObservation : false,
+                            filterColle       : false,
+                            isModified        : .constant(false))
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
@@ -203,10 +226,13 @@ struct EleveDetail_Previews: PreviewProvider {
 
             NavigationView {
                 //EmptyView()
-                EleveDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
-                            isEditing  : false,
-                            isNew      : false,
-                            isModified : .constant(false))
+                EleveDetail(classe            : TestEnvir.classeStore.items.first!,
+                            eleve             : .constant(TestEnvir.eleveStore.items.first!),
+                            isEditing         : false,
+                            isNew             : false,
+                            filterObservation : false,
+                            filterColle       : false,
+                            isModified        : .constant(false))
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)

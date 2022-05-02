@@ -5,7 +5,7 @@
 //  Created by Lionel MICHAUD on 23/04/2022.
 //
 
-import Foundation
+import SwiftUI
 
 struct EleveManager {
 
@@ -126,6 +126,43 @@ struct EleveManager {
                     .wrappedValue
                     .filter { $0.isConsignee == c || $0.isVerified == v }
                     .count
+        }
+    }
+
+    func filteredSortedEleves(dans classe       : Classe,
+                              eleveStore        : EleveStore,
+                              observStore       : ObservationStore,
+                              colleStore        : ColleStore,
+                              filterObservation : Bool,
+                              filterColle       : Bool) -> Binding<[Eleve]> {
+        eleveStore.filteredSortedEleves(dans: classe) { eleve in
+
+            lazy var nbObservWithActionToDo : Int = {
+                nbOfObservations(de          : eleve,
+                                 isConsignee : false,
+                                 isVerified  : false,
+                                 observStore : observStore)
+            }()
+            lazy var nbColleWithActionToDo : Int = {
+                nbOfColles(de          : eleve,
+                           isConsignee : false,
+                           colleStore  : colleStore)
+            }()
+
+            switch (filterObservation, filterColle) {
+                case (false, false):
+                    // on ne filtre pas
+                    return true
+
+                case (true, false):
+                    return nbObservWithActionToDo > 0
+
+                case (false, true):
+                    return nbColleWithActionToDo > 0
+
+                case (true, true):
+                    return nbObservWithActionToDo + nbColleWithActionToDo > 0
+            }
         }
     }
 }

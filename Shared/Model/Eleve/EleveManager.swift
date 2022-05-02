@@ -68,11 +68,16 @@ struct EleveManager {
 
     func retirer(colleId           : UUID,
                  deEleveId eleveId : UUID,
-                 eleveStore        : EleveStore) {
-        guard let index = eleveStore.items.firstIndex(where: { $0.id == colleId }) else {
+                 eleveStore        : EleveStore,
+                 colleStore        : ColleStore) {
+        // Détruire une colle d'ID'`colleId` de la liste des colles du store `colleStore`
+        colleStore.deleteColle(withID: colleId)
+
+        // retirer la colle de l'élève d'ID `eleveId` qui fait l'objet de  l'observation
+        guard let indexEleve = eleveStore.items.firstIndex(where: { $0.id == colleId }) else {
             return
         }
-        eleveStore.items[index].removeColle(withID: colleId)
+        eleveStore.items[indexEleve].removeColle(withID: colleId)
     }
 
     func retirer(colleIndex    : Int,

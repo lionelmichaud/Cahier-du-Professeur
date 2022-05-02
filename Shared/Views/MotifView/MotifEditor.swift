@@ -26,6 +26,8 @@ struct MotifEditor: View {
                 .onChange(of: motif.nature) { newValue in
                     if newValue != .autre {
                         motif.descriptionMotif = ""
+                    } else {
+                        motif.descriptionMotif = "motif"
                     }
                 }
 

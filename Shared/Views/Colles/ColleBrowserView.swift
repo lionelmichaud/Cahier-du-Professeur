@@ -1,30 +1,30 @@
 //
-//  ObservBrowserView.swift
+//  ColleBrowserView.swift
 //  Cahier du Professeur
 //
-//  Created by Lionel MICHAUD on 26/04/2022.
+//  Created by Lionel MICHAUD on 02/05/2022.
 //
 
 import SwiftUI
 
-struct ObservBrowserView: View {
+struct ColleBrowserView: View {
     @EnvironmentObject private var schoolStore : SchoolStore
     @EnvironmentObject private var eleveStore  : EleveStore
-    @EnvironmentObject private var observStore : ObservationStore
-    @State private var filterObservation = true
+    @EnvironmentObject private var colleStore  : ColleStore
+    @State private var filterColle = true
 
     var body: some View {
         List {
-            if observStore.items.isEmpty {
-                Text("Aucune observation")
+            if colleStore.items.isEmpty {
+                Text("Aucune colle")
             } else {
                 // pour chaque Etablissement
                 ForEach(schoolStore.sortedSchools()) { $school in
                     if school.nbOfClasses != 0 {
                         Section() {
                             // pour chaque Classe
-                            ObservBrowserSchoolSubiew(school            : school,
-                                                      filterObservation : filterObservation)
+                            ColleBrowserSchoolSubiew(school      : school,
+                                                     filterColle : filterColle)
                         } header: {
                             Text(school.displayString)
                                 .font(.callout)
@@ -42,51 +42,51 @@ struct ObservBrowserView: View {
                 Text("Filtrer")
                     .foregroundColor(.secondary)
                     .padding(.trailing, 4)
-                Toggle(isOn: $filterObservation.animation(),
+                Toggle(isOn: $filterColle.animation(),
                        label: {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: "lock.fill")
                 })
                 .toggleStyle(.button)
             }
         }
-        .navigationTitle("Les Observations")
+        .navigationTitle("Les Colles")
     }
 }
 
-struct ObservBrowserSchoolSubiew : View {
-    let school            : School
-    var filterObservation : Bool
+struct ColleBrowserSchoolSubiew : View {
+    let school      : School
+    var filterColle : Bool
     @State private var isClasseExpanded = true
 
     @EnvironmentObject private var classeStore : ClasseStore
     @EnvironmentObject private var eleveStore  : EleveStore
-    @EnvironmentObject private var observStore : ObservationStore
+    @EnvironmentObject private var colleStore  : ColleStore
 
     var body: some View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
-            if filteredSortedObservs(dans: classe).isNotEmpty {
+            if filteredSortedColles(dans: classe).isNotEmpty {
                 DisclosureGroup(isExpanded: $isClasseExpanded) {
-                    ForEach(filteredSortedObservs(dans: classe)) { $observ in
+                    ForEach(filteredSortedColles(dans: classe)) { $colle in
                         NavigationLink {
-                            ObservEditor(classe            : classe,
-                                         eleve             : .constant(Eleve.exemple),
-                                         observ            : $observ,
-                                         isNew             : false,
-                                         filterObservation : filterObservation)
+                            ColleEditor(classe      : classe,
+                                        eleve       : .constant(Eleve.exemple),
+                                        colle       : $colle,
+                                        isNew       : false,
+                                        filterColle : filterColle)
                         } label: {
-                            ObservBrowserRow(eleve  : eleveStore.eleve(withID: observ.eleveId!)!,
-                                             observ : observ)
+                            ColleBrowserRow(eleve : eleveStore.eleve(withID: colle.eleveId!)!,
+                                            colle : colle)
                         }
                         .swipeActions {
                             // supprimer un élève
                             Button(role: .destructive) {
                                 withAnimation {
-                                    if let eleveId = observ.eleveId {
-                                        EleveManager().retirer(observId   : observ.id,
+                                    if let eleveId = colle.eleveId {
+                                        EleveManager().retirer(colleId    : colle.id,
                                                                deEleveId  : eleveId,
                                                                eleveStore : eleveStore,
-                                                               observStore: observStore)
+                                                               colleStore : colleStore)
                                     }
                                 }
                             } label: {
@@ -106,24 +106,23 @@ struct ObservBrowserSchoolSubiew : View {
 
     // MARK: - Methods
 
-    func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
-        eleveStore.filteredSortedObservations(dans        : classe,
-                                              observStore : observStore) { observ in
-            switch filterObservation {
+    func filteredSortedColles(dans classe: Classe) -> Binding<[Colle]> {
+        eleveStore.filteredSortedColles(dans       : classe,
+                                        colleStore : colleStore) { colle in
+            switch filterColle {
                 case false:
                     // on ne filtre pas
                     return true
 
                 case true:
-                    return observ.satisfies(isConsignee: false,
-                                            isVerified : false)
+                    return colle.satisfies(isConsignee: false)
             }
         }
     }
 }
 
-struct ObservBrowserView_Previews: PreviewProvider {
+struct ColleBrowserView_Previews: PreviewProvider {
     static var previews: some View {
-        ObservBrowserView()
+        ColleBrowserView()
     }
 }

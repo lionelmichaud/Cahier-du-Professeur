@@ -5,7 +5,7 @@
 //  Created by Lionel MICHAUD on 14/04/2022.
 //
 
-import Foundation
+import SwiftUI
 
 struct Observation: Identifiable, Codable {
 
@@ -29,6 +29,10 @@ struct Observation: Identifiable, Codable {
     var isConsignee : Bool  = false
     var isVerified  : Bool  = false
     var date        : Date  = Date.now
+
+    var color: Color {
+        satisfies(isConsignee: false, isVerified: false) ? .red : .green
+    }
 
     // MARK: - Initializers
 

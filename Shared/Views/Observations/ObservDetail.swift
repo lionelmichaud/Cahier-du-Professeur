@@ -9,6 +9,7 @@ import SwiftUI
 import HelpersView
 
 struct ObservDetail: View {
+    var eleve     : Eleve
     @Binding
     var observ    : Observation
     let isEditing : Bool
@@ -43,7 +44,7 @@ struct ObservDetail: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .sfSymbolStyling()
-                    .foregroundColor(.red)
+                    .foregroundColor(observ.color)
                 // date
                 if isNew || isEditing {
                     DatePicker("Date", selection: $observ.date)
@@ -51,9 +52,12 @@ struct ObservDetail: View {
                         .listRowSeparator(.hidden)
                         .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 } else {
-                    Text(observ.date.stringLongDateTime)
+                    Text("Le " + observ.date.stringLongDateTime)
                 }
             }
+
+            // élève
+            EleveLabel(eleve: eleve)
 
             // motif
             if isNew || isEditing {
@@ -86,7 +90,7 @@ struct ObservDetail: View {
                 isVerifiedLabel
             }
         }
-#if os(iOS)
+        #if os(iOS)
         .navigationTitle("Observation")
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -97,7 +101,8 @@ struct ObservDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+            ObservDetail(eleve      : TestEnvir.eleveStore.items.first!,
+                         observ     : .constant(TestEnvir.observStore.items.first!),
                          isEditing  : false,
                          isNew      : true,
                          isModified : .constant(false))
@@ -109,7 +114,8 @@ struct ObservDetail_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
             .previewDisplayName("Observ isNew")
 
-            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+            ObservDetail(eleve      : TestEnvir.eleveStore.items.first!,
+                         observ     : .constant(TestEnvir.observStore.items.first!),
                          isEditing  : false,
                          isNew      : true,
                          isModified : .constant(false))
@@ -121,7 +127,8 @@ struct ObservDetail_Previews: PreviewProvider {
             .previewDevice("iPhone Xs")
             .previewDisplayName("Observ isNew")
 
-            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!),
+            ObservDetail(eleve      : TestEnvir.eleveStore.items.first!,
+                         observ     : .constant(TestEnvir.observStore.items.first!),
                          isEditing  : false,
                          isNew      : false,
                          isModified : .constant(false))

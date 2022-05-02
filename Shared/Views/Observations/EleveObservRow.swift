@@ -13,14 +13,10 @@ struct EleveObservRow: View {
     @EnvironmentObject var observStore : ObservationStore
     @Environment(\.horizontalSizeClass) var hClass
 
-    var observColor: Color {
-        observ.satisfies(isConsignee: false, isVerified: false) ? .red : .green
-    }
-
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(observColor)
+                .foregroundColor(observ.color)
             if hClass == .compact {
                 VStack(alignment: .leading) {
                     Text(observ.date.stringShortDate)
@@ -39,10 +35,10 @@ struct EleveObservRow: View {
             Spacer()
 
             Button {
-                if let index = observStore.items.firstIndex(where: {
-                    $0.id == observ.id
-                }) {
-                    observStore.items[index].isConsignee.toggle()
+                if let index = observStore.items.firstIndex(where: { $0.id == observ.id }) {
+                    withAnimation {
+                        observStore.items[index].isConsignee.toggle()
+                    }
                 }
             } label: {
                 Image(systemName: observ.isConsignee ? "checkmark.circle.fill" : "circle")
@@ -59,7 +55,9 @@ struct EleveObservRow: View {
 
             Button {
                 if let index = observStore.items.firstIndex(where: { $0.id == observ.id }) {
-                    observStore.items[index].isVerified.toggle()
+                    withAnimation {
+                        observStore.items[index].isVerified.toggle()
+                    }
                 }
             } label: {
                 Image(systemName: observ.isVerified ? "checkmark.circle.fill" : "circle")

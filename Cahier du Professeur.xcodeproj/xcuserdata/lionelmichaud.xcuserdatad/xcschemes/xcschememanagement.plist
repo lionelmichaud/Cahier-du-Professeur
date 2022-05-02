@@ -7,12 +7,12 @@
 		<key>Cahier du Professeur (iOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Cahier du Professeur (macOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>Playground (Playground).xcscheme</key>
 		<dict>
@@ -20,6 +20,19 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>79F3AB942808218300D068D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>79F3ABA12808218300D068D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

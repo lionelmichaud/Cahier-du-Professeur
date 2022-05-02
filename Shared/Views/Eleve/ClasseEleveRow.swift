@@ -12,10 +12,7 @@ struct ClasseEleveRow: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "person.fill")
-                .sfSymbolStyling()
-                .foregroundColor(eleve.sexe.color)
-            Text(eleve.displayName)
+            EleveLabel(eleve: eleve)
 
             Spacer()
 

@@ -9,6 +9,7 @@ import SwiftUI
 import HelpersView
 
 struct ColleDetail: View {
+    var eleve     : Eleve
     @Binding
     var colle     : Colle
     let isEditing : Bool
@@ -51,9 +52,12 @@ struct ColleDetail: View {
                         .listRowSeparator(.hidden)
                         .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 } else {
-                    Text(colle.date.stringLongDateTime)
+                    Text("Le " + colle.date.stringLongDateTime)
                 }
             }
+
+            // élève
+            EleveLabel(eleve: eleve)
 
             // motif
             if isNew || isEditing {
@@ -101,7 +105,7 @@ struct ColleDetail: View {
             }
         }
         #if os(iOS)
-        .navigationTitle("Observation")
+        .navigationTitle("Colles")
         .navigationBarTitleDisplayMode(.inline)
         #endif
     }
@@ -111,7 +115,8 @@ struct ColleDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!),
+            ColleDetail(eleve      : TestEnvir.eleveStore.items.first!,
+                        colle      : .constant(TestEnvir.colleStore.items.first!),
                         isEditing  : false,
                         isNew      : true,
                         isModified : .constant(false))
@@ -123,7 +128,8 @@ struct ColleDetail_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
             .previewDisplayName("Colle isNew")
 
-            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!),
+            ColleDetail(eleve      : TestEnvir.eleveStore.items.first!,
+                        colle      : .constant(TestEnvir.colleStore.items.first!),
                         isEditing  : false,
                         isNew      : true,
                         isModified : .constant(false))

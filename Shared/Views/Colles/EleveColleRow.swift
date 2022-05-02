@@ -16,7 +16,7 @@ struct EleveColleRow: View {
     var body: some View {
         HStack {
             Image(systemName: "lock")
-                .foregroundColor(.red)
+                .foregroundColor(colle.color)
             if hClass == .compact {
                 VStack(alignment: .leading) {
                     Text(colle.date.stringShortDate)
@@ -35,10 +35,10 @@ struct EleveColleRow: View {
             Spacer()
 
             Button {
-                if let index = colleStore.items.firstIndex(where: {
-                    $0.id == colle.id
-                }) {
-                    colleStore.items[index].isConsignee.toggle()
+                if let index = colleStore.items.firstIndex(where: { $0.id == colle.id }) {
+                    withAnimation {
+                        colleStore.items[index].isConsignee.toggle()
+                    }
                 }
             } label: {
                 Image(systemName: colle.isConsignee ? "checkmark.circle.fill" : "circle")
@@ -51,11 +51,13 @@ struct EleveColleRow: View {
                 }
             }
             .buttonStyle(.plain)
-            .padding(.trailing)
+            .padding(.trailing, 4)
 
             Button {
                 if let index = colleStore.items.firstIndex(where: { $0.id == colle.id }) {
-                    colleStore.items[index].isVerified.toggle()
+                    withAnimation {
+                        colleStore.items[index].isVerified.toggle()
+                    }
                 }
             } label: {
                 Image(systemName: colle.isVerified ? "checkmark.circle.fill" : "circle")

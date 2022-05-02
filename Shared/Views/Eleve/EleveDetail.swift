@@ -119,9 +119,11 @@ struct EleveDetail: View {
             ForEach(colleStore.colles(de          : eleve,
                                       isConsignee : filterColle ? false : nil)) { $colle in
                 NavigationLink {
-                    ColleEditor(eleve : $eleve,
-                                colle : $colle,
-                                isNew : false)
+                    ColleEditor(classe      : classe,
+                                eleve       : $eleve,
+                                colle       : $colle,
+                                isNew       : false,
+                                filterColle : filterColle)
                 } label: {
                     EleveColleRow(colle: colle)
                 }
@@ -184,9 +186,11 @@ struct EleveDetail: View {
         }
         .sheet(isPresented: $isAddingNewColle) {
             NavigationView {
-                ColleEditor(eleve : $eleve,
-                            colle : $newColle,
-                            isNew : true)
+                ColleEditor(classe      : classe,
+                            eleve       : $eleve,
+                            colle       : $newColle,
+                            isNew       : true,
+                            filterColle : false)
             }
         }
     }

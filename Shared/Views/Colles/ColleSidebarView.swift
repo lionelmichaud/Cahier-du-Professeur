@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ColleSidebarView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            /// Primary view
+            ColleBrowserView()
+            /// vue par défaut
+            Text("Sélectionner une colle")
+                .foregroundStyle(.secondary)
+        }
     }
 }
 

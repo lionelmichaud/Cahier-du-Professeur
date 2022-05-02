@@ -8,15 +8,30 @@
 import SwiftUI
 
 struct ObservBrowserRow: View {
+    let eleve : Eleve
     var observ: Observation
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            EleveLabel(eleve: eleve)
+
+            HStack {
+                Text(observ.date.stringShortDate)
+                    .foregroundColor(.secondary)
+
+                Spacer()
+
+                ObservNotifIcon(observ: observ)
+                ObservSignIcon(observ: observ)
+            }.font(.callout)
+        }
     }
 }
 
 struct ObservBrowserRow_Previews: PreviewProvider {
     static var previews: some View {
-        ObservBrowserRow(observ: Observation.exemple)
+        ObservBrowserRow(eleve  : Eleve.exemple,
+                         observ : Observation.exemple)
+        .previewLayout(.sizeThatFits)
     }
 }

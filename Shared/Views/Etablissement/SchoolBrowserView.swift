@@ -69,7 +69,7 @@ struct SchoolBrowserView: View {
             #endif
         }
         //.listStyle(.sidebar)
-        .navigationTitle("Les Etablissements")
+        .navigationTitle("Etablissements")
         //.navigationViewStyle(.columns)
         .toolbar {
             // ajouter un établissement

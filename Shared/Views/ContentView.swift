@@ -37,17 +37,17 @@ struct ContentView: View {
                 .tag(UIState.Tab.eleve)
                 .badge(eleveStore.nbOfItems)
 
-            /// actifs & passifs du patrimoine de la famille
-            ColleSidebarView()
-                .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
-                .tag(UIState.Tab.colle)
-                .badge(colleStore.nbOfItemsToCheck)
-
             /// scenario paramètrique de simulation
             ObservSidebarView()
                 .tabItem { Label("Observations", systemImage: "rectangle.and.text.magnifyingglass").symbolVariant(.none) }
                 .tag(UIState.Tab.observation)
                 .badge(observStore.nbOfItemsToCheck)
+
+            /// actifs & passifs du patrimoine de la famille
+            ColleSidebarView()
+                .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
+                .tag(UIState.Tab.colle)
+                .badge(colleStore.nbOfItemsToCheck)
         }
     }
 }

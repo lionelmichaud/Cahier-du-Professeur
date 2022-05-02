@@ -37,6 +37,7 @@ struct ObservEditor: View {
         !observStore.isPresent(observ) && !isNew
     }
 
+    /// True si l'item est filtré (masqué)
     private var isItemFiltred: Bool {
         !filteredSortedObservs(dans: classe).contains {
             $0.wrappedValue.id == observ.id
@@ -46,7 +47,8 @@ struct ObservEditor: View {
     var body: some View {
         if (isNew || !isItemFiltred) {
             VStack {
-                ObservDetail(observ     : $itemCopy,
+                ObservDetail(eleve      : eleve,
+                             observ     : $itemCopy,
                              isEditing  : isEditing,
                              isNew      : isNew,
                              isModified : $isModified)
@@ -94,7 +96,7 @@ struct ObservEditor: View {
                 }
                 .onDisappear {
                     if isModified && !isSaved {
-                        // Appliquer les modifications faites à la classe hors du mode édition
+                        // Appliquer les modifications faites à l'observation hors du mode édition
                         observ     = itemCopy
                         isModified = false
                         isSaved    = true
@@ -114,10 +116,10 @@ struct ObservEditor: View {
         }
     }
 
-    init(classe : Classe,
-         eleve  : Binding<Eleve>,
-         observ : Binding<Observation>,
-         isNew  : Bool = false,
+    init(classe            : Classe,
+         eleve             : Binding<Eleve>,
+         observ            : Binding<Observation>,
+         isNew             : Bool = false,
          filterObservation : Bool) {
         self.classe            = classe
         self._eleve            = eleve

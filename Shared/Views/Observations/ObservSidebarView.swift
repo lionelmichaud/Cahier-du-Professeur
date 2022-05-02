@@ -13,7 +13,7 @@ struct ObservSidebarView: View {
             /// Primary view
             ObservBrowserView()
             /// vue par défaut
-            Text("Sélectionner une classe")
+            Text("Sélectionner une observation")
                 .foregroundStyle(.secondary)
         }
     }

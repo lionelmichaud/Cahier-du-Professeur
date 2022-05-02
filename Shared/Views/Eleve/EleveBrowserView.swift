@@ -63,6 +63,7 @@ struct EleveBrowserSchoolSubiew : View {
     let school            : School
     var filterObservation : Bool
     var filterColle       : Bool
+    @State private var isClasseExpanded = true
 
     @EnvironmentObject private var classeStore : ClasseStore
     @EnvironmentObject private var eleveStore  : EleveStore
@@ -73,7 +74,7 @@ struct EleveBrowserSchoolSubiew : View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
             if filteredSortedEleves(dans: classe).isNotEmpty {
-                DisclosureGroup() {
+                DisclosureGroup(isExpanded: $isClasseExpanded) {
                     ForEach(filteredSortedEleves(dans: classe)) { $eleve in
                         NavigationLink {
                             EleveEditor(classe            : .constant(classe),

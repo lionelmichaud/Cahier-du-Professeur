@@ -168,7 +168,7 @@ final class EleveStore: ObservableObject, Codable {
                             if isIncluded(observ) {
                                 observs.append(observ)
                             }
-                    }
+                        }
                 }
 
                 return observs.sorted(by: <)
@@ -177,6 +177,44 @@ final class EleveStore: ObservableObject, Codable {
                 for observ in items {
                     if let index = observStore.items.firstIndex(where: { $0.id == observ.id }) {
                         observStore.items[index] = observ
+                    }
+                }
+            }
+        )
+    }
+
+    func filteredSortedColles
+    (dans classe : Classe,
+     colleStore  : ColleStore,
+     _ isIncluded: @escaping (Colle) -> Bool = { _ in true}) -> Binding<[Colle]> {
+
+        Binding<[Colle]>(
+            get: {
+                var colles = [Colle]()
+
+                self.items.filter { eleve in
+                    if let classeId = eleve.classeId {
+                        return (classeId == classe.id)
+                    } else {
+                        return false
+                    }
+                }
+                .forEach { eleve in
+                    colleStore
+                        .colles(de: eleve)
+                        .forEach { $observ in
+                            if isIncluded(observ) {
+                                colles.append(observ)
+                            }
+                        }
+                }
+
+                return colles.sorted(by: <)
+            },
+            set: { items in
+                for colle in items {
+                    if let index = colleStore.items.firstIndex(where: { $0.id == colle.id }) {
+                        colleStore.items[index] = colle
                     }
                 }
             }

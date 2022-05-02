@@ -12,18 +12,12 @@ struct EleveBrowserRow: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "person.fill")
-                .sfSymbolStyling()
-                .foregroundColor(eleve.sexe.color)
-            //            VStack(alignment: .leading, spacing: 5) {
-            Text(eleve.displayName)
-                .fontWeight(.semibold)
+            EleveLabel(eleve: eleve)
+
             Spacer()
-            HStack {
-                EleveColleLabel(eleve: eleve, scale: .small)
-                EleveObservLabel(eleve: eleve, scale: .small)
-            }
-            //            }
+            
+            EleveColleLabel(eleve: eleve, scale: .small)
+            EleveObservLabel(eleve: eleve, scale: .small)
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Colle: Identifiable {
+struct Colle: Identifiable, Codable {
 
     // MARK: - Type Methods
 

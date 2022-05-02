@@ -7,10 +7,16 @@
 
 import SwiftUI
 
+/// Gestion des élèves et de leurs liens avec leurs dépendants (classe, observaions, colles...)
 struct EleveManager {
 
     // MARK: - Gestion des Observations
 
+    /// Ajouter une `observation`à un `eleve` et à la liste des observations du store `observStore`
+    /// - Parameters:
+    ///   - observation: nouvelle observation de `eleve`
+    ///   - eleve: élève auquel ajouter la nouvelle `observation`
+    ///   - observStore: store des observations
     func ajouter(observation  : inout Observation,
                  aEleve eleve : inout Eleve,
                  observStore  : ObservationStore) {
@@ -19,15 +25,28 @@ struct EleveManager {
         observStore.add(observation)
     }
 
+    /// Détruire une observation d'ID'`observId` de la liste des observations du store `observStore`
+    /// puis retirer l'observation de l'élève d'ID `eleveId` qui fait l'objet de  l'observation
+    /// - Parameters:
+    ///   - observId: ID de l'observation à supprimer
+    ///   - eleveId: élève qui fait l'objet de  l'observation
+    ///   - eleveStore: store des élèves
     func retirer(observId          : UUID,
                  deEleveId eleveId : UUID,
-                 eleveStore        : EleveStore) {
-        guard let index = eleveStore.items.firstIndex(where: { $0.id == observId }) else {
+                 eleveStore        : EleveStore,
+                 observStore       : ObservationStore) {
+        // Détruire une observation d'ID'`observId` de la liste des observations du store `observStore`
+        observStore.deleteObservation(withID: observId)
+        
+        // retirer l'observation de l'élève d'ID `eleveId` qui fait l'objet de  l'observation
+        guard let indexEleve = eleveStore.items.firstIndex(where: { $0.id == eleveId }) else {
             return
         }
-        eleveStore.items[index].removeObservation(withID: observId)
+        eleveStore.items[indexEleve].removeObservation(withID: observId)
     }
 
+    /// Détruire une observation à la position `observIndex`de la liste des observations du store `observStore`
+    /// puis retirer l'observation de `eleve` auquel  elle appartient
     func retirer(observIndex   : Int,
                  deEleve eleve : inout Eleve,
                  observStore   : ObservationStore) {

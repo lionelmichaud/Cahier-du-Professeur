@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Observation: Identifiable {
+struct Observation: Identifiable, Codable {
 
     // MARK: - Type Methods
 

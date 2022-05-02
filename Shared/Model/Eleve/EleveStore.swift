@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-final class EleveStore: ObservableObject {
+final class EleveStore: ObservableObject, Codable {
 
     // MARK: - Properties
 
+    /// La liste des élèves
     @Published
     var items: [Eleve] = [ ]
 
+    /// Le nombre total d'élèves dans la liste du store
     var nbOfItems: Int {
         items.count
     }
@@ -42,13 +44,13 @@ final class EleveStore: ObservableObject {
         }
     }
 
-    /// True si un élève existe déjà avec le même ID
+    /// True si un élève existe déjà dans la liste du store avec le même ID
     /// - Parameter item: Eleve
     func isPresent(_ item: Eleve) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 
-    /// True si un élève existe déjà avec le même ID
+    /// True si un élève existe déjà dans la liste du store avec le même ID
     /// - Parameter ID: ID de l'élève
     func isPresent(_ ID: UUID) -> Bool {
         items.contains(where: { ID == $0.id})
@@ -62,6 +64,8 @@ final class EleveStore: ObservableObject {
         items.insert(item, at: 0)
     }
 
+    /// Supprimer toutes les observations et colles de l'élève
+    /// puis retirer l'élève de la liste du store
     func deleteEleve(_ eleve     : Eleve,
                      observStore : ObservationStore,
                      colleStore  : ColleStore) {
@@ -70,6 +74,8 @@ final class EleveStore: ObservableObject {
                     colleStore  : colleStore)
     }
 
+    /// Supprimer toutes les observations et colles de l'élève
+    /// puis retirer l'élève de la liste du store
     func deleteEleve(withID id   : UUID,
                      observStore : ObservationStore,
                      colleStore  : ColleStore) {
@@ -89,6 +95,11 @@ final class EleveStore: ObservableObject {
         }
     }
 
+    /// Insérer un l'ID d'un nouvel `eleve` dans une liste d'IDs `elevesID`
+    /// en respectant la relation d'oredre `<` définie pour les élèves.
+    /// - Parameters:
+    ///   - eleve: nouvel élève à insérer
+    ///   - elevesID: une liste d'IDs d'élèves
     func insert(eleve         : Eleve,
                 `in` elevesID : inout [UUID]) {
         guard elevesID.isNotEmpty else {

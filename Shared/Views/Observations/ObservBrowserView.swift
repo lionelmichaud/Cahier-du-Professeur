@@ -73,22 +73,21 @@ struct ObservBrowserSchoolSubiew : View {
                         } label: {
                             ObservBrowserRow(observ: observ)
                         }
-//                        .swipeActions {
-//                            // supprimer un élève
-//                            Button(role: .destructive) {
-//                                withAnimation {
-//                                    // supprimer l'élève et tous ses descendants
-//                                    // puis retirer l'élève de la classe auquelle il appartient
-//                                    ClasseManager().retirer(eleve       : eleve,
-//                                                            deClasse    : &classe,
-//                                                            eleveStore  : eleveStore,
-//                                                            observStore : observStore,
-//                                                            colleStore  : colleStore)
-//                                }
-//                            } label: {
-//                                Label("Supprimer", systemImage: "trash")
-//                            }
-//                        }
+                        .swipeActions {
+                            // supprimer un élève
+                            Button(role: .destructive) {
+                                withAnimation {
+                                    if let eleveId = observ.eleveId {
+                                        EleveManager().retirer(observId   : observ.id,
+                                                               deEleveId  : eleveId,
+                                                               eleveStore : eleveStore,
+                                                               observStore: observStore)
+                                    }
+                                }
+                            } label: {
+                                Label("Supprimer", systemImage: "trash")
+                            }
+                        }
                     }
                 } label: {
                     Text(classe.displayString)

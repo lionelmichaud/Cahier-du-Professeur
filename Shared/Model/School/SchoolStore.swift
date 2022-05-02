@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class SchoolStore: ObservableObject {
+final class SchoolStore: ObservableObject, Codable {
 
     // MARK: - Properties
 

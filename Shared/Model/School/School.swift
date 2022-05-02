@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct School: Identifiable, Equatable {
+struct School: Identifiable, Equatable, Codable {
 
     // MARK: - Type Methods
 

@@ -7,7 +7,14 @@
 
 import Foundation
 
+/// Gestion des classes et de leurs liens avec leurs dépendants (établissements, élèves...)
 struct ClasseManager {
+
+    /// Ajouter un `eleve`à une `classe` et à la liste des élève du store `eleveStore`
+    /// - Parameters:
+    ///   - eleve: nouvel élève dans la `classe`
+    ///   - classe: classe à lauqlelle ajouter le nouvel `eleve`
+    ///   - eleveStore: store des élèves
     func ajouter(eleve          : inout Eleve,
                  aClasse classe : inout Classe,
                  eleveStore     : EleveStore) {
@@ -16,6 +23,9 @@ struct ClasseManager {
         eleveStore.add(eleve)
     }
 
+    /// Détruire l'`eleve` de la liste du store des élèves `eleveStore`
+    /// ainsi que tous ses descendants (observ, colles...) des listes `observStore`et `colleStore`
+    /// puis retirer l'élève de la `classe` à laquelle il appartient
     func retirer(eleve           : Eleve,
                  deClasse classe : inout Classe,
                  eleveStore      : EleveStore,
@@ -29,8 +39,9 @@ struct ClasseManager {
         classe.removeEleve(withID: eleve.id)
     }
 
-    /// Détruire l'élève et tous ses descendants
-    /// puis retirer l'élève de la classe à laquelle il appartient
+    /// Détruire l'élève à la position `eleveIndex`de la liste du store des élèves `eleveStore`
+    /// ainsi que tous ses descendants (observ, colles...) des listes `observStore`et `colleStore`
+    /// puis retirer l'élève de la `classe` à laquelle il appartient
     func retirer(eleveIndex      : Int,
                  deClasse classe : inout Classe,
                  eleveStore      : EleveStore,

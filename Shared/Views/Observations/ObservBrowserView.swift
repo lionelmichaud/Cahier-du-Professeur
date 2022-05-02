@@ -70,7 +70,7 @@ struct ObservBrowserSchoolSubiew : View {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
                         NavigationLink {
                             ObservEditor(classe            : classe,
-                                         eleve             : .constant(Eleve.exemple),
+                                         eleve             : .constant(eleveStore.eleve(withID: observ.eleveId!)!),
                                          observ            : $observ,
                                          isNew             : false,
                                          filterObservation : filterObservation)

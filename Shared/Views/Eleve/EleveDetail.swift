@@ -52,6 +52,10 @@ struct EleveDetail: View {
                 Text(eleve.displayName)
                     .font(.title2)
                     .textFieldStyle(.roundedBorder)
+                if eleve.isFlagged {
+                    Image(systemName: "flag.fill")
+                        .foregroundColor(.orange)
+                }
             }
         }
         .listRowSeparator(.hidden)
@@ -88,12 +92,12 @@ struct EleveDetail: View {
                     EleveObservRow(observ: observ)
                 }
             }
-            .onDelete(perform: { indexSet in
+            .onDelete { indexSet in
                 for index in indexSet {
                     isModified = true
                     deleteObserv(index: index)
                 }
-            })
+            }
         } header: {
             HStack {
                 Text("Observations")

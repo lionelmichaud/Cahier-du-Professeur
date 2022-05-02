@@ -25,6 +25,7 @@ struct Eleve: Identifiable, Codable {
     var sexe         : Sexe = .male
     var name         : PersonNameComponents = PersonNameComponents()
     var classeId     : UUID?
+    var isFlagged    : Bool   = false
     var appreciation : String = ""
     var collesID     : [UUID] = [ ]
     var observsID    : [UUID] = [ ]
@@ -129,6 +130,7 @@ extension Eleve: CustomStringConvertible {
            Sexe    : \(sexe.pickerString)
            Nom     : \(name.formatted(.name(style: .long)))
            ClasseID: \(String(describing: classeId))
+           Flagged : \(isFlagged.frenchString)
            Appréciation: \(appreciation)
            Observations: \(String(describing: observsID).withPrefixedSplittedLines("     "))
            Colles: \(String(describing: collesID).withPrefixedSplittedLines("     "))

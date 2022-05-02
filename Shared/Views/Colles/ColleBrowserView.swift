@@ -70,7 +70,7 @@ struct ColleBrowserSchoolSubiew : View {
                     ForEach(filteredSortedColles(dans: classe)) { $colle in
                         NavigationLink {
                             ColleEditor(classe      : classe,
-                                        eleve       : .constant(Eleve.exemple),
+                                        eleve       : .constant(eleveStore.eleve(withID: colle.eleveId!)!),
                                         colle       : $colle,
                                         isNew       : false,
                                         filterColle : filterColle)

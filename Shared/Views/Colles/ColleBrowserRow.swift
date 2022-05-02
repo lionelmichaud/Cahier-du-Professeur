@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct ColleBrowserRow: View {
     let eleve : Eleve
@@ -13,16 +14,20 @@ struct ColleBrowserRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            EleveLabel(eleve: eleve)
-
             HStack {
-                Text(colle.date.stringShortDate)
-                    .foregroundColor(.secondary)
+                Image(systemName: "lock")
+                    .sfSymbolStyling()
+                    .foregroundColor(colle.color)
+                Text("\(colle.date.stringShortDate) à \(colle.date.stringTime)")
 
                 Spacer()
 
                 ColleNotifIcon(colle: colle)
-            }.font(.callout)
+            }
+
+            EleveLabel(eleve: eleve)
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 }
@@ -31,5 +36,6 @@ struct ColleBrowserRow_Previews: PreviewProvider {
     static var previews: some View {
         ColleBrowserRow(eleve: Eleve.exemple,
                         colle: Colle.exemple)
+        .previewLayout(.sizeThatFits)
     }
 }

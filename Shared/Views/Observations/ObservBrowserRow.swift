@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct ObservBrowserRow: View {
     let eleve : Eleve
@@ -13,17 +14,21 @@ struct ObservBrowserRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            EleveLabel(eleve: eleve)
-
             HStack {
-                Text(observ.date.stringShortDate)
-                    .foregroundColor(.secondary)
+                Image(systemName: "magnifyingglass")
+                    .sfSymbolStyling()
+                    .foregroundColor(observ.color)
+                Text("\(observ.date.stringShortDate) à \(observ.date.stringTime)")
 
                 Spacer()
 
                 ObservNotifIcon(observ: observ)
                 ObservSignIcon(observ: observ)
-            }.font(.callout)
+            }
+
+            EleveLabel(eleve: eleve)
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 }

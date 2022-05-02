@@ -27,6 +27,70 @@ struct ClasseDetail: View {
     @FocusState
     private var isHoursFocused: Bool
 
+    var eleveList: some View {
+        Group {
+            // titre
+            Text(classe.elevesLabel)
+                .font(.title3)
+                .fontWeight(.bold)
+
+            // édition de la liste des élèves
+            ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
+                NavigationLink {
+                    EleveEditor(classe : $classe,
+                                eleve  : $eleve,
+                                isNew  : false)
+                } label: {
+                    ClasseEleveRow(eleve: eleve)
+                }
+                .swipeActions {
+                    // supprimer un élève
+                    Button(role: .destructive) {
+                        withAnimation {
+                            // supprimer l'élève et tous ses descendants
+                            // puis retirer l'élève de la classe auquelle il appartient
+                            ClasseManager().retirer(eleve       : eleve,
+                                                    deClasse    : &classe,
+                                                    eleveStore  : eleveStore,
+                                                    observStore : observStore,
+                                                    colleStore  : colleStore)
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
+
+                    // flager un élève
+                    Button {
+                        withAnimation {
+                            eleve.isFlagged.toggle()
+                        }
+                    } label: {
+                        if eleve.isFlagged {
+                            Label("Sans drapeau", systemImage: "flag.slash")
+                        } else {
+                            Label("Avec drapeau", systemImage: "flag.fill")
+                        }
+                    }.tint(.orange)
+                }
+            }
+
+            // ajouter un élève
+            Button {
+                isModified = true
+                newEleve = Eleve(sexe   : .male,
+                                 nom    : "",
+                                 prenom : "")
+                isAddingNewEleve = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Ajouter un élève")
+                }
+            }
+            .buttonStyle(.borderless)
+        }
+    }
+
     var body: some View {
         List {
             // nom
@@ -75,43 +139,7 @@ struct ClasseDetail: View {
 
             // élèves dans la classe
             if !isNew {
-                // titre
-                Text(classe.elevesLabel)
-                    .font(.title3)
-                    .fontWeight(.bold)
-
-                // édition de la liste des élèves
-                ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
-                    NavigationLink {
-                        EleveEditor(classe : $classe,
-                                    eleve  : $eleve,
-                                    isNew  : false)
-                    } label: {
-                        ClasseEleveRow(eleve: eleve)
-                    }
-                }
-                .onDelete(perform: { indexSet in
-                    for index in indexSet {
-                        isModified = true
-                        delete(eleveIndex: index)
-                    }
-                })
-                .onMove(perform: moveEleve)
-
-                // ajouter un élève
-                Button {
-                    isModified = true
-                    newEleve = Eleve(sexe   : .male,
-                                     nom    : "",
-                                     prenom : "")
-                    isAddingNewEleve = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus")
-                        Text("Ajouter un élève")
-                    }
-                }
-                .buttonStyle(.borderless)
+                eleveList
             }
         }
         #if os(iOS)
@@ -127,18 +155,6 @@ struct ClasseDetail: View {
                             isNew  : true)
             }
         }
-    }
-
-    private func moveEleve(from indexes: IndexSet, to destination: Int) {
-        classe.moveEleve(from: indexes, to: destination)
-    }
-
-    func delete(eleveIndex: Int) {
-        ClasseManager().retirer(eleveIndex  : eleveIndex,
-                                deClasse    : &classe,
-                                eleveStore  : eleveStore,
-                                observStore : observStore,
-                                colleStore  : colleStore)
     }
 }
 

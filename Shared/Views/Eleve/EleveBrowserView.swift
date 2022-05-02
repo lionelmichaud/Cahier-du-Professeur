@@ -100,6 +100,19 @@ struct EleveBrowserSchoolSubiew : View {
                             } label: {
                                 Label("Supprimer", systemImage: "trash")
                             }
+
+                            // flager un élève
+                            Button {
+                                withAnimation {
+                                    eleve.isFlagged.toggle()
+                                }
+                            } label: {
+                                if eleve.isFlagged {
+                                    Label("Sans drapeau", systemImage: "flag.slash")
+                                } else {
+                                    Label("Avec drapeau", systemImage: "flag.fill")
+                                }
+                            }.tint(.orange)
                         }
                     }
                 } label: {

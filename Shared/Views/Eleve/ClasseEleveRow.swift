@@ -16,8 +16,8 @@ struct ClasseEleveRow: View {
 
             Spacer()
 
-            EleveColleLabel(eleve: eleve, scale: .large)
-            EleveObservLabel(eleve: eleve, scale: .large)
+            EleveColleLabel(eleve: eleve, scale: .medium)
+            EleveObservLabel(eleve: eleve, scale: .medium)
         }
     }
 }

@@ -22,8 +22,8 @@ struct ClassBrowserRow: View {
                     Text(classe.displayString)
                         .fontWeight(.bold)
                     Spacer()
-                    ClasseColleLabel(classe: classe, scale: .large)
-                    ClasseObservLabel(classe: classe, scale: .large)
+                    ClasseColleLabel(classe: classe, scale: .medium)
+                    ClasseObservLabel(classe: classe, scale: .medium)
                 }
 
                 HStack {

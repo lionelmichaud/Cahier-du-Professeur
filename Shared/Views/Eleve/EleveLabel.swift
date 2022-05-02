@@ -18,6 +18,10 @@ struct EleveLabel: View {
                 .foregroundColor(eleve.sexe.color)
             Text(eleve.displayName)
                 .fontWeight(.semibold)
+            if eleve.isFlagged {
+                Image(systemName: "flag.fill")
+                    .foregroundColor(.orange)
+            }
         }
     }
 }

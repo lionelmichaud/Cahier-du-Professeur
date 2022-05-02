@@ -44,7 +44,7 @@ struct ColleDetail: View {
             HStack {
                 Image(systemName: "lock")
                     .sfSymbolStyling()
-                    .foregroundColor(.red)
+                    .foregroundColor(colle.color)
                 // date
                 if isNew || isEditing {
                     DatePicker("Date", selection: $colle.date)

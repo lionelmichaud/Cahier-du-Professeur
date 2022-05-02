@@ -13,10 +13,14 @@ struct EleveObservRow: View {
     @EnvironmentObject var observStore : ObservationStore
     @Environment(\.horizontalSizeClass) var hClass
 
+    var observColor: Color {
+        observ.satisfies(isConsignee: false, isVerified: false) ? .red : .green
+    }
+
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.red)
+                .foregroundColor(observColor)
             if hClass == .compact {
                 VStack(alignment: .leading) {
                     Text(observ.date.stringShortDate)

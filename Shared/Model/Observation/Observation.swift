@@ -38,6 +38,10 @@ struct Observation: Identifiable, Codable {
 
     // MARK: - Methods
 
+    /// True si l'observation satisfait à l'un des critères (OU logique)
+    /// - Parameters:
+    ///   - isConsignee: si `nil`, le critère n'est pas pris en compe
+    ///   - isVerified: si `nil`, le critère n'est pas pris en compe
     func satisfies(isConsignee : Bool?  = nil,
                    isVerified  : Bool?  = nil) -> Bool {
         switch (isConsignee, isVerified) {

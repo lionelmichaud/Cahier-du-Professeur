@@ -174,7 +174,7 @@ struct EleveDetail: View {
         //.listStyle(.sidebar)
         #if os(iOS)
         .navigationTitle("Élève")
-        .navigationBarTitleDisplayMode(.inline)
+        //.navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
             isPrenomFocused = isNew

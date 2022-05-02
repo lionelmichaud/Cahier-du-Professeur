@@ -105,8 +105,8 @@ struct ColleDetail: View {
             }
         }
         #if os(iOS)
-        .navigationTitle("Colles")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Colle")
+        //.navigationBarTitleDisplayMode(.inline)
         #endif
     }
 }

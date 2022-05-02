@@ -92,7 +92,7 @@ struct ObservDetail: View {
         }
         #if os(iOS)
         .navigationTitle("Observation")
-        .navigationBarTitleDisplayMode(.inline)
+        //.navigationBarTitleDisplayMode(.inline)
         #endif
     }
 }

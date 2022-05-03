@@ -22,11 +22,13 @@ struct Classe: Identifiable, Codable {
     // MARK: - Properties
 
     var id = UUID()
-    var schoolId : UUID?
-    var niveau   : NiveauClasse = .n6ieme
-    var numero   : Int          = 1
-    var heures   : Double       = 0
-    var elevesID : [UUID] = []
+    var schoolId     : UUID?
+    var niveau       : NiveauClasse = .n6ieme
+    var numero       : Int          = 1
+    var heures       : Double       = 0
+    var isFlagged    : Bool         = false
+    var appreciation : String       = ""
+    var elevesID     : [UUID]       = []
 
     var nbOfEleves: Int {
         elevesID.count
@@ -97,6 +99,8 @@ extension Classe: CustomStringConvertible {
            Niveau  : \(niveau.displayString)
            Numéro  : \(numero)
            Heures  : \(heures)
+           Flagged : \(isFlagged.frenchString)
+           Appréciation: \(appreciation)
            SchoolID: \(String(describing: schoolId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
         """

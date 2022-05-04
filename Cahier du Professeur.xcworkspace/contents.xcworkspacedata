@@ -2,7 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Packages/Stateful">
+   </FileRef>
+   <FileRef
       location = "group:../Packages/AppFoundation">
+   </FileRef>
+   <FileRef
+      location = "group:../Packages/Persistable">
+   </FileRef>
+   <FileRef
+      location = "group:../Packages/FileAndFolder">
    </FileRef>
    <FileRef
       location = "group:../Packages/HelpersView">

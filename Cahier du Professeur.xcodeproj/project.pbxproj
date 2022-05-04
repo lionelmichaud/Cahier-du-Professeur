@@ -95,6 +95,16 @@
 		79E109F328219AF700689212 /* Stateful in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109F228219AF700689212 /* Stateful */; };
 		79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
+		79F102E228232F36005E5D9C /* Eleve.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DD28232F36005E5D9C /* Eleve.json */; };
+		79F102E328232F36005E5D9C /* Eleve.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DD28232F36005E5D9C /* Eleve.json */; };
+		79F102E428232F36005E5D9C /* Colle.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DE28232F36005E5D9C /* Colle.json */; };
+		79F102E528232F36005E5D9C /* Colle.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DE28232F36005E5D9C /* Colle.json */; };
+		79F102E628232F36005E5D9C /* Observation.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DF28232F36005E5D9C /* Observation.json */; };
+		79F102E728232F36005E5D9C /* Observation.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DF28232F36005E5D9C /* Observation.json */; };
+		79F102E828232F36005E5D9C /* School.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102E028232F36005E5D9C /* School.json */; };
+		79F102E928232F36005E5D9C /* School.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102E028232F36005E5D9C /* School.json */; };
+		79F102EA28232F36005E5D9C /* Classe.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102E128232F36005E5D9C /* Classe.json */; };
+		79F102EB28232F36005E5D9C /* Classe.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102E128232F36005E5D9C /* Classe.json */; };
 		79F3ABA72808218300D068D9 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA62808218300D068D9 /* Tests_iOS.swift */; };
 		79F3ABA92808218300D068D9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA82808218300D068D9 /* Tests_iOSLaunchTests.swift */; };
 		79F3ABB32808218300D068D9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB22808218300D068D9 /* Tests_macOS.swift */; };
@@ -207,6 +217,11 @@
 		79D583FF2820535B00371EB3 /* ColleBrowserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleBrowserRow.swift; sourceTree = "<group>"; };
 		79D58402282053C300371EB3 /* ColleNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleNotifIcon.swift; sourceTree = "<group>"; };
 		79F102D02821B816005E5D9C /* JsonCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonCodableArray.swift; sourceTree = "<group>"; };
+		79F102DD28232F36005E5D9C /* Eleve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Eleve.json; sourceTree = "<group>"; };
+		79F102DE28232F36005E5D9C /* Colle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Colle.json; sourceTree = "<group>"; };
+		79F102DF28232F36005E5D9C /* Observation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Observation.json; sourceTree = "<group>"; };
+		79F102E028232F36005E5D9C /* School.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = School.json; sourceTree = "<group>"; };
+		79F102E128232F36005E5D9C /* Classe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Classe.json; sourceTree = "<group>"; };
 		79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cahier_du_ProfesseurApp.swift; sourceTree = "<group>"; };
 		79F3AB8F2808218100D068D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79F3AB902808218300D068D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -359,10 +374,23 @@
 			path = MotifView;
 			sourceTree = "<group>";
 		};
+		79F102D32823199E005E5D9C /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				79F102E028232F36005E5D9C /* School.json */,
+				79F102E128232F36005E5D9C /* Classe.json */,
+				79F102DD28232F36005E5D9C /* Eleve.json */,
+				79F102DF28232F36005E5D9C /* Observation.json */,
+				79F102DE28232F36005E5D9C /* Colle.json */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		79F3AB882808218000D068D9 = {
 			isa = PBXGroup;
 			children = (
 				79F3ABE528083A3100D068D9 /* Playground.playground */,
+				79F102D32823199E005E5D9C /* JSON */,
 				79F3AB8D2808218100D068D9 /* Shared */,
 				79F3AB9C2808218300D068D9 /* macOS */,
 				79F3ABA52808218300D068D9 /* Tests iOS */,
@@ -645,7 +673,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F102EA28232F36005E5D9C /* Classe.json in Resources */,
+				79F102E828232F36005E5D9C /* School.json in Resources */,
+				79F102E628232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBA2808218300D068D9 /* Assets.xcassets in Resources */,
+				79F102E228232F36005E5D9C /* Eleve.json in Resources */,
+				79F102E428232F36005E5D9C /* Colle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +686,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F102EB28232F36005E5D9C /* Classe.json in Resources */,
+				79F102E928232F36005E5D9C /* School.json in Resources */,
+				79F102E728232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBB2808218300D068D9 /* Assets.xcassets in Resources */,
+				79F102E328232F36005E5D9C /* Eleve.json in Resources */,
+				79F102E528232F36005E5D9C /* Colle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

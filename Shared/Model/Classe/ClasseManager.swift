@@ -18,7 +18,7 @@ struct ClasseManager {
     func ajouter(eleve          : inout Eleve,
                  aClasse classe : inout Classe,
                  eleveStore     : EleveStore) {
-        eleveStore.insert(eleve: eleve, in: &classe.elevesID)
+        eleveStore.insert(item: eleve, in: &classe.elevesID)
         eleve.classeId = classe.id
         eleveStore.add(eleve)
     }

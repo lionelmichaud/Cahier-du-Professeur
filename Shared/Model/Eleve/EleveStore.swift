@@ -7,18 +7,9 @@
 
 import SwiftUI
 
-final class EleveStore: ObservableObject, Codable {
+typealias EleveStore = JsonCodableArray<Eleve>
 
-    // MARK: - Properties
-
-    /// La liste des élèves
-    @Published
-    var items: [Eleve] = [ ]
-
-    /// Le nombre total d'élèves dans la liste du store
-    var nbOfItems: Int {
-        items.count
-    }
+extension EleveStore {
 
     // MARK: - Methods
 
@@ -44,26 +35,6 @@ final class EleveStore: ObservableObject, Codable {
         }
     }
 
-    /// True si un élève existe déjà dans la liste du store avec le même ID
-    /// - Parameter item: Eleve
-    func isPresent(_ item: Eleve) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
-
-    /// True si un élève existe déjà dans la liste du store avec le même ID
-    /// - Parameter ID: ID de l'élève
-    func isPresent(_ ID: UUID) -> Bool {
-        items.contains(where: { ID == $0.id})
-    }
-
-    func eleve(withID ID: UUID) -> Eleve? {
-        items.first(where: { ID == $0.id})
-    }
-
-    func add(_ item: Eleve) {
-        items.insert(item, at: 0)
-    }
-
     /// Supprimer toutes les observations et colles de l'élève
     /// puis retirer l'élève de la liste du store
     func deleteEleve(_ eleve     : Eleve,
@@ -79,7 +50,7 @@ final class EleveStore: ObservableObject, Codable {
     func deleteEleve(withID id   : UUID,
                      observStore : ObservationStore,
                      colleStore  : ColleStore) {
-        guard let eleve = eleve(withID: id) else {
+        guard let eleve = item(withID: id) else {
             return
         }
         // supprimer toutes les observations et colles de l'élève
@@ -93,30 +64,7 @@ final class EleveStore: ObservableObject, Codable {
         items.removeAll {
             $0.id == eleve.id
         }
-    }
-
-    /// Insérer un l'ID d'un nouvel `eleve` dans une liste d'IDs `elevesID`
-    /// en respectant la relation d'oredre `<` définie pour les élèves.
-    /// - Parameters:
-    ///   - eleve: nouvel élève à insérer
-    ///   - elevesID: une liste d'IDs d'élèves
-    func insert(eleve         : Eleve,
-                `in` elevesID : inout [UUID]) {
-        guard elevesID.isNotEmpty else {
-            elevesID = [eleve.id]
-            return
-        }
-
-        guard let index = elevesID.firstIndex(where: {
-            guard let c0 = self.eleve(withID: $0) else {
-                return false
-            }
-            return eleve < c0
-        }) else {
-            elevesID.append(eleve.id)
-            return
-        }
-        elevesID.insert(eleve.id, at: index)
+        saveAsJSON()
     }
 
     func filteredSortedEleves
@@ -141,6 +89,7 @@ final class EleveStore: ObservableObject, Codable {
                         self.items[index] = classe
                     }
                 }
+                self.saveAsJSON()
             }
         )
     }
@@ -179,6 +128,7 @@ final class EleveStore: ObservableObject, Codable {
                         observStore.items[index] = observ
                     }
                 }
+                self.saveAsJSON()
             }
         )
     }
@@ -217,24 +167,14 @@ final class EleveStore: ObservableObject, Codable {
                         colleStore.items[index] = colle
                     }
                 }
+                self.saveAsJSON()
             }
         )
     }
 
-    static var exemple : EleveStore = {
-        let store = EleveStore()
-        store.items.append(Eleve.exemple)
-        return store
-    }()
+//    static var exemple : EleveStore = {
+//        let store = EleveStore()
+//        store.items.append(Eleve.exemple)
+//        return store
+//    }()
 }
-
-extension EleveStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
-    }
-}
-

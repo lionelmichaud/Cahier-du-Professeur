@@ -1,0 +1,13 @@
+{
+    "items" : [
+        {
+            "id"        : "14D6F5C7-3B61-4AA8-940B-CCA5159928AA",
+            "nom"       : "Collège",
+            "note"      : ""
+            "niveau"    : 0,
+            "classesID" : [
+                "A75400FA-6C2D-459B-B416-0DEE88B03C96"
+            ],
+        }
+    ]
+}

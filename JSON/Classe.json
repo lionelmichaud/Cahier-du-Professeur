@@ -1,0 +1,16 @@
+{
+    "items" : [
+        {
+            "id"           : "A75400FA-6C2D-459B-B416-0DEE88B03C96",
+            "schoolId"     : "14D6F5C7-3B61-4AA8-940B-CCA5159928AA",
+            "niveau"       : 0,
+            "numero"       : 1,
+            "heures"       : 1.5,
+            "isFlagged"    : false,
+            "appreciation" : "",
+            "elevesID"     : [
+                "B50E1614-677E-4B48-AAEA-7896027FFA66"
+            ]
+        }
+    ]
+}

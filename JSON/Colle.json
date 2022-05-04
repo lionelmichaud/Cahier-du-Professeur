@@ -1,0 +1,19 @@
+{
+    "items" : [
+        {
+            "id"      : "DC3CDB64-4A3E-4D6C-810D-4A6F63AF3E81",
+            "eleveId" : "B50E1614-677E-4B48-AAEA-7896027FFA66"
+            "date"    : "2022-05-04T21:56:18Z",
+            "motif"   : {
+                "nature" : {
+                    "attitudeIndaptee" : {
+                    }
+                },
+                "descriptionMotif" : ""
+            },
+            "isConsignee" : true,
+            "isVerified"  : false,
+            "duree"       : 1,
+        }
+    ]
+}

@@ -14,7 +14,7 @@ protocol Ordered {
     static func < (lhs: Self, rhs: Self) -> Bool
 }
 
-public class JsonCodableArray<E>: ObservableObject, JsonCodableToFolderP where
+public final class JsonCodableArray<E>: ObservableObject, JsonCodableToFolderP where
 E: Codable,
 E: Identifiable,
 E: CustomStringConvertible,
@@ -177,6 +177,11 @@ extension JsonCodableArray: CustomStringConvertible {
 
 extension JsonCodableArray where E: Ordered {
 
+    /// Insérer un l'ID d'un nouvel `item` dans une liste d'IDs `itemsID`
+    /// en respectant la relation d'oredre `<` définie pour les élèves.
+    /// - Parameters:
+    ///   - item: nouvel item à insérer
+    ///   - itemsID: une liste d'IDs d'item
     func insert(item         : E,
                 `in` itemsID : inout [UUID]) {
         guard itemsID.isNotEmpty else {

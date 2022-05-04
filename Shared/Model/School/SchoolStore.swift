@@ -7,29 +7,12 @@
 
 import SwiftUI
 
-final class SchoolStore: ObservableObject, Codable {
+typealias SchoolStore = JsonCodableArray<School>
 
-    // MARK: - Properties
-
-    @Published
-    var items: [School] = [ ]
-    
-    var nbOfItems: Int {
-        items.count
-    }
-
-    // MARK: - Methods
+extension SchoolStore {
 
     func isPresent(_ item: School) -> Bool {
         items.contains(where: { item.id == $0.id})
-    }
-
-    func school(withID ID: UUID) -> School? {
-        items.first(where: { ID == $0.id})
-    }
-
-    func add(_ item: School) {
-        items.insert(item, at: 0)
     }
 
     func deleteSchool(_ item      : School,
@@ -48,6 +31,7 @@ final class SchoolStore: ObservableObject, Codable {
         items.removeAll {
             $0.id == item.id
         }
+        saveAsJSON()
     }
 
     func sortedSchools(niveau: NiveauSchool) -> Binding<[School]> {
@@ -65,6 +49,7 @@ final class SchoolStore: ObservableObject, Codable {
                         self.items[index] = school
                     }
                 }
+                self.saveAsJSON()
             }
         )
     }
@@ -81,19 +66,8 @@ final class SchoolStore: ObservableObject, Codable {
                         self.items[index] = school
                     }
                 }
+                self.saveAsJSON()
             }
         )
-    }
-
-    static var exemple = SchoolStore()
-}
-
-extension SchoolStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
     }
 }

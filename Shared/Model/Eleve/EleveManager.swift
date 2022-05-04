@@ -20,7 +20,7 @@ struct EleveManager {
     func ajouter(observation  : inout Observation,
                  aEleve eleve : inout Eleve,
                  observStore  : ObservationStore) {
-        observStore.insert(observation: observation, in: &eleve.observsID)
+        observStore.insert(item: observation, in: &eleve.observsID)
         observation.eleveId = eleve.id
         observStore.add(observation)
     }
@@ -61,7 +61,7 @@ struct EleveManager {
     func ajouter(colle        : inout Colle,
                  aEleve eleve : inout Eleve,
                  colleStore   : ColleStore) {
-        colleStore.insert(colle: colle, in: &eleve.collesID)
+        colleStore.insert(item: colle, in: &eleve.collesID)
         colle.eleveId = eleve.id
         colleStore.add(colle)
     }

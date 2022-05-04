@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Colle: Identifiable, Codable {
+struct Colle: Identifiable, Codable, Ordered {
 
     // MARK: - Type Methods
 

@@ -70,12 +70,12 @@ struct ObservBrowserSchoolSubiew : View {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
                         NavigationLink {
                             ObservEditor(classe            : classe,
-                                         eleve             : .constant(eleveStore.eleve(withID: observ.eleveId!)!),
+                                         eleve             : .constant(eleveStore.item(withID: observ.eleveId!)!),
                                          observ            : $observ,
                                          isNew             : false,
                                          filterObservation : filterObservation)
                         } label: {
-                            ObservBrowserRow(eleve  : eleveStore.eleve(withID: observ.eleveId!)!,
+                            ObservBrowserRow(eleve  : eleveStore.item(withID: observ.eleveId!)!,
                                              observ : observ)
                         }
                         .swipeActions {

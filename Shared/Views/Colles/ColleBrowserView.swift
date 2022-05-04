@@ -70,12 +70,12 @@ struct ColleBrowserSchoolSubiew : View {
                     ForEach(filteredSortedColles(dans: classe)) { $colle in
                         NavigationLink {
                             ColleEditor(classe      : classe,
-                                        eleve       : .constant(eleveStore.eleve(withID: colle.eleveId!)!),
+                                        eleve       : .constant(eleveStore.item(withID: colle.eleveId!)!),
                                         colle       : $colle,
                                         isNew       : false,
                                         filterColle : filterColle)
                         } label: {
-                            ColleBrowserRow(eleve : eleveStore.eleve(withID: colle.eleveId!)!,
+                            ColleBrowserRow(eleve : eleveStore.item(withID: colle.eleveId!)!,
                                             colle : colle)
                         }
                         .swipeActions {

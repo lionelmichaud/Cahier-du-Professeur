@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Eleve: Identifiable, Codable {
+struct Eleve: Identifiable, Codable, Ordered {
 
     // MARK: - Type Methods
 

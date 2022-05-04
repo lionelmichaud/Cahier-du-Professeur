@@ -7,16 +7,9 @@
 
 import SwiftUI
 
-final class ClasseStore: ObservableObject, Codable {
+typealias ClasseStore = JsonCodableArray<Classe>
 
-    // MARK: - Properties
-
-    @Published
-    var items: [Classe] = [ ]
-
-    var nbOfItems: Int {
-        items.count
-    }
+extension ClasseStore {
 
     // MARK: - Methods
 
@@ -42,27 +35,7 @@ final class ClasseStore: ObservableObject, Codable {
         }
     }
 
-    /// True si une classe existe déjà avec le même ID
-    /// - Parameter item: Classe
-    func isPresent(_ item: Classe) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
-
-    /// True si une classe existe déjà avec le même ID
-    /// - Parameter ID: ID de la Calsse
-    func isPresent(_ ID: UUID) -> Bool {
-        items.contains(where: { ID == $0.id})
-    }
-
-    func classe(withID ID: UUID) -> Classe? {
-        items.first(where: { ID == $0.id})
-    }
-
-    func add(_ item: Classe) {
-        items.insert(item, at: 0)
-    }
-
-    func deleteClasse(_ classe     : Classe,
+    func deleteClasse(_ classe    : Classe,
                       eleveStore  : EleveStore,
                       observStore : ObservationStore,
                       colleStore  : ColleStore) {
@@ -76,7 +49,7 @@ final class ClasseStore: ObservableObject, Codable {
                       eleveStore  : EleveStore,
                       observStore : ObservationStore,
                       colleStore  : ColleStore) {
-        guard let classe = classe(withID: id) else {
+        guard let classe = item(withID: id) else {
             return
         }
         // supprimer toutes les élèves de la classe
@@ -89,31 +62,13 @@ final class ClasseStore: ObservableObject, Codable {
         items.removeAll {
             $0.id == classe.id
         }
-    }
-
-    func insert(classe         : Classe,
-                `in` classesID : inout [UUID]) {
-        guard classesID.isNotEmpty else {
-            classesID = [classe.id]
-            return
-        }
-
-        guard let index = classesID.firstIndex(where: {
-            guard let c0 = self.classe(withID: $0) else {
-                return false
-            }
-            return classe < c0
-        }) else {
-            classesID.append(classe.id)
-            return
-        }
-        classesID.insert(classe.id, at: index)
+        saveAsJSON()
     }
 
     func heures(dans classesID : [UUID]) -> Double {
         var total = 0.0
         for c in classesID {
-            total += classe(withID: c)?.heures ?? 0.0
+            total += item(withID: c)?.heures ?? 0.0
         }
         return total
     }
@@ -137,6 +92,7 @@ final class ClasseStore: ObservableObject, Codable {
                         self.items[index] = classe
                     }
                 }
+                self.saveAsJSON()
             }
         )
     }
@@ -161,19 +117,8 @@ final class ClasseStore: ObservableObject, Codable {
                         self.items[index] = classe
                     }
                 }
+                self.saveAsJSON()
             }
         )
-    }
-
-    static var exemple = ClasseStore()
-}
-
-extension ClasseStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
     }
 }

@@ -7,16 +7,9 @@
 
 import SwiftUI
 
-final class ColleStore: ObservableObject, Codable {
+typealias ColleStore = JsonCodableArray<Colle>
 
-    // MARK: - Properties
-
-    @Published
-    var items: [Colle] = [ ]
-    
-    var nbOfItems: Int {
-        items.count
-    }
+extension ColleStore {
 
     var nbOfItemsToCheck: Int {
         items.filter {
@@ -36,37 +29,11 @@ final class ColleStore: ObservableObject, Codable {
         items.contains(where: { ID == $0.id})
     }
 
-    func colle(withID ID: UUID) -> Colle? {
-        items.first(where: { ID == $0.id})
-    }
-
-    func add(_ item: Colle) {
-        items.insert(item, at: 0)
-    }
-
     func deleteColle(withID: UUID) {
         items.removeAll {
             $0.id == withID
         }
-    }
-
-    func insert(colle           : Colle,
-                `in` observesID : inout [UUID]) {
-        guard observesID.isNotEmpty else {
-            observesID = [colle.id]
-            return
-        }
-
-        guard let index = observesID.firstIndex(where: {
-            guard let c0 = self.colle(withID: $0) else {
-                return false
-            }
-            return colle < c0
-        }) else {
-            observesID.append(colle.id)
-            return
-        }
-        observesID.insert(colle.id, at: index)
+        saveAsJSON()
     }
 
     func colles(de eleve    : Eleve,
@@ -91,24 +58,13 @@ final class ColleStore: ObservableObject, Codable {
                         self.items[index] = colle
                     }
                 }
+                self.saveAsJSON()
             }
         )
     }
-
-    static var exemple : ColleStore = {
-        let store = ColleStore()
-        store.items.append(Colle.exemple)
-        return store
-    }()
+//    static var exemple : ColleStore = {
+//        let store = ColleStore()
+//        store.items.append(Colle.exemple)
+//        return store
+//    }()
 }
-
-extension ColleStore: CustomStringConvertible {
-    var description: String {
-        var str = ""
-        items.forEach { item in
-            str += (String(describing: item) + "\n")
-        }
-        return str
-    }
-}
-

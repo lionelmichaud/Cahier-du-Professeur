@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Observation: Identifiable, Codable {
+struct Observation: Identifiable, Codable, Ordered {
 
     // MARK: - Type Methods
 

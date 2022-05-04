@@ -76,25 +76,28 @@ E.ID == UUID {
     /// préfixé par `fileNamePrefix`
     /// contenu dans le dossier `fromFolder` du répertoire `Documents`
     /// - Parameter fromFolder: dossier où se trouve le fichier JSON à utiliser
-    public convenience init(fromFolder: Folder?) throws {
-        var documentsFolder: Folder
+    public convenience init(fromFolder: Folder?) {
+        var folder: Folder
 
         if let fromFolder = fromFolder {
-            documentsFolder = fromFolder
+            folder = fromFolder
 
-        } else if let fromFolder = Folder.documents {
-            documentsFolder = fromFolder
+        } else if let documentsFolder = Folder.documents {
+            folder = documentsFolder
 
         } else {
             self.init()
             return
         }
-
-        // charger les données JSON
-        try self.init(fromFile             : String(describing: E.self) + ".json",
-                      fromFolder           : documentsFolder,
-                      dateDecodingStrategy : .iso8601,
-                      keyDecodingStrategy  : .useDefaultKeys)
+        do {
+            // charger les données JSON
+            try self.init(fromFile             : String(describing: E.self) + ".json",
+                          fromFolder           : folder,
+                          dateDecodingStrategy : .iso8601,
+                          keyDecodingStrategy  : .useDefaultKeys)
+        } catch {
+            self.init()
+        }
     }
 
     // MARK: - Methods

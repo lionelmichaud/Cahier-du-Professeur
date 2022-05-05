@@ -52,10 +52,24 @@ struct EleveDetail: View {
                 Text(eleve.displayName)
                     .font(.title2)
                     .textFieldStyle(.roundedBorder)
-                if eleve.isFlagged {
-                    Image(systemName: "flag.fill")
-                        .foregroundColor(.orange)
+                Button {
+                    eleve.isFlagged.toggle()
+                } label: {
+                    if eleve.isFlagged {
+                        Image(systemName: "flag.fill")
+                            .foregroundColor(.orange)
+                    } else {
+                        Image(systemName: "flag")
+                            .foregroundColor(.orange)
+                    }
                 }
+                .onChange(of: eleve.isFlagged) {newValue in
+                    isModified = true
+                }
+//                if eleve.isFlagged {
+//                    Image(systemName: "flag.fill")
+//                        .foregroundColor(.orange)
+//                }
             }
         }
         .listRowSeparator(.hidden)

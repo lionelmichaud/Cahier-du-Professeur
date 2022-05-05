@@ -50,6 +50,21 @@ struct SchoolDetail: View {
         .listRowSeparator(.hidden)
     }
 
+    var note: some View {
+        VStack(alignment: .leading) {
+            Text("Note")
+                .font(.headline)
+                .fontWeight(.bold)
+            TextEditor(text: $school.note)
+                .multilineTextAlignment(.leading)
+                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                .frame(minHeight: 80)
+        }
+        .onChange(of: school.note) {newValue in
+            isModified = true
+        }
+    }
+
     var classeList: some View {
         Section {
             // édition de la liste des classes
@@ -131,6 +146,9 @@ struct SchoolDetail: View {
 
             // classes dans l'établissement
             if !isNew {
+                // note sur la classe
+                note
+                // édition de la liste des classes
                 classeList
             }
         }

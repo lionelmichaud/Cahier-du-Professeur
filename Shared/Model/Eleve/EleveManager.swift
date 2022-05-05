@@ -158,7 +158,8 @@ struct EleveManager {
                               observStore       : ObservationStore,
                               colleStore        : ColleStore,
                               filterObservation : Bool,
-                              filterColle       : Bool) -> Binding<[Eleve]> {
+                              filterColle       : Bool,
+                              filterFlag        : Bool) -> Binding<[Eleve]> {
         eleveStore.filteredSortedEleves(dans: classe) { eleve in
 
             lazy var nbObservWithActionToDo : Int = {
@@ -173,20 +174,10 @@ struct EleveManager {
                            colleStore  : colleStore)
             }()
 
-            switch (filterObservation, filterColle) {
-                case (false, false):
-                    // on ne filtre pas
-                    return true
-
-                case (true, false):
-                    return nbObservWithActionToDo > 0
-
-                case (false, true):
-                    return nbColleWithActionToDo > 0
-
-                case (true, true):
-                    return nbObservWithActionToDo + nbColleWithActionToDo > 0
-            }
+            return (!filterObservation && !filterColle && !filterFlag) ||
+            (filterObservation && (nbObservWithActionToDo > 0)) ||
+            (filterColle && nbColleWithActionToDo > 0) ||
+            (filterFlag && eleve.isFlagged)
         }
     }
 }

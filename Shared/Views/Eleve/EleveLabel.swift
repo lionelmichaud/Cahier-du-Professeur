@@ -9,17 +9,22 @@ import SwiftUI
 import HelpersView
 
 struct EleveLabel: View {
-    let eleve: Eleve
+    let eleve      : Eleve
+    var fontWeight : Font.Weight = .semibold
+    var imageSize  : Image.Scale = .large
+    var flagSize   : Image.Scale = .medium
 
     var body: some View {
         HStack {
             Image(systemName: "person.fill")
-                .sfSymbolStyling()
+                .imageScale(imageSize)
+                .symbolRenderingMode(.monochrome)
                 .foregroundColor(eleve.sexe.color)
             Text(eleve.displayName)
-                .fontWeight(.semibold)
+                .fontWeight(fontWeight)
             if eleve.isFlagged {
                 Image(systemName: "flag.fill")
+                    .imageScale(flagSize)
                     .foregroundColor(.orange)
             }
         }
@@ -28,7 +33,14 @@ struct EleveLabel: View {
 
 struct EleveLabel_Previews: PreviewProvider {
     static var previews: some View {
-        EleveLabel(eleve: Eleve.exemple)
+        Group {
+            EleveLabel(eleve      : Eleve.exemple,
+                       fontWeight : .regular,
+                       imageSize  : .small)
             .previewLayout(.sizeThatFits)
+
+            EleveLabel(eleve: Eleve.exemple)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

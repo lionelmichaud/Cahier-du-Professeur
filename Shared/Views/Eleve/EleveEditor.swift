@@ -149,7 +149,8 @@ struct EleveEditor: View {
                                             observStore       : observStore,
                                             colleStore        : colleStore,
                                             filterObservation : filterObservation,
-                                            filterColle       : filterColle)
+                                            filterColle       : filterColle,
+                                            filterFlag        : false)
     }
 
 }

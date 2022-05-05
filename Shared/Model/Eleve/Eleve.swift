@@ -44,11 +44,13 @@ struct Eleve: Identifiable, Codable, Ordered {
 
     // MARK: - Initializers
 
-    init(sexe   : Sexe,
-         nom    : String,
-         prenom : String) {
-        self.sexe   = sexe
-        self.name   = PersonNameComponents(givenName: prenom, familyName: nom)
+    init(sexe      : Sexe,
+         nom       : String,
+         prenom    : String,
+         isFlagged : Bool = false) {
+        self.sexe      = sexe
+        self.name      = PersonNameComponents(givenName : prenom, familyName : nom)
+        self.isFlagged = isFlagged
     }
 
     // MARK: - Methods
@@ -116,9 +118,10 @@ struct Eleve: Identifiable, Codable, Ordered {
         collesID.move(fromOffsets: indexes, toOffset: destination)
     }
 
-    static let exemple = Eleve(sexe   : .male,
-                               nom    : "NomDeFamille",
-                               prenom : "Prénom")
+    static let exemple = Eleve(sexe      : .male,
+                               nom       : "NomDeFamille",
+                               prenom    : "Prénom",
+                               isFlagged : true)
 }
 
 extension Eleve: CustomStringConvertible {

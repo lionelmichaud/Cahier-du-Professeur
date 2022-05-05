@@ -12,7 +12,10 @@ struct EleveBrowserRow: View {
     
     var body: some View {
         HStack {
-            EleveLabel(eleve: eleve)
+            EleveLabel(eleve      : eleve,
+                       fontWeight : .regular,
+                       imageSize  : .medium,
+                       flagSize   : .small)
 
             Spacer()
             

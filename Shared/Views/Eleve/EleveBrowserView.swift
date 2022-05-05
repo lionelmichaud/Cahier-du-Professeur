@@ -12,6 +12,7 @@ struct EleveBrowserView: View {
     @EnvironmentObject private var eleveStore  : EleveStore
     @State private var filterObservation = false
     @State private var filterColle       = false
+    @State private var filterFlag        = false
 
     var body: some View {
         List {
@@ -25,7 +26,8 @@ struct EleveBrowserView: View {
                             // pour chaque Classe
                             EleveBrowserSchoolSubiew(school            : school,
                                                      filterObservation : filterObservation,
-                                                     filterColle       : filterColle)
+                                                     filterColle       : filterColle,
+                                                     filterFlag        : filterFlag)
                         } header: {
                             Text(school.displayString)
                                 .font(.callout)
@@ -53,6 +55,13 @@ struct EleveBrowserView: View {
                     Image(systemName: "lock")
                 })
                 .toggleStyle(.button)
+                .padding(.trailing, 4)
+
+                Toggle(isOn: $filterFlag.animation(),
+                       label: {
+                    Image(systemName: "flag")
+                })
+                .toggleStyle(.button)
             }
         }
         .navigationTitle("Les Élèves")
@@ -63,6 +72,7 @@ struct EleveBrowserSchoolSubiew : View {
     let school            : School
     var filterObservation : Bool
     var filterColle       : Bool
+    var filterFlag        : Bool
     @State private var isClasseExpanded = true
 
     @EnvironmentObject private var classeStore : ClasseStore
@@ -133,7 +143,8 @@ struct EleveBrowserSchoolSubiew : View {
                                             observStore       : observStore,
                                             colleStore        : colleStore,
                                             filterObservation : filterObservation,
-                                            filterColle       : filterColle)
+                                            filterColle       : filterColle,
+                                            filterFlag        : filterFlag)
     }
 }
 

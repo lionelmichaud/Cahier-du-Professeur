@@ -17,12 +17,21 @@ struct SchoolClasseRow: View {
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
             Text(classe.displayString)
+            if classe.isFlagged {
+                Image(systemName: "flag.fill")
+                    //.imageScale(.small)
+                    .foregroundColor(.orange)
+            }
+
             Spacer()
+
             Text("\(classe.nbOfEleves)")
             Image(systemName: "person.fill")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
+
             Spacer()
+
             Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) h")
         }
     }

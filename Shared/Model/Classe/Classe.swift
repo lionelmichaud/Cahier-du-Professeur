@@ -28,6 +28,7 @@ struct Classe: Identifiable, Codable, Ordered {
     var heures       : Double       = 0
     var isFlagged    : Bool         = false
     var appreciation : String       = ""
+    var note         : String       = ""
     var elevesID     : [UUID]       = []
 
     var nbOfEleves: Int {
@@ -101,6 +102,7 @@ extension Classe: CustomStringConvertible {
            Heures  : \(heures)
            Flagged : \(isFlagged.frenchString)
            Appréciation: \(appreciation)
+           Note    : \(note)
            SchoolID: \(String(describing: schoolId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
         """

@@ -69,6 +69,19 @@ struct ClasseBrowserSchoolSubview : View {
                 } label: {
                     Label("Supprimer", systemImage: "trash")
                 }
+
+                // flager un élève
+                Button {
+                    withAnimation {
+                        classe.isFlagged.toggle()
+                    }
+                } label: {
+                    if classe.isFlagged {
+                        Label("Sans drapeau", systemImage: "flag.slash")
+                    } else {
+                        Label("Avec drapeau", systemImage: "flag.fill")
+                    }
+                }.tint(.orange)
             }
         }
     }

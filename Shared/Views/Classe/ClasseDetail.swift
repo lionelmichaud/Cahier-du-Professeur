@@ -27,13 +27,95 @@ struct ClasseDetail: View {
     @FocusState
     private var isHoursFocused: Bool
 
-    var eleveList: some View {
-        Group {
-            // titre
-            Text(classe.elevesLabel)
-                .font(.title3)
-                .fontWeight(.bold)
+    var name: some View {
+        HStack {
+            Image(systemName: "person.3.fill")
+                .sfSymbolStyling()
+                .foregroundColor(classe.niveau.color)
 
+            if isNew {
+                // niveau de cette classe
+                CasePicker(pickedCase: $classe.niveau, label: "Niveau")
+                    .pickerStyle(.menu)
+                // numéro de cette classe
+                Picker("Numéro", selection: $classe.numero) {
+                    ForEach(1...8, id: \.self) { num in
+                        Text(String(num))
+                    }
+                }
+                .pickerStyle(.menu)
+
+            } else {
+                Text(classe.displayString)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Button {
+                    classe.isFlagged.toggle()
+                } label: {
+                    if classe.isFlagged {
+                        Image(systemName: "flag.fill")
+                            .foregroundColor(.orange)
+                    } else {
+                        Image(systemName: "flag")
+                            .foregroundColor(.orange)
+                    }
+                }
+                .onChange(of: classe.isFlagged) {newValue in
+                    isModified = true
+                }
+            }
+
+            Spacer()
+
+            // nombre d'heures d'enseignement pour cette classe
+            if isNew || isEditing {
+                AmountEditView(label: "Heures",
+                               amount: $classe.heures,
+                               validity: .poz,
+                               currency: false)
+                .focused($isHoursFocused)
+                .frame(maxWidth: 150)
+            } else {
+                Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) h")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+            }
+        }
+        .listRowSeparator(.hidden)
+    }
+
+    var appreciation: some View {
+        VStack(alignment: .leading) {
+            Text("Appréciation")
+                .font(.headline)
+                .fontWeight(.bold)
+            TextEditor(text: $classe.appreciation)
+                .multilineTextAlignment(.leading)
+                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                .frame(minHeight: 80)
+        }
+        .onChange(of: classe.appreciation) {newValue in
+            isModified = true
+        }
+    }
+
+    var note: some View {
+        VStack(alignment: .leading) {
+            Text("Note")
+                .font(.headline)
+                .fontWeight(.bold)
+            TextEditor(text: $classe.note)
+                .multilineTextAlignment(.leading)
+                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                .frame(minHeight: 80)
+        }
+        .onChange(of: classe.note) {newValue in
+            isModified = true
+        }
+    }
+
+    var eleveList: some View {
+        Section {
             // édition de la liste des élèves
             ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
                 NavigationLink {
@@ -88,57 +170,25 @@ struct ClasseDetail: View {
                 }
             }
             .buttonStyle(.borderless)
+
+        } header: {
+            Text(classe.elevesLabel)
+                .font(.headline)
         }
     }
 
     var body: some View {
         List {
             // nom
-            HStack {
-                Image(systemName: "person.3.fill")
-                    .sfSymbolStyling()
-                    .foregroundColor(classe.niveau.color)
-
-                // niveau de cette classe
-                if isNew {
-                    CasePicker(pickedCase: $classe.niveau, label: "Niveau")
-                        .pickerStyle(.menu)
-                } else {
-                    Text(classe.displayString)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                }
-
-                // numéro de cette classe
-                if isNew {
-                    Picker("Numéro", selection: $classe.numero) {
-                        ForEach(1...8, id: \.self) { num in
-                            Text(String(num))
-                        }
-                    }
-                    .pickerStyle(.menu)
-                }
-
-                Spacer()
-
-                // nombre d'heures d'enseignement pour cette classe
-                if isNew || isEditing {
-                    AmountEditView(label: "Heures",
-                                   amount: $classe.heures,
-                                   validity: .poz,
-                                   currency: false)
-                    .focused($isHoursFocused)
-                    .frame(maxWidth: 150)
-                } else {
-                    Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) h")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                }
-            }
-            .listRowSeparator(.hidden)
+            name
 
             // élèves dans la classe
             if !isNew {
+                // appréciation sur la classe
+                appreciation
+                // note sur la classe
+                note
+                // édition de la liste des élèves
                 eleveList
             }
         }

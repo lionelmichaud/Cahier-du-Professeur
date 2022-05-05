@@ -39,8 +39,8 @@ struct EleveDetail: View {
                 .sfSymbolStyling()
                 .foregroundColor(eleve.sexe.color)
 
-            // Sexe de cet eleve
             if isNew || isEditing {
+                // Sexe de cet eleve
                 CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
                     .pickerStyle(.menu)
                 TextField("Prénom", text: $eleve.name.givenName.bound)
@@ -66,10 +66,6 @@ struct EleveDetail: View {
                 .onChange(of: eleve.isFlagged) {newValue in
                     isModified = true
                 }
-//                if eleve.isFlagged {
-//                    Image(systemName: "flag.fill")
-//                        .foregroundColor(.orange)
-//                }
             }
         }
         .listRowSeparator(.hidden)
@@ -177,9 +173,9 @@ struct EleveDetail: View {
             name
 
             if !isNew {
-                // appréciation de l'élève
+                // appréciation sur l'élève
                 appreciation
-                // observations de l'élève
+                // observations sur l'élève
                 observations
                 // colles de l'élève
                 colles

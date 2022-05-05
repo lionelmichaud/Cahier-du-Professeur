@@ -21,7 +21,14 @@ struct ClassBrowserRow: View {
                 HStack {
                     Text(classe.displayString)
                         .fontWeight(.bold)
+                    if classe.isFlagged {
+                        Image(systemName: "flag.fill")
+                            .imageScale(.small)
+                            .foregroundColor(.orange)
+                    }
+
                     Spacer()
+                    
                     ClasseColleLabel(classe: classe, scale: .medium)
                     ClasseObservLabel(classe: classe, scale: .medium)
                 }

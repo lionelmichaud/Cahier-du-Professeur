@@ -31,25 +31,95 @@ struct SchoolDetail: View {
         SchoolManager().heures(dans: school, classeStore: classeStore)
     }
 
+    var name: some View {
+        HStack {
+            Image(systemName: school.niveau == .lycee ? "building.2" : "building")
+                .imageScale(.large)
+                .foregroundColor(school.niveau == .lycee ? .mint : .orange)
+            if isNew || isEditing {
+                TextField("Nouvel établissement", text: $school.nom)
+                    .font(.title2)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($isNameFocused)
+            } else {
+                Text(school.displayString)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+            }
+        }
+        .listRowSeparator(.hidden)
+    }
+
+    var classeList: some View {
+        Section {
+            // édition de la liste des classes
+            ForEach(classeStore.sortedClasses(dans: school)) { $classe in
+                NavigationLink {
+                    ClasseEditor(school : $school,
+                                 classe : $classe,
+                                 isNew  : false)
+                } label: {
+                    SchoolClasseRow(classe: classe)
+                }
+                .swipeActions {
+                    // supprimer un élève
+                    Button(role: .destructive) {
+                        withAnimation {
+                            // supprimer l'élève et tous ses descendants
+                            // puis retirer l'élève de la classe auquelle il appartient
+                            SchoolManager().retirer(classe      : classe,
+                                                    deSchool    : &school,
+                                                    classeStore : classeStore,
+                                                    eleveStore  : eleveStore,
+                                                    observStore : observStore,
+                                                    colleStore  : colleStore)
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
+
+                    // flager un élève
+                    Button {
+                        withAnimation {
+                            classe.isFlagged.toggle()
+                        }
+                    } label: {
+                        if classe.isFlagged {
+                            Label("Sans drapeau", systemImage: "flag.slash")
+                        } else {
+                            Label("Avec drapeau", systemImage: "flag.fill")
+                        }
+                    }.tint(.orange)
+                }
+            }
+
+            // ajouter une classe
+            Button {
+                isModified = true
+                newClasse = Classe(niveau: .n6ieme, numero: 1)
+                isAddingNewClasse = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Ajouter une classe")
+                }
+            }
+            .buttonStyle(.borderless)
+        } header: {
+            // titre
+            HStack {
+                Text(school.classesLabel)
+                Spacer()
+                Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
+            }
+            .font(.headline)
+        }
+    }
+
     var body: some View {
         List {
             // nom de l'établissement
-            HStack {
-                Image(systemName: school.niveau == .lycee ? "building.2" : "building")
-                    .imageScale(.large)
-                    .foregroundColor(school.niveau == .lycee ? .mint : .orange)
-                if isNew || isEditing {
-                    TextField("Nouvel établissement", text: $school.nom)
-                        .font(.title2)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($isNameFocused)
-                } else {
-                    Text(school.displayString)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                }
-            }
-            .listRowSeparator(.hidden)
+            name
 
             // type d'établissement
             if isNew || isEditing {
@@ -61,47 +131,7 @@ struct SchoolDetail: View {
 
             // classes dans l'établissement
             if !isNew {
-                // titre
-                HStack {
-                    Text(school.classesLabel)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                    Spacer()
-                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                }
-
-                // édition de la liste des classes
-                ForEach(classeStore.sortedClasses(dans: school)) { $classe in
-                    NavigationLink {
-                        ClasseEditor(school : $school,
-                                     classe : $classe,
-                                     isNew  : false)
-                    } label: {
-                        SchoolClasseRow(classe: classe)
-                    }
-                }
-                .onDelete(perform: { indexSet in
-                    for index in indexSet {
-                        isModified = true
-                        deleteClasse(atIndex: index)
-                    }
-                })
-                .onMove(perform: moveClasse)
-
-                // ajouter une classe
-                Button {
-                    isModified = true
-                    newClasse = Classe(niveau: .n6ieme, numero: 1)
-                    isAddingNewClasse = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus")
-                        Text("Ajouter une classe")
-                    }
-                }
-                .buttonStyle(.borderless)
+                classeList
             }
         }
         #if os(iOS)
@@ -117,19 +147,6 @@ struct SchoolDetail: View {
                              isNew  : true)
             }
         }
-    }
-
-    private func moveClasse(from indexes: IndexSet, to destination: Int) {
-        school.moveClasse(from: indexes, to: destination)
-    }
-
-    func deleteClasse(atIndex: Int) {
-        SchoolManager().retirer(classeIndex : atIndex,
-                                deSchool    : &school,
-                                classeStore : classeStore,
-                                eleveStore  : eleveStore,
-                                observStore : observStore,
-                                colleStore  : colleStore)
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct SchoolBrowserView: View {
     @EnvironmentObject private var schoolStore : SchoolStore
@@ -16,77 +17,122 @@ struct SchoolBrowserView: View {
     @State
     private var isAddingNewEtab = false
     @State
+    private var isEditingPreferences = false
+    @State
     private var newEtab = School()
+    @State
+    private var alertItem: AlertItem?
 
     var body: some View {
-        List {
-            if schoolStore.items.isEmpty {
-                Text("Aucun établissement")
-            }
-            ForEach(NiveauSchool.allCases) { niveau in
-                if !schoolStore.sortedSchools(niveau: niveau).isEmpty {
-                    Section {
-                        ForEach(schoolStore.sortedSchools(niveau: niveau)) { $school in
-                            NavigationLink {
-                                SchoolEditor(school: $school)
-                            } label: {
-                                SchoolBrowserRow(school: school)
-                            }
-                            .swipeActions {
-                                // supprimer un établissement
-                                Button(role: .destructive) {
-                                    withAnimation {
-                                        schoolStore.deleteSchool(school,
-                                                                 classeStore : classeStore,
-                                                                 eleveStore  : eleveStore,
-                                                                 observStore : observStore,
-                                                                 colleStore  : colleStore)
-                                    }
+        GeometryReader { geometry in
+            List {
+                if schoolStore.items.isEmpty {
+                    Text("Aucun établissement")
+                }
+                ForEach(NiveauSchool.allCases) { niveau in
+                    if !schoolStore.sortedSchools(niveau: niveau).isEmpty {
+                        Section {
+                            ForEach(schoolStore.sortedSchools(niveau: niveau)) { $school in
+                                NavigationLink {
+                                    SchoolEditor(school: $school)
                                 } label: {
-                                    Label("Supprimer", systemImage: "trash")
+                                    SchoolBrowserRow(school: school)
+                                }
+                                .swipeActions {
+                                    // supprimer un établissement
+                                    Button(role: .destructive) {
+                                        withAnimation {
+                                            schoolStore.deleteSchool(school,
+                                                                     classeStore : classeStore,
+                                                                     eleveStore  : eleveStore,
+                                                                     observStore : observStore,
+                                                                     colleStore  : colleStore)
+                                        }
+                                    } label: {
+                                        Label("Supprimer", systemImage: "trash")
+                                    }
                                 }
                             }
+                        } header: {
+                            Text(niveau.displayString)
+                                .font(.callout)
+                                .foregroundColor(.secondary)
+                                .fontWeight(.bold)
                         }
-                    } header: {
-                        Text(niveau.displayString)
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                            .fontWeight(.bold)
+                    }
+                }
+                #if targetEnvironment(simulator)
+                Button {
+                    TestEnvir.populateWithFakes(
+                        schoolStore : schoolStore,
+                        classeStore : classeStore,
+                        eleveStore  : eleveStore,
+                        observStore : observStore,
+                        colleStore  : colleStore)
+                } label: {
+                    Text("Test").foregroundColor(.primary)
+                }
+                #endif
+            }
+            //.listStyle(.sidebar)
+            .navigationTitle("Etablissements")
+            //.navigationViewStyle(.columns)
+            .toolbar {
+                // ajouter un établissement
+                ToolbarItemGroup(placement: .status) {
+                    Button {
+                        newEtab = School()
+                        isAddingNewEtab = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                            Text("Ajouter un établissement")
+                            Spacer()
+                        }
+                    }
+                }
+
+                // menu
+                ToolbarItemGroup(placement: .automatic) {
+                    Menu {
+                        Button(action: { share(geometry: geometry) }) {
+                            Label("Exporter les données", systemImage: "square.and.arrow.up")
+                        }
+                        Button(action: `import`) {
+                            Label("Importer les données", systemImage: "square.and.arrow.down")
+                        }
+                        Button(action: { isEditingPreferences = true }) {
+                            Label("Préférences", systemImage: "gear")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
                     }
                 }
             }
-            #if targetEnvironment(simulator)
-            Button {
-                TestEnvir.populateWithFakes(
-                    schoolStore : schoolStore,
-                    classeStore : classeStore,
-                    eleveStore  : eleveStore,
-                    observStore : observStore,
-                    colleStore  : colleStore)
-            } label: {
-                Text("Test").foregroundColor(.primary)
+            .sheet(isPresented: $isAddingNewEtab) {
+                NavigationView {
+                    SchoolEditor(school: $newEtab, isNew: true)
+                }
             }
-            #endif
-        }
-        //.listStyle(.sidebar)
-        .navigationTitle("Etablissements")
-        //.navigationViewStyle(.columns)
-        .toolbar {
-            // ajouter un établissement
-            ToolbarItem {
-                Button {
-                    newEtab = School()
-                    isAddingNewEtab = true
-                } label: {
-                    Image(systemName: "plus.circle.fill")
+            .sheet(isPresented: $isEditingPreferences) {
+                NavigationView {
+                    EmptyView()
                 }
             }
         }
-        .sheet(isPresented: $isAddingNewEtab) {
-            NavigationView {
-                SchoolEditor(school: $newEtab, isNew: true)
-            }
-        }
+        .alert(item: $alertItem, content: newAlert)
+    }
+
+    /// Exporter tous les fichiers JSON utilisateur
+    private func share(geometry: GeometryProxy) {
+        shareFiles(fileNames: [".json"],
+                   alertItem: &alertItem,
+                   geometry: geometry)
+    }
+
+
+    func `import`() {
+
     }
 }
 

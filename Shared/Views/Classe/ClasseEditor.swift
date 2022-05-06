@@ -34,6 +34,8 @@ struct ClasseEditor: View {
     // true si l'item va être détruit
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
+    @State private var importFile = false
+
 
     private var isItemDeleted: Bool {
         !classeStore.isPresent(classe) && !isNew
@@ -53,7 +55,7 @@ struct ClasseEditor: View {
                         }
                     }
                 }
-                ToolbarItem {
+                ToolbarItemGroup(placement: .automatic) {
                     Button {
                         if isNew {
                             // Ajouter une nouvelle classe
@@ -84,6 +86,15 @@ struct ClasseEditor: View {
                     } label: {
                         Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
+
+                    if !isNew {
+                        Button {
+                            importFile.toggle()
+                        } label: {
+                            Text("Importer")
+//                            Image(systemName: "square.and.arrow.down")
+                        }
+                    }
                 }
             }
             .onAppear {
@@ -109,6 +120,29 @@ struct ClasseEditor: View {
             }
         }
         .alert(item: $alertItem, content: newAlert)
+        //file importer
+        .fileImporter(isPresented             : $importFile,
+                      allowedContentTypes     : [.json],
+                      allowsMultipleSelection : false) { (result) in
+            if case .success = result {
+                do{
+                    let fileUrl = try result.get().first!
+                    print(fileUrl)
+
+                    guard fileUrl.startAccessingSecurityScopedResource() else { return }
+                    if let text = try? Data(contentsOf: fileUrl) {
+                        print(text)
+                    }
+                    fileUrl.stopAccessingSecurityScopedResource()
+
+                } catch{
+                    print ("File Import Failed")
+                    print (error.localizedDescription)
+                }
+            } else {
+                print("File Import Failed")
+            }
+        }
     }
 
     init(school: Binding<School>,

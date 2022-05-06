@@ -494,10 +494,10 @@
 		79F3ABE1280830D000D068D9 /* School */ = {
 			isa = PBXGroup;
 			children = (
+				79F3ABE928086C4F00D068D9 /* SchoolManager.swift */,
 				7953631B280DC44B00AB8600 /* SchoolStore.swift */,
 				79F3ABCC2808222C00D068D9 /* School.swift */,
 				79F3ABD8280823D900D068D9 /* NiveauSchool.swift */,
-				79F3ABE928086C4F00D068D9 /* SchoolManager.swift */,
 			);
 			path = School;
 			sourceTree = "<group>";
@@ -505,10 +505,10 @@
 		79F3ABE2280830E000D068D9 /* Classe */ = {
 			isa = PBXGroup;
 			children = (
+				79F3ABE6280844C000D068D9 /* ClasseManager.swift */,
 				7953631E280DC4D800AB8600 /* ClassStore.swift */,
 				79F3ABCF2808225800D068D9 /* Classe.swift */,
 				79F3ABD5280822BD00D068D9 /* NiveauClasse.swift */,
-				79F3ABE6280844C000D068D9 /* ClasseManager.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -516,10 +516,10 @@
 		79F3ABE3280830F300D068D9 /* Eleve */ = {
 			isa = PBXGroup;
 			children = (
+				791C26D62814378A00686F0C /* EleveManager.swift */,
 				795BC3DA2813055200C22271 /* EleveStore.swift */,
 				79F3ABD22808229A00D068D9 /* Eleve.swift */,
 				79F3ABDB280826A400D068D9 /* Sexe.swift */,
-				791C26D62814378A00686F0C /* EleveManager.swift */,
 			);
 			path = Eleve;
 			sourceTree = "<group>";
@@ -527,9 +527,9 @@
 		79F3ABEC2808707300D068D9 /* Colle */ = {
 			isa = PBXGroup;
 			children = (
+				79F3ABF72808818D00D068D9 /* ColleManager.swift */,
 				791C26D328142D7100686F0C /* ColleStore.swift */,
 				79F3ABEE2808709100D068D9 /* Colle.swift */,
-				79F3ABF72808818D00D068D9 /* ColleManager.swift */,
 			);
 			path = Colle;
 			sourceTree = "<group>";
@@ -537,9 +537,9 @@
 		79F3ABED2808707C00D068D9 /* Observation */ = {
 			isa = PBXGroup;
 			children = (
+				79F3ABF4280880CC00D068D9 /* ObservationManager.swift */,
 				791C26D028142B6300686F0C /* ObservationStore.swift */,
 				79F3ABF128087D5600D068D9 /* Observation.swift */,
-				79F3ABF4280880CC00D068D9 /* ObservationManager.swift */,
 			);
 			path = Observation;
 			sourceTree = "<group>";

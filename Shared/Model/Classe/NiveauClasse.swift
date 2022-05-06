@@ -8,7 +8,7 @@
 import SwiftUI
 import AppFoundation
 
-enum NiveauClasse: Int, PickableEnumP, Codable {
+enum NiveauClasse: String, PickableEnumP, Codable {
     case n6ieme
     case n5ieme
     case n4ieme
@@ -56,6 +56,21 @@ enum NiveauClasse: Int, PickableEnumP, Codable {
     }
 
     var color: Color {
-        ColorOptions.all[self.rawValue]
+        switch self {
+            case .n6ieme:
+                return ColorOptions.all[0]
+            case .n5ieme:
+                return ColorOptions.all[1]
+            case .n4ieme:
+                return ColorOptions.all[2]
+            case .n3ieme:
+                return ColorOptions.all[3]
+            case .n2nd:
+                return ColorOptions.all[4]
+            case .n1ere:
+                return ColorOptions.all[5]
+            case .terminale:
+                return ColorOptions.all[6]
+        }
     }
 }

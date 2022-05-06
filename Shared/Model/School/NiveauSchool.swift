@@ -8,11 +8,11 @@
 import Foundation
 import AppFoundation
 
-enum NiveauSchool: Int, PickableEnumP, Codable, Identifiable, Equatable {
+enum NiveauSchool: String, PickableEnumP, Codable, Identifiable, Equatable {
     case college
     case lycee
 
-    var id: Int { self.rawValue }
+    var id: String { self.rawValue }
 
     var pickerString: String {
         switch self {

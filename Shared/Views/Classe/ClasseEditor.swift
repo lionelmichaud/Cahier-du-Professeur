@@ -92,7 +92,6 @@ struct ClasseEditor: View {
                             importFile.toggle()
                         } label: {
                             Text("Importer")
-//                            Image(systemName: "square.and.arrow.down")
                         }
                     }
                 }
@@ -122,7 +121,7 @@ struct ClasseEditor: View {
         .alert(item: $alertItem, content: newAlert)
         //file importer
         .fileImporter(isPresented             : $importFile,
-                      allowedContentTypes     : [.json],
+                      allowedContentTypes     : [.commaSeparatedText],
                       allowsMultipleSelection : false) { (result) in
             if case .success = result {
                 do{
@@ -130,17 +129,29 @@ struct ClasseEditor: View {
                     print(fileUrl)
 
                     guard fileUrl.startAccessingSecurityScopedResource() else { return }
-                    if let text = try? Data(contentsOf: fileUrl) {
-                        print(text)
+                    if let data = try? Data(contentsOf: fileUrl) {
+                        var eleves = try CsvImporter().importEleves(from: data)
+                        for idx in eleves.startIndex...eleves.endIndex-1 {
+                            ClasseManager()
+                                .ajouter(eleve      : &eleves[idx],
+                                         aClasse    : &classe,
+                                         eleveStore : eleveStore)
+                        }
                     }
                     fileUrl.stopAccessingSecurityScopedResource()
 
-                } catch{
+                } catch {
+                    self.alertItem = AlertItem(title         : Text("Échec"),
+                                               message       : Text("L'importation du fichier a échouée"),
+                                               dismissButton : .default(Text("OK")))
                     print ("File Import Failed")
                     print (error.localizedDescription)
                 }
             } else {
-                print("File Import Failed")
+                self.alertItem = AlertItem(title         : Text("Échec"),
+                                           message       : Text("L'importation du fichier a échouée"),
+                                           dismissButton : .default(Text("OK")))
+                print ("File Import Failed")
             }
         }
     }

@@ -155,6 +155,8 @@
 		79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */; };
 		79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
 		79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
+		79FFDCD62825E950009D7452 /* importCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFDCD52825E94F009D7452 /* importCSV.swift */; };
+		79FFDCD72825E950009D7452 /* importCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFDCD52825E94F009D7452 /* importCSV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +259,7 @@
 		79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSidebarView.swift; sourceTree = "<group>"; };
+		79FFDCD52825E94F009D7452 /* importCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importCSV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +418,7 @@
 				79F3ABCA280821CE00D068D9 /* Model */,
 				79F3ABCB280821E700D068D9 /* Views */,
 				79F3AB902808218300D068D9 /* Assets.xcassets */,
+				79FFDCD52825E94F009D7452 /* importCSV.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -784,6 +788,7 @@
 				79502BA42818716500DA798F /* ObservBrowserView.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
+				79FFDCD62825E950009D7452 /* importCSV.swift in Sources */,
 				795FAB2F2809E54C004CB120 /* SchoolDetail.swift in Sources */,
 				791C26D428142D7100686F0C /* ColleStore.swift in Sources */,
 			);
@@ -820,6 +825,7 @@
 				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
+				79FFDCD72825E950009D7452 /* importCSV.swift in Sources */,
 				791C26E628145F8E00686F0C /* EleveObservLabel.swift in Sources */,
 				79D583FB28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,

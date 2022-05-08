@@ -24,6 +24,10 @@ struct ClasseDetail: View {
     private var isAddingNewEleve = false
     @State
     private var newEleve = Eleve.exemple
+    @State
+    private var appreciationIsExpanded = false
+    @State
+    private var noteIsExpanded = false
     @FocusState
     private var isHoursFocused: Bool
 
@@ -85,14 +89,15 @@ struct ClasseDetail: View {
     }
 
     var appreciation: some View {
-        VStack(alignment: .leading) {
-            Text("Appréciation")
-                .font(.headline)
-                .fontWeight(.bold)
+        DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $classe.appreciation)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
+        } label: {
+            Text("Appréciation")
+                .font(.headline)
+                .fontWeight(.bold)
         }
         .onChange(of: classe.appreciation) {newValue in
             isModified = true
@@ -100,14 +105,15 @@ struct ClasseDetail: View {
     }
 
     var note: some View {
-        VStack(alignment: .leading) {
-            Text("Note")
-                .font(.headline)
-                .fontWeight(.bold)
+        DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $classe.note)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
+        } label: {
+            Text("Note")
+                .font(.headline)
+                .fontWeight(.bold)
         }
         .onChange(of: classe.note) {newValue in
             isModified = true

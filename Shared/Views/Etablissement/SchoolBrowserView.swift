@@ -98,9 +98,6 @@ struct SchoolBrowserView: View {
                         Button(action: { share(geometry: geometry) }) {
                             Label("Exporter les données", systemImage: "square.and.arrow.up")
                         }
-                        Button(action: `import`) {
-                            Label("Importer les données", systemImage: "square.and.arrow.down")
-                        }
                         Button(action: { isEditingPreferences = true }) {
                             Label("Préférences", systemImage: "gear")
                         }

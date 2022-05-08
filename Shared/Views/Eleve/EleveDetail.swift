@@ -30,6 +30,8 @@ struct EleveDetail: View {
     private var newObserv = Observation.exemple
     @State
     private var newColle  = Colle.exemple
+    @State
+    private var appreciationIsExpanded = false
     @FocusState
     private var isPrenomFocused: Bool
 
@@ -72,14 +74,15 @@ struct EleveDetail: View {
     }
 
     var appreciation: some View {
-        VStack(alignment: .leading) {
-            Text("Appréciation")
-                .font(.headline)
-                .fontWeight(.bold)
+        DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $eleve.appreciation)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
+        } label: {
+            Text("Appréciation")
+                .font(.headline)
+                .fontWeight(.bold)
         }
         .onChange(of: eleve.appreciation) {newValue in
             isModified = true

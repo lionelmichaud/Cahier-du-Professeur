@@ -159,8 +159,20 @@ struct EleveManager {
                               colleStore        : ColleStore,
                               filterObservation : Bool,
                               filterColle       : Bool,
-                              filterFlag        : Bool) -> Binding<[Eleve]> {
+                              filterFlag        : Bool,
+                              searchString      : String) -> Binding<[Eleve]> {
         eleveStore.filteredSortedEleves(dans: classe) { eleve in
+
+            lazy var nameComplies: Bool = {
+                if searchString.isNotEmpty {
+                    let string = searchString.lowercased()
+
+                    return  eleve.name.familyName!.lowercased().contains(string) ||
+                    eleve.name.givenName!.lowercased().contains(string)
+                } else {
+                    return true
+                }
+            }()
 
             lazy var nbObservWithActionToDo : Int = {
                 nbOfObservations(de          : eleve,
@@ -174,10 +186,12 @@ struct EleveManager {
                            colleStore  : colleStore)
             }()
 
-            return (!filterObservation && !filterColle && !filterFlag) ||
+            return nameComplies &&
+            ((!filterObservation && !filterColle && !filterFlag) ||
             (filterObservation && (nbObservWithActionToDo > 0)) ||
             (filterColle && nbColleWithActionToDo > 0) ||
-            (filterFlag && eleve.isFlagged)
+            (filterFlag && eleve.isFlagged))
+
         }
     }
 }

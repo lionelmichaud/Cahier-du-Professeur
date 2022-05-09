@@ -13,9 +13,16 @@ struct EleveBrowserView: View {
     @State private var filterObservation = false
     @State private var filterColle       = false
     @State private var filterFlag        = false
+    // filtrage par nom/prénom
+    @State
+    private var selectedEleve: Eleve?
+    @State
+    private var searchString: String = ""
+    @Environment(\.isSearching) var isSearching
+    @Environment(\.dismissSearch) var dismissSearch
 
     var body: some View {
-        List {
+        List(selection: $selectedEleve) {
             if eleveStore.items.isEmpty {
                 Text("Aucun élève")
             } else {
@@ -27,7 +34,8 @@ struct EleveBrowserView: View {
                             EleveBrowserSchoolSubiew(school            : school,
                                                      filterObservation : filterObservation,
                                                      filterColle       : filterColle,
-                                                     filterFlag        : filterFlag)
+                                                     filterFlag        : filterFlag,
+                                                     searchString      : searchString)
                         } header: {
                             Text(school.displayString)
                                 .font(.callout)
@@ -38,6 +46,9 @@ struct EleveBrowserView: View {
                 }
             }
         }
+        .searchable(text      : $searchString,
+                    placement : .navigationBarDrawer(displayMode : .automatic),
+                    prompt    : "Filtrer")
         .toolbar {
             ToolbarItemGroup(placement: .status) {
                 Text("Filtrer")
@@ -73,7 +84,9 @@ struct EleveBrowserSchoolSubiew : View {
     var filterObservation : Bool
     var filterColle       : Bool
     var filterFlag        : Bool
-    @State private var isClasseExpanded = true
+    let searchString      : String
+    @State
+    private var isClasseExpanded = true
 
     @EnvironmentObject private var classeStore : ClasseStore
     @EnvironmentObject private var eleveStore  : EleveStore
@@ -144,7 +157,8 @@ struct EleveBrowserSchoolSubiew : View {
                                             colleStore        : colleStore,
                                             filterObservation : filterObservation,
                                             filterColle       : filterColle,
-                                            filterFlag        : filterFlag)
+                                            filterFlag        : filterFlag,
+                                            searchString      : searchString)
     }
 }
 

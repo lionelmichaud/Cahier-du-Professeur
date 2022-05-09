@@ -39,6 +39,28 @@ struct ClasseManager {
         classe.removeEleve(withID: eleve.id)
     }
 
+    func retirerTousLesEleves(deClasse classe : inout Classe,
+                              eleveStore      : EleveStore,
+                              observStore     : ObservationStore,
+                              colleStore      : ColleStore) {
+        let eleves = EleveManager()
+            .filteredSortedEleves(dans              : classe,
+                                  eleveStore        : eleveStore,
+                                  observStore       : observStore,
+                                  colleStore        : colleStore,
+                                  filterObservation : false,
+                                  filterColle       : false,
+                                  filterFlag        : false,
+                                  searchString      : "")
+        eleves.wrappedValue.forEach { eleve in
+            self.retirer(eleve       : eleve,
+                         deClasse    : &classe,
+                         eleveStore  : eleveStore,
+                         observStore : observStore,
+                         colleStore  : colleStore)
+        }
+    }
+
     /// Détruire l'élève à la position `eleveIndex`de la liste du store des élèves `eleveStore`
     /// ainsi que tous ses descendants (observ, colles...) des listes `observStore`et `colleStore`
     /// puis retirer l'élève de la `classe` à laquelle il appartient

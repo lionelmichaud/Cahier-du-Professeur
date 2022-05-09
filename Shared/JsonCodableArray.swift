@@ -105,6 +105,10 @@ E.ID == UUID {
 
     // MARK: - Methods
 
+    func clear() {
+        self.items = [ ]
+    }
+
     /// Initialiser à partir d'un fichier JSON portant le nom de la Class `E`
     /// contenu dans le dossier `fromFolder` du répertoire `Documents`.
     ///

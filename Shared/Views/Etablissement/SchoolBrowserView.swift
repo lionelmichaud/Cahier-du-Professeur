@@ -24,7 +24,8 @@ struct SchoolBrowserView: View {
     private var newEtab = School()
     @State
     private var alertItem: AlertItem?
-    @State private var isShowingDialog = false
+    @State private var isShowingImportConfirmDialog = false
+    @State private var isShowingDeleteConfirmDialog = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -95,47 +96,69 @@ struct SchoolBrowserView: View {
                     }
                 }
 
-                // menu
+                /// Menu
                 ToolbarItemGroup(placement: .automatic) {
                     Menu {
-                        // Exporter les fichiers JSON utilisateurs
-                        Button(action: { share(geometry: geometry) }) {
-                            Label("Exporter les données", systemImage: "square.and.arrow.up")
-                        }
-                        // Importer les fichiers JSON depuis le Bundle Application
-                        Button(action: { isShowingDialog.toggle() }) {
-                            Label("Importer les données", systemImage: "square.and.arrow.down")
-                        }
+                        /// Edition des préférences utilisateur
                         Button(action: { isEditingPreferences = true }) {
                             Label("Préférences", systemImage: "gear")
+                        }
+
+                        /// Exporter les fichiers JSON utilisateurs
+                        Button(action: { share(geometry: geometry) }) {
+                            Label("Exporter vos données", systemImage: "square.and.arrow.up")
+                        }
+
+                        /// Importer les fichiers JSON depuis le Bundle Application
+                        Button(role: .destructive, action: { isShowingImportConfirmDialog.toggle() }) {
+                            Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
+                        }
+
+                        /// Effacer toutes les données utilisateur
+                        Button(role: .destructive, action: { isShowingDeleteConfirmDialog.toggle() }) {
+                            Label("supprimer toutes vos données", systemImage: "trash")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
                     }
                 }
             }
+            .confirmationDialog("Importation des fichiers de l'App",
+                                isPresented: $isShowingImportConfirmDialog,
+                                titleVisibility : .visible) {
+                Button("Importer", role: .destructive) {
+                    withAnimation {
+                        self.import()
+                    }
+                }
+            } message: {
+                Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application.") +
+                Text("Cette action ne peut pas être annulée.")
+            }
+
+            .confirmationDialog("Suppression de toutes vos données",
+                                isPresented: $isShowingDeleteConfirmDialog,
+                                titleVisibility : .visible) {
+                Button("Supprimer", role: .destructive) {
+                    withAnimation {
+                        self.clearAllUserData()
+                    }
+                }
+            } message: {
+                Text("Cette action ne peut pas être annulée.")
+            }
+
             .sheet(isPresented: $isAddingNewEtab) {
                 NavigationView {
                     SchoolEditor(school: $newEtab, isNew: true)
                 }
             }
+
             .sheet(isPresented: $isEditingPreferences) {
                 NavigationView {
                     EmptyView()
                 }
             }
-        }
-        /// Importer les fichiers JSON depuis le Bundle Application
-        .confirmationDialog(
-            "L'importation va remplacer vos données actuelles par celles contenues dans l'Application.",
-            isPresented: $isShowingDialog
-        ) {
-            Button("Importer", role: .destructive) {
-                self.import()
-            }
-        } message: {
-            Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application.\nCette action ne peut pas être annulée.")
-            Text("Cette action ne peut pas être annulée.")
         }
         .alert(item: $alertItem, content: newAlert)
     }
@@ -148,7 +171,7 @@ struct SchoolBrowserView: View {
     }
 
     /// Importer les fichiers JSON depuis le Bundle Application
-    func `import`() {
+    private func `import`() {
         do {
             try PersistenceManager().forcedImportAllJsonFilesFromApp()
         } catch {
@@ -173,6 +196,16 @@ struct SchoolBrowserView: View {
                                            dismissButton: .default(Text("OK")))
             }
         }
+    }
+
+    /// Suppression de toutes les données utilisateur
+    private func clearAllUserData() {
+        schoolStore.clear()
+        classeStore.clear()
+        eleveStore.clear()
+        colleStore.clear()
+        observStore.clear()
+
     }
 }
 

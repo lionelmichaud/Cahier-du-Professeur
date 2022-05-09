@@ -148,7 +148,7 @@ struct ClasseEditor: View {
                       allowedContentTypes     : [.commaSeparatedText],
                       allowsMultipleSelection : false) { (result) in
             if case .success = result {
-                do{
+                do {
                     let fileUrl = try result.get().first!
                     print(fileUrl)
 

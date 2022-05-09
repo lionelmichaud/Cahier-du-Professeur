@@ -13,7 +13,7 @@ struct Classe: Identifiable, Codable, Ordered {
 
     static func < (lhs: Classe, rhs: Classe) -> Bool {
         if lhs.niveau.rawValue != rhs.niveau.rawValue {
-            return lhs.niveau.rawValue < rhs.niveau.rawValue
+            return lhs.niveau.rawValue > rhs.niveau.rawValue
         } else {
             return lhs.numero < rhs.numero
         }

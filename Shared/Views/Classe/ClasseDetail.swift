@@ -129,6 +129,21 @@ struct ClasseDetail: View {
 
     var eleveList: some View {
         Section {
+            // ajouter un élève
+            Button {
+                isModified = true
+                newEleve = Eleve(sexe   : .male,
+                                 nom    : "",
+                                 prenom : "")
+                isAddingNewEleve = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter un élève")
+                }
+            }
+            .buttonStyle(.borderless)
+
             // édition de la liste des élèves
             ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
                 NavigationLink {
@@ -169,39 +184,8 @@ struct ClasseDetail: View {
                 }
             }
 
-            // ajouter un élève
-            Button {
-                isModified = true
-                newEleve = Eleve(sexe   : .male,
-                                 nom    : "",
-                                 prenom : "")
-                isAddingNewEleve = true
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter un élève")
-                }
-            }
-            .buttonStyle(.borderless)
-
         } header: {
-            HStack {
-                Text(classe.elevesLabel)
-
-                Spacer()
-
-                // supprimer tous les élèves de la classe
-                Button {
-                    withAnimation {
-                        ClasseManager().retirerTousLesEleves(deClasse    : &classe,
-                                                             eleveStore  : eleveStore,
-                                                             observStore : observStore,
-                                                             colleStore  : colleStore)
-                    }
-                } label: {
-                    Text("Supprimer tous les élèves")
-                }
-            }
+            Text(classe.elevesLabel)
         }
         .headerProminence(.increased)
     }

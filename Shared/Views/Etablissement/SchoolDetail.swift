@@ -59,7 +59,7 @@ struct SchoolDetail: View {
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
         } label: {
-            Text("Note")
+            Text("Annotation")
                 .font(.headline)
                 .fontWeight(.bold)
         }
@@ -70,6 +70,19 @@ struct SchoolDetail: View {
 
     var classeList: some View {
         Section {
+            // ajouter une classe
+            Button {
+                isModified = true
+                newClasse = Classe(niveau: .n6ieme, numero: 1)
+                isAddingNewClasse = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter une classe")
+                }
+            }
+            .buttonStyle(.borderless)
+
             // édition de la liste des classes
             ForEach(classeStore.sortedClasses(dans: school)) { $classe in
                 NavigationLink {
@@ -110,19 +123,6 @@ struct SchoolDetail: View {
                     }.tint(.orange)
                 }
             }
-
-            // ajouter une classe
-            Button {
-                isModified = true
-                newClasse = Classe(niveau: .n6ieme, numero: 1)
-                isAddingNewClasse = true
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une classe")
-                }
-            }
-            .buttonStyle(.borderless)
         } header: {
             // titre
             HStack {

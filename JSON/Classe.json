@@ -3,6 +3,7 @@
     {
       "niveau" : "n4ieme",
       "numero" : 1,
+      "segpa"  : false,
       "heures" : 1.5,
       "id" : "6919DFA1-4AAB-49AA-9EFC-60E260ACD84A",
       "isFlagged" : false,
@@ -41,6 +42,7 @@
       "niveau" : "n5ieme",
       "numero" : 5,
       "heures" : 1.5,
+      "segpa"  : true,
       "id" : "42E327EC-DA22-412A-97F7-784B1096D37E",
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
@@ -71,6 +73,7 @@
     {
       "niveau" : "n6ieme",
       "numero" : 5,
+      "segpa"  : true,
       "heures" : 1.5,
       "id" : "ED643D50-9EAA-4CC3-9F36-92C67DD55067",
       "isFlagged" : false,
@@ -96,6 +99,7 @@
     {
       "niveau" : "n4ieme",
       "numero" : 7,
+      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445D",
       "isFlagged" : false,
@@ -134,6 +138,7 @@
     {
       "niveau" : "n4ieme",
       "numero" : 5,
+      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445C",
       "isFlagged" : false,
@@ -171,6 +176,7 @@
     {
       "niveau" : "n4ieme",
       "numero" : 3,
+      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445B",
       "isFlagged" : false,
@@ -209,6 +215,7 @@
     {
       "niveau" : "n4ieme",
       "numero" : 2,
+      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445A",
       "isFlagged" : false,

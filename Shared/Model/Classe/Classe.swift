@@ -26,6 +26,7 @@ struct Classe: Identifiable, Codable, Ordered {
     var niveau       : NiveauClasse = .n6ieme
     var numero       : Int          = 1
     var heures       : Double       = 0
+    var segpa        : Bool         = false
     var isFlagged    : Bool         = false
     var appreciation : String       = ""
     var note         : String       = ""
@@ -46,7 +47,7 @@ struct Classe: Identifiable, Codable, Ordered {
     }
 
     var displayString: String {
-        "\(niveau.displayString)\(numero)"
+        "\(niveau.displayString)\(numero)\(segpa ? "S" : "")"
     }
 
     // MARK: - Initializers
@@ -54,10 +55,12 @@ struct Classe: Identifiable, Codable, Ordered {
     init(schoolId : UUID?  = nil,
          niveau   : NiveauClasse,
          numero   : Int,
+         segpa    : Bool = false,
          heures   : Double = 0) {
         self.schoolId = schoolId
         self.niveau   = niveau
         self.numero   = numero
+        self.segpa    = segpa
         self.heures   = heures
     }
 

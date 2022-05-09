@@ -118,7 +118,7 @@ struct SchoolDetail: View {
                 isAddingNewClasse = true
             } label: {
                 HStack {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.circle.fill")
                     Text("Ajouter une classe")
                 }
             }
@@ -130,7 +130,8 @@ struct SchoolDetail: View {
                 Spacer()
                 Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
             }
-            .font(.headline)
+            .headerProminence(.increased)
+            //.font(.headline)
         }
     }
 

@@ -123,11 +123,13 @@ struct EleveDetail: View {
                     isAddingNewObserv = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
+                        .imageScale(.medium)
                 }
                 .buttonStyle(.borderless)
             }
         }
+        .headerProminence(.increased)
+        //.font(.headline)
     }
 
     var colles: some View {
@@ -163,11 +165,13 @@ struct EleveDetail: View {
                     isAddingNewColle = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
+                        .imageScale(.medium)
                 }
                 .buttonStyle(.borderless)
             }
         }
+        .headerProminence(.increased)
+        //.font(.headline)
     }
 
     var body: some View {

@@ -171,7 +171,7 @@ struct ClasseDetail: View {
                 isAddingNewEleve = true
             } label: {
                 HStack {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.circle.fill")
                     Text("Ajouter un élève")
                 }
             }
@@ -179,7 +179,8 @@ struct ClasseDetail: View {
 
         } header: {
             Text(classe.elevesLabel)
-                .font(.headline)
+                .headerProminence(.increased)
+                //.font(.headline)
         }
     }
 

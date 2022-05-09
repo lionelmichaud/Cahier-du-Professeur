@@ -73,9 +73,12 @@ E.ID == UUID {
     public init() { }
 
     /// Initialiser à partir d'un fichier JSON portant le nom de la Class `E`
-    /// préfixé par `fileNamePrefix`
-    /// contenu dans le dossier `fromFolder` du répertoire `Documents`
-    /// - Parameter fromFolder: dossier où se trouve le fichier JSON à utiliser
+    /// contenu dans le dossier `fromFolder` du répertoire `Documents`.
+    ///
+    /// Si fromFolder = nil alors les fichiers JSON sont cherchés à la racines du répertoire `Documents`
+    ///
+    /// - Parameter fromFolder: dossier du répertoire `Documents` où se trouve le fichier JSON à utiliser
+    ///
     public convenience init(fromFolder: Folder?) {
         var folder: Folder
 
@@ -101,6 +104,38 @@ E.ID == UUID {
     }
 
     // MARK: - Methods
+
+    /// Initialiser à partir d'un fichier JSON portant le nom de la Class `E`
+    /// contenu dans le dossier `fromFolder` du répertoire `Documents`.
+    ///
+    /// Si fromFolder = nil alors les fichiers JSON sont cherchés à la racines du répertoire `Documents`
+    ///
+    /// - Parameter fromFolder: dossier du répertoire `Documents` où se trouve le fichier JSON à utiliser
+    ///
+    public func loadFromJSON(fromFolder: Folder?) throws {
+        var folder: Folder
+
+        if let fromFolder = fromFolder {
+            folder = fromFolder
+
+        } else if let documentsFolder = Folder.documents {
+            folder = documentsFolder
+
+        } else {
+            throw FileError.failedToReadFile
+        }
+
+        do {
+            // charger les données JSON
+            let copy = try self.loadFromJSON(fromFile             : String(describing: E.self) + ".json",
+                                             fromFolder           : folder,
+                                             dateDecodingStrategy : .iso8601,
+                                             keyDecodingStrategy  : .useDefaultKeys)
+            self.items = copy.items
+        } catch {
+            throw FileError.failedToReadFile
+        }
+    }
 
     /// Enregistrer au format JSON dans un fichier JSON portant le nom de la Class `E`
     /// dans le folder nommé `toFolder` du répertoire `Documents`

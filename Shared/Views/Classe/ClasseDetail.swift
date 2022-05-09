@@ -118,7 +118,7 @@ struct ClasseDetail: View {
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
         } label: {
-            Text("Note")
+            Text("Annotation")
                 .font(.headline)
                 .fontWeight(.bold)
         }

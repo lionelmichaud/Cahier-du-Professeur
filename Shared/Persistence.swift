@@ -40,7 +40,34 @@ public extension Folder {
 
 public struct PersistenceManager {
 
-    // MARK: - Static Methods
+    // MARK: - Methods
+
+    public func collectedJsonURLs(fileNames : [String]?  = nil) throws -> [URL] {
+        // vérifier l'existence du Folder associé au Dossier
+        guard let documentsFolder = Folder.documents else {
+            let error = FileError.failedToResolveDocuments
+            customLog.log(level: .fault,
+                          "\(error.rawValue))")
+            throw error
+        }
+
+        var urls = [URL]()
+        // collecte des URL des fichiers contenus dans le dossier Documents
+        documentsFolder.files.forEach { file in
+            if let fileNames = fileNames {
+                fileNames.forEach { fileName in
+                    if file.name.contains(fileName) {
+                        urls.append(file.url)
+                    }
+                }
+            } else {
+                urls.append(file.url)
+            }
+        }
+
+        return urls
+    }
+
 
     /// Importer les fichiers template depuis le `Bundle Main` de l'Application
     /// vers le répertoire `Documents` même si'ils y sont déjà présents.
@@ -52,7 +79,7 @@ public struct PersistenceManager {
             throw error
         }
 
-        guard let templateFolder = Folder.documents else {
+        guard let documentsFolder = Folder.documents else {
             let error = FileError.failedToResolveDocuments
             customLog.log(level: .fault,
                           "\(error.rawValue))")
@@ -61,7 +88,7 @@ public struct PersistenceManager {
 
         do {
             try duplicateAllJsonFiles(from        : originFolder,
-                                      to          : templateFolder,
+                                      to          : documentsFolder,
                                       forceUpdate : true)
         } catch {
             let error = FileError.failedToImportTemplates

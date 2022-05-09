@@ -146,11 +146,10 @@ struct ClasseEditor: View {
         /// Importer un fichier CSV depuis PRONOTE
         .fileImporter(isPresented             : $importFile,
                       allowedContentTypes     : [.commaSeparatedText],
-                      allowsMultipleSelection : false) { (result) in
+                      allowsMultipleSelection : false) { result in
             if case .success = result {
                 do {
                     let fileUrl = try result.get().first!
-                    print(fileUrl)
 
                     guard fileUrl.startAccessingSecurityScopedResource() else { return }
                     if let data = try? Data(contentsOf: fileUrl) {

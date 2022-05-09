@@ -30,32 +30,6 @@ func share(items      : [Any],
     }
 }
 
-func collectedURLs(fileNames : [String]?  = nil,
-                   alertItem : inout AlertItem?) -> [URL] {
-    // vérifier l'existence du Folder associé au Dossier
-    guard let documentsFolder = Folder.documents else {
-        alertItem = AlertItem(title         : Text("Echec de l'exportation: dossier Documents introuvable !"),
-                              dismissButton : .default(Text("OK")))
-        return [ ]
-    }
-
-    var urls = [URL]()
-    // collecte des URL des fichiers contenus dans le dossier Documents
-    documentsFolder.files.forEach { file in
-        if let fileNames = fileNames {
-            fileNames.forEach { fileName in
-                if file.name.contains(fileName) {
-                    urls.append(file.url)
-                }
-            }
-        } else {
-            urls.append(file.url)
-        }
-    }
-    
-    return urls
-}
-
 /// Partager les fichiers contenus dans le dossier actif de `dataStore`
 /// et qui contiennent l'une des Strings de `fileNames`
 /// ou bien tous les fichiers si `fileNames` = `nil`
@@ -66,8 +40,14 @@ func collectedURLs(fileNames : [String]?  = nil,
 func shareFiles(fileNames : [String]? = nil,
                 alertItem : inout AlertItem?,
                 geometry  : GeometryProxy) {
-    let urls = collectedURLs(fileNames: fileNames,
-                             alertItem: &alertItem)
+    var urls: [URL] = []
+
+    do {
+        urls = try PersistenceManager().collectedJsonURLs(fileNames: fileNames)
+    } catch {
+        alertItem = AlertItem(title         : Text("Echec de l'exportation: dossier Documents introuvable !"),
+                              dismissButton : .default(Text("OK")))
+    }
 
     // partage des fichiers collectés
     if urls.isNotEmpty {

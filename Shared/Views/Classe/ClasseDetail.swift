@@ -69,10 +69,15 @@ struct ClasseDetail: View {
                 }
             }
 
-            Spacer()
-
             // nombre d'heures d'enseignement pour cette classe
             if isNew || isEditing {
+                Toggle(isOn: $classe.segpa) {
+                    Text("SEGPA")
+                }
+                .toggleStyle(.button)
+
+                Spacer()
+
                 AmountEditView(label: "Heures",
                                amount: $classe.heures,
                                validity: .poz,
@@ -80,6 +85,8 @@ struct ClasseDetail: View {
                 .focused($isHoursFocused)
                 .frame(maxWidth: 150)
             } else {
+                Spacer()
+
                 Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) h")
                     .font(.title2)
                     .fontWeight(.semibold)
@@ -178,10 +185,25 @@ struct ClasseDetail: View {
             .buttonStyle(.borderless)
 
         } header: {
-            Text(classe.elevesLabel)
-                .headerProminence(.increased)
-                //.font(.headline)
+            HStack {
+                Text(classe.elevesLabel)
+
+                Spacer()
+
+                // supprimer tous les élèves de la classe
+                Button {
+                    withAnimation {
+                        ClasseManager().retirerTousLesEleves(deClasse    : &classe,
+                                                             eleveStore  : eleveStore,
+                                                             observStore : observStore,
+                                                             colleStore  : colleStore)
+                    }
+                } label: {
+                    Text("Supprimer tous les élèves")
+                }
+            }
         }
+        .headerProminence(.increased)
     }
 
     var body: some View {

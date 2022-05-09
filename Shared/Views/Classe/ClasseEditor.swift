@@ -34,6 +34,7 @@ struct ClasseEditor: View {
     // true si l'item va être détruit
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
+    @State private var isShowingDialog = false
     @State private var importFile = false
 
 
@@ -58,7 +59,7 @@ struct ClasseEditor: View {
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
                         if isNew {
-                            // Ajouter une nouvelle classe
+                            /// Ajouter une nouvelle classe
                             if classeStore.exists(classe: itemCopy, in: school.id) {
                                 self.alertItem = AlertItem(title         : Text("Ajout impossible"),
                                                            message       : Text("Cette classe existe déjà dans cet établissement"),
@@ -73,7 +74,7 @@ struct ClasseEditor: View {
                                 dismiss()
                             }
                         } else {
-                            // Appliquer les modifications faites à la classe
+                            /// Appliquer les modifications faites à la classe
                             if isEditing && !isDeleted {
                                 print("Done, saving any changes to \(classe.displayString).")
                                 withAnimation {
@@ -87,11 +88,34 @@ struct ClasseEditor: View {
                         Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
 
-                    if !isNew {
+                    /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
+                    if !isNew && !isEditing {
                         Button {
-                            importFile.toggle()
+                            isShowingDialog.toggle()
                         } label: {
                             Text("Importer")
+                        }
+                        /// Confirmation de l'importation
+                        .confirmationDialog("Importer un fichier",
+                                            isPresented     : $isShowingDialog,
+                                            titleVisibility : .visible) {
+                            Button("Ajouter les élèves importés") {
+                                withAnimation() {
+                                    importFile.toggle()
+                                }
+                            }
+                            Button("Importer et remplacer", role: .destructive) {
+                                withAnimation() {
+                                    ClasseManager().retirerTousLesEleves(deClasse    : &classe,
+                                                                         eleveStore  : eleveStore,
+                                                                         observStore : observStore,
+                                                                         colleStore  : colleStore)
+                                }
+                                importFile.toggle()
+                            }
+                        } message: {
+                            Text("La liste des élèves importée doit être au format CSV de PRONOTE.") +
+                            Text(" Cette action ne peut pas être annulée.")
                         }
                     }
                 }
@@ -119,7 +143,7 @@ struct ClasseEditor: View {
             }
         }
         .alert(item: $alertItem, content: newAlert)
-        //file importer
+        /// Importer un fichier CSV depuis PRONOTE
         .fileImporter(isPresented             : $importFile,
                       allowedContentTypes     : [.commaSeparatedText],
                       allowsMultipleSelection : false) { (result) in
@@ -132,10 +156,12 @@ struct ClasseEditor: View {
                     if let data = try? Data(contentsOf: fileUrl) {
                         var eleves = try CsvImporter().importEleves(from: data)
                         for idx in eleves.startIndex...eleves.endIndex-1 {
+                            withAnimation() {
                             ClasseManager()
                                 .ajouter(eleve      : &eleves[idx],
                                          aClasse    : &classe,
                                          eleveStore : eleveStore)
+                            }
                         }
                     }
                     fileUrl.stopAccessingSecurityScopedResource()

@@ -16,6 +16,7 @@ struct EleveEditor: View {
     var isNew             : Bool
     var filterObservation : Bool
     var filterColle       : Bool
+    let searchString      : String
 
     @EnvironmentObject private var eleveStore  : EleveStore
     @EnvironmentObject private var colleStore  : ColleStore
@@ -130,14 +131,16 @@ struct EleveEditor: View {
 
     init(classe            : Binding<Classe>,
          eleve             : Binding<Eleve>,
-         isNew             : Bool = false,
-         filterObservation : Bool = false,
-         filterColle       : Bool = false) {
+         isNew             : Bool   = false,
+         filterObservation : Bool   = false,
+         filterColle       : Bool   = false,
+         searchString      : String = "") {
         self.isNew             = isNew
         self._classe           = classe
         self._eleve            = eleve
         self.filterObservation = filterObservation
         self.filterColle       = filterColle
+        self.searchString      = searchString
         self._itemCopy         = State(initialValue : eleve.wrappedValue)
     }
 
@@ -150,7 +153,8 @@ struct EleveEditor: View {
                                             colleStore        : colleStore,
                                             filterObservation : filterObservation,
                                             filterColle       : filterColle,
-                                            filterFlag        : false)
+                                            filterFlag        : false,
+                                            searchString      : searchString)
     }
 
 }

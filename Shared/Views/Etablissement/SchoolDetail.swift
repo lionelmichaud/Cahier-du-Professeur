@@ -24,6 +24,8 @@ struct SchoolDetail: View {
     private var isAddingNewClasse = false
     @State
     private var newClasse = Classe.exemple
+    @State
+    private var noteIsExpanded = false
     @FocusState
     private var isNameFocused: Bool
 
@@ -51,14 +53,15 @@ struct SchoolDetail: View {
     }
 
     var note: some View {
-        VStack(alignment: .leading) {
-            Text("Note")
-                .font(.headline)
-                .fontWeight(.bold)
+        DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $school.note)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
+        } label: {
+            Text("Note")
+                .font(.headline)
+                .fontWeight(.bold)
         }
         .onChange(of: school.note) {newValue in
             isModified = true
@@ -115,7 +118,7 @@ struct SchoolDetail: View {
                 isAddingNewClasse = true
             } label: {
                 HStack {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.circle.fill")
                     Text("Ajouter une classe")
                 }
             }
@@ -127,7 +130,8 @@ struct SchoolDetail: View {
                 Spacer()
                 Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
             }
-            .font(.headline)
+            .headerProminence(.increased)
+            //.font(.headline)
         }
     }
 

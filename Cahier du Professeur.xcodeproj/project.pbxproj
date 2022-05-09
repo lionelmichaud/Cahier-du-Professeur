@@ -74,6 +74,12 @@
 		795FAB312809FB0B004CB120 /* HelpersView in Frameworks */ = {isa = PBXBuildFile; productRef = 795FAB302809FB0B004CB120 /* HelpersView */; };
 		797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
+		7986E7DF282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
+		7986E7E0282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
+		7986E7E228291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
+		7986E7E328291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
+		7986E7EA282930340011FF21 /* ConfirmationDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */; };
+		7986E7EB282930340011FF21 /* ConfirmationDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */; };
 		79935D372824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
 		79935D382824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
@@ -155,6 +161,8 @@
 		79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */; };
 		79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
 		79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
+		79FFDCD62825E950009D7452 /* importCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFDCD52825E94F009D7452 /* importCSV.swift */; };
+		79FFDCD72825E950009D7452 /* importCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFDCD52825E94F009D7452 /* importCSV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +218,9 @@
 		795FAB2C2809C830004CB120 /* SchoolEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEditor.swift; sourceTree = "<group>"; };
 		795FAB2E2809E54C004CB120 /* SchoolDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetail.swift; sourceTree = "<group>"; };
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
+		7986E7DE282918320011FF21 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		7986E7E128291DA00011FF21 /* AppVersion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppVersion.json; sourceTree = "<group>"; };
+		7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogs.swift; sourceTree = "<group>"; };
 		79935D362824906B005C20BD /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
@@ -257,6 +268,7 @@
 		79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSidebarView.swift; sourceTree = "<group>"; };
+		79FFDCD52825E94F009D7452 /* importCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importCSV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +380,14 @@
 			path = Etablissement;
 			sourceTree = "<group>";
 		};
+		7986E7E82829300C0011FF21 /* ApplicationHelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */,
+			);
+			path = ApplicationHelperViews;
+			sourceTree = "<group>";
+		};
 		79BB0B4B28170CC5002AAABA /* MotifView */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +400,7 @@
 		79F102D32823199E005E5D9C /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				7986E7E128291DA00011FF21 /* AppVersion.json */,
 				79F102E028232F36005E5D9C /* School.json */,
 				79F102E128232F36005E5D9C /* Classe.json */,
 				79F102DD28232F36005E5D9C /* Eleve.json */,
@@ -408,6 +429,8 @@
 			children = (
 				79F3ABFD2808C68700D068D9 /* UIState.swift */,
 				7918D1F92810997700C24C5A /* ColorOptions.swift */,
+				79FFDCD52825E94F009D7452 /* importCSV.swift */,
+				7986E7DE282918320011FF21 /* Persistence.swift */,
 				79F102D02821B816005E5D9C /* JsonCodableArray.swift */,
 				79935D362824906B005C20BD /* Share.swift */,
 				79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */,
@@ -474,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
+				7986E7E82829300C0011FF21 /* ApplicationHelperViews */,
 				795FAB272809C4D0004CB120 /* Etablissement */,
 				7918D1FC2810A5C400C24C5A /* Classe */,
 				795BC3DD2813102A00C22271 /* Eleve */,
@@ -678,6 +702,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F102EA28232F36005E5D9C /* Classe.json in Resources */,
+				7986E7E228291DA00011FF21 /* AppVersion.json in Resources */,
 				79F102E828232F36005E5D9C /* School.json in Resources */,
 				79F102E628232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBA2808218300D068D9 /* Assets.xcassets in Resources */,
@@ -691,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F102EB28232F36005E5D9C /* Classe.json in Resources */,
+				7986E7E328291DA00011FF21 /* AppVersion.json in Resources */,
 				79F102E928232F36005E5D9C /* School.json in Resources */,
 				79F102E728232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBB2808218300D068D9 /* Assets.xcassets in Resources */,
@@ -773,10 +799,12 @@
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
 				7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */,
+				7986E7DF282918320011FF21 /* Persistence.swift in Sources */,
 				79D583FD28204EBE00371EB3 /* ColleBrowserView.swift in Sources */,
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
+				7986E7EA282930340011FF21 /* ConfirmationDialogs.swift in Sources */,
 				791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				79BB0B502817138D002AAABA /* MotifEditor.swift in Sources */,
@@ -784,6 +812,7 @@
 				79502BA42818716500DA798F /* ObservBrowserView.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
+				79FFDCD62825E950009D7452 /* importCSV.swift in Sources */,
 				795FAB2F2809E54C004CB120 /* SchoolDetail.swift in Sources */,
 				791C26D428142D7100686F0C /* ColleStore.swift in Sources */,
 			);
@@ -820,10 +849,12 @@
 				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
+				79FFDCD72825E950009D7452 /* importCSV.swift in Sources */,
 				791C26E628145F8E00686F0C /* EleveObservLabel.swift in Sources */,
 				79D583FB28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
+				7986E7EB282930340011FF21 /* ConfirmationDialogs.swift in Sources */,
 				791C26E328145E4700686F0C /* EleveColleLabel.swift in Sources */,
 				7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				791C26DD281447BD00686F0C /* EleveBrowserView.swift in Sources */,
@@ -837,6 +868,7 @@
 				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,
+				7986E7E0282918320011FF21 /* Persistence.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FC2814A43400686F0C /* ColleEditor.swift in Sources */,
 				79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,

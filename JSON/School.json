@@ -1,13 +1,19 @@
 {
-    "items" : [
-        {
-            "id"        : "14D6F5C7-3B61-4AA8-940B-CCA5159928AA",
-            "nom"       : "Collège",
-            "note"      : ""
-            "niveau"    : 0,
-            "classesID" : [
-                "A75400FA-6C2D-459B-B416-0DEE88B03C96"
-            ],
-        }
-    ]
+  "items" : [
+    {
+      "id" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
+      "niveau" : "college",
+      "classesID" : [
+        "6919DFA1-4AAB-49AA-9EFC-60E260ACD84A",
+        "C132C97A-4EDF-4A25-A41A-02064BEA445A",
+        "C132C97A-4EDF-4A25-A41A-02064BEA445B",
+        "C132C97A-4EDF-4A25-A41A-02064BEA445C",
+        "C132C97A-4EDF-4A25-A41A-02064BEA445D",
+        "42E327EC-DA22-412A-97F7-784B1096D37E",
+        "ED643D50-9EAA-4CC3-9F36-92C67DD55067"
+      ],
+      "nom" : "Galilée",
+      "note" : ""
+    }
+  ]
 }

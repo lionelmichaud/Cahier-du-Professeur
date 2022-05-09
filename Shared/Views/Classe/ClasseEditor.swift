@@ -34,6 +34,8 @@ struct ClasseEditor: View {
     // true si l'item va être détruit
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
+    @State private var importFile = false
+
 
     private var isItemDeleted: Bool {
         !classeStore.isPresent(classe) && !isNew
@@ -53,7 +55,7 @@ struct ClasseEditor: View {
                         }
                     }
                 }
-                ToolbarItem {
+                ToolbarItemGroup(placement: .automatic) {
                     Button {
                         if isNew {
                             // Ajouter une nouvelle classe
@@ -84,6 +86,14 @@ struct ClasseEditor: View {
                     } label: {
                         Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
+
+                    if !isNew {
+                        Button {
+                            importFile.toggle()
+                        } label: {
+                            Text("Importer")
+                        }
+                    }
                 }
             }
             .onAppear {
@@ -109,6 +119,41 @@ struct ClasseEditor: View {
             }
         }
         .alert(item: $alertItem, content: newAlert)
+        //file importer
+        .fileImporter(isPresented             : $importFile,
+                      allowedContentTypes     : [.commaSeparatedText],
+                      allowsMultipleSelection : false) { (result) in
+            if case .success = result {
+                do{
+                    let fileUrl = try result.get().first!
+                    print(fileUrl)
+
+                    guard fileUrl.startAccessingSecurityScopedResource() else { return }
+                    if let data = try? Data(contentsOf: fileUrl) {
+                        var eleves = try CsvImporter().importEleves(from: data)
+                        for idx in eleves.startIndex...eleves.endIndex-1 {
+                            ClasseManager()
+                                .ajouter(eleve      : &eleves[idx],
+                                         aClasse    : &classe,
+                                         eleveStore : eleveStore)
+                        }
+                    }
+                    fileUrl.stopAccessingSecurityScopedResource()
+
+                } catch {
+                    self.alertItem = AlertItem(title         : Text("Échec"),
+                                               message       : Text("L'importation du fichier a échouée"),
+                                               dismissButton : .default(Text("OK")))
+                    print ("File Import Failed")
+                    print (error.localizedDescription)
+                }
+            } else {
+                self.alertItem = AlertItem(title         : Text("Échec"),
+                                           message       : Text("L'importation du fichier a échouée"),
+                                           dismissButton : .default(Text("OK")))
+                print ("File Import Failed")
+            }
+        }
     }
 
     init(school: Binding<School>,

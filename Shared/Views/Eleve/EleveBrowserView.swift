@@ -84,7 +84,7 @@ struct EleveBrowserSchoolSubiew : View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
             if filteredSortedEleves(dans: classe).isNotEmpty {
-                DisclosureGroup(isExpanded: $isClasseExpanded) {
+                DisclosureGroup {
                     ForEach(filteredSortedEleves(dans: classe)) { $eleve in
                         NavigationLink {
                             EleveEditor(classe            : .constant(classe),

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Files
+import FileAndFolder
 import HelpersView
 
 struct SchoolBrowserView: View {
@@ -22,6 +24,7 @@ struct SchoolBrowserView: View {
     private var newEtab = School()
     @State
     private var alertItem: AlertItem?
+    @State private var isShowingDialog = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -95,10 +98,12 @@ struct SchoolBrowserView: View {
                 // menu
                 ToolbarItemGroup(placement: .automatic) {
                     Menu {
+                        // Exporter les fichiers JSON utilisateurs
                         Button(action: { share(geometry: geometry) }) {
                             Label("Exporter les données", systemImage: "square.and.arrow.up")
                         }
-                        Button(action: `import`) {
+                        // Importer les fichiers JSON depuis le Bundle Application
+                        Button(action: { isShowingDialog.toggle() }) {
                             Label("Importer les données", systemImage: "square.and.arrow.down")
                         }
                         Button(action: { isEditingPreferences = true }) {
@@ -120,6 +125,18 @@ struct SchoolBrowserView: View {
                 }
             }
         }
+        /// Importer les fichiers JSON depuis le Bundle Application
+        .confirmationDialog(
+            "L'importation va remplacer vos données actuelles par celles contenues dans l'Application.",
+            isPresented: $isShowingDialog
+        ) {
+            Button("Importer", role: .destructive) {
+                self.import()
+            }
+        } message: {
+            Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application.\nCette action ne peut pas être annulée.")
+            Text("Cette action ne peut pas être annulée.")
+        }
         .alert(item: $alertItem, content: newAlert)
     }
 
@@ -130,9 +147,32 @@ struct SchoolBrowserView: View {
                    geometry: geometry)
     }
 
-
+    /// Importer les fichiers JSON depuis le Bundle Application
     func `import`() {
-
+        do {
+            try PersistenceManager().forcedImportAllJsonFilesFromApp()
+        } catch {
+            /// trigger second alert
+            DispatchQueue.main.async {
+                self.alertItem = AlertItem(title: Text("Erreur"),
+                                           message: Text("L'importation des fichiers a échouée!"),
+                                           dismissButton: .default(Text("OK")))
+            }
+        }
+        do {
+            try schoolStore.loadFromJSON(fromFolder: nil)
+            try classeStore.loadFromJSON(fromFolder: nil)
+            try eleveStore.loadFromJSON(fromFolder: nil)
+            try colleStore.loadFromJSON(fromFolder: nil)
+            try observStore.loadFromJSON(fromFolder: nil)
+        } catch {
+            /// trigger second alert
+            DispatchQueue.main.async {
+                self.alertItem = AlertItem(title: Text("Erreur"),
+                                           message: Text("La lecture des fichiers importés a échouée!"),
+                                           dismissButton: .default(Text("OK")))
+            }
+        }
     }
 }
 

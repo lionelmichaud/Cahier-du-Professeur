@@ -49,6 +49,7 @@ struct EleveBrowserView: View {
         .searchable(text      : $searchString,
                     placement : .navigationBarDrawer(displayMode : .automatic),
                     prompt    : "Filtrer")
+        .disableAutocorrection(true)
         .toolbar {
             ToolbarItemGroup(placement: .status) {
                 Text("Filtrer")

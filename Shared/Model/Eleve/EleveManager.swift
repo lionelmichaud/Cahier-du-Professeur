@@ -102,23 +102,23 @@ struct EleveManager {
             case (.some(let c), nil):
                 return observStore
                     .observations(de: eleve)
-                    .wrappedValue
-                    .filter { $0.isConsignee == c }
-                    .count
+                    .reduce(into: 0) { partialResult, observ in
+                        partialResult += (observ.isConsignee == c ? 1 : 0)
+                    }
 
             case (nil, .some(let v)):
                 return observStore
                     .observations(de: eleve)
-                    .wrappedValue
-                    .filter { $0.isVerified == v }
-                    .count
+                    .reduce(into: 0) { partialResult, observ in
+                        partialResult += (observ.isVerified == v ? 1 : 0)
+                    }
 
             case (.some(let c), .some(let v)):
                 return observStore
                     .observations(de: eleve)
-                    .wrappedValue
-                    .filter { $0.isConsignee == c || $0.isVerified == v }
-                    .count
+                    .reduce(into: 0) { partialResult, observ in
+                        partialResult += ((observ.isConsignee == c || observ.isVerified == v) ? 1 : 0)
+                    }
         }
     }
 
@@ -133,23 +133,23 @@ struct EleveManager {
             case (.some(let c), nil):
                 return colleStore
                     .colles(de: eleve)
-                    .wrappedValue
-                    .filter { $0.isConsignee == c }
-                    .count
+                    .reduce(into: 0) { partialResult, colle in
+                        partialResult += (colle.isConsignee == c ? 1 : 0)
+                    }
 
             case (nil, .some(let v)):
                 return colleStore
                     .colles(de: eleve)
-                    .wrappedValue
-                    .filter { $0.isVerified == v }
-                    .count
+                    .reduce(into: 0) { partialResult, colle in
+                        partialResult += (colle.isVerified == v ? 1 : 0)
+                    }
 
             case (.some(let c), .some(let v)):
                 return colleStore
                     .colles(de: eleve)
-                    .wrappedValue
-                    .filter { $0.isConsignee == c || $0.isVerified == v }
-                    .count
+                    .reduce(into: 0) { partialResult, colle in
+                        partialResult += ((colle.isConsignee == c || colle.isVerified == v) ? 1 : 0)
+                    }
         }
     }
 
@@ -167,7 +167,7 @@ struct EleveManager {
                 if searchString.isNotEmpty {
                     let string = searchString.lowercased()
 
-                    return  eleve.name.familyName!.lowercased().contains(string) ||
+                    return eleve.name.familyName!.lowercased().contains(string) ||
                     eleve.name.givenName!.lowercased().contains(string)
                 } else {
                     return true

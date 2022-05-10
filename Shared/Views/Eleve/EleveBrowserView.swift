@@ -29,7 +29,7 @@ struct EleveBrowserView: View {
                 // pour chaque Etablissement
                 ForEach(schoolStore.sortedSchools()) { $school in
                     if school.nbOfClasses != 0 {
-                        Section() {
+                        Section {
                             // pour chaque Classe
                             EleveBrowserSchoolSubiew(school            : school,
                                                      filterObservation : filterObservation,

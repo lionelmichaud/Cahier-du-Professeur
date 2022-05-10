@@ -113,7 +113,7 @@ extension EleveStore {
                 .forEach { eleve in
                     observStore
                         .observations(de: eleve)
-                        .forEach { $observ in
+                        .forEach { observ in
                             if isIncluded(observ) {
                                 observs.append(observ)
                             }
@@ -152,7 +152,7 @@ extension EleveStore {
                 .forEach { eleve in
                     colleStore
                         .colles(de: eleve)
-                        .forEach { $observ in
+                        .forEach { observ in
                             if isIncluded(observ) {
                                 colles.append(observ)
                             }

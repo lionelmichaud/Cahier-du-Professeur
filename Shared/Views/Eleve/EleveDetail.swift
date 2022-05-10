@@ -92,9 +92,9 @@ struct EleveDetail: View {
     var observations: some View {
         Section {
             // édition de la liste des observations
-            ForEach(observStore.observations(de          : eleve,
-                                             isConsignee : filterObservation ? false : nil,
-                                             isVerified  : filterObservation ? false : nil)) { $observ in
+            ForEach(observStore.sortedObservations(de          : eleve,
+                                                   isConsignee : filterObservation ? false : nil,
+                                                   isVerified  : filterObservation ? false : nil)) { $observ in
                 NavigationLink {
                     ObservEditor(classe            : classe,
                                  eleve             : $eleve,
@@ -135,7 +135,7 @@ struct EleveDetail: View {
     var colles: some View {
         Section {
             // édition de la liste des colles
-            ForEach(colleStore.colles(de          : eleve,
+            ForEach(colleStore.sortedColles(de          : eleve,
                                       isConsignee : filterColle ? false : nil)) { $colle in
                 NavigationLink {
                     ColleEditor(classe      : classe,

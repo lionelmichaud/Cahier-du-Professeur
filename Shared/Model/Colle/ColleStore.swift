@@ -36,9 +36,9 @@ extension ColleStore {
         saveAsJSON()
     }
 
-    func colles(de eleve    : Eleve,
-                isConsignee : Bool? = nil,
-                isVerified  : Bool? = nil) -> Binding<[Colle]> {
+    func sortedColles(de eleve    : Eleve,
+                      isConsignee : Bool? = nil,
+                      isVerified  : Bool? = nil) -> Binding<[Colle]> {
         Binding<[Colle]>(
             get: {
                 self.items
@@ -62,9 +62,18 @@ extension ColleStore {
             }
         )
     }
-//    static var exemple : ColleStore = {
-//        let store = ColleStore()
-//        store.items.append(Colle.exemple)
-//        return store
-//    }()
+
+    func colles(de eleve    : Eleve,
+                isConsignee : Bool? = nil,
+                isVerified  : Bool? = nil) -> [Colle] {
+        items.filter {
+                if let eleveId = $0.eleveId {
+                    return (eleveId == eleve.id) && $0.satisfies(isConsignee : isConsignee,
+                                                                 isVerified  : isVerified)
+                } else {
+                    return false
+                }
+            }
+            .sorted(by: <)
+    }
 }

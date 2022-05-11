@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var schoolStore   : SchoolStore
+    @EnvironmentObject var schoolStore : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -48,6 +48,9 @@ struct ContentView: View {
                 .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
                 .tag(UIState.Tab.colle)
                 .badge(colleStore.nbOfItemsToCheck)
+        }
+        .onAppear {
+            eleveStore.sort()
         }
     }
 }

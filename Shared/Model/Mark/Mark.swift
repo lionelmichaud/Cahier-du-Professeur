@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Mark: Codable {
+    var mark    : Int?
+    var eleveId : UUID
+}

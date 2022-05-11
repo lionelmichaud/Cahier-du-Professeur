@@ -78,8 +78,10 @@
 		7986E7E0282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
 		7986E7E228291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
 		7986E7E328291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
-		7986E7EA282930340011FF21 /* ConfirmationDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */; };
-		7986E7EB282930340011FF21 /* ConfirmationDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */; };
+		7992D0AA282B0AF200B31186 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* Mark.swift */; };
+		7992D0AB282B0AF200B31186 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* Mark.swift */; };
+		7992D0AD282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
+		7992D0AE282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
 		79935D372824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
 		79935D382824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
@@ -220,7 +222,8 @@
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		7986E7DE282918320011FF21 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7986E7E128291DA00011FF21 /* AppVersion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppVersion.json; sourceTree = "<group>"; };
-		7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogs.swift; sourceTree = "<group>"; };
+		7992D0A9282B0AF200B31186 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
+		7992D0AC282B0B2100B31186 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		79935D362824906B005C20BD /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
@@ -383,9 +386,24 @@
 		7986E7E82829300C0011FF21 /* ApplicationHelperViews */ = {
 			isa = PBXGroup;
 			children = (
-				7986E7E9282930340011FF21 /* ConfirmationDialogs.swift */,
 			);
 			path = ApplicationHelperViews;
+			sourceTree = "<group>";
+		};
+		7992D0A7282B0A4200B31186 /* Exam */ = {
+			isa = PBXGroup;
+			children = (
+				7992D0AC282B0B2100B31186 /* Exam.swift */,
+			);
+			path = Exam;
+			sourceTree = "<group>";
+		};
+		7992D0A8282B0ACB00B31186 /* Mark */ = {
+			isa = PBXGroup;
+			children = (
+				7992D0A9282B0AF200B31186 /* Mark.swift */,
+			);
+			path = Mark;
 			sourceTree = "<group>";
 		};
 		79BB0B4B28170CC5002AAABA /* MotifView */ = {
@@ -483,6 +501,8 @@
 			isa = PBXGroup;
 			children = (
 				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
+				7992D0A8282B0ACB00B31186 /* Mark */,
+				7992D0A7282B0A4200B31186 /* Exam */,
 				79F3ABE1280830D000D068D9 /* School */,
 				79F3ABE2280830E000D068D9 /* Classe */,
 				79F3ABE3280830F300D068D9 /* Eleve */,
@@ -770,6 +790,7 @@
 				791C26D128142B6300686F0C /* ObservationStore.swift in Sources */,
 				791C26EF281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				795BC3D82812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
+				7992D0AA282B0AF200B31186 /* Mark.swift in Sources */,
 				795BC3D52812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
 				791C26E228145E4700686F0C /* EleveColleLabel.swift in Sources */,
@@ -792,6 +813,7 @@
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
 				791C26F528148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
+				7992D0AD282B0B2100B31186 /* Exam.swift in Sources */,
 				79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				791C26EC28146F8F00686F0C /* EleveColleRow.swift in Sources */,
 				79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */,
@@ -804,7 +826,6 @@
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
-				7986E7EA282930340011FF21 /* ConfirmationDialogs.swift in Sources */,
 				791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				79BB0B502817138D002AAABA /* MotifEditor.swift in Sources */,
@@ -846,6 +867,7 @@
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */,
+				7992D0AB282B0AF200B31186 /* Mark.swift in Sources */,
 				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
@@ -854,7 +876,6 @@
 				79D583FB28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
-				7986E7EB282930340011FF21 /* ConfirmationDialogs.swift in Sources */,
 				791C26E328145E4700686F0C /* EleveColleLabel.swift in Sources */,
 				7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				791C26DD281447BD00686F0C /* EleveBrowserView.swift in Sources */,
@@ -865,6 +886,7 @@
 				79F3ABB92808218300D068D9 /* ContentView.swift in Sources */,
 				791C26D528142D7100686F0C /* ColleStore.swift in Sources */,
 				79D584012820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
+				7992D0AE282B0B2100B31186 /* Exam.swift in Sources */,
 				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,

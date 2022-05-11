@@ -25,6 +25,10 @@ struct ClasseDetail: View {
     @State
     private var newEleve = Eleve.exemple
     @State
+    private var isAddingNewExam = false
+    @State
+    private var newExam = Exam()
+    @State
     private var appreciationIsExpanded = false
     @State
     private var noteIsExpanded = false
@@ -111,7 +115,7 @@ struct ClasseDetail: View {
         }
     }
 
-    var note: some View {
+    var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $classe.note)
                 .multilineTextAlignment(.leading)
@@ -190,6 +194,36 @@ struct ClasseDetail: View {
         .headerProminence(.increased)
     }
 
+    var examList: some View {
+        Section {
+            // ajouter un élève
+            Button {
+                isModified      = true
+                newExam         = Exam()
+                isAddingNewExam = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter une évaluation")
+                }
+            }
+            .buttonStyle(.borderless)
+
+            // édition de la liste des examen
+            ForEach(classe.exams) { exam in
+                NavigationLink {
+                    EmptyView()
+                } label: {
+                    Text(exam.sujet)
+                }
+            }
+
+        } header: {
+            Text(classe.elevesLabel)
+        }
+        .headerProminence(.increased)
+    }
+
     var body: some View {
         List {
             // nom
@@ -200,9 +234,11 @@ struct ClasseDetail: View {
                 // appréciation sur la classe
                 appreciation
                 // note sur la classe
-                note
+                annotation
                 // édition de la liste des élèves
                 eleveList
+                // édition de la liste des examens
+                examList
             }
         }
         #if os(iOS)

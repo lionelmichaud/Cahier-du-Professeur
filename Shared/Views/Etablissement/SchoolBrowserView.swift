@@ -196,6 +196,7 @@ struct SchoolBrowserView: View {
                                            dismissButton: .default(Text("OK")))
             }
         }
+        eleveStore.sort()
     }
 
     /// Suppression de toutes les données utilisateur

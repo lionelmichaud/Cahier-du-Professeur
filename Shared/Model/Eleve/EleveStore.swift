@@ -81,7 +81,7 @@ extension EleveStore {
                             return false
                         }
                     }
-                    .sorted(by: <)
+                    //.sorted(by: <)
             },
             set: { items in
                 for classe in items {

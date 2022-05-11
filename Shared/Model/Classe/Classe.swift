@@ -24,13 +24,14 @@ struct Classe: Identifiable, Codable, Ordered {
     var id = UUID()
     var schoolId     : UUID?
     var niveau       : NiveauClasse = .n6ieme
-    var numero       : Int          = 1
-    var heures       : Double       = 0
-    var segpa        : Bool         = false
-    var isFlagged    : Bool         = false
-    var appreciation : String       = ""
-    var note         : String       = ""
-    var elevesID     : [UUID]       = []
+    var numero       : Int    = 1
+    var heures       : Double = 0
+    var segpa        : Bool   = false
+    var isFlagged    : Bool   = false
+    var appreciation : String = ""
+    var note         : String = ""
+    var elevesID     : [UUID] = []
+    var exams        : [Exam] = []
 
     var nbOfEleves: Int {
         elevesID.count
@@ -108,14 +109,7 @@ extension Classe: CustomStringConvertible {
            Note    : \(note)
            SchoolID: \(String(describing: schoolId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
+           Examens : \(String(describing: exams).withPrefixedSplittedLines("     "))
         """
     }
 }
-
-//extension Classe: Equatable {
-//    static func == (lhs: Classe, rhs: Classe) -> Bool {
-//        lhs.niveau == rhs.niveau &&
-//        lhs.numero == rhs.numero &&
-//        lhs.schoolId == rhs.schoolId
-//    }
-//}

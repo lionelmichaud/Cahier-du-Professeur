@@ -444,7 +444,7 @@
     },
     {
       "id" : "10FE39A7-29EA-44B2-B0E8-5BDE9023F483",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445C",
       "collesID" : [
 
@@ -456,7 +456,7 @@
         "givenName" : "Vince"
       },
       "observsID" : [
-
+        "F6D5DC92-A059-4721-82C3-47D32BFE2C9F"
       ]
     },
     {
@@ -478,7 +478,7 @@
     },
     {
       "id" : "2575F4FF-8AB2-43A7-9CA0-9F52BC001C5C",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445C",
       "collesID" : [
 
@@ -490,7 +490,7 @@
         "givenName" : "Paul"
       },
       "observsID" : [
-
+        "02B177C4-B9DC-4652-B862-BA926BE145D8"
       ]
     },
     {
@@ -631,7 +631,7 @@
     },
     {
       "id" : "8D1DFDB0-15C6-4899-A277-567AEA1138E2",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445C",
       "collesID" : [
 
@@ -643,7 +643,7 @@
         "givenName" : "Yassin"
       },
       "observsID" : [
-
+        "93884292-87F2-401F-BA18-4FCBCD9AA9C8"
       ]
     },
     {
@@ -835,7 +835,7 @@
     },
     {
       "id" : "AAD01DB8-E1A5-4DF7-837F-9B4AD3A32791",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445C",
       "collesID" : [
 
@@ -847,7 +847,7 @@
         "givenName" : "Antoine"
       },
       "observsID" : [
-
+        "F405FD84-E89D-409E-AB7A-ED1DB8F29A88"
       ]
     },
     {
@@ -937,7 +937,7 @@
     },
     {
       "id" : "C50A253B-CC73-4433-B826-09679D1C9CAF",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445B",
       "collesID" : [
 
@@ -949,7 +949,7 @@
         "givenName" : "Yoan"
       },
       "observsID" : [
-
+        "09E1F923-A632-4790-AB47-99C6185AE47F"
       ]
     },
     {
@@ -1090,7 +1090,7 @@
     },
     {
       "id" : "02F59FEE-767D-4D14-91E8-9B89EEF364EB",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445B",
       "collesID" : [
 
@@ -1102,7 +1102,7 @@
         "givenName" : "Thomas"
       },
       "observsID" : [
-
+        "BAD7C6E6-76A4-4ED0-AA36-A3A4C6DD37EB"
       ]
     },
     {
@@ -1226,7 +1226,7 @@
     },
     {
       "id" : "76FCB38D-EA61-4EE9-8738-B34587F03FD7",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "C132C97A-4EDF-4A25-A41A-02064BEA445B",
       "collesID" : [
 
@@ -1238,7 +1238,7 @@
         "givenName" : "Alessandro"
       },
       "observsID" : [
-
+        "0AF33418-5DF9-48A5-BD44-65B97DFB60A8"
       ]
     },
     {
@@ -2479,7 +2479,7 @@
         "givenName" : "Yanis"
       },
       "observsID" : [
-
+        "A2DE341E-ED50-47C8-BA34-E9F8BD236D9E"
       ]
     },
     {
@@ -2632,7 +2632,7 @@
         "givenName" : "Sofi"
       },
       "observsID" : [
-
+        "8F2B24B5-8AC1-4CF6-A0A1-171273B9B4F7"
       ]
     },
     {
@@ -2649,7 +2649,7 @@
         "givenName" : "Leandro"
       },
       "observsID" : [
-
+        "A39C266F-86C6-45D6-AA53-E1B8AD1B6923"
       ]
     },
     {
@@ -2666,7 +2666,7 @@
         "givenName" : "Sofian"
       },
       "observsID" : [
-
+        "622BC42B-981E-4FF5-9493-FA465A64AC6F"
       ]
     },
     {

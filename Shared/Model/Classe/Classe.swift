@@ -37,6 +37,10 @@ struct Classe: Identifiable, Codable, Ordered {
         elevesID.count
     }
 
+    var nbOfExams: Int {
+        exams.count
+    }
+
     var elevesLabel: String {
         if nbOfEleves == 0 {
             return "Aucun Élève"
@@ -44,6 +48,16 @@ struct Classe: Identifiable, Codable, Ordered {
             return "1 Élève"
         } else {
             return "\(nbOfEleves) Élèves"
+        }
+    }
+
+    var examsLabel: String {
+        if nbOfExams == 0 {
+            return "Aucune Évaluation"
+        } else if nbOfExams == 1 {
+            return "1 Évaluation"
+        } else {
+            return "\(nbOfExams) Évaluations"
         }
     }
 

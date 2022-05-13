@@ -149,7 +149,7 @@ struct ClasseDetail: View {
             .buttonStyle(.borderless)
 
             // édition de la liste des élèves
-            ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
+            ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
                 NavigationLink {
                     EleveEditor(classe : $classe,
                                 eleve  : $eleve,
@@ -210,16 +210,18 @@ struct ClasseDetail: View {
             .buttonStyle(.borderless)
 
             // édition de la liste des examen
-            ForEach(classe.exams) { exam in
+            ForEach($classe.exams) { $exam in
                 NavigationLink {
-                    EmptyView()
+                    ExamEditor(classe : $classe,
+                               exam   : $exam,
+                               isNew  : false)
                 } label: {
-                    Text(exam.sujet)
+                    ClasseExamRow(exam: exam)
                 }
             }
 
         } header: {
-            Text(classe.elevesLabel)
+            Text(classe.examsLabel)
         }
         .headerProminence(.increased)
     }
@@ -252,6 +254,13 @@ struct ClasseDetail: View {
                 EleveEditor(classe : $classe,
                             eleve  : $newEleve,
                             isNew  : true)
+            }
+        }
+        .sheet(isPresented: $isAddingNewExam) {
+            NavigationView {
+                ExamEditor(classe : $classe,
+                           exam   : $newExam,
+                           isNew  : true)
             }
         }
     }

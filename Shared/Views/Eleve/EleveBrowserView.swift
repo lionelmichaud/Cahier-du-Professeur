@@ -152,7 +152,7 @@ struct EleveBrowserSchoolSubiew : View {
     // MARK: - Methods
 
     func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
-        EleveManager().filteredSortedEleves(dans              : classe,
+        EleveManager().filteredEleves(dans              : classe,
                                             eleveStore        : eleveStore,
                                             observStore       : observStore,
                                             colleStore        : colleStore,

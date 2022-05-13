@@ -38,13 +38,15 @@ struct EleveEditor: View {
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
 
+    /// True si l'élève n'est pas dans le store ET si on est pas en train d'ajouter un nouvel élève
     private var isItemDeleted: Bool {
         !eleveStore.isPresent(eleve) && !isNew
     }
 
+    /// True si l'élève n'est pas dans la liste des élève de la `classe` satisfaisant aux critères de filtrage
     private var isItemFiltred: Bool {
-        !filteredSortedEleves(dans: classe).contains {
-            $0.wrappedValue.id == eleve.id
+        !filteredEleves(dans: classe).contains {
+            $0.id == eleve.id
         }
     }
     
@@ -146,15 +148,16 @@ struct EleveEditor: View {
 
     // MARK: - Methods
 
-    func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
-        EleveManager().filteredSortedEleves(dans              : classe,
-                                            eleveStore        : eleveStore,
-                                            observStore       : observStore,
-                                            colleStore        : colleStore,
-                                            filterObservation : filterObservation,
-                                            filterColle       : filterColle,
-                                            filterFlag        : false,
-                                            searchString      : searchString)
+    /// Liste des élève de la `classe` satisfaisant aux critères de filtrage
+    func filteredEleves(dans classe: Classe) -> Binding<[Eleve]> {
+        EleveManager().filteredEleves(dans              : classe,
+                                      eleveStore        : eleveStore,
+                                      observStore       : observStore,
+                                      colleStore        : colleStore,
+                                      filterObservation : filterObservation,
+                                      filterColle       : filterColle,
+                                      filterFlag        : false,
+                                      searchString      : searchString)
     }
 
 }

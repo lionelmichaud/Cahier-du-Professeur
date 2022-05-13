@@ -67,7 +67,7 @@ extension EleveStore {
         saveAsJSON()
     }
 
-    func filteredSortedEleves
+    func filteredEleves
     (dans classe  : Classe,
      _ isIncluded : @escaping (Eleve) -> Bool = { _ in true}) -> Binding<[Eleve]> {
 
@@ -92,6 +92,20 @@ extension EleveStore {
                 self.saveAsJSON()
             }
         )
+    }
+
+    func filteredEleves
+    (dans classe  : Classe,
+     _ isIncluded : @escaping (Eleve) -> Bool = { _ in true}) -> [Eleve] {
+        self.items
+            .filter { eleve in
+                if let classeId = eleve.classeId {
+                    return (classeId == classe.id) && isIncluded(eleve)
+                } else {
+                    return false
+                }
+            }
+        //.sorted(by: <)
     }
 
     func filteredSortedObservations

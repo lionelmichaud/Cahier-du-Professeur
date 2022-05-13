@@ -153,15 +153,15 @@ struct EleveManager {
         }
     }
 
-    func filteredSortedEleves(dans classe       : Classe,
-                              eleveStore        : EleveStore,
-                              observStore       : ObservationStore,
-                              colleStore        : ColleStore,
-                              filterObservation : Bool,
-                              filterColle       : Bool,
-                              filterFlag        : Bool,
-                              searchString      : String) -> Binding<[Eleve]> {
-        eleveStore.filteredSortedEleves(dans: classe) { eleve in
+    func filteredEleves(dans classe       : Classe,
+                        eleveStore        : EleveStore,
+                        observStore       : ObservationStore,
+                        colleStore        : ColleStore,
+                        filterObservation : Bool,
+                        filterColle       : Bool,
+                        filterFlag        : Bool,
+                        searchString      : String) -> Binding<[Eleve]> {
+        eleveStore.filteredEleves(dans: classe) { eleve in
 
             lazy var nameComplies: Bool = {
                 if searchString.isNotEmpty {

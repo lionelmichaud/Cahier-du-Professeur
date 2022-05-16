@@ -37,7 +37,6 @@ struct ClasseEditor: View {
     @State private var isShowingDialog = false
     @State private var importFile = false
 
-
     private var isItemDeleted: Bool {
         !classeStore.isPresent(classe) && !isNew
     }
@@ -48,6 +47,16 @@ struct ClasseEditor: View {
                          isEditing  : isEditing,
                          isNew      : isNew,
                          isModified : $isModified)
+//            .onChange(of: isModified, perform: { hasBeenModified in
+//                print("isModified modifié dans ClasseEditor: \(isModified)")
+//                if hasBeenModified && !isSaved {
+//                    // Appliquer les modifications faites à la classe hors du mode édition
+//                    // avant que .onAppear ne reste la valeur de isModified à False
+//                    classe     = itemCopy
+//                    isModified = false
+//                    isSaved    = true
+//                }
+//            })
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     if isNew {

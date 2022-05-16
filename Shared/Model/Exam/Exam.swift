@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Exam: Identifiable, Codable {
+struct Exam: Identifiable, Hashable, Codable {
     var id = UUID()
     var sujet   : String = ""
     var maxMark : Int    = 20

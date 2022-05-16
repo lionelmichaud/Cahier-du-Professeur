@@ -117,7 +117,7 @@ struct ClasseDetail: View {
 
     var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
-            TextEditor(text: $classe.note)
+            TextEditor(text: $classe.annotation)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -126,7 +126,7 @@ struct ClasseDetail: View {
                 .font(.headline)
                 .fontWeight(.bold)
         }
-        .onChange(of: classe.note) {newValue in
+        .onChange(of: classe.annotation) {newValue in
             isModified = true
         }
     }
@@ -196,7 +196,7 @@ struct ClasseDetail: View {
 
     var examList: some View {
         Section {
-            // ajouter un élève
+            // ajouter une évaluation
             Button {
                 isModified      = true
                 newExam         = Exam()
@@ -212,11 +212,28 @@ struct ClasseDetail: View {
             // édition de la liste des examen
             ForEach($classe.exams) { $exam in
                 NavigationLink {
-                    ExamEditor(classe : $classe,
-                               exam   : $exam,
-                               isNew  : false)
+                    ExamEditor(classe           : $classe,
+                               classeIsModified : $isModified,
+                               exam             : $exam,
+                               isNew            : false)
+//                    .onChange(of: isModified, perform: { newvalue in
+//                        print("isModified modifié dans ClasseDetail: \(isModified)")
+//                    })
                 } label: {
                     ClasseExamRow(exam: exam)
+                }
+                .swipeActions {
+                    // supprimer une évaluation
+                    Button(role: .destructive) {
+                        withAnimation {
+                            isModified = true
+                            classe.exams.removeAll {
+                                $0.id == exam.id
+                            }
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
                 }
             }
 
@@ -235,7 +252,7 @@ struct ClasseDetail: View {
             if !isNew {
                 // appréciation sur la classe
                 appreciation
-                // note sur la classe
+                // annotation sur la classe
                 annotation
                 // édition de la liste des élèves
                 eleveList
@@ -248,6 +265,8 @@ struct ClasseDetail: View {
         #endif
         .onAppear {
             isHoursFocused = isNew
+            appreciationIsExpanded = classe.appreciation.isNotEmpty
+            noteIsExpanded = classe.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewEleve) {
             NavigationView {
@@ -259,6 +278,7 @@ struct ClasseDetail: View {
         .sheet(isPresented: $isAddingNewExam) {
             NavigationView {
                 ExamEditor(classe : $classe,
+                           classeIsModified: $isModified,
                            exam   : $newExam,
                            isNew  : true)
             }

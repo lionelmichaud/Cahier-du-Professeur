@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Mark: Codable {
+struct Mark: Codable, Hashable {
     var mark    : Int?
     var eleveId : UUID
 }

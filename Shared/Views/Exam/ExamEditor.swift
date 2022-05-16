@@ -11,6 +11,8 @@ struct ExamEditor: View {
     @Binding
     var classe : Classe
     @Binding
+    var classeIsModified : Bool
+    @Binding
     var exam   : Exam
     var isNew  : Bool
 
@@ -56,11 +58,12 @@ struct ExamEditor: View {
                         } else {
                             // Appliquer les modifications faites à l'évaluation
                             if isEditing && !isDeleted {
-                                print("Done, saving any changes to \(classe.displayString).")
+                                print("Done, saving any changes to \(itemCopy.sujet).")
                                 withAnimation {
                                     exam = itemCopy // Put edits (if any) back in the store.
                                 }
                                 isSaved = true
+                                classeIsModified = true
                             }
                             isEditing.toggle()
                         }
@@ -69,6 +72,9 @@ struct ExamEditor: View {
                     }
                 }
             }
+//            .onChange(of: classeIsModified, perform: { newvalue in
+//                print("classeIsModified modifié dans ExamEditor: \(classeIsModified)")
+//            })
             .onAppear {
                 itemCopy   = exam
                 isModified = false
@@ -77,6 +83,7 @@ struct ExamEditor: View {
             .onDisappear {
                 if isModified && !isSaved {
                     // Appliquer les modifications faites à la classe hors du mode édition
+                    classeIsModified = true
                     exam       = itemCopy
                     isModified = false
                     isSaved    = true
@@ -93,13 +100,15 @@ struct ExamEditor: View {
         }
     }
 
-    init(classe: Binding<Classe>,
-         exam  : Binding<Exam>,
-         isNew : Bool = false) {
-        self.isNew     = isNew
-        self._classe   = classe
-        self._exam     = exam
-        self._itemCopy = State(initialValue : exam.wrappedValue)
+    init(classe           : Binding<Classe>,
+         classeIsModified : Binding<Bool>,
+         exam             : Binding<Exam>,
+         isNew            : Bool = false) {
+        self._classe           = classe
+        self._classeIsModified = classeIsModified
+        self._exam             = exam
+        self.isNew             = isNew
+        self._itemCopy         = State(initialValue : exam.wrappedValue)
     }
 
     private func addNewItem() {
@@ -107,6 +116,7 @@ struct ExamEditor: View {
         withAnimation {
             classe.exams.insert(itemCopy, at: 0)
         }
+        classeIsModified = true
         dismiss()
     }
 
@@ -116,17 +126,19 @@ struct ExamEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ExamEditor(classe : .constant(TestEnvir.classeStore.items.first!),
-                       exam   : .constant(Exam()),
-                       isNew  : true)
+            ExamEditor(classe           : .constant(TestEnvir.classeStore.items.first!),
+                       classeIsModified : .constant(false),
+                       exam             : .constant(Exam()),
+                       isNew            : true)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
-            ExamEditor(classe : .constant(TestEnvir.classeStore.items.first!),
-                       exam   : .constant(Exam()),
-                       isNew  : true)
+            ExamEditor(classe           : .constant(TestEnvir.classeStore.items.first!),
+                       classeIsModified : .constant(false),
+                       exam             : .constant(Exam()),
+                       isNew            : true)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)

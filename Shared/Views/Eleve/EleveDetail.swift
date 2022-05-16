@@ -32,6 +32,8 @@ struct EleveDetail: View {
     private var newColle  = Colle.exemple
     @State
     private var appreciationIsExpanded = false
+    @State
+    private var noteIsExpanded = false
     @FocusState
     private var isPrenomFocused: Bool
 
@@ -87,6 +89,22 @@ struct EleveDetail: View {
                 .fontWeight(.bold)
         }
         .onChange(of: eleve.appreciation) {newValue in
+            isModified = true
+        }
+    }
+
+    var annotation: some View {
+        DisclosureGroup(isExpanded: $noteIsExpanded) {
+            TextEditor(text: $eleve.annotation)
+                .multilineTextAlignment(.leading)
+                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                .frame(minHeight: 80)
+        } label: {
+            Text("Annotation")
+                .font(.headline)
+                .fontWeight(.bold)
+        }
+        .onChange(of: eleve.annotation) {newValue in
             isModified = true
         }
     }
@@ -184,6 +202,8 @@ struct EleveDetail: View {
             if !isNew {
                 // appréciation sur l'élève
                 appreciation
+                // annotation sur l'élève
+                annotation
                 // observations sur l'élève
                 observations
                 // colles de l'élève
@@ -197,6 +217,8 @@ struct EleveDetail: View {
         #endif
         .onAppear {
             isPrenomFocused = isNew
+            appreciationIsExpanded = eleve.appreciation.isNotEmpty
+            noteIsExpanded = eleve.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {

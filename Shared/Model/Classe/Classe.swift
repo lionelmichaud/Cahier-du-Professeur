@@ -29,7 +29,7 @@ struct Classe: Identifiable, Codable, Ordered {
     var segpa        : Bool   = false
     var isFlagged    : Bool   = false
     var appreciation : String = ""
-    var note         : String = ""
+    var annotation   : String = ""
     var elevesID     : [UUID] = []
     var exams        : [Exam] = []
 
@@ -120,7 +120,7 @@ extension Classe: CustomStringConvertible {
            Heures  : \(heures)
            Flagged : \(isFlagged.frenchString)
            Appréciation: \(appreciation)
-           Note    : \(note)
+           Annotation  : \(annotation)
            SchoolID: \(String(describing: schoolId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
            Examens : \(String(describing: exams).withPrefixedSplittedLines("     "))

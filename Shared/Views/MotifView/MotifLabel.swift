@@ -14,7 +14,7 @@ struct MotifLabel: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "info.circle.fill")
+            Image(systemName: "exclamationmark.circle.fill")
                 .imageScale(imageSize)
                 .symbolRenderingMode(.hierarchical)
                 //.foregroundColor(eleve.sexe.color)

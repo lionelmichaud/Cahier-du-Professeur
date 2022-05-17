@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MotifLabel: View {
-    let motif      : MotifEnum
+    let motif      : Motif
     var fontWeight : Font.Weight = .semibold
     var imageSize  : Image.Scale = .large
 
@@ -18,15 +18,19 @@ struct MotifLabel: View {
                 .imageScale(imageSize)
                 .symbolRenderingMode(.hierarchical)
                 //.foregroundColor(eleve.sexe.color)
-            Text(motif.displayString)
+            Text(motif.nature == .autre ? motif.descriptionMotif : motif.nature.displayString)
                 .fontWeight(fontWeight)
                 .foregroundColor(.secondary)
+                .lineLimit(1)
         }
     }
 }
 
 struct MotifLabel_Previews: PreviewProvider {
     static var previews: some View {
-        MotifLabel(motif: MotifEnum.leconNonApprise)
+        MotifLabel(motif: Motif())
+            .previewLayout(.sizeThatFits)
+        MotifLabel(motif: Motif(nature: .leconNonApprise, descriptionMotif: ""))
+            .previewLayout(.sizeThatFits)
     }
 }

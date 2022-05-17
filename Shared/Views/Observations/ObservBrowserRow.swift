@@ -30,7 +30,7 @@ struct ObservBrowserRow: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
 
-            MotifLabel(motif: observ.motif.nature)
+            MotifLabel(motif: observ.motif)
                 .font(.caption)
                 //.foregroundColor(.secondary)
         }

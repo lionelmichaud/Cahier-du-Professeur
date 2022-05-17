@@ -29,7 +29,7 @@ struct ColleBrowserRow: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
 
-            MotifLabel(motif: colle.motif.nature)
+            MotifLabel(motif: colle.motif)
                 .font(.caption)
             //.foregroundColor(.secondary)
         }

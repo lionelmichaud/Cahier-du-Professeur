@@ -44,7 +44,7 @@ struct ColleBrowserView: View {
                     .padding(.trailing, 4)
                 Toggle(isOn: $filterColle.animation(),
                        label: {
-                    Image(systemName: "lock.fill")
+                    Text("Action")
                 })
                 .toggleStyle(.button)
             }

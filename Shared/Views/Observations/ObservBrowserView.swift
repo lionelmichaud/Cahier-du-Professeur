@@ -44,7 +44,7 @@ struct ObservBrowserView: View {
                     .padding(.trailing, 4)
                 Toggle(isOn: $filterObservation.animation(),
                        label: {
-                    Image(systemName: "magnifyingglass")
+                    Text("Action")
                 })
                 .toggleStyle(.button)
             }

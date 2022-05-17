@@ -102,6 +102,7 @@ struct ClasseDetail: View {
     var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $classe.appreciation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -118,6 +119,7 @@ struct ClasseDetail: View {
     var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $classe.annotation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)

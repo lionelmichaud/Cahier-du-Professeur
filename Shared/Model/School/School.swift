@@ -22,10 +22,10 @@ struct School: Identifiable, Equatable, Codable {
     // MARK: - Properties
 
     var id = UUID()
-    var niveau    : NiveauSchool = .college
-    var nom       : String       = ""
-    var note      : String       = ""
-    var classesID : [UUID] = []
+    var niveau     : NiveauSchool = .college
+    var nom        : String       = ""
+    var annotation : String       = ""
+    var classesID  : [UUID]       = []
 
     var nbOfClasses: Int {
         classesID.count
@@ -82,7 +82,7 @@ extension School: CustomStringConvertible {
            ID     : \(id)
            Niveau : \(niveau.displayString)
            Nom    : \(nom)
-           Note   : \(note)
+           Note   : \(annotation)
            Nombre de classes: \(nbOfClasses)
            ClassesID: \(String(describing: classesID).withPrefixedSplittedLines("     "))
         """

@@ -86,6 +86,8 @@
 		7992D0AE282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
 		79935D372824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
 		79935D382824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
+		79B5BD4728340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
+		79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
 		79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
 		79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4C28170CEC002AAABA /* MotifView.swift */; };
@@ -232,6 +234,7 @@
 		7992D0A9282B0AF200B31186 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
 		7992D0AC282B0B2100B31186 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		79935D362824906B005C20BD /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		79B5BD4628340C9400034115 /* MotifLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifLabel.swift; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
 		79BB0B4F2817138D002AAABA /* MotifEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifEditor.swift; sourceTree = "<group>"; };
@@ -430,6 +433,7 @@
 			children = (
 				79BB0B4C28170CEC002AAABA /* MotifView.swift */,
 				79BB0B4F2817138D002AAABA /* MotifEditor.swift */,
+				79B5BD4628340C9400034115 /* MotifLabel.swift */,
 			);
 			path = MotifView;
 			sourceTree = "<group>";
@@ -836,6 +840,7 @@
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
 				791C26F528148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
+				79B5BD4728340C9400034115 /* MotifLabel.swift in Sources */,
 				7992D0AD282B0B2100B31186 /* Exam.swift in Sources */,
 				79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				791C26EC28146F8F00686F0C /* EleveColleRow.swift in Sources */,
@@ -877,6 +882,7 @@
 				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				79F3ABEB28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				79502BA82818945200DA798F /* ObservBrowserRow.swift in Sources */,
+				79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */,
 				79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */,
 				79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */,
 				79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,

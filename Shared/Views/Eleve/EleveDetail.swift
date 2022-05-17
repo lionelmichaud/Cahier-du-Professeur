@@ -80,6 +80,7 @@ struct EleveDetail: View {
     var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $eleve.appreciation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -96,6 +97,7 @@ struct EleveDetail: View {
     var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $eleve.annotation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)

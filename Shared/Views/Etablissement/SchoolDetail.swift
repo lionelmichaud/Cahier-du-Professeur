@@ -52,9 +52,10 @@ struct SchoolDetail: View {
         .listRowSeparator(.hidden)
     }
 
-    var note: some View {
+    var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
-            TextEditor(text: $school.note)
+            TextEditor(text: $school.annotation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -63,7 +64,7 @@ struct SchoolDetail: View {
                 .font(.headline)
                 .fontWeight(.bold)
         }
-        .onChange(of: school.note) {newValue in
+        .onChange(of: school.annotation) {newValue in
             isModified = true
         }
     }
@@ -151,7 +152,7 @@ struct SchoolDetail: View {
             // classes dans l'établissement
             if !isNew {
                 // note sur la classe
-                note
+                annotation
                 // édition de la liste des classes
                 classeList
             }
@@ -161,6 +162,7 @@ struct SchoolDetail: View {
         #endif
         .onAppear {
             isNameFocused = isNew
+            noteIsExpanded = school.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {

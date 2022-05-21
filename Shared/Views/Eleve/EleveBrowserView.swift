@@ -29,7 +29,7 @@ struct EleveBrowserView: View {
                 // pour chaque Etablissement
                 ForEach(schoolStore.sortedSchools()) { $school in
                     if school.nbOfClasses != 0 {
-                        Section() {
+                        Section {
                             // pour chaque Classe
                             EleveBrowserSchoolSubiew(school            : school,
                                                      filterObservation : filterObservation,
@@ -49,6 +49,7 @@ struct EleveBrowserView: View {
         .searchable(text      : $searchString,
                     placement : .navigationBarDrawer(displayMode : .automatic),
                     prompt    : "Filtrer")
+        .disableAutocorrection(true)
         .toolbar {
             ToolbarItemGroup(placement: .status) {
                 Text("Filtrer")
@@ -151,7 +152,7 @@ struct EleveBrowserSchoolSubiew : View {
     // MARK: - Methods
 
     func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
-        EleveManager().filteredSortedEleves(dans              : classe,
+        EleveManager().filteredEleves(dans              : classe,
                                             eleveStore        : eleveStore,
                                             observStore       : observStore,
                                             colleStore        : colleStore,

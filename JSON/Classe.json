@@ -9,7 +9,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "1BA04F06-B288-42A0-BB08-913E44772C9E",
         "D585DE52-F59E-4362-A3E5-D5CEC8691C70",
@@ -36,6 +36,8 @@
         "F5268F2C-30AD-42C8-A628-BB0D8F3879E7",
         "0E25A715-85A4-4E8E-B953-A671054736AA",
         "83E7C101-32FC-43E1-9DB2-CC81FB637679"
+      ],
+      "exams" : [
       ]
     },
     {
@@ -47,7 +49,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "7DBBD152-47AC-4494-B908-A734052A30C9",
         "F53D12FD-A3FA-4579-B167-8BD708CD1B14",
@@ -68,6 +70,8 @@
         "BDD7F1CB-721B-49EF-A4FD-FCBB22323EF5",
         "ABDD2827-C389-426B-97EC-941FB367D7AC",
         "A7FE3B3F-CCB6-4B43-B1FC-BAD5BECAE673"
+      ],
+      "exams" : [
       ]
     },
     {
@@ -79,7 +83,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "8E4C0D65-4C45-41A4-8E2C-47B025340C98",
         "F287B5BB-5EE4-4EC9-81EE-8CADBFBDF780",
@@ -94,6 +98,8 @@
         "9809CAD9-0983-41CC-9F6C-90F8EEECF44A",
         "BC1B3AA2-37BC-4FF7-BFBE-386B975C2E46",
         "2C62D0DE-9CD0-40C0-BD84-D5817DB289C3"
+      ],
+      "exams" : [
       ]
     },
     {
@@ -105,7 +111,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "BD59903C-E7DF-4791-AFA3-82D6A332CD9B",
         "F797493A-DA7B-4CC6-AD17-A21A37163975",
@@ -133,6 +139,8 @@
         "B3E53EF3-5173-4C15-9D50-88A0EF2AEA60",
         "15BCF048-6580-4ABF-8F57-E65EA1652F09",
         "C3CEF27D-93A3-46D8-B4A6-B32556A5F231"
+      ],
+      "exams" : [
       ]
     },
     {
@@ -144,7 +152,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "EFE90B02-4D1B-48BE-A1EC-DBB0D886728B",
         "AAD01DB8-E1A5-4DF7-837F-9B4AD3A32791",
@@ -171,6 +179,8 @@
         "2575F4FF-8AB2-43A7-9CA0-9F52BC001C5C",
         "2106A3A4-28F8-47F1-84EC-BF831151DBD7",
         "10FE39A7-29EA-44B2-B0E8-5BDE9023F483"
+      ],
+      "exams" : [
       ]
     },
     {
@@ -182,7 +192,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "B8E79260-72D9-49C5-8E44-00A410BE8F68",
         "AEB7675F-0737-47FA-A18F-D0F4F6C75377",
@@ -210,6 +220,8 @@
         "1005269C-F62B-4675-BFD5-4301F9BBCE8D",
         "D32F4080-3E4B-43BE-82A8-E2099DF24EE1",
         "3E5A2324-78B9-41FC-8E89-0B0DE13E2EEE"
+      ],
+      "exams" : [
       ]
     },
     {
@@ -221,7 +233,7 @@
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
-      "note" : "",
+      "annotation" : "",
       "elevesID" : [
         "EF6AF2DB-4EC5-4847-983D-2968061A03C4",
         "AF276567-6FB4-449D-9BAB-23AA13F8A191",
@@ -249,6 +261,8 @@
         "CCE03128-6FE4-4D3A-8C6F-DEE3C52705D6",
         "0ED5ED03-2C9F-4354-BD39-5048DFE4554E",
         "60A3FC11-A75D-4605-927D-8C6B7CF5496D"
+      ],
+      "exams" : [
       ]
     }
   ]

@@ -243,4 +243,13 @@ extension JsonCodableArray where E: Ordered {
         itemsID.insert(item.id, at: index)
     }
 
+    func add(_ item: E) {
+        items.append(item)
+        items.sort(by: <)
+        saveAsJSON()
+    }
+
+    func sort() {
+        items.sort(by: <)
+    }
 }

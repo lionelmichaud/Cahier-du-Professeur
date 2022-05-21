@@ -36,9 +36,9 @@ extension ObservationStore {
         return observs.map { $0.id }
     }
 
-    func observations(de eleve    : Eleve,
-                      isConsignee : Bool? = nil,
-                      isVerified  : Bool? = nil) -> Binding<[Observation]> {
+    func sortedObservations(de eleve    : Eleve,
+                            isConsignee : Bool? = nil,
+                            isVerified  : Bool? = nil) -> Binding<[Observation]> {
         Binding<[Observation]>(
             get: {
                 self.items
@@ -62,9 +62,17 @@ extension ObservationStore {
             }
         )
     }
-//    static var exemple : ObservationStore = {
-//        let store = ObservationStore()
-//        store.items.append(Observation.exemple)
-//        return store
-//    }()
+
+    func observations(de eleve    : Eleve,
+                      isConsignee : Bool? = nil,
+                      isVerified  : Bool? = nil) -> [Observation] {
+        items.filter {
+            if let eleveId = $0.eleveId {
+                return (eleveId == eleve.id) && $0.satisfies(isConsignee : isConsignee,
+                                                             isVerified  : isVerified)
+            } else {
+                return false
+            }
+        }
+    }
 }

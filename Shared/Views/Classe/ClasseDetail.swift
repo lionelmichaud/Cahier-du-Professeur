@@ -25,6 +25,10 @@ struct ClasseDetail: View {
     @State
     private var newEleve = Eleve.exemple
     @State
+    private var isAddingNewExam = false
+    @State
+    private var newExam = Exam()
+    @State
     private var appreciationIsExpanded = false
     @State
     private var noteIsExpanded = false
@@ -98,6 +102,7 @@ struct ClasseDetail: View {
     var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $classe.appreciation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -111,9 +116,10 @@ struct ClasseDetail: View {
         }
     }
 
-    var note: some View {
+    var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
-            TextEditor(text: $classe.note)
+            TextEditor(text: $classe.annotation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -122,7 +128,7 @@ struct ClasseDetail: View {
                 .font(.headline)
                 .fontWeight(.bold)
         }
-        .onChange(of: classe.note) {newValue in
+        .onChange(of: classe.annotation) {newValue in
             isModified = true
         }
     }
@@ -145,7 +151,7 @@ struct ClasseDetail: View {
             .buttonStyle(.borderless)
 
             // édition de la liste des élèves
-            ForEach(eleveStore.filteredSortedEleves(dans: classe)) { $eleve in
+            ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
                 NavigationLink {
                     EleveEditor(classe : $classe,
                                 eleve  : $eleve,
@@ -190,6 +196,55 @@ struct ClasseDetail: View {
         .headerProminence(.increased)
     }
 
+    var examList: some View {
+        Section {
+            // ajouter une évaluation
+            Button {
+                isModified      = true
+                newExam         = Exam()
+                isAddingNewExam = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter une évaluation")
+                }
+            }
+            .buttonStyle(.borderless)
+
+            // édition de la liste des examen
+            ForEach($classe.exams) { $exam in
+                NavigationLink {
+                    ExamEditor(classe           : $classe,
+                               classeIsModified : $isModified,
+                               exam             : $exam,
+                               isNew            : false)
+//                    .onChange(of: isModified, perform: { newvalue in
+//                        print("isModified modifié dans ClasseDetail: \(isModified)")
+//                    })
+                } label: {
+                    ClasseExamRow(exam: exam)
+                }
+                .swipeActions {
+                    // supprimer une évaluation
+                    Button(role: .destructive) {
+                        withAnimation {
+                            isModified = true
+                            classe.exams.removeAll {
+                                $0.id == exam.id
+                            }
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
+                }
+            }
+
+        } header: {
+            Text(classe.examsLabel)
+        }
+        .headerProminence(.increased)
+    }
+
     var body: some View {
         List {
             // nom
@@ -199,10 +254,12 @@ struct ClasseDetail: View {
             if !isNew {
                 // appréciation sur la classe
                 appreciation
-                // note sur la classe
-                note
+                // annotation sur la classe
+                annotation
                 // édition de la liste des élèves
                 eleveList
+                // édition de la liste des examens
+                examList
             }
         }
         #if os(iOS)
@@ -210,12 +267,22 @@ struct ClasseDetail: View {
         #endif
         .onAppear {
             isHoursFocused = isNew
+            appreciationIsExpanded = classe.appreciation.isNotEmpty
+            noteIsExpanded = classe.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewEleve) {
             NavigationView {
                 EleveEditor(classe : $classe,
                             eleve  : $newEleve,
                             isNew  : true)
+            }
+        }
+        .sheet(isPresented: $isAddingNewExam) {
+            NavigationView {
+                ExamEditor(classe : $classe,
+                           classeIsModified: $isModified,
+                           exam   : $newExam,
+                           isNew  : true)
             }
         }
     }

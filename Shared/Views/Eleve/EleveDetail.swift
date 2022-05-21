@@ -32,6 +32,8 @@ struct EleveDetail: View {
     private var newColle  = Colle.exemple
     @State
     private var appreciationIsExpanded = false
+    @State
+    private var noteIsExpanded = false
     @FocusState
     private var isPrenomFocused: Bool
 
@@ -47,9 +49,11 @@ struct EleveDetail: View {
                     .pickerStyle(.menu)
                 TextField("Prénom", text: $eleve.name.givenName.bound)
                     .textFieldStyle(.roundedBorder)
+                    .disableAutocorrection(true)
                     .focused($isPrenomFocused)
                 TextField("Nom", text: $eleve.name.familyName.bound)
                     .textFieldStyle(.roundedBorder)
+                    .disableAutocorrection(true)
             } else {
                 Text(eleve.displayName)
                     .font(.title2)
@@ -76,6 +80,7 @@ struct EleveDetail: View {
     var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $eleve.appreciation)
+                .font(.caption)
                 .multilineTextAlignment(.leading)
                 .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
                 .frame(minHeight: 80)
@@ -89,12 +94,29 @@ struct EleveDetail: View {
         }
     }
 
+    var annotation: some View {
+        DisclosureGroup(isExpanded: $noteIsExpanded) {
+            TextEditor(text: $eleve.annotation)
+                .font(.caption)
+                .multilineTextAlignment(.leading)
+                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                .frame(minHeight: 80)
+        } label: {
+            Text("Annotation")
+                .font(.headline)
+                .fontWeight(.bold)
+        }
+        .onChange(of: eleve.annotation) {newValue in
+            isModified = true
+        }
+    }
+
     var observations: some View {
         Section {
             // édition de la liste des observations
-            ForEach(observStore.observations(de          : eleve,
-                                             isConsignee : filterObservation ? false : nil,
-                                             isVerified  : filterObservation ? false : nil)) { $observ in
+            ForEach(observStore.sortedObservations(de          : eleve,
+                                                   isConsignee : filterObservation ? false : nil,
+                                                   isVerified  : filterObservation ? false : nil)) { $observ in
                 NavigationLink {
                     ObservEditor(classe            : classe,
                                  eleve             : $eleve,
@@ -135,7 +157,7 @@ struct EleveDetail: View {
     var colles: some View {
         Section {
             // édition de la liste des colles
-            ForEach(colleStore.colles(de          : eleve,
+            ForEach(colleStore.sortedColles(de          : eleve,
                                       isConsignee : filterColle ? false : nil)) { $colle in
                 NavigationLink {
                     ColleEditor(classe      : classe,
@@ -182,6 +204,8 @@ struct EleveDetail: View {
             if !isNew {
                 // appréciation sur l'élève
                 appreciation
+                // annotation sur l'élève
+                annotation
                 // observations sur l'élève
                 observations
                 // colles de l'élève
@@ -195,6 +219,8 @@ struct EleveDetail: View {
         #endif
         .onAppear {
             isPrenomFocused = isNew
+            appreciationIsExpanded = eleve.appreciation.isNotEmpty
+            noteIsExpanded = eleve.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {

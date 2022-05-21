@@ -16,7 +16,7 @@ struct MainScene: Scene {
 
     // MARK: - Properties
 
-    @ObservedObject var schoolStore   : SchoolStore
+    @ObservedObject var schoolStore : SchoolStore
     @ObservedObject var classeStore : ClasseStore
     @ObservedObject var eleveStore  : EleveStore
     @ObservedObject var colleStore  : ColleStore

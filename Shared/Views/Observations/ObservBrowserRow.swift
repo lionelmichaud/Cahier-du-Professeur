@@ -16,7 +16,7 @@ struct ObservBrowserRow: View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .sfSymbolStyling()
+                    .symbolRenderingMode(.monochrome)
                     .foregroundColor(observ.color)
                 Text("\(observ.date.stringShortDate) à \(observ.date.stringTime)")
 
@@ -29,6 +29,10 @@ struct ObservBrowserRow: View {
             EleveLabel(eleve: eleve)
                 .font(.caption)
                 .foregroundColor(.secondary)
+
+            MotifLabel(motif: observ.motif)
+                .font(.caption)
+                //.foregroundColor(.secondary)
         }
     }
 }

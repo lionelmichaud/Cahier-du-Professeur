@@ -68,7 +68,6 @@ public struct PersistenceManager {
         return urls
     }
 
-
     /// Importer les fichiers template depuis le `Bundle Main` de l'Application
     /// vers le répertoire `Documents` même si'ils y sont déjà présents.
     public func forcedImportAllJsonFilesFromApp() throws {
@@ -136,6 +135,47 @@ public struct PersistenceManager {
             customLog.log(level: .fault,
                           "\(FileError.failedToDuplicateFiles.rawValue) de \(originFolder.name) vers \(targetFolder.name)")
             throw FileError.failedToDuplicateFiles
+        }
+    }
+
+    /// Vérifier la compatibilité de version entre l'App et le directory `targetFolder`
+    /// - Note: Les versions sont compatibles si elles portent la même version majeure
+    public static func checkCompatibilityWithAppVersion(of targetFolder: Folder) throws -> Bool {
+        if let appMajorVersion = AppVersion.shared.version.major {
+            do {
+                let targetMajorVersion = try targetFolder.loadFromJSON(
+                    AppVersion.self,
+                    from                 : AppVersion.fileName,
+                    dateDecodingStrategy : .iso8601,
+                    keyDecodingStrategy  : .useDefaultKeys).version.major
+                return (appMajorVersion == targetMajorVersion)
+
+            } catch {
+                // le chargement du fichier AppVersion.json du dossier s'est mal passé
+                if let theError = (error as? LocationError) {
+                    // à cause d'un pb de gestion de fichier
+                    switch theError.reason {
+                        case .missing:
+                            // le fichier AppVersion.json en manquant dans le dossier
+                            return false
+                        default:
+                            // à cause d'une autre raison
+                            customLog.log(level: .fault,
+                                          "\(FileError.failedToCheckCompatibility.rawValue) de '\(AppVersion.fileName)'")
+                            throw FileError.failedToCheckCompatibility
+                    }
+                } else {
+                    // à cause d'une autre raison
+                    customLog.log(level: .fault,
+                                  "\(FileError.failedToCheckCompatibility.rawValue) de '\(AppVersion.fileName)'")
+                    throw FileError.failedToCheckCompatibility
+                }
+            }
+
+        } else {
+            customLog.log(level: .fault,
+                          "\(FileError.failedToCheckCompatibility.rawValue) de '\(AppVersion.fileName)'")
+            throw FileError.failedToCheckCompatibility
         }
     }
 }

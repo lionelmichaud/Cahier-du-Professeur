@@ -24,16 +24,21 @@ struct Classe: Identifiable, Codable, Ordered {
     var id = UUID()
     var schoolId     : UUID?
     var niveau       : NiveauClasse = .n6ieme
-    var numero       : Int          = 1
-    var heures       : Double       = 0
-    var segpa        : Bool         = false
-    var isFlagged    : Bool         = false
-    var appreciation : String       = ""
-    var note         : String       = ""
-    var elevesID     : [UUID]       = []
+    var numero       : Int    = 1
+    var heures       : Double = 0
+    var segpa        : Bool   = false
+    var isFlagged    : Bool   = false
+    var appreciation : String = ""
+    var annotation   : String = ""
+    var elevesID     : [UUID] = []
+    var exams        : [Exam] = []
 
     var nbOfEleves: Int {
         elevesID.count
+    }
+
+    var nbOfExams: Int {
+        exams.count
     }
 
     var elevesLabel: String {
@@ -43,6 +48,16 @@ struct Classe: Identifiable, Codable, Ordered {
             return "1 Élève"
         } else {
             return "\(nbOfEleves) Élèves"
+        }
+    }
+
+    var examsLabel: String {
+        if nbOfExams == 0 {
+            return "Aucune Évaluation"
+        } else if nbOfExams == 1 {
+            return "1 Évaluation"
+        } else {
+            return "\(nbOfExams) Évaluations"
         }
     }
 
@@ -105,17 +120,10 @@ extension Classe: CustomStringConvertible {
            Heures  : \(heures)
            Flagged : \(isFlagged.frenchString)
            Appréciation: \(appreciation)
-           Note    : \(note)
+           Annotation  : \(annotation)
            SchoolID: \(String(describing: schoolId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
+           Examens : \(String(describing: exams).withPrefixedSplittedLines("     "))
         """
     }
 }
-
-//extension Classe: Equatable {
-//    static func == (lhs: Classe, rhs: Classe) -> Bool {
-//        lhs.niveau == rhs.niveau &&
-//        lhs.numero == rhs.numero &&
-//        lhs.schoolId == rhs.schoolId
-//    }
-//}

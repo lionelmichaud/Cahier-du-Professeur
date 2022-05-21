@@ -16,7 +16,7 @@ struct ColleBrowserRow: View {
         VStack(alignment: .leading) {
             HStack {
                 Image(systemName: "lock")
-                    .sfSymbolStyling()
+                    .symbolRenderingMode(.monochrome)
                     .foregroundColor(colle.color)
                 Text("\(colle.date.stringShortDate) à \(colle.date.stringTime)")
 
@@ -28,6 +28,10 @@ struct ColleBrowserRow: View {
             EleveLabel(eleve: eleve)
                 .font(.caption)
                 .foregroundColor(.secondary)
+
+            MotifLabel(motif: colle.motif)
+                .font(.caption)
+            //.foregroundColor(.secondary)
         }
     }
 }

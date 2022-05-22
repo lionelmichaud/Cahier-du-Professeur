@@ -28,7 +28,7 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     var isFlagged    : Bool   = false
     var appreciation : String = ""
     var annotation   : String = ""
-    var bonus        : Int    = 0
+    var bonus        : Double = 0
     var collesID     : [UUID] = [ ]
     var observsID    : [UUID] = [ ]
 

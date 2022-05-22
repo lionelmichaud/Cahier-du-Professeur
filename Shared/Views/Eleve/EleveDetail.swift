@@ -34,8 +34,12 @@ struct EleveDetail: View {
     private var appreciationIsExpanded = false
     @State
     private var noteIsExpanded = false
+    @State
+    private var bonusIsExpanded = false
     @FocusState
     private var isPrenomFocused: Bool
+    @Preference(\.maxBonusMalus) var maxBonusMalus
+    @Preference(\.maxBonusIncrement) var maxBonusIncrement
 
     var name: some View {
         HStack {
@@ -107,6 +111,28 @@ struct EleveDetail: View {
                 .fontWeight(.bold)
         }
         .onChange(of: eleve.annotation) {newValue in
+            isModified = true
+        }
+    }
+
+    var bonus: some View {
+        DisclosureGroup(isExpanded: $bonusIsExpanded) {
+            Stepper(value : $eleve.bonus,
+                    in    : -maxBonusMalus ... maxBonusMalus,
+                    step  : maxBonusIncrement) {
+                HStack {
+                    Text(eleve.bonus >= 0 ? "Bonus" : "Malus")
+                    Spacer()
+                    Text("\(eleve.bonus.formatted(.number.precision(.fractionLength(2))))")
+                        .foregroundColor(.secondary)
+                }
+            }
+        } label: {
+            Text("Bonus / Malus trimestriel")
+                .font(.headline)
+                .fontWeight(.bold)
+        }
+        .onChange(of: eleve.bonus) {newValue in
             isModified = true
         }
     }
@@ -206,6 +232,8 @@ struct EleveDetail: View {
                 appreciation
                 // annotation sur l'élève
                 annotation
+                // bonus/malus de l'élève
+                bonus
                 // observations sur l'élève
                 observations
                 // colles de l'élève
@@ -218,9 +246,10 @@ struct EleveDetail: View {
         //.navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
-            isPrenomFocused = isNew
+            isPrenomFocused        = isNew
             appreciationIsExpanded = eleve.appreciation.isNotEmpty
-            noteIsExpanded = eleve.annotation.isNotEmpty
+            noteIsExpanded         = eleve.annotation.isNotEmpty
+            bonusIsExpanded        = (eleve.bonus != 0)
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {

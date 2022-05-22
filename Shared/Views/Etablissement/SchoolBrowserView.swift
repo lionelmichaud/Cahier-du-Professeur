@@ -24,8 +24,12 @@ struct SchoolBrowserView: View {
     private var newEtab = School()
     @State
     private var alertItem: AlertItem?
-    @State private var isShowingImportConfirmDialog = false
-    @State private var isShowingDeleteConfirmDialog = false
+    @State
+    private var isShowingImportConfirmDialog = false
+    @State
+    private var isShowingDeleteConfirmDialog = false
+    @State
+    private var isShowingAbout = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -99,6 +103,11 @@ struct SchoolBrowserView: View {
                 /// Menu
                 ToolbarItemGroup(placement: .automatic) {
                     Menu {
+                        /// A propos
+                        Button(action: { isShowingAbout = true }) {
+                            Label("A propos", systemImage: "info.circle")
+                        }
+
                         /// Edition des préférences utilisateur
                         Button(action: { isEditingPreferences = true }) {
                             Label("Préférences", systemImage: "gear")
@@ -123,6 +132,7 @@ struct SchoolBrowserView: View {
                     }
                 }
             }
+            
             .confirmationDialog("Importation des fichiers de l'App",
                                 isPresented: $isShowingImportConfirmDialog,
                                 titleVisibility : .visible) {
@@ -148,15 +158,21 @@ struct SchoolBrowserView: View {
                 Text("Cette action ne peut pas être annulée.")
             }
 
-            .sheet(isPresented: $isAddingNewEtab) {
+            .sheet(isPresented: $isShowingAbout) {
                 NavigationView {
-                    SchoolEditor(school: $newEtab, isNew: true)
+                    AppVersionView()
                 }
             }
 
             .sheet(isPresented: $isEditingPreferences) {
                 NavigationView {
-                    EmptyView()
+                    SettingsView()
+                }
+            }
+
+            .sheet(isPresented: $isAddingNewEtab) {
+                NavigationView {
+                    SchoolEditor(school: $newEtab, isNew: true)
                 }
             }
         }

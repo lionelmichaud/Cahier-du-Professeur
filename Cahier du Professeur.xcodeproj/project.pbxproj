@@ -97,7 +97,9 @@
 		79C1274F283A929B002F243E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C1274E283A929B002F243E /* SettingsView.swift */; };
 		79C12751283A9620002F243E /* AppVersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12750283A9620002F243E /* AppVersionView.swift */; };
 		79C12754283A9925002F243E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12753283A9925002F243E /* Preferences.swift */; };
-		79C12756283A9C31002F243E /* SettingsPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12755283A9C31002F243E /* SettingsPage1.swift */; };
+		79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12755283A9C31002F243E /* SettingsEleve.swift */; };
+		79C12758283AA9CB002F243E /* SettingsClasse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12757283AA9CB002F243E /* SettingsClasse.swift */; };
+		79C1275A283AB1C5002F243E /* SettingsSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12759283AB1C5002F243E /* SettingsSchool.swift */; };
 		79D583F728204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583F828204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F928204A6A00371EB3 /* ObservSignIcon.swift */; };
@@ -245,7 +247,9 @@
 		79C1274E283A929B002F243E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79C12750283A9620002F243E /* AppVersionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
 		79C12753283A9925002F243E /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		79C12755283A9C31002F243E /* SettingsPage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage1.swift; sourceTree = "<group>"; };
+		79C12755283A9C31002F243E /* SettingsEleve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEleve.swift; sourceTree = "<group>"; };
+		79C12757283AA9CB002F243E /* SettingsClasse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsClasse.swift; sourceTree = "<group>"; };
+		79C12759283AB1C5002F243E /* SettingsSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSchool.swift; sourceTree = "<group>"; };
 		79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservNotifIcon.swift; sourceTree = "<group>"; };
 		79D583F928204A6A00371EB3 /* ObservSignIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSignIcon.swift; sourceTree = "<group>"; };
 		79D583FC28204EBE00371EB3 /* ColleBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleBrowserView.swift; sourceTree = "<group>"; };
@@ -451,7 +455,9 @@
 			children = (
 				79C12750283A9620002F243E /* AppVersionView.swift */,
 				79C1274E283A929B002F243E /* SettingsView.swift */,
-				79C12755283A9C31002F243E /* SettingsPage1.swift */,
+				79C12759283AB1C5002F243E /* SettingsSchool.swift */,
+				79C12757283AA9CB002F243E /* SettingsClasse.swift */,
+				79C12755283A9C31002F243E /* SettingsEleve.swift */,
 			);
 			path = PreferencesViews;
 			sourceTree = "<group>";
@@ -833,7 +839,7 @@
 				791C26DF28144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				79502BA72818945200DA798F /* ObservBrowserRow.swift in Sources */,
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
-				79C12756283A9C31002F243E /* SettingsPage1.swift in Sources */,
+				79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */,
 				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				79C1274F283A929B002F243E /* SettingsView.swift in Sources */,
 				79502BAA2820407500DA798F /* EleveLabel.swift in Sources */,
@@ -858,6 +864,7 @@
 				79F3AC102808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
 				795BC3D22812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79F3ABDC280826A400D068D9 /* Sexe.swift in Sources */,
+				79C1275A283AB1C5002F243E /* SettingsSchool.swift in Sources */,
 				791C26E928146B4300686F0C /* EleveObservRow.swift in Sources */,
 				795FAB292809C4E2004CB120 /* SchoolBrowserView.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
@@ -895,6 +902,7 @@
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
 				79FFDCD62825E950009D7452 /* importCSV.swift in Sources */,
 				795FAB2F2809E54C004CB120 /* SchoolDetail.swift in Sources */,
+				79C12758283AA9CB002F243E /* SettingsClasse.swift in Sources */,
 				791C26D428142D7100686F0C /* ColleStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

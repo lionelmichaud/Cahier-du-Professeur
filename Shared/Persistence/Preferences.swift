@@ -179,7 +179,33 @@ public final class Preferences {
         self.userDefaults = userDefaults
     }
     
-    /// Bonus et malus
+    /// School
+    // Champ annotation
+    @UserDefault("school_annotation")
+    public var schoolAnnotation: Bool = true
+
+    /// Classe
+    // Champ appéciation
+    @UserDefault("classe_appreciation")
+    public var classeAppreciation: Bool = true
+
+    // Champ annotation
+    @UserDefault("classe_annotation")
+    public var classeAnnotation: Bool = true
+
+    /// Elève
+    // Champ appéciation
+    @UserDefault("eleve_appreciation")
+    public var eleveAppreciation: Bool = true
+
+    // Champ annotation
+    @UserDefault("eleve_annotation")
+    public var eleveAnnotation: Bool = true
+
+    // Champ bonus / malus
+    @UserDefault("eleve_bonus")
+    public var eleveBonus: Bool = true
+
     @UserDefault("bonus_malus_max")
     public var maxBonusMalus: Double = 2.0
 

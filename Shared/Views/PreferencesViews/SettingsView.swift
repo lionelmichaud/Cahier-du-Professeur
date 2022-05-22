@@ -12,8 +12,9 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
-            SettingsPage1()
-            Text("Page 2")
+            SettingsSchool()
+            SettingsClasse()
+            SettingsEleve()
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         .toolbar {

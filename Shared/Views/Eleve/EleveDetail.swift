@@ -38,8 +38,16 @@ struct EleveDetail: View {
     private var bonusIsExpanded = false
     @FocusState
     private var isPrenomFocused: Bool
-    @Preference(\.maxBonusMalus) var maxBonusMalus
-    @Preference(\.maxBonusIncrement) var maxBonusIncrement
+    @Preference(\.eleveAppreciation)
+    var eleveAppreciation
+    @Preference(\.eleveAnnotation)
+    var eleveAnnotation
+    @Preference(\.eleveBonus)
+    var eleveBonus
+    @Preference(\.maxBonusMalus)
+    var maxBonusMalus
+    @Preference(\.maxBonusIncrement)
+    var maxBonusIncrement
 
     var name: some View {
         HStack {
@@ -128,7 +136,7 @@ struct EleveDetail: View {
                 }
             }
         } label: {
-            Text("Bonus / Malus trimestriel")
+            Text("Bonus / Malus")
                 .font(.headline)
                 .fontWeight(.bold)
         }
@@ -229,11 +237,17 @@ struct EleveDetail: View {
 
             if !isNew {
                 // appréciation sur l'élève
-                appreciation
+                if eleveAppreciation {
+                    appreciation
+                }
                 // annotation sur l'élève
-                annotation
+                if eleveAnnotation {
+                    annotation
+                }
                 // bonus/malus de l'élève
-                bonus
+                if eleveBonus {
+                    bonus
+                }
                 // observations sur l'élève
                 observations
                 // colles de l'élève

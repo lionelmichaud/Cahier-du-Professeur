@@ -28,6 +28,8 @@ struct SchoolDetail: View {
     private var noteIsExpanded = false
     @FocusState
     private var isNameFocused: Bool
+    @Preference(\.schoolAnnotation)
+    var schoolAnnotation
 
     var heures: Double {
         SchoolManager().heures(dans: school, classeStore: classeStore)
@@ -152,7 +154,9 @@ struct SchoolDetail: View {
             // classes dans l'établissement
             if !isNew {
                 // note sur la classe
-                annotation
+                if schoolAnnotation {
+                    annotation
+                }
                 // édition de la liste des classes
                 classeList
             }

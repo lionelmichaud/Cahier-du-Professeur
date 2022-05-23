@@ -52,12 +52,53 @@ struct ExamDetail: View {
         }
     }
 
+    @ViewBuilder
+    var bareme: some View {
+        if isNew || isEditing {
+            Stepper(value : $exam.maxMark,
+                    in    : 1 ... 20,
+                    step  : 1) {
+                HStack {
+                    Text("Barême")
+                    Spacer()
+                    Text("\(exam.maxMark)")
+                        .foregroundColor(.secondary)
+                }
+            }
+
+        } else {
+            Text("Barême sur \(exam.maxMark) points")
+        }
+    }
+
+    @ViewBuilder
+    var coefficient: some View {
+        if isNew || isEditing {
+            Stepper(value : $exam.coef,
+                    in    : 0.0 ... 5.0,
+                    step  : 0.25) {
+                HStack {
+                    Text("Coefficient")
+                    Spacer()
+                    Text("\(exam.coef.formatted(.number.precision(.fractionLength(2))))")
+                        .foregroundColor(.secondary)
+                }
+            }
+        } else {
+            Text("Coefficient \(exam.coef.formatted(.number.precision(.fractionLength(2))))")
+        }
+    }
+
     var body: some View {
         List {
             // nom
             name
             // date
             date
+            // barême
+            bareme
+            // coefficient
+            coefficient
         }
         #if os(iOS)
         .navigationTitle("Évaluation")

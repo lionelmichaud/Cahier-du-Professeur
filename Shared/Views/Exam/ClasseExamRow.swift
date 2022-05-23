@@ -21,7 +21,9 @@ struct ClasseExamRow: View {
                 HStack {
                     Text(exam.date.stringLongDate)
                     Spacer()
-                    Text("Note /\(exam.maxMark)")
+                    Text("sur \(exam.maxMark) points")
+                    Spacer()
+                    Text("coef \(exam.coef.formatted(.number.precision(.fractionLength(2))))")
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)

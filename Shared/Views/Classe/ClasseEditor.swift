@@ -29,8 +29,9 @@ struct ClasseEditor: View {
     @State private var isEditing  = false
     // true les modifs faites en mode édition sont sauvegardées
     @State private var isSaved    = false
-    // true si des modifiction sont faites hors du mode édition
+    // true si des modifictions sont faites hors du mode édition
     @State private var isModified = false
+    @State private var examIsModified = false
     // true si l'item va être détruit
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
@@ -43,20 +44,21 @@ struct ClasseEditor: View {
 
     var body: some View {
         VStack {
-            ClasseDetail(classe     : $itemCopy,
-                         isEditing  : isEditing,
-                         isNew      : isNew,
-                         isModified : $isModified)
-//            .onChange(of: isModified, perform: { hasBeenModified in
-//                print("isModified modifié dans ClasseEditor: \(isModified)")
-//                if hasBeenModified && !isSaved {
-//                    // Appliquer les modifications faites à la classe hors du mode édition
-//                    // avant que .onAppear ne reste la valeur de isModified à False
-//                    classe     = itemCopy
-//                    isModified = false
-//                    isSaved    = true
-//                }
-//            })
+            ClasseDetail(classe         : $itemCopy,
+                         isEditing      : isEditing,
+                         isNew          : isNew,
+                         isModified     : $isModified,
+                         examIsModified : $examIsModified)
+            .onChange(of: examIsModified, perform: { hasBeenModified in
+                print("examIsModified modifié dans ClasseEditor: \(hasBeenModified)")
+                if hasBeenModified && !isSaved {
+                    // Appliquer les modifications faites à la classe hors du mode édition
+                    // avant que .onAppear ne reset la valeur de isModified à False
+                    classe         = itemCopy
+                    examIsModified = false
+                    isSaved        = true
+                }
+            })
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     if isNew {
@@ -122,11 +124,12 @@ struct ClasseEditor: View {
                 isSaved    = false
             }
             .onDisappear {
-                if isModified && !isSaved {
+                if (isModified || examIsModified) && !isSaved {
                     // Appliquer les modifications faites à la classe hors du mode édition
-                    classe     = itemCopy
-                    isModified = false
-                    isSaved    = true
+                    classe         = itemCopy
+                    isModified     = false
+                    examIsModified = false
+                    isSaved        = true
                 }
             }
             .disabled(isItemDeleted)

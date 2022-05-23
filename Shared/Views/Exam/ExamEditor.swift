@@ -11,7 +11,7 @@ struct ExamEditor: View {
     @Binding
     var classe : Classe
     @Binding
-    var classeIsModified : Bool
+    var examIsModified : Bool
     @Binding
     var exam   : Exam
     var isNew  : Bool
@@ -21,15 +21,20 @@ struct ExamEditor: View {
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
     // This is important for when the niveau changes and puts the établissement in a different section.
-    @State private var itemCopy   = Exam()
+    @State
+    private var itemCopy   = Exam()
     // true si le mode édition est engagé
-    @State private var isEditing  = false
+    @State
+    private var isEditing  = false
     // true les modifs faites en mode édition sont sauvegardées
-    @State private var isSaved    = false
+    @State
+    private var isSaved    = false
     // true si des modifiction sont faites hors du mode édition
-    @State private var isModified = false
+    @State
+    private var isModified = false
     // true si l'item va être détruit
-    @State private var isDeleted  = false
+    @State
+    private var isDeleted  = false
 
     /// True si l'évaluation n'est pas dans le store ET si on est pas en train d'ajouter une nouvelle évaluation
     private var isItemDeleted: Bool {
@@ -58,12 +63,12 @@ struct ExamEditor: View {
                         } else {
                             // Appliquer les modifications faites à l'évaluation
                             if isEditing && !isDeleted {
-                                print("Done, saving any changes to \(itemCopy.sujet).")
                                 withAnimation {
                                     exam = itemCopy // Put edits (if any) back in the store.
                                 }
-                                isSaved = true
-                                classeIsModified = true
+                                print("Done, saving any changes to \(exam.sujet).")
+                                isSaved        = true
+                                examIsModified = true
                             }
                             isEditing.toggle()
                         }
@@ -72,9 +77,9 @@ struct ExamEditor: View {
                     }
                 }
             }
-//            .onChange(of: classeIsModified, perform: { newvalue in
-//                print("classeIsModified modifié dans ExamEditor: \(classeIsModified)")
-//            })
+            .onChange(of: examIsModified, perform: { newvalue in
+                print("examIsModified modifié dans ExamEditor: \(newvalue)")
+            })
             .onAppear {
                 itemCopy   = exam
                 isModified = false
@@ -83,10 +88,10 @@ struct ExamEditor: View {
             .onDisappear {
                 if isModified && !isSaved {
                     // Appliquer les modifications faites à la classe hors du mode édition
-                    classeIsModified = true
-                    exam       = itemCopy
-                    isModified = false
-                    isSaved    = true
+                    examIsModified = true
+                    exam           = itemCopy
+                    isModified     = false
+                    isSaved        = true
                 }
             }
             .disabled(isItemDeleted)
@@ -100,15 +105,15 @@ struct ExamEditor: View {
         }
     }
 
-    init(classe           : Binding<Classe>,
-         classeIsModified : Binding<Bool>,
-         exam             : Binding<Exam>,
-         isNew            : Bool = false) {
-        self._classe           = classe
-        self._classeIsModified = classeIsModified
-        self._exam             = exam
-        self.isNew             = isNew
-        self._itemCopy         = State(initialValue : exam.wrappedValue)
+    init(classe         : Binding<Classe>,
+         examIsModified : Binding<Bool>,
+         exam           : Binding<Exam>,
+         isNew          : Bool = false) {
+        self._classe         = classe
+        self._examIsModified = examIsModified
+        self._exam           = exam
+        self.isNew           = isNew
+        self._itemCopy       = State(initialValue : exam.wrappedValue)
     }
 
     private func addNewItem() {
@@ -116,7 +121,7 @@ struct ExamEditor: View {
         withAnimation {
             classe.exams.insert(itemCopy, at: 0)
         }
-        classeIsModified = true
+        examIsModified = true
         dismiss()
     }
 
@@ -126,19 +131,19 @@ struct ExamEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ExamEditor(classe           : .constant(TestEnvir.classeStore.items.first!),
-                       classeIsModified : .constant(false),
-                       exam             : .constant(Exam()),
-                       isNew            : true)
+            ExamEditor(classe         : .constant(TestEnvir.classeStore.items.first!),
+                       examIsModified : .constant(false),
+                       exam           : .constant(Exam()),
+                       isNew          : true)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
-            ExamEditor(classe           : .constant(TestEnvir.classeStore.items.first!),
-                       classeIsModified : .constant(false),
-                       exam             : .constant(Exam()),
-                       isNew            : true)
+            ExamEditor(classe         : .constant(TestEnvir.classeStore.items.first!),
+                       examIsModified : .constant(false),
+                       exam           : .constant(Exam()),
+                       isNew          : true)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)

@@ -11,6 +11,7 @@ struct Exam: Identifiable, Hashable, Codable {
     var id = UUID()
     var sujet   : String = ""
     var maxMark : Int    = 20
+    var coef    : Double = 1.0
     var date    : Date   = Date.now
     var marks   : [Mark] = []
 }

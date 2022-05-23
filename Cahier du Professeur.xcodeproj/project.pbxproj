@@ -428,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				7992D0AC282B0B2100B31186 /* Exam.swift */,
+				7992D0A8282B0ACB00B31186 /* Mark */,
 			);
 			path = Exam;
 			sourceTree = "<group>";
@@ -557,10 +558,9 @@
 			isa = PBXGroup;
 			children = (
 				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
-				7992D0A8282B0ACB00B31186 /* Mark */,
-				7992D0A7282B0A4200B31186 /* Exam */,
 				79F3ABE1280830D000D068D9 /* School */,
 				79F3ABE2280830E000D068D9 /* Classe */,
+				7992D0A7282B0A4200B31186 /* Exam */,
 				79F3ABE3280830F300D068D9 /* Eleve */,
 				79F3ABED2808707C00D068D9 /* Observation */,
 				79F3ABEC2808707300D068D9 /* Colle */,
@@ -1149,7 +1149,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaud.lionel.Cahier-du-Professeur";
 				PRODUCT_NAME = "Cahier du Professeur";
 				SDKROOT = iphoneos;
@@ -1180,7 +1180,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaud.lionel.Cahier-du-Professeur";
 				PRODUCT_NAME = "Cahier du Professeur";
 				SDKROOT = iphoneos;

@@ -16,6 +16,8 @@ struct ClasseDetail: View {
     var isNew     : Bool
     @Binding
     var isModified: Bool
+    @Binding
+    var examIsModified: Bool
 
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -218,13 +220,14 @@ struct ClasseDetail: View {
             // édition de la liste des examen
             ForEach($classe.exams) { $exam in
                 NavigationLink {
-                    ExamEditor(classe           : $classe,
-                               classeIsModified : $isModified,
-                               exam             : $exam,
-                               isNew            : false)
-//                    .onChange(of: isModified, perform: { newvalue in
-//                        print("isModified modifié dans ClasseDetail: \(isModified)")
-//                    })
+                    ExamEditor(classe         : $classe,
+                               examIsModified : $examIsModified,
+                               exam           : $exam,
+                               isNew          : false)
+                    .onChange(of: examIsModified, perform: { newvalue in
+                        print("examIsModified modifié dans ClasseDetail: \(newvalue)")
+                        print(exam)
+                    })
                 } label: {
                     ClasseExamRow(exam: exam)
                 }
@@ -274,6 +277,7 @@ struct ClasseDetail: View {
         .navigationTitle("Classe")
         #endif
         .onAppear {
+            //examIsModified = false
             isHoursFocused = isNew
             appreciationIsExpanded = classe.appreciation.isNotEmpty
             noteIsExpanded = classe.annotation.isNotEmpty
@@ -287,10 +291,10 @@ struct ClasseDetail: View {
         }
         .sheet(isPresented: $isAddingNewExam) {
             NavigationView {
-                ExamEditor(classe : $classe,
-                           classeIsModified: $isModified,
-                           exam   : $newExam,
-                           isNew  : true)
+                ExamEditor(classe         : $classe,
+                           examIsModified : $examIsModified,
+                           exam           : $newExam,
+                           isNew          : true)
             }
         }
     }
@@ -300,10 +304,11 @@ struct ClassDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ClasseDetail(classe   : .constant(TestEnvir.classeStore.items.first!),
-                         isEditing : false,
-                         isNew     : true,
-                         isModified: .constant(false))
+            ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!),
+                         isEditing      : false,
+                         isNew          : true,
+                         isModified     : .constant(false),
+                         examIsModified : .constant(false))
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
@@ -311,10 +316,11 @@ struct ClassDetail_Previews: PreviewProvider {
             .environmentObject(TestEnvir.observStore)
             .previewDisplayName("NewClasse")
 
-            ClasseDetail(classe    : .constant(TestEnvir.classeStore.items.first!),
-                         isEditing : false,
-                         isNew     : false,
-                         isModified: .constant(false))
+            ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!),
+                         isEditing      : false,
+                         isNew          : false,
+                         isModified     : .constant(false),
+                         examIsModified : .constant(false))
             .previewDevice("iPhone Xs")
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)

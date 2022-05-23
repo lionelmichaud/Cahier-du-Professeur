@@ -7,7 +7,4 @@
 
 import Foundation
 
-struct Mark: Codable, Hashable {
-    var mark    : Int?
-    var eleveId : UUID
-}
+typealias EleveMarkDico = Dictionary<UUID, Double?>

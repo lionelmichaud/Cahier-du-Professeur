@@ -35,10 +35,6 @@ struct ClasseExamRow: View {
 
 struct ClasseExamRow_Previews: PreviewProvider {
     static var previews: some View {
-        ClasseExamRow(exam: Exam(id: UUID(),
-                                 sujet: "Les automatismes en technologie",
-                                 maxMark: 20,
-                                 date: Date.now,
-                                 marks: []))
+        ClasseExamRow(exam: Exam(sujet: "Les automatismes en technologie"))
     }
 }

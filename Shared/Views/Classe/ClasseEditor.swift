@@ -50,7 +50,7 @@ struct ClasseEditor: View {
                          isModified     : $isModified,
                          examIsModified : $examIsModified)
             .onChange(of: examIsModified, perform: { hasBeenModified in
-                print("examIsModified modifié dans ClasseEditor: \(hasBeenModified)")
+//                print("examIsModified modifié dans ClasseEditor: \(hasBeenModified)")
                 if hasBeenModified && !isSaved {
                     // Appliquer les modifications faites à la classe hors du mode édition
                     // avant que .onAppear ne reset la valeur de isModified à False

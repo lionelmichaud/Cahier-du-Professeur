@@ -43,6 +43,7 @@
 		791C26FC2814A43400686F0C /* ColleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FA2814A43400686F0C /* ColleEditor.swift */; };
 		791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FD2814A64E00686F0C /* ColleDetail.swift */; };
 		791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FD2814A64E00686F0C /* ColleDetail.swift */; };
+		7925C48F283D413E00A6BF31 /* MarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925C48E283D413E00A6BF31 /* MarkView.swift */; };
 		79502BA42818716500DA798F /* ObservBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79502BA32818716500DA798F /* ObservBrowserView.swift */; };
 		79502BA52818716500DA798F /* ObservBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79502BA32818716500DA798F /* ObservBrowserView.swift */; };
 		79502BA72818945200DA798F /* ObservBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79502BA62818945200DA798F /* ObservBrowserRow.swift */; };
@@ -80,8 +81,8 @@
 		7986E7E0282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
 		7986E7E228291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
 		7986E7E328291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
-		7992D0AA282B0AF200B31186 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* Mark.swift */; };
-		7992D0AB282B0AF200B31186 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* Mark.swift */; };
+		7992D0AA282B0AF200B31186 /* EleveMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* EleveMark.swift */; };
+		7992D0AB282B0AF200B31186 /* EleveMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* EleveMark.swift */; };
 		7992D0AD282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
 		7992D0AE282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
 		79935D372824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
@@ -113,6 +114,9 @@
 		79E109EF28219AF700689212 /* FileAndFolder in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109EE28219AF700689212 /* FileAndFolder */; };
 		79E109F128219AF700689212 /* Persistable in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109F028219AF700689212 /* Persistable */; };
 		79E109F328219AF700689212 /* Stateful in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109F228219AF700689212 /* Stateful */; };
+		79E18C0A283C2FC6003C89EE /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 79E18C09283C2FC6003C89EE /* Collections */; };
+		79E18C0C283C2FC6003C89EE /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 79E18C0B283C2FC6003C89EE /* DequeModule */; };
+		79E18C0E283C2FC6003C89EE /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 79E18C0D283C2FC6003C89EE /* OrderedCollections */; };
 		79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102E228232F36005E5D9C /* Eleve.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DD28232F36005E5D9C /* Eleve.json */; };
@@ -217,6 +221,7 @@
 		791C26F728149E7E00686F0C /* ObservDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservDetail.swift; sourceTree = "<group>"; };
 		791C26FA2814A43400686F0C /* ColleEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleEditor.swift; sourceTree = "<group>"; };
 		791C26FD2814A64E00686F0C /* ColleDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleDetail.swift; sourceTree = "<group>"; };
+		7925C48E283D413E00A6BF31 /* MarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView.swift; sourceTree = "<group>"; };
 		79502BA32818716500DA798F /* ObservBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservBrowserView.swift; sourceTree = "<group>"; };
 		79502BA62818945200DA798F /* ObservBrowserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservBrowserRow.swift; sourceTree = "<group>"; };
 		79502BA92820407500DA798F /* EleveLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveLabel.swift; sourceTree = "<group>"; };
@@ -237,7 +242,7 @@
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		7986E7DE282918320011FF21 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7986E7E128291DA00011FF21 /* AppVersion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppVersion.json; sourceTree = "<group>"; };
-		7992D0A9282B0AF200B31186 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
+		7992D0A9282B0AF200B31186 /* EleveMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveMark.swift; sourceTree = "<group>"; };
 		7992D0AC282B0B2100B31186 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		79935D362824906B005C20BD /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		79B5BD4628340C9400034115 /* MotifLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifLabel.swift; sourceTree = "<group>"; };
@@ -303,10 +308,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79E18C0A283C2FC6003C89EE /* Collections in Frameworks */,
 				79E109F328219AF700689212 /* Stateful in Frameworks */,
 				79F3ABE02808305400D068D9 /* AppFoundation in Frameworks */,
+				79E18C0C283C2FC6003C89EE /* DequeModule in Frameworks */,
 				79E109F128219AF700689212 /* Persistable in Frameworks */,
 				795FAB312809FB0B004CB120 /* HelpersView in Frameworks */,
+				79E18C0E283C2FC6003C89EE /* OrderedCollections in Frameworks */,
 				79E109EF28219AF700689212 /* FileAndFolder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +387,14 @@
 			path = Colles;
 			sourceTree = "<group>";
 		};
+		7925C48D283D412100A6BF31 /* Mark */ = {
+			isa = PBXGroup;
+			children = (
+				7925C48E283D413E00A6BF31 /* MarkView.swift */,
+			);
+			path = Mark;
+			sourceTree = "<group>";
+		};
 		795BC3DD2813102A00C22271 /* Eleve */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,13 +433,6 @@
 			path = Exam;
 			sourceTree = "<group>";
 		};
-		7986E7E82829300C0011FF21 /* ApplicationHelperViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ApplicationHelperViews;
-			sourceTree = "<group>";
-		};
 		7992D0A7282B0A4200B31186 /* Exam */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,7 +445,7 @@
 		7992D0A8282B0ACB00B31186 /* Mark */ = {
 			isa = PBXGroup;
 			children = (
-				7992D0A9282B0AF200B31186 /* Mark.swift */,
+				7992D0A9282B0AF200B31186 /* EleveMark.swift */,
 			);
 			path = Mark;
 			sourceTree = "<group>";
@@ -572,12 +581,12 @@
 		79F3ABCB280821E700D068D9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				79C1274D283A91E8002F243E /* PreferencesViews */,
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
-				7986E7E82829300C0011FF21 /* ApplicationHelperViews */,
+				79C1274D283A91E8002F243E /* PreferencesViews */,
 				795FAB272809C4D0004CB120 /* Etablissement */,
 				7918D1FC2810A5C400C24C5A /* Classe */,
 				7974C4C7282C7CBE00217CD5 /* Exam */,
+				7925C48D283D412100A6BF31 /* Mark */,
 				795BC3DD2813102A00C22271 /* Eleve */,
 				791C26D92814463C00686F0C /* Observations */,
 				791C26DA2814465C00686F0C /* Colles */,
@@ -668,6 +677,9 @@
 				79E109EE28219AF700689212 /* FileAndFolder */,
 				79E109F028219AF700689212 /* Persistable */,
 				79E109F228219AF700689212 /* Stateful */,
+				79E18C09283C2FC6003C89EE /* Collections */,
+				79E18C0B283C2FC6003C89EE /* DequeModule */,
+				79E18C0D283C2FC6003C89EE /* OrderedCollections */,
 			);
 			productName = "Cahier du Professeur (iOS)";
 			productReference = 79F3AB952808218300D068D9 /* Cahier du Professeur.app */;
@@ -762,6 +774,9 @@
 				fr,
 			);
 			mainGroup = 79F3AB882808218000D068D9;
+			packageReferences = (
+				79E18C08283C2FC6003C89EE /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 79F3AB962808218300D068D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -855,7 +870,7 @@
 				795BC3D82812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				79F3F78F282E8A3800DC26FC /* ExamDetail.swift in Sources */,
 				79C12754283A9925002F243E /* Preferences.swift in Sources */,
-				7992D0AA282B0AF200B31186 /* Mark.swift in Sources */,
+				7992D0AA282B0AF200B31186 /* EleveMark.swift in Sources */,
 				795BC3D52812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */,
 				791C26E228145E4700686F0C /* EleveColleLabel.swift in Sources */,
@@ -889,6 +904,7 @@
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
 				7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				7986E7DF282918320011FF21 /* Persistence.swift in Sources */,
+				7925C48F283D413E00A6BF31 /* MarkView.swift in Sources */,
 				79D583FD28204EBE00371EB3 /* ColleBrowserView.swift in Sources */,
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */,
@@ -937,7 +953,7 @@
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */,
-				7992D0AB282B0AF200B31186 /* Mark.swift in Sources */,
+				7992D0AB282B0AF200B31186 /* EleveMark.swift in Sources */,
 				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
@@ -1378,6 +1394,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		79E18C08283C2FC6003C89EE /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		795FAB302809FB0B004CB120 /* HelpersView */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1394,6 +1421,21 @@
 		79E109F228219AF700689212 /* Stateful */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Stateful;
+		};
+		79E18C09283C2FC6003C89EE /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79E18C08283C2FC6003C89EE /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		79E18C0B283C2FC6003C89EE /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79E18C08283C2FC6003C89EE /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		79E18C0D283C2FC6003C89EE /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79E18C08283C2FC6003C89EE /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		79F3ABDF2808305400D068D9 /* AppFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -185,10 +185,4 @@ extension EleveStore {
             }
         )
     }
-
-//    static var exemple : EleveStore = {
-//        let store = EleveStore()
-//        store.items.append(Eleve.exemple)
-//        return store
-//    }()
 }

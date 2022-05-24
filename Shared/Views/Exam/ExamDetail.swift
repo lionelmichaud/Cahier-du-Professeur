@@ -15,10 +15,16 @@ struct ExamDetail: View {
     var isNew     : Bool
     @Binding
     var isModified: Bool
+
+    @EnvironmentObject
+    private var eleveStore  : EleveStore
     @FocusState
     private var isSujetFocused: Bool
+    @State
+    private var searchString: String = ""
+    @Environment(\.isSearching) var isSearching
 
-    var name: some View {
+    private var name: some View {
         HStack {
             Image(systemName: "doc.plaintext")
                 .sfSymbolStyling()
@@ -41,7 +47,7 @@ struct ExamDetail: View {
     }
 
     @ViewBuilder
-    var date: some View {
+    private var date: some View {
         if isNew || isEditing {
             DatePicker("Date", selection: $exam.date)
                 .labelsHidden()
@@ -53,7 +59,7 @@ struct ExamDetail: View {
     }
 
     @ViewBuilder
-    var bareme: some View {
+    private var bareme: some View {
         if isNew || isEditing {
             Stepper(value : $exam.maxMark,
                     in    : 1 ... 20,
@@ -72,7 +78,7 @@ struct ExamDetail: View {
     }
 
     @ViewBuilder
-    var coefficient: some View {
+    private var coefficient: some View {
         if isNew || isEditing {
             Stepper(value : $exam.coef,
                     in    : 0.0 ... 5.0,
@@ -89,8 +95,28 @@ struct ExamDetail: View {
         }
     }
 
+    private var markList: some View {
+        Section {
+            ForEach(filtredMarks(), id: \.self) { $eleveMark in
+                if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                    MarkView(eleveName : eleve.displayName,
+                              maxMark   : exam.maxMark,
+                              type      : $eleveMark.type,
+                              mark      : $eleveMark.mark)
+                }
+            }
+            .onChange(of: exam.marks) { newValue in
+                isModified = true
+            }
+        } header: {
+            Text("Notes")
+        }
+        .headerProminence(.increased)
+    }
+
     var body: some View {
         List {
+            if !isSearching {
             // nom
             name
             // date
@@ -99,13 +125,52 @@ struct ExamDetail: View {
             bareme
             // coefficient
             coefficient
+            }
+
+            // notes
+            if !isNew {
+                markList
+            }
         }
+        .searchable(text      : $searchString,
+                    placement : .navigationBarDrawer(displayMode : .automatic),
+                    prompt    : "Filtrer")
+        .disableAutocorrection(true)
         #if os(iOS)
         .navigationTitle("Évaluation")
         #endif
         .onAppear {
             isSujetFocused = isNew
         }
+    }
+
+    private func filtredMarks() -> Binding<[EleveMark]> {
+
+        Binding<[EleveMark]>(
+            get: {
+                self.exam.marks
+                    .filter { eleveMark in
+                        if searchString.isNotEmpty {
+                            let string = searchString.lowercased()
+                            if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                                return eleve.name.familyName!.lowercased().contains(string) ||
+                                eleve.name.givenName!.lowercased().contains(string)
+                            } else {
+                                return false
+                            }
+                        } else {
+                            return true
+                        }
+                    }
+            },
+            set: { items in
+                for eleveMark in items {
+                    if let index = self.exam.marks.firstIndex(where: { $0.eleveId == eleveMark.eleveId }) {
+                        self.exam.marks[index] = eleveMark
+                    }
+                }
+            }
+        )
     }
 }
 

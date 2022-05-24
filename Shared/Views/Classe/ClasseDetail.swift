@@ -41,7 +41,7 @@ struct ClasseDetail: View {
     @Preference(\.classeAnnotation)
     var classeAnnotation
 
-    var name: some View {
+    private var name: some View {
         HStack {
             Image(systemName: "person.3.fill")
                 .sfSymbolStyling()
@@ -105,7 +105,7 @@ struct ClasseDetail: View {
         .listRowSeparator(.hidden)
     }
 
-    var appreciation: some View {
+    private var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $classe.appreciation)
                 .font(.caption)
@@ -122,7 +122,7 @@ struct ClasseDetail: View {
         }
     }
 
-    var annotation: some View {
+    private var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $classe.annotation)
                 .font(.caption)
@@ -139,117 +139,123 @@ struct ClasseDetail: View {
         }
     }
 
-    var eleveList: some View {
+    private var eleveList: some View {
         Section {
-            // ajouter un élève
-            Button {
-                isModified = true
-                newEleve = Eleve(sexe   : .male,
-                                 nom    : "",
-                                 prenom : "")
-                isAddingNewEleve = true
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter un élève")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des élèves
-            ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
-                NavigationLink {
-                    EleveEditor(classe : $classe,
-                                eleve  : $eleve,
-                                isNew  : false)
+            DisclosureGroup {
+                // ajouter un élève
+                Button {
+                    isModified = true
+                    newEleve = Eleve(sexe   : .male,
+                                     nom    : "",
+                                     prenom : "")
+                    isAddingNewEleve = true
                 } label: {
-                    ClasseEleveRow(eleve: eleve)
-                }
-                .swipeActions {
-                    // supprimer un élève
-                    Button(role: .destructive) {
-                        withAnimation {
-                            // supprimer l'élève et tous ses descendants
-                            // puis retirer l'élève de la classe auquelle il appartient
-                            ClasseManager().retirer(eleve       : eleve,
-                                                    deClasse    : &classe,
-                                                    eleveStore  : eleveStore,
-                                                    observStore : observStore,
-                                                    colleStore  : colleStore)
-                        }
-                    } label: {
-                        Label("Supprimer", systemImage: "trash")
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter un élève")
                     }
-
-                    // flager un élève
-                    Button {
-                        withAnimation {
-                            eleve.isFlagged.toggle()
-                        }
-                    } label: {
-                        if eleve.isFlagged {
-                            Label("Sans drapeau", systemImage: "flag.slash")
-                        } else {
-                            Label("Avec drapeau", systemImage: "flag.fill")
-                        }
-                    }.tint(.orange)
                 }
-            }
+                .buttonStyle(.borderless)
 
-        } header: {
-            Text(classe.elevesLabel)
+                // édition de la liste des élèves
+                ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
+                    NavigationLink {
+                        EleveEditor(classe : $classe,
+                                    eleve  : $eleve,
+                                    isNew  : false)
+                    } label: {
+                        ClasseEleveRow(eleve: eleve)
+                    }
+                    .swipeActions {
+                        // supprimer un élève
+                        Button(role: .destructive) {
+                            withAnimation {
+                                // supprimer l'élève et tous ses descendants
+                                // puis retirer l'élève de la classe auquelle il appartient
+                                ClasseManager().retirer(eleve       : eleve,
+                                                        deClasse    : &classe,
+                                                        eleveStore  : eleveStore,
+                                                        observStore : observStore,
+                                                        colleStore  : colleStore)
+                            }
+                        } label: {
+                            Label("Supprimer", systemImage: "trash")
+                        }
+
+                        // flager un élève
+                        Button {
+                            withAnimation {
+                                eleve.isFlagged.toggle()
+                            }
+                        } label: {
+                            if eleve.isFlagged {
+                                Label("Sans drapeau", systemImage: "flag.slash")
+                            } else {
+                                Label("Avec drapeau", systemImage: "flag.fill")
+                            }
+                        }.tint(.orange)
+                    }
+                }
+
+            } label: {
+                Text(classe.elevesLabel)
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
         }
-        .headerProminence(.increased)
     }
 
-    var examList: some View {
+    private var examList: some View {
         Section {
-            // ajouter une évaluation
-            Button {
-                isModified      = true
-                newExam         = Exam()
-                isAddingNewExam = true
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une évaluation")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des examen
-            ForEach($classe.exams) { $exam in
-                NavigationLink {
-                    ExamEditor(classe         : $classe,
-                               examIsModified : $examIsModified,
-                               exam           : $exam,
-                               isNew          : false)
-                    .onChange(of: examIsModified, perform: { newvalue in
-                        print("examIsModified modifié dans ClasseDetail: \(newvalue)")
-                        print(exam)
-                    })
+            DisclosureGroup {
+                // ajouter une évaluation
+                Button {
+                    isModified      = true
+                    newExam         = Exam(elevesId: classe.elevesID)
+                    isAddingNewExam = true
                 } label: {
-                    ClasseExamRow(exam: exam)
-                }
-                .swipeActions {
-                    // supprimer une évaluation
-                    Button(role: .destructive) {
-                        withAnimation {
-                            isModified = true
-                            classe.exams.removeAll {
-                                $0.id == exam.id
-                            }
-                        }
-                    } label: {
-                        Label("Supprimer", systemImage: "trash")
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter une évaluation")
                     }
                 }
-            }
+                .buttonStyle(.borderless)
 
-        } header: {
-            Text(classe.examsLabel)
+                // édition de la liste des examen
+                ForEach($classe.exams) { $exam in
+                    NavigationLink {
+                        ExamEditor(classe         : $classe,
+                                   examIsModified : $examIsModified,
+                                   exam           : $exam,
+                                   isNew          : false)
+//                        .onChange(of: examIsModified, perform: { newvalue in
+//                            print("examIsModified modifié dans ClasseDetail: \(newvalue)")
+//                            print(exam)
+//                        })
+                    } label: {
+                        ClasseExamRow(exam: exam)
+                    }
+                    .swipeActions {
+                        // supprimer une évaluation
+                        Button(role: .destructive) {
+                            withAnimation {
+                                isModified = true
+                                classe.exams.removeAll {
+                                    $0.id == exam.id
+                                }
+                            }
+                        } label: {
+                            Label("Supprimer", systemImage: "trash")
+                        }
+                    }
+                }
+
+            } label: {
+                Text(classe.examsLabel)
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
         }
-        .headerProminence(.increased)
     }
 
     var body: some View {

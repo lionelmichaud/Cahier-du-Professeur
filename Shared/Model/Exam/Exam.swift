@@ -16,23 +16,23 @@ struct Exam: Identifiable, Hashable, Codable {
     var maxMark : Int    = 20
     var coef    : Double = 1.0
     var date    : Date   = Date.now
-    var marks   : EleveMarkDico = [:]
+    var marks   : [EleveMark] = []
 
     // MARK: - Initializers
 
-    internal init(id       : UUID   = UUID(),
-                  sujet    : String = "",
-                  maxMark  : Int    = 20,
-                  coef     : Double = 1.0,
-                  date     : Date   = Date.now,
-                  elevesId : [UUID] = []) {
-        self.id = id
-        self.sujet = sujet
+    init(id       : UUID   = UUID(),
+         sujet    : String = "",
+         maxMark  : Int    = 20,
+         coef     : Double = 1.0,
+         date     : Date   = Date.now,
+         elevesId : [UUID] = []) {
+        self.id      = id
+        self.sujet   = sujet
         self.maxMark = maxMark
-        self.coef = coef
-        self.date = date
+        self.coef    = coef
+        self.date    = date
         elevesId.forEach { id in
-            marks[id] = nil
+            marks.append(EleveMark(eleveId: id))
         }
     }
 }

@@ -41,7 +41,7 @@ struct ClasseDetail: View {
     @Preference(\.classeAnnotation)
     var classeAnnotation
 
-    var name: some View {
+    private var name: some View {
         HStack {
             Image(systemName: "person.3.fill")
                 .sfSymbolStyling()
@@ -105,7 +105,7 @@ struct ClasseDetail: View {
         .listRowSeparator(.hidden)
     }
 
-    var appreciation: some View {
+    private var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
             TextEditor(text: $classe.appreciation)
                 .font(.caption)
@@ -122,7 +122,7 @@ struct ClasseDetail: View {
         }
     }
 
-    var annotation: some View {
+    private var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
             TextEditor(text: $classe.annotation)
                 .font(.caption)
@@ -139,7 +139,7 @@ struct ClasseDetail: View {
         }
     }
 
-    var eleveList: some View {
+    private var eleveList: some View {
         Section {
             // ajouter un élève
             Button {
@@ -202,12 +202,12 @@ struct ClasseDetail: View {
         .headerProminence(.increased)
     }
 
-    var examList: some View {
+    private var examList: some View {
         Section {
             // ajouter une évaluation
             Button {
                 isModified      = true
-                newExam         = Exam()
+                newExam         = Exam(elevesId: classe.elevesID)
                 isAddingNewExam = true
             } label: {
                 HStack {

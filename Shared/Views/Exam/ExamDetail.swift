@@ -15,33 +15,38 @@ struct ExamDetail: View {
     var isNew     : Bool
     @Binding
     var isModified: Bool
+
+    @EnvironmentObject
+    private var eleveStore  : EleveStore
     @FocusState
     private var isSujetFocused: Bool
+    @State
+    private var mark: Double = 0
 
-    var name: some View {
-        HStack {
-            Image(systemName: "doc.plaintext")
-                .sfSymbolStyling()
-                .foregroundColor(.accentColor)
+    private var name: some View {
+    HStack {
+        Image(systemName: "doc.plaintext")
+            .sfSymbolStyling()
+            .foregroundColor(.accentColor)
 
-            if isNew || isEditing {
-                // sujet
-                TextField("Sujet de l'évaluation", text: $exam.sujet)
-                    .font(.title2)
-                    .textFieldStyle(.roundedBorder)
-                    .focused($isSujetFocused)
+        if isNew || isEditing {
+            // sujet
+            TextField("Sujet de l'évaluation", text: $exam.sujet)
+                .font(.title2)
+                .textFieldStyle(.roundedBorder)
+                .focused($isSujetFocused)
 
-            } else {
-                Text(exam.sujet)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-            }
+        } else {
+            Text(exam.sujet)
+                .font(.title2)
+                .fontWeight(.semibold)
         }
-        .listRowSeparator(.hidden)
     }
+    .listRowSeparator(.hidden)
+}
 
     @ViewBuilder
-    var date: some View {
+    private var date: some View {
         if isNew || isEditing {
             DatePicker("Date", selection: $exam.date)
                 .labelsHidden()
@@ -53,7 +58,7 @@ struct ExamDetail: View {
     }
 
     @ViewBuilder
-    var bareme: some View {
+    private var bareme: some View {
         if isNew || isEditing {
             Stepper(value : $exam.maxMark,
                     in    : 1 ... 20,
@@ -72,7 +77,7 @@ struct ExamDetail: View {
     }
 
     @ViewBuilder
-    var coefficient: some View {
+    private var coefficient: some View {
         if isNew || isEditing {
             Stepper(value : $exam.coef,
                     in    : 0.0 ... 5.0,
@@ -89,6 +94,24 @@ struct ExamDetail: View {
         }
     }
 
+    private var markList: some View {
+        Section {
+            ForEach($exam.marks, id: \.self) { $eleveMark in
+                if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                    MarkView(eleveName : eleve.displayName,
+                             maxMark   : exam.maxMark,
+                             mark      : $eleveMark.mark)
+                }
+            }
+            .onChange(of: exam.marks) { newValue in
+                isModified = true
+            }
+        } header: {
+            Text("Notes")
+        }
+        .headerProminence(.increased)
+    }
+
     var body: some View {
         List {
             // nom
@@ -99,8 +122,13 @@ struct ExamDetail: View {
             bareme
             // coefficient
             coefficient
+
+            // notes
+            if !isNew {
+                markList
+            }
         }
-        #if os(iOS)
+#if os(iOS)
         .navigationTitle("Évaluation")
         #endif
         .onAppear {

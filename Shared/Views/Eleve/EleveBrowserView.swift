@@ -18,7 +18,7 @@ struct EleveBrowserView: View {
     private var selectedEleve: Eleve?
     @State
     private var searchString: String = ""
-    @Environment(\.isSearching) var isSearching
+    //@Environment(\.isSearching) var isSearching
     @Environment(\.dismissSearch) var dismissSearch
 
     var body: some View {
@@ -153,13 +153,13 @@ struct EleveBrowserSchoolSubiew : View {
 
     func filteredSortedEleves(dans classe: Classe) -> Binding<[Eleve]> {
         EleveManager().filteredEleves(dans              : classe,
-                                            eleveStore        : eleveStore,
-                                            observStore       : observStore,
-                                            colleStore        : colleStore,
-                                            filterObservation : filterObservation,
-                                            filterColle       : filterColle,
-                                            filterFlag        : filterFlag,
-                                            searchString      : searchString)
+                                      eleveStore        : eleveStore,
+                                      observStore       : observStore,
+                                      colleStore        : colleStore,
+                                      filterObservation : filterObservation,
+                                      filterColle       : filterColle,
+                                      filterFlag        : filterFlag,
+                                      searchString      : searchString)
     }
 }
 

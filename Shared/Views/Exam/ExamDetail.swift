@@ -20,6 +20,9 @@ struct ExamDetail: View {
     private var eleveStore  : EleveStore
     @FocusState
     private var isSujetFocused: Bool
+    @State
+    private var searchString: String = ""
+    @Environment(\.isSearching) var isSearching
 
     private var name: some View {
         HStack {
@@ -94,7 +97,7 @@ struct ExamDetail: View {
 
     private var markList: some View {
         Section {
-            ForEach($exam.marks, id: \.self) { $eleveMark in
+            ForEach(filtredMarks(), id: \.self) { $eleveMark in
                 if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
                     MarkView(eleveName : eleve.displayName,
                               maxMark   : exam.maxMark,
@@ -113,6 +116,7 @@ struct ExamDetail: View {
 
     var body: some View {
         List {
+            if !isSearching {
             // nom
             name
             // date
@@ -121,18 +125,52 @@ struct ExamDetail: View {
             bareme
             // coefficient
             coefficient
+            }
 
             // notes
             if !isNew {
                 markList
             }
         }
-#if os(iOS)
+        .searchable(text      : $searchString,
+                    placement : .navigationBarDrawer(displayMode : .automatic),
+                    prompt    : "Filtrer")
+        .disableAutocorrection(true)
+        #if os(iOS)
         .navigationTitle("Évaluation")
         #endif
         .onAppear {
             isSujetFocused = isNew
         }
+    }
+
+    private func filtredMarks() -> Binding<[EleveMark]> {
+
+        Binding<[EleveMark]>(
+            get: {
+                self.exam.marks
+                    .filter { eleveMark in
+                        if searchString.isNotEmpty {
+                            let string = searchString.lowercased()
+                            if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                                return eleve.name.familyName!.lowercased().contains(string) ||
+                                eleve.name.givenName!.lowercased().contains(string)
+                            } else {
+                                return false
+                            }
+                        } else {
+                            return true
+                        }
+                    }
+            },
+            set: { items in
+                for eleveMark in items {
+                    if let index = self.exam.marks.firstIndex(where: { $0.eleveId == eleveMark.eleveId }) {
+                        self.exam.marks[index] = eleveMark
+                    }
+                }
+            }
+        )
     }
 }
 

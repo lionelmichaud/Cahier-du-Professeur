@@ -20,30 +20,28 @@ struct ExamDetail: View {
     private var eleveStore  : EleveStore
     @FocusState
     private var isSujetFocused: Bool
-    @State
-    private var mark: Double = 0
 
     private var name: some View {
-    HStack {
-        Image(systemName: "doc.plaintext")
-            .sfSymbolStyling()
-            .foregroundColor(.accentColor)
+        HStack {
+            Image(systemName: "doc.plaintext")
+                .sfSymbolStyling()
+                .foregroundColor(.accentColor)
 
-        if isNew || isEditing {
-            // sujet
-            TextField("Sujet de l'évaluation", text: $exam.sujet)
-                .font(.title2)
-                .textFieldStyle(.roundedBorder)
-                .focused($isSujetFocused)
+            if isNew || isEditing {
+                // sujet
+                TextField("Sujet de l'évaluation", text: $exam.sujet)
+                    .font(.title2)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($isSujetFocused)
 
-        } else {
-            Text(exam.sujet)
-                .font(.title2)
-                .fontWeight(.semibold)
+            } else {
+                Text(exam.sujet)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+            }
         }
+        .listRowSeparator(.hidden)
     }
-    .listRowSeparator(.hidden)
-}
 
     @ViewBuilder
     private var date: some View {
@@ -99,8 +97,9 @@ struct ExamDetail: View {
             ForEach($exam.marks, id: \.self) { $eleveMark in
                 if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
                     MarkView(eleveName : eleve.displayName,
-                             maxMark   : exam.maxMark,
-                             mark      : $eleveMark.mark)
+                              maxMark   : exam.maxMark,
+                              type      : $eleveMark.type,
+                              mark      : $eleveMark.mark)
                 }
             }
             .onChange(of: exam.marks) { newValue in

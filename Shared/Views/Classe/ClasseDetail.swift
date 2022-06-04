@@ -83,6 +83,7 @@ struct ClasseDetail: View {
             if isNew || isEditing {
                 Toggle(isOn: $classe.segpa) {
                     Text("SEGPA")
+                        .font(.caption)
                 }
                 .toggleStyle(.button)
 

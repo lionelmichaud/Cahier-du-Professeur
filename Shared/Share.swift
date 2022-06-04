@@ -35,7 +35,7 @@ func share(items      : [Any],
 /// ou bien tous les fichiers si `fileNames` = `nil`
 /// - Parameters:
 ///   - dataStore: dataStore de l'application
-///   - fileNames: permet d'identifier les fichiers à partager
+///   - fileNames: permet d'identifier les fichiers à partager (par exemple .json)
 ///   - geometry: gemetry de la View qui appèle la fonction
 func shareFiles(fileNames : [String]? = nil,
                 alertItem : inout AlertItem?,
@@ -43,7 +43,7 @@ func shareFiles(fileNames : [String]? = nil,
     var urls: [URL] = []
 
     do {
-        urls = try PersistenceManager().collectedJsonURLs(fileNames: fileNames)
+        urls = try PersistenceManager().collectedURLs(fileNames: fileNames)
     } catch {
         alertItem = AlertItem(title         : Text("Echec de l'exportation: dossier Documents introuvable !"),
                               dismissButton : .default(Text("OK")))

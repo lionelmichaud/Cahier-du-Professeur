@@ -1,23 +1,24 @@
 {
-    "version" : {
-        "name" : null,
-        "comment" : null
+  "version" : {
+    "name" : "",
+    "version" : "3.0.0",
+    "date" : "2022-05-24T22:16:29Z"
+  },
+  "revisionHistory" : [
+    {
+      "version" : "3.0.0",
+      "date" : "2022-05-23T22:00:00Z",
+      "comment" : "Ajout d'un coefficient aux évaluations"
     },
-    "revisionHistory" : [
-        {
-            "version" : "3.0.0",
-            "date" : "2022-05-23T22:00:00Z",
-            "comment" : "Ajout d'un coefficient aux évaluations"
-        },
-        {
-            "version" : "2.0.0",
-            "date" : "2022-05-21T22:00:00Z",
-            "comment" : "Ajout d'une note bonus à chaque élève"
-        },
-        {
-            "version" : "1.0.0",
-            "date" : "2022-05-09T22:00:00Z",
-            "comment" : "Première version"
-        }
-    ]
+    {
+      "version" : "2.0.0",
+      "date" : "2022-05-21T22:00:00Z",
+      "comment" : "Ajout d'une note bonus à chaque élève"
+    },
+    {
+      "version" : "1.0.0",
+      "date" : "2022-05-09T22:00:00Z",
+      "comment" : "Première version"
+    }
+  ]
 }

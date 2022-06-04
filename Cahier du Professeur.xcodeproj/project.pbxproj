@@ -77,6 +77,20 @@
 		7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */; };
 		797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
+		79843351283E92D800C5E51E /* POURQUET_Anthony.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334C283E92D800C5E51E /* POURQUET_Anthony.jpg */; };
+		79843352283E92D800C5E51E /* POURQUET_Anthony.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334C283E92D800C5E51E /* POURQUET_Anthony.jpg */; };
+		79843353283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334D283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg */; };
+		79843354283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334D283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg */; };
+		79843355283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334E283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg */; };
+		79843356283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334E283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg */; };
+		79843357283E92D800C5E51E /* FRITZ_Rémi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334F283E92D800C5E51E /* FRITZ_Rémi.jpg */; };
+		79843358283E92D800C5E51E /* FRITZ_Rémi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7984334F283E92D800C5E51E /* FRITZ_Rémi.jpg */; };
+		79843359283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79843350283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg */; };
+		7984335A283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79843350283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg */; };
+		7984335D283E97C000C5E51E /* Trombinoscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984335C283E97C000C5E51E /* Trombinoscope.swift */; };
+		7984335E283E97C000C5E51E /* Trombinoscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984335C283E97C000C5E51E /* Trombinoscope.swift */; };
+		79843360283EA37000C5E51E /* LoadableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984335F283EA37000C5E51E /* LoadableImage.swift */; };
+		79843361283EA37000C5E51E /* LoadableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984335F283EA37000C5E51E /* LoadableImage.swift */; };
 		7986E7DF282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
 		7986E7E0282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
 		7986E7E228291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
@@ -240,6 +254,13 @@
 		795FAB2E2809E54C004CB120 /* SchoolDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolDetail.swift; sourceTree = "<group>"; };
 		7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseExamRow.swift; sourceTree = "<group>"; };
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
+		7984334C283E92D800C5E51E /* POURQUET_Anthony.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = POURQUET_Anthony.jpg; sourceTree = "<group>"; };
+		7984334D283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BOSC--OLIVEAU_Lauriane.jpg"; sourceTree = "<group>"; };
+		7984334E283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "RIVENET-BENITO_Noa.jpg"; sourceTree = "<group>"; };
+		7984334F283E92D800C5E51E /* FRITZ_Rémi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FRITZ_Rémi.jpg"; sourceTree = "<group>"; };
+		79843350283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ADJAB-BOMBEKE_Camille.jpg"; sourceTree = "<group>"; };
+		7984335C283E97C000C5E51E /* Trombinoscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trombinoscope.swift; sourceTree = "<group>"; };
+		7984335F283EA37000C5E51E /* LoadableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableImage.swift; sourceTree = "<group>"; };
 		7986E7DE282918320011FF21 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7986E7E128291DA00011FF21 /* AppVersion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppVersion.json; sourceTree = "<group>"; };
 		7992D0A9282B0AF200B31186 /* EleveMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveMark.swift; sourceTree = "<group>"; };
@@ -433,6 +454,27 @@
 			path = Exam;
 			sourceTree = "<group>";
 		};
+		7984334B283E92B100C5E51E /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				79843350283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg */,
+				7984334D283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg */,
+				7984334F283E92D800C5E51E /* FRITZ_Rémi.jpg */,
+				7984334C283E92D800C5E51E /* POURQUET_Anthony.jpg */,
+				7984334E283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		7984335B283E979700C5E51E /* Trombinoscope */ = {
+			isa = PBXGroup;
+			children = (
+				7984335C283E97C000C5E51E /* Trombinoscope.swift */,
+				7984335F283EA37000C5E51E /* LoadableImage.swift */,
+			);
+			path = Trombinoscope;
+			sourceTree = "<group>";
+		};
 		7992D0A7282B0A4200B31186 /* Exam */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				79F3ABE528083A3100D068D9 /* Playground.playground */,
+				7984334B283E92B100C5E51E /* Photos */,
 				79F102D32823199E005E5D9C /* JSON */,
 				79F3AB8D2808218100D068D9 /* Shared */,
 				79F3AB9C2808218300D068D9 /* macOS */,
@@ -569,6 +612,7 @@
 				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
 				79F3ABE1280830D000D068D9 /* School */,
 				79F3ABE2280830E000D068D9 /* Classe */,
+				7984335B283E979700C5E51E /* Trombinoscope */,
 				7992D0A7282B0A4200B31186 /* Exam */,
 				79F3ABE3280830F300D068D9 /* Eleve */,
 				79F3ABED2808707C00D068D9 /* Observation */,
@@ -794,12 +838,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79843351283E92D800C5E51E /* POURQUET_Anthony.jpg in Resources */,
+				79843357283E92D800C5E51E /* FRITZ_Rémi.jpg in Resources */,
 				79F102EA28232F36005E5D9C /* Classe.json in Resources */,
 				7986E7E228291DA00011FF21 /* AppVersion.json in Resources */,
+				79843355283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg in Resources */,
+				79843353283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg in Resources */,
 				79F102E828232F36005E5D9C /* School.json in Resources */,
 				79F102E628232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBA2808218300D068D9 /* Assets.xcassets in Resources */,
 				79F102E228232F36005E5D9C /* Eleve.json in Resources */,
+				79843359283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg in Resources */,
 				79F102E428232F36005E5D9C /* Colle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -808,12 +857,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79843352283E92D800C5E51E /* POURQUET_Anthony.jpg in Resources */,
+				79843358283E92D800C5E51E /* FRITZ_Rémi.jpg in Resources */,
 				79F102EB28232F36005E5D9C /* Classe.json in Resources */,
 				7986E7E328291DA00011FF21 /* AppVersion.json in Resources */,
+				79843356283E92D800C5E51E /* RIVENET-BENITO_Noa.jpg in Resources */,
+				79843354283E92D800C5E51E /* BOSC--OLIVEAU_Lauriane.jpg in Resources */,
 				79F102E928232F36005E5D9C /* School.json in Resources */,
 				79F102E728232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBB2808218300D068D9 /* Assets.xcassets in Resources */,
 				79F102E328232F36005E5D9C /* Eleve.json in Resources */,
+				7984335A283E92D800C5E51E /* ADJAB-BOMBEKE_Camille.jpg in Resources */,
 				79F102E528232F36005E5D9C /* Colle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,6 +971,8 @@
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
 				79FFDCD62825E950009D7452 /* importCSV.swift in Sources */,
+				79843360283EA37000C5E51E /* LoadableImage.swift in Sources */,
+				7984335D283E97C000C5E51E /* Trombinoscope.swift in Sources */,
 				795FAB2F2809E54C004CB120 /* SchoolDetail.swift in Sources */,
 				79C12758283AA9CB002F243E /* SettingsClasse.swift in Sources */,
 				791C26D428142D7100686F0C /* ColleStore.swift in Sources */,
@@ -945,6 +1001,7 @@
 				79D583FE28204EBE00371EB3 /* ColleBrowserView.swift in Sources */,
 				795BC3DC2813055200C22271 /* EleveStore.swift in Sources */,
 				795BC3E6281337E600C22271 /* EleveDetail.swift in Sources */,
+				7984335E283E97C000C5E51E /* Trombinoscope.swift in Sources */,
 				79935D382824906B005C20BD /* Share.swift in Sources */,
 				795BC3D62812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */,
@@ -993,6 +1050,7 @@
 				79536320280DC4D800AB8600 /* ClassStore.swift in Sources */,
 				791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */,
+				79843361283EA37000C5E51E /* LoadableImage.swift in Sources */,
 				79502BAB2820407500DA798F /* EleveLabel.swift in Sources */,
 				79D58404282053C300371EB3 /* ColleNotifIcon.swift in Sources */,
 				79F3ABDA280823D900D068D9 /* NiveauSchool.swift in Sources */,

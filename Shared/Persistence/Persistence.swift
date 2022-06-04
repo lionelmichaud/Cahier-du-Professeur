@@ -42,8 +42,11 @@ public struct PersistenceManager {
 
     // MARK: - Methods
 
-    public func collectedJsonURLs(fileNames : [String]?  = nil) throws -> [URL] {
-        // vérifier l'existence du Folder associé au Dossier
+    /// Fournit la litse des URL des fichiers contenus dans le répertoir Document
+    /// et qui contiennent `fileNames`dans leur nom de fichier.
+    /// - Parameter fileNames: critère de collecte (par exemple ".json")
+    public func collectedURLs(fileNames : [String]?  = nil) throws -> [URL] {
+        // vérifier l'existence du Folder Document
         guard let documentsFolder = Folder.documents else {
             let error = FileError.failedToResolveDocuments
             customLog.log(level: .fault,

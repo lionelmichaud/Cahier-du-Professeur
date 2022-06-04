@@ -117,14 +117,14 @@ struct ExamDetail: View {
     var body: some View {
         List {
             if !isSearching {
-            // nom
-            name
-            // date
-            date
-            // barême
-            bareme
-            // coefficient
-            coefficient
+                // nom
+                name
+                // date
+                date
+                // barême
+                bareme
+                // coefficient
+                coefficient
             }
 
             // notes

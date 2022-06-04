@@ -36,6 +36,8 @@ struct EleveDetail: View {
     private var noteIsExpanded = false
     @State
     private var bonusIsExpanded = false
+    @State
+    private var showTrombine = false
     @FocusState
     private var isPrenomFocused: Bool
     @Preference(\.eleveAppreciation)
@@ -51,41 +53,57 @@ struct EleveDetail: View {
 
     var name: some View {
         HStack {
-            Image(systemName: "person.fill")
-                .sfSymbolStyling()
-                .foregroundColor(eleve.sexe.color)
-
             if isNew || isEditing {
-                // Sexe de cet eleve
-                CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
-                    .pickerStyle(.menu)
-                TextField("Prénom", text: $eleve.name.givenName.bound)
-                    .textFieldStyle(.roundedBorder)
-                    .disableAutocorrection(true)
-                    .focused($isPrenomFocused)
-                TextField("Nom", text: $eleve.name.familyName.bound)
-                    .textFieldStyle(.roundedBorder)
-                    .disableAutocorrection(true)
-            } else {
-                Text(eleve.displayName)
-                    .font(.title2)
-                    .textFieldStyle(.roundedBorder)
-                Button {
-                    eleve.isFlagged.toggle()
-                } label: {
-                    if eleve.isFlagged {
-                        Image(systemName: "flag.fill")
-                            .foregroundColor(.orange)
-                    } else {
-                        Image(systemName: "flag")
-                            .foregroundColor(.orange)
-                    }
+                HStack {
+                    Image(systemName: "person.fill")
+                        .sfSymbolStyling()
+                        .foregroundColor(eleve.sexe.color)
+                    // Sexe de cet eleve
+                    CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
+                        .pickerStyle(.menu)
+                    TextField("Prénom", text: $eleve.name.givenName.bound)
+                        .textFieldStyle(.roundedBorder)
+                        .disableAutocorrection(true)
+                        .focused($isPrenomFocused)
+                    TextField("Nom", text: $eleve.name.familyName.bound)
+                        .textFieldStyle(.roundedBorder)
+                        .disableAutocorrection(true)
                 }
-                .onChange(of: eleve.isFlagged) {newValue in
-                    isModified = true
+            } else {
+                VStack {
+                    HStack {
+                        Button {
+                            showTrombine.toggle()
+                        } label: {
+                            Image(systemName: "person.fill")
+                                .sfSymbolStyling()
+                                .foregroundColor(eleve.sexe.color)
+                        }
+                        Text(eleve.displayName)
+                            .font(.title2)
+                            .textFieldStyle(.roundedBorder)
+                        Button {
+                            eleve.isFlagged.toggle()
+                        } label: {
+                            if eleve.isFlagged {
+                                Image(systemName: "flag.fill")
+                                    .foregroundColor(.orange)
+                            } else {
+                                Image(systemName: "flag")
+                                    .foregroundColor(.orange)
+                            }
+                        }
+                        .onChange(of: eleve.isFlagged) {newValue in
+                            isModified = true
+                        }
+                    }
+                    if showTrombine, let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
+                        LoadableImage(imageUrl: trombine)
+                    }
                 }
             }
         }
+        .padding(.horizontal)
         .listRowSeparator(.hidden)
     }
 
@@ -231,27 +249,29 @@ struct EleveDetail: View {
     }
 
     var body: some View {
-        List {
+        VStack {
             // nom
             name
 
-            if !isNew {
-                // appréciation sur l'élève
-                if eleveAppreciation {
-                    appreciation
+            List {
+                if !isNew {
+                    // appréciation sur l'élève
+                    if eleveAppreciation {
+                        appreciation
+                    }
+                    // annotation sur l'élève
+                    if eleveAnnotation {
+                        annotation
+                    }
+                    // bonus/malus de l'élève
+                    if eleveBonus {
+                        bonus
+                    }
+                    // observations sur l'élève
+                    observations
+                    // colles de l'élève
+                    colles
                 }
-                // annotation sur l'élève
-                if eleveAnnotation {
-                    annotation
-                }
-                // bonus/malus de l'élève
-                if eleveBonus {
-                    bonus
-                }
-                // observations sur l'élève
-                observations
-                // colles de l'élève
-                colles
             }
         }
         //.listStyle(.sidebar)

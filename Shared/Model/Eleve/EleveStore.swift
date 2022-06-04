@@ -64,6 +64,7 @@ extension EleveStore {
         items.removeAll {
             $0.id == eleve.id
         }
+        Trombinoscope.deleteTrombine(eleve: eleve)
         saveAsJSON()
     }
 

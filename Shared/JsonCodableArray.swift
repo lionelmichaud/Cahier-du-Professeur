@@ -106,7 +106,8 @@ E.ID == UUID {
     // MARK: - Methods
 
     func clear() {
-        self.items = [ ]
+        self.items = []
+        saveAsJSON()
     }
 
     /// Initialiser à partir d'un fichier JSON portant le nom de la Class `E`

@@ -44,7 +44,8 @@ struct Cahier_du_ProfesseurApp: App {
             print("Compatibilité : \(documentsAreCompatibleWithAppVersion)")
             if !documentsAreCompatibleWithAppVersion {
                 do {
-                    try PersistenceManager().forcedImportAllJsonFilesFromApp()
+                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
+                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
                 } catch {
                     self.alertItem = AlertItem(title         : Text("Erreur"),
                                                message       : Text("L'importation des fichiers a échouée!"),

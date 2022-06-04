@@ -186,10 +186,11 @@ struct SchoolBrowserView: View {
                    geometry: geometry)
     }
 
-    /// Importer les fichiers JSON depuis le Bundle Application
+    /// Importer les fichiers JSON et JPEG depuis le Bundle Application
     private func `import`() {
         do {
-            try PersistenceManager().forcedImportAllJsonFilesFromApp()
+            try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
+            try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
         } catch {
             /// trigger second alert
             DispatchQueue.main.async {
@@ -207,9 +208,9 @@ struct SchoolBrowserView: View {
         } catch {
             /// trigger second alert
             DispatchQueue.main.async {
-                self.alertItem = AlertItem(title: Text("Erreur"),
-                                           message: Text("La lecture des fichiers importés a échouée!"),
-                                           dismissButton: .default(Text("OK")))
+                self.alertItem = AlertItem(title         : Text("Erreur"),
+                                           message       : Text("La lecture des fichiers importés a échouée!"),
+                                           dismissButton : .default(Text("OK")))
             }
         }
         eleveStore.sort()
@@ -222,7 +223,7 @@ struct SchoolBrowserView: View {
         eleveStore.clear()
         colleStore.clear()
         observStore.clear()
-
+        Trombinoscope.deleteAllTrombines()
     }
 }
 

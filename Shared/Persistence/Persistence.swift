@@ -73,7 +73,7 @@ public struct PersistenceManager {
 
     /// Importer les fichiers template depuis le `Bundle Main` de l'Application
     /// vers le répertoire `Documents` même si'ils y sont déjà présents.
-    public func forcedImportAllJsonFilesFromApp() throws {
+    public func forcedImportAllFilesFromApp(fileExt: String) throws {
         guard let originFolder = Folder.application else {
             let error = FileError.failedToResolveAppBundle
             customLog.log(level: .fault,
@@ -89,9 +89,10 @@ public struct PersistenceManager {
         }
 
         do {
-            try duplicateAllJsonFiles(from        : originFolder,
-                                      to          : documentsFolder,
-                                      forceUpdate : true)
+            try duplicateAllFiles(from        : originFolder,
+                                  to          : documentsFolder,
+                                  fileExt     : fileExt,
+                                  forceUpdate : true)
         } catch {
             let error = FileError.failedToImportTemplates
             customLog.log(level: .fault,
@@ -109,12 +110,13 @@ public struct PersistenceManager {
     ///   - targetFolder: répertoire destination
     ///   - forceUpdate: si false alors ne copie pas les fichiers s'ils sont déjà présents dans le répertoire `targetFolder`
     /// - Throws:`FileError.failedToDuplicateFiles`
-    fileprivate func duplicateAllJsonFiles(from originFolder : Folder,
-                                           to targetFolder   : Folder,
-                                           forceUpdate       : Bool = false) throws {
+    fileprivate func duplicateAllFiles(from originFolder : Folder,
+                                       to targetFolder   : Folder,
+                                       fileExt           : String,
+                                       forceUpdate       : Bool = false) throws {
         do {
             try originFolder.files.forEach { originFile in
-                if let ext = originFile.extension, ext == "json" {
+                if let ext = originFile.extension, ext == fileExt {
                     // recopier le fichier s'il n'est pas présent dans le directory targetFolder
                     if !targetFolder.containsFile(named: originFile.name) || forceUpdate {
                         if originFile.name == AppVersion.fileName {

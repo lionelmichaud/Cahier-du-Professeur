@@ -28,19 +28,47 @@ struct Trombinoscope {
         }
 
         let fileURL = documentsFolder.url.appendingPathComponent(name)
-        print(fileURL)
 
         return fileURL
-//        documentsFolder.files.forEach { file in
-//            if let fileNames = fileNames {
-//                fileNames.forEach { fileName in
-//                    if file.name.contains(fileName) {
-//                        urls.append(file.url)
-//                    }
-//                }
-//            } else {
-//                urls.append(file.url)
-//            }
-//        }
+    }
+
+    static func deleteTrombine(eleve: Eleve) {
+        guard let familyName = eleve.name.familyName, let givenName = eleve.name.givenName else {
+            return
+        }
+        let name = familyName + "_" + givenName + ".jpg"
+
+        // vérifier l'existence du Folder Document
+        guard let documentsFolder = Folder.documents else {
+            let error = FileError.failedToResolveDocuments
+            customLog.log(level: .fault,
+                          "\(error.rawValue))")
+            return
+        }
+
+        do {
+            let file = try documentsFolder.file(named: name)
+            try file.delete()
+        } catch {
+        }
+    }
+
+    static func deleteAllTrombines() {
+        // vérifier l'existence du Folder Document
+        guard let documentsFolder = Folder.documents else {
+            let error = FileError.failedToResolveDocuments
+            customLog.log(level: .fault,
+                          "\(error.rawValue))")
+            return
+        }
+
+        documentsFolder.files.forEach { file in
+            if file.extension == "jpg" {
+                do {
+                    try file.delete()
+                } catch {
+                }
+            }
+        }
     }
 }

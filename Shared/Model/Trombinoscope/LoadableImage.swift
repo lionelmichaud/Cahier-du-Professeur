@@ -3,6 +3,7 @@ See the License.txt file for this sample’s licensing information.
 */
 
 import SwiftUI
+import Files
 
 struct LoadableImage: View {
     var imageUrl: URL
@@ -33,9 +34,10 @@ struct LoadableImage: View {
 }
 
 struct LoadableImage_Previews: PreviewProvider {
+    static func testImageUrl() -> URL {
+        return try! Folder.application!.file(named: "test_image.jpg").url
+    }
     static var previews: some View {
-        LoadableImage(imageUrl: Trombinoscope.eleveTrombineUrl(eleve: Eleve(sexe: .female,
-                                                                            nom: "ADJAB-BOMBEKE",
-                                                                            prenom: "Camille"))!)
+        LoadableImage(imageUrl: testImageUrl())
     }
 }

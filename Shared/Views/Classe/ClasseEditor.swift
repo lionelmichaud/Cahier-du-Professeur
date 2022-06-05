@@ -21,6 +21,7 @@ struct ClasseEditor: View {
     @EnvironmentObject private var colleStore  : ColleStore
     @EnvironmentObject private var observStore : ObservationStore
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var hClass
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
     // This is important for when the niveau changes and puts the établissement in a different section.
@@ -50,7 +51,7 @@ struct ClasseEditor: View {
                          isModified     : $isModified,
                          examIsModified : $examIsModified)
             .onChange(of: examIsModified, perform: { hasBeenModified in
-//                print("examIsModified modifié dans ClasseEditor: \(hasBeenModified)")
+                //                print("examIsModified modifié dans ClasseEditor: \(hasBeenModified)")
                 if hasBeenModified && !isSaved {
                     // Appliquer les modifications faites à la classe hors du mode édition
                     // avant que .onAppear ne reset la valeur de isModified à False
@@ -67,7 +68,7 @@ struct ClasseEditor: View {
                         }
                     }
                 }
-                ToolbarItemGroup(placement: .automatic) {
+                ToolbarItem(placement: .automatic) {
                     Button {
                         if isNew {
                             addNewItem()
@@ -85,8 +86,10 @@ struct ClasseEditor: View {
                     } label: {
                         Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
+                }
 
-                    /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
+                /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
+                ToolbarItem(placement: hClass == .compact ? .principal : .automatic) {
                     if !isNew && !isEditing {
                         Button {
                             isShowingDialog.toggle()
@@ -97,7 +100,7 @@ struct ClasseEditor: View {
                         .confirmationDialog("Importer un fichier",
                                             isPresented     : $isShowingDialog,
                                             titleVisibility : .visible) {
-                            Button("Ajouter les élèves importés") {
+                            Button("Importer et ajouter") {
                                 withAnimation() {
                                     importFile.toggle()
                                 }

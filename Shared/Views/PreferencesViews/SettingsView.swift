@@ -19,7 +19,7 @@ struct SettingsView: View {
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         .toolbar {
             ToolbarItem {
-                Button("Ok") {
+                Button("Fermer") {
                     dismiss()
                 }
             }

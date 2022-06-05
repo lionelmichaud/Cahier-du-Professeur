@@ -71,4 +71,8 @@ struct Trombinoscope {
             }
         }
     }
+
+    static func importTrombines() {
+        
+    }
 }

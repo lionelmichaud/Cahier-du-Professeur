@@ -10,8 +10,8 @@ import HelpersView
 
 struct EleveObservRow: View {
     var observ: Observation
-    @EnvironmentObject var observStore : ObservationStore
-    @Environment(\.horizontalSizeClass) var hClass
+    @EnvironmentObject private var observStore : ObservationStore
+    @Environment(\.horizontalSizeClass) private var hClass
 
     var body: some View {
         HStack {

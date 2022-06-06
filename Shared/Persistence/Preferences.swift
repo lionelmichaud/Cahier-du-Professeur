@@ -182,29 +182,33 @@ public final class Preferences {
     /// School
     // Champ annotation
     @UserDefault("school_annotation")
-    public var schoolAnnotation: Bool = true
+    public var schoolAnnotationEnabled: Bool = true
 
     /// Classe
     // Champ appéciation
     @UserDefault("classe_appreciation")
-    public var classeAppreciation: Bool = true
+    public var classeAppreciationEnabled: Bool = true
 
     // Champ annotation
     @UserDefault("classe_annotation")
-    public var classeAnnotation: Bool = true
+    public var classeAnnotationEnabled: Bool = true
 
     /// Elève
     // Champ appéciation
     @UserDefault("eleve_appreciation")
-    public var eleveAppreciation: Bool = true
+    public var eleveAppreciationEnabled: Bool = true
 
     // Champ annotation
     @UserDefault("eleve_annotation")
-    public var eleveAnnotation: Bool = true
+    public var eleveAnnotationEnabled: Bool = true
+
+    // Champ trombine
+    @UserDefault("eleve_trombine")
+    public var eleveTrombineEnabled: Bool = true
 
     // Champ bonus / malus
     @UserDefault("eleve_bonus")
-    public var eleveBonus: Bool = true
+    public var eleveBonusEnabled: Bool = true
 
     @UserDefault("bonus_malus_max")
     public var maxBonusMalus: Double = 2.0

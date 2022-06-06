@@ -28,7 +28,7 @@ struct SchoolDetail: View {
     private var noteIsExpanded = false
     @FocusState
     private var isNameFocused: Bool
-    @Preference(\.schoolAnnotation)
+    @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
 
     var heures: Double {

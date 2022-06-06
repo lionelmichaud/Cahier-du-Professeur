@@ -29,7 +29,11 @@ struct SchoolBrowserView: View {
     @State
     private var isShowingDeleteConfirmDialog = false
     @State
+    private var isShowingImportTrombineDialog = false
+    @State
     private var isShowingAbout = false
+    @State
+    private var isImportingJpegFile = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -123,6 +127,11 @@ struct SchoolBrowserView: View {
                             Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
                         }
 
+                        /// Importer des fichiers JPEG pour le trombinoscope
+                        Button(action: { isShowingImportTrombineDialog.toggle() }) {
+                            Label("Trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
+                        }
+
                         /// Effacer toutes les données utilisateur
                         Button(role: .destructive, action: { isShowingDeleteConfirmDialog.toggle() }) {
                             Label("supprimer toutes vos données", systemImage: "trash")
@@ -144,6 +153,20 @@ struct SchoolBrowserView: View {
             } message: {
                 Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application.") +
                 Text("Cette action ne peut pas être annulée.")
+            }
+
+            /// Confirmation des fichiers JPEG pour le trombinoscope
+            .confirmationDialog("Importer des photos d'élèves",
+                                isPresented     : $isShowingImportTrombineDialog,
+                                titleVisibility : .visible) {
+                Button("Importer") {
+                    withAnimation() {
+                        isImportingJpegFile = true
+                    }
+                }
+            } message: {
+                Text("Les photos importées doivent être au format JPEG.") +
+                Text(" Cette action ne peut pas être annulée.")
             }
 
             .confirmationDialog("Suppression de toutes vos données",
@@ -175,6 +198,12 @@ struct SchoolBrowserView: View {
                     SchoolEditor(school: $newEtab, isNew: true)
                 }
             }
+        }
+        /// Importer des fichiers JPEG
+        .fileImporter(isPresented             : $isImportingJpegFile,
+                      allowedContentTypes     : [.jpeg],
+                      allowsMultipleSelection : true) { result in
+            importJpegFiles(result: result)
         }
         .alert(item: $alertItem, content: newAlert)
     }
@@ -224,6 +253,35 @@ struct SchoolBrowserView: View {
         colleStore.clear()
         observStore.clear()
         Trombinoscope.deleteAllTrombines()
+    }
+
+    private func importJpegFiles(result: Result<[URL], Error>) {
+        switch result {
+            case .failure(let error):
+                self.alertItem = AlertItem(title         : Text("Échec"),
+                                           message       : Text("L'importation des fichiers a échouée"),
+                                           dismissButton : .default(Text("OK")))
+                print("Error selecting file: \(error.localizedDescription)")
+
+            case .success(let filesUrl):
+                guard let documentsFolder = Folder.documents else { return }
+
+                filesUrl.forEach { fileUrl in
+                    guard fileUrl.startAccessingSecurityScopedResource() else { return }
+
+                    if let imageFile = try? File(path: fileUrl.path) {
+                        do {
+                            if !documentsFolder.contains(imageFile) {
+                                try imageFile.copy(to: documentsFolder)
+                            }
+                        } catch let error {
+                            print("Error reading file \(error.localizedDescription)")
+                        }
+                    }
+
+                    fileUrl.stopAccessingSecurityScopedResource()
+                }
+        }
     }
 }
 

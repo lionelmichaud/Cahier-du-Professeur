@@ -40,16 +40,18 @@ struct EleveDetail: View {
     private var showTrombine = false
     @FocusState
     private var isPrenomFocused: Bool
-    @Preference(\.eleveAppreciation)
-    var eleveAppreciation
-    @Preference(\.eleveAnnotation)
-    var eleveAnnotation
-    @Preference(\.eleveBonus)
-    var eleveBonus
+    @Preference(\.eleveAppreciationEnabled)
+    var eleveAppreciationEnabled
+    @Preference(\.eleveAnnotationEnabled)
+    var eleveAnnotationEnabled
+    @Preference(\.eleveBonusEnabled)
+    var eleveBonusEnabled
     @Preference(\.maxBonusMalus)
     var maxBonusMalus
     @Preference(\.maxBonusIncrement)
     var maxBonusIncrement
+    @Preference(\.eleveTrombineEnabled)
+    var eleveTrombineEnabled
 
     var name: some View {
         HStack {
@@ -73,7 +75,9 @@ struct EleveDetail: View {
                 VStack {
                     HStack {
                         Button {
-                            showTrombine.toggle()
+                            if eleveTrombineEnabled {
+                                showTrombine.toggle()
+                            }
                         } label: {
                             Image(systemName: "person.fill")
                                 .sfSymbolStyling()
@@ -256,15 +260,15 @@ struct EleveDetail: View {
             List {
                 if !isNew {
                     // appréciation sur l'élève
-                    if eleveAppreciation {
+                    if eleveAppreciationEnabled {
                         appreciation
                     }
                     // annotation sur l'élève
-                    if eleveAnnotation {
+                    if eleveAnnotationEnabled {
                         annotation
                     }
                     // bonus/malus de l'élève
-                    if eleveBonus {
+                    if eleveBonusEnabled {
                         bonus
                     }
                     // observations sur l'élève

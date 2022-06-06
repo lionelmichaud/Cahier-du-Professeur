@@ -90,7 +90,7 @@ struct SchoolBrowserView: View {
             .navigationTitle("Etablissements")
             //.navigationViewStyle(.columns)
             .toolbar {
-                // ajouter un établissement
+                /// Ajouter un établissement
                 ToolbarItemGroup(placement: .status) {
                     Button {
                         newEtab = School()
@@ -122,14 +122,14 @@ struct SchoolBrowserView: View {
                             Label("Exporter vos données", systemImage: "square.and.arrow.up")
                         }
 
+                        /// Importer des fichiers JPEG pour le trombinoscope
+                        Button(action: { isShowingImportTrombineDialog.toggle() }) {
+                            Label("Importer des photos du trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
+                        }
+
                         /// Importer les fichiers JSON depuis le Bundle Application
                         Button(role: .destructive, action: { isShowingImportConfirmDialog.toggle() }) {
                             Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
-                        }
-
-                        /// Importer des fichiers JPEG pour le trombinoscope
-                        Button(action: { isShowingImportTrombineDialog.toggle() }) {
-                            Label("Trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
                         }
 
                         /// Effacer toutes les données utilisateur

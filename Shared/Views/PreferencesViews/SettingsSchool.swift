@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsSchool: View {
-    @Preference(\.schoolAnnotation)
+    @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
 
     var body: some View {

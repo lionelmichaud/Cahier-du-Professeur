@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SettingsClasse: View {
-    @Preference(\.classeAppreciation)
+    @Preference(\.classeAppreciationEnabled)
     var classeAppreciation
-    @Preference(\.classeAnnotation)
+    @Preference(\.classeAnnotationEnabled)
     var classeAnnotation
 
     var body: some View {

@@ -9,26 +9,29 @@ import SwiftUI
 
 struct SettingsEleve: View {
     @EnvironmentObject var eleveStore: EleveStore
-    @Preference(\.eleveAppreciation)
-    var eleveAppreciation
-    @Preference(\.eleveAnnotation)
-    var eleveAnnotation
-    @Preference(\.eleveBonus)
-    var eleveBonus
+    @Preference(\.eleveAppreciationEnabled)
+    var eleveAppreciationEnabled
+    @Preference(\.eleveAnnotationEnabled)
+    var eleveAnnotationEnabled
+    @Preference(\.eleveBonusEnabled)
+    var eleveBonusEnabled
     @Preference(\.maxBonusMalus)
     var maxBonusMalus
     @Preference(\.maxBonusIncrement)
     var maxBonusIncrement
+    @Preference(\.eleveTrombineEnabled)
+    var eleveTrombineEnabled
 
     var body: some View {
         List {
             Section("Champs") {
-                Toggle("Appréciation", isOn: $eleveAppreciation)
-                Toggle("Annotation", isOn: $eleveAnnotation)
+                Toggle("Trombine", isOn: $eleveTrombineEnabled)
+                Toggle("Appréciation", isOn: $eleveAppreciationEnabled)
+                Toggle("Annotation", isOn: $eleveAnnotationEnabled)
             }
             Section("Bonus / Malus") {
-                Toggle("Afficher", isOn: $eleveBonus)
-                if eleveBonus {
+                Toggle("Afficher", isOn: $eleveBonusEnabled)
+                if eleveBonusEnabled {
                     Stepper(value : $maxBonusMalus,
                             in    : 0 ... 20,
                             step  : 1) {

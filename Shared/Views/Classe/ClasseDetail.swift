@@ -36,10 +36,10 @@ struct ClasseDetail: View {
     private var noteIsExpanded = false
     @FocusState
     private var isHoursFocused: Bool
-    @Preference(\.classeAppreciation)
-    var classeAppreciation
-    @Preference(\.classeAnnotation)
-    var classeAnnotation
+    @Preference(\.classeAppreciationEnabled)
+    var classeAppreciationEnabled
+    @Preference(\.classeAnnotationEnabled)
+    var classeAnnotationEnabled
 
     private var name: some View {
         HStack {
@@ -267,11 +267,11 @@ struct ClasseDetail: View {
             // élèves dans la classe
             if !isNew {
                 // appréciation sur la classe
-                if classeAppreciation {
+                if classeAppreciationEnabled {
                     appreciation
                 }
                 // annotation sur la classe
-                if classeAnnotation {
+                if classeAnnotationEnabled {
                     annotation
                 }
                 // édition de la liste des élèves

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Files
 import HelpersView
 
 struct ClasseEditor: View {
@@ -36,8 +37,8 @@ struct ClasseEditor: View {
     // true si l'item va être détruit
     @State private var isDeleted = false
     @State private var alertItem : AlertItem?
-    @State private var isShowingDialog = false
-    @State private var importFile = false
+    @State private var isShowingImportListeDialog = false
+    @State private var importCsvFile = false
 
     private var isItemDeleted: Bool {
         !classeStore.isPresent(classe) && !isNew
@@ -68,7 +69,7 @@ struct ClasseEditor: View {
                         }
                     }
                 }
-                ToolbarItem(placement: .automatic) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         if isNew {
                             addNewItem()
@@ -86,23 +87,23 @@ struct ClasseEditor: View {
                     } label: {
                         Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
-                }
 
-                /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
-                ToolbarItem(placement: hClass == .compact ? .principal : .automatic) {
+                    /// Importation des données
                     if !isNew && !isEditing {
+                        /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
                         Button {
-                            isShowingDialog.toggle()
+                            isShowingImportListeDialog.toggle()
                         } label: {
-                            Text("Importer")
+                            Image(systemName: "square.and.arrow.down")
+                                .imageScale(.large)
                         }
-                        /// Confirmation de l'importation
-                        .confirmationDialog("Importer un fichier",
-                                            isPresented     : $isShowingDialog,
+                        /// Confirmation de l'importation d'une liste d'élèves d'une classe
+                        .confirmationDialog("Importer une liste d'élèves",
+                                            isPresented     : $isShowingImportListeDialog,
                                             titleVisibility : .visible) {
                             Button("Importer et ajouter") {
                                 withAnimation() {
-                                    importFile.toggle()
+                                    importCsvFile = true
                                 }
                             }
                             Button("Importer et remplacer", role: .destructive) {
@@ -112,7 +113,7 @@ struct ClasseEditor: View {
                                                                          observStore : observStore,
                                                                          colleStore  : colleStore)
                                 }
-                                importFile.toggle()
+                                importCsvFile = true
                             }
                         } message: {
                             Text("La liste des élèves importée doit être au format CSV de PRONOTE.") +
@@ -136,6 +137,12 @@ struct ClasseEditor: View {
                 }
             }
             .disabled(isItemDeleted)
+            /// Importer un fichier CSV au format PRONOTE
+            .fileImporter(isPresented             : $importCsvFile,
+                          allowedContentTypes     : [.commaSeparatedText],
+                          allowsMultipleSelection : false) { result in
+                importCsvFiles(result: result)
+            }
         }
         .overlay(alignment: .center) {
             if isItemDeleted {
@@ -145,12 +152,6 @@ struct ClasseEditor: View {
             }
         }
         .alert(item: $alertItem, content: newAlert)
-        /// Importer un fichier CSV depuis PRONOTE
-        .fileImporter(isPresented             : $importFile,
-                      allowedContentTypes     : [.commaSeparatedText],
-                      allowsMultipleSelection : false) { result in
-            importCsvFiles(result: result)
-        }
     }
 
     init(school: Binding<School>,
@@ -180,36 +181,38 @@ struct ClasseEditor: View {
     }
 
     private func importCsvFiles(result: Result<[URL], Error>) {
-        if case .success = result {
-            do {
-                let fileUrl = try result.get().first!
-
-                guard fileUrl.startAccessingSecurityScopedResource() else { return }
-                if let data = try? Data(contentsOf: fileUrl) {
-                    var eleves = try CsvImporter().importEleves(from: data)
-                    for idx in eleves.startIndex...eleves.endIndex-1 {
-                        withAnimation() {
-                            ClasseManager()
-                                .ajouter(eleve      : &eleves[idx],
-                                         aClasse    : &classe,
-                                         eleveStore : eleveStore)
-                        }
-                    }
-                }
-                fileUrl.stopAccessingSecurityScopedResource()
-
-            } catch {
+        switch result {
+            case .failure(let error):
                 self.alertItem = AlertItem(title         : Text("Échec"),
                                            message       : Text("L'importation du fichier a échouée"),
                                            dismissButton : .default(Text("OK")))
-                print ("File Import Failed")
-                print (error.localizedDescription)
-            }
-        } else {
-            self.alertItem = AlertItem(title         : Text("Échec"),
-                                       message       : Text("L'importation du fichier a échouée"),
-                                       dismissButton : .default(Text("OK")))
-            print ("File Import Failed")
+                print("Error selecting file: \(error.localizedDescription)")
+
+            case .success(let filesUrl):
+                filesUrl.forEach { fileUrl in
+                    guard fileUrl.startAccessingSecurityScopedResource() else { return }
+
+                    if let data = try? Data(contentsOf: fileUrl) {
+                        do {
+                            var eleves = try CsvImporter().importEleves(from: data)
+                            for idx in eleves.startIndex...eleves.endIndex-1 {
+                                withAnimation() {
+                                    ClasseManager()
+                                        .ajouter(eleve      : &eleves[idx],
+                                                 aClasse    : &classe,
+                                                 eleveStore : eleveStore)
+                                }
+                            }
+                        } catch let error {
+                            self.alertItem = AlertItem(title         : Text("Échec"),
+                                                       message       : Text("L'importation du fichier a échouée"),
+                                                       dismissButton : .default(Text("OK")))
+                            print("Error reading file \(error.localizedDescription)")
+                        }
+                    }
+
+                    fileUrl.stopAccessingSecurityScopedResource()
+                }
         }
     }
 }

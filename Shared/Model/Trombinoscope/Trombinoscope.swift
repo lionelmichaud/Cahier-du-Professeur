@@ -14,9 +14,12 @@ private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Profess
 
 struct Trombinoscope {
     static func eleveTrombineUrl(eleve: Eleve) -> URL? {
-        guard let familyName = eleve.name.familyName, let givenName = eleve.name.givenName else {
+        guard var familyName = eleve.name.familyName, let givenName = eleve.name.givenName else {
             return nil
         }
+
+        familyName = familyName.replacingOccurrences(of: " ", with: "_", count: 2)
+
         let name = familyName + "_" + givenName + ".jpg"
 
         // vérifier l'existence du Folder Document

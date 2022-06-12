@@ -82,7 +82,7 @@ extension EleveStore {
                             return false
                         }
                     }
-                    //.sorted(by: <)
+                //.sorted(by: <)
             },
             set: { items in
                 for classe in items {
@@ -163,30 +163,45 @@ extension EleveStore {
         )
     }
 
+    func someColles(dans classe : Classe,
+                    colleStore  : ColleStore,
+                    isConsignee : Bool? = nil,
+                    isVerified  : Bool? = nil) -> Bool {
+        var found = false
+
+        self.items.filter { eleve in
+            eleve.classeId != nil && eleve.classeId == classe.id
+        }
+        .forEach { eleve in
+            if !found {
+                if colleStore.colles(de          : eleve,
+                                     isConsignee : isConsignee,
+                                     isVerified  : isVerified).count != 0 {
+                    found = true
+                }
+            }
+        }
+
+        return found
+    }
+
     func filteredSortedColles
     (dans classe : Classe,
      colleStore  : ColleStore,
-     _ isIncluded: @escaping (Colle) -> Bool = { _ in true}) -> Binding<[Colle]> {
+     isConsignee : Bool? = nil,
+     isVerified  : Bool? = nil) -> Binding<[Colle]> {
 
         Binding<[Colle]>(
             get: {
                 var colles = [Colle]()
 
                 self.items.filter { eleve in
-                    if let classeId = eleve.classeId {
-                        return (classeId == classe.id)
-                    } else {
-                        return false
-                    }
+                    eleve.classeId != nil && eleve.classeId == classe.id
                 }
                 .forEach { eleve in
-                    colleStore
-                        .colles(de: eleve)
-                        .forEach { observ in
-                            if isIncluded(observ) {
-                                colles.append(observ)
-                            }
-                        }
+                    colles += colleStore.colles(de          : eleve,
+                                                isConsignee : isConsignee,
+                                                isVerified  : isVerified)
                 }
 
                 return colles.sorted(by: <)
@@ -201,4 +216,5 @@ extension EleveStore {
             }
         )
     }
+
 }

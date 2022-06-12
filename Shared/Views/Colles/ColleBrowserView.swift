@@ -56,7 +56,6 @@ struct ColleBrowserView: View {
 struct ColleBrowserSchoolSubiew : View {
     let school      : School
     var filterColle : Bool
-    @State private var isClasseExpanded = true
 
     @EnvironmentObject private var classeStore : ClasseStore
     @EnvironmentObject private var eleveStore  : EleveStore
@@ -65,8 +64,8 @@ struct ColleBrowserSchoolSubiew : View {
     var body: some View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
-            if filteredSortedColles(dans: classe).isNotEmpty {
-                DisclosureGroup(isExpanded: $isClasseExpanded) {
+            if someColles(dans: classe) {
+                DisclosureGroup {
                     ForEach(filteredSortedColles(dans: classe)) { $colle in
                         NavigationLink {
                             ColleEditor(classe      : classe,
@@ -106,18 +105,16 @@ struct ColleBrowserSchoolSubiew : View {
 
     // MARK: - Methods
 
-    func filteredSortedColles(dans classe: Classe) -> Binding<[Colle]> {
-        eleveStore.filteredSortedColles(dans       : classe,
-                                        colleStore : colleStore) { colle in
-            switch filterColle {
-                case false:
-                    // on ne filtre pas
-                    return true
+    private func someColles(dans classe : Classe) -> Bool {
+        eleveStore.someColles(dans        : classe,
+                              colleStore  : colleStore,
+                              isConsignee : filterColle ? false : nil)
+    }
 
-                case true:
-                    return colle.satisfies(isConsignee: false)
-            }
-        }
+    private func filteredSortedColles(dans classe: Classe) -> Binding<[Colle]> {
+        eleveStore.filteredSortedColles(dans        : classe,
+                                        colleStore  : colleStore,
+                                        isConsignee : filterColle ? false : nil)
     }
 }
 

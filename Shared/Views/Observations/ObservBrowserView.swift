@@ -56,7 +56,6 @@ struct ObservBrowserView: View {
 struct ObservBrowserSchoolSubiew : View {
     let school            : School
     var filterObservation : Bool
-    @State private var isClasseExpanded = true
 
     @EnvironmentObject private var classeStore : ClasseStore
     @EnvironmentObject private var eleveStore  : EleveStore
@@ -66,7 +65,7 @@ struct ObservBrowserSchoolSubiew : View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
             if someObservations(dans: classe) {
-                DisclosureGroup(isExpanded: $isClasseExpanded) {
+                DisclosureGroup {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
                         NavigationLink {
                             ObservEditor(classe            : classe,

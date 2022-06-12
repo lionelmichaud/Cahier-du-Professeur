@@ -133,17 +133,9 @@ struct ColleEditor: View {
     // MARK: - Methods
 
     func filteredSortedColle(dans classe: Classe) -> Binding<[Colle]> {
-        eleveStore.filteredSortedColles(dans       : classe,
-                                        colleStore : colleStore) { observ in
-            switch filterColle {
-                case false:
-                    // on ne filtre pas
-                    return true
-
-                case true:
-                    return colle.satisfies(isConsignee: false)
-            }
-        }
+        eleveStore.filteredSortedColles(dans        : classe,
+                                        colleStore  : colleStore,
+                                        isConsignee : filterColle ? false : nil)
     }
 }
 

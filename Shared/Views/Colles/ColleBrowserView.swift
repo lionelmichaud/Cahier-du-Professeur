@@ -67,29 +67,31 @@ struct ColleBrowserSchoolSubiew : View {
             if someColles(dans: classe) {
                 DisclosureGroup {
                     ForEach(filteredSortedColles(dans: classe)) { $colle in
-                        NavigationLink {
-                            ColleEditor(classe      : classe,
-                                        eleve       : .constant(eleveStore.item(withID: colle.eleveId!)!),
-                                        colle       : $colle,
-                                        isNew       : false,
-                                        filterColle : filterColle)
-                        } label: {
-                            ColleBrowserRow(eleve : eleveStore.item(withID: colle.eleveId!)!,
-                                            colle : colle)
-                        }
-                        .swipeActions {
-                            // supprimer un élève
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    if let eleveId = colle.eleveId {
-                                        EleveManager().retirer(colleId    : colle.id,
-                                                               deEleveId  : eleveId,
-                                                               eleveStore : eleveStore,
-                                                               colleStore : colleStore)
-                                    }
-                                }
+                        if let eleve = eleveStore.item(withID: colle.eleveId!) {
+                            NavigationLink {
+                                ColleEditor(classe      : classe,
+                                            eleve       : .constant(eleve),
+                                            colle       : $colle,
+                                            isNew       : false,
+                                            filterColle : filterColle)
                             } label: {
-                                Label("Supprimer", systemImage: "trash")
+                                ColleBrowserRow(eleve : eleve,
+                                                colle : colle)
+                            }
+                            .swipeActions {
+                                // supprimer un élève
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        if let eleveId = colle.eleveId {
+                                            EleveManager().retirer(colleId    : colle.id,
+                                                                   deEleveId  : eleveId,
+                                                                   eleveStore : eleveStore,
+                                                                   colleStore : colleStore)
+                                        }
+                                    }
+                                } label: {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
                             }
                         }
                     }

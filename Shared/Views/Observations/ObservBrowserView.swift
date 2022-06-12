@@ -67,29 +67,31 @@ struct ObservBrowserSchoolSubiew : View {
             if someObservations(dans: classe) {
                 DisclosureGroup {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
-                        NavigationLink {
-                            ObservEditor(classe            : classe,
-                                         eleve             : .constant(eleveStore.item(withID: observ.eleveId!)!),
-                                         observ            : $observ,
-                                         isNew             : false,
-                                         filterObservation : filterObservation)
-                        } label: {
-                            ObservBrowserRow(eleve  : eleveStore.item(withID: observ.eleveId!)!,
-                                             observ : observ)
-                        }
-                        .swipeActions {
-                            // supprimer un élève
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    if let eleveId = observ.eleveId {
-                                        EleveManager().retirer(observId   : observ.id,
-                                                               deEleveId  : eleveId,
-                                                               eleveStore : eleveStore,
-                                                               observStore: observStore)
-                                    }
-                                }
+                        if let eleve = eleveStore.item(withID: observ.eleveId!) {
+                            NavigationLink {
+                                ObservEditor(classe            : classe,
+                                             eleve             : .constant(eleve),
+                                             observ            : $observ,
+                                             isNew             : false,
+                                             filterObservation : filterObservation)
                             } label: {
-                                Label("Supprimer", systemImage: "trash")
+                                ObservBrowserRow(eleve  : eleve,
+                                                 observ : observ)
+                            }
+                            .swipeActions {
+                                // supprimer un élève
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        if let eleveId = observ.eleveId {
+                                            EleveManager().retirer(observId   : observ.id,
+                                                                   deEleveId  : eleveId,
+                                                                   eleveStore : eleveStore,
+                                                                   observStore: observStore)
+                                        }
+                                    }
+                                } label: {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
                             }
                         }
                     }

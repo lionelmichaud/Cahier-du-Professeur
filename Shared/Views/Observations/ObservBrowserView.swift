@@ -65,7 +65,7 @@ struct ObservBrowserSchoolSubiew : View {
     var body: some View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             // pour chaque Elève
-            if filteredSortedObservs(dans: classe).isNotEmpty {
+            if someObservations(dans: classe) {
                 DisclosureGroup(isExpanded: $isClasseExpanded) {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
                         NavigationLink {
@@ -106,19 +106,18 @@ struct ObservBrowserSchoolSubiew : View {
 
     // MARK: - Methods
 
-    func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
-        eleveStore.filteredSortedObservations(dans        : classe,
-                                              observStore : observStore) { observ in
-            switch filterObservation {
-                case false:
-                    // on ne filtre pas
-                    return true
+    private func someObservations(dans classe : Classe) -> Bool {
+        eleveStore.someObservations(dans        : classe,
+                                    observStore : observStore,
+                                    isConsignee : filterObservation ? false : nil,
+                                    isVerified  : filterObservation ? false : nil)
+    }
 
-                case true:
-                    return observ.satisfies(isConsignee: false,
-                                            isVerified : false)
-            }
-        }
+    private func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
+        eleveStore.filteredSortedObservations(dans        : classe,
+                                              observStore : observStore,
+                                              isConsignee : filterObservation ? false : nil,
+                                              isVerified  : filterObservation ? false : nil)
     }
 }
 

@@ -133,17 +133,9 @@ struct ObservEditor: View {
 
     func filteredSortedObservs(dans classe: Classe) -> Binding<[Observation]> {
         eleveStore.filteredSortedObservations(dans        : classe,
-                                              observStore : observStore) { observ in
-            switch filterObservation {
-                case false:
-                    // on ne filtre pas
-                    return true
-
-                case true:
-                    return observ.satisfies(isConsignee: false,
-                                            isVerified : false)
-            }
-        }
+                                              observStore : observStore,
+                                              isConsignee : filterObservation ? false : nil,
+                                              isVerified  : filterObservation ? false : nil)
     }
 }
 

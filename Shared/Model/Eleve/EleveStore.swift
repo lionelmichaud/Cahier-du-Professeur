@@ -109,30 +109,45 @@ extension EleveStore {
         //.sorted(by: <)
     }
 
+    func someObservations(dans classe : Classe,
+                          observStore : ObservationStore,
+                          isConsignee : Bool? = nil,
+                          isVerified  : Bool? = nil) -> Bool {
+        var found = false
+
+        self.items.filter { eleve in
+            eleve.classeId != nil && eleve.classeId == classe.id
+        }
+        .forEach { eleve in
+            if !found {
+                if observStore.observations(de          : eleve,
+                                            isConsignee : isConsignee,
+                                            isVerified  : isVerified).count != 0 {
+                    found = true
+                }
+            }
+        }
+
+        return found
+    }
+
     func filteredSortedObservations
     (dans classe : Classe,
      observStore : ObservationStore,
-     _ isIncluded: @escaping (Observation) -> Bool = { _ in true}) -> Binding<[Observation]> {
+     isConsignee : Bool? = nil,
+     isVerified  : Bool? = nil) -> Binding<[Observation]> {
 
         Binding<[Observation]>(
             get: {
                 var observs = [Observation]()
 
                 self.items.filter { eleve in
-                    if let classeId = eleve.classeId {
-                        return (classeId == classe.id)
-                    } else {
-                        return false
-                    }
+                    eleve.classeId != nil && eleve.classeId == classe.id
                 }
                 .forEach { eleve in
-                    observStore
-                        .observations(de: eleve)
-                        .forEach { observ in
-                            if isIncluded(observ) {
-                                observs.append(observ)
-                            }
-                        }
+                    observs += observStore.observations(de          : eleve,
+                                                        isConsignee : isConsignee,
+                                                        isVerified  : isVerified)
                 }
 
                 return observs.sorted(by: <)

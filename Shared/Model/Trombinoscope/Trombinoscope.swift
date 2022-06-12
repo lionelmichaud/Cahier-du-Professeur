@@ -18,8 +18,12 @@ struct Trombinoscope {
             return nil
         }
 
-        familyName = familyName.replacingOccurrences(of: " ", with: "_", count: 2)
-
+        if #available(iOS 16.0, macOS 13.0, *) {
+            familyName = familyName.replacing(" ", with: "_")
+        } else {
+            familyName = familyName.replacingOccurrences(of: " ", with: "_", count: 2)
+        }
+        
         let name = familyName + "_" + givenName + ".jpg"
 
         // vérifier l'existence du Folder Document

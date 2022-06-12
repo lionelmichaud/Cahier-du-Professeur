@@ -41,7 +41,7 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     }
 
     var displayName : String {
-        name.formatted(.name(style: .long))
+        name.formatted(.name(style: .medium))
     }
 
     // MARK: - Initializers

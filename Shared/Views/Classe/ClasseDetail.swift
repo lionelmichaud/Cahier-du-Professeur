@@ -40,6 +40,8 @@ struct ClasseDetail: View {
     var classeAppreciationEnabled
     @Preference(\.classeAnnotationEnabled)
     var classeAnnotationEnabled
+    @Environment(\.horizontalSizeClass)
+    var hClass
 
     private var name: some View {
         HStack {
@@ -108,11 +110,18 @@ struct ClasseDetail: View {
 
     private var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
-            TextEditor(text: $classe.appreciation)
-                .font(.caption)
-                .multilineTextAlignment(.leading)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                .frame(minHeight: 80)
+            if #available(iOS 16.0, macOS 13.0, *) {
+                TextField("Appréciation", text: $classe.appreciation, axis: .vertical)
+                    .lineLimit(5)
+                    .font(hClass == .compact ? .callout : .body)
+                    .textFieldStyle(.roundedBorder)
+            } else {
+                TextEditor(text: $classe.appreciation)
+                    .font(hClass == .compact ? .callout : .body)
+                    .multilineTextAlignment(.leading)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                    .frame(minHeight: 80)
+            }
         } label: {
             Text("Appréciation")
                 .font(.headline)
@@ -125,11 +134,18 @@ struct ClasseDetail: View {
 
     private var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
-            TextEditor(text: $classe.annotation)
-                .font(.caption)
-                .multilineTextAlignment(.leading)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                .frame(minHeight: 80)
+            if #available(iOS 16.0, macOS 13.0, *) {
+                TextField("Annotation", text: $classe.annotation, axis: .vertical)
+                    .lineLimit(5)
+                    .font(hClass == .compact ? .callout : .body)
+                    .textFieldStyle(.roundedBorder)
+            } else {
+                TextEditor(text: $classe.annotation)
+                    .font(hClass == .compact ? .callout : .body)
+                    .multilineTextAlignment(.leading)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                    .frame(minHeight: 80)
+            }
         } label: {
             Text("Annotation")
                 .font(.headline)

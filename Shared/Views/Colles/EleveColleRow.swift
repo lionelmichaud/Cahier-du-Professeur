@@ -17,20 +17,12 @@ struct EleveColleRow: View {
         HStack {
             Image(systemName: "lock")
                 .foregroundColor(colle.color)
-            if hClass == .compact {
-                VStack(alignment: .leading) {
-                    Text(colle.date.stringShortDate)
-                    Text(colle.motif.nature.displayString)
-                        .foregroundColor(.secondary)
-                }
-                .font(.callout)
-            } else {
-                VStack(alignment: .leading) {
-                    Text(colle.date.stringLongDateTime)
-                    Text(colle.motif.nature.displayString)
-                        .foregroundColor(.secondary)
-                }
+            VStack(alignment: .leading) {
+                Text(colle.date.stringShortDate)
+                Text(colle.motif.nature.displayString)
+                    .foregroundColor(.secondary)
             }
+            .font(hClass == .compact ? .callout : .body)
 
             Spacer()
 

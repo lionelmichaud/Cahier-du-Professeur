@@ -100,9 +100,9 @@ struct ExamDetail: View {
             ForEach(filtredMarks(), id: \.self) { $eleveMark in
                 if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
                     MarkView(eleveName : eleve.displayName,
-                              maxMark   : exam.maxMark,
-                              type      : $eleveMark.type,
-                              mark      : $eleveMark.mark)
+                             maxMark   : exam.maxMark,
+                             type      : $eleveMark.type,
+                             mark      : $eleveMark.mark)
                 }
             }
             .onChange(of: exam.marks) { newValue in
@@ -134,7 +134,7 @@ struct ExamDetail: View {
         }
         .searchable(text      : $searchString,
                     placement : .navigationBarDrawer(displayMode : .automatic),
-                    prompt    : "Filtrer")
+                    prompt    : "Nom ou Prénom de l'élève")
         .disableAutocorrection(true)
         #if os(iOS)
         .navigationTitle("Évaluation")

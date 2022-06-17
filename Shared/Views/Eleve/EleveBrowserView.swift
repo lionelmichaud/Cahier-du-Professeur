@@ -48,7 +48,7 @@ struct EleveBrowserView: View {
         }
         .searchable(text      : $searchString,
                     placement : .navigationBarDrawer(displayMode : .automatic),
-                    prompt    : "Filtrer")
+                    prompt    : "Nom ou Prénom de l'élève")
         .disableAutocorrection(true)
         .toolbar {
             ToolbarItemGroup(placement: .status) {

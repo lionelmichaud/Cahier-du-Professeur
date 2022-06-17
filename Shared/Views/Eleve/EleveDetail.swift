@@ -52,6 +52,8 @@ struct EleveDetail: View {
     var maxBonusIncrement
     @Preference(\.eleveTrombineEnabled)
     var eleveTrombineEnabled
+    @Environment(\.horizontalSizeClass)
+    var hClass
 
     var name: some View {
         HStack {
@@ -113,11 +115,18 @@ struct EleveDetail: View {
 
     var appreciation: some View {
         DisclosureGroup(isExpanded: $appreciationIsExpanded) {
-            TextEditor(text: $eleve.appreciation)
-                .font(.caption)
-                .multilineTextAlignment(.leading)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                .frame(minHeight: 80)
+            if #available(iOS 16.0, macOS 13.0, *) {
+                TextField("Appréciation", text: $eleve.appreciation, axis: .vertical)
+                    .lineLimit(5)
+                    .font(hClass == .compact ? .callout : .body)
+                    .textFieldStyle(.roundedBorder)
+            } else {
+                TextEditor(text: $eleve.appreciation)
+                    .font(hClass == .compact ? .callout : .body)
+                    .multilineTextAlignment(.leading)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                    .frame(minHeight: 80)
+            }
         } label: {
             Text("Appréciation")
                 .font(.headline)
@@ -130,11 +139,18 @@ struct EleveDetail: View {
 
     var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
-            TextEditor(text: $eleve.annotation)
-                .font(.caption)
-                .multilineTextAlignment(.leading)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                .frame(minHeight: 80)
+            if #available(iOS 16.0, macOS 13.0, *) {
+                TextField("Annotation", text: $eleve.annotation, axis: .vertical)
+                    .lineLimit(5)
+                    .font(hClass == .compact ? .callout : .body)
+                    .textFieldStyle(.roundedBorder)
+            } else {
+                TextEditor(text: $eleve.annotation)
+                    .font(hClass == .compact ? .callout : .body)
+                    .multilineTextAlignment(.leading)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                    .frame(minHeight: 80)
+            }
         } label: {
             Text("Annotation")
                 .font(.headline)

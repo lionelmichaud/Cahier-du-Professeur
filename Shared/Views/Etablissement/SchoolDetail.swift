@@ -30,6 +30,8 @@ struct SchoolDetail: View {
     private var isNameFocused: Bool
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
+    @Environment(\.horizontalSizeClass)
+    var hClass
 
     var heures: Double {
         SchoolManager().heures(dans: school, classeStore: classeStore)
@@ -56,11 +58,18 @@ struct SchoolDetail: View {
 
     var annotation: some View {
         DisclosureGroup(isExpanded: $noteIsExpanded) {
-            TextEditor(text: $school.annotation)
-                .font(.caption)
-                .multilineTextAlignment(.leading)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                .frame(minHeight: 80)
+            if #available(iOS 16.0, macOS 13.0, *) {
+                TextField("Annotation", text: $school.annotation, axis: .vertical)
+                    .lineLimit(5)
+                    .font(hClass == .compact ? .callout : .body)
+                    .textFieldStyle(.roundedBorder)
+            } else {
+                TextEditor(text: $school.annotation)
+                    .font(hClass == .compact ? .callout : .body)
+                    .multilineTextAlignment(.leading)
+                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
+                    .frame(minHeight: 80)
+            }
         } label: {
             Text("Annotation")
                 .font(.headline)

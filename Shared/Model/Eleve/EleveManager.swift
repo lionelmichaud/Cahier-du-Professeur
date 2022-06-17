@@ -50,9 +50,9 @@ struct EleveManager {
     func retirer(observIndex   : Int,
                  deEleve eleve : inout Eleve,
                  observStore   : ObservationStore) {
-        // supprimer l'élève de la liste d'élèves
+        // supprimer l'observation de la liste des observation
         observStore.deleteObservation(withID: eleve.observsID[observIndex])
-        // supprimer l'élève de la eleve
+        // supprimer l'observation de la liste des observations de l'eleve
         eleve.removeObservation(at: observIndex)
     }
 

@@ -120,11 +120,20 @@ struct EleveDetail: View {
                 } label: {
                     EleveObservRow(observ: observ)
                 }
-            }
-            .onDelete { indexSet in
-                for index in indexSet {
-                    isModified = true
-                    deleteObserv(index: index)
+                .swipeActions {
+                    // supprimer un élève
+                    Button(role: .destructive) {
+                        withAnimation {
+                            if let eleveId = observ.eleveId {
+                                EleveManager().retirer(observId   : observ.id,
+                                                       deEleveId  : eleveId,
+                                                       eleveStore : eleveStore,
+                                                       observStore: observStore)
+                            }
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
                 }
             }
         } header: {
@@ -152,7 +161,7 @@ struct EleveDetail: View {
         Section {
             // édition de la liste des colles
             ForEach(colleStore.sortedColles(de          : eleve,
-                                      isConsignee : filterColle ? false : nil)) { $colle in
+                                            isConsignee : filterColle ? false : nil)) { $colle in
                 NavigationLink {
                     ColleEditor(classe      : classe,
                                 eleve       : $eleve,
@@ -162,13 +171,22 @@ struct EleveDetail: View {
                 } label: {
                     EleveColleRow(colle: colle)
                 }
-            }
-            .onDelete(perform: { indexSet in
-                for index in indexSet {
-                    isModified = true
-                    deleteColle(index: index)
+                .swipeActions {
+                    // supprimer un élève
+                    Button(role: .destructive) {
+                        withAnimation {
+                            if let eleveId = colle.eleveId {
+                                EleveManager().retirer(colleId    : colle.id,
+                                                       deEleveId  : eleveId,
+                                                       eleveStore : eleveStore,
+                                                       colleStore : colleStore)
+                            }
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
+                    }
                 }
-            })
+            }
         } header: {
             HStack {
                 Text("Colles")

@@ -14,38 +14,58 @@ struct MarkView: View {
     @Binding var type : MarkEnum
     @Binding var mark : Double?
 
+    @Environment(\.horizontalSizeClass) private var hClass
+
     var body: some View {
-        VStack(alignment: .leading) {
+        Group {
             switch type {
                 case .note:
-                    AmountEditView(label    : eleveName,
-                                   amount   : $mark.bound,
-                                   validity : .within(range: 0.0 ... Double(maxMark)),
-                                   currency : false)
-                    HStack {
-                        CasePicker(pickedCase: $type,
-                                   label: "")
-                        .pickerStyle(.menu)
-                        Stepper(
-                            "",
-                            onIncrement: {
-                                mark = ((mark ?? 0.0) + 0.5).clamp(low: 0.0, high: Double(maxMark))
-                            },
-                            onDecrement: {
-                                mark = ((mark ?? 0.0) - 0.5).clamp(low: 0.0, high: Double(maxMark))
-                            })
-                    }
-                default:
-                    HStack {
+                    if hClass == .compact {
                         VStack(alignment: .leading) {
-                            Text(eleveName)
+                            CasePicker(pickedCase: $type,
+                                       label: eleveName)
+                            .pickerStyle(.menu)
+                            HStack {
+                                AmountEditView(label    : "Note",
+                                               amount   : $mark.bound,
+                                               validity : .within(range: 0.0 ... Double(maxMark)),
+                                               currency : false)
+                                Stepper(
+                                    "",
+                                    onIncrement: {
+                                        mark = ((mark ?? 0.0) + 0.5).clamp(low: 0.0, high: Double(maxMark))
+                                    },
+                                    onDecrement: {
+                                        mark = ((mark ?? 0.0) - 0.5).clamp(low: 0.0, high: Double(maxMark))
+                                    })
+                            }
+                        }
+                    } else {
+                        HStack {
+                            AmountEditView(label    : eleveName,
+                                           amount   : $mark.bound,
+                                           validity : .within(range: 0.0 ... Double(maxMark)),
+                                           currency : false)
+                            Stepper(
+                                "",
+                                onIncrement: {
+                                    mark = ((mark ?? 0.0) + 0.5).clamp(low: 0.0, high: Double(maxMark))
+                                },
+                                onDecrement: {
+                                    mark = ((mark ?? 0.0) - 0.5).clamp(low: 0.0, high: Double(maxMark))
+                                })
+                            .frame(maxWidth: 100)
                             CasePicker(pickedCase: $type,
                                        label: "")
                             .pickerStyle(.menu)
+                            .frame(maxWidth: 120)
                         }
-                        Spacer()
-
                     }
+
+                default:
+                    CasePicker(pickedCase: $type,
+                               label: eleveName)
+                    .pickerStyle(.menu)
             }
         }
     }
@@ -53,13 +73,17 @@ struct MarkView: View {
 
 struct MarkView_Previews: PreviewProvider {
     static var previews: some View {
-        MarkView(eleveName : "Nom",
-                 maxMark   : 20,
-                 type      : .constant(.nonNote),
-                 mark      : .constant(0.0))
-        MarkView(eleveName : "Nom",
-                 maxMark   : 20,
-                 type      : .constant(.note),
-                 mark      : .constant(10.0))
+        List {
+            MarkView(eleveName : "Lionel MICHAUD",
+                     maxMark   : 20,
+                     type      : .constant(.nonNote),
+                     mark      : .constant(0.0))
+        }
+        List {
+            MarkView(eleveName : "Lionel MICHAUD",
+                     maxMark   : 20,
+                     type      : .constant(.note),
+                     mark      : .constant(10.0))
+        }
     }
 }

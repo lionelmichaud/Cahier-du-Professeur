@@ -52,8 +52,6 @@ struct EleveDetail: View {
     var maxBonusIncrement
     @Preference(\.eleveTrombineEnabled)
     var eleveTrombineEnabled
-    @Environment(\.horizontalSizeClass)
-    var hClass
 
     var name: some View {
         HStack {

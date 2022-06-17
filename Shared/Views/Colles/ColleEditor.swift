@@ -48,7 +48,7 @@ struct ColleEditor: View {
     var body: some View {
         if (isNew || !isItemFiltred) {
             VStack {
-                ColleDetail(eleve      : eleve,
+                ColleDetail(eleve      : $eleve,
                             colle      : $itemCopy,
                             isEditing  : isEditing,
                             isNew      : isNew,
@@ -139,33 +139,33 @@ struct ColleEditor: View {
     }
 }
 
-struct ColleEditor_Previews: PreviewProvider {
-    static var previews: some View {
-        TestEnvir.createFakes()
-        return Group {
-            ColleEditor(classe      : TestEnvir.classeStore.items.first!,
-                        eleve       : .constant(TestEnvir.eleveStore.items.first!),
-                        colle       : .constant(TestEnvir.colleStore.items.first!),
-                        isNew       : true,
-                        filterColle : false)
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPad mini (6th generation)")
-
-            ColleEditor(classe      : TestEnvir.classeStore.items.first!,
-                        eleve       : .constant(TestEnvir.eleveStore.items.first!),
-                        colle       : .constant(TestEnvir.colleStore.items.first!),
-                        isNew       : true,
-                        filterColle : false)
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPhone Xs")
-        }
-    }
-}
+//struct ColleEditor_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TestEnvir.createFakes()
+//        return Group {
+//            ColleEditor(classe      : .constant(TestEnvir.classeStore.items.first!),
+//                        eleve       : .constant(TestEnvir.eleveStore.items.first!),
+//                        colle       : .constant(TestEnvir.colleStore.items.first!),
+//                        isNew       : true,
+//                        filterColle : false)
+//            .environmentObject(TestEnvir.schoolStore)
+//            .environmentObject(TestEnvir.classeStore)
+//            .environmentObject(TestEnvir.eleveStore)
+//            .environmentObject(TestEnvir.colleStore)
+//            .environmentObject(TestEnvir.observStore)
+//            .previewDevice("iPad mini (6th generation)")
+//
+//            ColleEditor(classe      : .constant(TestEnvir.classeStore.items.first!),
+//                        eleve       : .constant(TestEnvir.eleveStore.items.first!),
+//                        colle       : .constant(TestEnvir.colleStore.items.first!),
+//                        isNew       : true,
+//                        filterColle : false)
+//            .environmentObject(TestEnvir.schoolStore)
+//            .environmentObject(TestEnvir.classeStore)
+//            .environmentObject(TestEnvir.eleveStore)
+//            .environmentObject(TestEnvir.colleStore)
+//            .environmentObject(TestEnvir.observStore)
+//            .previewDevice("iPhone Xs")
+//        }
+//    }
+//}

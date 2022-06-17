@@ -74,91 +74,14 @@ struct EleveDetail: View {
                         .disableAutocorrection(true)
                 }
             } else {
-                VStack {
-                    HStack {
-                        Button {
-                            if eleveTrombineEnabled {
-                                showTrombine.toggle()
-                            }
-                        } label: {
-                            Image(systemName: "person.fill")
-                                .sfSymbolStyling()
-                                .foregroundColor(eleve.sexe.color)
-                        }
-                        Text(eleve.displayName)
-                            .font(.title2)
-                            .textFieldStyle(.roundedBorder)
-                        Button {
-                            eleve.isFlagged.toggle()
-                        } label: {
-                            if eleve.isFlagged {
-                                Image(systemName: "flag.fill")
-                                    .foregroundColor(.orange)
-                            } else {
-                                Image(systemName: "flag")
-                                    .foregroundColor(.orange)
-                            }
-                        }
-                        .onChange(of: eleve.isFlagged) {newValue in
-                            isModified = true
-                        }
-                    }
-                    if showTrombine, let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
-                        LoadableImage(imageUrl: trombine)
-                    }
-                }
+                EleveLabelWithTrombineFlag(eleve     : $eleve,
+                                           isModified: $isModified,
+                                           font      : .title2,
+                                           fontWeight: .regular)
             }
         }
         .padding(.horizontal)
         .listRowSeparator(.hidden)
-    }
-
-    var appreciation: some View {
-        DisclosureGroup(isExpanded: $appreciationIsExpanded) {
-            if #available(iOS 16.0, macOS 13.0, *) {
-                TextField("Appréciation", text: $eleve.appreciation, axis: .vertical)
-                    .lineLimit(5)
-                    .font(hClass == .compact ? .callout : .body)
-                    .textFieldStyle(.roundedBorder)
-            } else {
-                TextEditor(text: $eleve.appreciation)
-                    .font(hClass == .compact ? .callout : .body)
-                    .multilineTextAlignment(.leading)
-                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                    .frame(minHeight: 80)
-            }
-        } label: {
-            Text("Appréciation")
-                .font(.headline)
-                .fontWeight(.bold)
-        }
-        .onChange(of: eleve.appreciation) {newValue in
-            isModified = true
-        }
-    }
-
-    var annotation: some View {
-        DisclosureGroup(isExpanded: $noteIsExpanded) {
-            if #available(iOS 16.0, macOS 13.0, *) {
-                TextField("Annotation", text: $eleve.annotation, axis: .vertical)
-                    .lineLimit(5)
-                    .font(hClass == .compact ? .callout : .body)
-                    .textFieldStyle(.roundedBorder)
-            } else {
-                TextEditor(text: $eleve.annotation)
-                    .font(hClass == .compact ? .callout : .body)
-                    .multilineTextAlignment(.leading)
-                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                    .frame(minHeight: 80)
-            }
-        } label: {
-            Text("Annotation")
-                .font(.headline)
-                .fontWeight(.bold)
-        }
-        .onChange(of: eleve.annotation) {newValue in
-            isModified = true
-        }
     }
 
     var bonus: some View {
@@ -178,6 +101,7 @@ struct EleveDetail: View {
                 .font(.headline)
                 .fontWeight(.bold)
         }
+        .listRowSeparator(.hidden)
         .onChange(of: eleve.bonus) {newValue in
             isModified = true
         }
@@ -277,11 +201,15 @@ struct EleveDetail: View {
                 if !isNew {
                     // appréciation sur l'élève
                     if eleveAppreciationEnabled {
-                        appreciation
+                        AppreciationView(isExpanded  : $appreciationIsExpanded,
+                                         isModified  : $isModified,
+                                         appreciation: $eleve.appreciation)
                     }
                     // annotation sur l'élève
                     if eleveAnnotationEnabled {
-                        annotation
+                        AnnotationView(isExpanded: $noteIsExpanded,
+                                       isModified: $isModified,
+                                       annotation: $eleve.annotation)
                     }
                     // bonus/malus de l'élève
                     if eleveBonusEnabled {

@@ -9,6 +9,7 @@ import SwiftUI
 import HelpersView
 
 struct ObservDetail: View {
+    @Binding
     var eleve     : Eleve
     @Binding
     var observ    : Observation
@@ -40,54 +41,58 @@ struct ObservDetail: View {
     }
 
     var body: some View {
-        List {
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .sfSymbolStyling()
-                    .foregroundColor(observ.color)
-                // date
-                if isNew || isEditing {
-                    DatePicker("Date", selection: $observ.date)
-                        .labelsHidden()
-                        .listRowSeparator(.hidden)
-                        .environment(\.locale, Locale.init(identifier: "fr_FR"))
-                } else {
-                    Text("Le " + observ.date.stringLongDateTime)
-                }
-            }
-
+        VStack {
             // élève
-            EleveLabel(eleve: eleve)
+            EleveLabelWithTrombineFlag(eleve     : $eleve,
+                                       isModified: $isModified,
+                                       font      : .title2,
+                                       fontWeight: .regular)
+            List {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .sfSymbolStyling()
+                        .foregroundColor(observ.color)
+                    // date
+                    if isNew || isEditing {
+                        DatePicker("Date", selection: $observ.date)
+                            .labelsHidden()
+                            .listRowSeparator(.hidden)
+                            .environment(\.locale, Locale.init(identifier: "fr_FR"))
+                    } else {
+                        Text("Le " + observ.date.stringLongDateTime)
+                    }
+                }
 
-            // motif
-            if isNew || isEditing {
-                MotifEditor(motif: $observ.motif)
-            } else {
-                MotifView(motif: observ.motif)
-            }
+                // motif
+                if isNew || isEditing {
+                    MotifEditor(motif: $observ.motif)
+                } else {
+                    MotifView(motif: observ.motif)
+                }
 
-            // checkbox isConsignee
-            if isNew || isEditing {
-                Button {
-                    observ.isConsignee.toggle()
-                } label: {
+                // checkbox isConsignee
+                if isNew || isEditing {
+                    Button {
+                        observ.isConsignee.toggle()
+                    } label: {
+                        isConsigneeLabel
+                    }
+                    .buttonStyle(.plain)
+                } else {
                     isConsigneeLabel
                 }
-                .buttonStyle(.plain)
-            } else {
-                isConsigneeLabel
-            }
 
-            // checkbox isVerified
-            if isNew || isEditing {
-                Button {
-                    observ.isVerified.toggle()
-                } label: {
+                // checkbox isVerified
+                if isNew || isEditing {
+                    Button {
+                        observ.isVerified.toggle()
+                    } label: {
+                        isVerifiedLabel
+                    }
+                    .buttonStyle(.plain)
+                } else {
                     isVerifiedLabel
                 }
-                .buttonStyle(.plain)
-            } else {
-                isVerifiedLabel
             }
         }
         #if os(iOS)
@@ -101,7 +106,7 @@ struct ObservDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ObservDetail(eleve      : TestEnvir.eleveStore.items.first!,
+            ObservDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                          observ     : .constant(TestEnvir.observStore.items.first!),
                          isEditing  : false,
                          isNew      : true,
@@ -114,7 +119,7 @@ struct ObservDetail_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
             .previewDisplayName("Observ isNew")
 
-            ObservDetail(eleve      : TestEnvir.eleveStore.items.first!,
+            ObservDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                          observ     : .constant(TestEnvir.observStore.items.first!),
                          isEditing  : false,
                          isNew      : true,
@@ -127,7 +132,7 @@ struct ObservDetail_Previews: PreviewProvider {
             .previewDevice("iPhone Xs")
             .previewDisplayName("Observ isNew")
 
-            ObservDetail(eleve      : TestEnvir.eleveStore.items.first!,
+            ObservDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                          observ     : .constant(TestEnvir.observStore.items.first!),
                          isEditing  : false,
                          isNew      : false,

@@ -56,30 +56,6 @@ struct SchoolDetail: View {
         .listRowSeparator(.hidden)
     }
 
-    var annotation: some View {
-        DisclosureGroup(isExpanded: $noteIsExpanded) {
-            if #available(iOS 16.0, macOS 13.0, *) {
-                TextField("Annotation", text: $school.annotation, axis: .vertical)
-                    .lineLimit(5)
-                    .font(hClass == .compact ? .callout : .body)
-                    .textFieldStyle(.roundedBorder)
-            } else {
-                TextEditor(text: $school.annotation)
-                    .font(hClass == .compact ? .callout : .body)
-                    .multilineTextAlignment(.leading)
-                    .background(RoundedRectangle(cornerRadius: 8).stroke(.secondary))
-                    .frame(minHeight: 80)
-            }
-        } label: {
-            Text("Annotation")
-                .font(.headline)
-                .fontWeight(.bold)
-        }
-        .onChange(of: school.annotation) {newValue in
-            isModified = true
-        }
-    }
-
     var classeList: some View {
         Section {
             // ajouter une classe
@@ -164,7 +140,9 @@ struct SchoolDetail: View {
             if !isNew {
                 // note sur la classe
                 if schoolAnnotation {
-                    annotation
+                    AnnotationView(isExpanded: $noteIsExpanded,
+                                   isModified: $isModified,
+                                   annotation: $school.annotation)
                 }
                 // édition de la liste des classes
                 classeList

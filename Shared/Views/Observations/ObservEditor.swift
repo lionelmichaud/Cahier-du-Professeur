@@ -47,7 +47,7 @@ struct ObservEditor: View {
     var body: some View {
         if (isNew || !isItemFiltred) {
             VStack {
-                ObservDetail(eleve      : eleve,
+                ObservDetail(eleve      : $eleve,
                              observ     : $itemCopy,
                              isEditing  : isEditing,
                              isNew      : isNew,

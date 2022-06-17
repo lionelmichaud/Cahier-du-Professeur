@@ -9,6 +9,7 @@ import SwiftUI
 import HelpersView
 
 struct ColleDetail: View {
+    @Binding
     var eleve     : Eleve
     @Binding
     var colle     : Colle
@@ -40,68 +41,72 @@ struct ColleDetail: View {
    }
 
     var body: some View {
-        List {
-            HStack {
-                Image(systemName: "lock")
-                    .sfSymbolStyling()
-                    .foregroundColor(colle.color)
-                // date
-                if isNew || isEditing {
-                    DatePicker("Date", selection: $colle.date)
-                        .labelsHidden()
-                        .listRowSeparator(.hidden)
-                        .environment(\.locale, Locale.init(identifier: "fr_FR"))
-                } else {
-                    Text("Le " + colle.date.stringLongDateTime)
-                }
-            }
-
+        VStack {
             // élève
-            EleveLabel(eleve: eleve)
-
-            // motif
-            if isNew || isEditing {
-                MotifEditor(motif: $colle.motif)
-            } else {
-                MotifView(motif: colle.motif)
-            }
-
-            // Durée
-            if isNew || isEditing {
+            EleveLabelWithTrombineFlag(eleve     : $eleve,
+                                       isModified: $isModified,
+                                       font      : .title2,
+                                       fontWeight: .regular)
+            List {
                 HStack {
-                    Stepper("Durée",
-                            value : $colle.duree,
-                            in    : 1 ... 4,
-                            step  : 1)
-                    Text("\(colle.duree) heures")
+                    Image(systemName: "lock")
+                        .sfSymbolStyling()
+                        .foregroundColor(colle.color)
+                    // date
+                    if isNew || isEditing {
+                        DatePicker("Date", selection: $colle.date)
+                            .labelsHidden()
+                            .listRowSeparator(.hidden)
+                            .environment(\.locale, Locale.init(identifier: "fr_FR"))
+                    } else {
+                        Text("Le " + colle.date.stringLongDateTime)
+                    }
                 }
-                .frame(width: 225)
-            } else {
-                Text("Durée: \(colle.duree) heures")
-            }
 
-            // checkbox isConsignee
-            if isNew || isEditing {
-                Button {
-                    colle.isConsignee.toggle()
-                } label: {
+                // motif
+                if isNew || isEditing {
+                    MotifEditor(motif: $colle.motif)
+                } else {
+                    MotifView(motif: colle.motif)
+                }
+
+                // Durée
+                if isNew || isEditing {
+                    HStack {
+                        Stepper("Durée",
+                                value : $colle.duree,
+                                in    : 1 ... 4,
+                                step  : 1)
+                        Text("\(colle.duree) heures")
+                    }
+                    .frame(width: 225)
+                } else {
+                    Text("Durée: \(colle.duree) heures")
+                }
+
+                // checkbox isConsignee
+                if isNew || isEditing {
+                    Button {
+                        colle.isConsignee.toggle()
+                    } label: {
+                        isConsigneeLabel
+                    }
+                    .buttonStyle(.plain)
+                } else {
                     isConsigneeLabel
                 }
-                .buttonStyle(.plain)
-            } else {
-                isConsigneeLabel
-            }
 
-            // checkbox isVerified
-            if isNew || isEditing {
-                Button {
-                    colle.isVerified.toggle()
-                } label: {
+                // checkbox isVerified
+                if isNew || isEditing {
+                    Button {
+                        colle.isVerified.toggle()
+                    } label: {
+                        isVerifiedLabel
+                    }
+                    .buttonStyle(.plain)
+                } else {
                     isVerifiedLabel
                 }
-                .buttonStyle(.plain)
-            } else {
-                isVerifiedLabel
             }
         }
         #if os(iOS)
@@ -115,7 +120,7 @@ struct ColleDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ColleDetail(eleve      : TestEnvir.eleveStore.items.first!,
+            ColleDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                         colle      : .constant(TestEnvir.colleStore.items.first!),
                         isEditing  : false,
                         isNew      : true,
@@ -128,7 +133,7 @@ struct ColleDetail_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
             .previewDisplayName("Colle isNew")
 
-            ColleDetail(eleve      : TestEnvir.eleveStore.items.first!,
+            ColleDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                         colle      : .constant(TestEnvir.colleStore.items.first!),
                         isEditing  : false,
                         isNew      : true,

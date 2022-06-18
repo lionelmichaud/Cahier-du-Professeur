@@ -105,6 +105,8 @@ struct ExamEditor: View {
         }
     }
 
+    // MARK: - Initializer
+
     init(classe         : Binding<Classe>,
          examIsModified : Binding<Bool>,
          exam           : Binding<Exam>,
@@ -115,6 +117,8 @@ struct ExamEditor: View {
         self.isNew           = isNew
         self._itemCopy       = State(initialValue : exam.wrappedValue)
     }
+
+    // MARK: - Methods
 
     private func addNewItem() {
         /// Ajouter une nouvelle évaluation

@@ -144,6 +144,8 @@ struct ExamDetail: View {
         }
     }
 
+    // MARK: - Methods
+
     private func filtredMarks() -> Binding<[EleveMark]> {
 
         Binding<[EleveMark]>(

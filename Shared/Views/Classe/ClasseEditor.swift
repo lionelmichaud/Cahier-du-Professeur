@@ -154,6 +154,8 @@ struct ClasseEditor: View {
         .alert(item: $alertItem, content: newAlert)
     }
 
+    // MARK: - Initializer
+
     init(school: Binding<School>,
          classe: Binding<Classe>,
          isNew : Bool = false) {
@@ -163,6 +165,8 @@ struct ClasseEditor: View {
         self._itemCopy = State(initialValue : classe.wrappedValue)
     }
 
+    // MARK: - Methods
+    
     private func addNewItem() {
         /// Ajouter une nouvelle classe
         if classeStore.exists(classe: itemCopy, in: school.id) {

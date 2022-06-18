@@ -131,6 +131,8 @@ struct EleveEditor: View {
         }
     }
 
+    // MARK: - Initializer
+
     init(classe            : Binding<Classe>,
          eleve             : Binding<Eleve>,
          isNew             : Bool   = false,

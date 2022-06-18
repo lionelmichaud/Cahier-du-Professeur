@@ -269,6 +269,8 @@ struct EleveDetail: View {
         }
     }
 
+    // MARK: - Methods
+
     func deleteObserv(index: Int) {
         EleveManager().retirer(observIndex : index,
                                deEleve     : &eleve,

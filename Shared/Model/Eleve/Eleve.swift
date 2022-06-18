@@ -57,6 +57,14 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
 
     // MARK: - Methods
 
+    func contains(observID: UUID) -> Bool {
+        self.observsID.contains(observID)
+    }
+
+    func contains(colleID: UUID) -> Bool {
+        self.collesID.contains(colleID)
+    }
+
     func isSameAs(_ eleve: Eleve) -> Bool {
         self.name.familyName == eleve.name.familyName &&
         self.name.givenName == eleve.name.givenName &&

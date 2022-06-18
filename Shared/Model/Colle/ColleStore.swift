@@ -53,12 +53,9 @@ extension ColleStore {
                     .sorted(by: <)
             },
             set: { items in
-                for colle in items {
-                    if let index = self.items.firstIndex(where: { $0.id == colle.id }) {
-                        self.items[index] = colle
-                    }
+                for item in items {
+                    self.update(with: item)
                 }
-                self.saveAsJSON()
             }
         )
     }

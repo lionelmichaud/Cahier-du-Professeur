@@ -55,6 +55,10 @@ struct School: Identifiable, Equatable, Codable {
 
     // MARK: - Methods
 
+    func contains(classeId: UUID) -> Bool {
+        self.classesID.contains(classeId)
+    }
+
     mutating func addClasse(withID classeID: UUID) {
         classesID.insert(classeID, at: 0)
     }

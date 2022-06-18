@@ -44,12 +44,9 @@ extension SchoolStore {
                     .sorted { $0.nom < $1.nom }
             },
             set: { items in
-                for school in items {
-                    if let index = self.items.firstIndex(where: { $0.id == school.id }) {
-                        self.items[index] = school
-                    }
+                for item in items {
+                    self.update(with: item)
                 }
-                self.saveAsJSON()
             }
         )
     }

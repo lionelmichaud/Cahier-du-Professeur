@@ -87,12 +87,9 @@ extension ClasseStore {
                     .sorted(by: <)
             },
             set: { items in
-                for classe in items {
-                    if let index = self.items.firstIndex(where: { $0.id == classe.id }) {
-                        self.items[index] = classe
-                    }
+                for item in items {
+                    self.update(with: item)
                 }
-                self.saveAsJSON()
             }
         )
     }

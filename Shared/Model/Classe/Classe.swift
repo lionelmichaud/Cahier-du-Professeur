@@ -81,6 +81,10 @@ struct Classe: Identifiable, Codable, Ordered {
 
     // MARK: - Methods
 
+    func contains(eleveId: UUID) -> Bool {
+        self.elevesID.contains(eleveId)
+    }
+
     func isSameAs(_ classe: Classe) -> Bool {
         self.niveau == classe.niveau &&
         self.numero == classe.numero &&

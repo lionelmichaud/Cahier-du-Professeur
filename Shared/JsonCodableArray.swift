@@ -185,10 +185,11 @@ E.ID == UUID {
         saveAsJSON()
     }
 
-    public func update(with item : E,
-                       at index  : Int) {
-        items[index] = item
-        saveAsJSON()
+    public func update(with item: E) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items[index] = item
+            saveAsJSON()
+        }
     }
 
     /// True si une classe existe déjà avec le même ID

@@ -132,6 +132,11 @@ struct SchoolBrowserView: View {
                             Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
                         }
 
+                        /// Reconstruire la BDD
+                        Button(role: .destructive, action: { repairDataBase() }) {
+                            Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
+                        }
+
                         /// Effacer toutes les données utilisateur
                         Button(role: .destructive, action: { isShowingDeleteConfirmDialog.toggle() }) {
                             Label("supprimer toutes vos données", systemImage: "trash")
@@ -208,6 +213,8 @@ struct SchoolBrowserView: View {
         .alert(item: $alertItem, content: newAlert)
     }
 
+    // MARK: - Methods
+
     /// Exporter tous les fichiers JSON utilisateur
     private func share(geometry: GeometryProxy) {
         shareFiles(fileNames: [".json"],
@@ -281,6 +288,23 @@ struct SchoolBrowserView: View {
 
                     fileUrl.stopAccessingSecurityScopedResource()
                 }
+        }
+    }
+
+    private func repairDataBase() {
+        let success = PersistenceManager.repairDataBase(schoolStore: schoolStore,
+                                                        classeStore: classeStore,
+                                                        eleveStore : eleveStore,
+                                                        colleStore : colleStore,
+                                                        observStore: observStore)
+        if !success {
+            self.alertItem = AlertItem(title: Text("Erreur"),
+                                       message: Text("La base de donnée n'a pas pu être complètement réparée !"),
+                                       dismissButton: .default(Text("OK")))
+        } else {
+            self.alertItem = AlertItem(title: Text(""),
+                                       message: Text("La base de donnée est réparée"),
+                                       dismissButton: .default(Text("OK")))
         }
     }
 }

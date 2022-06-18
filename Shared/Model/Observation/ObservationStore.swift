@@ -53,12 +53,9 @@ extension ObservationStore {
                     .sorted(by: <)
             },
             set: { items in
-                for observ in items {
-                    if let index = self.items.firstIndex(where: { $0.id == observ.id }) {
-                        self.items[index] = observ
-                    }
+                for item in items {
+                    self.update(with: item)
                 }
-                self.saveAsJSON()
             }
         )
     }

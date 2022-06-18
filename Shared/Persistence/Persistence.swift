@@ -26,6 +26,10 @@ public enum FileError: String, Error {
     case failedToCheckCompatibility        = "Impossible de vérifier la compatibilité avec la version de l'application"
 }
 
+public enum BddErrod: String, Error {
+    case failedToRepair = "Echec de réparation de la base de données"
+}
+
 // MARK: - Extension de Folder
 
 public extension Folder {
@@ -38,6 +42,8 @@ public extension Folder {
     }
 }
 
+// MARK: - Gestion de la persistence
+
 public struct PersistenceManager {
 
     // MARK: - Methods
@@ -49,8 +55,7 @@ public struct PersistenceManager {
         // vérifier l'existence du Folder Document
         guard let documentsFolder = Folder.documents else {
             let error = FileError.failedToResolveDocuments
-            customLog.log(level: .fault,
-                          "\(error.rawValue))")
+            customLog.log(level: .fault, "\(error.rawValue))")
             throw error
         }
 
@@ -71,20 +76,18 @@ public struct PersistenceManager {
         return urls
     }
 
-    /// Importer les fichiers template depuis le `Bundle Main` de l'Application
+    /// Importer les fichiers depuis le `Bundle Main` de l'Application
     /// vers le répertoire `Documents` même si'ils y sont déjà présents.
     public func forcedImportAllFilesFromApp(fileExt: String) throws {
         guard let originFolder = Folder.application else {
             let error = FileError.failedToResolveAppBundle
-            customLog.log(level: .fault,
-                          "\(error.rawValue))")
+            customLog.log(level: .fault, "\(error.rawValue))")
             throw error
         }
 
         guard let documentsFolder = Folder.documents else {
             let error = FileError.failedToResolveDocuments
-            customLog.log(level: .fault,
-                          "\(error.rawValue))")
+            customLog.log(level: .fault, "\(error.rawValue))")
             throw error
         }
 
@@ -95,8 +98,7 @@ public struct PersistenceManager {
                                   forceUpdate : true)
         } catch {
             let error = FileError.failedToImportTemplates
-            customLog.log(level: .fault,
-                          "\(error.rawValue))")
+            customLog.log(level: .fault, "\(error.rawValue))")
             throw error
         }
     }
@@ -143,6 +145,8 @@ public struct PersistenceManager {
         }
     }
 
+    // MARK: - Type Methods
+
     /// Vérifier la compatibilité de version entre l'App et le directory `targetFolder`
     /// - Note: Les versions sont compatibles si elles portent la même version majeure
     public static func checkCompatibilityWithAppVersion(of targetFolder: Folder) throws -> Bool {
@@ -182,5 +186,95 @@ public struct PersistenceManager {
                           "\(FileError.failedToCheckCompatibility.rawValue) de '\(AppVersion.fileName)'")
             throw FileError.failedToCheckCompatibility
         }
+    }
+
+    static func repairDataBase(schoolStore : SchoolStore,
+                               classeStore : ClasseStore,
+                               eleveStore  : EleveStore,
+                               colleStore  : ColleStore,
+                               observStore : ObservationStore) -> Bool {
+        var success = true
+
+        // consistency School <=> Classes
+        for classe in classeStore.items {
+            // Ecole d'appartenance
+            if let schoolId = classe.schoolId {
+                if var school = schoolStore.item(withID: schoolId) {
+                    if !school.contains(classeId: classe.id) {
+                        school.addClasse(withID: classe.id)
+                        schoolStore.update(with: school)
+                        print("rebuildDataBase: Ajout de la classe de \(classe.displayString) à l'école \(school.displayString) dans la BDD")
+                    }
+                } else {
+                    customLog.log(level: .fault, "rebuildDataBase: Classe sans école d'appartenance dans la BDD")
+                    success = false
+                }
+            } else {
+                customLog.log(level: .fault, "rebuildDataBase: Classe sans identifiant d'école dans la BDD")
+                success = false
+            }
+        }
+
+        // consistency Classe <=> Elèves
+        for eleve in eleveStore.items {
+            // Classe d'appartenance
+            if let classeId = eleve.classeId {
+                if var classe = classeStore.item(withID: classeId) {
+                    if !classe.contains(eleveId: eleve.id) {
+                        classe.addEleve(withID: eleve.id)
+                        classeStore.update(with: classe)
+                        print("rebuildDataBase: Ajout de l'élève de \(eleve.displayName) à la classe \(classe.displayString) dans la BDD")
+                    }
+                } else {
+                    customLog.log(level: .fault, "rebuildDataBase: Elève sans classe d'appartenance dans la BDD")
+                    success = false
+                }
+            } else {
+                customLog.log(level: .fault, "rebuildDataBase: Elève sans identifiant de classe dans la BDD")
+                success = false
+            }
+        }
+
+        // consistency Elève <=> Observations
+        for observ in observStore.items {
+            // Elève d'appartenance
+            if let eleveId = observ.eleveId {
+                if var eleve = eleveStore.item(withID: eleveId) {
+                    if !eleve.contains(observID: observ.id) {
+                        eleve.addObservation(withID: observ.id)
+                        eleveStore.update(with: eleve)
+                        print("rebuildDataBase: Ajout d'une observation à l'élève \(eleve.displayName) dans la BDD")
+                    }
+                } else {
+                    customLog.log(level: .fault, "rebuildDataBase: Observation sans élève d'appartenance dans la BDD")
+                    success = false
+                }
+            } else {
+                customLog.log(level: .fault, "rebuildDataBase: Observation sans identifiant d'élève associé dans la BDD")
+                success = false
+            }
+        }
+
+        // consistency Elève <=> Colles
+        for colle in colleStore.items {
+            // Elève d'appartenance
+            if let eleveId = colle.eleveId {
+                if var eleve = eleveStore.item(withID: eleveId) {
+                    if !eleve.contains(colleID: colle.id) {
+                        eleve.addColle(withID: colle.id)
+                        eleveStore.update(with: eleve)
+                        print("rebuildDataBase: Ajout d'une colle à l'élève \(eleve.displayName) dans la BDD")
+                    }
+                } else {
+                    customLog.log(level: .fault, "rebuildDataBase: Colle sans élève d'appartenance dans la BDD")
+                    success = false
+                }
+            } else {
+                customLog.log(level: .fault, "rebuildDataBase: Colle sans identifiant d'élève associé dans la BDD")
+                success = false
+            }
+        }
+
+        return success
     }
 }

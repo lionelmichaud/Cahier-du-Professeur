@@ -58,68 +58,71 @@ struct SchoolDetail: View {
 
     var classeList: some View {
         Section {
-            // ajouter une classe
-            Button {
-                isModified = true
-                newClasse = Classe(niveau: .n6ieme, numero: 1)
-                isAddingNewClasse = true
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une classe")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des classes
-            ForEach(classeStore.sortedClasses(dans: school)) { $classe in
-                NavigationLink {
-                    ClasseEditor(school : $school,
-                                 classe : $classe,
-                                 isNew  : false)
+            DisclosureGroup {
+                // ajouter une classe
+                Button {
+                    isModified = true
+                    newClasse = Classe(niveau: .n6ieme, numero: 1)
+                    isAddingNewClasse = true
                 } label: {
-                    SchoolClasseRow(classe: classe)
-                }
-                .swipeActions {
-                    // supprimer un élève
-                    Button(role: .destructive) {
-                        withAnimation {
-                            // supprimer l'élève et tous ses descendants
-                            // puis retirer l'élève de la classe auquelle il appartient
-                            SchoolManager().retirer(classe      : classe,
-                                                    deSchool    : &school,
-                                                    classeStore : classeStore,
-                                                    eleveStore  : eleveStore,
-                                                    observStore : observStore,
-                                                    colleStore  : colleStore)
-                        }
-                    } label: {
-                        Label("Supprimer", systemImage: "trash")
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter une classe")
                     }
-
-                    // flager un élève
-                    Button {
-                        withAnimation {
-                            classe.isFlagged.toggle()
-                        }
-                    } label: {
-                        if classe.isFlagged {
-                            Label("Sans drapeau", systemImage: "flag.slash")
-                        } else {
-                            Label("Avec drapeau", systemImage: "flag.fill")
-                        }
-                    }.tint(.orange)
                 }
+                .buttonStyle(.borderless)
+
+                // édition de la liste des classes
+                ForEach(classeStore.sortedClasses(dans: school)) { $classe in
+                    NavigationLink {
+                        ClasseEditor(school : $school,
+                                     classe : $classe,
+                                     isNew  : false)
+                    } label: {
+                        SchoolClasseRow(classe: classe)
+                    }
+                    .swipeActions {
+                        // supprimer un élève
+                        Button(role: .destructive) {
+                            withAnimation {
+                                // supprimer l'élève et tous ses descendants
+                                // puis retirer l'élève de la classe auquelle il appartient
+                                SchoolManager().retirer(classe      : classe,
+                                                        deSchool    : &school,
+                                                        classeStore : classeStore,
+                                                        eleveStore  : eleveStore,
+                                                        observStore : observStore,
+                                                        colleStore  : colleStore)
+                            }
+                        } label: {
+                            Label("Supprimer", systemImage: "trash")
+                        }
+
+                        // flager un élève
+                        Button {
+                            withAnimation {
+                                classe.isFlagged.toggle()
+                            }
+                        } label: {
+                            if classe.isFlagged {
+                                Label("Sans drapeau", systemImage: "flag.slash")
+                            } else {
+                                Label("Avec drapeau", systemImage: "flag.fill")
+                            }
+                        }.tint(.orange)
+                    }
+                }
+            } label: {
+                // titre
+                HStack {
+                    Text(school.classesLabel)
+                        .fontWeight(.bold)
+                    Spacer()
+                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
+                        .fontWeight(.bold)
+                }
+                .font(.title3)
             }
-        } header: {
-            // titre
-            HStack {
-                Text(school.classesLabel)
-                Spacer()
-                Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
-            }
-            .headerProminence(.increased)
-            //.font(.headline)
         }
     }
 

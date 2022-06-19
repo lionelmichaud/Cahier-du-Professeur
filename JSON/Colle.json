@@ -3,6 +3,54 @@
     {
       "motif" : {
         "nature" : {
+          "bavardage" : {
+
+          }
+        },
+        "descriptionMotif" : ""
+      },
+      "id" : "3B95F528-0578-4A40-BE23-BF886EDA8C0C",
+      "isConsignee" : false,
+      "isVerified" : false,
+      "date" : "2022-06-07T11:31:52Z",
+      "duree" : 1,
+      "eleveId" : "830BF7DF-9723-429C-955D-ED2144F677E4"
+    },
+    {
+      "motif" : {
+        "nature" : {
+          "bavardage" : {
+
+          }
+        },
+        "descriptionMotif" : ""
+      },
+      "id" : "273CE6F3-2D60-40E2-88F3-40B21919BBA5",
+      "isConsignee" : false,
+      "isVerified" : false,
+      "date" : "2022-06-07T11:31:28Z",
+      "duree" : 1,
+      "eleveId" : "8D1DFDB0-15C6-4899-A277-567AEA1138E2"
+    },
+    {
+      "motif" : {
+        "nature" : {
+          "bavardage" : {
+
+          }
+        },
+        "descriptionMotif" : ""
+      },
+      "id" : "25AAA8BE-D633-4852-8633-C6CFEFF7DC2F",
+      "isConsignee" : false,
+      "isVerified" : false,
+      "date" : "2022-06-07T11:11:35Z",
+      "duree" : 1,
+      "eleveId" : "9B603ACD-EACB-4F92-94AD-447B9A4E6363"
+    },
+    {
+      "motif" : {
+        "nature" : {
           "autre" : {
 
           }

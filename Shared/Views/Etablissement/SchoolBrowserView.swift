@@ -73,7 +73,7 @@ struct SchoolBrowserView: View {
                                     } label: {
                                         Label(school.niveau == .college ? "Lycée" : "Collège",
                                               systemImage: school.niveau == .college ?  "building.2" : "building")
-                                    }
+                                    }.tint(school.niveau == .college ? .mint : .orange)
                                 }
                             }
                         } header: {

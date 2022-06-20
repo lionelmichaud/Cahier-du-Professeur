@@ -49,7 +49,7 @@ struct SchoolBrowserView: View {
                                     SchoolBrowserRow(school: school)
                                 }
                                 .swipeActions {
-                                    // supprimer un établissement
+                                    // supprimer l'établissement
                                     Button(role: .destructive) {
                                         withAnimation {
                                             schoolStore.deleteSchool(school,
@@ -60,6 +60,19 @@ struct SchoolBrowserView: View {
                                         }
                                     } label: {
                                         Label("Supprimer", systemImage: "trash")
+                                    }
+                                    // modifier le type de l'établissement
+                                    Button {
+                                        withAnimation {
+                                            if school.niveau == .college {
+                                                school.niveau = .lycee
+                                            } else {
+                                                school.niveau = .college
+                                            }
+                                        }
+                                    } label: {
+                                        Label(school.niveau == .college ? "Lycée" : "Collège",
+                                              systemImage: school.niveau == .college ?  "building.2" : "building")
                                     }
                                 }
                             }

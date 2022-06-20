@@ -11,9 +11,8 @@ import HelpersView
 struct SchoolDetail: View {
     @Binding
     var school    : School
-    let isEditing : Bool
-    @Binding
-    var isModified: Bool
+    @State
+    var isModified: Bool = false
 
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
@@ -27,8 +26,6 @@ struct SchoolDetail: View {
     private var newClasse = Classe.exemple
     @State
     private var noteIsExpanded = false
-    @FocusState
-    private var isNameFocused: Bool
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
     @Environment(\.horizontalSizeClass)
@@ -43,16 +40,9 @@ struct SchoolDetail: View {
             Image(systemName: school.niveau == .lycee ? "building.2" : "building")
                 .imageScale(.large)
                 .foregroundColor(school.niveau == .lycee ? .mint : .orange)
-            if isEditing {
-                TextField("Nouvel établissement", text: $school.nom)
-                    .font(.title2)
-                    .textFieldStyle(.roundedBorder)
-                    .focused($isNameFocused)
-            } else {
-                Text(school.displayString)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-            }
+            TextField("Nouvel établissement", text: $school.nom)
+                .font(.title2)
+                .textFieldStyle(.roundedBorder)
         }
         .listRowSeparator(.hidden)
     }
@@ -62,7 +52,6 @@ struct SchoolDetail: View {
             DisclosureGroup {
                 // ajouter une classe
                 Button {
-                    isModified = true
                     newClasse = Classe(niveau: .n6ieme, numero: 1)
                     isAddingNewClasse = true
                 } label: {
@@ -132,8 +121,6 @@ struct SchoolDetail: View {
             DisclosureGroup {
                 // ajouter une évaluation
                 Button {
-                    isModified      = true
-                    //newExam         = Exam(elevesId: classe.elevesID)
                     isAddingNewRessource = true
                 } label: {
                     HStack {
@@ -146,12 +133,7 @@ struct SchoolDetail: View {
                 // édition de la liste des examen
                 ForEach($school.ressources) { $ressource in
                     NavigationLink {
-                        RessourceEditor(ressource: $ressource,
-                                        ressourceIsModified: $isModified)
-//                        ExamEditor(classe         : $classe,
-//                                   examIsModified : $examIsModified,
-//                                   exam           : $ressource,
-//                                   isNew          : false)
+                        RessourceEditor(ressource: $ressource)
                     } label: {
                         SchoolRessourceRow(ressource: ressource)
                     }
@@ -159,7 +141,6 @@ struct SchoolDetail: View {
                         // supprimer une évaluation
                         Button(role: .destructive) {
                             withAnimation {
-                                isModified = true
                                 school.ressources.removeAll {
                                     $0.id == ressource.id
                                 }
@@ -184,12 +165,10 @@ struct SchoolDetail: View {
             name
 
             // type d'établissement
-            if isEditing {
                 CasePicker(pickedCase: $school.niveau,
                            label: "Type d'établissement")
                 .pickerStyle(.segmented)
                 .listRowSeparator(.hidden)
-            }
 
                 // note sur la classe
                 if schoolAnnotation {
@@ -233,26 +212,20 @@ struct SchoolDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
-                         isEditing : false,
-                         isModified: .constant(false))
+            SchoolDetail(school: .constant(TestEnvir.schoolStore.items.first!))
             .previewDisplayName("Display")
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
-            SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
-                         isEditing : true,
-                         isModified: .constant(false))
+            SchoolDetail(school: .constant(TestEnvir.schoolStore.items.first!))
             .previewDisplayName("Edit")
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewInterfaceOrientation(.portraitUpsideDown)
-            SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
-                         isEditing : false,
-                         isModified: .constant(false))
+            SchoolDetail(school: .constant(TestEnvir.schoolStore.items.first!))
             .previewDisplayName("New")
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)

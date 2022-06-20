@@ -53,9 +53,7 @@ extension ObservationStore {
                     .sorted(by: <)
             },
             set: { items in
-                for item in items {
-                    self.update(with: item)
-                }
+                self.update(with: items)
             }
         )
     }

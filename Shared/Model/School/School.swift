@@ -52,7 +52,7 @@ struct School: Identifiable, Equatable, Codable {
         } else if nbOfRessources == 1 {
             return "1 Ressource"
         } else {
-            return "\(nbOfClasses) Ressources"
+            return "\(nbOfRessources) Ressources"
         }
     }
 

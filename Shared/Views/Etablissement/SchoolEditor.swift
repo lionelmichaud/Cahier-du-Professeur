@@ -6,212 +6,187 @@
 //
 
 import SwiftUI
-
-//struct SchoolEditorOld: View {
-//    @Binding var school: School
-//    var isNew = false
-//
-//    @EnvironmentObject var schoolStore : SchoolStore
-//    @EnvironmentObject var classeStore : ClasseStore
-//    @EnvironmentObject var eleveStore  : EleveStore
-//    @EnvironmentObject var colleStore  : ColleStore
-//    @EnvironmentObject var observStore : ObservationStore
-//    @Environment(\.dismiss) private var dismiss
-//
-//    // Keep a local copy in case we make edits, so we don't disrupt the list of events.
-//    // This is important for when the niveau changes and puts the établissement in a different section.
-//    @State private var itemCopy   = School()
-//    // true si le mode édition est engagé
-//    @State private var isEditing  = false
-//    // true les modifs faites en mode édition sont sauvegardées
-//    @State private var isSaved    = false
-//    // true si des modifiction sont faites hors du mode édition
-//    @State private var isModified = false
-//    // true si l'item va être détruit
-//    @State private var isDeleted = false
-//
-//    private var isItemDeleted: Bool {
-//        !schoolStore.isPresent(school) && !isNew
-//    }
-//
-//    var body: some View {
-//        VStack {
-//            SchoolDetail(school    : $itemCopy,
-//                         isEditing : isEditing,
-//                         isNew     : isNew,
-//                         isModified: $isModified)
-//            .toolbar {
-//                ToolbarItem(placement: .cancellationAction) {
-//                    if isNew {
-//                        Button("Annuler") {
-//                            dismiss()
-//                        }
-//                    }
-//                }
-//                ToolbarItem {
-//                    Button {
-//                        if isNew {
-//                            // Ajouter le nouvel établissement
-//                            withAnimation {
-//                                schoolStore.add(itemCopy)
-//                            }
-//                            dismiss()
-//                        } else {
-//                            // Appliquer les modifications faites à l'établissement
-//                            if isEditing && !isDeleted {
-//                                print("Done, saving any changes to \(school.displayString).")
-//                                withAnimation {
-//                                    school = itemCopy // Put edits (if any) back in the store.
-//                                }
-//                                isSaved = true
-//                            }
-//                            isEditing.toggle()
-//                        }
-//                    } label: {
-//                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
-//                    }
-//                }
-//            }
-//            .onAppear {
-//                itemCopy   = school
-//                isModified = false
-//                isSaved    = false
-//            }
-//            .onDisappear {
-//                if isModified && !isSaved {
-//                    // Appliquer les modifications faites à l'établissement hors du mode édition
-//                    school     = itemCopy
-//                    isModified = false
-//                    isSaved    = true
-//                }
-//            }
-//            .disabled(isItemDeleted)
-//        }
-//        .overlay(alignment: .center) {
-//            if isItemDeleted {
-//                Color(UIColor.systemBackground)
-//                Text("Etablissement supprimé. Sélectionner un établissement.")
-//                    .foregroundStyle(.secondary)
-//            }
-//        }
-//    }
-//
-//    // MARK: - Initializer
-//
-//    init(school: Binding<School>,
-//         isNew: Bool = false) {
-//        self.isNew = isNew
-//        self._school = school
-//        self._itemCopy = State(initialValue: school.wrappedValue)
-//    }
-//
-//    // MARK: - Methods
-//
-//    func saveChanges() {
-//
-//    }
-//}
+import HelpersView
 
 struct SchoolEditor: View {
-    @Binding var school: School
+    @Binding
+    var school    : School
+    @State
+    var isModified: Bool = false
 
-    @EnvironmentObject var schoolStore : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
     @EnvironmentObject var observStore : ObservationStore
-    @Environment(\.dismiss) private var dismiss
+    @State
+    private var isAddingNewClasse = false
+    @State
+    private var newClasse = Classe.exemple
+    @State
+    private var noteIsExpanded = false
+    @Preference(\.schoolAnnotationEnabled)
+    var schoolAnnotation
 
-    // Keep a local copy in case we make edits, so we don't disrupt the list of events.
-    // This is important for when the niveau changes and puts the établissement in a different section.
-    @State private var itemCopy   = School()
-    // true si le mode édition est engagé
-    @State private var isEditing  = false
-    // true les modifs faites en mode édition sont sauvegardées
-    @State private var isSaved    = false
-    // true si des modifiction sont faites hors du mode édition
-    @State private var isModified = false
-    // true si l'item va être détruit
-    @State private var isDeleted = false
+    var heures: Double {
+        SchoolManager().heures(dans: school, classeStore: classeStore)
+    }
 
-    private var isItemDeleted: Bool {
-        !schoolStore.isPresent(school)
+    var name: some View {
+        HStack {
+            Image(systemName: school.niveau == .lycee ? "building.2" : "building")
+                .imageScale(.large)
+                .foregroundColor(school.niveau == .lycee ? .mint : .orange)
+            TextField("Nouvel établissement", text: $school.nom)
+                .font(.title2)
+                .textFieldStyle(.roundedBorder)
+        }
+        .listRowSeparator(.hidden)
+    }
+
+    var classeList: some View {
+        Section {
+            DisclosureGroup {
+                // ajouter une classe
+                Button {
+                    newClasse = Classe(niveau: .n6ieme, numero: 1)
+                    isAddingNewClasse = true
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter une classe")
+                    }
+                }
+                .buttonStyle(.borderless)
+
+                // édition de la liste des classes
+                ForEach(classeStore.sortedClasses(dans: school)) { $classe in
+                    NavigationLink {
+                        ClasseEditor(school : $school,
+                                     classe : $classe,
+                                     isNew  : false)
+                    } label: {
+                        SchoolClasseRow(classe: classe)
+                    }
+                    .swipeActions {
+                        // supprimer un élève
+                        Button(role: .destructive) {
+                            withAnimation {
+                                // supprimer l'élève et tous ses descendants
+                                // puis retirer l'élève de la classe auquelle il appartient
+                                SchoolManager().retirer(classe      : classe,
+                                                        deSchool    : &school,
+                                                        classeStore : classeStore,
+                                                        eleveStore  : eleveStore,
+                                                        observStore : observStore,
+                                                        colleStore  : colleStore)
+                            }
+                        } label: {
+                            Label("Supprimer", systemImage: "trash")
+                        }
+
+                        // flager un élève
+                        Button {
+                            withAnimation {
+                                classe.isFlagged.toggle()
+                            }
+                        } label: {
+                            if classe.isFlagged {
+                                Label("Sans drapeau", systemImage: "flag.slash")
+                            } else {
+                                Label("Avec drapeau", systemImage: "flag.fill")
+                            }
+                        }.tint(.orange)
+                    }
+                }
+            } label: {
+                // titre
+                HStack {
+                    Text(school.classesLabel)
+                        .fontWeight(.bold)
+                    Spacer()
+                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
+                        .fontWeight(.bold)
+                }
+                .font(.title3)
+            }
+        }
+    }
+
+    private var ressourceList: some View {
+        Section {
+            DisclosureGroup {
+                // ajouter une évaluation
+                Button {
+                    school.ressources.append(Ressource())
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter une ressource")
+                    }
+                }
+                .buttonStyle(.borderless)
+
+                // édition de la liste des examen
+                ForEach($school.ressources) { $res in
+                    RessourceEditor(ressource: $res)
+                }
+                .onDelete { indexSet in
+                    school.ressources.remove(atOffsets: indexSet)
+                }
+                .onMove { fromOffsets, toOffset in
+                    school.ressources.move(fromOffsets: fromOffsets, toOffset: toOffset)
+                }
+
+            } label: {
+                Text(school.ressourcesLabel)
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
+        }
     }
 
     var body: some View {
-        VStack {
-            SchoolDetail(school    : $itemCopy,
-                         isEditing : isEditing,
-                         isModified: $isModified)
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        // Appliquer les modifications faites à l'établissement
-                        if isEditing && !isDeleted {
-                            print("Done, saving any changes to \(school.displayString).")
-                            withAnimation {
-                                school = itemCopy // Put edits (if any) back in the store.
-                            }
-                            isSaved = true
-                        }
-                        isEditing.toggle()
-                    } label: {
-                        Text(isEditing ? "Ok" : "Modifier")
-                    }
-                }
+        List {
+            // nom de l'établissement
+            name
+
+            // note sur la classe
+            if schoolAnnotation {
+                AnnotationView(isExpanded: $noteIsExpanded,
+                               isModified: $isModified,
+                               annotation: $school.annotation)
             }
-            .onAppear {
-                itemCopy   = school
-                isModified = false
-                isSaved    = false
-            }
-            .onDisappear {
-                if isModified && !isSaved {
-                    // Appliquer les modifications faites à l'établissement hors du mode édition
-                    school     = itemCopy
-                    isModified = false
-                    isSaved    = true
-                }
-            }
-            .disabled(isItemDeleted)
+            // édition de la liste des classes
+            classeList
+
+            // édition de la liste des ressources
+            ressourceList
         }
-        .overlay(alignment: .center) {
-            if isItemDeleted {
-                Color(UIColor.systemBackground)
-                Text("Etablissement supprimé. Sélectionner un établissement.")
-                    .foregroundStyle(.secondary)
+        #if os(iOS)
+        .navigationTitle("Etablissement")
+        #endif
+        .onAppear {
+            noteIsExpanded = school.annotation.isNotEmpty
+        }
+        // Modal: ajout d'une nouvelle classe
+        .sheet(isPresented: $isAddingNewClasse) {
+            NavigationView {
+                ClasseEditor(school : $school,
+                             classe : $newClasse,
+                             isNew  : true)
             }
         }
-    }
-
-    // MARK: - Initializer
-
-    init(school: Binding<School>,
-         isNew: Bool = false) {
-        self._school = school
-        self._itemCopy = State(initialValue: school.wrappedValue)
-    }
-
-    // MARK: - Methods
-
-    func saveChanges() {
-
     }
 }
 
 struct SchoolEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return NavigationView {
-            //EmptyView()
-            SchoolEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                         isNew  : false)
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            //.previewInterfaceOrientation(.landscapeRight)
-        }
+        return SchoolEditor(school : .constant(TestEnvir.schoolStore.items.first!))
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
     }
 }

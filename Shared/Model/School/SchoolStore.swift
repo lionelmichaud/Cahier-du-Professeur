@@ -44,9 +44,7 @@ extension SchoolStore {
                     .sorted { $0.nom < $1.nom }
             },
             set: { items in
-                for item in items {
-                    self.update(with: item)
-                }
+                self.update(with: items)
             }
         )
     }

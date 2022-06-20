@@ -265,6 +265,14 @@
 		79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12755283A9C31002F243E /* SettingsEleve.swift */; };
 		79C12758283AA9CB002F243E /* SettingsClasse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12757283AA9CB002F243E /* SettingsClasse.swift */; };
 		79C1275A283AB1C5002F243E /* SettingsSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12759283AB1C5002F243E /* SettingsSchool.swift */; };
+		79CC570E285F8975001D56F5 /* Ressource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC570D285F8975001D56F5 /* Ressource.swift */; };
+		79CC570F285F8975001D56F5 /* Ressource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC570D285F8975001D56F5 /* Ressource.swift */; };
+		79CC5712285F9105001D56F5 /* SchoolRessourceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC5711285F9105001D56F5 /* SchoolRessourceRow.swift */; };
+		79CC5713285F9105001D56F5 /* SchoolRessourceRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC5711285F9105001D56F5 /* SchoolRessourceRow.swift */; };
+		79CC5715285F9906001D56F5 /* RessourceEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC5714285F9906001D56F5 /* RessourceEditor.swift */; };
+		79CC5716285F9906001D56F5 /* RessourceEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC5714285F9906001D56F5 /* RessourceEditor.swift */; };
+		79CC57182860B7C4001D56F5 /* SchoolCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC57172860B7C4001D56F5 /* SchoolCreator.swift */; };
+		79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC57172860B7C4001D56F5 /* SchoolCreator.swift */; };
 		79D583F728204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583F828204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F928204A6A00371EB3 /* ObservSignIcon.swift */; };
@@ -573,6 +581,10 @@
 		79C12755283A9C31002F243E /* SettingsEleve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEleve.swift; sourceTree = "<group>"; };
 		79C12757283AA9CB002F243E /* SettingsClasse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsClasse.swift; sourceTree = "<group>"; };
 		79C12759283AB1C5002F243E /* SettingsSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSchool.swift; sourceTree = "<group>"; };
+		79CC570D285F8975001D56F5 /* Ressource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ressource.swift; sourceTree = "<group>"; };
+		79CC5711285F9105001D56F5 /* SchoolRessourceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolRessourceRow.swift; sourceTree = "<group>"; };
+		79CC5714285F9906001D56F5 /* RessourceEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RessourceEditor.swift; sourceTree = "<group>"; };
+		79CC57172860B7C4001D56F5 /* SchoolCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCreator.swift; sourceTree = "<group>"; };
 		79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservNotifIcon.swift; sourceTree = "<group>"; };
 		79D583F928204A6A00371EB3 /* ObservSignIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSignIcon.swift; sourceTree = "<group>"; };
 		79D583FC28204EBE00371EB3 /* ColleBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleBrowserView.swift; sourceTree = "<group>"; };
@@ -751,6 +763,7 @@
 				795FAB2A2809C813004CB120 /* SchoolBrowserRow.swift */,
 				795FAB2C2809C830004CB120 /* SchoolEditor.swift */,
 				795FAB2E2809E54C004CB120 /* SchoolDetail.swift */,
+				79CC57172860B7C4001D56F5 /* SchoolCreator.swift */,
 			);
 			path = Etablissement;
 			sourceTree = "<group>";
@@ -981,6 +994,23 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		79CC570C285F895F001D56F5 /* Ressource */ = {
+			isa = PBXGroup;
+			children = (
+				79CC570D285F8975001D56F5 /* Ressource.swift */,
+			);
+			path = Ressource;
+			sourceTree = "<group>";
+		};
+		79CC5710285F90E9001D56F5 /* Ressource */ = {
+			isa = PBXGroup;
+			children = (
+				79CC5711285F9105001D56F5 /* SchoolRessourceRow.swift */,
+				79CC5714285F9906001D56F5 /* RessourceEditor.swift */,
+			);
+			path = Ressource;
+			sourceTree = "<group>";
+		};
 		79F102D32823199E005E5D9C /* JSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -1069,6 +1099,7 @@
 			children = (
 				797FA2E7280ACFD7002524F3 /* Fakes.swift */,
 				79F3ABE1280830D000D068D9 /* School */,
+				79CC570C285F895F001D56F5 /* Ressource */,
 				79F3ABE2280830E000D068D9 /* Classe */,
 				7984335B283E979700C5E51E /* Trombinoscope */,
 				7992D0A7282B0A4200B31186 /* Exam */,
@@ -1086,6 +1117,7 @@
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
 				79C1274D283A91E8002F243E /* PreferencesViews */,
 				795FAB272809C4D0004CB120 /* Etablissement */,
+				79CC5710285F90E9001D56F5 /* Ressource */,
 				7918D1FC2810A5C400C24C5A /* Classe */,
 				7974C4C7282C7CBE00217CD5 /* Exam */,
 				7925C48D283D412100A6BF31 /* Mark */,
@@ -1247,7 +1279,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					79F3AB942808218300D068D9 = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -1505,6 +1537,7 @@
 				7918D1FA2810997700C24C5A /* ColorOptions.swift in Sources */,
 				79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */,
 				7974C4C9282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
+				79CC5715285F9906001D56F5 /* RessourceEditor.swift in Sources */,
 				79935D372824906B005C20BD /* Share.swift in Sources */,
 				791C26FB2814A43400686F0C /* ColleEditor.swift in Sources */,
 				79D584002820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
@@ -1558,11 +1591,14 @@
 				79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				791C26EC28146F8F00686F0C /* EleveColleRow.swift in Sources */,
 				79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */,
+				79CC5712285F9105001D56F5 /* SchoolRessourceRow.swift in Sources */,
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
+				79CC570E285F8975001D56F5 /* Ressource.swift in Sources */,
 				7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				7986E7DF282918320011FF21 /* Persistence.swift in Sources */,
+				79CC57182860B7C4001D56F5 /* SchoolCreator.swift in Sources */,
 				7925C48F283D413E00A6BF31 /* MarkView.swift in Sources */,
 				79D583FD28204EBE00371EB3 /* ColleBrowserView.swift in Sources */,
 				79F3ABF5280880CC00D068D9 /* ObservationManager.swift in Sources */,
@@ -1591,6 +1627,7 @@
 			files = (
 				79F3ABCE2808222C00D068D9 /* School.swift in Sources */,
 				79F3AC0E2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
+				79CC5716285F9906001D56F5 /* RessourceEditor.swift in Sources */,
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
@@ -1598,6 +1635,7 @@
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
+				79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */,
 				79F3ABEB28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				79502BA82818945200DA798F /* ObservBrowserRow.swift in Sources */,
 				79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */,
@@ -1617,7 +1655,9 @@
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */,
 				7992D0AB282B0AF200B31186 /* EleveMark.swift in Sources */,
+				79CC5713285F9105001D56F5 /* SchoolRessourceRow.swift in Sources */,
 				791C26F628148D2D00686F0C /* ObservEditor.swift in Sources */,
+				79CC570F285F8975001D56F5 /* Ressource.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
 				79FFDCD72825E950009D7452 /* importCSV.swift in Sources */,
@@ -1731,6 +1771,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1790,6 +1831,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1830,7 +1872,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaud.lionel.Cahier-du-Professeur";
 				PRODUCT_NAME = "Cahier du Professeur";
 				SDKROOT = iphoneos;
@@ -1862,7 +1904,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaud.lionel.Cahier-du-Professeur";
 				PRODUCT_NAME = "Cahier du Professeur";
 				SDKROOT = iphoneos;
@@ -1883,6 +1925,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8N9S268396;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1912,6 +1955,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8N9S268396;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1978,6 +2022,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8N9S268396;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
@@ -1997,6 +2042,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 8N9S268396;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;

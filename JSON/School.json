@@ -13,6 +13,13 @@
         "C132C97A-4EDF-4A25-A41A-02064BEA445D",
         "42E327EC-DA22-412A-97F7-784B1096D37E",
         "ED643D50-9EAA-4CC3-9F36-92C67DD55067"
+      ],
+      "ressources" : [
+          {
+              "id"        : "CAC1FD63-CE6E-4FA8-B795-027E7D17B0CB",
+              "name"      : "Kit robot",
+              "maxNumber" : 12
+          }
       ]
     }
   ]

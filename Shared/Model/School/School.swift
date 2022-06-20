@@ -26,18 +26,33 @@ struct School: Identifiable, Equatable, Codable {
     var nom        : String       = ""
     var annotation : String       = ""
     var classesID  : [UUID]       = []
+    var ressources : [Ressource]  = []
 
     var nbOfClasses: Int {
         classesID.count
     }
 
-   var classesLabel: String {
+    var nbOfRessources: Int {
+        ressources.count
+    }
+
+    var classesLabel: String {
         if nbOfClasses == 0 {
             return "Aucune Classe"
         } else if nbOfClasses == 1 {
             return "1 Classe"
         } else {
             return "\(nbOfClasses) Classes"
+        }
+    }
+
+    var ressourcesLabel: String {
+        if nbOfRessources == 0 {
+            return "Aucune Ressource"
+        } else if nbOfRessources == 1 {
+            return "1 Ressource"
+        } else {
+            return "\(nbOfClasses) Ressources"
         }
     }
 

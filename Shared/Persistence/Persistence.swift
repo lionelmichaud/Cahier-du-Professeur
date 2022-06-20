@@ -76,7 +76,8 @@ public struct PersistenceManager {
         return urls
     }
 
-    /// Importer les fichiers depuis le `Bundle Main` de l'Application
+    /// Importer les fichiers dont le nom contient `fileExt`
+    /// depuis le `Bundle Main` de l'Application
     /// vers le répertoire `Documents` même si'ils y sont déjà présents.
     public func forcedImportAllFilesFromApp(fileExt: String) throws {
         guard let originFolder = Folder.application else {

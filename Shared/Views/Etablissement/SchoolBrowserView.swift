@@ -21,8 +21,6 @@ struct SchoolBrowserView: View {
     @State
     private var isEditingPreferences = false
     @State
-    private var newEtab = School()
-    @State
     private var alertItem: AlertItem?
     @State
     private var isShowingImportConfirmDialog = false
@@ -93,7 +91,6 @@ struct SchoolBrowserView: View {
                 /// Ajouter un établissement
                 ToolbarItemGroup(placement: .status) {
                     Button {
-                        newEtab = School()
                         isAddingNewEtab = true
                     } label: {
                         HStack {
@@ -200,7 +197,9 @@ struct SchoolBrowserView: View {
 
             .sheet(isPresented: $isAddingNewEtab) {
                 NavigationView {
-                    SchoolEditor(school: $newEtab, isNew: true)
+                    SchoolCreator() { school in
+                        schoolStore.add(school)
+                    }
                 }
             }
         }

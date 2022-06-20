@@ -12,7 +12,6 @@ struct SchoolDetail: View {
     @Binding
     var school    : School
     let isEditing : Bool
-    let isNew     : Bool
     @Binding
     var isModified: Bool
 
@@ -22,6 +21,8 @@ struct SchoolDetail: View {
     @EnvironmentObject var observStore : ObservationStore
     @State
     private var isAddingNewClasse = false
+    @State
+    private var isAddingNewRessource = false
     @State
     private var newClasse = Classe.exemple
     @State
@@ -42,7 +43,7 @@ struct SchoolDetail: View {
             Image(systemName: school.niveau == .lycee ? "building.2" : "building")
                 .imageScale(.large)
                 .foregroundColor(school.niveau == .lycee ? .mint : .orange)
-            if isNew || isEditing {
+            if isEditing {
                 TextField("Nouvel établissement", text: $school.nom)
                     .font(.title2)
                     .textFieldStyle(.roundedBorder)
@@ -126,21 +127,70 @@ struct SchoolDetail: View {
         }
     }
 
+    private var ressourceList: some View {
+        Section {
+            DisclosureGroup {
+                // ajouter une évaluation
+                Button {
+                    isModified      = true
+                    //newExam         = Exam(elevesId: classe.elevesID)
+                    isAddingNewRessource = true
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter une ressource")
+                    }
+                }
+                .buttonStyle(.borderless)
+
+                // édition de la liste des examen
+                ForEach($school.ressources) { $ressource in
+                    NavigationLink {
+                        RessourceEditor(ressource: $ressource,
+                                        ressourceIsModified: $isModified)
+//                        ExamEditor(classe         : $classe,
+//                                   examIsModified : $examIsModified,
+//                                   exam           : $ressource,
+//                                   isNew          : false)
+                    } label: {
+                        SchoolRessourceRow(ressource: ressource)
+                    }
+                    .swipeActions {
+                        // supprimer une évaluation
+                        Button(role: .destructive) {
+                            withAnimation {
+                                isModified = true
+                                school.ressources.removeAll {
+                                    $0.id == ressource.id
+                                }
+                            }
+                        } label: {
+                            Label("Supprimer", systemImage: "trash")
+                        }
+                    }
+                }
+
+            } label: {
+                Text(school.ressourcesLabel)
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
+        }
+    }
+
     var body: some View {
         List {
             // nom de l'établissement
             name
 
             // type d'établissement
-            if isNew || isEditing {
+            if isEditing {
                 CasePicker(pickedCase: $school.niveau,
                            label: "Type d'établissement")
                 .pickerStyle(.segmented)
                 .listRowSeparator(.hidden)
             }
 
-            // classes dans l'établissement
-            if !isNew {
                 // note sur la classe
                 if schoolAnnotation {
                     AnnotationView(isExpanded: $noteIsExpanded,
@@ -149,20 +199,31 @@ struct SchoolDetail: View {
                 }
                 // édition de la liste des classes
                 classeList
-            }
+
+                // édition de la liste des ressources
+                ressourceList
         }
         #if os(iOS)
         .navigationTitle("Etablissement")
         #endif
         .onAppear {
-            isNameFocused = isNew
             noteIsExpanded = school.annotation.isNotEmpty
         }
+        // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {
                 ClasseEditor(school : $school,
                              classe : $newClasse,
                              isNew  : true)
+            }
+        }
+        // Modal: ajout d'une nouvelle ressource
+        .sheet(isPresented: $isAddingNewRessource) {
+            NavigationView {
+                Text("Créaion")
+//                ClasseEditor(school : $school,
+//                             classe : $newClasse,
+//                             isNew  : true)
             }
         }
     }
@@ -174,7 +235,6 @@ struct SchoolDetail_Previews: PreviewProvider {
         return Group {
             SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
                          isEditing : false,
-                         isNew     : false,
                          isModified: .constant(false))
             .previewDisplayName("Display")
             .environmentObject(TestEnvir.classeStore)
@@ -183,7 +243,6 @@ struct SchoolDetail_Previews: PreviewProvider {
             .environmentObject(TestEnvir.observStore)
             SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
                          isEditing : true,
-                         isNew     : false,
                          isModified: .constant(false))
             .previewDisplayName("Edit")
             .environmentObject(TestEnvir.classeStore)
@@ -193,7 +252,6 @@ struct SchoolDetail_Previews: PreviewProvider {
             .previewInterfaceOrientation(.portraitUpsideDown)
             SchoolDetail(school    : .constant(TestEnvir.schoolStore.items.first!),
                          isEditing : false,
-                         isNew     : true,
                          isModified: .constant(false))
             .previewDisplayName("New")
             .environmentObject(TestEnvir.classeStore)

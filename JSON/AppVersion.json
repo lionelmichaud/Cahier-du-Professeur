@@ -1,24 +1,29 @@
 {
-  "version" : {
-    "name" : "",
-    "version" : "3.0.0",
-    "date" : "2022-05-24T22:16:29Z"
-  },
-  "revisionHistory" : [
-    {
-      "version" : "3.0.0",
-      "date" : "2022-05-23T22:00:00Z",
-      "comment" : "Ajout d'un coefficient aux évaluations"
+    "version" : {
+        "name" : "",
+        "version" : "4.0.0",
+        "date" : "2022-06-19T22:00:00Z",
     },
-    {
-      "version" : "2.0.0",
-      "date" : "2022-05-21T22:00:00Z",
-      "comment" : "Ajout d'une note bonus à chaque élève"
-    },
-    {
-      "version" : "1.0.0",
-      "date" : "2022-05-09T22:00:00Z",
-      "comment" : "Première version"
-    }
-  ]
+    "revisionHistory" : [
+        {
+            "version" : "4.0.0",
+            "date" : "2022-06-19T22:00:00Z",
+            "comment" : "Ajout de ressources à un établissement"
+        },
+        {
+            "version" : "3.0.0",
+            "date" : "2022-05-23T22:00:00Z",
+            "comment" : "Ajout d'un coefficient aux évaluations"
+        },
+        {
+            "version" : "2.0.0",
+            "date" : "2022-05-21T22:00:00Z",
+            "comment" : "Ajout d'une note bonus à chaque élève"
+        },
+        {
+            "version" : "1.0.0",
+            "date" : "2022-05-09T22:00:00Z",
+            "comment" : "Première version"
+        }
+    ]
 }

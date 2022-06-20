@@ -67,7 +67,7 @@ struct ExamDetail: View {
                 HStack {
                     Text("Barême")
                     Spacer()
-                    Text("\(exam.maxMark)")
+                    Text("\(exam.maxMark) points")
                         .foregroundColor(.secondary)
                 }
             }

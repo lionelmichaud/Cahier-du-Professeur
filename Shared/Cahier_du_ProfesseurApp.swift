@@ -44,6 +44,7 @@ struct Cahier_du_ProfesseurApp: App {
             print("Compatibilité : \(documentsAreCompatibleWithAppVersion)")
             if !documentsAreCompatibleWithAppVersion {
                 do {
+                    print("Importation des fichiers du Bundle de l'Application")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
                 } catch {

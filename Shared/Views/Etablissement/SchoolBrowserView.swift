@@ -21,8 +21,6 @@ struct SchoolBrowserView: View {
     @State
     private var isEditingPreferences = false
     @State
-    private var newEtab = School()
-    @State
     private var alertItem: AlertItem?
     @State
     private var isShowingImportConfirmDialog = false
@@ -51,7 +49,7 @@ struct SchoolBrowserView: View {
                                     SchoolBrowserRow(school: school)
                                 }
                                 .swipeActions {
-                                    // supprimer un établissement
+                                    // supprimer l'établissement
                                     Button(role: .destructive) {
                                         withAnimation {
                                             schoolStore.deleteSchool(school,
@@ -63,6 +61,19 @@ struct SchoolBrowserView: View {
                                     } label: {
                                         Label("Supprimer", systemImage: "trash")
                                     }
+                                    // modifier le type de l'établissement
+                                    Button {
+                                        withAnimation {
+                                            if school.niveau == .college {
+                                                school.niveau = .lycee
+                                            } else {
+                                                school.niveau = .college
+                                            }
+                                        }
+                                    } label: {
+                                        Label(school.niveau == .college ? "Lycée" : "Collège",
+                                              systemImage: school.niveau == .college ?  "building.2" : "building")
+                                    }.tint(school.niveau == .college ? .mint : .orange)
                                 }
                             }
                         } header: {
@@ -93,7 +104,6 @@ struct SchoolBrowserView: View {
                 /// Ajouter un établissement
                 ToolbarItemGroup(placement: .status) {
                     Button {
-                        newEtab = School()
                         isAddingNewEtab = true
                     } label: {
                         HStack {
@@ -200,7 +210,9 @@ struct SchoolBrowserView: View {
 
             .sheet(isPresented: $isAddingNewEtab) {
                 NavigationView {
-                    SchoolEditor(school: $newEtab, isNew: true)
+                    SchoolCreator() { school in
+                        schoolStore.add(school)
+                    }
                 }
             }
         }

@@ -85,13 +85,11 @@ extension EleveStore {
                 //.sorted(by: <)
             },
             set: { items in
-                for item in items {
-                    self.update(with: item)
-                }
+                self.update(with: items)
             }
         )
     }
-
+    
     func filteredEleves
     (dans classe  : Classe,
      _ isIncluded : @escaping (Eleve) -> Bool = { _ in true}) -> [Eleve] {

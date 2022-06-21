@@ -14,7 +14,6 @@ struct ClasseEditor: View {
     var school: School
     @Binding
     var classe: Classe
-    var isNew = false
 
     @EnvironmentObject private var schoolStore : SchoolStore
     @EnvironmentObject private var classeStore : ClasseStore
@@ -41,14 +40,13 @@ struct ClasseEditor: View {
     @State private var importCsvFile = false
 
     private var isItemDeleted: Bool {
-        !classeStore.isPresent(classe) && !isNew
+        !classeStore.isPresent(classe)
     }
 
     var body: some View {
         VStack {
             ClasseDetail(classe         : $itemCopy,
                          isEditing      : isEditing,
-                         isNew          : isNew,
                          isModified     : $isModified,
                          examIsModified : $examIsModified)
             .onChange(of: examIsModified, perform: { hasBeenModified in
@@ -62,34 +60,23 @@ struct ClasseEditor: View {
                 }
             })
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    if isNew {
-                        Button("Annuler") {
-                            dismiss()
-                        }
-                    }
-                }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
-                        if isNew {
-                            addNewItem()
-                        } else {
-                            /// Appliquer les modifications faites à la classe
-                            if isEditing && !isDeleted {
-                                print("Done, saving any changes to \(classe.displayString).")
-                                withAnimation {
-                                    classe = itemCopy // Put edits (if any) back in the store.
-                                }
-                                isSaved = true
+                        /// Appliquer les modifications faites à la classe
+                        if isEditing && !isDeleted {
+                            print("Done, saving any changes to \(classe.displayString).")
+                            withAnimation {
+                                classe = itemCopy // Put edits (if any) back in the store.
                             }
-                            isEditing.toggle()
+                            isSaved = true
                         }
+                        isEditing.toggle()
                     } label: {
-                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                        Text(isEditing ? "Ok" : "Modifier")
                     }
 
                     /// Importation des données
-                    if !isNew && !isEditing {
+                    if !isEditing {
                         /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
                         Button {
                             isShowingImportListeDialog.toggle()
@@ -159,7 +146,6 @@ struct ClasseEditor: View {
     init(school: Binding<School>,
          classe: Binding<Classe>,
          isNew : Bool = false) {
-        self.isNew     = isNew
         self._school   = school
         self._classe   = classe
         self._itemCopy = State(initialValue : classe.wrappedValue)
@@ -167,23 +153,6 @@ struct ClasseEditor: View {
 
     // MARK: - Methods
     
-    private func addNewItem() {
-        /// Ajouter une nouvelle classe
-        if classeStore.exists(classe: itemCopy, in: school.id) {
-            self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                       message       : Text("Cette classe existe déjà dans cet établissement"),
-                                       dismissButton : .default(Text("OK")))
-        } else {
-            withAnimation {
-                SchoolManager()
-                    .ajouter(classe      : &itemCopy,
-                             aSchool     : &school,
-                             classeStore : classeStore)
-            }
-            dismiss()
-        }
-    }
-
     private func importCsvFiles(result: Result<[URL], Error>) {
         switch result {
             case .failure(let error):

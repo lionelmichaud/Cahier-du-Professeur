@@ -13,7 +13,6 @@ struct ClasseDetail: View {
     @Binding
     var classe    : Classe
     let isEditing : Bool
-    var isNew     : Bool
     @Binding
     var isModified: Bool
     @Binding
@@ -49,40 +48,26 @@ struct ClasseDetail: View {
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
 
-            if isNew {
-                // niveau de cette classe
-                CasePicker(pickedCase: $classe.niveau, label: "Niveau")
-                    .pickerStyle(.menu)
-                // numéro de cette classe
-                Picker("Numéro", selection: $classe.numero) {
-                    ForEach(1...8, id: \.self) { num in
-                        Text(String(num))
-                    }
+            Text(classe.displayString)
+                .font(.title2)
+                .fontWeight(.semibold)
+            Button {
+                classe.isFlagged.toggle()
+            } label: {
+                if classe.isFlagged {
+                    Image(systemName: "flag.fill")
+                        .foregroundColor(.orange)
+                } else {
+                    Image(systemName: "flag")
+                        .foregroundColor(.orange)
                 }
-                .pickerStyle(.menu)
-
-            } else {
-                Text(classe.displayString)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Button {
-                    classe.isFlagged.toggle()
-                } label: {
-                    if classe.isFlagged {
-                        Image(systemName: "flag.fill")
-                            .foregroundColor(.orange)
-                    } else {
-                        Image(systemName: "flag")
-                            .foregroundColor(.orange)
-                    }
-                }
-                .onChange(of: classe.isFlagged) {newValue in
-                    isModified = true
-                }
+            }
+            .onChange(of: classe.isFlagged) {newValue in
+                isModified = true
             }
 
             // nombre d'heures d'enseignement pour cette classe
-            if isNew || isEditing {
+            if isEditing {
                 Toggle(isOn: $classe.segpa) {
                     Text("SEGPA")
                         .font(.caption)
@@ -233,31 +218,28 @@ struct ClasseDetail: View {
             name
 
             // élèves dans la classe
-            if !isNew {
-                // appréciation sur la classe
-                if classeAppreciationEnabled {
-                    AppreciationView(isExpanded  : $appreciationIsExpanded,
-                                     isModified  : $isModified,
-                                     appreciation: $classe.appreciation)
-                }
-                // annotation sur la classe
-                if classeAnnotationEnabled {
-                    AnnotationView(isExpanded: $noteIsExpanded,
-                                   isModified: $isModified,
-                                   annotation: $classe.annotation)
-                }
-                // édition de la liste des élèves
-                eleveList
-                // édition de la liste des examens
-                examList
+            // appréciation sur la classe
+            if classeAppreciationEnabled {
+                AppreciationView(isExpanded  : $appreciationIsExpanded,
+                                 isModified  : $isModified,
+                                 appreciation: $classe.appreciation)
             }
+            // annotation sur la classe
+            if classeAnnotationEnabled {
+                AnnotationView(isExpanded: $noteIsExpanded,
+                               isModified: $isModified,
+                               annotation: $classe.annotation)
+            }
+            // édition de la liste des élèves
+            eleveList
+            // édition de la liste des examens
+            examList
         }
         #if os(iOS)
         .navigationTitle("Classe")
         #endif
         .onAppear {
             //examIsModified = false
-            isHoursFocused = isNew
             appreciationIsExpanded = classe.appreciation.isNotEmpty
             noteIsExpanded = classe.annotation.isNotEmpty
         }
@@ -285,7 +267,6 @@ struct ClassDetail_Previews: PreviewProvider {
         return Group {
             ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!),
                          isEditing      : false,
-                         isNew          : true,
                          isModified     : .constant(false),
                          examIsModified : .constant(false))
             .environmentObject(TestEnvir.schoolStore)
@@ -297,7 +278,6 @@ struct ClassDetail_Previews: PreviewProvider {
 
             ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!),
                          isEditing      : false,
-                         isNew          : false,
                          isModified     : .constant(false),
                          examIsModified : .constant(false))
             .previewDevice("iPhone Xs")

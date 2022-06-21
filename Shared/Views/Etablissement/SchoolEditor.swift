@@ -24,6 +24,8 @@ struct SchoolEditor: View {
     private var newClasse = Classe.exemple
     @State
     private var noteIsExpanded = false
+    @State
+    private var alertItem : AlertItem?
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
 
@@ -48,7 +50,6 @@ struct SchoolEditor: View {
             DisclosureGroup {
                 // ajouter une classe
                 Button {
-                    newClasse = Classe(niveau: .n6ieme, numero: 1)
                     isAddingNewClasse = true
                 } label: {
                     HStack {
@@ -173,9 +174,22 @@ struct SchoolEditor: View {
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {
-                ClasseEditor(school : $school,
-                             classe : $newClasse,
-                             isNew  : true)
+                ClassCreator() { classe in
+                    /// Ajouter une nouvelle classe
+                    if classeStore.exists(classe: classe, in: school.id) {
+                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                   message       : Text("Cette classe existe déjà dans cet établissement"),
+                                                   dismissButton : .default(Text("OK")))
+                    } else {
+                        var _classe = classe
+                        withAnimation {
+                            SchoolManager()
+                                .ajouter(classe      : &_classe,
+                                         aSchool     : &school,
+                                         classeStore : classeStore)
+                        }
+                    }
+                }
             }
         }
     }

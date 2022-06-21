@@ -117,7 +117,9 @@ struct SchoolEditor: View {
             DisclosureGroup {
                 // ajouter une évaluation
                 Button {
-                    school.ressources.append(Ressource())
+                    withAnimation {
+                        school.ressources.insert(Ressource(), at: 0)
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "plus.circle.fill")

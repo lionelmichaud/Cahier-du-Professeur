@@ -3,9 +3,9 @@
     {
       "niveau" : "n4ieme",
       "numero" : 1,
-      "segpa"  : false,
       "heures" : 1.5,
       "id" : "6919DFA1-4AAB-49AA-9EFC-60E260ACD84A",
+      "segpa" : false,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
@@ -38,14 +38,15 @@
         "83E7C101-32FC-43E1-9DB2-CC81FB637679"
       ],
       "exams" : [
+
       ]
     },
     {
       "niveau" : "n5ieme",
       "numero" : 5,
       "heures" : 1.5,
-      "segpa"  : true,
       "id" : "42E327EC-DA22-412A-97F7-784B1096D37E",
+      "segpa" : true,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
@@ -72,20 +73,23 @@
         "A7FE3B3F-CCB6-4B43-B1FC-BAD5BECAE673"
       ],
       "exams" : [
+
       ]
     },
     {
       "niveau" : "n6ieme",
       "numero" : 5,
-      "segpa"  : true,
       "heures" : 1.5,
       "id" : "ED643D50-9EAA-4CC3-9F36-92C67DD55067",
+      "segpa" : true,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
       "annotation" : "",
       "elevesID" : [
         "8E4C0D65-4C45-41A4-8E2C-47B025340C98",
+        "B10458C2-933D-4A58-AFCB-6B7DBDBFFBD6",
+        "515CF90E-1DE4-4605-863E-210A23400192",
         "F287B5BB-5EE4-4EC9-81EE-8CADBFBDF780",
         "4C2D3B8B-D0B6-4067-B7A4-84F887461CE6",
         "2014C99D-5D40-4725-8E40-70114903A6F7",
@@ -100,14 +104,143 @@
         "2C62D0DE-9CD0-40C0-BD84-D5817DB289C3"
       ],
       "exams" : [
+        {
+          "marks" : [
+            {
+              "eleveId" : "8E4C0D65-4C45-41A4-8E2C-47B025340C98",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "B10458C2-933D-4A58-AFCB-6B7DBDBFFBD6",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "515CF90E-1DE4-4605-863E-210A23400192",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "F287B5BB-5EE4-4EC9-81EE-8CADBFBDF780",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "4C2D3B8B-D0B6-4067-B7A4-84F887461CE6",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "2014C99D-5D40-4725-8E40-70114903A6F7",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "F38D8DFE-6512-4468-A7D3-F285A706CF4A",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "5BC0751D-07AF-4B09-8059-572136AA1EA4",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "A3891D17-0B82-4F0C-B24D-401683BBCE70",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "BB6ECE3E-FC35-47CD-B6D4-4FEF36C09F64",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "FDDF7400-27B3-4C86-853B-C8F5B540643E",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "BE87B4B4-C477-43F0-986F-A749D64B4856",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "9809CAD9-0983-41CC-9F6C-90F8EEECF44A",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "BC1B3AA2-37BC-4FF7-BFBE-386B975C2E46",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            },
+            {
+              "eleveId" : "2C62D0DE-9CD0-40C0-BD84-D5817DB289C3",
+              "type" : {
+                "nonRendu" : {
+
+                }
+              }
+            }
+          ],
+          "id" : "F29689CA-0315-4BBE-B93D-57876DBCF1FF",
+          "sujet" : "Test 1",
+          "coef" : 1,
+          "maxMark" : 20,
+          "date" : "2022-06-18T14:51:05Z"
+        }
       ]
     },
     {
       "niveau" : "n4ieme",
       "numero" : 7,
-      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445D",
+      "segpa" : false,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
@@ -141,14 +274,15 @@
         "C3CEF27D-93A3-46D8-B4A6-B32556A5F231"
       ],
       "exams" : [
+
       ]
     },
     {
       "niveau" : "n4ieme",
       "numero" : 5,
-      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445C",
+      "segpa" : false,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
@@ -181,14 +315,15 @@
         "10FE39A7-29EA-44B2-B0E8-5BDE9023F483"
       ],
       "exams" : [
+
       ]
     },
     {
       "niveau" : "n4ieme",
       "numero" : 3,
-      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445B",
+      "segpa" : false,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
@@ -222,14 +357,15 @@
         "3E5A2324-78B9-41FC-8E89-0B0DE13E2EEE"
       ],
       "exams" : [
+
       ]
     },
     {
       "niveau" : "n4ieme",
       "numero" : 2,
-      "segpa"  : false,
       "heures" : 1.5,
       "id" : "C132C97A-4EDF-4A25-A41A-02064BEA445A",
+      "segpa" : false,
       "isFlagged" : false,
       "schoolId" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
       "appreciation" : "",
@@ -263,6 +399,7 @@
         "60A3FC11-A75D-4605-927D-8C6B7CF5496D"
       ],
       "exams" : [
+
       ]
     }
   ]

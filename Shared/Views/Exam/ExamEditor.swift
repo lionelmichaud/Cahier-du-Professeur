@@ -10,14 +10,11 @@ import SwiftUI
 struct ExamEditor: View {
     @Binding
     var classe : Classe
-    @Binding
-    var examIsModified : Bool
+    
     @Binding
     var exam   : Exam
-    var isNew  : Bool
 
     @EnvironmentObject private var eleveStore  : EleveStore
-    @Environment(\.dismiss) private var dismiss
 
     // Keep a local copy in case we make edits, so we don't disrupt the list of events.
     // This is important for when the niveau changes and puts the établissement in a different section.
@@ -38,29 +35,17 @@ struct ExamEditor: View {
 
     /// True si l'évaluation n'est pas dans le store ET si on est pas en train d'ajouter une nouvelle évaluation
     private var isItemDeleted: Bool {
-        !classe.exams.contains(where: { $0.id == exam.id }) && !isNew
+        !classe.exams.contains(where: { $0.id == exam.id })
     }
 
     var body: some View {
         VStack {
             ExamDetail(exam       : $itemCopy,
                        isEditing  : isEditing,
-                       isNew      : isNew,
                        isModified : $isModified)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    if isNew {
-                        Button("Annuler") {
-                            dismiss()
-                        }
-                    }
-                }
                 ToolbarItemGroup(placement: .automatic) {
                     Button {
-                        if isNew {
-                            // Ajouter une nouvelle évaluation à la classe
-                            addNewItem()
-                        } else {
                             // Appliquer les modifications faites à l'évaluation
                             if isEditing && !isDeleted {
                                 withAnimation {
@@ -68,18 +53,13 @@ struct ExamEditor: View {
                                 }
                                 print("Done, saving any changes to \(exam.sujet).")
                                 isSaved        = true
-                                examIsModified = true
                             }
                             isEditing.toggle()
-                        }
                     } label: {
-                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                        Text(isEditing ? "Ok" : "Modifier")
                     }
                 }
             }
-            .onChange(of: examIsModified, perform: { newvalue in
-                print("examIsModified modifié dans ExamEditor: \(newvalue)")
-            })
             .onAppear {
                 itemCopy   = exam
                 isModified = false
@@ -88,7 +68,6 @@ struct ExamEditor: View {
             .onDisappear {
                 if isModified && !isSaved {
                     // Appliquer les modifications faites à la classe hors du mode édition
-                    examIsModified = true
                     exam           = itemCopy
                     isModified     = false
                     isSaved        = true
@@ -108,13 +87,9 @@ struct ExamEditor: View {
     // MARK: - Initializer
 
     init(classe         : Binding<Classe>,
-         examIsModified : Binding<Bool>,
-         exam           : Binding<Exam>,
-         isNew          : Bool = false) {
+         exam           : Binding<Exam>) {
         self._classe         = classe
-        self._examIsModified = examIsModified
         self._exam           = exam
-        self.isNew           = isNew
         self._itemCopy       = State(initialValue : exam.wrappedValue)
     }
 
@@ -125,10 +100,7 @@ struct ExamEditor: View {
         withAnimation {
             classe.exams.insert(itemCopy, at: 0)
         }
-        examIsModified = true
-        dismiss()
     }
-
 }
 
 struct ExamEditor_Previews: PreviewProvider {
@@ -136,18 +108,14 @@ struct ExamEditor_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return Group {
             ExamEditor(classe         : .constant(TestEnvir.classeStore.items.first!),
-                       examIsModified : .constant(false),
-                       exam           : .constant(Exam()),
-                       isNew          : true)
+                       exam           : .constant(Exam()))
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
             ExamEditor(classe         : .constant(TestEnvir.classeStore.items.first!),
-                       examIsModified : .constant(false),
-                       exam           : .constant(Exam()),
-                       isNew          : true)
+                       exam           : .constant(Exam()))
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)

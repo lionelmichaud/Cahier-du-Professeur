@@ -12,7 +12,6 @@ struct ExamDetail: View {
     @Binding
     var exam      : Exam
     let isEditing : Bool
-    var isNew     : Bool
     @Binding
     var isModified: Bool
 
@@ -30,7 +29,7 @@ struct ExamDetail: View {
                 .sfSymbolStyling()
                 .foregroundColor(.accentColor)
 
-            if isNew || isEditing {
+            if isEditing {
                 // sujet
                 TextField("Sujet de l'évaluation", text: $exam.sujet)
                     .font(.title2)
@@ -48,7 +47,7 @@ struct ExamDetail: View {
 
     @ViewBuilder
     private var date: some View {
-        if isNew || isEditing {
+        if isEditing {
             DatePicker("Date", selection: $exam.date)
                 .labelsHidden()
                 .listRowSeparator(.hidden)
@@ -60,7 +59,7 @@ struct ExamDetail: View {
 
     @ViewBuilder
     private var bareme: some View {
-        if isNew || isEditing {
+        if isEditing {
             Stepper(value : $exam.maxMark,
                     in    : 1 ... 20,
                     step  : 1) {
@@ -79,7 +78,7 @@ struct ExamDetail: View {
 
     @ViewBuilder
     private var coefficient: some View {
-        if isNew || isEditing {
+        if isEditing {
             Stepper(value : $exam.coef,
                     in    : 0.0 ... 5.0,
                     step  : 0.25) {
@@ -128,9 +127,7 @@ struct ExamDetail: View {
             }
 
             // notes
-            if !isNew {
-                markList
-            }
+            markList
         }
         .searchable(text      : $searchString,
                     placement : .navigationBarDrawer(displayMode : .automatic),
@@ -140,7 +137,7 @@ struct ExamDetail: View {
         .navigationTitle("Évaluation")
         #endif
         .onAppear {
-            isSujetFocused = isNew
+            isSujetFocused = true
         }
     }
 
@@ -180,9 +177,8 @@ struct ExamDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ExamDetail(exam      : .constant(Exam()),
+            ExamDetail(exam      : .constant(Exam(sujet: "Sujet")),
                        isEditing : false,
-                       isNew     : true,
                        isModified: .constant(false))
                 .previewDisplayName("Display")
                 .environmentObject(TestEnvir.classeStore)
@@ -193,7 +189,6 @@ struct ExamDetail_Previews: PreviewProvider {
 
             ExamDetail(exam      : .constant(Exam()),
                        isEditing : false,
-                       isNew     : false,
                        isModified: .constant(false))
             .previewDevice("iPhone Xs")
             .environmentObject(TestEnvir.classeStore)

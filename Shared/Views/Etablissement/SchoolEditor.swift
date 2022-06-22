@@ -14,6 +14,7 @@ struct SchoolEditor: View {
     @State
     var isModified: Bool = false
 
+    @EnvironmentObject var schoolStore : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -21,13 +22,17 @@ struct SchoolEditor: View {
     @State
     private var isAddingNewClasse = false
     @State
-    private var newClasse = Classe.exemple
-    @State
     private var noteIsExpanded = false
     @State
     private var alertItem : AlertItem?
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
+    // si l'item va être détruit
+    @State private var isDeleted = false
+
+    private var isItemDeleted: Bool {
+        !schoolStore.isPresent(school)
+    }
 
     var heures: Double {
         SchoolManager().heures(dans: school, classeStore: classeStore)
@@ -63,8 +68,7 @@ struct SchoolEditor: View {
                 ForEach(classeStore.sortedClasses(dans: school)) { $classe in
                     NavigationLink {
                         ClasseEditor(school : $school,
-                                     classe : $classe,
-                                     isNew  : false)
+                                     classe : $classe)
                     } label: {
                         SchoolClasseRow(classe: classe)
                     }
@@ -171,6 +175,7 @@ struct SchoolEditor: View {
         .onAppear {
             noteIsExpanded = school.annotation.isNotEmpty
         }
+        .disabled(isItemDeleted)
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {
@@ -190,6 +195,13 @@ struct SchoolEditor: View {
                         }
                     }
                 }
+            }
+        }
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Etablissement supprimé. Sélectionner un établissement.")
+                    .foregroundStyle(.secondary)
             }
         }
     }

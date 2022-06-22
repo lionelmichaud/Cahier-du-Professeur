@@ -12,11 +12,8 @@ import HelpersView
 struct ClasseDetail: View {
     @Binding
     var classe    : Classe
-    let isEditing : Bool
-    @Binding
-    var isModified: Bool
-    @Binding
-    var examIsModified: Bool
+    @State
+    var isModified: Bool = false
 
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -39,18 +36,17 @@ struct ClasseDetail: View {
     var classeAppreciationEnabled
     @Preference(\.classeAnnotationEnabled)
     var classeAnnotationEnabled
-    @Environment(\.horizontalSizeClass)
-    var hClass
 
     private var name: some View {
         HStack {
             Image(systemName: "person.3.fill")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
-
             Text(classe.displayString)
                 .font(.title2)
                 .fontWeight(.semibold)
+
+            // Flag de la classe
             Button {
                 classe.isFlagged.toggle()
             } label: {
@@ -62,33 +58,23 @@ struct ClasseDetail: View {
                         .foregroundColor(.orange)
                 }
             }
-            .onChange(of: classe.isFlagged) {newValue in
-                isModified = true
+
+            // Nombre d'heures d'enseignement pour cette classe
+            Toggle(isOn: $classe.segpa) {
+                Text("SEGPA")
+                    .font(.caption)
             }
+            .toggleStyle(.button)
 
-            // nombre d'heures d'enseignement pour cette classe
-            if isEditing {
-                Toggle(isOn: $classe.segpa) {
-                    Text("SEGPA")
-                        .font(.caption)
-                }
-                .toggleStyle(.button)
+            Spacer()
 
-                Spacer()
-
-                AmountEditView(label: "Heures",
-                               amount: $classe.heures,
-                               validity: .poz,
-                               currency: false)
-                .focused($isHoursFocused)
-                .frame(maxWidth: 150)
-            } else {
-                Spacer()
-
-                Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) h")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-            }
+            // Nombre d'heure d'enseignement
+            AmountEditView(label: "Heures",
+                           amount: $classe.heures,
+                           validity: .poz,
+                           currency: false)
+            .focused($isHoursFocused)
+            .frame(maxWidth: 150)
         }
         .listRowSeparator(.hidden)
     }
@@ -98,7 +84,6 @@ struct ClasseDetail: View {
             DisclosureGroup {
                 // ajouter un élève
                 Button {
-                    isModified = true
                     newEleve = Eleve(sexe   : .male,
                                      nom    : "",
                                      prenom : "")
@@ -164,7 +149,6 @@ struct ClasseDetail: View {
             DisclosureGroup {
                 // ajouter une évaluation
                 Button {
-                    isModified      = true
                     newExam         = Exam(elevesId: classe.elevesID)
                     isAddingNewExam = true
                 } label: {
@@ -178,14 +162,8 @@ struct ClasseDetail: View {
                 // édition de la liste des examen
                 ForEach($classe.exams) { $exam in
                     NavigationLink {
-                        ExamEditor(classe         : $classe,
-                                   examIsModified : $examIsModified,
-                                   exam           : $exam,
-                                   isNew          : false)
-//                        .onChange(of: examIsModified, perform: { newvalue in
-//                            print("examIsModified modifié dans ClasseDetail: \(newvalue)")
-//                            print(exam)
-//                        })
+                        ExamEditor(classe : $classe,
+                                   exam   : $exam)
                     } label: {
                         ClasseExamRow(exam: exam)
                     }
@@ -230,8 +208,10 @@ struct ClasseDetail: View {
                                isModified: $isModified,
                                annotation: $classe.annotation)
             }
+
             // édition de la liste des élèves
             eleveList
+
             // édition de la liste des examens
             examList
         }
@@ -239,9 +219,8 @@ struct ClasseDetail: View {
         .navigationTitle("Classe")
         #endif
         .onAppear {
-            //examIsModified = false
             appreciationIsExpanded = classe.appreciation.isNotEmpty
-            noteIsExpanded = classe.annotation.isNotEmpty
+            noteIsExpanded         = classe.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewEleve) {
             NavigationView {
@@ -252,10 +231,12 @@ struct ClasseDetail: View {
         }
         .sheet(isPresented: $isAddingNewExam) {
             NavigationView {
-                ExamEditor(classe         : $classe,
-                           examIsModified : $examIsModified,
-                           exam           : $newExam,
-                           isNew          : true)
+                ExamCreator(elevesId: classe.elevesID) { newExam in
+                    /// Ajouter une nouvelle évaluation
+                    withAnimation {
+                        classe.exams.insert(newExam, at: 0)
+                    }
+                }
             }
         }
     }
@@ -265,28 +246,13 @@ struct ClassDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!),
-                         isEditing      : false,
-                         isModified     : .constant(false),
-                         examIsModified : .constant(false))
+            ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!))
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewDisplayName("NewClasse")
-
-            ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!),
-                         isEditing      : false,
-                         isModified     : .constant(false),
-                         examIsModified : .constant(false))
-            .previewDevice("iPhone Xs")
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDisplayName("DisplayClasse")
         }
     }
 }

@@ -48,8 +48,7 @@ struct ClasseBrowserSchoolSubview : View {
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             NavigationLink {
                 ClasseEditor(school : .constant(school),
-                             classe : $classe,
-                             isNew  : false)
+                             classe : $classe)
             } label: {
                 ClassBrowserRow(classe: classe)
             }

@@ -68,6 +68,9 @@ struct ClassCreator: View {
         #if os(iOS)
         .navigationTitle("Nouvelle Classe")
         #endif
+        .onAppear {
+            isHoursFocused = true
+        }
     }
 }
 

@@ -12,6 +12,7 @@ import HelpersView
 struct ClasseEditor: View {
     @Binding
     var school: School
+
     @Binding
     var classe: Classe
 
@@ -20,107 +21,55 @@ struct ClasseEditor: View {
     @EnvironmentObject private var eleveStore  : EleveStore
     @EnvironmentObject private var colleStore  : ColleStore
     @EnvironmentObject private var observStore : ObservationStore
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.horizontalSizeClass) private var hClass
 
-    // Keep a local copy in case we make edits, so we don't disrupt the list of events.
-    // This is important for when the niveau changes and puts the établissement in a different section.
-    @State private var itemCopy   = Classe(niveau: .n6ieme, numero: 1)
-    // true si le mode édition est engagé
-    @State private var isEditing  = false
-    // true les modifs faites en mode édition sont sauvegardées
-    @State private var isSaved    = false
-    // true si des modifictions sont faites hors du mode édition
-    @State private var isModified = false
-    @State private var examIsModified = false
     // true si l'item va être détruit
-    @State private var isDeleted = false
-    @State private var alertItem : AlertItem?
-    @State private var isShowingImportListeDialog = false
-    @State private var importCsvFile = false
+    @State
+    private var isDeleted = false
+    @State
+    private var alertItem : AlertItem?
+    @State
+    private var isShowingImportListeDialog = false
+    @State
+    private var importCsvFile = false
 
     private var isItemDeleted: Bool {
         !classeStore.isPresent(classe)
     }
 
     var body: some View {
-        VStack {
-            ClasseDetail(classe         : $itemCopy,
-                         isEditing      : isEditing,
-                         isModified     : $isModified,
-                         examIsModified : $examIsModified)
-            .onChange(of: examIsModified, perform: { hasBeenModified in
-                //                print("examIsModified modifié dans ClasseEditor: \(hasBeenModified)")
-                if hasBeenModified && !isSaved {
-                    // Appliquer les modifications faites à la classe hors du mode édition
-                    // avant que .onAppear ne reset la valeur de isModified à False
-                    classe         = itemCopy
-                    examIsModified = false
-                    isSaved        = true
-                }
-            })
+        ClasseDetail(classe: $classe)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button {
-                        /// Appliquer les modifications faites à la classe
-                        if isEditing && !isDeleted {
-                            print("Done, saving any changes to \(classe.displayString).")
-                            withAnimation {
-                                classe = itemCopy // Put edits (if any) back in the store.
-                            }
-                            isSaved = true
-                        }
-                        isEditing.toggle()
-                    } label: {
-                        Text(isEditing ? "Ok" : "Modifier")
-                    }
-
                     /// Importation des données
-                    if !isEditing {
-                        /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
-                        Button {
-                            isShowingImportListeDialog.toggle()
-                        } label: {
-                            Image(systemName: "square.and.arrow.down")
-                                .imageScale(.large)
-                        }
-                        /// Confirmation de l'importation d'une liste d'élèves d'une classe
-                        .confirmationDialog("Importer une liste d'élèves",
-                                            isPresented     : $isShowingImportListeDialog,
-                                            titleVisibility : .visible) {
-                            Button("Importer et ajouter") {
-                                withAnimation() {
-                                    importCsvFile = true
-                                }
-                            }
-                            Button("Importer et remplacer", role: .destructive) {
-                                withAnimation() {
-                                    ClasseManager().retirerTousLesEleves(deClasse    : &classe,
-                                                                         eleveStore  : eleveStore,
-                                                                         observStore : observStore,
-                                                                         colleStore  : colleStore)
-                                }
+                    /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
+                    Button {
+                        isShowingImportListeDialog.toggle()
+                    } label: {
+                        Image(systemName: "square.and.arrow.down")
+                            .imageScale(.large)
+                    }
+                    /// Confirmation de l'importation d'une liste d'élèves d'une classe
+                    .confirmationDialog("Importer une liste d'élèves",
+                                        isPresented     : $isShowingImportListeDialog,
+                                        titleVisibility : .visible) {
+                        Button("Importer et ajouter") {
+                            withAnimation() {
                                 importCsvFile = true
                             }
-                        } message: {
-                            Text("La liste des élèves importée doit être au format CSV de PRONOTE.") +
-                            Text(" Cette action ne peut pas être annulée.")
                         }
+                        Button("Importer et remplacer", role: .destructive) {
+                            withAnimation() {
+                                ClasseManager().retirerTousLesEleves(deClasse    : &classe,
+                                                                     eleveStore  : eleveStore,
+                                                                     observStore : observStore,
+                                                                     colleStore  : colleStore)
+                            }
+                            importCsvFile = true
+                        }
+                    } message: {
+                        Text("La liste des élèves importée doit être au format CSV de PRONOTE.") +
+                        Text(" Cette action ne peut pas être annulée.")
                     }
-                }
-            }
-            .onAppear {
-                itemCopy   = classe
-                isModified = false
-                isSaved    = false
-            }
-            .onDisappear {
-                if (isModified || examIsModified) && !isSaved {
-                    // Appliquer les modifications faites à la classe hors du mode édition
-                    classe         = itemCopy
-                    isModified     = false
-                    examIsModified = false
-                    isSaved        = true
                 }
             }
             .disabled(isItemDeleted)
@@ -130,25 +79,14 @@ struct ClasseEditor: View {
                           allowsMultipleSelection : false) { result in
                 importCsvFiles(result: result)
             }
-        }
-        .overlay(alignment: .center) {
-            if isItemDeleted {
-                Color(UIColor.systemBackground)
-                Text("Classe supprimée. Sélectionner une classe.")
-                    .foregroundStyle(.secondary)
-            }
-        }
-        .alert(item: $alertItem, content: newAlert)
-    }
-
-    // MARK: - Initializer
-
-    init(school: Binding<School>,
-         classe: Binding<Classe>,
-         isNew : Bool = false) {
-        self._school   = school
-        self._classe   = classe
-        self._itemCopy = State(initialValue : classe.wrappedValue)
+                          .overlay(alignment: .center) {
+                              if isItemDeleted {
+                                  Color(UIColor.systemBackground)
+                                  Text("Classe supprimée. Sélectionner une classe.")
+                                      .foregroundStyle(.secondary)
+                              }
+                          }
+                          .alert(item: $alertItem, content: newAlert)
     }
 
     // MARK: - Methods
@@ -197,8 +135,7 @@ struct ClasseEditor_Previews: PreviewProvider {
             NavigationView {
                 EmptyView()
                 ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                             classe : .constant(TestEnvir.classeStore.items.first!),
-                             isNew  : true)
+                             classe : .constant(TestEnvir.classeStore.items.first!))
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
@@ -208,19 +145,7 @@ struct ClasseEditor_Previews: PreviewProvider {
 
             NavigationView {
                 ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                             classe : .constant(TestEnvir.classeStore.items.first!),
-                             isNew  : true)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-            }
-            .previewDevice("iPhone Xs")
-
-            NavigationView {
-                ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
-                             classe : .constant(TestEnvir.classeStore.items.first!),
-                             isNew  : false)
+                             classe : .constant(TestEnvir.classeStore.items.first!))
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)

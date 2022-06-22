@@ -14,6 +14,7 @@ struct SchoolEditor: View {
     @State
     var isModified: Bool = false
 
+    @EnvironmentObject var schoolStore : SchoolStore
     @EnvironmentObject var classeStore : ClasseStore
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
@@ -21,11 +22,17 @@ struct SchoolEditor: View {
     @State
     private var isAddingNewClasse = false
     @State
-    private var newClasse = Classe.exemple
-    @State
     private var noteIsExpanded = false
+    @State
+    private var alertItem : AlertItem?
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
+    // si l'item va être détruit
+    @State private var isDeleted = false
+
+    private var isItemDeleted: Bool {
+        !schoolStore.isPresent(school)
+    }
 
     var heures: Double {
         SchoolManager().heures(dans: school, classeStore: classeStore)
@@ -48,7 +55,6 @@ struct SchoolEditor: View {
             DisclosureGroup {
                 // ajouter une classe
                 Button {
-                    newClasse = Classe(niveau: .n6ieme, numero: 1)
                     isAddingNewClasse = true
                 } label: {
                     HStack {
@@ -59,45 +65,7 @@ struct SchoolEditor: View {
                 .buttonStyle(.borderless)
 
                 // édition de la liste des classes
-                ForEach(classeStore.sortedClasses(dans: school)) { $classe in
-                    NavigationLink {
-                        ClasseEditor(school : $school,
-                                     classe : $classe,
-                                     isNew  : false)
-                    } label: {
-                        SchoolClasseRow(classe: classe)
-                    }
-                    .swipeActions {
-                        // supprimer un élève
-                        Button(role: .destructive) {
-                            withAnimation {
-                                // supprimer l'élève et tous ses descendants
-                                // puis retirer l'élève de la classe auquelle il appartient
-                                SchoolManager().retirer(classe      : classe,
-                                                        deSchool    : &school,
-                                                        classeStore : classeStore,
-                                                        eleveStore  : eleveStore,
-                                                        observStore : observStore,
-                                                        colleStore  : colleStore)
-                            }
-                        } label: {
-                            Label("Supprimer", systemImage: "trash")
-                        }
-
-                        // flager un élève
-                        Button {
-                            withAnimation {
-                                classe.isFlagged.toggle()
-                            }
-                        } label: {
-                            if classe.isFlagged {
-                                Label("Sans drapeau", systemImage: "flag.slash")
-                            } else {
-                                Label("Avec drapeau", systemImage: "flag.fill")
-                            }
-                        }.tint(.orange)
-                    }
-                }
+                ClasseBrowserSchoolSubview(school: $school)
             } label: {
                 // titre
                 HStack {
@@ -170,12 +138,33 @@ struct SchoolEditor: View {
         .onAppear {
             noteIsExpanded = school.annotation.isNotEmpty
         }
+        .disabled(isItemDeleted)
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {
-                ClasseEditor(school : $school,
-                             classe : $newClasse,
-                             isNew  : true)
+                ClassCreator() { classe in
+                    /// Ajouter une nouvelle classe
+                    if classeStore.exists(classe: classe, in: school.id) {
+                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                   message       : Text("Cette classe existe déjà dans cet établissement"),
+                                                   dismissButton : .default(Text("OK")))
+                    } else {
+                        var _classe = classe
+                        withAnimation {
+                            SchoolManager()
+                                .ajouter(classe      : &_classe,
+                                         aSchool     : &school,
+                                         classeStore : classeStore)
+                        }
+                    }
+                }
+            }
+        }
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Etablissement supprimé. Sélectionner un établissement.")
+                    .foregroundStyle(.secondary)
             }
         }
     }

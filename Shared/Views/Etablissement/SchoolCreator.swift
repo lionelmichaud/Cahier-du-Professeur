@@ -50,11 +50,17 @@ struct SchoolCreator: View {
                 }
             }
         }
+        #if os(iOS)
+        .navigationTitle("Nouvel Etablissement")
+        #endif
     }
 }
 
 struct SchoolCreator_Previews: PreviewProvider {
     static var previews: some View {
-        SchoolCreator() { _ in }
+        NavigationView {
+            EmptyView()
+            SchoolCreator() { _ in }
+        }
     }
 }

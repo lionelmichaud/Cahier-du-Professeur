@@ -8,10 +8,13 @@
 import Foundation
 import AppFoundation
 
-struct EleveMark: Codable, Hashable {
+struct EleveMark: Codable, Hashable, Identifiable {
     var eleveId : UUID
     var type    : MarkEnum = .nonRendu
     var mark    : Double?
+    var id      : UUID {
+        eleveId
+    }
 }
 
 enum MarkEnum: Codable {

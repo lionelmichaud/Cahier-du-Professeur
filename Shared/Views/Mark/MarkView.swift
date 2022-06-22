@@ -55,17 +55,37 @@ struct MarkView: View {
                                     mark = ((mark ?? 0.0) - 0.5).clamp(low: 0.0, high: Double(maxMark))
                                 })
                             .frame(maxWidth: 100)
-                            CasePicker(pickedCase: $type,
-                                       label: "")
-                            .pickerStyle(.menu)
-                            .frame(maxWidth: 120)
+                            if #available(iOS 16.0, macOS 13.0, *) {
+                                CasePicker(pickedCase: $type,
+                                           label: "")
+                                .pickerStyle(.menu)
+                                .frame(maxWidth: 120)
+                            } else {
+                                HStack {
+                                    Spacer()
+                                    CasePicker(pickedCase: $type,
+                                               label: "")
+                                    .pickerStyle(.menu)
+                                }
+                                .frame(maxWidth: 120)
+                            }
                         }
                     }
 
                 default:
-                    CasePicker(pickedCase: $type,
-                               label: eleveName)
-                    .pickerStyle(.menu)
+                    if #available(iOS 16.0, macOS 13.0, *) {
+                        CasePicker(pickedCase: $type,
+                                   label: eleveName)
+                        .pickerStyle(.menu)
+                    } else {
+                        HStack {
+                            Text(eleveName)
+                            Spacer()
+                            CasePicker(pickedCase: $type,
+                                       label: eleveName)
+                            .pickerStyle(.menu)
+                        }
+                    }
             }
         }
     }

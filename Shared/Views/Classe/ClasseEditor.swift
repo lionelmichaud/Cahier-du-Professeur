@@ -10,7 +10,7 @@ import Files
 import HelpersView
 
 struct ClasseEditor: View {
-    @Binding
+    //@Binding
     var school: School
 
     @Binding
@@ -22,9 +22,6 @@ struct ClasseEditor: View {
     @EnvironmentObject private var colleStore  : ColleStore
     @EnvironmentObject private var observStore : ObservationStore
 
-    // true si l'item va être détruit
-    @State
-    private var isDeleted = false
     @State
     private var alertItem : AlertItem?
     @State
@@ -73,20 +70,20 @@ struct ClasseEditor: View {
                 }
             }
             .disabled(isItemDeleted)
+            .overlay(alignment: .center) {
+                if isItemDeleted {
+                    Color(UIColor.systemBackground)
+                    Text("Classe supprimée. Sélectionner une classe.")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .alert(item: $alertItem, content: newAlert)
             /// Importer un fichier CSV au format PRONOTE
             .fileImporter(isPresented             : $importCsvFile,
                           allowedContentTypes     : [.commaSeparatedText],
                           allowsMultipleSelection : false) { result in
                 importCsvFiles(result: result)
             }
-                          .overlay(alignment: .center) {
-                              if isItemDeleted {
-                                  Color(UIColor.systemBackground)
-                                  Text("Classe supprimée. Sélectionner une classe.")
-                                      .foregroundStyle(.secondary)
-                              }
-                          }
-                          .alert(item: $alertItem, content: newAlert)
     }
 
     // MARK: - Methods
@@ -134,7 +131,7 @@ struct ClasseEditor_Previews: PreviewProvider {
         return Group {
             NavigationView {
                 EmptyView()
-                ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
+                ClasseEditor(school : TestEnvir.schoolStore.items.first!,
                              classe : .constant(TestEnvir.classeStore.items.first!))
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
@@ -144,7 +141,7 @@ struct ClasseEditor_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
 
             NavigationView {
-                ClasseEditor(school : .constant(TestEnvir.schoolStore.items.first!),
+                ClasseEditor(school : TestEnvir.schoolStore.items.first!,
                              classe : .constant(TestEnvir.classeStore.items.first!))
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)

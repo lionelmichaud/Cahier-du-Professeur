@@ -11,13 +11,13 @@ import HelpersView
 
 struct ClasseDetail: View {
     @Binding
-    var classe    : Classe
-    @State
-    var isModified: Bool = false
+    var classe: Classe
 
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
     @EnvironmentObject var observStore : ObservationStore
+    @State
+    var isModified: Bool = false
     @State
     private var isAddingNewEleve = false
     @State
@@ -25,13 +25,9 @@ struct ClasseDetail: View {
     @State
     private var isAddingNewExam = false
     @State
-    private var newExam = Exam()
-    @State
     private var appreciationIsExpanded = false
     @State
     private var noteIsExpanded = false
-    @FocusState
-    private var isHoursFocused: Bool
     @Preference(\.classeAppreciationEnabled)
     var classeAppreciationEnabled
     @Preference(\.classeAnnotationEnabled)
@@ -73,7 +69,6 @@ struct ClasseDetail: View {
                            amount: $classe.heures,
                            validity: .poz,
                            currency: false)
-            .focused($isHoursFocused)
             .frame(maxWidth: 150)
         }
         .listRowSeparator(.hidden)
@@ -149,7 +144,6 @@ struct ClasseDetail: View {
             DisclosureGroup {
                 // ajouter une évaluation
                 Button {
-                    newExam         = Exam(elevesId: classe.elevesID)
                     isAddingNewExam = true
                 } label: {
                     HStack {
@@ -171,7 +165,6 @@ struct ClasseDetail: View {
                         // supprimer une évaluation
                         Button(role: .destructive) {
                             withAnimation {
-                                isModified = true
                                 classe.exams.removeAll {
                                     $0.id == exam.id
                                 }

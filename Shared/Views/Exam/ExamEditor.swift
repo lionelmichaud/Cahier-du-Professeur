@@ -10,71 +10,97 @@ import SwiftUI
 struct ExamEditor: View {
     @Binding
     var classe : Classe
-    
+
     @Binding
     var exam   : Exam
 
-    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var eleveStore: EleveStore
+    @State
+    private var searchString: String = ""
+    @Environment(\.isSearching) var isSearching
 
-    // Keep a local copy in case we make edits, so we don't disrupt the list of events.
-    // This is important for when the niveau changes and puts the établissement in a different section.
-    @State
-    private var itemCopy   = Exam()
-    // true si le mode édition est engagé
-    @State
-    private var isEditing  = false
-    // true les modifs faites en mode édition sont sauvegardées
-    @State
-    private var isSaved    = false
-    // true si des modifiction sont faites hors du mode édition
-    @State
-    private var isModified = false
-    // true si l'item va être détruit
-    @State
-    private var isDeleted  = false
+    private var name: some View {
+        HStack {
+            Image(systemName: "doc.plaintext")
+                .sfSymbolStyling()
+                .foregroundColor(.accentColor)
 
-    /// True si l'évaluation n'est pas dans le store ET si on est pas en train d'ajouter une nouvelle évaluation
+            // sujet
+            TextField("Sujet de l'évaluation", text: $exam.sujet)
+                .font(.title2)
+                .textFieldStyle(.roundedBorder)
+        }
+        .listRowSeparator(.hidden)
+    }
+
+    private var markList: some View {
+        Section {
+            ForEach(filtredMarks(), id: \.self) { $eleveMark in
+                if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                    MarkView(eleveName : eleve.displayName,
+                             maxMark   : exam.maxMark,
+                             type      : $eleveMark.type,
+                             mark      : $eleveMark.mark)
+                }
+            }
+        } header: {
+            Text("Notes")
+        }
+        .headerProminence(.increased)
+    }
+
     private var isItemDeleted: Bool {
         !classe.exams.contains(where: { $0.id == exam.id })
     }
 
     var body: some View {
-        VStack {
-            ExamDetail(exam       : $itemCopy,
-                       isEditing  : isEditing,
-                       isModified : $isModified)
-            .toolbar {
-                ToolbarItemGroup(placement: .automatic) {
-                    Button {
-                            // Appliquer les modifications faites à l'évaluation
-                            if isEditing && !isDeleted {
-                                withAnimation {
-                                    exam = itemCopy // Put edits (if any) back in the store.
-                                }
-                                print("Done, saving any changes to \(exam.sujet).")
-                                isSaved        = true
-                            }
-                            isEditing.toggle()
-                    } label: {
-                        Text(isEditing ? "Ok" : "Modifier")
+        List {
+            if !isSearching {
+                // nom
+                name
+
+                // date
+                DatePicker("Date", selection: $exam.date)
+                    .labelsHidden()
+                    .listRowSeparator(.hidden)
+                    .environment(\.locale, Locale.init(identifier: "fr_FR"))
+
+                // barême
+                Stepper(value : $exam.maxMark,
+                        in    : 1 ... 20,
+                        step  : 1) {
+                    HStack {
+                        Text("Barême")
+                        Spacer()
+                        Text("\(exam.maxMark) points")
+                            .foregroundColor(.secondary)
+                    }
+                }
+
+                // coefficient
+                Stepper(value : $exam.coef,
+                        in    : 0.0 ... 5.0,
+                        step  : 0.25) {
+                    HStack {
+                        Text("Coefficient")
+                        Spacer()
+                        Text("\(exam.coef.formatted(.number.precision(.fractionLength(2))))")
+                            .foregroundColor(.secondary)
                     }
                 }
             }
-            .onAppear {
-                itemCopy   = exam
-                isModified = false
-                isSaved    = false
-            }
-            .onDisappear {
-                if isModified && !isSaved {
-                    // Appliquer les modifications faites à la classe hors du mode édition
-                    exam           = itemCopy
-                    isModified     = false
-                    isSaved        = true
-                }
-            }
-            .disabled(isItemDeleted)
+
+            // notes
+            markList
         }
+        .searchable(text      : $searchString,
+                    placement : .navigationBarDrawer(displayMode : .automatic),
+                    prompt    : "Nom ou Prénom de l'élève")
+        .disableAutocorrection(true)
+        #if os(iOS)
+        .navigationTitle("Évaluation")
+        #endif
+        .disabled(isItemDeleted)
         .overlay(alignment: .center) {
             if isItemDeleted {
                 Color(UIColor.systemBackground)
@@ -84,22 +110,35 @@ struct ExamEditor: View {
         }
     }
 
-    // MARK: - Initializer
-
-    init(classe         : Binding<Classe>,
-         exam           : Binding<Exam>) {
-        self._classe         = classe
-        self._exam           = exam
-        self._itemCopy       = State(initialValue : exam.wrappedValue)
-    }
-
     // MARK: - Methods
 
-    private func addNewItem() {
-        /// Ajouter une nouvelle évaluation
-        withAnimation {
-            classe.exams.insert(itemCopy, at: 0)
-        }
+    private func filtredMarks() -> Binding<[EleveMark]> {
+
+        Binding<[EleveMark]>(
+            get: {
+                self.exam.marks
+                    .filter { eleveMark in
+                        if searchString.isNotEmpty {
+                            let string = searchString.lowercased()
+                            if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                                return eleve.name.familyName!.lowercased().contains(string) ||
+                                eleve.name.givenName!.lowercased().contains(string)
+                            } else {
+                                return false
+                            }
+                        } else {
+                            return true
+                        }
+                    }
+            },
+            set: { items in
+                for eleveMark in items {
+                    if let index = self.exam.marks.firstIndex(where: { $0.eleveId == eleveMark.eleveId }) {
+                        self.exam.marks[index] = eleveMark
+                    }
+                }
+            }
+        )
     }
 }
 

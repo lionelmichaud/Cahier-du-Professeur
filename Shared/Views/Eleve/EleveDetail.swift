@@ -38,8 +38,6 @@ struct EleveDetail: View {
     private var bonusIsExpanded = false
     @State
     private var showTrombine = false
-    @FocusState
-    private var isPrenomFocused: Bool
     @Preference(\.eleveAppreciationEnabled)
     var eleveAppreciationEnabled
     @Preference(\.eleveAnnotationEnabled)
@@ -66,7 +64,6 @@ struct EleveDetail: View {
                     TextField("Prénom", text: $eleve.name.givenName.bound)
                         .textFieldStyle(.roundedBorder)
                         .disableAutocorrection(true)
-                        .focused($isPrenomFocused)
                     TextField("Nom", text: $eleve.name.familyName.bound)
                         .textFieldStyle(.roundedBorder)
                         .disableAutocorrection(true)
@@ -244,7 +241,6 @@ struct EleveDetail: View {
         //.navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
-            isPrenomFocused        = isNew
             appreciationIsExpanded = eleve.appreciation.isNotEmpty
             noteIsExpanded         = eleve.annotation.isNotEmpty
             bonusIsExpanded        = (eleve.bonus != 0)

@@ -35,7 +35,7 @@ struct ExamEditor: View {
 
     private var markList: some View {
         Section {
-            ForEach(filtredMarks(), id: \.self) { $eleveMark in
+            ForEach(filtredMarks()) { $eleveMark in
                 if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
                     MarkView(eleveName : eleve.displayName,
                              maxMark   : exam.maxMark,

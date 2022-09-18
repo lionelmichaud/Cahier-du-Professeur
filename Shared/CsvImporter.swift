@@ -13,7 +13,7 @@ enum CsvImporterError: Error {
 }
 
 struct CsvImporter {
-    func importEleves(from data: Data) throws -> [Eleve] {
+    func importElevesFromPRONOTE(from data: Data) throws -> [Eleve] {
         let nameColumn = ColumnID("Élève", String.self)
         let sexeColumn = ColumnID("Sexe", String.self)
 
@@ -51,6 +51,46 @@ struct CsvImporter {
             .compactMap { row in
                 if let nom = row["Élève", String.self]?.split(separator: " ") {
                     return Eleve(sexe     : row["Sexe", String.self] == "male" ? .male   : .female,
+                                 nom      : String(nom[0]),
+                                 prenom   : String(nom.last!)
+                    )
+                } else {
+                    return nil
+                }
+            }
+    }
+
+    func importElevesFromEcoleDirecte(from data: Data) throws -> [Eleve] {
+        let nameColumn = ColumnID("Nom", String.self)
+        let sexeColumn = ColumnID("Sexe", String.self)
+
+        let columnNames = [nameColumn.name, sexeColumn.name]
+
+        let options = CSVReadingOptions(hasHeaderRow      : true,
+                                        nilEncodings      : ["", "nil"],
+                                        ignoresEmptyLines : true,
+                                        delimiter         : ";")
+
+        var dataFrame = try DataFrame(csvData : data,
+                                      columns : columnNames,
+                                      types   : [nameColumn.name : .string,
+                                                 sexeColumn.name : .string],
+                                      options : options)
+
+        let resolvedColumnsNames = Set(dataFrame.columns.map(\.name))
+        guard resolvedColumnsNames.intersection(columnNames) == resolvedColumnsNames else {
+            throw CsvImporterError.incompatibleColumnNames
+        }
+
+        dataFrame.transformColumn("Sexe") { data in
+            data == "G" ? "male" : "female"
+        }
+
+        return dataFrame
+            .rows
+            .compactMap { row in
+                if let nom = row["Nom", String.self]?.split(separator: " ") {
+                    return Eleve(sexe     : row["Sexe", String.self] == "male" ? .male : .female,
                                  nom      : String(nom[0]),
                                  prenom   : String(nom.last!)
                     )

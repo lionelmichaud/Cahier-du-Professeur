@@ -15,9 +15,13 @@ struct SettingsClasse: View {
 
     var body: some View {
         List {
-            Section("Champs") {
+            Section {
                 Toggle("Appréciation", isOn: $classeAppreciation)
                 Toggle("Annotation", isOn: $classeAnnotation)
+            } header: {
+                Text("Champs")
+            } footer: {
+                Text("Inclure des champs de saisie pour chaque classe")
             }
         }
         #if os(iOS)

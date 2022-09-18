@@ -57,6 +57,15 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
 
     // MARK: - Methods
 
+    func displayName(_ order: NameDisplayOrder = .prenomNom) -> String {
+        switch order {
+            case .prenomNom:
+                return "\(name.givenName ?? "") \(name.familyName ?? "")"
+            case .nomPrenom:
+                return "\(name.familyName ?? "") \(name.givenName ?? "")"
+        }
+    }
+
     func contains(observID: UUID) -> Bool {
         self.observsID.contains(observID)
     }

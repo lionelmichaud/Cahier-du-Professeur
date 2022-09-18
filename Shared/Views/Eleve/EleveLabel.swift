@@ -14,13 +14,16 @@ struct EleveLabel: View {
     var imageSize  : Image.Scale = .large
     var flagSize   : Image.Scale = .medium
 
+    @Preference(\.nameDisplayOrder)
+    var nameDisplayOrder
+
     var body: some View {
         HStack {
             Image(systemName: "person.fill")
                 .imageScale(imageSize)
                 .symbolRenderingMode(.monochrome)
                 .foregroundColor(eleve.sexe.color)
-            Text(eleve.displayName)
+            Text(eleve.displayName(nameDisplayOrder))
                 .fontWeight(fontWeight)
             if eleve.isFlagged {
                 Image(systemName: "flag.fill")

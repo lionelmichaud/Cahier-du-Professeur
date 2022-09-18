@@ -1,25 +1,33 @@
 {
   "items" : [
     {
-      "id" : "903C81D9-8A9E-4A72-ACD5-05A0C17F2AFB",
-      "niveau" : "college",
-      "annotation" : "661\nNicolas Bessou & Daniel Baup\nMardi: Salle 212\nMercredi & Vendredi: Salle 210\nPhotocopie: 8938",
-      "nom" : "Galilée",
+      "id" : "624A549C-9D11-402B-B308-640E30189FD6",
+      "niveau" : "lycee",
+      "annotation" : "",
+      "nom" : "Le Caousou",
       "classesID" : [
-        "6919DFA1-4AAB-49AA-9EFC-60E260ACD84A",
-        "C132C97A-4EDF-4A25-A41A-02064BEA445A",
-        "C132C97A-4EDF-4A25-A41A-02064BEA445B",
-        "C132C97A-4EDF-4A25-A41A-02064BEA445C",
-        "C132C97A-4EDF-4A25-A41A-02064BEA445D",
-        "42E327EC-DA22-412A-97F7-784B1096D37E",
-        "ED643D50-9EAA-4CC3-9F36-92C67DD55067"
+        "F2DD54DD-793D-4AFA-92ED-D7E19B33E463"
       ],
       "ressources" : [
-          {
-              "id"        : "CAC1FD63-CE6E-4FA8-B795-027E7D17B0CB",
-              "name"      : "Kit robot",
-              "maxNumber" : 12
-          }
+
+      ]
+    },
+    {
+      "id" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
+      "niveau" : "college",
+      "annotation" : "",
+      "nom" : "Le Caousou",
+      "classesID" : [
+        "00067A1B-4802-4657-A1F9-72CB19A74500",
+        "FF8AA65D-3CAC-4844-BB28-335178359125",
+        "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
+        "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
+        "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
+        "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
+        "49819899-4614-42CC-82BE-50F6483AC241"
+      ],
+      "ressources" : [
+
       ]
     }
   ]

@@ -24,16 +24,21 @@ struct SettingsEleve: View {
 
     var body: some View {
         List {
-            Section("Champs") {
+            Section {
                 Toggle("Trombine", isOn: $eleveTrombineEnabled)
                 Toggle("Appréciation", isOn: $eleveAppreciationEnabled)
                 Toggle("Annotation", isOn: $eleveAnnotationEnabled)
+            } header: {
+                Text("Champs")
+            } footer: {
+                Text("Inclure des champs de saisie pour chaque classe")
             }
+
             Section("Bonus / Malus") {
                 Toggle("Afficher", isOn: $eleveBonusEnabled)
                 if eleveBonusEnabled {
                     Stepper(value : $maxBonusMalus,
-                            in    : 0 ... 20,
+                            in    : 0 ... 100,
                             step  : 1) {
                         HStack {
                             Text("Limite")

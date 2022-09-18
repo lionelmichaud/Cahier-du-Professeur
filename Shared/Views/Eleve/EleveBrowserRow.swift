@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EleveBrowserRow: View {
     let eleve: Eleve
-    
+
     var body: some View {
         HStack {
             EleveLabel(eleve      : eleve,

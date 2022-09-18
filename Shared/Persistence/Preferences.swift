@@ -179,6 +179,14 @@ public final class Preferences {
         self.userDefaults = userDefaults
     }
     
+    /// Générales
+    // Champ annotation
+    @UserEnumDefault("interop")
+    public var interoperability: Interoperability = .ecoleDirecte
+
+    @UserEnumDefault("name_display_order")
+    public var nameDisplayOrder: NameDisplayOrder = .prenomNom
+
     /// School
     // Champ annotation
     @UserDefault("school_annotation")
@@ -211,10 +219,10 @@ public final class Preferences {
     public var eleveBonusEnabled: Bool = true
 
     @UserDefault("bonus_malus_max")
-    public var maxBonusMalus: Double = 2.0
+    public var maxBonusMalus: Double = 100.0
 
     @UserDefault("bonus_malus_increment")
-    public var maxBonusIncrement: Double = 0.25
+    public var maxBonusIncrement: Double = 1.0
 
     /// Paramètres Graphiques
     // graphique Bilan

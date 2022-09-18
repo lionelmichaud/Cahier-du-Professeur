@@ -33,6 +33,9 @@ struct ClasseEditor: View {
         !classeStore.isPresent(classe)
     }
 
+    @Preference(\.interoperability)
+    var interoperability
+
     var body: some View {
         ClasseDetail(classe: $classe)
             .toolbar {
@@ -102,7 +105,16 @@ struct ClasseEditor: View {
 
                     if let data = try? Data(contentsOf: fileUrl) {
                         do {
-                            var eleves = try CsvImporter().importEleves(from: data)
+                            var eleves = [Eleve]()
+
+                            switch interoperability {
+                                case .ecoleDirecte:
+                                    eleves = try CsvImporter().importElevesFromEcoleDirecte(from: data)
+
+                                case .proNote:
+                                    eleves = try CsvImporter().importElevesFromPRONOTE(from: data)
+                            }
+
                             for idx in eleves.startIndex...eleves.endIndex-1 {
                                 withAnimation() {
                                     ClasseManager()

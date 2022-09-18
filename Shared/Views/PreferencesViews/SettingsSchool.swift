@@ -13,8 +13,12 @@ struct SettingsSchool: View {
 
     var body: some View {
         List {
-            Section("Champs") {
+            Section {
                 Toggle("Annotation", isOn: $schoolAnnotation)
+            } header: {
+                Text("Champs")
+            } footer: {
+                Text("Ajouter un champ de saisie d'annotation à chaque établissement")
             }
         }
         #if os(iOS)

@@ -31,7 +31,7 @@ struct EleveBrowserView: View {
                     if school.nbOfClasses != 0 {
                         Section {
                             // pour chaque Classe
-                            EleveBrowserSchoolSubiew(school            : school,
+                            EleveBrowserSchoolSubview(school            : school,
                                                      filterObservation : filterObservation,
                                                      filterColle       : filterColle,
                                                      filterFlag        : filterFlag,
@@ -80,7 +80,7 @@ struct EleveBrowserView: View {
     }
 }
 
-struct EleveBrowserSchoolSubiew : View {
+struct EleveBrowserSchoolSubview : View {
     let school            : School
     var filterObservation : Bool
     var filterColle       : Bool

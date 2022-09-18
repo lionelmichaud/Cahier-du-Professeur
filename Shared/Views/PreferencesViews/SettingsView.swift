@@ -12,6 +12,7 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
+            SettingsGeneral()
             SettingsSchool()
             SettingsClasse()
             SettingsEleve()

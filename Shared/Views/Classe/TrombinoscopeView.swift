@@ -47,6 +47,7 @@ struct TrombinoscopeView: View {
         #endif
     }
 }
+
 struct TrombinoscopeFooterView: View {
     @Binding var eleve: Eleve
 
@@ -59,21 +60,21 @@ struct TrombinoscopeFooterView: View {
                 eleve.bonus -= maxBonusIncrement
             }
             .buttonStyle(.bordered)
-            .tint(.white)
 
             Spacer()
-            Text("\(eleve.bonus.formatted(.number.precision(.fractionLength(0))))")
-                .fontWeight(.bold)
-            Spacer()
+            if eleve.bonus != 0 {
+                Text("\(eleve.bonus.formatted(.number.precision(.fractionLength(0))))")
+                    .fontWeight(.bold)
+                    .foregroundColor(eleve.bonus > 0 ? .green : .red)
+                Spacer()
+            }
 
             Button(iconName: "plus.circle") {
                 eleve.bonus += maxBonusIncrement
             }
             .buttonStyle(.bordered)
-            .tint(.white)
         }
-        //.frame(height: 40)
-        .background(Rectangle().fill(Color.gray).opacity(0.7))
+        .background(Rectangle().fill(Color.white).opacity(0.9))
     }
 }
 

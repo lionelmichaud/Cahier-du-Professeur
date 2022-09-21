@@ -227,7 +227,6 @@ public struct PersistenceManager {
             if eleve.name.familyName != nil {
                 eleve.name.familyName!.trim()
                 eleveStore.update(with: eleve)
-
             }
             // Classe d'appartenance
             if let classeId = eleve.classeId {

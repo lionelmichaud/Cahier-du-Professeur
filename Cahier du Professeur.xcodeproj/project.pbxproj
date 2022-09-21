@@ -125,13 +125,10 @@
 		79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC57172860B7C4001D56F5 /* SchoolCreator.swift */; };
 		79D4FD1928DB189900D2D164 /* GEGO_Fleur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */; };
 		79D4FD1A28DB189900D2D164 /* HASAN_JALIL_Luciano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */; };
-		79D4FD1B28DB189900D2D164 /* DUBUS_Albane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1228DB189900D2D164 /* DUBUS_Albane.jpg */; };
 		79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */; };
 		79D4FD1D28DB189900D2D164 /* HERVY_Eugénie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */; };
-		79D4FD1E28DB189900D2D164 /* GIRARDEAU_Pablo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1528DB189900D2D164 /* GIRARDEAU_Pablo.jpg */; };
 		79D4FD1F28DB189900D2D164 /* DUTHEIL_Victoire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */; };
 		79D4FD2028DB189900D2D164 /* HUMBERT_Alice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */; };
-		79D4FD2128DB189900D2D164 /* ELTVEDT_Charles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1828DB189900D2D164 /* ELTVEDT_Charles.jpg */; };
 		79D583F728204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583F828204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F928204A6A00371EB3 /* ObservSignIcon.swift */; };
@@ -209,6 +206,102 @@
 		79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */; };
 		79F3F78C282E7E9500DC26FC /* ExamEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3F78B282E7E9500DC26FC /* ExamEditor.swift */; };
 		79F3F78D282E7E9500DC26FC /* ExamEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3F78B282E7E9500DC26FC /* ExamEditor.swift */; };
+		79FC12AD28DB9D6500F64F7D /* DUTHEIL_Victoire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129728DB9D6500F64F7D /* DUTHEIL_Victoire.jpg */; };
+		79FC12AE28DB9D6500F64F7D /* ARNAUD_Victor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */; };
+		79FC12AF28DB9D6500F64F7D /* BEDEL_Maxence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */; };
+		79FC12B028DB9D6500F64F7D /* DEVIN_Anouk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */; };
+		79FC12B128DB9D6500F64F7D /* BOURSOT_Clara.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129B28DB9D6500F64F7D /* BOURSOT_Clara.jpg */; };
+		79FC12B228DB9D6500F64F7D /* FLORES-OLIVIE_Théo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129C28DB9D6500F64F7D /* FLORES-OLIVIE_Théo.jpg */; };
+		79FC12B328DB9D6500F64F7D /* HASAN_JALIL_Luciano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129D28DB9D6500F64F7D /* HASAN_JALIL_Luciano.jpg */; };
+		79FC12B428DB9D6500F64F7D /* DUFOSSET_Margaux.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129E28DB9D6500F64F7D /* DUFOSSET_Margaux.jpg */; };
+		79FC12B528DB9D6500F64F7D /* BADAOUI_Alice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129F28DB9D6500F64F7D /* BADAOUI_Alice.jpg */; };
+		79FC12B628DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A028DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg */; };
+		79FC12B728DB9D6500F64F7D /* DUPUY_Thomas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A128DB9D6500F64F7D /* DUPUY_Thomas.jpg */; };
+		79FC12BA28DB9D6500F64F7D /* FERMI_Hugo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A428DB9D6500F64F7D /* FERMI_Hugo.jpg */; };
+		79FC12BD28DB9D6500F64F7D /* ABADLA_Nesrine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A728DB9D6500F64F7D /* ABADLA_Nesrine.jpg */; };
+		79FC12BF28DB9D6500F64F7D /* BORDE_Lilou.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A928DB9D6500F64F7D /* BORDE_Lilou.jpg */; };
+		79FC12C028DB9D6500F64F7D /* DAIZIS_Violette.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12AA28DB9D6500F64F7D /* DAIZIS_Violette.jpg */; };
+		79FC12C128DB9D6500F64F7D /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12AB28DB9D6500F64F7D /* DORNIC_Salomé.jpg */; };
+		79FC12C228DB9D6500F64F7D /* GEGO_Fleur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12AC28DB9D6500F64F7D /* GEGO_Fleur.jpg */; };
+		79FC12C428DB9ECA00F64F7D /* FONTAINE_Gabin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C328DB9ECA00F64F7D /* FONTAINE_Gabin.jpg */; };
+		79FC12C628DB9EE100F64F7D /* MALIN_Christian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C528DB9EE100F64F7D /* MALIN_Christian.jpg */; };
+		79FC12C828DB9F0300F64F7D /* MARINGE_Aliénor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C728DB9F0300F64F7D /* MARINGE_Aliénor.jpg */; };
+		79FC12CA28DB9F1E00F64F7D /* MATHIEU_Eugénie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C928DB9F1D00F64F7D /* MATHIEU_Eugénie.jpg */; };
+		79FC12CC28DB9F3400F64F7D /* PERES_Jules.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12CB28DB9F3400F64F7D /* PERES_Jules.jpg */; };
+		79FC12CE28DB9F4E00F64F7D /* PERIGAULT_Emma.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12CD28DB9F4E00F64F7D /* PERIGAULT_Emma.jpg */; };
+		79FC12D028DB9F6500F64F7D /* PINEAU_Charlotte.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12CF28DB9F6500F64F7D /* PINEAU_Charlotte.jpg */; };
+		79FC12D228DB9F7F00F64F7D /* POPOVA_Sofia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12D128DB9F7F00F64F7D /* POPOVA_Sofia.jpg */; };
+		79FC12D428DB9F9600F64F7D /* RIEUNIER_Côme.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12D328DB9F9600F64F7D /* RIEUNIER_Côme.jpg */; };
+		79FC12D628DB9FAE00F64F7D /* RODRIGUEZ_Hugo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12D528DB9FAE00F64F7D /* RODRIGUEZ_Hugo.jpg */; };
+		79FC12D828DB9FC000F64F7D /* ROUDIE_Jean.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12D728DB9FC000F64F7D /* ROUDIE_Jean.jpg */; };
+		79FC12DA28DB9FD600F64F7D /* SALETES_Louise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12D928DB9FD600F64F7D /* SALETES_Louise.jpg */; };
+		79FC12DC28DB9FF100F64F7D /* SUC-MELLA_Ruben.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12DB28DB9FF100F64F7D /* SUC-MELLA_Ruben.jpg */; };
+		79FC12E128DBA2BB00F64F7D /* BURNS_Chloé-Grace.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12DD28DBA2BB00F64F7D /* BURNS_Chloé-Grace.jpg */; };
+		79FC12E228DBA2BB00F64F7D /* BARON_Victoire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12DE28DBA2BB00F64F7D /* BARON_Victoire.jpg */; };
+		79FC12E328DBA2BB00F64F7D /* CAGNASSO_Romance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12DF28DBA2BB00F64F7D /* CAGNASSO_Romance.jpg */; };
+		79FC12E428DBA2BB00F64F7D /* BUTLER_Augustin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12E028DBA2BB00F64F7D /* BUTLER_Augustin.jpg */; };
+		79FC12E928DBA32200F64F7D /* GRAF_Emma.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12E528DBA32200F64F7D /* GRAF_Emma.jpg */; };
+		79FC12EA28DBA32200F64F7D /* DU-PLESSIS_Marie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12E628DBA32200F64F7D /* DU-PLESSIS_Marie.jpg */; };
+		79FC12EB28DBA32200F64F7D /* DESMEULLES_Kate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12E728DBA32200F64F7D /* DESMEULLES_Kate.jpg */; };
+		79FC12EC28DBA32200F64F7D /* GORDO_Manel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12E828DBA32200F64F7D /* GORDO_Manel.jpg */; };
+		79FC12F128DBA38000F64F7D /* HABRIAS_Ulysse.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12ED28DBA38000F64F7D /* HABRIAS_Ulysse.jpg */; };
+		79FC12F228DBA38000F64F7D /* LEGUEVAQUE_Lucie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12EE28DBA38000F64F7D /* LEGUEVAQUE_Lucie.jpg */; };
+		79FC12F328DBA38000F64F7D /* LAPORTALIERE_Justine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12EF28DBA38000F64F7D /* LAPORTALIERE_Justine.jpg */; };
+		79FC12F428DBA38000F64F7D /* LE MOOIGNE_Ines.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12F028DBA38000F64F7D /* LE MOOIGNE_Ines.jpg */; };
+		79FC12F928DBA3E200F64F7D /* PHILIPPON_Maël.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12F528DBA3E200F64F7D /* PHILIPPON_Maël.jpg */; };
+		79FC12FA28DBA3E200F64F7D /* MARTIN_Eva.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12F628DBA3E200F64F7D /* MARTIN_Eva.jpg */; };
+		79FC12FB28DBA3E200F64F7D /* PAGOTTO_Tom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12F728DBA3E200F64F7D /* PAGOTTO_Tom.jpg */; };
+		79FC12FC28DBA3E200F64F7D /* REVOL_Louis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12F828DBA3E200F64F7D /* REVOL_Louis.jpg */; };
+		79FC12FF28DBA41600F64F7D /* SHAIK_Tazmeen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12FD28DBA41600F64F7D /* SHAIK_Tazmeen.jpg */; };
+		79FC130028DBA41600F64F7D /* ZUNINO_Mauro.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12FE28DBA41600F64F7D /* ZUNINO_Mauro.jpg */; };
+		79FC130528DBA76B00F64F7D /* COURTEL_Jean-Camille.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130128DBA76B00F64F7D /* COURTEL_Jean-Camille.jpg */; };
+		79FC130628DBA76B00F64F7D /* CRUZ-SEMEDO_Inna.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130228DBA76B00F64F7D /* CRUZ-SEMEDO_Inna.jpg */; };
+		79FC130728DBA76B00F64F7D /* CAUSSOU_Martin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130328DBA76B00F64F7D /* CAUSSOU_Martin.jpg */; };
+		79FC130828DBA76B00F64F7D /* CAZALS_Paloma.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130428DBA76B00F64F7D /* CAZALS_Paloma.jpg */; };
+		79FC130D28DBA7B200F64F7D /* DENIS_Paul.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130928DBA7B100F64F7D /* DENIS_Paul.jpg */; };
+		79FC130E28DBA7B200F64F7D /* DEVIN_Axelle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130A28DBA7B100F64F7D /* DEVIN_Axelle.jpg */; };
+		79FC130F28DBA7B200F64F7D /* FAURE_François.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130B28DBA7B200F64F7D /* FAURE_François.jpg */; };
+		79FC131028DBA7B200F64F7D /* EVEN_Amélie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC130C28DBA7B200F64F7D /* EVEN_Amélie.jpg */; };
+		79FC131528DBA80600F64F7D /* GROULT_Valentin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131128DBA80600F64F7D /* GROULT_Valentin.jpg */; };
+		79FC131628DBA80600F64F7D /* FERRIER_Raphaël.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131228DBA80600F64F7D /* FERRIER_Raphaël.jpg */; };
+		79FC131728DBA80600F64F7D /* FOURCADE_Jules.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131328DBA80600F64F7D /* FOURCADE_Jules.jpg */; };
+		79FC131828DBA80600F64F7D /* GEVIGNEY_Amicie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131428DBA80600F64F7D /* GEVIGNEY_Amicie.jpg */; };
+		79FC131D28DBA86A00F64F7D /* LABATUT_Luce.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131928DBA86A00F64F7D /* LABATUT_Luce.jpg */; };
+		79FC131E28DBA86A00F64F7D /* JOUANILLOU_Marine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131A28DBA86A00F64F7D /* JOUANILLOU_Marine.jpg */; };
+		79FC131F28DBA86A00F64F7D /* HERVY_Apolline.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131B28DBA86A00F64F7D /* HERVY_Apolline.jpg */; };
+		79FC132028DBA86A00F64F7D /* LEWIN-FLEUR_Aubin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC131C28DBA86A00F64F7D /* LEWIN-FLEUR_Aubin.jpg */; };
+		79FC132528DBA8AD00F64F7D /* LOPEZ_Martin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132128DBA8AC00F64F7D /* LOPEZ_Martin.jpg */; };
+		79FC132628DBA8AD00F64F7D /* MALLEVILLE_Charlotte.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132228DBA8AD00F64F7D /* MALLEVILLE_Charlotte.jpg */; };
+		79FC132728DBA8AD00F64F7D /* MARRACHE_Vickie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132328DBA8AD00F64F7D /* MARRACHE_Vickie.jpg */; };
+		79FC132828DBA8AD00F64F7D /* MERCY_Antoine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132428DBA8AD00F64F7D /* MERCY_Antoine.jpg */; };
+		79FC132D28DBA90600F64F7D /* MORALES_Paul.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132928DBA90500F64F7D /* MORALES_Paul.jpg */; };
+		79FC132E28DBA90600F64F7D /* SU_Lily.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132A28DBA90500F64F7D /* SU_Lily.jpg */; };
+		79FC132F28DBA90600F64F7D /* VERMEERSCH_Jules.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132B28DBA90500F64F7D /* VERMEERSCH_Jules.jpg */; };
+		79FC133028DBA90600F64F7D /* WENGER_Emmy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC132C28DBA90600F64F7D /* WENGER_Emmy.jpg */; };
+		79FC133528DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC133128DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg */; };
+		79FC133728DBAF8C00F64F7D /* BACOU_Léo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC133328DBAF8C00F64F7D /* BACOU_Léo.jpg */; };
+		79FC133828DBAF8C00F64F7D /* BAILLOT_Clémence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC133428DBAF8C00F64F7D /* BAILLOT_Clémence.jpg */; };
+		79FC133E28DBAFD700F64F7D /* CLEMENT_Andréanne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC133A28DBAFD600F64F7D /* CLEMENT_Andréanne.jpg */; };
+		79FC133F28DBAFD700F64F7D /* BLANCO_Tessa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC133B28DBAFD600F64F7D /* BLANCO_Tessa.jpg */; };
+		79FC134028DBAFD700F64F7D /* CASSE_Clémence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC133C28DBAFD700F64F7D /* CASSE_Clémence.jpg */; };
+		79FC134228DBB04100F64F7D /* CHAVANT_Rose.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134128DBB04100F64F7D /* CHAVANT_Rose.jpg */; };
+		79FC134428DBB05000F64F7D /* BELAUD_Amélie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134328DBB05000F64F7D /* BELAUD_Amélie.jpg */; };
+		79FC134928DBB0B500F64F7D /* DELRIEU_Gabriel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134528DBB0B500F64F7D /* DELRIEU_Gabriel.jpg */; };
+		79FC134A28DBB0B500F64F7D /* COTONAT_Jean.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134628DBB0B500F64F7D /* COTONAT_Jean.jpg */; };
+		79FC134B28DBB0B500F64F7D /* COURTOIS_Dorian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134728DBB0B500F64F7D /* COURTOIS_Dorian.jpg */; };
+		79FC134C28DBB0B500F64F7D /* DELOOZ_Cyprien.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134828DBB0B500F64F7D /* DELOOZ_Cyprien.jpg */; };
+		79FC135128DBB13C00F64F7D /* FERRE_Louis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134D28DBB13B00F64F7D /* FERRE_Louis.jpg */; };
+		79FC135228DBB13C00F64F7D /* DRUAUT_Raphaël.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134E28DBB13B00F64F7D /* DRUAUT_Raphaël.jpg */; };
+		79FC135328DBB13C00F64F7D /* FERRIER_Gaëtan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC134F28DBB13C00F64F7D /* FERRIER_Gaëtan.jpg */; };
+		79FC135428DBB13C00F64F7D /* DUPRE_Tiago.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135028DBB13C00F64F7D /* DUPRE_Tiago.jpg */; };
+		79FC135928DBB18E00F64F7D /* GOUGEON_Martin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135528DBB18D00F64F7D /* GOUGEON_Martin.jpg */; };
+		79FC135A28DBB18E00F64F7D /* GIMMIG_Titouan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135628DBB18E00F64F7D /* GIMMIG_Titouan.jpg */; };
+		79FC135B28DBB18E00F64F7D /* FRESPUECH_Théphile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135728DBB18E00F64F7D /* FRESPUECH_Théphile.jpg */; };
+		79FC135C28DBB18E00F64F7D /* GRANGER_Valentine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135828DBB18E00F64F7D /* GRANGER_Valentine.jpg */; };
+		79FC136128DBB1D700F64F7D /* MAUREL_Louise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135D28DBB1D700F64F7D /* MAUREL_Louise.jpg */; };
+		79FC136228DBB1D700F64F7D /* MAFFRE_Sasha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135E28DBB1D700F64F7D /* MAFFRE_Sasha.jpg */; };
+		79FC136328DBB1D700F64F7D /* MONTAIGNAC_Louise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC135F28DBB1D700F64F7D /* MONTAIGNAC_Louise.jpg */; };
+		79FC136428DBB1D700F64F7D /* LANDES_Mathilde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC136028DBB1D700F64F7D /* LANDES_Mathilde.jpg */; };
 		79FC342328D7721500EFCE3D /* SettingsGeneral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC342228D7721500EFCE3D /* SettingsGeneral.swift */; };
 		79FFDCD62825E950009D7452 /* CsvImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFDCD52825E94F009D7452 /* CsvImporter.swift */; };
 		79FFDCD72825E950009D7452 /* CsvImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FFDCD52825E94F009D7452 /* CsvImporter.swift */; };
@@ -299,13 +392,10 @@
 		79CC57172860B7C4001D56F5 /* SchoolCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCreator.swift; sourceTree = "<group>"; };
 		79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GEGO_Fleur.jpg; sourceTree = "<group>"; };
 		79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HASAN_JALIL_Luciano.jpg; sourceTree = "<group>"; };
-		79D4FD1228DB189900D2D164 /* DUBUS_Albane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUBUS_Albane.jpg; sourceTree = "<group>"; };
 		79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DORNIC_Salomé.jpg"; sourceTree = "<group>"; };
 		79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "HERVY_Eugénie.jpg"; sourceTree = "<group>"; };
-		79D4FD1528DB189900D2D164 /* GIRARDEAU_Pablo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GIRARDEAU_Pablo.jpg; sourceTree = "<group>"; };
 		79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUTHEIL_Victoire.jpg; sourceTree = "<group>"; };
 		79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUMBERT_Alice.jpg; sourceTree = "<group>"; };
-		79D4FD1828DB189900D2D164 /* ELTVEDT_Charles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ELTVEDT_Charles.jpg; sourceTree = "<group>"; };
 		79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservNotifIcon.swift; sourceTree = "<group>"; };
 		79D583F928204A6A00371EB3 /* ObservSignIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSignIcon.swift; sourceTree = "<group>"; };
 		79D583FC28204EBE00371EB3 /* ColleBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleBrowserView.swift; sourceTree = "<group>"; };
@@ -351,6 +441,102 @@
 		79F3AC0C2808CA8700D068D9 /* ColleSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC0F2808CAA600D068D9 /* ObservSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSidebarView.swift; sourceTree = "<group>"; };
 		79F3F78B282E7E9500DC26FC /* ExamEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEditor.swift; sourceTree = "<group>"; };
+		79FC129728DB9D6500F64F7D /* DUTHEIL_Victoire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUTHEIL_Victoire.jpg; sourceTree = "<group>"; };
+		79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARNAUD_Victor.jpg; sourceTree = "<group>"; };
+		79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BEDEL_Maxence.jpg; sourceTree = "<group>"; };
+		79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DEVIN_Anouk.jpg; sourceTree = "<group>"; };
+		79FC129B28DB9D6500F64F7D /* BOURSOT_Clara.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BOURSOT_Clara.jpg; sourceTree = "<group>"; };
+		79FC129C28DB9D6500F64F7D /* FLORES-OLIVIE_Théo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FLORES-OLIVIE_Théo.jpg"; sourceTree = "<group>"; };
+		79FC129D28DB9D6500F64F7D /* HASAN_JALIL_Luciano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HASAN_JALIL_Luciano.jpg; sourceTree = "<group>"; };
+		79FC129E28DB9D6500F64F7D /* DUFOSSET_Margaux.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUFOSSET_Margaux.jpg; sourceTree = "<group>"; };
+		79FC129F28DB9D6500F64F7D /* BADAOUI_Alice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BADAOUI_Alice.jpg; sourceTree = "<group>"; };
+		79FC12A028DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARMENGAUD_Pauline.jpg; sourceTree = "<group>"; };
+		79FC12A128DB9D6500F64F7D /* DUPUY_Thomas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUPUY_Thomas.jpg; sourceTree = "<group>"; };
+		79FC12A428DB9D6500F64F7D /* FERMI_Hugo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FERMI_Hugo.jpg; sourceTree = "<group>"; };
+		79FC12A728DB9D6500F64F7D /* ABADLA_Nesrine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ABADLA_Nesrine.jpg; sourceTree = "<group>"; };
+		79FC12A928DB9D6500F64F7D /* BORDE_Lilou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BORDE_Lilou.jpg; sourceTree = "<group>"; };
+		79FC12AA28DB9D6500F64F7D /* DAIZIS_Violette.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DAIZIS_Violette.jpg; sourceTree = "<group>"; };
+		79FC12AB28DB9D6500F64F7D /* DORNIC_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DORNIC_Salomé.jpg"; sourceTree = "<group>"; };
+		79FC12AC28DB9D6500F64F7D /* GEGO_Fleur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GEGO_Fleur.jpg; sourceTree = "<group>"; };
+		79FC12C328DB9ECA00F64F7D /* FONTAINE_Gabin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FONTAINE_Gabin.jpg; sourceTree = "<group>"; };
+		79FC12C528DB9EE100F64F7D /* MALIN_Christian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MALIN_Christian.jpg; sourceTree = "<group>"; };
+		79FC12C728DB9F0300F64F7D /* MARINGE_Aliénor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "MARINGE_Aliénor.jpg"; sourceTree = "<group>"; };
+		79FC12C928DB9F1D00F64F7D /* MATHIEU_Eugénie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "MATHIEU_Eugénie.jpg"; sourceTree = "<group>"; };
+		79FC12CB28DB9F3400F64F7D /* PERES_Jules.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PERES_Jules.jpg; sourceTree = "<group>"; };
+		79FC12CD28DB9F4E00F64F7D /* PERIGAULT_Emma.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PERIGAULT_Emma.jpg; sourceTree = "<group>"; };
+		79FC12CF28DB9F6500F64F7D /* PINEAU_Charlotte.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PINEAU_Charlotte.jpg; sourceTree = "<group>"; };
+		79FC12D128DB9F7F00F64F7D /* POPOVA_Sofia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = POPOVA_Sofia.jpg; sourceTree = "<group>"; };
+		79FC12D328DB9F9600F64F7D /* RIEUNIER_Côme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "RIEUNIER_Côme.jpg"; sourceTree = "<group>"; };
+		79FC12D528DB9FAE00F64F7D /* RODRIGUEZ_Hugo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RODRIGUEZ_Hugo.jpg; sourceTree = "<group>"; };
+		79FC12D728DB9FC000F64F7D /* ROUDIE_Jean.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROUDIE_Jean.jpg; sourceTree = "<group>"; };
+		79FC12D928DB9FD600F64F7D /* SALETES_Louise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SALETES_Louise.jpg; sourceTree = "<group>"; };
+		79FC12DB28DB9FF100F64F7D /* SUC-MELLA_Ruben.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SUC-MELLA_Ruben.jpg"; sourceTree = "<group>"; };
+		79FC12DD28DBA2BB00F64F7D /* BURNS_Chloé-Grace.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BURNS_Chloé-Grace.jpg"; sourceTree = "<group>"; };
+		79FC12DE28DBA2BB00F64F7D /* BARON_Victoire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BARON_Victoire.jpg; sourceTree = "<group>"; };
+		79FC12DF28DBA2BB00F64F7D /* CAGNASSO_Romance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CAGNASSO_Romance.jpg; sourceTree = "<group>"; };
+		79FC12E028DBA2BB00F64F7D /* BUTLER_Augustin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BUTLER_Augustin.jpg; sourceTree = "<group>"; };
+		79FC12E528DBA32200F64F7D /* GRAF_Emma.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GRAF_Emma.jpg; sourceTree = "<group>"; };
+		79FC12E628DBA32200F64F7D /* DU-PLESSIS_Marie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DU-PLESSIS_Marie.jpg"; sourceTree = "<group>"; };
+		79FC12E728DBA32200F64F7D /* DESMEULLES_Kate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DESMEULLES_Kate.jpg; sourceTree = "<group>"; };
+		79FC12E828DBA32200F64F7D /* GORDO_Manel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GORDO_Manel.jpg; sourceTree = "<group>"; };
+		79FC12ED28DBA38000F64F7D /* HABRIAS_Ulysse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HABRIAS_Ulysse.jpg; sourceTree = "<group>"; };
+		79FC12EE28DBA38000F64F7D /* LEGUEVAQUE_Lucie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LEGUEVAQUE_Lucie.jpg; sourceTree = "<group>"; };
+		79FC12EF28DBA38000F64F7D /* LAPORTALIERE_Justine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LAPORTALIERE_Justine.jpg; sourceTree = "<group>"; };
+		79FC12F028DBA38000F64F7D /* LE MOOIGNE_Ines.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "LE MOOIGNE_Ines.jpg"; sourceTree = "<group>"; };
+		79FC12F528DBA3E200F64F7D /* PHILIPPON_Maël.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "PHILIPPON_Maël.jpg"; sourceTree = "<group>"; };
+		79FC12F628DBA3E200F64F7D /* MARTIN_Eva.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MARTIN_Eva.jpg; sourceTree = "<group>"; };
+		79FC12F728DBA3E200F64F7D /* PAGOTTO_Tom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PAGOTTO_Tom.jpg; sourceTree = "<group>"; };
+		79FC12F828DBA3E200F64F7D /* REVOL_Louis.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = REVOL_Louis.jpg; sourceTree = "<group>"; };
+		79FC12FD28DBA41600F64F7D /* SHAIK_Tazmeen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SHAIK_Tazmeen.jpg; sourceTree = "<group>"; };
+		79FC12FE28DBA41600F64F7D /* ZUNINO_Mauro.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ZUNINO_Mauro.jpg; sourceTree = "<group>"; };
+		79FC130128DBA76B00F64F7D /* COURTEL_Jean-Camille.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "COURTEL_Jean-Camille.jpg"; sourceTree = "<group>"; };
+		79FC130228DBA76B00F64F7D /* CRUZ-SEMEDO_Inna.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CRUZ-SEMEDO_Inna.jpg"; sourceTree = "<group>"; };
+		79FC130328DBA76B00F64F7D /* CAUSSOU_Martin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CAUSSOU_Martin.jpg; sourceTree = "<group>"; };
+		79FC130428DBA76B00F64F7D /* CAZALS_Paloma.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CAZALS_Paloma.jpg; sourceTree = "<group>"; };
+		79FC130928DBA7B100F64F7D /* DENIS_Paul.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DENIS_Paul.jpg; sourceTree = "<group>"; };
+		79FC130A28DBA7B100F64F7D /* DEVIN_Axelle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DEVIN_Axelle.jpg; sourceTree = "<group>"; };
+		79FC130B28DBA7B200F64F7D /* FAURE_François.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FAURE_François.jpg"; sourceTree = "<group>"; };
+		79FC130C28DBA7B200F64F7D /* EVEN_Amélie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "EVEN_Amélie.jpg"; sourceTree = "<group>"; };
+		79FC131128DBA80600F64F7D /* GROULT_Valentin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GROULT_Valentin.jpg; sourceTree = "<group>"; };
+		79FC131228DBA80600F64F7D /* FERRIER_Raphaël.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FERRIER_Raphaël.jpg"; sourceTree = "<group>"; };
+		79FC131328DBA80600F64F7D /* FOURCADE_Jules.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FOURCADE_Jules.jpg; sourceTree = "<group>"; };
+		79FC131428DBA80600F64F7D /* GEVIGNEY_Amicie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GEVIGNEY_Amicie.jpg; sourceTree = "<group>"; };
+		79FC131928DBA86A00F64F7D /* LABATUT_Luce.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LABATUT_Luce.jpg; sourceTree = "<group>"; };
+		79FC131A28DBA86A00F64F7D /* JOUANILLOU_Marine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JOUANILLOU_Marine.jpg; sourceTree = "<group>"; };
+		79FC131B28DBA86A00F64F7D /* HERVY_Apolline.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HERVY_Apolline.jpg; sourceTree = "<group>"; };
+		79FC131C28DBA86A00F64F7D /* LEWIN-FLEUR_Aubin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "LEWIN-FLEUR_Aubin.jpg"; sourceTree = "<group>"; };
+		79FC132128DBA8AC00F64F7D /* LOPEZ_Martin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LOPEZ_Martin.jpg; sourceTree = "<group>"; };
+		79FC132228DBA8AD00F64F7D /* MALLEVILLE_Charlotte.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MALLEVILLE_Charlotte.jpg; sourceTree = "<group>"; };
+		79FC132328DBA8AD00F64F7D /* MARRACHE_Vickie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MARRACHE_Vickie.jpg; sourceTree = "<group>"; };
+		79FC132428DBA8AD00F64F7D /* MERCY_Antoine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MERCY_Antoine.jpg; sourceTree = "<group>"; };
+		79FC132928DBA90500F64F7D /* MORALES_Paul.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MORALES_Paul.jpg; sourceTree = "<group>"; };
+		79FC132A28DBA90500F64F7D /* SU_Lily.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SU_Lily.jpg; sourceTree = "<group>"; };
+		79FC132B28DBA90500F64F7D /* VERMEERSCH_Jules.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = VERMEERSCH_Jules.jpg; sourceTree = "<group>"; };
+		79FC132C28DBA90600F64F7D /* WENGER_Emmy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WENGER_Emmy.jpg; sourceTree = "<group>"; };
+		79FC133128DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ANDRE-MIQUEL_Emma.jpg"; sourceTree = "<group>"; };
+		79FC133328DBAF8C00F64F7D /* BACOU_Léo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BACOU_Léo.jpg"; sourceTree = "<group>"; };
+		79FC133428DBAF8C00F64F7D /* BAILLOT_Clémence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BAILLOT_Clémence.jpg"; sourceTree = "<group>"; };
+		79FC133A28DBAFD600F64F7D /* CLEMENT_Andréanne.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CLEMENT_Andréanne.jpg"; sourceTree = "<group>"; };
+		79FC133B28DBAFD600F64F7D /* BLANCO_Tessa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BLANCO_Tessa.jpg; sourceTree = "<group>"; };
+		79FC133C28DBAFD700F64F7D /* CASSE_Clémence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CASSE_Clémence.jpg"; sourceTree = "<group>"; };
+		79FC134128DBB04100F64F7D /* CHAVANT_Rose.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CHAVANT_Rose.jpg; sourceTree = "<group>"; };
+		79FC134328DBB05000F64F7D /* BELAUD_Amélie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BELAUD_Amélie.jpg"; sourceTree = "<group>"; };
+		79FC134528DBB0B500F64F7D /* DELRIEU_Gabriel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DELRIEU_Gabriel.jpg; sourceTree = "<group>"; };
+		79FC134628DBB0B500F64F7D /* COTONAT_Jean.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = COTONAT_Jean.jpg; sourceTree = "<group>"; };
+		79FC134728DBB0B500F64F7D /* COURTOIS_Dorian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = COURTOIS_Dorian.jpg; sourceTree = "<group>"; };
+		79FC134828DBB0B500F64F7D /* DELOOZ_Cyprien.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DELOOZ_Cyprien.jpg; sourceTree = "<group>"; };
+		79FC134D28DBB13B00F64F7D /* FERRE_Louis.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FERRE_Louis.jpg; sourceTree = "<group>"; };
+		79FC134E28DBB13B00F64F7D /* DRUAUT_Raphaël.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DRUAUT_Raphaël.jpg"; sourceTree = "<group>"; };
+		79FC134F28DBB13C00F64F7D /* FERRIER_Gaëtan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FERRIER_Gaëtan.jpg"; sourceTree = "<group>"; };
+		79FC135028DBB13C00F64F7D /* DUPRE_Tiago.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUPRE_Tiago.jpg; sourceTree = "<group>"; };
+		79FC135528DBB18D00F64F7D /* GOUGEON_Martin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GOUGEON_Martin.jpg; sourceTree = "<group>"; };
+		79FC135628DBB18E00F64F7D /* GIMMIG_Titouan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GIMMIG_Titouan.jpg; sourceTree = "<group>"; };
+		79FC135728DBB18E00F64F7D /* FRESPUECH_Théphile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FRESPUECH_Théphile.jpg"; sourceTree = "<group>"; };
+		79FC135828DBB18E00F64F7D /* GRANGER_Valentine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GRANGER_Valentine.jpg; sourceTree = "<group>"; };
+		79FC135D28DBB1D700F64F7D /* MAUREL_Louise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MAUREL_Louise.jpg; sourceTree = "<group>"; };
+		79FC135E28DBB1D700F64F7D /* MAFFRE_Sasha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MAFFRE_Sasha.jpg; sourceTree = "<group>"; };
+		79FC135F28DBB1D700F64F7D /* MONTAIGNAC_Louise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MONTAIGNAC_Louise.jpg; sourceTree = "<group>"; };
+		79FC136028DBB1D700F64F7D /* LANDES_Mathilde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LANDES_Mathilde.jpg; sourceTree = "<group>"; };
 		79FC342228D7721500EFCE3D /* SettingsGeneral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeneral.swift; sourceTree = "<group>"; };
 		79FFDCD52825E94F009D7452 /* CsvImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CsvImporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -504,14 +690,107 @@
 		7984334B283E92B100C5E51E /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */,
-				79D4FD1228DB189900D2D164 /* DUBUS_Albane.jpg */,
-				79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */,
-				79D4FD1828DB189900D2D164 /* ELTVEDT_Charles.jpg */,
-				79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */,
-				79D4FD1528DB189900D2D164 /* GIRARDEAU_Pablo.jpg */,
-				79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */,
+				79FC12A728DB9D6500F64F7D /* ABADLA_Nesrine.jpg */,
+				79FC133128DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg */,
+				79FC12A028DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg */,
+				79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */,
+				79FC133328DBAF8C00F64F7D /* BACOU_Léo.jpg */,
+				79FC129F28DB9D6500F64F7D /* BADAOUI_Alice.jpg */,
+				79FC133428DBAF8C00F64F7D /* BAILLOT_Clémence.jpg */,
+				79FC12DE28DBA2BB00F64F7D /* BARON_Victoire.jpg */,
+				79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */,
+				79FC134328DBB05000F64F7D /* BELAUD_Amélie.jpg */,
+				79FC133B28DBAFD600F64F7D /* BLANCO_Tessa.jpg */,
+				79FC12A928DB9D6500F64F7D /* BORDE_Lilou.jpg */,
+				79FC129B28DB9D6500F64F7D /* BOURSOT_Clara.jpg */,
+				79FC12DD28DBA2BB00F64F7D /* BURNS_Chloé-Grace.jpg */,
+				79FC12E028DBA2BB00F64F7D /* BUTLER_Augustin.jpg */,
+				79FC12DF28DBA2BB00F64F7D /* CAGNASSO_Romance.jpg */,
+				79FC133C28DBAFD700F64F7D /* CASSE_Clémence.jpg */,
+				79FC130328DBA76B00F64F7D /* CAUSSOU_Martin.jpg */,
+				79FC130428DBA76B00F64F7D /* CAZALS_Paloma.jpg */,
+				79FC134128DBB04100F64F7D /* CHAVANT_Rose.jpg */,
+				79FC133A28DBAFD600F64F7D /* CLEMENT_Andréanne.jpg */,
+				79FC134628DBB0B500F64F7D /* COTONAT_Jean.jpg */,
+				79FC130128DBA76B00F64F7D /* COURTEL_Jean-Camille.jpg */,
+				79FC134728DBB0B500F64F7D /* COURTOIS_Dorian.jpg */,
+				79FC130228DBA76B00F64F7D /* CRUZ-SEMEDO_Inna.jpg */,
+				79FC12AA28DB9D6500F64F7D /* DAIZIS_Violette.jpg */,
+				79FC134828DBB0B500F64F7D /* DELOOZ_Cyprien.jpg */,
+				79FC134528DBB0B500F64F7D /* DELRIEU_Gabriel.jpg */,
+				79FC130928DBA7B100F64F7D /* DENIS_Paul.jpg */,
+				79FC12E728DBA32200F64F7D /* DESMEULLES_Kate.jpg */,
+				79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */,
+				79FC130A28DBA7B100F64F7D /* DEVIN_Axelle.jpg */,
+				79FC12AB28DB9D6500F64F7D /* DORNIC_Salomé.jpg */,
+				79FC134E28DBB13B00F64F7D /* DRUAUT_Raphaël.jpg */,
+				79FC12E628DBA32200F64F7D /* DU-PLESSIS_Marie.jpg */,
+				79FC129E28DB9D6500F64F7D /* DUFOSSET_Margaux.jpg */,
+				79FC135028DBB13C00F64F7D /* DUPRE_Tiago.jpg */,
+				79FC12A128DB9D6500F64F7D /* DUPUY_Thomas.jpg */,
+				79FC129728DB9D6500F64F7D /* DUTHEIL_Victoire.jpg */,
+				79FC130C28DBA7B200F64F7D /* EVEN_Amélie.jpg */,
+				79FC130B28DBA7B200F64F7D /* FAURE_François.jpg */,
+				79FC12A428DB9D6500F64F7D /* FERMI_Hugo.jpg */,
+				79FC134D28DBB13B00F64F7D /* FERRE_Louis.jpg */,
+				79FC134F28DBB13C00F64F7D /* FERRIER_Gaëtan.jpg */,
+				79FC131228DBA80600F64F7D /* FERRIER_Raphaël.jpg */,
+				79FC129C28DB9D6500F64F7D /* FLORES-OLIVIE_Théo.jpg */,
+				79FC12C328DB9ECA00F64F7D /* FONTAINE_Gabin.jpg */,
+				79FC131328DBA80600F64F7D /* FOURCADE_Jules.jpg */,
+				79FC135728DBB18E00F64F7D /* FRESPUECH_Théphile.jpg */,
+				79FC12AC28DB9D6500F64F7D /* GEGO_Fleur.jpg */,
+				79FC131428DBA80600F64F7D /* GEVIGNEY_Amicie.jpg */,
+				79FC135628DBB18E00F64F7D /* GIMMIG_Titouan.jpg */,
+				79FC12E828DBA32200F64F7D /* GORDO_Manel.jpg */,
+				79FC135528DBB18D00F64F7D /* GOUGEON_Martin.jpg */,
+				79FC12E528DBA32200F64F7D /* GRAF_Emma.jpg */,
+				79FC135828DBB18E00F64F7D /* GRANGER_Valentine.jpg */,
+				79FC131128DBA80600F64F7D /* GROULT_Valentin.jpg */,
+				79FC12ED28DBA38000F64F7D /* HABRIAS_Ulysse.jpg */,
+				79FC129D28DB9D6500F64F7D /* HASAN_JALIL_Luciano.jpg */,
+				79FC131B28DBA86A00F64F7D /* HERVY_Apolline.jpg */,
 				79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */,
+				79FC131A28DBA86A00F64F7D /* JOUANILLOU_Marine.jpg */,
+				79FC131928DBA86A00F64F7D /* LABATUT_Luce.jpg */,
+				79FC136028DBB1D700F64F7D /* LANDES_Mathilde.jpg */,
+				79FC12EF28DBA38000F64F7D /* LAPORTALIERE_Justine.jpg */,
+				79FC12F028DBA38000F64F7D /* LE MOOIGNE_Ines.jpg */,
+				79FC12EE28DBA38000F64F7D /* LEGUEVAQUE_Lucie.jpg */,
+				79FC131C28DBA86A00F64F7D /* LEWIN-FLEUR_Aubin.jpg */,
+				79FC132128DBA8AC00F64F7D /* LOPEZ_Martin.jpg */,
+				79FC135E28DBB1D700F64F7D /* MAFFRE_Sasha.jpg */,
+				79FC12C528DB9EE100F64F7D /* MALIN_Christian.jpg */,
+				79FC132228DBA8AD00F64F7D /* MALLEVILLE_Charlotte.jpg */,
+				79FC12C728DB9F0300F64F7D /* MARINGE_Aliénor.jpg */,
+				79FC132328DBA8AD00F64F7D /* MARRACHE_Vickie.jpg */,
+				79FC12F628DBA3E200F64F7D /* MARTIN_Eva.jpg */,
+				79FC12C928DB9F1D00F64F7D /* MATHIEU_Eugénie.jpg */,
+				79FC135D28DBB1D700F64F7D /* MAUREL_Louise.jpg */,
+				79FC132428DBA8AD00F64F7D /* MERCY_Antoine.jpg */,
+				79FC135F28DBB1D700F64F7D /* MONTAIGNAC_Louise.jpg */,
+				79FC132928DBA90500F64F7D /* MORALES_Paul.jpg */,
+				79FC12F728DBA3E200F64F7D /* PAGOTTO_Tom.jpg */,
+				79FC12CB28DB9F3400F64F7D /* PERES_Jules.jpg */,
+				79FC12CD28DB9F4E00F64F7D /* PERIGAULT_Emma.jpg */,
+				79FC12F528DBA3E200F64F7D /* PHILIPPON_Maël.jpg */,
+				79FC12CF28DB9F6500F64F7D /* PINEAU_Charlotte.jpg */,
+				79FC12D128DB9F7F00F64F7D /* POPOVA_Sofia.jpg */,
+				79FC12F828DBA3E200F64F7D /* REVOL_Louis.jpg */,
+				79FC12D328DB9F9600F64F7D /* RIEUNIER_Côme.jpg */,
+				79FC12D528DB9FAE00F64F7D /* RODRIGUEZ_Hugo.jpg */,
+				79FC12D728DB9FC000F64F7D /* ROUDIE_Jean.jpg */,
+				79FC12D928DB9FD600F64F7D /* SALETES_Louise.jpg */,
+				79FC12FD28DBA41600F64F7D /* SHAIK_Tazmeen.jpg */,
+				79FC132A28DBA90500F64F7D /* SU_Lily.jpg */,
+				79FC12DB28DB9FF100F64F7D /* SUC-MELLA_Ruben.jpg */,
+				79FC132B28DBA90500F64F7D /* VERMEERSCH_Jules.jpg */,
+				79FC132C28DBA90600F64F7D /* WENGER_Emmy.jpg */,
+				79FC12FE28DBA41600F64F7D /* ZUNINO_Mauro.jpg */,
+				79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */,
+				79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */,
+				79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */,
+				79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */,
 				79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */,
 			);
 			path = Photos;
@@ -910,22 +1189,115 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79D4FD1B28DB189900D2D164 /* DUBUS_Albane.jpg in Resources */,
+				79FC131628DBA80600F64F7D /* FERRIER_Raphaël.jpg in Resources */,
+				79FC132D28DBA90600F64F7D /* MORALES_Paul.jpg in Resources */,
+				79FC132628DBA8AD00F64F7D /* MALLEVILLE_Charlotte.jpg in Resources */,
+				79FC135228DBB13C00F64F7D /* DRUAUT_Raphaël.jpg in Resources */,
+				79FC134228DBB04100F64F7D /* CHAVANT_Rose.jpg in Resources */,
+				79FC12BF28DB9D6500F64F7D /* BORDE_Lilou.jpg in Resources */,
+				79FC133F28DBAFD700F64F7D /* BLANCO_Tessa.jpg in Resources */,
+				79FC130E28DBA7B200F64F7D /* DEVIN_Axelle.jpg in Resources */,
+				79FC12AF28DB9D6500F64F7D /* BEDEL_Maxence.jpg in Resources */,
 				79D4FD2028DB189900D2D164 /* HUMBERT_Alice.jpg in Resources */,
 				79F102EA28232F36005E5D9C /* Classe.json in Resources */,
+				79FC12B528DB9D6500F64F7D /* BADAOUI_Alice.jpg in Resources */,
+				79FC12E328DBA2BB00F64F7D /* CAGNASSO_Romance.jpg in Resources */,
+				79FC131028DBA7B200F64F7D /* EVEN_Amélie.jpg in Resources */,
+				79FC12B228DB9D6500F64F7D /* FLORES-OLIVIE_Théo.jpg in Resources */,
+				79FC12B328DB9D6500F64F7D /* HASAN_JALIL_Luciano.jpg in Resources */,
+				79FC12D628DB9FAE00F64F7D /* RODRIGUEZ_Hugo.jpg in Resources */,
 				7986E7E228291DA00011FF21 /* AppVersion.json in Resources */,
+				79FC12B128DB9D6500F64F7D /* BOURSOT_Clara.jpg in Resources */,
+				79FC12E128DBA2BB00F64F7D /* BURNS_Chloé-Grace.jpg in Resources */,
+				79FC136228DBB1D700F64F7D /* MAFFRE_Sasha.jpg in Resources */,
+				79FC130528DBA76B00F64F7D /* COURTEL_Jean-Camille.jpg in Resources */,
+				79FC131E28DBA86A00F64F7D /* JOUANILLOU_Marine.jpg in Resources */,
+				79FC12B028DB9D6500F64F7D /* DEVIN_Anouk.jpg in Resources */,
+				79FC131828DBA80600F64F7D /* GEVIGNEY_Amicie.jpg in Resources */,
+				79FC134928DBB0B500F64F7D /* DELRIEU_Gabriel.jpg in Resources */,
+				79FC12BA28DB9D6500F64F7D /* FERMI_Hugo.jpg in Resources */,
+				79FC12D428DB9F9600F64F7D /* RIEUNIER_Côme.jpg in Resources */,
+				79FC132528DBA8AD00F64F7D /* LOPEZ_Martin.jpg in Resources */,
+				79FC12D228DB9F7F00F64F7D /* POPOVA_Sofia.jpg in Resources */,
+				79FC134B28DBB0B500F64F7D /* COURTOIS_Dorian.jpg in Resources */,
 				79F102E828232F36005E5D9C /* School.json in Resources */,
+				79FC12EB28DBA32200F64F7D /* DESMEULLES_Kate.jpg in Resources */,
+				79FC133528DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg in Resources */,
+				79FC131F28DBA86A00F64F7D /* HERVY_Apolline.jpg in Resources */,
+				79FC131528DBA80600F64F7D /* GROULT_Valentin.jpg in Resources */,
 				79D4FD1F28DB189900D2D164 /* DUTHEIL_Victoire.jpg in Resources */,
+				79FC12EA28DBA32200F64F7D /* DU-PLESSIS_Marie.jpg in Resources */,
+				79FC135328DBB13C00F64F7D /* FERRIER_Gaëtan.jpg in Resources */,
+				79FC12F128DBA38000F64F7D /* HABRIAS_Ulysse.jpg in Resources */,
 				79F102E628232F36005E5D9C /* Observation.json in Resources */,
+				79FC12FC28DBA3E200F64F7D /* REVOL_Louis.jpg in Resources */,
+				79FC12CE28DB9F4E00F64F7D /* PERIGAULT_Emma.jpg in Resources */,
+				79FC134428DBB05000F64F7D /* BELAUD_Amélie.jpg in Resources */,
+				79FC133728DBAF8C00F64F7D /* BACOU_Léo.jpg in Resources */,
+				79FC12B428DB9D6500F64F7D /* DUFOSSET_Margaux.jpg in Resources */,
+				79FC134A28DBB0B500F64F7D /* COTONAT_Jean.jpg in Resources */,
+				79FC12F928DBA3E200F64F7D /* PHILIPPON_Maël.jpg in Resources */,
+				79FC12AE28DB9D6500F64F7D /* ARNAUD_Victor.jpg in Resources */,
+				79FC12DA28DB9FD600F64F7D /* SALETES_Louise.jpg in Resources */,
+				79FC131D28DBA86A00F64F7D /* LABATUT_Luce.jpg in Resources */,
+				79FC12E928DBA32200F64F7D /* GRAF_Emma.jpg in Resources */,
+				79FC12CC28DB9F3400F64F7D /* PERES_Jules.jpg in Resources */,
+				79FC12F228DBA38000F64F7D /* LEGUEVAQUE_Lucie.jpg in Resources */,
+				79FC132828DBA8AD00F64F7D /* MERCY_Antoine.jpg in Resources */,
+				79FC12C828DB9F0300F64F7D /* MARINGE_Aliénor.jpg in Resources */,
+				79FC12DC28DB9FF100F64F7D /* SUC-MELLA_Ruben.jpg in Resources */,
+				79FC12EC28DBA32200F64F7D /* GORDO_Manel.jpg in Resources */,
+				79FC135428DBB13C00F64F7D /* DUPRE_Tiago.jpg in Resources */,
+				79FC135B28DBB18E00F64F7D /* FRESPUECH_Théphile.jpg in Resources */,
+				79FC134C28DBB0B500F64F7D /* DELOOZ_Cyprien.jpg in Resources */,
 				79D4FD1D28DB189900D2D164 /* HERVY_Eugénie.jpg in Resources */,
+				79FC12C028DB9D6500F64F7D /* DAIZIS_Violette.jpg in Resources */,
+				79FC132F28DBA90600F64F7D /* VERMEERSCH_Jules.jpg in Resources */,
+				79FC12C228DB9D6500F64F7D /* GEGO_Fleur.jpg in Resources */,
+				79FC136328DBB1D700F64F7D /* MONTAIGNAC_Louise.jpg in Resources */,
+				79FC12C628DB9EE100F64F7D /* MALIN_Christian.jpg in Resources */,
 				79D4FD1928DB189900D2D164 /* GEGO_Fleur.jpg in Resources */,
+				79FC133028DBA90600F64F7D /* WENGER_Emmy.jpg in Resources */,
+				79FC133828DBAF8C00F64F7D /* BAILLOT_Clémence.jpg in Resources */,
+				79FC130628DBA76B00F64F7D /* CRUZ-SEMEDO_Inna.jpg in Resources */,
 				79F3ABBA2808218300D068D9 /* Assets.xcassets in Resources */,
+				79FC130828DBA76B00F64F7D /* CAZALS_Paloma.jpg in Resources */,
+				79FC12F328DBA38000F64F7D /* LAPORTALIERE_Justine.jpg in Resources */,
+				79FC134028DBAFD700F64F7D /* CASSE_Clémence.jpg in Resources */,
+				79FC135128DBB13C00F64F7D /* FERRE_Louis.jpg in Resources */,
+				79FC12E428DBA2BB00F64F7D /* BUTLER_Augustin.jpg in Resources */,
+				79FC12B728DB9D6500F64F7D /* DUPUY_Thomas.jpg in Resources */,
 				79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */,
-				79D4FD2128DB189900D2D164 /* ELTVEDT_Charles.jpg in Resources */,
-				79D4FD1E28DB189900D2D164 /* GIRARDEAU_Pablo.jpg in Resources */,
+				79FC135A28DBB18E00F64F7D /* GIMMIG_Titouan.jpg in Resources */,
+				79FC12E228DBA2BB00F64F7D /* BARON_Victoire.jpg in Resources */,
+				79FC12FB28DBA3E200F64F7D /* PAGOTTO_Tom.jpg in Resources */,
+				79FC130028DBA41600F64F7D /* ZUNINO_Mauro.jpg in Resources */,
+				79FC136428DBB1D700F64F7D /* LANDES_Mathilde.jpg in Resources */,
+				79FC12D828DB9FC000F64F7D /* ROUDIE_Jean.jpg in Resources */,
+				79FC12BD28DB9D6500F64F7D /* ABADLA_Nesrine.jpg in Resources */,
+				79FC12C428DB9ECA00F64F7D /* FONTAINE_Gabin.jpg in Resources */,
+				79FC12FF28DBA41600F64F7D /* SHAIK_Tazmeen.jpg in Resources */,
+				79FC133E28DBAFD700F64F7D /* CLEMENT_Andréanne.jpg in Resources */,
 				79D4FD1A28DB189900D2D164 /* HASAN_JALIL_Luciano.jpg in Resources */,
 				79F102E228232F36005E5D9C /* Eleve.json in Resources */,
+				79FC12D028DB9F6500F64F7D /* PINEAU_Charlotte.jpg in Resources */,
+				79FC12CA28DB9F1E00F64F7D /* MATHIEU_Eugénie.jpg in Resources */,
+				79FC12FA28DBA3E200F64F7D /* MARTIN_Eva.jpg in Resources */,
+				79FC12B628DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg in Resources */,
+				79FC132028DBA86A00F64F7D /* LEWIN-FLEUR_Aubin.jpg in Resources */,
+				79FC135928DBB18E00F64F7D /* GOUGEON_Martin.jpg in Resources */,
+				79FC136128DBB1D700F64F7D /* MAUREL_Louise.jpg in Resources */,
+				79FC12C128DB9D6500F64F7D /* DORNIC_Salomé.jpg in Resources */,
+				79FC130D28DBA7B200F64F7D /* DENIS_Paul.jpg in Resources */,
+				79FC12F428DBA38000F64F7D /* LE MOOIGNE_Ines.jpg in Resources */,
+				79FC132E28DBA90600F64F7D /* SU_Lily.jpg in Resources */,
+				79FC130F28DBA7B200F64F7D /* FAURE_François.jpg in Resources */,
+				79FC131728DBA80600F64F7D /* FOURCADE_Jules.jpg in Resources */,
 				79F102E428232F36005E5D9C /* Colle.json in Resources */,
+				79FC130728DBA76B00F64F7D /* CAUSSOU_Martin.jpg in Resources */,
+				79FC12AD28DB9D6500F64F7D /* DUTHEIL_Victoire.jpg in Resources */,
+				79FC135C28DBB18E00F64F7D /* GRANGER_Valentine.jpg in Resources */,
+				79FC132728DBA8AD00F64F7D /* MARRACHE_Vickie.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

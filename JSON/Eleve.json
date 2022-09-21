@@ -324,7 +324,7 @@
       ]
     },
     {
-      "bonus" : -0.25,
+      "bonus" : -1,
       "id" : "EFF96B80-634E-4E75-8364-62DC85C42C6B",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -1255,7 +1255,7 @@
       ]
     },
     {
-      "bonus" : -0.25,
+      "bonus" : -1,
       "id" : "1BEE22F8-AE5D-47D9-820A-4FE8A7380078",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -1287,6 +1287,25 @@
       "name" : {
         "familyName" : "DINH",
         "givenName" : "Niccolo"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "55211765-9FA7-474B-A183-E8E5D7128F8F",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "DORNIC",
+        "givenName" : "Salomé"
       },
       "observsID" : [
 
@@ -1382,6 +1401,25 @@
       "name" : {
         "familyName" : "DU",
         "givenName" : "Paul"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "67A714C3-0333-40F6-94B7-DC3BCC38A4D7",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "DUBUS",
+        "givenName" : "Albane"
       },
       "observsID" : [
 
@@ -1503,6 +1541,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "03769F5F-42EB-4135-9C2C-3CECE773E1E1",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "DUTHEIL",
+        "givenName" : "Victoire"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "56C93F37-DB4B-4164-91E6-11AB41AB6C7F",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -1534,6 +1591,25 @@
       "name" : {
         "familyName" : "EL",
         "givenName" : "Safia"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "55C6A1CB-A3D2-4A61-803C-BBD8A7E1A053",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "ELTVEDT",
+        "givenName" : "Charles"
       },
       "observsID" : [
 
@@ -1845,6 +1921,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "4F4C753B-7B6D-4C51-BFF3-997EA222D199",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "GEGO",
+        "givenName" : "Fleur"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "E7015A0D-C343-49C5-AEA4-AC66D4FA2B93",
       "isFlagged" : false,
       "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
@@ -1895,6 +1990,25 @@
       "name" : {
         "familyName" : "GIMMIG",
         "givenName" : "TITOUAN"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "A738D094-ADCE-4CF1-9627-B8A8AE2435A3",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "GIRARDEAU",
+        "givenName" : "Pablo"
       },
       "observsID" : [
 
@@ -2092,6 +2206,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "025D209D-FE24-41C7-8374-0F3F60255705",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "HASAN JALIL",
+        "givenName" : "Luciano"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "2C873DF8-FB36-4A7E-87EA-445FD1651680",
       "isFlagged" : false,
       "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
@@ -2130,6 +2263,44 @@
     },
     {
       "bonus" : 0,
+      "id" : "7F063730-28CC-49C4-B9DF-BD86B082A240",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "HERVY",
+        "givenName" : "Eugénie "
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "A78E0656-5E78-4566-95E1-CB79527DC61E",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "HUMBERT",
+        "givenName" : "Alice"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "9F2E58A7-DAC0-42B2-AFC4-63CB0441E426",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -2142,6 +2313,25 @@
       "name" : {
         "familyName" : "JOUANILLOU",
         "givenName" : "Marine"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "702337B3-187E-4518-88B3-CBB4D8522D09",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "JURIS",
+        "givenName" : "Ondine "
       },
       "observsID" : [
 
@@ -2199,6 +2389,25 @@
       "name" : {
         "familyName" : "LABATUT",
         "givenName" : "Luce"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "57B30F9E-6B7D-4734-A9A7-4CDCED0B62D2",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "LABOURET",
+        "givenName" : "Emile"
       },
       "observsID" : [
 
@@ -2275,6 +2484,25 @@
       "name" : {
         "familyName" : "LEGUEVAQUE",
         "givenName" : "Lucie"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "03DB6D85-BF09-40B6-869C-E3CD8EADA020",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "LELEU",
+        "givenName" : "Valentine"
       },
       "observsID" : [
 
@@ -2415,6 +2643,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "C10B7DA4-C8B5-4E7E-B3B6-4E6669B888D1",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "MAGNAUDEIX",
+        "givenName" : "Anna"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "A625DC74-EB4F-4859-B76D-1800905F0BE2",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -2446,6 +2693,25 @@
       "name" : {
         "familyName" : "MALLEVILLE",
         "givenName" : "Charlotte "
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "1F19BC20-9005-4795-B863-9890D936AE10",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "MARCOUYRE",
+        "givenName" : "Zoé "
       },
       "observsID" : [
 
@@ -2509,12 +2775,12 @@
       ]
     },
     {
-      "bonus" : -0.5,
+      "bonus" : -2,
       "id" : "80AC31EB-0C10-47E0-992F-F4C98A05ECEA",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
       "annotation" : "",
-      "appreciation" : "",
+      "appreciation" : "Bavarde",
       "sexe" : "female",
       "collesID" : [
 
@@ -2541,6 +2807,25 @@
       "name" : {
         "familyName" : "MARTY",
         "givenName" : "Louis"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "CD10C150-F563-4772-9B43-DCA5AB70563A",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "MARTY",
+        "givenName" : "Thibaut"
       },
       "observsID" : [
 
@@ -2604,7 +2889,7 @@
       ]
     },
     {
-      "bonus" : -0.5,
+      "bonus" : -2,
       "id" : "FC76F128-2670-42C3-B3F3-C54EBF069710",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -2617,6 +2902,25 @@
       "name" : {
         "familyName" : "MICOULEAU",
         "givenName" : "Marius"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "41A9A180-83E5-459D-8230-ED5464040952",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "MILLIEZ",
+        "givenName" : "Maylis"
       },
       "observsID" : [
 
@@ -2909,6 +3213,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "FF567A51-54D6-4FF0-B156-A35C045E63B9",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "PODLIPSKI",
+        "givenName" : "Paul-Albert"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "A9BFB5BB-21D7-4872-BF2E-2711BB50DB37",
       "isFlagged" : false,
       "classeId" : "49819899-4614-42CC-82BE-50F6483AC241",
@@ -2959,6 +3282,44 @@
       "name" : {
         "familyName" : "PUECH",
         "givenName" : "LOUIS"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "D5108C4F-3F3E-481C-BDF4-CEBA1C5517CF",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "PUN",
+        "givenName" : "Alice"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "608AFB84-E82E-480F-B5D6-016787E9B7E4",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "RAYNAUD",
+        "givenName" : "Jack"
       },
       "observsID" : [
 
@@ -3118,6 +3479,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "737051DE-30EC-4601-8822-828632D9A580",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "SAINT EXUPERY ",
+        "givenName" : "Gaston"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "52992ABF-A495-4645-8F8E-0E3589EE1424",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -3232,6 +3612,44 @@
     },
     {
       "bonus" : 0,
+      "id" : "BBD505CF-18F7-4A67-9A41-F78CE2679F30",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "SNOW",
+        "givenName" : "Violette "
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "EB559D7B-0AA2-46EA-B338-CAC4DFAE9598",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "SOUBIELLE",
+        "givenName" : "Alban"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "CEAD6F0C-B95E-41A7-A343-8DCF35A2ACCA",
       "isFlagged" : false,
       "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
@@ -3308,6 +3726,25 @@
     },
     {
       "bonus" : 0,
+      "id" : "266FB862-B9F6-4CA6-8623-94221559DEC1",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "TIRABY",
+        "givenName" : "Alban"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
       "id" : "D9A020C8-EB36-449C-8749-BC53DA6DEDAC",
       "isFlagged" : false,
       "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
@@ -3358,6 +3795,25 @@
       "name" : {
         "familyName" : "VALMORIN",
         "givenName" : "Salomé"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "B83D8446-0E1A-45EB-A8E3-5BE71E383774",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "VERLINDE",
+        "givenName" : "Alienor "
       },
       "observsID" : [
 
@@ -3453,6 +3909,25 @@
       "name" : {
         "familyName" : "WENGER",
         "givenName" : "Emmy"
+      },
+      "observsID" : [
+
+      ]
+    },
+    {
+      "bonus" : 0,
+      "id" : "A00D6DBF-A847-4C19-A7A3-8F42F79E2494",
+      "isFlagged" : false,
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "female",
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "ZHAO",
+        "givenName" : "Lucie"
       },
       "observsID" : [
 

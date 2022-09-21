@@ -180,8 +180,9 @@ struct SchoolBrowserView: View {
                     }
                 }
             } message: {
-                Text("Les photos importées doivent être au format JPEG.") +
-                Text(" Cette action ne peut pas être annulée.")
+                Text("Les photos importées doivent être au format JPEG ") +
+                Text("et être nommées NOM_Prénom.jpg. ") +
+                Text("Cette action ne peut pas être annulée.")
             }
 
             .confirmationDialog("Suppression de toutes vos données",
@@ -274,6 +275,8 @@ struct SchoolBrowserView: View {
         Trombinoscope.deleteAllTrombines()
     }
 
+    /// Coppier les fichier Image sélectionnés dans le dossier Document de l'application.
+    /// - Parameter result: résultat de la sélection des fichiers issu de fileImporter.
     private func importJpegFiles(result: Result<[URL], Error>) {
         switch result {
             case .failure(let error):

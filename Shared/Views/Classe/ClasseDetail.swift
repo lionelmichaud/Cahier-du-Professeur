@@ -32,6 +32,8 @@ struct ClasseDetail: View {
     var classeAppreciationEnabled
     @Preference(\.classeAnnotationEnabled)
     var classeAnnotationEnabled
+    @Preference(\.eleveTrombineEnabled)
+    private var eleveTrombineEnabled
 
     private var name: some View {
         HStack {
@@ -55,7 +57,7 @@ struct ClasseDetail: View {
                 }
             }
 
-            // Nombre d'heures d'enseignement pour cette classe
+            // SEGPA ou pas
             Toggle(isOn: $classe.segpa) {
                 Text("SEGPA")
                     .font(.caption)
@@ -64,7 +66,7 @@ struct ClasseDetail: View {
 
             Spacer()
 
-            // Nombre d'heure d'enseignement
+            // Nombre d'heures d'enseignement pour cette classe
             AmountEditView(label: "Heures",
                            amount: $classe.heures,
                            validity: .poz,
@@ -74,7 +76,7 @@ struct ClasseDetail: View {
         .listRowSeparator(.hidden)
     }
 
-    private var eleveList: some View {
+    private var elevesList: some View {
         Section {
             DisclosureGroup {
                 // ajouter un élève
@@ -132,14 +134,24 @@ struct ClasseDetail: View {
                 }
 
             } label: {
-                Text(classe.elevesLabel)
+                Text(classe.elevesListLabel)
                     .font(.title3)
                     .fontWeight(.bold)
             }
         }
     }
 
-    private var examList: some View {
+    private var trombinoscope: some View {
+        NavigationLink {
+            TrombinoscopeView(classe : $classe)
+        } label: {
+            Text("Trombinoscope")
+                .font(.title3)
+                .fontWeight(.bold)
+        }
+    }
+
+    private var examsList: some View {
         Section {
             DisclosureGroup {
                 // ajouter une évaluation
@@ -176,7 +188,7 @@ struct ClasseDetail: View {
                 }
 
             } label: {
-                Text(classe.examsLabel)
+                Text(classe.examsListLabel)
                     .font(.title3)
                     .fontWeight(.bold)
             }
@@ -188,7 +200,6 @@ struct ClasseDetail: View {
             // nom
             name
 
-            // élèves dans la classe
             // appréciation sur la classe
             if classeAppreciationEnabled {
                 AppreciationView(isExpanded  : $appreciationIsExpanded,
@@ -203,10 +214,15 @@ struct ClasseDetail: View {
             }
 
             // édition de la liste des élèves
-            eleveList
+            elevesList
+
+            // trombinoscope
+            if eleveTrombineEnabled {
+                trombinoscope
+            }
 
             // édition de la liste des examens
-            examList
+            examsList
         }
         #if os(iOS)
         .navigationTitle("Classe")
@@ -239,7 +255,7 @@ struct ClassDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ClasseDetail(classe         : .constant(TestEnvir.classeStore.items.first!))
+            ClasseDetail(classe: .constant(TestEnvir.classeStore.items.first!))
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)

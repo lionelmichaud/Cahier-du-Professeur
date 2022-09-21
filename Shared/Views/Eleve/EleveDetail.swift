@@ -62,9 +62,15 @@ struct EleveDetail: View {
                     CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
                         .pickerStyle(.menu)
                     TextField("Prénom", text: $eleve.name.givenName.bound)
+                        .onSubmit {
+                            eleve.name.givenName.bound.trim()
+                        }
                         .textFieldStyle(.roundedBorder)
                         .disableAutocorrection(true)
                     TextField("Nom", text: $eleve.name.familyName.bound)
+                        .onSubmit {
+                            eleve.name.familyName.bound.trim()
+                        }
                         .textFieldStyle(.roundedBorder)
                         .disableAutocorrection(true)
                 }

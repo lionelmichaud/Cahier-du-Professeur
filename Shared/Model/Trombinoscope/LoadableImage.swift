@@ -7,28 +7,62 @@ import Files
 
 struct LoadableImage: View {
     var imageUrl: URL
+    @State private var placeholderPortrait: Image = Image(systemName: "person.fill.questionmark")
     
     var body: some View {
-        AsyncImage(url: imageUrl) { phase in
-            if let image = phase.image {
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(15)
-                    .shadow(radius: 5)
-                    .accessibility(hidden: false)
-            }  else if phase.error != nil  {
-                VStack {
-                    Image(systemName: "person.fill.questionmark")
+        VStack {
+//            PlaceholderPortrait(portrait: $placeholderPortrait)
+//                .draggable(placeholderPortrait)
+//                .dropDestination(for: Image.self) { (images: [Image], _) in
+//                    if let portrait = images.first {
+//                        placeholderPortrait = portrait
+//                        return true
+//                    }
+//                    return false
+//                }
+//            PasteButton(payloadType: Image.self) { images in
+//                placeholderPortrait = images.first!
+//            }
+
+            AsyncImage(url: imageUrl) { phase in
+                if let image = phase.image {
+                    image
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: 100)
-                    Text("Photo introuvable.")
+                        .cornerRadius(15)
+                        .shadow(radius: 5)
+                        .accessibility(hidden: false)
+
+                } else if phase.error != nil  {
+                    PlaceholderPortrait(portrait: $placeholderPortrait)
+//                        .draggable(placeholderPortrait)
+                        .dropDestination(for: Image.self) { (images: [Image], _) in
+                            if let portrait = images.first {
+                                placeholderPortrait = portrait
+                                return true
+                            }
+                            return false
+                        }
+                } else {
+                    ProgressView()
                 }
-                
-            } else {
-                ProgressView()
             }
+        }
+    }
+}
+
+struct PlaceholderPortrait : View {
+    @Binding var portrait: Image
+    
+    var body: some View {
+        VStack {
+            portrait
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 100)
+//            PasteButton(payloadType: Image.self) { images in
+//                portrait = images.first!
+//            }
         }
     }
 }

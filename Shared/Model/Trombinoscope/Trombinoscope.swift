@@ -13,6 +13,8 @@ private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Profess
                                category  : "Trombinoscope")
 
 struct Trombinoscope {
+    /// Construit l'URL de l'image trombine de l'élève à partir de son nom
+    /// - Returns: URL de la trombine si le dossier Document existe sinon retourne `nil`.
     static func eleveTrombineUrl(eleve: Eleve) -> URL? {
         guard var familyName = eleve.name.familyName, let givenName = eleve.name.givenName else {
             return nil
@@ -24,7 +26,7 @@ struct Trombinoscope {
             familyName = familyName.replacingOccurrences(of: " ", with: "_", count: 2)
         }
         
-        let name = familyName + "_" + givenName + ".jpg"
+        let imageName = familyName + "_" + givenName + ".jpg"
 
         // vérifier l'existence du Folder Document
         guard let documentsFolder = Folder.documents else {
@@ -34,7 +36,7 @@ struct Trombinoscope {
             return nil
         }
 
-        let fileURL = documentsFolder.url.appendingPathComponent(name)
+        let fileURL = documentsFolder.url.appendingPathComponent(imageName)
 
         return fileURL
     }

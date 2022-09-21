@@ -217,7 +217,18 @@ public struct PersistenceManager {
         }
 
         // consistency Classe <=> Elèves
-        for eleve in eleveStore.items {
+        for idx in eleveStore.items.indices {
+            var eleve = eleveStore.items[idx]
+
+            if eleve.name.givenName != nil {
+                eleve.name.givenName!.trim()
+                eleveStore.update(with: eleve)
+            }
+            if eleve.name.familyName != nil {
+                eleve.name.familyName!.trim()
+                eleveStore.update(with: eleve)
+
+            }
             // Classe d'appartenance
             if let classeId = eleve.classeId {
                 if var classe = classeStore.item(withID: classeId) {

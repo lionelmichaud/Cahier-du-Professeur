@@ -123,6 +123,15 @@
 		79CC5716285F9906001D56F5 /* RessourceEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC5714285F9906001D56F5 /* RessourceEditor.swift */; };
 		79CC57182860B7C4001D56F5 /* SchoolCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC57172860B7C4001D56F5 /* SchoolCreator.swift */; };
 		79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC57172860B7C4001D56F5 /* SchoolCreator.swift */; };
+		79D4FD1928DB189900D2D164 /* GEGO_Fleur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */; };
+		79D4FD1A28DB189900D2D164 /* HASAN_JALIL_Luciano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */; };
+		79D4FD1B28DB189900D2D164 /* DUBUS_Albane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1228DB189900D2D164 /* DUBUS_Albane.jpg */; };
+		79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */; };
+		79D4FD1D28DB189900D2D164 /* HERVY_Eugénie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */; };
+		79D4FD1E28DB189900D2D164 /* GIRARDEAU_Pablo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1528DB189900D2D164 /* GIRARDEAU_Pablo.jpg */; };
+		79D4FD1F28DB189900D2D164 /* DUTHEIL_Victoire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */; };
+		79D4FD2028DB189900D2D164 /* HUMBERT_Alice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */; };
+		79D4FD2128DB189900D2D164 /* ELTVEDT_Charles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1828DB189900D2D164 /* ELTVEDT_Charles.jpg */; };
 		79D583F728204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583F828204A3A00371EB3 /* ObservNotifIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */; };
 		79D583FA28204A6A00371EB3 /* ObservSignIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D583F928204A6A00371EB3 /* ObservSignIcon.swift */; };
@@ -136,6 +145,8 @@
 		79E109EF28219AF700689212 /* FileAndFolder in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109EE28219AF700689212 /* FileAndFolder */; };
 		79E109F128219AF700689212 /* Persistable in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109F028219AF700689212 /* Persistable */; };
 		79E109F328219AF700689212 /* Stateful in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109F228219AF700689212 /* Stateful */; };
+		79E6C5B428DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */; };
+		79E6C5B528DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */; };
 		79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102E228232F36005E5D9C /* Eleve.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DD28232F36005E5D9C /* Eleve.json */; };
@@ -245,6 +256,7 @@
 		7935E64E285CAE9600111936 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7935E651285CB42500111936 /* AppreciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppreciationView.swift; sourceTree = "<group>"; };
 		7935E653285CC05900111936 /* EleveLabelWithTrombineFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveLabelWithTrombineFlag.swift; sourceTree = "<group>"; };
+		794370CA28D8C72A000830EC /* Cahier-du-Professeur--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cahier-du-Professeur--iOS--Info.plist"; sourceTree = "<group>"; };
 		79502BA32818716500DA798F /* ObservBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservBrowserView.swift; sourceTree = "<group>"; };
 		79502BA62818945200DA798F /* ObservBrowserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservBrowserRow.swift; sourceTree = "<group>"; };
 		79502BA92820407500DA798F /* EleveLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveLabel.swift; sourceTree = "<group>"; };
@@ -285,11 +297,21 @@
 		79CC5711285F9105001D56F5 /* SchoolRessourceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolRessourceRow.swift; sourceTree = "<group>"; };
 		79CC5714285F9906001D56F5 /* RessourceEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RessourceEditor.swift; sourceTree = "<group>"; };
 		79CC57172860B7C4001D56F5 /* SchoolCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCreator.swift; sourceTree = "<group>"; };
+		79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GEGO_Fleur.jpg; sourceTree = "<group>"; };
+		79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HASAN_JALIL_Luciano.jpg; sourceTree = "<group>"; };
+		79D4FD1228DB189900D2D164 /* DUBUS_Albane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUBUS_Albane.jpg; sourceTree = "<group>"; };
+		79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DORNIC_Salomé.jpg"; sourceTree = "<group>"; };
+		79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "HERVY_Eugénie.jpg"; sourceTree = "<group>"; };
+		79D4FD1528DB189900D2D164 /* GIRARDEAU_Pablo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GIRARDEAU_Pablo.jpg; sourceTree = "<group>"; };
+		79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUTHEIL_Victoire.jpg; sourceTree = "<group>"; };
+		79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUMBERT_Alice.jpg; sourceTree = "<group>"; };
+		79D4FD1828DB189900D2D164 /* ELTVEDT_Charles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ELTVEDT_Charles.jpg; sourceTree = "<group>"; };
 		79D583F628204A3A00371EB3 /* ObservNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservNotifIcon.swift; sourceTree = "<group>"; };
 		79D583F928204A6A00371EB3 /* ObservSignIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSignIcon.swift; sourceTree = "<group>"; };
 		79D583FC28204EBE00371EB3 /* ColleBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleBrowserView.swift; sourceTree = "<group>"; };
 		79D583FF2820535B00371EB3 /* ColleBrowserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleBrowserRow.swift; sourceTree = "<group>"; };
 		79D58402282053C300371EB3 /* ColleNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleNotifIcon.swift; sourceTree = "<group>"; };
+		79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrombinoscopeView.swift; sourceTree = "<group>"; };
 		79F102D02821B816005E5D9C /* JsonCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonCodableArray.swift; sourceTree = "<group>"; };
 		79F102DD28232F36005E5D9C /* Eleve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Eleve.json; sourceTree = "<group>"; };
 		79F102DE28232F36005E5D9C /* Colle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Colle.json; sourceTree = "<group>"; };
@@ -382,6 +404,7 @@
 				7918D2002810A86100C24C5A /* ClasseDetail.swift */,
 				791C26EE281475CC00686F0C /* ClasseObservLabel.swift */,
 				791C26F12814847B00686F0C /* ClasseColleLabel.swift */,
+				79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -481,6 +504,15 @@
 		7984334B283E92B100C5E51E /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */,
+				79D4FD1228DB189900D2D164 /* DUBUS_Albane.jpg */,
+				79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */,
+				79D4FD1828DB189900D2D164 /* ELTVEDT_Charles.jpg */,
+				79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */,
+				79D4FD1528DB189900D2D164 /* GIRARDEAU_Pablo.jpg */,
+				79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */,
+				79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */,
+				79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -578,6 +610,7 @@
 		79F3AB882808218000D068D9 = {
 			isa = PBXGroup;
 			children = (
+				794370CA28D8C72A000830EC /* Cahier-du-Professeur--iOS--Info.plist */,
 				79F3ABE528083A3100D068D9 /* Playground.playground */,
 				7984334B283E92B100C5E51E /* Photos */,
 				79F102D32823199E005E5D9C /* JSON */,
@@ -877,11 +910,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79D4FD1B28DB189900D2D164 /* DUBUS_Albane.jpg in Resources */,
+				79D4FD2028DB189900D2D164 /* HUMBERT_Alice.jpg in Resources */,
 				79F102EA28232F36005E5D9C /* Classe.json in Resources */,
 				7986E7E228291DA00011FF21 /* AppVersion.json in Resources */,
 				79F102E828232F36005E5D9C /* School.json in Resources */,
+				79D4FD1F28DB189900D2D164 /* DUTHEIL_Victoire.jpg in Resources */,
 				79F102E628232F36005E5D9C /* Observation.json in Resources */,
+				79D4FD1D28DB189900D2D164 /* HERVY_Eugénie.jpg in Resources */,
+				79D4FD1928DB189900D2D164 /* GEGO_Fleur.jpg in Resources */,
 				79F3ABBA2808218300D068D9 /* Assets.xcassets in Resources */,
+				79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */,
+				79D4FD2128DB189900D2D164 /* ELTVEDT_Charles.jpg in Resources */,
+				79D4FD1E28DB189900D2D164 /* GIRARDEAU_Pablo.jpg in Resources */,
+				79D4FD1A28DB189900D2D164 /* HASAN_JALIL_Luciano.jpg in Resources */,
 				79F102E228232F36005E5D9C /* Eleve.json in Resources */,
 				79F102E428232F36005E5D9C /* Colle.json in Resources */,
 			);
@@ -937,6 +979,7 @@
 				79D584002820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
 				791C26DF28144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				79502BA72818945200DA798F /* ObservBrowserRow.swift in Sources */,
+				79E6C5B428DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */,
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */,
 				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
@@ -1051,6 +1094,7 @@
 				797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */,
 				791C26D82814378A00686F0C /* EleveManager.swift in Sources */,
 				79F3AC112808CAA600D068D9 /* ObservSidebarView.swift in Sources */,
+				79E6C5B528DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */,
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseBrowserView.swift in Sources */,
 				79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */,
@@ -1260,6 +1304,7 @@
 				DEVELOPMENT_TEAM = 8N9S268396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Cahier-du-Professeur--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1292,6 +1337,7 @@
 				DEVELOPMENT_TEAM = 8N9S268396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Cahier-du-Professeur--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

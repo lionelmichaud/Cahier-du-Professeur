@@ -71,6 +71,15 @@ struct EleveEditor: View {
                     ToolbarItem {
                         Button {
                             if isNew {
+                                // supprimer les caracctères blancs au début et à la fin
+                                if itemCopy.name.familyName != nil {
+                                    itemCopy.name.familyName!.trim()
+                                    itemCopy.name.familyName = itemCopy.name.familyName!.uppercased()
+                                }
+                                if itemCopy.name.givenName != nil {
+                                    itemCopy.name.givenName!.trim()
+                                }
+                                //trim(formName: itemCopy.name)
                                 // Ajouter un nouvel élève à la classe
                                 if eleveStore.exists(eleve: itemCopy, in: classe.id) {
                                     self.alertItem = AlertItem(title         : Text("Ajout impossible"),
@@ -88,6 +97,14 @@ struct EleveEditor: View {
                             } else {
                                 // Appliquer les modifications faites à l'élève
                                 if isEditing && !isDeleted {
+                                    // supprimer les caracctères blancs au début et à la fin
+                                    if itemCopy.name.familyName != nil {
+                                        itemCopy.name.familyName!.trim()
+                                        itemCopy.name.familyName = itemCopy.name.familyName!.uppercased()
+                                    }
+                                    if itemCopy.name.givenName != nil {
+                                        itemCopy.name.givenName!.trim()
+                                    }
                                     print("Done, saving any changes to \(eleve.displayName).")
                                     withAnimation {
                                         eleve = itemCopy // Put edits (if any) back in the store.
@@ -161,7 +178,6 @@ struct EleveEditor: View {
                                       filterFlag        : false,
                                       searchString      : searchString)
     }
-
 }
 
 struct EleveEditor_Previews: PreviewProvider {

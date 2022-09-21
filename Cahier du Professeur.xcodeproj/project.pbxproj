@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		790E0F8128DBD24200A17AA2 /* RIMAUD_Maxence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F7D28DBD24200A17AA2 /* RIMAUD_Maxence.jpg */; };
+		790E0F8228DBD24200A17AA2 /* SOUIFA_Célia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F7E28DBD24200A17AA2 /* SOUIFA_Célia.jpg */; };
+		790E0F8328DBD24200A17AA2 /* TOURNIER_Victoire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F7F28DBD24200A17AA2 /* TOURNIER_Victoire.jpg */; };
+		790E0F8428DBD24200A17AA2 /* SARRY_Arthur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8028DBD24200A17AA2 /* SARRY_Arthur.jpg */; };
+		790E0F8928DBD2EE00A17AA2 /* VALMORIN_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8528DBD2EE00A17AA2 /* VALMORIN_Salomé.jpg */; };
+		790E0F8A28DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8628DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg */; };
+		790E0F8B28DBD2EE00A17AA2 /* VINKEN_Noor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8728DBD2EE00A17AA2 /* VINKEN_Noor.jpg */; };
+		790E0F8C28DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8828DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg */; };
 		7913562828D77C2900480771 /* Interoperability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913562728D77C2900480771 /* Interoperability.swift */; };
 		7913562928D77C2900480771 /* Interoperability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913562728D77C2900480771 /* Interoperability.swift */; };
 		7913562B28D7814600480771 /* UIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913562A28D7814600480771 /* UIPreferences.swift */; };
@@ -191,7 +199,7 @@
 		79A5259128DBCFFA00E69ACD /* GUISARD_Paul.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5258D28DBCFFA00E69ACD /* GUISARD_Paul.jpg */; };
 		79A5259228DBCFFA00E69ACD /* HERRI_Clémence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5258E28DBCFFA00E69ACD /* HERRI_Clémence.jpg */; };
 		79A5259728DBD0CC00E69ACD /* LAPLACE_Oscar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5259328DBD0CC00E69ACD /* LAPLACE_Oscar.jpg */; };
-		79A5259828DBD0CC00E69ACD /* KEMPF-Sophie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5259428DBD0CC00E69ACD /* KEMPF-Sophie.jpg */; };
+		79A5259828DBD0CC00E69ACD /* KEMPF_Sophie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5259428DBD0CC00E69ACD /* KEMPF_Sophie.jpg */; };
 		79A5259928DBD0CC00E69ACD /* MARTY_Louis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5259528DBD0CC00E69ACD /* MARTY_Louis.jpg */; };
 		79A5259A28DBD0CC00E69ACD /* REMARK_Olivier.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5259628DBD0CC00E69ACD /* REMARK_Olivier.jpg */; };
 		79AA30B728DBBA560091E8FB /* PUECH_Louis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AA30B328DBBA560091E8FB /* PUECH_Louis.jpg */; };
@@ -425,6 +433,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		790E0F7D28DBD24200A17AA2 /* RIMAUD_Maxence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RIMAUD_Maxence.jpg; sourceTree = "<group>"; };
+		790E0F7E28DBD24200A17AA2 /* SOUIFA_Célia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SOUIFA_Célia.jpg"; sourceTree = "<group>"; };
+		790E0F7F28DBD24200A17AA2 /* TOURNIER_Victoire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TOURNIER_Victoire.jpg; sourceTree = "<group>"; };
+		790E0F8028DBD24200A17AA2 /* SARRY_Arthur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SARRY_Arthur.jpg; sourceTree = "<group>"; };
+		790E0F8528DBD2EE00A17AA2 /* VALMORIN_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "VALMORIN_Salomé.jpg"; sourceTree = "<group>"; };
+		790E0F8628DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = VERMEERSCH_Paul.jpg; sourceTree = "<group>"; };
+		790E0F8728DBD2EE00A17AA2 /* VINKEN_Noor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = VINKEN_Noor.jpg; sourceTree = "<group>"; };
+		790E0F8828DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "TRACEY_Grace-Lily.jpg"; sourceTree = "<group>"; };
 		7913562728D77C2900480771 /* Interoperability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interoperability.swift; sourceTree = "<group>"; };
 		7913562A28D7814600480771 /* UIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPreferences.swift; sourceTree = "<group>"; };
 		7918D1F92810997700C24C5A /* ColorOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptions.swift; sourceTree = "<group>"; };
@@ -566,7 +582,7 @@
 		79A5258D28DBCFFA00E69ACD /* GUISARD_Paul.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GUISARD_Paul.jpg; sourceTree = "<group>"; };
 		79A5258E28DBCFFA00E69ACD /* HERRI_Clémence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "HERRI_Clémence.jpg"; sourceTree = "<group>"; };
 		79A5259328DBD0CC00E69ACD /* LAPLACE_Oscar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LAPLACE_Oscar.jpg; sourceTree = "<group>"; };
-		79A5259428DBD0CC00E69ACD /* KEMPF-Sophie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "KEMPF-Sophie.jpg"; sourceTree = "<group>"; };
+		79A5259428DBD0CC00E69ACD /* KEMPF_Sophie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = KEMPF_Sophie.jpg; sourceTree = "<group>"; };
 		79A5259528DBD0CC00E69ACD /* MARTY_Louis.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MARTY_Louis.jpg; sourceTree = "<group>"; };
 		79A5259628DBD0CC00E69ACD /* REMARK_Olivier.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = REMARK_Olivier.jpg; sourceTree = "<group>"; };
 		79AA30B328DBBA560091E8FB /* PUECH_Louis.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PUECH_Louis.jpg; sourceTree = "<group>"; };
@@ -911,6 +927,14 @@
 				79FC130428DBA76B00F64F7D /* CAZALS_Paloma.jpg */,
 				79FC134128DBB04100F64F7D /* CHAVANT_Rose.jpg */,
 				79FC133A28DBAFD600F64F7D /* CLEMENT_Andréanne.jpg */,
+				790E0F7D28DBD24200A17AA2 /* RIMAUD_Maxence.jpg */,
+				790E0F8028DBD24200A17AA2 /* SARRY_Arthur.jpg */,
+				790E0F8828DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg */,
+				790E0F8528DBD2EE00A17AA2 /* VALMORIN_Salomé.jpg */,
+				790E0F8628DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg */,
+				790E0F8728DBD2EE00A17AA2 /* VINKEN_Noor.jpg */,
+				790E0F7E28DBD24200A17AA2 /* SOUIFA_Célia.jpg */,
+				790E0F7F28DBD24200A17AA2 /* TOURNIER_Victoire.jpg */,
 				79FC134628DBB0B500F64F7D /* COTONAT_Jean.jpg */,
 				79FC130128DBA76B00F64F7D /* COURTEL_Jean-Camille.jpg */,
 				79FC134728DBB0B500F64F7D /* COURTOIS_Dorian.jpg */,
@@ -1046,7 +1070,7 @@
 				79A5254B28DBC70500E69ACD /* DURAND_Brune.jpg */,
 				79A5254E28DBC70500E69ACD /* DUTECH_Robin.jpg */,
 				79A5254328DBC68300E69ACD /* DELPIC_Côme.jpg */,
-				79A5259428DBD0CC00E69ACD /* KEMPF-Sophie.jpg */,
+				79A5259428DBD0CC00E69ACD /* KEMPF_Sophie.jpg */,
 				79A5259328DBD0CC00E69ACD /* LAPLACE_Oscar.jpg */,
 				79A5259528DBD0CC00E69ACD /* MARTY_Louis.jpg */,
 				79A5259628DBD0CC00E69ACD /* REMARK_Olivier.jpg */,
@@ -1535,6 +1559,7 @@
 				79FC131828DBA80600F64F7D /* GEVIGNEY_Amicie.jpg in Resources */,
 				79FC134928DBB0B500F64F7D /* DELRIEU_Gabriel.jpg in Resources */,
 				79FC12BA28DB9D6500F64F7D /* FERMI_Hugo.jpg in Resources */,
+				790E0F8B28DBD2EE00A17AA2 /* VINKEN_Noor.jpg in Resources */,
 				79FC12D428DB9F9600F64F7D /* RIEUNIER_Côme.jpg in Resources */,
 				7955964F28DBBD5F00FB6A95 /* MARCOUYRE_Zoé.jpg in Resources */,
 				79FC132528DBA8AD00F64F7D /* LOPEZ_Martin.jpg in Resources */,
@@ -1547,6 +1572,7 @@
 				79FC12EB28DBA32200F64F7D /* DESMEULLES_Kate.jpg in Resources */,
 				79A5252A28DBC43200E69ACD /* NISSOU_Jules.jpg in Resources */,
 				79A5250728DBC15300E69ACD /* ARKWRIGHT_Wandrille.jpg in Resources */,
+				790E0F8928DBD2EE00A17AA2 /* VALMORIN_Salomé.jpg in Resources */,
 				79A5255828DBC79000E69ACD /* GALVANI_Giulia.jpg in Resources */,
 				79A5254028DBC5E200E69ACD /* DAZZI_Mattéo.jpg in Resources */,
 				79FC133528DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg in Resources */,
@@ -1565,7 +1591,7 @@
 				79A5258028DBCE9400E69ACD /* DETHIEUX_Gaspard.jpg in Resources */,
 				79A5258928DBCF2400E69ACD /* EZQUERRA_Camille.jpg in Resources */,
 				79AA30C128DBBA980091E8FB /* SELLEM_Manon.jpg in Resources */,
-				79A5259828DBD0CC00E69ACD /* KEMPF-Sophie.jpg in Resources */,
+				79A5259828DBD0CC00E69ACD /* KEMPF_Sophie.jpg in Resources */,
 				7955964628DBBCEE00FB6A95 /* LABOURET_Emile.jpg in Resources */,
 				79A5251228DBC1B000E69ACD /* DASQUE_Eva.jpg in Resources */,
 				79FC12F128DBA38000F64F7D /* HABRIAS_Ulysse.jpg in Resources */,
@@ -1594,6 +1620,7 @@
 				79A5256228DBC81700E69ACD /* MONTBRON_Eulalie.jpg in Resources */,
 				79FC12F928DBA3E200F64F7D /* PHILIPPON_Maël.jpg in Resources */,
 				79A5257128DBCCF600E69ACD /* CASTERA_Lou.jpg in Resources */,
+				790E0F8128DBD24200A17AA2 /* RIMAUD_Maxence.jpg in Resources */,
 				79A5252028DBC35600E69ACD /* MARTIN_Pauline.jpg in Resources */,
 				79AA30B828DBBA560091E8FB /* PONTIER_Inès.jpg in Resources */,
 				79FC12AE28DB9D6500F64F7D /* ARNAUD_Victor.jpg in Resources */,
@@ -1620,13 +1647,16 @@
 				79FC134C28DBB0B500F64F7D /* DELOOZ_Cyprien.jpg in Resources */,
 				79D4FD1D28DB189900D2D164 /* HERVY_Eugénie.jpg in Resources */,
 				79FC12C028DB9D6500F64F7D /* DAIZIS_Violette.jpg in Resources */,
+				790E0F8328DBD24200A17AA2 /* TOURNIER_Victoire.jpg in Resources */,
 				79FC132F28DBA90600F64F7D /* VERMEERSCH_Jules.jpg in Resources */,
 				79A5251A28DBC29A00E69ACD /* LODE_Lucas.jpg in Resources */,
 				7955965F28DBBF1500FB6A95 /* SNOW_Violette.jpg in Resources */,
 				79A5256928DBCC4C00E69ACD /* BANGOURA_Emma.jpg in Resources */,
 				79FC136328DBB1D700F64F7D /* MONTAIGNAC_Louise.jpg in Resources */,
 				79FC12C628DB9EE100F64F7D /* MALIN_Christian.jpg in Resources */,
+				790E0F8428DBD24200A17AA2 /* SARRY_Arthur.jpg in Resources */,
 				79D4FD1928DB189900D2D164 /* GEGO_Fleur.jpg in Resources */,
+				790E0F8A28DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg in Resources */,
 				79FC133028DBA90600F64F7D /* WENGER_Emmy.jpg in Resources */,
 				79FC133828DBAF8C00F64F7D /* BAILLOT_Clémence.jpg in Resources */,
 				7955965428DBBE4B00FB6A95 /* PODLIPSKI_Paul-Albert.jpg in Resources */,
@@ -1647,6 +1677,7 @@
 				79FC12B728DB9D6500F64F7D /* DUPUY_Thomas.jpg in Resources */,
 				79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */,
 				79FC135A28DBB18E00F64F7D /* GIMMIG_Titouan.jpg in Resources */,
+				790E0F8C28DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg in Resources */,
 				79AA30B928DBBA560091E8FB /* PETIT_Eléonore.jpg in Resources */,
 				79FC12E228DBA2BB00F64F7D /* BARON_Victoire.jpg in Resources */,
 				79A5250F28DBC1B000E69ACD /* DASTE_Louise.jpg in Resources */,
@@ -1682,6 +1713,7 @@
 				79A5255028DBC70500E69ACD /* DINH_Niccolo.jpg in Resources */,
 				79FC12C128DB9D6500F64F7D /* DORNIC_Salomé.jpg in Resources */,
 				79A5257928DBCDD700E69ACD /* COLNAT_Claire.jpg in Resources */,
+				790E0F8228DBD24200A17AA2 /* SOUIFA_Célia.jpg in Resources */,
 				79FC130D28DBA7B200F64F7D /* DENIS_Paul.jpg in Resources */,
 				79FC12F428DBA38000F64F7D /* LE MOOIGNE_Ines.jpg in Resources */,
 				79FC132E28DBA90600F64F7D /* SU_Lily.jpg in Resources */,

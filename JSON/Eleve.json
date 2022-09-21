@@ -3489,7 +3489,7 @@
 
       ],
       "name" : {
-        "familyName" : "SAINT EXUPERY ",
+        "familyName" : "SAINT-EXUPERY",
         "givenName" : "Gaston"
       },
       "observsID" : [
@@ -3623,7 +3623,7 @@
       ],
       "name" : {
         "familyName" : "SNOW",
-        "givenName" : "Violette "
+        "givenName" : "Violette"
       },
       "observsID" : [
 
@@ -3813,7 +3813,7 @@
       ],
       "name" : {
         "familyName" : "VERLINDE",
-        "givenName" : "Alienor "
+        "givenName" : "Aliénor"
       },
       "observsID" : [
 

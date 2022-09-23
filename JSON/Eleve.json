@@ -478,9 +478,9 @@
     {
       "bonus" : 0,
       "id" : "0270D262-44E3-48F0-8B5E-5E99593BB0AD",
-      "isFlagged" : false,
+      "isFlagged" : true,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
-      "annotation" : "",
+      "annotation" : "Agité et bavard",
       "appreciation" : "",
       "sexe" : "male",
       "collesID" : [
@@ -2851,7 +2851,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "D1CB5E80-7243-4BB9-95F1-50D03448BFFB",
       "isFlagged" : false,
       "classeId" : "49819899-4614-42CC-82BE-50F6483AC241",
@@ -3402,7 +3402,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "6FFF0E7F-E307-430A-9904-879D16A4B9A4",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -3417,7 +3417,7 @@
         "givenName" : "Hugo"
       },
       "observsID" : [
-
+        "B4168778-D0A2-4D04-923A-75CD3F4A1A78"
       ]
     },
     {
@@ -3440,7 +3440,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "FB2F8D03-1BBF-4DE2-8598-5D7AD325C18D",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -3455,7 +3455,7 @@
         "givenName" : "Jean"
       },
       "observsID" : [
-
+        "C3D212F7-72F6-4BDA-AF08-E24E55A55943"
       ]
     },
     {

@@ -14,30 +14,103 @@ struct TrombinoscopeView: View {
     @EnvironmentObject
     var eleveStore  : EleveStore
 
+    @State
+    private var isAddingNewObserv = false
+    @State
+    private var isAddingNewColle  = false
+    @State
+    private var newObserv = Observation.exemple
+    @State
+    private var newColle  = Colle.exemple
+
     @Preference(\.nameDisplayOrder)
     var nameDisplayOrder
 
     let font       : Font        = .title3
     let fontWeight : Font.Weight = .semibold
 
+    private var menu: some View {
+        Menu {
+            Button(action: {  }) {
+                Label("A propos", systemImage: "info.circle")
+            }
+            // ajouter une observation
+            Button {
+//                isModified        = true
+                newObserv         = Observation()
+                isAddingNewObserv = true
+            } label: {
+                Label("Nouvelle observation", systemImage: "magnifyingglass")
+            }
+            // ajouter une colle
+            Button {
+//                isModified       = true
+                newColle         = Colle()
+                isAddingNewColle = true
+            } label: {
+                Label("Nouvelle colle", systemImage: "lock")
+            }
+
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .imageScale(.large)
+                .padding(4)
+        }
+    }
+
     var body: some View {
         let columns = [GridItem(.adaptive(minimum: 120, maximum: 200))]
         ScrollView(.vertical, showsIndicators: true) {
             LazyVGrid(columns: columns, spacing: 4, pinnedViews: .sectionFooters) {
-                //                Section(footer: TrombinoscopeFooterVGridView(nbOfEleves: classe.nbOfEleves)) {
                 ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
-                    VStack {
-                        if let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
+                    if let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
+                        VStack {
                             // si le dossier Document existe
-                            ZStack(alignment: .bottom) {
-                                LoadableImage(imageUrl: trombine)
-                                TrombinoscopeFooterView(eleve: $eleve)
+                            ZStack(alignment: .topLeading) {
+                                ZStack(alignment: .topTrailing) {
+                                    ZStack(alignment: .bottom) {
+                                        LoadableImage(imageUrl: trombine)
+                                        TrombinoscopeFooterView(eleve: $eleve)
+                                    }
+                                    menu
+                                        .sheet(isPresented: $isAddingNewObserv) {
+                                            NavigationView {
+                                                ObservEditor(classe            : classe,
+                                                             eleve             : $eleve,
+                                                             observ            : $newObserv,
+                                                             isNew             : true,
+                                                             filterObservation : false)
+                                            }
+                                        }
+                                        .sheet(isPresented: $isAddingNewColle) {
+                                            NavigationView {
+                                                ColleEditor(classe      : classe,
+                                                            eleve       : $eleve,
+                                                            colle       : $newColle,
+                                                            isNew       : true,
+                                                            filterColle : false)
+                                            }
+                                        }
+                                }
+                                
+                                /// Flag
+                                Button {
+                                    eleve.isFlagged.toggle()
+                                } label: {
+                                    if eleve.isFlagged {
+                                        Image(systemName: "flag.fill")
+                                            .foregroundColor(.orange)
+                                    } else {
+                                        Image(systemName: "flag")
+                                            .foregroundColor(.orange)
+                                    }
+                                }
+                                .buttonStyle(.bordered)
                             }
                             Text(eleve.displayName2lines(nameDisplayOrder))
                                 .multilineTextAlignment(.center)
                         }
                     }
-                    //                    }
                 }
             }
         }
@@ -56,7 +129,7 @@ struct TrombinoscopeFooterView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Button(iconName: "minus.circle") {
+            Button(iconName: "hand.thumbsdown.fill") {
                 eleve.bonus -= maxBonusIncrement
             }
             .buttonStyle(.bordered)
@@ -69,12 +142,12 @@ struct TrombinoscopeFooterView: View {
                 Spacer()
             }
 
-            Button(iconName: "plus.circle") {
+            Button(iconName: "hand.thumbsup.fill") {
                 eleve.bonus += maxBonusIncrement
             }
             .buttonStyle(.bordered)
         }
-        .background(Rectangle().fill(Color.white).opacity(0.9))
+        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white).opacity(0.8))
     }
 }
 

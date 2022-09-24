@@ -212,6 +212,8 @@
 		79AA30C228DBBA980091E8FB /* SATGE_Maxence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AA30BE28DBBA980091E8FB /* SATGE_Maxence.jpg */; };
 		79AA30C528DBBB660091E8FB /* ELTVEDT_Charles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AA30C328DBBB660091E8FB /* ELTVEDT_Charles.jpg */; };
 		79AA30C628DBBB660091E8FB /* DUBUS_Albane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AA30C428DBBB660091E8FB /* DUBUS_Albane.jpg */; };
+		79AACD8F28DF5430009B5AE4 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD8E28DF5430009B5AE4 /* GroupsView.swift */; };
+		79AACD9028DF5430009B5AE4 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD8E28DF5430009B5AE4 /* GroupsView.swift */; };
 		79B5BD4728340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
 		79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
@@ -595,6 +597,7 @@
 		79AA30BE28DBBA980091E8FB /* SATGE_Maxence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SATGE_Maxence.jpg; sourceTree = "<group>"; };
 		79AA30C328DBBB660091E8FB /* ELTVEDT_Charles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ELTVEDT_Charles.jpg; sourceTree = "<group>"; };
 		79AA30C428DBBB660091E8FB /* DUBUS_Albane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUBUS_Albane.jpg; sourceTree = "<group>"; };
+		79AACD8E28DF5430009B5AE4 /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
 		79B5BD4628340C9400034115 /* MotifLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifLabel.swift; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
@@ -807,6 +810,7 @@
 				791C26EE281475CC00686F0C /* ClasseObservLabel.swift */,
 				791C26F12814847B00686F0C /* ClasseColleLabel.swift */,
 				79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */,
+				79AACD8E28DF5430009B5AE4 /* GroupsView.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -1772,6 +1776,7 @@
 				79F3ABCD2808222C00D068D9 /* School.swift in Sources */,
 				79F3AC0D2808CA8700D068D9 /* ColleSidebarView.swift in Sources */,
 				795BC3DF2813105A00C22271 /* ClasseEleveRow.swift in Sources */,
+				79AACD8F28DF5430009B5AE4 /* GroupsView.swift in Sources */,
 				791C26E528145F8E00686F0C /* EleveObservLabel.swift in Sources */,
 				79C12751283A9620002F243E /* AppVersionView.swift in Sources */,
 				7918D1FA2810997700C24C5A /* ColorOptions.swift in Sources */,
@@ -1923,6 +1928,7 @@
 				79F3ABB92808218300D068D9 /* ContentView.swift in Sources */,
 				791C26D528142D7100686F0C /* ColleStore.swift in Sources */,
 				79D584012820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
+				79AACD9028DF5430009B5AE4 /* GroupsView.swift in Sources */,
 				7992D0AE282B0B2100B31186 /* Exam.swift in Sources */,
 				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,

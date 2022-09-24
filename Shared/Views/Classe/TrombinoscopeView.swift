@@ -40,7 +40,7 @@ struct TrombinoscopeView: View {
                 newObserv         = Observation()
                 isAddingNewObserv = true
             } label: {
-                Label("Nouvelle observation", systemImage: "magnifyingglass")
+                Label("Nouvelle observation", systemImage: "rectangle.and.text.magnifyingglass")
             }
             // ajouter une colle
             Button {
@@ -48,7 +48,7 @@ struct TrombinoscopeView: View {
                 newColle         = Colle()
                 isAddingNewColle = true
             } label: {
-                Label("Nouvelle colle", systemImage: "lock")
+                Label("Nouvelle colle", systemImage: "lock.fill")
             }
 
         } label: {

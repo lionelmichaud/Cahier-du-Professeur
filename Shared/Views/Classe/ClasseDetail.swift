@@ -142,12 +142,26 @@ struct ClasseDetail: View {
     }
 
     private var trombinoscope: some View {
-        NavigationLink {
-            TrombinoscopeView(classe : $classe)
-        } label: {
-            Text("Trombinoscope")
-                .font(.title3)
-                .fontWeight(.bold)
+        Section {
+            NavigationLink {
+                TrombinoscopeView(classe : $classe)
+            } label: {
+                Text("Trombinoscope")
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
+        }
+    }
+
+    private var groups: some View {
+        Section {
+            NavigationLink {
+                GroupsView(classe : $classe)
+            } label: {
+                Text("Groupes")
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
         }
     }
 
@@ -197,31 +211,34 @@ struct ClasseDetail: View {
 
     var body: some View {
         List {
-            // nom
+            /// nom
             name
 
-            // appréciation sur la classe
+            /// appréciation sur la classe
             if classeAppreciationEnabled {
                 AppreciationView(isExpanded  : $appreciationIsExpanded,
                                  isModified  : $isModified,
                                  appreciation: $classe.appreciation)
             }
-            // annotation sur la classe
+            /// annotation sur la classe
             if classeAnnotationEnabled {
                 AnnotationView(isExpanded: $noteIsExpanded,
                                isModified: $isModified,
                                annotation: $classe.annotation)
             }
 
-            // édition de la liste des élèves
+            /// édition de la liste des élèves
             elevesList
 
-            // trombinoscope
+            /// trombinoscope
             if eleveTrombineEnabled {
                 trombinoscope
             }
 
-            // édition de la liste des examens
+            /// gestion des groupes
+            groups
+
+            /// édition de la liste des examens
             examsList
         }
         #if os(iOS)

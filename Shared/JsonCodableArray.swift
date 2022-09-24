@@ -82,7 +82,7 @@ E.ID == UUID {
     public convenience init(fromFolder: Folder?) {
         var folder: Folder
 
-        if let fromFolder = fromFolder {
+        if let fromFolder {
             folder = fromFolder
 
         } else if let documentsFolder = Folder.documents {
@@ -120,7 +120,7 @@ E.ID == UUID {
     public func loadFromJSON(fromFolder: Folder?) throws {
         var folder: Folder
 
-        if let fromFolder = fromFolder {
+        if let fromFolder {
             folder = fromFolder
 
         } else if let documentsFolder = Folder.documents {

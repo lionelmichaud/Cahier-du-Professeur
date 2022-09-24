@@ -62,7 +62,7 @@ public struct PersistenceManager {
         var urls = [URL]()
         // collecte des URL des fichiers contenus dans le dossier Documents
         documentsFolder.files.forEach { file in
-            if let fileNames = fileNames {
+            if let fileNames {
                 fileNames.forEach { fileName in
                     if file.name.contains(fileName) {
                         urls.append(file.url)

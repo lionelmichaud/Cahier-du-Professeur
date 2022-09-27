@@ -26,9 +26,11 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     var name         : PersonNameComponents = PersonNameComponents()
     var classeId     : UUID?
     var isFlagged    : Bool   = false
+    var troubleDys   : TroubleDys?
     var appreciation : String = ""
     var annotation   : String = ""
     var bonus        : Double = 0
+    var group        : Int?
     var collesID     : [UUID] = [ ]
     var observsID    : [UUID] = [ ]
 
@@ -163,6 +165,9 @@ extension Eleve: CustomStringConvertible {
            ClasseID: \(String(describing: classeId))
            Flagged : \(isFlagged.frenchString)
            Appréciation: \(appreciation)
+           Annotation  : \(annotation)
+           Bonus : \(bonus)
+           Groupe: \(String(describing: group))
            Observations: \(String(describing: observsID).withPrefixedSplittedLines("     "))
            Colles: \(String(describing: collesID).withPrefixedSplittedLines("     "))
         """

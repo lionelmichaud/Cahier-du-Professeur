@@ -6,18 +6,28 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct EleveLabelWithTrombineFlag: View {
-    @Binding var eleve      : Eleve
-    @Binding var isModified : Bool
+    @Binding
+    var eleve      : Eleve
+
+    @Binding
+    var isModified : Bool
+
     var font       : Font        = .title2
     var fontWeight : Font.Weight = .semibold
     var imageSize  : Image.Scale = .large
     var flagSize   : Image.Scale = .medium
+
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
+
     @State
     private var showTrombine = false
+
+    @State
+    private var hasPAP = false
 
     var body: some View {
         VStack {
@@ -49,13 +59,54 @@ struct EleveLabelWithTrombineFlag: View {
                             .foregroundColor(.orange)
                     }
                 }
-                .onChange(of: eleve.isFlagged) { newValue in
+                .onChange(of: eleve.isFlagged) { _ in
+                    isModified = true
+                }
+                // PAP
+                Toggle(isOn: $hasPAP) {
+                    Text("PAP")
+                }
+                .toggleStyle(.button)
+                .controlSize(.small)
+                .onChange(of: hasPAP) { newValue in
+                    if newValue {
+                        if eleve.troubleDys == nil {
+                            eleve.troubleDys = .undefined
+                        }
+                    } else {
+                        eleve.troubleDys = nil
+                    }
                     isModified = true
                 }
             }
+
+            /// Trouble dys
+            if let trouble = eleve.troubleDys {
+                HStack {
+                    // Sexe de cet eleve
+                    CasePicker(pickedCase: $eleve.troubleDys.bound, label: "Trouble")
+                        .pickerStyle(.menu)
+                        .onChange(of: eleve.troubleDys.bound) { _ in
+                            isModified = true
+                        }
+                    if trouble.additionalTime {
+                        Text("1/3 de temps aditionnel")
+                    }
+                }
+            }
+
+            /// Groupe
+            if let group = eleve.group {
+                Text("Groupe " + group.formatted(.number))
+            }
+
+            /// Trombine
             if showTrombine, let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
                 LoadableImage(imageUrl: trombine)
             }
+        }
+        .onAppear {
+            hasPAP = eleve.troubleDys != nil
         }
     }
 }

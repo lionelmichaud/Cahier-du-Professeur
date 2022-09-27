@@ -201,14 +201,13 @@ E.ID == UUID {
         saveAsJSON()
     }
 
-    /// True si une classe existe déjà avec le même ID
-    /// - Parameter item: Classe
+    /// True si un `item` existe déjà avec le même ID
     public func isPresent(_ item: E) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 
-    /// True si une classe existe déjà avec le même ID
-    /// - Parameter ID: ID de la Calsse
+    /// True si un item existe déjà avec le même ID
+    /// - Parameter ID: ID de l'item
     public func isPresent(_ ID: UUID) -> Bool {
         items.contains(where: { ID == $0.id})
     }

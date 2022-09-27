@@ -12,7 +12,7 @@ struct GroupsView: View {
     var classe: Classe
 
     @EnvironmentObject
-    var eleveStore  : EleveStore
+    var eleveStore: EleveStore
 
     @State
     private var isShowingDeleteGroupsDialog = false
@@ -28,27 +28,26 @@ struct GroupsView: View {
                     Menu {
                         /// Générer les groupes
                         Menu {
-                            Button("Manuellement", action: {})
                             Menu("Automatiquement") {
                                 Menu("Par ordre alphabétique") {
                                     Button("2 élèves") {
                                         withAnimation() {
-                                            generateOrderedGroups(nbEleveParGroupe: 2)
+                                            formOrderedGroups(nbEleveParGroupe: 2)
                                         }
                                     }
                                     Button("3 élèves") {
                                         withAnimation() {
-                                            generateOrderedGroups(nbEleveParGroupe: 3)
+                                            formOrderedGroups(nbEleveParGroupe: 3)
                                         }
                                     }
                                     Button("4 élèves") {
                                         withAnimation() {
-                                            generateOrderedGroups(nbEleveParGroupe: 4)
+                                            formOrderedGroups(nbEleveParGroupe: 4)
                                         }
                                     }
                                     Button("5 élèves") {
                                         withAnimation() {
-                                            generateOrderedGroups(nbEleveParGroupe: 5)
+                                            formOrderedGroups(nbEleveParGroupe: 5)
                                         }
                                     }
                                 }
@@ -56,28 +55,31 @@ struct GroupsView: View {
                                 Menu("Aléatoirement") {
                                     Button("2 élèves") {
                                         withAnimation() {
-                                            generateRandomGroups(nbEleveParGroupe: 2)
+                                            formRandomGroups(nbEleveParGroupe: 2)
                                         }
                                     }
                                     Button("3 élèves") {
                                         withAnimation() {
-                                            generateRandomGroups(nbEleveParGroupe: 3)
+                                            formRandomGroups(nbEleveParGroupe: 3)
                                         }
                                     }
                                     Button("4 élèves") {
                                         withAnimation() {
-                                            generateRandomGroups(nbEleveParGroupe: 4)
+                                            formRandomGroups(nbEleveParGroupe: 4)
                                         }
                                     }
                                     Button("5 élèves") {
                                         withAnimation() {
-                                            generateRandomGroups(nbEleveParGroupe: 5)
+                                            formRandomGroups(nbEleveParGroupe: 5)
                                         }
                                     }
                                 }
                             }
+
+                            Button("Manuellement", action: {})
+
                         } label: {
-                            Label("Générer les groupes", systemImage: "person.line.dotted.person")
+                            Label("Générer les groupes", systemImage: "person.line.dotted.person.fill")
                         }
 
                         /// Supprimer les groupes
@@ -99,6 +101,7 @@ struct GroupsView: View {
                         titleVisibility : .visible) {
                             Button("Supprimer", role: .destructive) {
                                 withAnimation() {
+                                    deleteGroups()
                                 }
                             }
                         } message: {
@@ -108,12 +111,56 @@ struct GroupsView: View {
             }
     }
 
-    private func generateOrderedGroups(nbEleveParGroupe: Int) {
+    private func formOrderedGroups(nbEleveParGroupe: Int) {
+        func formRegularGroups(_ nb: Int) {
+            for idx in eleves.indices {
+                let (q, _) = idx.quotientAndRemainder(dividingBy: nbEleveParGroupe)
+                eleves[idx].wrappedValue.group = q + 1
+            }
+        }
+
+        let eleves: Binding<[Eleve]> = eleveStore.filteredEleves(dans: classe)
+        let nbEleves = eleves.count
+        let (nbGroupes, reste) = nbEleves.quotientAndRemainder(dividingBy: nbEleveParGroupe)
+        let distributeRemainder = reste > 0 && (reste.double() < nbEleveParGroupe.double() / 2.0)
+
+        if reste == 0 {
+            // nombre entier de groupes complets
+            formRegularGroups(nbGroupes)
+
+        } else if distributeRemainder {
+            // les élèves formant un groupe incomplet sont redistribués sur les derniers groupes complets
+            let nbOfRegularGroups = nbGroupes - reste
+            let firstRemainEleveIndex = nbOfRegularGroups * nbEleveParGroupe
+            formRegularGroups(nbGroupes)
+            for group in nbOfRegularGroups + 1 ... nbOfRegularGroups + reste {
+                for i in 0 ... nbEleveParGroupe {
+                    eleves[firstRemainEleveIndex + i * (group - nbOfRegularGroups)].wrappedValue.group = group
+                }
+            }
+
+        } else {
+            // le dernier groupe est laissé incomplet
+            formRegularGroups(nbGroupes)
+            for idx in (eleves.endIndex-reste) ... eleves.endIndex-1 {
+                eleves[idx].wrappedValue.group = nbGroupes + 1
+            }
+        }
+        eleves.forEach { eleve in
+            print(eleve.wrappedValue.displayName(.nomPrenom) + String(describing: eleve.group))
+        }
 
     }
 
-    private func generateRandomGroups(nbEleveParGroupe: Int) {
+    private func formRandomGroups(nbEleveParGroupe: Int) {
 
+    }
+
+    private func deleteGroups() {
+        let eleves: Binding<[Eleve]> = eleveStore.filteredEleves(dans: classe)
+        for idx in eleves.indices {
+            eleves[idx].wrappedValue.group = nil
+        }
     }
 }
 

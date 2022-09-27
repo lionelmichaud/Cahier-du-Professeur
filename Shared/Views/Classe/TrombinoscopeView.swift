@@ -70,8 +70,10 @@ struct TrombinoscopeView: View {
                                 ZStack(alignment: .topTrailing) {
                                     ZStack(alignment: .bottom) {
                                         LoadableImage(imageUrl: trombine)
+                                        /// Points +/-
                                         TrombinoscopeFooterView(eleve: $eleve)
                                     }
+                                    /// Coin supérieur droit: Menu
                                     menu
                                         .sheet(isPresented: $isAddingNewObserv) {
                                             NavigationView {
@@ -93,7 +95,7 @@ struct TrombinoscopeView: View {
                                         }
                                 }
                                 
-                                /// Flag
+                                /// Coin supérieur gauche: Flag
                                 Button {
                                     eleve.isFlagged.toggle()
                                 } label: {
@@ -107,8 +109,22 @@ struct TrombinoscopeView: View {
                                 }
                                 .buttonStyle(.bordered)
                             }
-                            Text(eleve.displayName2lines(nameDisplayOrder))
-                                .multilineTextAlignment(.center)
+
+                            /// Nom de l'élève
+                            if eleve.troubleDys == nil {
+                                Text(eleve.displayName2lines(nameDisplayOrder))
+                                    .multilineTextAlignment(.center)
+                                    .fontWeight(fontWeight)
+                            } else {
+                                Text(eleve.displayName2lines(nameDisplayOrder))
+                                    .multilineTextAlignment(.center)
+                                    .fontWeight(fontWeight)
+                                    .padding(2)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(.gray)
+                                    }
+                            }
                         }
                     }
                 }

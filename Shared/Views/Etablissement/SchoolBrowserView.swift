@@ -157,6 +157,7 @@ struct SchoolBrowserView: View {
                 }
             }
             
+            /// Confirmation importation de tous les fichiers depuis l'App
             .confirmationDialog("Importation des fichiers de l'App",
                                 isPresented: $isShowingImportConfirmDialog,
                                 titleVisibility : .visible) {
@@ -170,7 +171,7 @@ struct SchoolBrowserView: View {
                 Text("Cette action ne peut pas être annulée.")
             }
 
-            /// Confirmation des fichiers JPEG pour le trombinoscope
+            /// Confirmation importation des fichiers JPEG pour le trombinoscope
             .confirmationDialog("Importer des photos d'élèves",
                                 isPresented     : $isShowingImportTrombineDialog,
                                 titleVisibility : .visible) {
@@ -185,6 +186,7 @@ struct SchoolBrowserView: View {
                 Text("Cette action ne peut pas être annulée.")
             }
 
+            /// Confirmation de Suppression de toutes vos données
             .confirmationDialog("Suppression de toutes vos données",
                                 isPresented: $isShowingDeleteConfirmDialog,
                                 titleVisibility : .visible) {

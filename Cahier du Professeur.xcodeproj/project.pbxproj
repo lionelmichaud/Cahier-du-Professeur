@@ -214,6 +214,12 @@
 		79AA30C628DBBB660091E8FB /* DUBUS_Albane.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AA30C428DBBB660091E8FB /* DUBUS_Albane.jpg */; };
 		79AACD8F28DF5430009B5AE4 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD8E28DF5430009B5AE4 /* GroupsView.swift */; };
 		79AACD9028DF5430009B5AE4 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD8E28DF5430009B5AE4 /* GroupsView.swift */; };
+		79AACD9228E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9128E0BF51009B5AE4 /* GroupOfEleves.swift */; };
+		79AACD9328E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9128E0BF51009B5AE4 /* GroupOfEleves.swift */; };
+		79AACD9928E21525009B5AE4 /* TroubleDys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9828E21525009B5AE4 /* TroubleDys.swift */; };
+		79AACD9A28E21525009B5AE4 /* TroubleDys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9828E21525009B5AE4 /* TroubleDys.swift */; };
+		79AACD9D28E24D5A009B5AE4 /* PapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9C28E24D5A009B5AE4 /* PapView.swift */; };
+		79AACD9E28E24D5A009B5AE4 /* PapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9C28E24D5A009B5AE4 /* PapView.swift */; };
 		79B5BD4728340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
 		79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
@@ -598,6 +604,9 @@
 		79AA30C328DBBB660091E8FB /* ELTVEDT_Charles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ELTVEDT_Charles.jpg; sourceTree = "<group>"; };
 		79AA30C428DBBB660091E8FB /* DUBUS_Albane.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUBUS_Albane.jpg; sourceTree = "<group>"; };
 		79AACD8E28DF5430009B5AE4 /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
+		79AACD9128E0BF51009B5AE4 /* GroupOfEleves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOfEleves.swift; sourceTree = "<group>"; };
+		79AACD9828E21525009B5AE4 /* TroubleDys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleDys.swift; sourceTree = "<group>"; };
+		79AACD9C28E24D5A009B5AE4 /* PapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapView.swift; sourceTree = "<group>"; };
 		79B5BD4628340C9400034115 /* MotifLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifLabel.swift; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
@@ -1150,6 +1159,22 @@
 			path = Mark;
 			sourceTree = "<group>";
 		};
+		79AACD9428E214D9009B5AE4 /* PAP */ = {
+			isa = PBXGroup;
+			children = (
+				79AACD9828E21525009B5AE4 /* TroubleDys.swift */,
+			);
+			path = PAP;
+			sourceTree = "<group>";
+		};
+		79AACD9B28E24D2F009B5AE4 /* PAP */ = {
+			isa = PBXGroup;
+			children = (
+				79AACD9C28E24D5A009B5AE4 /* PapView.swift */,
+			);
+			path = PAP;
+			sourceTree = "<group>";
+		};
 		79BB0B4B28170CC5002AAABA /* MotifView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1315,6 +1340,7 @@
 				795BC3DD2813102A00C22271 /* Eleve */,
 				791C26D92814463C00686F0C /* Observations */,
 				791C26DA2814465C00686F0C /* Colles */,
+				79AACD9B28E24D2F009B5AE4 /* PAP */,
 				7935E650285CB40A00111936 /* Appreciation */,
 				7935E64D285CAE5600111936 /* Annotation */,
 				79BB0B4B28170CC5002AAABA /* MotifView */,
@@ -1347,6 +1373,7 @@
 				7953631E280DC4D800AB8600 /* ClassStore.swift */,
 				79F3ABCF2808225800D068D9 /* Classe.swift */,
 				79F3ABD5280822BD00D068D9 /* NiveauClasse.swift */,
+				79AACD9128E0BF51009B5AE4 /* GroupOfEleves.swift */,
 			);
 			path = Classe;
 			sourceTree = "<group>";
@@ -1354,6 +1381,7 @@
 		79F3ABE3280830F300D068D9 /* Eleve */ = {
 			isa = PBXGroup;
 			children = (
+				79AACD9428E214D9009B5AE4 /* PAP */,
 				791C26D62814378A00686F0C /* EleveManager.swift */,
 				795BC3DA2813055200C22271 /* EleveStore.swift */,
 				79F3ABD22808229A00D068D9 /* Eleve.swift */,
@@ -1782,6 +1810,7 @@
 				7918D1FA2810997700C24C5A /* ColorOptions.swift in Sources */,
 				79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */,
 				7974C4C9282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
+				79AACD9D28E24D5A009B5AE4 /* PapView.swift in Sources */,
 				79CC5715285F9906001D56F5 /* RessourceEditor.swift in Sources */,
 				79935D372824906B005C20BD /* Share.swift in Sources */,
 				791C26FB2814A43400686F0C /* ColleEditor.swift in Sources */,
@@ -1802,6 +1831,7 @@
 				79F3ABEA28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				791C26DC281447BD00686F0C /* EleveBrowserView.swift in Sources */,
 				79F3F78C282E7E9500DC26FC /* ExamEditor.swift in Sources */,
+				79AACD9928E21525009B5AE4 /* TroubleDys.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
 				791C26D128142B6300686F0C /* ObservationStore.swift in Sources */,
 				791C26EF281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
@@ -1823,6 +1853,7 @@
 				796F69AB28625384005E323D /* ClassCreator.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
 				79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */,
+				79AACD9228E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,
 				791C26D72814378A00686F0C /* EleveManager.swift in Sources */,
 				791C26F828149E7E00686F0C /* ObservDetail.swift in Sources */,
 				7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */,
@@ -1920,6 +1951,7 @@
 				79F3ABFF2808C68700D068D9 /* UIState.swift in Sources */,
 				791C26E328145E4700686F0C /* EleveColleLabel.swift in Sources */,
 				7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */,
+				79AACD9A28E21525009B5AE4 /* TroubleDys.swift in Sources */,
 				791C26DD281447BD00686F0C /* EleveBrowserView.swift in Sources */,
 				79F3ABE8280844C000D068D9 /* ClasseManager.swift in Sources */,
 				791C26EA28146B4300686F0C /* EleveObservRow.swift in Sources */,
@@ -1929,6 +1961,7 @@
 				791C26D528142D7100686F0C /* ColleStore.swift in Sources */,
 				79D584012820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
 				79AACD9028DF5430009B5AE4 /* GroupsView.swift in Sources */,
+				79AACD9E28E24D5A009B5AE4 /* PapView.swift in Sources */,
 				7992D0AE282B0B2100B31186 /* Exam.swift in Sources */,
 				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
@@ -1937,6 +1970,7 @@
 				79F3F78D282E7E9500DC26FC /* ExamEditor.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FC2814A43400686F0C /* ColleEditor.swift in Sources */,
+				79AACD9328E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,
 				79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
 				795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				791C26F928149E7E00686F0C /* ObservDetail.swift in Sources */,

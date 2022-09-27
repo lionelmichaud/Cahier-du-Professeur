@@ -63,6 +63,7 @@ struct ClasseDetail: View {
                     .font(.caption)
             }
             .toggleStyle(.button)
+            .controlSize(.small)
 
             Spacer()
 

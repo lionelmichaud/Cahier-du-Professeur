@@ -23,8 +23,18 @@ struct EleveLabel: View {
                 .imageScale(imageSize)
                 .symbolRenderingMode(.monochrome)
                 .foregroundColor(eleve.sexe.color)
-            Text(eleve.displayName(nameDisplayOrder))
-                .fontWeight(fontWeight)
+            if eleve.troubleDys == nil {
+                Text(eleve.displayName(nameDisplayOrder))
+                    .fontWeight(fontWeight)
+            } else {
+                Text(eleve.displayName(nameDisplayOrder))
+                    .fontWeight(fontWeight)
+                    .padding(2)
+                    .background {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(.gray)
+                    }
+            }
             if eleve.isFlagged {
                 Image(systemName: "flag.fill")
                     .imageScale(flagSize)

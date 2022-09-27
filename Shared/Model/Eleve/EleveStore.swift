@@ -13,7 +13,7 @@ extension EleveStore {
 
     // MARK: - Methods
 
-    /// True si un élève existe dans le strore déjà avec les mêmes
+    /// True si un élève existe déjà dans le strore  avec les mêmes
     /// nom et prénom
     /// - Parameter eleve: Elève
     func exists(_ eleve: Eleve) -> Bool {

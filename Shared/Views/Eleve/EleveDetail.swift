@@ -22,6 +22,7 @@ struct EleveDetail: View {
     @EnvironmentObject var eleveStore  : EleveStore
     @EnvironmentObject var colleStore  : ColleStore
     @EnvironmentObject var observStore : ObservationStore
+
     @State
     private var isAddingNewObserv = false
     @State
@@ -38,6 +39,9 @@ struct EleveDetail: View {
     private var bonusIsExpanded = false
     @State
     private var showTrombine = false
+    @State
+    private var hasPAP = false
+
     @Preference(\.eleveAppreciationEnabled)
     var eleveAppreciationEnabled
     @Preference(\.eleveAnnotationEnabled)
@@ -250,6 +254,7 @@ struct EleveDetail: View {
             appreciationIsExpanded = eleve.appreciation.isNotEmpty
             noteIsExpanded         = eleve.annotation.isNotEmpty
             bonusIsExpanded        = (eleve.bonus != 0)
+            hasPAP                 = eleve.troubleDys != nil
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {

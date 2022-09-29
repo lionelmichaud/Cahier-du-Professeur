@@ -15,7 +15,7 @@ struct EleveLabel: View {
     var flagSize   : Image.Scale = .medium
 
     @Preference(\.nameDisplayOrder)
-    var nameDisplayOrder
+    private var nameDisplayOrder
 
     var body: some View {
         HStack {

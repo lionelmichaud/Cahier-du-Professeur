@@ -7,26 +7,47 @@
 
 import Foundation
 
-struct GroupOfEleves {
-    /// Nombre de groupes formés dans la classe
-    /// - Returns: Nombre de groupes formés dans la classe ou `nil`s'il n'y pas de groupe
-    func numberOfGroups(dans classe : Classe,
-                        eleveStore  : EleveStore) -> Int? {
-        var nb: Int?
-        classe.elevesID.forEach { eleveID in
-            let eleve = eleveStore.item(withID: eleveID)
-            if let group = eleve?.group {
-                if nb == nil {
-                    nb = group
-                } else if group > nb! {
-                    nb = group
-                }
-            }
-        }
-        return nb
+struct GroupOfEleves: Identifiable {
+
+    // MARK: - Properties
+
+    var id       : Int { number }
+    var number   : Int
+    var elevesID : [UUID] = []
+
+    // MARK: - Initializers
+
+    init(number   : Int,
+         elevesID : [UUID] = []) {
+        self.number = number
+        self.elevesID = elevesID
     }
 
-//    static func eleves(dans classe  : Classe) -> <#return type#> {
-//        <#function body#>
-//    }
+
+    // MARK: - Methods
+
+    func eleves(eleveStore : EleveStore) -> [Eleve] {
+        elevesID.compactMap { eleveID in
+            eleveStore.item(withID: eleveID)
+        }
+    }
+
+    func elevesNames(eleveStore : EleveStore,
+                     order      : NameDisplayOrder = .prenomNom) -> [String] {
+        elevesID.compactMap { eleveID in
+            eleveStore.item(withID: eleveID)?.displayName(order)
+        }
+    }
+}
+
+extension GroupOfEleves: CustomStringConvertible {
+    var description: String {
+        return """
+
+        GROUPE:
+           Numéro  : \(number)
+           Eleves: \(elevesID))
+        """
+
+    }
 }

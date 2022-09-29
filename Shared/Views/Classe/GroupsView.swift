@@ -24,21 +24,38 @@ struct GroupsView: View {
     private var expanded = true
 
     @State
+    private var searchString: String = ""
+
+    @State
     private var groups = [GroupOfEleves]()
 
     var body: some View {
-        List {
-            ForEach(groups) { group in
-                DisclosureGroup(isExpanded: $expanded) {
-                    ForEach(group.elevesID, id: \.self) { eleveID in
-                        if let eleve = eleveStore.item(withID: eleveID) {
-                            EleveLabel(eleve: eleve)
+        Group {
+            if groups.count == 0 {
+                VStack(alignment: .center, spacing: 10) {
+                    Text("Aucun groupe.")
+                    Text("Créer des groupes.")
+                }
+
+            } else {
+                List {
+                    ForEach(groups) { group in
+                        DisclosureGroup(isExpanded: $expanded) {
+                            ForEach(group.elevesID, id: \.self) { eleveID in
+                                if let eleve = eleveStore.item(withID: eleveID) {
+                                    EleveLabel(eleve: eleve)
+                                }
+                            }
+                        } label: {
+                            Text("Groupe \(group.number.formatted())")
+                                .foregroundColor(.secondary)
                         }
                     }
-                } label: {
-                    Text("Groupe \(group.number.formatted())")
-                        .foregroundColor(.secondary)
                 }
+                .searchable(text      : $searchString,
+                            placement : .navigationBarDrawer(displayMode : .automatic),
+                            prompt    : "Nom ou Prénom de l'élève")
+                .disableAutocorrection(true)
             }
         }
         #if os(iOS)

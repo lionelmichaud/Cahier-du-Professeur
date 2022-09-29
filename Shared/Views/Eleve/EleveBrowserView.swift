@@ -19,7 +19,7 @@ struct EleveBrowserView: View {
     @State
     private var searchString: String = ""
     //@Environment(\.isSearching) var isSearching
-    @Environment(\.dismissSearch) var dismissSearch
+    //@Environment(\.dismissSearch) var dismissSearch
 
     var body: some View {
         List(selection: $selectedEleve) {

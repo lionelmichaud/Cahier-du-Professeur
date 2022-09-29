@@ -21,12 +21,15 @@ struct GroupsView: View {
     private var isShowingDeleteGroupsDialog = false
 
     @State
+    private var expanded = true
+
+    @State
     private var groups = [GroupOfEleves]()
 
     var body: some View {
         List {
             ForEach(groups) { group in
-                DisclosureGroup {
+                DisclosureGroup(isExpanded: $expanded) {
                     ForEach(group.elevesID, id: \.self) { eleveID in
                         if let eleve = eleveStore.item(withID: eleveID) {
                             EleveLabel(eleve: eleve)

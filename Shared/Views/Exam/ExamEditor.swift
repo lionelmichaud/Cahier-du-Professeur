@@ -14,11 +14,48 @@ struct ExamEditor: View {
     @Binding
     var exam   : Exam
 
-    @EnvironmentObject private var eleveStore: EleveStore
     @State
     private var searchString: String = ""
 
-    private var markList: some View {
+    private var isItemDeleted: Bool {
+        !classe.exams.contains(where: { $0.id == exam.id })
+    }
+
+    var body: some View {
+        List {
+            ExamDetail(exam: $exam)
+
+            // notes
+            MarkListView(exam: $exam, searchString: searchString)
+        }
+        .searchable(text      : $searchString,
+                    placement : .navigationBarDrawer(displayMode : .automatic),
+                    prompt    : "Nom, Prénom ou n° de groupe")
+        .disableAutocorrection(true)
+        #if os(iOS)
+        .navigationTitle("Évaluation")
+        #endif
+        .disabled(isItemDeleted)
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Évaluation supprimée. Sélectionner une évaluation.")
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+}
+
+struct MarkListView : View {
+    @Binding
+    var exam: Exam
+
+    var searchString: String
+
+    @EnvironmentObject
+    private var eleveStore: EleveStore
+
+    var body: some View {
         Section {
             ForEach(filtredMarks()) { $eleveMark in
                 if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
@@ -34,49 +71,32 @@ struct ExamEditor: View {
         .headerProminence(.increased)
     }
 
-    private var isItemDeleted: Bool {
-        !classe.exams.contains(where: { $0.id == exam.id })
-    }
-
-    var body: some View {
-        List {
-            ExamDetail(exam: $exam)
-
-            // notes
-            markList
-        }
-        .searchable(text      : $searchString,
-                    placement : .navigationBarDrawer(displayMode : .automatic),
-                    prompt    : "Nom ou Prénom de l'élève")
-        .disableAutocorrection(true)
-        #if os(iOS)
-        .navigationTitle("Évaluation")
-        #endif
-        .disabled(isItemDeleted)
-        .overlay(alignment: .center) {
-            if isItemDeleted {
-                Color(UIColor.systemBackground)
-                Text("Évaluation supprimée. Sélectionner une évaluation.")
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
     // MARK: - Methods
 
     private func filtredMarks() -> Binding<[EleveMark]> {
-
         Binding<[EleveMark]>(
             get: {
                 self.exam.marks
                     .filter { eleveMark in
                         if searchString.isNotEmpty {
-                            let string = searchString.lowercased()
-                            if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
-                                return eleve.name.familyName!.lowercased().contains(string) ||
-                                eleve.name.givenName!.lowercased().contains(string)
+                            if searchString.containsOnlyDigits {
+                                // filtrage sur numéro de groupe
+                                if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                                    let groupNum = Int(searchString)!
+                                    return eleve.group == groupNum
+                                } else {
+                                    return false
+                                }
+
                             } else {
-                                return false
+                                // filtrage sur Nom ou Prénom
+                                if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
+                                    let string = searchString.lowercased()
+                                    return eleve.name.familyName!.lowercased().contains(string) ||
+                                    eleve.name.givenName!.lowercased().contains(string)
+                                } else {
+                                    return false
+                                }
                             }
                         } else {
                             return true
@@ -152,7 +172,6 @@ struct ExamDetail : View {
         }
     }
 }
-
 
 struct ExamEditor_Previews: PreviewProvider {
     static var previews: some View {

@@ -17,21 +17,6 @@ struct ExamEditor: View {
     @EnvironmentObject private var eleveStore: EleveStore
     @State
     private var searchString: String = ""
-    @Environment(\.isSearching) var isSearching
-
-    private var name: some View {
-        HStack {
-            Image(systemName: "doc.plaintext")
-                .sfSymbolStyling()
-                .foregroundColor(.accentColor)
-
-            // sujet
-            TextField("Sujet de l'évaluation", text: $exam.sujet)
-                .font(.title2)
-                .textFieldStyle(.roundedBorder)
-        }
-        .listRowSeparator(.hidden)
-    }
 
     private var markList: some View {
         Section {
@@ -55,40 +40,7 @@ struct ExamEditor: View {
 
     var body: some View {
         List {
-            if !isSearching {
-                // nom
-                name
-
-                // date
-                DatePicker("Date", selection: $exam.date)
-                    .labelsHidden()
-                    .listRowSeparator(.hidden)
-                    .environment(\.locale, Locale.init(identifier: "fr_FR"))
-
-                // barême
-                Stepper(value : $exam.maxMark,
-                        in    : 1 ... 20,
-                        step  : 1) {
-                    HStack {
-                        Text("Barême")
-                        Spacer()
-                        Text("\(exam.maxMark) points")
-                            .foregroundColor(.secondary)
-                    }
-                }
-
-                // coefficient
-                Stepper(value : $exam.coef,
-                        in    : 0.0 ... 5.0,
-                        step  : 0.25) {
-                    HStack {
-                        Text("Coefficient")
-                        Spacer()
-                        Text("\(exam.coef.formatted(.number.precision(.fractionLength(2))))")
-                            .foregroundColor(.secondary)
-                    }
-                }
-            }
+            ExamDetail(exam: $exam)
 
             // notes
             markList
@@ -141,6 +93,66 @@ struct ExamEditor: View {
         )
     }
 }
+
+struct ExamDetail : View {
+    @Binding
+    var exam: Exam
+
+    @Environment(\.isSearching)
+    private var isSearching
+
+    private var name: some View {
+        HStack {
+            Image(systemName: "doc.plaintext")
+                .sfSymbolStyling()
+                .foregroundColor(.accentColor)
+
+            // sujet
+            TextField("Sujet de l'évaluation", text: $exam.sujet)
+                .font(.title2)
+                .textFieldStyle(.roundedBorder)
+        }
+        .listRowSeparator(.hidden)
+    }
+
+    var body: some View {
+        if !isSearching {
+            // nom
+            name
+
+            // date
+            DatePicker("Date", selection: $exam.date)
+                .labelsHidden()
+                .listRowSeparator(.hidden)
+                .environment(\.locale, Locale.init(identifier: "fr_FR"))
+
+            // barême
+            Stepper(value : $exam.maxMark,
+                    in    : 1 ... 20,
+                    step  : 1) {
+                HStack {
+                    Text("Barême")
+                    Spacer()
+                    Text("\(exam.maxMark) points")
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            // coefficient
+            Stepper(value : $exam.coef,
+                    in    : 0.0 ... 5.0,
+                    step  : 0.25) {
+                HStack {
+                    Text("Coefficient")
+                    Spacer()
+                    Text("\(exam.coef.formatted(.number.precision(.fractionLength(2))))")
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+}
+
 
 struct ExamEditor_Previews: PreviewProvider {
     static var previews: some View {

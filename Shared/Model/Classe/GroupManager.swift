@@ -8,8 +8,47 @@
 import SwiftUI
 
 struct GroupManager {
+    /// Retourne le groupe de la `classe` contenant l'élève de nom `eleveName`
+    /// - Returns: Groupe contenant l'élève de nom `eleveName` ou tableau vide si l'élève n'est pas trouvé
+    static func groups(dans classe         : Classe,
+                       including eleveName : String,
+                       eleveStore          : EleveStore) -> [GroupOfEleves] {
+        if eleveName.isEmpty {
+            return groups(dans       : classe,
+                          eleveStore : eleveStore)
+
+        } else {
+            let string = eleveName.lowercased()
+            var groupNum: Int?
+
+            // dans quel groupe se trouve l'élève ?
+            classe.elevesID.forEach { eleveID in
+                if let eleve = eleveStore.item(withID: eleveID) {
+                    if eleve.name.familyName!.lowercased().contains(string) ||
+                        eleve.name.givenName!.lowercased().contains(string) {
+                        groupNum = eleve.group
+                    }
+                }
+            }
+            guard let groupNum else {
+                return [ ]
+            }
+
+            // ajouter tous les élèves du même groupe au groupe
+            var group = GroupOfEleves(number: groupNum)
+            classe.elevesID.forEach { eleveID in
+                if let eleve = eleveStore.item(withID: eleveID) {
+                    if eleve.group == groupNum {
+                        group.elevesID.append(eleveID)
+                    }
+                }
+            }
+            return [group]
+        }
+    }
+
     /// Retourne les groupes constitués dans la classe
-    /// - Returns: groupes constitués dans la classe
+    /// - Returns: Les groupes constitués dans la classe
     static func groups(dans classe : Classe,
                        eleveStore  : EleveStore) -> [GroupOfEleves] {
         // initiliser une liste de groupes vides

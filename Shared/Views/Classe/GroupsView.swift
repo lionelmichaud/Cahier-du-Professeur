@@ -39,7 +39,9 @@ struct GroupsView: View {
 
             } else {
                 List {
-                    ForEach(groups) { group in
+                    ForEach(GroupManager.groups(dans       : classe,
+                                                including  : searchString,
+                                                eleveStore : eleveStore)) { group in
                         DisclosureGroup(isExpanded: $expanded) {
                             ForEach(group.elevesID, id: \.self) { eleveID in
                                 if let eleve = eleveStore.item(withID: eleveID) {

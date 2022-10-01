@@ -189,6 +189,7 @@ public struct PersistenceManager {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     static func repairDataBase(schoolStore : SchoolStore,
                                classeStore : ClasseStore,
                                eleveStore  : EleveStore,
@@ -288,4 +289,5 @@ public struct PersistenceManager {
 
         return success
     }
+    // swiftlint:enable cyclomatic_complexity
 }

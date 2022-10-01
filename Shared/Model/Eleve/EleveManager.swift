@@ -153,6 +153,7 @@ struct EleveManager {
         }
     }
 
+    // swiftlint:disable function_parameter_count
     func filteredEleves(dans classe       : Classe,
                         eleveStore        : EleveStore,
                         observStore       : ObservationStore,
@@ -194,4 +195,5 @@ struct EleveManager {
 
         }
     }
+    // swiftlint:enable function_parameter_count
 }

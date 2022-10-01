@@ -222,6 +222,8 @@
 		79AACD9A28E21525009B5AE4 /* TroubleDys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AACD9828E21525009B5AE4 /* TroubleDys.swift */; };
 		79B5BD4728340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
 		79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BD4628340C9400034115 /* MotifLabel.swift */; };
+		79B7F3FE28E88EC100CD3730 /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79B7F3FD28E88EC100CD3730 /* DORNIC_Salomé.jpg */; };
+		79B7F3FF28E88EC100CD3730 /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79B7F3FD28E88EC100CD3730 /* DORNIC_Salomé.jpg */; };
 		79BB0B492816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
 		79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B482816FAE5002AAABA /* Motif.swift */; };
 		79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4C28170CEC002AAABA /* MotifView.swift */; };
@@ -244,7 +246,6 @@
 		79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC57172860B7C4001D56F5 /* SchoolCreator.swift */; };
 		79D4FD1928DB189900D2D164 /* GEGO_Fleur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */; };
 		79D4FD1A28DB189900D2D164 /* HASAN_JALIL_Luciano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */; };
-		79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */; };
 		79D4FD1D28DB189900D2D164 /* HERVY_Eugénie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */; };
 		79D4FD1F28DB189900D2D164 /* DUTHEIL_Victoire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */; };
 		79D4FD2028DB189900D2D164 /* HUMBERT_Alice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */; };
@@ -338,7 +339,6 @@
 		79FC12BD28DB9D6500F64F7D /* ABADLA_Nesrine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A728DB9D6500F64F7D /* ABADLA_Nesrine.jpg */; };
 		79FC12BF28DB9D6500F64F7D /* BORDE_Lilou.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12A928DB9D6500F64F7D /* BORDE_Lilou.jpg */; };
 		79FC12C028DB9D6500F64F7D /* DAIZIS_Violette.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12AA28DB9D6500F64F7D /* DAIZIS_Violette.jpg */; };
-		79FC12C128DB9D6500F64F7D /* DORNIC_Salomé.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12AB28DB9D6500F64F7D /* DORNIC_Salomé.jpg */; };
 		79FC12C428DB9ECA00F64F7D /* FONTAINE_Gabin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C328DB9ECA00F64F7D /* FONTAINE_Gabin.jpg */; };
 		79FC12C628DB9EE100F64F7D /* MALIN_Christian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C528DB9EE100F64F7D /* MALIN_Christian.jpg */; };
 		79FC12C828DB9F0300F64F7D /* MARINGE_Aliénor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC12C728DB9F0300F64F7D /* MARINGE_Aliénor.jpg */; };
@@ -608,6 +608,7 @@
 		79AACD9128E0BF51009B5AE4 /* GroupOfEleves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOfEleves.swift; sourceTree = "<group>"; };
 		79AACD9828E21525009B5AE4 /* TroubleDys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleDys.swift; sourceTree = "<group>"; };
 		79B5BD4628340C9400034115 /* MotifLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifLabel.swift; sourceTree = "<group>"; };
+		79B7F3FD28E88EC100CD3730 /* DORNIC_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DORNIC_Salomé.jpg"; sourceTree = "<group>"; };
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
 		79BB0B4F2817138D002AAABA /* MotifEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifEditor.swift; sourceTree = "<group>"; };
@@ -623,7 +624,6 @@
 		79CC57172860B7C4001D56F5 /* SchoolCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCreator.swift; sourceTree = "<group>"; };
 		79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GEGO_Fleur.jpg; sourceTree = "<group>"; };
 		79D4FD1128DB189900D2D164 /* HASAN_JALIL_Luciano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HASAN_JALIL_Luciano.jpg; sourceTree = "<group>"; };
-		79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DORNIC_Salomé.jpg"; sourceTree = "<group>"; };
 		79D4FD1428DB189900D2D164 /* HERVY_Eugénie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "HERVY_Eugénie.jpg"; sourceTree = "<group>"; };
 		79D4FD1628DB189900D2D164 /* DUTHEIL_Victoire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DUTHEIL_Victoire.jpg; sourceTree = "<group>"; };
 		79D4FD1728DB189900D2D164 /* HUMBERT_Alice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUMBERT_Alice.jpg; sourceTree = "<group>"; };
@@ -685,7 +685,6 @@
 		79FC12A728DB9D6500F64F7D /* ABADLA_Nesrine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ABADLA_Nesrine.jpg; sourceTree = "<group>"; };
 		79FC12A928DB9D6500F64F7D /* BORDE_Lilou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BORDE_Lilou.jpg; sourceTree = "<group>"; };
 		79FC12AA28DB9D6500F64F7D /* DAIZIS_Violette.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DAIZIS_Violette.jpg; sourceTree = "<group>"; };
-		79FC12AB28DB9D6500F64F7D /* DORNIC_Salomé.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "DORNIC_Salomé.jpg"; sourceTree = "<group>"; };
 		79FC12C328DB9ECA00F64F7D /* FONTAINE_Gabin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FONTAINE_Gabin.jpg; sourceTree = "<group>"; };
 		79FC12C528DB9EE100F64F7D /* MALIN_Christian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MALIN_Christian.jpg; sourceTree = "<group>"; };
 		79FC12C728DB9F0300F64F7D /* MARINGE_Aliénor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "MARINGE_Aliénor.jpg"; sourceTree = "<group>"; };
@@ -967,7 +966,6 @@
 				79A5250E28DBC1B000E69ACD /* DASQUE_Eva.jpg */,
 				79A5250B28DBC1B000E69ACD /* DASTE_Louise.jpg */,
 				79A5250D28DBC1B000E69ACD /* DESCAYRAC_Hippolyte.jpg */,
-				79FC12AB28DB9D6500F64F7D /* DORNIC_Salomé.jpg */,
 				79FC134E28DBB13B00F64F7D /* DRUAUT_Raphaël.jpg */,
 				79FC12E628DBA32200F64F7D /* DU-PLESSIS_Marie.jpg */,
 				79AA30C428DBBB660091E8FB /* DUBUS_Albane.jpg */,
@@ -990,6 +988,7 @@
 				79A5252628DBC43200E69ACD /* NISSOU_Jules.jpg */,
 				79A5252528DBC43200E69ACD /* PARENT_Valentine.jpg */,
 				79A5251D28DBC35600E69ACD /* LOUPSENS_Naël.jpg */,
+				79B7F3FD28E88EC100CD3730 /* DORNIC_Salomé.jpg */,
 				79A5251C28DBC35600E69ACD /* MARTIN_Pauline.jpg */,
 				79A5251E28DBC35600E69ACD /* MICOULEAU_Marius.jpg */,
 				79A5251428DBC29A00E69ACD /* DI-BACCO_Paolo.jpg */,
@@ -1127,7 +1126,6 @@
 				79FC132C28DBA90600F64F7D /* WENGER_Emmy.jpg */,
 				7955965C28DBBF1500FB6A95 /* ZHAO_Lucie.jpg */,
 				79FC12FE28DBA41600F64F7D /* ZUNINO_Mauro.jpg */,
-				79D4FD1328DB189900D2D164 /* DORNIC_Salomé.jpg */,
 				79D4FD1028DB189900D2D164 /* GEGO_Fleur.jpg */,
 			);
 			path = Photos;
@@ -1692,7 +1690,6 @@
 				79FC135128DBB13C00F64F7D /* FERRE_Louis.jpg in Resources */,
 				79FC12E428DBA2BB00F64F7D /* BUTLER_Augustin.jpg in Resources */,
 				79FC12B728DB9D6500F64F7D /* DUPUY_Thomas.jpg in Resources */,
-				79D4FD1C28DB189900D2D164 /* DORNIC_Salomé.jpg in Resources */,
 				79FC135A28DBB18E00F64F7D /* GIMMIG_Titouan.jpg in Resources */,
 				790E0F8C28DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg in Resources */,
 				79AA30B928DBBA560091E8FB /* PETIT_Eléonore.jpg in Resources */,
@@ -1708,6 +1705,7 @@
 				79A5259128DBCFFA00E69ACD /* GUISARD_Paul.jpg in Resources */,
 				79A5254128DBC5E200E69ACD /* DAL-CIN_Clémence.jpg in Resources */,
 				79A5255928DBC79000E69ACD /* EL-MTABAI_Safia.jpg in Resources */,
+				79B7F3FE28E88EC100CD3730 /* DORNIC_Salomé.jpg in Resources */,
 				79FC12C428DB9ECA00F64F7D /* FONTAINE_Gabin.jpg in Resources */,
 				79FC12FF28DBA41600F64F7D /* SHAIK_Tazmeen.jpg in Resources */,
 				79FC133E28DBAFD700F64F7D /* CLEMENT_Andréanne.jpg in Resources */,
@@ -1728,7 +1726,6 @@
 				79FC135928DBB18E00F64F7D /* GOUGEON_Martin.jpg in Resources */,
 				79FC136128DBB1D700F64F7D /* MAUREL_Louise.jpg in Resources */,
 				79A5255028DBC70500E69ACD /* DINH_Niccolo.jpg in Resources */,
-				79FC12C128DB9D6500F64F7D /* DORNIC_Salomé.jpg in Resources */,
 				79A5257928DBCDD700E69ACD /* COLNAT_Claire.jpg in Resources */,
 				790E0F8228DBD24200A17AA2 /* SOUIFA_Célia.jpg in Resources */,
 				79FC130D28DBA7B200F64F7D /* DENIS_Paul.jpg in Resources */,
@@ -1755,6 +1752,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79F102EB28232F36005E5D9C /* Classe.json in Resources */,
+				79B7F3FF28E88EC100CD3730 /* DORNIC_Salomé.jpg in Resources */,
 				7986E7E328291DA00011FF21 /* AppVersion.json in Resources */,
 				79F102E928232F36005E5D9C /* School.json in Resources */,
 				79F102E728232F36005E5D9C /* Observation.json in Resources */,
@@ -1783,6 +1781,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		79B7F3FC28E8802900CD3730 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

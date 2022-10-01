@@ -34,6 +34,9 @@ struct MainScene: Scene {
                 .environmentObject(eleveStore)
                 .environmentObject(colleStore)
                 .environmentObject(observStore)
+                #if os(macOS)
+                .frame(minWidth: 800, minHeight: 600)
+                #endif
         }
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase {
@@ -45,5 +48,10 @@ struct MainScene: Scene {
                     break
             }
         }
+        #if os(macOS)
+        .commands {
+            SidebarCommands()
+        }
+        #endif
     }
 }

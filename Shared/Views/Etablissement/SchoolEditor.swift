@@ -142,7 +142,7 @@ struct SchoolEditor: View {
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationView {
-                ClassCreator() { classe in
+                ClassCreator { classe in
                     /// Ajouter une nouvelle classe
                     if classeStore.exists(classe: classe, in: school.id) {
                         self.alertItem = AlertItem(title         : Text("Ajout impossible"),

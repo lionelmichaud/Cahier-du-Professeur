@@ -107,7 +107,7 @@ struct EleveDetail: View {
                 .fontWeight(.bold)
         }
         .listRowSeparator(.hidden)
-        .onChange(of: eleve.bonus) {newValue in
+        .onChange(of: eleve.bonus) { _ in
             isModified = true
         }
     }

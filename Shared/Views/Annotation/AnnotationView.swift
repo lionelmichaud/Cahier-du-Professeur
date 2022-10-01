@@ -34,7 +34,7 @@ struct AnnotationView: View {
                 .fontWeight(.bold)
         }
         .listRowSeparator(.hidden)
-        .onChange(of: annotation) { newValue in
+        .onChange(of: annotation) { _ in
             isModified = true
         }
     }

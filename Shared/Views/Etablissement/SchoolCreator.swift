@@ -60,7 +60,7 @@ struct SchoolCreator_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             EmptyView()
-            SchoolCreator() { _ in }
+            SchoolCreator { _ in }
         }
     }
 }

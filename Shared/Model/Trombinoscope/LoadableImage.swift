@@ -33,7 +33,7 @@ struct LoadableImage: View {
                         .shadow(radius: 5)
                         .accessibility(hidden: false)
 
-                } else if phase.error != nil  {
+                } else if phase.error != nil {
                     PlaceholderPortrait(portrait: $placeholderPortrait)
 //                        .draggable(placeholderPortrait)
                         .dropDestination(for: Image.self) { (images: [Image], _) in

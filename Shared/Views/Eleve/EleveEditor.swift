@@ -51,7 +51,7 @@ struct EleveEditor: View {
     }
     
     var body: some View {
-        if (isNew || !isItemFiltred) {
+        if isNew || !isItemFiltred {
             VStack {
                 EleveDetail(classe            : classe,
                             eleve             : $itemCopy,
@@ -119,7 +119,7 @@ struct EleveEditor: View {
                     }
                 }
                 .onAppear {
-                    if (isNew || !isItemFiltred) {
+                    if isNew || !isItemFiltred {
                         itemCopy   = eleve
                         isModified = false
                         isSaved    = false

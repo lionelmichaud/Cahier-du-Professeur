@@ -31,7 +31,8 @@ struct TrombinoscopeView: View {
 
     private var menu: some View {
         Menu {
-            Button(action: {  }) {
+            Button {
+            } label: {
                 Label("A propos", systemImage: "info.circle")
             }
             // ajouter une observation

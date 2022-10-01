@@ -149,7 +149,7 @@ struct GroupManager {
     /// - Parameters:
     ///   - classe: dans cette classe
     static func disolveGroups(dans classe : Classe,
-                             eleveStore  : EleveStore) {
+                              eleveStore  : EleveStore) {
         let eleves: Binding<[Eleve]> = eleveStore.filteredEleves(dans: classe)
         for idx in eleves.indices {
             eleves[idx].wrappedValue.group = nil

@@ -21,7 +21,7 @@ struct ColleBrowserView: View {
                 // pour chaque Etablissement
                 ForEach(schoolStore.sortedSchools()) { $school in
                     if school.nbOfClasses != 0 {
-                        Section() {
+                        Section {
                             // pour chaque Classe
                             ColleBrowserSchoolSubiew(school      : school,
                                                      filterColle : filterColle)

@@ -23,4 +23,3 @@ enum NiveauSchool: String, PickableEnumP, Codable, Identifiable, Equatable {
         }
     }
 }
-

@@ -46,7 +46,7 @@ struct ColleEditor: View {
     }
 
     var body: some View {
-        if (isNew || !isItemFiltred) {
+        if isNew || !isItemFiltred {
             VStack {
                 ColleDetail(eleve      : $eleve,
                             colle      : $itemCopy,
@@ -89,7 +89,7 @@ struct ColleEditor: View {
                     }
                 }
                 .onAppear {
-                    if (isNew || !isItemFiltred) {
+                    if isNew || !isItemFiltred {
                         itemCopy   = colle
                         isModified = false
                         isSaved    = false

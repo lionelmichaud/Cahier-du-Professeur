@@ -34,7 +34,7 @@ struct AppreciationView: View {
                 .fontWeight(.bold)
         }
         .listRowSeparator(.hidden)
-        .onChange(of: appreciation) {newValue in
+        .onChange(of: appreciation) { _ in
             isModified = true
         }
     }

@@ -45,4 +45,3 @@ extension MarkEnum: PickableEnumP {
         }
     }
 }
-

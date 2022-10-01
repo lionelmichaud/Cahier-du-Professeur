@@ -23,7 +23,6 @@ struct GroupOfEleves: Identifiable {
         self.elevesID = elevesID
     }
 
-
     // MARK: - Methods
 
     func eleves(eleveStore : EleveStore) -> [Eleve] {

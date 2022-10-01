@@ -118,37 +118,51 @@ struct SchoolBrowserView: View {
                 ToolbarItemGroup(placement: .automatic) {
                     Menu {
                         /// A propos
-                        Button(action: { isShowingAbout = true }) {
+                        Button {
+                            isShowingAbout = true
+                        } label: {
                             Label("A propos", systemImage: "info.circle")
                         }
 
                         /// Edition des préférences utilisateur
-                        Button(action: { isEditingPreferences = true }) {
+                        Button {
+                            isEditingPreferences = true
+                        } label: {
                             Label("Préférences", systemImage: "gear")
                         }
 
                         /// Exporter les fichiers JSON utilisateurs
-                        Button(action: { share(geometry: geometry) }) {
+                        Button {
+                            share(geometry: geometry)
+                        } label: {
                             Label("Exporter vos données", systemImage: "square.and.arrow.up")
                         }
 
                         /// Importer des fichiers JPEG pour le trombinoscope
-                        Button(action: { isShowingImportTrombineDialog.toggle() }) {
+                        Button {
+                            isShowingImportTrombineDialog.toggle()
+                        } label: {
                             Label("Importer des photos du trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
                         }
 
                         /// Importer les fichiers JSON depuis le Bundle Application
-                        Button(role: .destructive, action: { isShowingImportConfirmDialog.toggle() }) {
+                        Button(role: .destructive) {
+                            isShowingImportConfirmDialog.toggle()
+                        } label: {
                             Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
                         }
 
                         /// Reconstruire la BDD
-                        Button(role: .destructive, action: { repairDataBase() }) {
+                        Button(role: .destructive) {
+                            repairDataBase()
+                        } label: {
                             Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
                         }
 
                         /// Effacer toutes les données utilisateur
-                        Button(role: .destructive, action: { isShowingDeleteConfirmDialog.toggle() }) {
+                        Button(role: .destructive) {
+                            isShowingDeleteConfirmDialog.toggle()
+                        } label: {
                             Label("supprimer toutes vos données", systemImage: "trash")
                         }
                     } label: {
@@ -176,7 +190,7 @@ struct SchoolBrowserView: View {
                                 isPresented     : $isShowingImportTrombineDialog,
                                 titleVisibility : .visible) {
                 Button("Importer") {
-                    withAnimation() {
+                    withAnimation {
                         isImportingJpegFile = true
                     }
                 }
@@ -213,7 +227,7 @@ struct SchoolBrowserView: View {
 
             .sheet(isPresented: $isAddingNewEtab) {
                 NavigationView {
-                    SchoolCreator() { school in
+                    SchoolCreator { school in
                         schoolStore.add(school)
                     }
                 }

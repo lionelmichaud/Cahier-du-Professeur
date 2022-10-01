@@ -72,28 +72,28 @@ struct GroupsView: View {
                         Menu("Automatiquement") {
                             Menu("Par ordre alphabétique") {
                                 Button("2 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formOrderedGroups(nbEleveParGroupe : 2,
                                                                        dans             : classe,
                                                                        eleveStore       : eleveStore)
                                     }
                                 }
                                 Button("3 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formOrderedGroups(nbEleveParGroupe: 3,
                                                                        dans             : classe,
                                                                        eleveStore       : eleveStore)
                                     }
                                 }
                                 Button("4 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formOrderedGroups(nbEleveParGroupe: 4,
                                                                        dans             : classe,
                                                                        eleveStore       : eleveStore)
                                     }
                                 }
                                 Button("5 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formOrderedGroups(nbEleveParGroupe: 5,
                                                                        dans             : classe,
                                                                        eleveStore       : eleveStore)
@@ -103,28 +103,28 @@ struct GroupsView: View {
 
                             Menu("Aléatoirement") {
                                 Button("2 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formRandomGroups(nbEleveParGroupe: 2,
                                                                       dans             : classe,
                                                                       eleveStore       : eleveStore)
                                     }
                                 }
                                 Button("3 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formRandomGroups(nbEleveParGroupe: 3,
                                                                       dans             : classe,
                                                                       eleveStore       : eleveStore)
                                     }
                                 }
                                 Button("4 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formRandomGroups(nbEleveParGroupe: 4,
                                                                       dans             : classe,
                                                                       eleveStore       : eleveStore)
                                     }
                                 }
                                 Button("5 élèves") {
-                                    withAnimation() {
+                                    withAnimation {
                                         GroupManager.formRandomGroups(nbEleveParGroupe: 5,
                                                                       dans             : classe,
                                                                       eleveStore       : eleveStore)
@@ -157,7 +157,7 @@ struct GroupsView: View {
                     isPresented     : $isShowingDeleteGroupsDialog,
                     titleVisibility : .visible) {
                         Button("Supprimer", role: .destructive) {
-                            withAnimation() {
+                            withAnimation {
                                 GroupManager.disolveGroups(dans       : classe,
                                                            eleveStore : eleveStore)
                             }

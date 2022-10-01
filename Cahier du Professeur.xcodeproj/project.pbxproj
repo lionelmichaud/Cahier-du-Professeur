@@ -279,8 +279,8 @@
 		79F3ABA92808218300D068D9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABA82808218300D068D9 /* Tests_iOSLaunchTests.swift */; };
 		79F3ABB32808218300D068D9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB22808218300D068D9 /* Tests_macOS.swift */; };
 		79F3ABB52808218300D068D9 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3ABB42808218300D068D9 /* Tests_macOSLaunchTests.swift */; };
-		79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */; };
-		79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */; };
+		79F3ABB62808218300D068D9 /* CahierDuProfesseurApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AB8E2808218100D068D9 /* CahierDuProfesseurApp.swift */; };
+		79F3ABB72808218300D068D9 /* CahierDuProfesseurApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AB8E2808218100D068D9 /* CahierDuProfesseurApp.swift */; };
 		79F3ABB82808218300D068D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AB8F2808218100D068D9 /* ContentView.swift */; };
 		79F3ABB92808218300D068D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AB8F2808218100D068D9 /* ContentView.swift */; };
 		79F3ABBA2808218300D068D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79F3AB902808218300D068D9 /* Assets.xcassets */; };
@@ -639,7 +639,7 @@
 		79F102DF28232F36005E5D9C /* Observation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Observation.json; sourceTree = "<group>"; };
 		79F102E028232F36005E5D9C /* School.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = School.json; sourceTree = "<group>"; };
 		79F102E128232F36005E5D9C /* Classe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Classe.json; sourceTree = "<group>"; };
-		79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cahier_du_ProfesseurApp.swift; sourceTree = "<group>"; };
+		79F3AB8E2808218100D068D9 /* CahierDuProfesseurApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CahierDuProfesseurApp.swift; sourceTree = "<group>"; };
 		79F3AB8F2808218100D068D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		79F3AB902808218300D068D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79F3AB952808218300D068D9 /* Cahier du Professeur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cahier du Professeur.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1247,7 +1247,7 @@
 				79FFDCD52825E94F009D7452 /* CsvImporter.swift */,
 				79F102D02821B816005E5D9C /* JsonCodableArray.swift */,
 				79935D362824906B005C20BD /* Share.swift */,
-				79F3AB8E2808218100D068D9 /* Cahier_du_ProfesseurApp.swift */,
+				79F3AB8E2808218100D068D9 /* CahierDuProfesseurApp.swift */,
 				79F3AC002808C76A00D068D9 /* MainScene.swift */,
 				79C12752283A98E8002F243E /* Persistence */,
 				79F3ABCA280821CE00D068D9 /* Model */,
@@ -1404,6 +1404,7 @@
 				79F3AB912808218300D068D9 /* Sources */,
 				79F3AB922808218300D068D9 /* Frameworks */,
 				79F3AB932808218300D068D9 /* Resources */,
+				79B7F3FC28E8802900CD3730 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1779,6 +1780,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		79B7F3FC28E8802900CD3730 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		79F3AB912808218300D068D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1869,7 +1891,7 @@
 				795BC3E22813277B00C22271 /* EleveEditor.swift in Sources */,
 				79F3ABD32808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */,
-				79F3ABB62808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
+				79F3ABB62808218300D068D9 /* CahierDuProfesseurApp.swift in Sources */,
 				79BB0B502817138D002AAABA /* MotifEditor.swift in Sources */,
 				7935E64F285CAE9600111936 /* AnnotationView.swift in Sources */,
 				797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */,
@@ -1955,7 +1977,7 @@
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FC2814A43400686F0C /* ColleEditor.swift in Sources */,
 				79AACD9328E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,
-				79F3ABB72808218300D068D9 /* Cahier_du_ProfesseurApp.swift in Sources */,
+				79F3ABB72808218300D068D9 /* CahierDuProfesseurApp.swift in Sources */,
 				795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				791C26F928149E7E00686F0C /* ObservDetail.swift in Sources */,
 				79F3ABF02808709100D068D9 /* Colle.swift in Sources */,

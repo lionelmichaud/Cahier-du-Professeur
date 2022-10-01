@@ -53,12 +53,12 @@ struct ClasseEditor: View {
                                         isPresented     : $isShowingImportListeDialog,
                                         titleVisibility : .visible) {
                         Button("Importer et ajouter") {
-                            withAnimation() {
+                            withAnimation {
                                 importCsvFile = true
                             }
                         }
                         Button("Importer et remplacer", role: .destructive) {
-                            withAnimation() {
+                            withAnimation {
                                 ClasseManager().retirerTousLesEleves(deClasse    : &classe,
                                                                      eleveStore  : eleveStore,
                                                                      observStore : observStore,
@@ -67,8 +67,8 @@ struct ClasseEditor: View {
                             importCsvFile = true
                         }
                     } message: {
-                        Text("La liste des élèves importée doit être au format CSV de PRONOTE.") +
-                        Text(" Cette action ne peut pas être annulée.")
+                        Text("La liste des élèves importée doit être au format CSV de \(interoperability == .proNote ? "PRONOTE" : "EcoleDirecte").") +
+                        Text("Cette action ne peut pas être annulée.")
                     }
                 }
             }
@@ -81,7 +81,7 @@ struct ClasseEditor: View {
                 }
             }
             .alert(item: $alertItem, content: newAlert)
-            /// Importer un fichier CSV au format PRONOTE
+            /// Importer un fichier CSV au format PRONOTE ou EcoleDirecte
             .fileImporter(isPresented             : $importCsvFile,
                           allowedContentTypes     : [.commaSeparatedText],
                           allowsMultipleSelection : false) { result in
@@ -116,7 +116,7 @@ struct ClasseEditor: View {
                             }
 
                             for idx in eleves.startIndex...eleves.endIndex-1 {
-                                withAnimation() {
+                                withAnimation {
                                     ClasseManager()
                                         .ajouter(eleve      : &eleves[idx],
                                                  aClasse    : &classe,

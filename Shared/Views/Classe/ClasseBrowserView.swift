@@ -69,7 +69,7 @@ struct ClasseBrowserSchoolSubview : View {
                     Label("Supprimer", systemImage: "trash")
                 }
 
-                // flager un élève
+                // flager une classe
                 Button {
                     withAnimation {
                         classe.isFlagged.toggle()

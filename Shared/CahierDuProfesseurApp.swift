@@ -15,7 +15,7 @@ private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Profess
                                category  : "Main")
 
 @main
-struct Cahier_du_ProfesseurApp: App {
+struct CahierDuProfesseurApp: App {
     @StateObject private var schoolStore = SchoolStore(fromFolder: nil)
     @StateObject private var classeStore = ClasseStore(fromFolder: nil)
     @StateObject private var eleveStore  = EleveStore(fromFolder: nil)

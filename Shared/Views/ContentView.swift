@@ -14,11 +14,11 @@ struct ContentView: View {
     @EnvironmentObject var colleStore  : ColleStore
     @EnvironmentObject var observStore : ObservationStore
 
-    @SceneStorage("selectedTab")
-    var selection = UIState.Tab.school
-    
+    @SceneStorage("navigation") private var navigationData: Data?
+    @StateObject private var navigationModel = NavigationModel()
+
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $navigationModel.selectedTab) {
             /// gestion des dossiers
             SchoolSidebarView()
                 .tabItem { Label("Etablissement", systemImage: "building.2").symbolVariant(.none) }
@@ -49,8 +49,16 @@ struct ContentView: View {
                 .tag(UIState.Tab.colle)
                 .badge(colleStore.nbOfItemsToCheck)
         }
-        .onAppear {
+        .environmentObject(navigationModel)
+        .task {
             eleveStore.sort()
+
+            if let navigationData {
+                navigationModel.jsonData = navigationData
+            }
+            for await _ in navigationModel.objectWillChangeSequence {
+                navigationData = navigationModel.jsonData
+            }
         }
     }
 }

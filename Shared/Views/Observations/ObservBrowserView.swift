@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ObservBrowserView: View {
-    @EnvironmentObject private var schoolStore : SchoolStore
-    @EnvironmentObject private var eleveStore  : EleveStore
-    @EnvironmentObject private var observStore : ObservationStore
+    @EnvironmentObject private var navigationModel : NavigationModel
+    @EnvironmentObject private var schoolStore     : SchoolStore
+    @EnvironmentObject private var eleveStore      : EleveStore
+    @EnvironmentObject private var observStore     : ObservationStore
     @State private var filterObservation = true
 
     var body: some View {
-        List {
+        List(selection: $navigationModel.selectedObservId) {
             if observStore.items.isEmpty {
                 Text("Aucune observation actuellement")
             } else {

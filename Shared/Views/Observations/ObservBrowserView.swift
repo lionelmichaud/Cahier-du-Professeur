@@ -16,7 +16,7 @@ struct ObservBrowserView: View {
     var body: some View {
         List {
             if observStore.items.isEmpty {
-                Text("Aucune observation")
+                Text("Aucune observation actuellement")
             } else {
                 // pour chaque Etablissement
                 ForEach(schoolStore.sortedSchools()) { $school in

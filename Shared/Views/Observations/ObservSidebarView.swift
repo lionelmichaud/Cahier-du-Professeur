@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ObservSidebarView: View {
     var body: some View {
-        NavigationView {
-            /// Primary view
+        NavigationSplitView {
             ObservBrowserView()
-            /// vue par défaut
+        } detail: {
             Text("Sélectionner une observation")
                 .foregroundStyle(.secondary)
         }

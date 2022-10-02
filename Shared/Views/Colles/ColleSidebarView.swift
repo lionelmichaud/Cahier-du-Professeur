@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ColleSidebarView: View {
     var body: some View {
-        NavigationView {
-            /// Primary view
+        NavigationSplitView {
             ColleBrowserView()
-            /// vue par défaut
+        } detail: {
             Text("Sélectionner une colle")
                 .foregroundStyle(.secondary)
         }

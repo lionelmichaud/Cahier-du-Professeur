@@ -78,20 +78,18 @@ struct TrombinoscopeView: View {
                                     menu
                                         .sheet(isPresented: $isAddingNewObserv) {
                                             NavigationView {
-                                                ObservEditor(classe            : classe,
-                                                             eleve             : $eleve,
-                                                             observ            : $newObserv,
-                                                             isNew             : true,
-                                                             filterObservation : false)
+                                                ObservEditor(classe : classe,
+                                                             eleve  : $eleve,
+                                                             observ : $newObserv,
+                                                             isNew  : true)
                                             }
                                         }
                                         .sheet(isPresented: $isAddingNewColle) {
                                             NavigationView {
-                                                ColleEditor(classe      : classe,
-                                                            eleve       : $eleve,
-                                                            colle       : $newColle,
-                                                            isNew       : true,
-                                                            filterColle : false)
+                                                ColleEditor(classe : classe,
+                                                            eleve  : $eleve,
+                                                            colle  : $newColle,
+                                                            isNew  : true)
                                             }
                                         }
                                 }

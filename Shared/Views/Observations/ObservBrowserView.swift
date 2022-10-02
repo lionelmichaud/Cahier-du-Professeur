@@ -70,11 +70,10 @@ struct ObservBrowserSchoolSubiew : View {
                     ForEach(filteredSortedObservs(dans: classe)) { $observ in
                         if let eleve = eleveStore.item(withID: observ.eleveId!) {
                             NavigationLink {
-                                ObservEditor(classe            : classe,
-                                             eleve             : .constant(eleve),
-                                             observ            : $observ,
-                                             isNew             : false,
-                                             filterObservation : filterObservation)
+                                ObservEditor(classe : classe,
+                                             eleve  : .constant(eleve),
+                                             observ : $observ,
+                                             isNew  : false)
                             } label: {
                                 ObservBrowserRow(eleve  : eleve,
                                                  observ : observ)

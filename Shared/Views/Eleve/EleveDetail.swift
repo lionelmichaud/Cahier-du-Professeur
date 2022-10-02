@@ -122,8 +122,7 @@ struct EleveDetail: View {
                     ObservEditor(classe            : classe,
                                  eleve             : $eleve,
                                  observ            : $observ,
-                                 isNew             : false,
-                                 filterObservation : filterObservation)
+                                 isNew             : false)
                 } label: {
                     EleveObservRow(observ: observ)
                 }
@@ -173,8 +172,7 @@ struct EleveDetail: View {
                     ColleEditor(classe      : classe,
                                 eleve       : $eleve,
                                 colle       : $colle,
-                                isNew       : false,
-                                filterColle : filterColle)
+                                isNew       : false)
                 } label: {
                     EleveColleRow(colle: colle)
                 }
@@ -261,8 +259,7 @@ struct EleveDetail: View {
                 ObservEditor(classe            : classe,
                              eleve             : $eleve,
                              observ            : $newObserv,
-                             isNew             : true,
-                             filterObservation : false)
+                             isNew             : true)
             }
         }
         .sheet(isPresented: $isAddingNewColle) {
@@ -270,8 +267,7 @@ struct EleveDetail: View {
                 ColleEditor(classe      : classe,
                             eleve       : $eleve,
                             colle       : $newColle,
-                            isNew       : true,
-                            filterColle : false)
+                            isNew       : true)
             }
         }
     }

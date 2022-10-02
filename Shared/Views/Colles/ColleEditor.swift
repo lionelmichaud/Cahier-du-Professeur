@@ -14,7 +14,6 @@ struct ColleEditor: View {
     var eleve: Eleve
     @Binding
     var colle: Colle
-    var filterColle : Bool
     var isNew = false
 
     @EnvironmentObject private var eleveStore  : EleveStore
@@ -38,104 +37,83 @@ struct ColleEditor: View {
         !colleStore.isPresent(colle) && !isNew
     }
 
-    /// True si l'item est filtré (masqué)
-    private var isItemFiltred: Bool {
-        !filteredSortedColle(dans: classe).contains {
-            $0.wrappedValue.id == colle.id
-        }
-    }
-
     var body: some View {
-        if isNew || !isItemFiltred {
-            VStack {
-                ColleDetail(eleve      : $eleve,
-                            colle      : $itemCopy,
-                            isEditing  : isEditing,
-                            isNew      : isNew,
-                            isModified : $isModified)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
+        VStack {
+            ColleDetail(eleve      : $eleve,
+                        colle      : $itemCopy,
+                        isEditing  : isEditing,
+                        isNew      : isNew,
+                        isModified : $isModified)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    if isNew {
+                        Button("Annuler") {
+                            dismiss()
+                        }
+                    }
+                }
+                ToolbarItem {
+                    Button {
                         if isNew {
-                            Button("Annuler") {
-                                dismiss()
+                            // Ajouter une nouvelle colle à l'élève
+                            withAnimation {
+                                EleveManager()
+                                    .ajouter(colle      : &itemCopy,
+                                             aEleve     : &eleve,
+                                             colleStore : colleStore)
                             }
-                        }
-                    }
-                    ToolbarItem {
-                        Button {
-                            if isNew {
-                                // Ajouter une nouvelle colle à l'élève
+                            dismiss()
+                        } else {
+                            // Appliquer les modifications faites à la colle
+                            if isEditing && !isDeleted {
+                                print("Done, saving any changes to \(colle.id).")
                                 withAnimation {
-                                    EleveManager()
-                                        .ajouter(colle      : &itemCopy,
-                                                 aEleve     : &eleve,
-                                                 colleStore : colleStore)
+                                    colle = itemCopy // Put edits (if any) back in the store.
                                 }
-                                dismiss()
-                            } else {
-                                // Appliquer les modifications faites à la colle
-                                if isEditing && !isDeleted {
-                                    print("Done, saving any changes to \(colle.id).")
-                                    withAnimation {
-                                        colle = itemCopy // Put edits (if any) back in the store.
-                                    }
-                                    isSaved = true
-                                }
-                                isEditing.toggle()
+                                isSaved = true
                             }
-                        } label: {
-                            Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
+                            isEditing.toggle()
                         }
+                    } label: {
+                        Text(isNew ? "Ajouter" : (isEditing ? "Ok" : "Modifier"))
                     }
-                }
-                .onAppear {
-                    if isNew || !isItemFiltred {
-                        itemCopy   = colle
-                        isModified = false
-                        isSaved    = false
-                    }
-                }
-                .onDisappear {
-                    if isModified && !isSaved {
-                        // Appliquer les modifications faites à la colle hors du mode édition
-                        colle = itemCopy
-                        isModified = false
-                        isSaved    = true
-                    }
-                }
-                .disabled(isItemDeleted)
-            }
-            .overlay(alignment: .center) {
-                if isItemDeleted {
-                    Color(UIColor.systemBackground)
-                    Text("Colle supprimée. Sélectionner une colle.")
-                        .foregroundStyle(.secondary)
                 }
             }
-        } else {
-            Text("Aucune colle sélectionnée.")
+            .onAppear {
+                if isNew {
+                    itemCopy   = colle
+                    isModified = false
+                    isSaved    = false
+                }
+            }
+            .onDisappear {
+                if isModified && !isSaved {
+                    // Appliquer les modifications faites à la colle hors du mode édition
+                    colle = itemCopy
+                    isModified = false
+                    isSaved    = true
+                }
+            }
+            .disabled(isItemDeleted)
+        }
+        .overlay(alignment: .center) {
+            if isItemDeleted {
+                Color(UIColor.systemBackground)
+                Text("Colle supprimée. Sélectionner une colle.")
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 
     init(classe      : Classe,
          eleve       : Binding<Eleve>,
          colle       : Binding<Colle>,
-         isNew       : Bool = false,
-         filterColle : Bool) {
+         isNew       : Bool = false) {
         self.classe      = classe
         self._eleve      = eleve
         self._colle      = colle
         self.isNew       = isNew
-        self.filterColle = filterColle
         self._itemCopy   = State(initialValue : colle.wrappedValue)
-    }
-
-    // MARK: - Methods
-
-    func filteredSortedColle(dans classe: Classe) -> Binding<[Colle]> {
-        eleveStore.filteredSortedColles(dans        : classe,
-                                        colleStore  : colleStore,
-                                        isConsignee : filterColle ? false : nil)
     }
 }
 

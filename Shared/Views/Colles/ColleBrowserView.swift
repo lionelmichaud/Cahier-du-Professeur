@@ -72,8 +72,7 @@ struct ColleBrowserSchoolSubiew : View {
                                 ColleEditor(classe      : classe,
                                             eleve       : .constant(eleve),
                                             colle       : $colle,
-                                            isNew       : false,
-                                            filterColle : filterColle)
+                                            isNew       : false)
                             } label: {
                                 ColleBrowserRow(eleve : eleve,
                                                 colle : colle)

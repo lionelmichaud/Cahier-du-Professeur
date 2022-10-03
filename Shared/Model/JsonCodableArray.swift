@@ -202,7 +202,7 @@ E.ID == UUID {
     }
 
     /// True si un `item` existe déjà avec le même ID
-    public func isPresent(_ item: E) -> Bool {
+    public func contains(_ item: E) -> Bool {
         items.contains(where: { item.id == $0.id})
     }
 

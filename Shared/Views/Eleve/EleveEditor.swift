@@ -40,7 +40,7 @@ struct EleveEditor: View {
 
     /// True si l'élève n'est pas dans le store ET si on est pas en train d'ajouter un nouvel élève
     private var isItemDeleted: Bool {
-        !eleveStore.isPresent(eleve) && !isNew
+        !eleveStore.contains(eleve) && !isNew
     }
 
     /// True si l'élève n'est pas dans la liste des élève de la `classe` satisfaisant aux critères de filtrage

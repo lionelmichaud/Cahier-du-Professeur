@@ -15,6 +15,7 @@ struct EleveLabelWithTrombineFlag: View {
     @Binding
     var isModified : Bool
 
+    var isEditable : Bool        = true
     var font       : Font        = .title2
     var fontWeight : Font.Weight = .semibold
     var imageSize  : Image.Scale = .large
@@ -49,7 +50,9 @@ struct EleveLabelWithTrombineFlag: View {
                     .fontWeight(fontWeight)
                 // Flag
                 Button {
-                    eleve.isFlagged.toggle()
+                    if isEditable {
+                        eleve.isFlagged.toggle()
+                    }
                 } label: {
                     if eleve.isFlagged {
                         Image(systemName: "flag.fill")
@@ -63,7 +66,7 @@ struct EleveLabelWithTrombineFlag: View {
                     isModified = true
                 }
                 // PAP
-                Toggle(isOn: $hasPAP) {
+                Toggle(isOn: isEditable ? $hasPAP : .constant(hasPAP)) {
                     Text("PAP")
                 }
                 .toggleStyle(.button)
@@ -84,11 +87,15 @@ struct EleveLabelWithTrombineFlag: View {
             if let trouble = eleve.troubleDys {
                 HStack {
                     // Sexe de cet eleve
-                    CasePicker(pickedCase: $eleve.troubleDys.bound, label: "Trouble")
-                        .pickerStyle(.menu)
-                        .onChange(of: eleve.troubleDys.bound) { _ in
-                            isModified = true
-                        }
+                    if isEditable {
+                        CasePicker(pickedCase: $eleve.troubleDys.bound, label: "Trouble")
+                            .pickerStyle(.menu)
+                            .onChange(of: eleve.troubleDys.bound) { _ in
+                                isModified = true
+                            }
+                    } else if let troubleDys = eleve.troubleDys {
+                        Text(troubleDys.displayString + ":")
+                    }
                     if trouble.additionalTime {
                         Text("1/3 de temps aditionnel")
                     }

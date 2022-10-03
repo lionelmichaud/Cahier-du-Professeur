@@ -119,8 +119,7 @@ struct EleveDetail: View {
                                                    isConsignee : filterObservation ? false : nil,
                                                    isVerified  : filterObservation ? false : nil)) { $observ in
                 NavigationLink {
-                    ObservEditor(classe            : classe,
-                                 eleve             : $eleve,
+                    ObservEditor(eleve             : $eleve,
                                  observ            : $observ,
                                  isNew             : false)
                 } label: {
@@ -256,8 +255,7 @@ struct EleveDetail: View {
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {
-                ObservEditor(classe            : classe,
-                             eleve             : $eleve,
+                ObservEditor(eleve             : $eleve,
                              observ            : $newObserv,
                              isNew             : true)
             }

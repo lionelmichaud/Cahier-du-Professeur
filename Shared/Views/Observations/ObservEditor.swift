@@ -2,62 +2,33 @@
 //  ObservEditor.swift
 //  Cahier du Professeur
 //
-//  Created by Lionel MICHAUD on 23/04/2022.
+//  Created by Lionel MICHAUD on 06/10/2022.
 //
 
 import SwiftUI
-import HelpersView
 
 struct ObservEditor: View {
-    @Binding
-    var eleve: Eleve
+    @EnvironmentObject private var navigationModel : NavigationModel
+    @EnvironmentObject private var observStore     : ObservationStore
 
-    @Binding
-    var observ: Observation
-
-    var isNew = false
-
-    @EnvironmentObject private var eleveStore  : EleveStore
-    @EnvironmentObject private var observStore : ObservationStore
-    @Environment(\.dismiss) private var dismiss
-
-    private var isItemDeleted: Bool {
-        !observStore.contains(observ) && !isNew
+    private var selectedItemExists: Bool {
+        guard let selectedObservId = navigationModel.selectedObservId else {
+            return false
+        }
+        return observStore.contains(selectedObservId)
     }
 
     var body: some View {
-        ObservDetail(observ: $observ)
-            .disabled(isItemDeleted)
-            .toolbar {
-                if isNew {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Annuler") {
-                            dismiss()
-                        }
-                    }
-                    ToolbarItem {
-                        if isNew {
-                            Button("Ajouter") {
-                                // Ajouter une nouvelle observation à l'élève
-                                withAnimation {
-                                    EleveManager()
-                                        .ajouter(observation : &observ,
-                                                 aEleve      : &eleve,
-                                                 observStore : observStore)
-                                }
-                                dismiss()
-                            }
-                        }
-                    }
-                }
+        if selectedItemExists {
+            ObservDetail(observ: observStore.itemBinding(withID: navigationModel.selectedObservId!)!)
+        } else {
+            VStack(alignment: .center) {
+                Text("Aucune observation sélectionnée.")
+                Text("Sélectionner une observation.")
             }
-            .overlay(alignment: .center) {
-                if isItemDeleted {
-                    Color(UIColor.systemBackground)
-                    Text("Observation supprimée. Sélectionner une observation.")
-                        .foregroundStyle(.secondary)
-                }
-            }
+            .foregroundStyle(.secondary)
+            .font(.title)
+        }
     }
 }
 
@@ -65,25 +36,23 @@ struct ObservEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ObservEditor(eleve  : .constant(TestEnvir.eleveStore.items.first!),
-                         observ : .constant(TestEnvir.observStore.items.first!),
-                         isNew  : true)
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPad mini (6th generation)")
+            ObservEditor()
+                .environmentObject(NavigationModel())
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPad mini (6th generation)")
 
-            ObservEditor(eleve  : .constant(TestEnvir.eleveStore.items.first!),
-                         observ : .constant(TestEnvir.observStore.items.first!),
-                         isNew  : true)
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPhone Xs")
+            ObservEditor()
+                .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPhone 13")
         }
     }
 }

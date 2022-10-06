@@ -78,9 +78,7 @@ struct TrombinoscopeView: View {
                                     menu
                                         .sheet(isPresented: $isAddingNewObserv) {
                                             NavigationView {
-                                                ObservEditor(eleve  : $eleve,
-                                                             observ : $newObserv,
-                                                             isNew  : true)
+                                                ObservCreator(eleve: $eleve)
                                             }
                                         }
                                         .sheet(isPresented: $isAddingNewColle) {

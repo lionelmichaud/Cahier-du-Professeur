@@ -19,16 +19,15 @@ struct EleveDetail: View {
     @Binding
     var isModified: Bool
 
-    @EnvironmentObject var eleveStore  : EleveStore
-    @EnvironmentObject var colleStore  : ColleStore
-    @EnvironmentObject var observStore : ObservationStore
+    @EnvironmentObject private var navigationModel : NavigationModel
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
 
     @State
     private var isAddingNewObserv = false
     @State
     private var isAddingNewColle  = false
-    @State
-    private var newObserv = Observation.exemple
     @State
     private var newColle  = Colle.exemple
     @State
@@ -118,28 +117,30 @@ struct EleveDetail: View {
             ForEach(observStore.sortedObservations(de          : eleve,
                                                    isConsignee : filterObservation ? false : nil,
                                                    isVerified  : filterObservation ? false : nil)) { $observ in
-                NavigationLink {
-                    ObservEditor(eleve             : $eleve,
-                                 observ            : $observ,
-                                 isNew             : false)
-                } label: {
-                    EleveObservRow(observ: observ)
-                }
-                .swipeActions {
-                    // supprimer un élève
-                    Button(role: .destructive) {
-                        withAnimation {
-                            if let eleveId = observ.eleveId {
-                                EleveManager().retirer(observId   : observ.id,
-                                                       deEleveId  : eleveId,
-                                                       eleveStore : eleveStore,
-                                                       observStore: observStore)
-                            }
-                        }
-                    } label: {
-                        Label("Supprimer", systemImage: "trash")
+                EleveObservRow(observ: observ)
+                    .onTapGesture {
+                        // Programatic Navigation
+                        navigationModel.selectedTab      = .observation
+                        navigationModel.selectedObservId = observ.id
                     }
-                }
+                    .swipeActions {
+                        // supprimer un élève
+                        Button(role: .destructive) {
+                            withAnimation {
+                                if let eleveId = observ.eleveId {
+                                    if observ.id == navigationModel.selectedObservId {
+                                        navigationModel.selectedObservId = nil
+                                    }
+                                    EleveManager().retirer(observId   : observ.id,
+                                                           deEleveId  : eleveId,
+                                                           eleveStore : eleveStore,
+                                                           observStore: observStore)
+                                }
+                            }
+                        } label: {
+                            Label("Supprimer", systemImage: "trash")
+                        }
+                    }
             }
         } header: {
             HStack {
@@ -149,7 +150,6 @@ struct EleveDetail: View {
                 // ajouter une observation
                 Button {
                     isModified        = true
-                    newObserv         = Observation()
                     isAddingNewObserv = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
@@ -245,7 +245,7 @@ struct EleveDetail: View {
         //.listStyle(.sidebar)
         #if os(iOS)
         .navigationTitle("Élève")
-        //.navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
             appreciationIsExpanded = eleve.appreciation.isNotEmpty
@@ -255,17 +255,15 @@ struct EleveDetail: View {
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationView {
-                ObservEditor(eleve             : $eleve,
-                             observ            : $newObserv,
-                             isNew             : true)
+                ObservCreator(eleve: $eleve)
             }
         }
         .sheet(isPresented: $isAddingNewColle) {
             NavigationView {
-                ColleEditor(classe      : classe,
-                            eleve       : $eleve,
-                            colle       : $newColle,
-                            isNew       : true)
+                ColleEditor(classe : classe,
+                            eleve  : $eleve,
+                            colle  : $newColle,
+                            isNew  : true)
             }
         }
     }

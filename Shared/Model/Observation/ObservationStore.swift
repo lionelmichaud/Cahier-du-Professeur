@@ -10,7 +10,7 @@ import SwiftUI
 typealias ObservationStore = JsonCodableArray<Observation>
 
 extension ObservationStore {
-    
+
     var nbOfItemsToCheck: Int {
         items.filter {
             $0.isVerified == false || $0.isConsignee == false

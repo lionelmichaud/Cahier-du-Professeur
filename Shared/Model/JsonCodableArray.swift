@@ -5,7 +5,7 @@
 //  Created by Lionel MICHAUD on 03/05/2022.
 //
 
-import Foundation
+import SwiftUI
 import AppFoundation
 import FileAndFolder
 import Files
@@ -17,8 +17,7 @@ protocol Ordered {
 public final class JsonCodableArray<E>: ObservableObject, JsonCodableToFolderP where
 E: Codable,
 E: Identifiable,
-E: CustomStringConvertible,
-E.ID == UUID {
+E: CustomStringConvertible {
 
     private enum CodingKeys: String, CodingKey {
         case items
@@ -185,6 +184,7 @@ E.ID == UUID {
         saveAsJSON()
     }
 
+    /// Met à jour l'item de `self.items` dont l'`id` est le même que celui de `updatedItem`
     public func update(with updatedItem: E) {
         if let index = items.firstIndex(where: { $0.id == updatedItem.id }) {
             items[index] = updatedItem
@@ -192,6 +192,8 @@ E.ID == UUID {
         }
     }
 
+    /// Met à jour tous les item de `self.items` dont l'`id` est le même que celui
+    /// d'un des éléments de`updatedItems`
     public func update(with updatedItems: [E]) {
         for updatedItem in updatedItems {
             if let index = self.items.firstIndex(where: { $0.id == updatedItem.id }) {
@@ -206,14 +208,29 @@ E.ID == UUID {
         items.contains(where: { item.id == $0.id})
     }
 
-    /// True si un item existe déjà avec le même ID
+    /// True si un `item` existe déjà avec le même ID
     /// - Parameter ID: ID de l'item
-    public func isPresent(_ ID: UUID) -> Bool {
+    public func contains(_ ID: E.ID) -> Bool {
         items.contains(where: { ID == $0.id})
     }
 
-    public func item(withID ID: UUID) -> E? {
+    public func item(withID ID: E.ID) -> E? {
         items.first(where: { ID == $0.id})
+    }
+
+    public func itemBinding(withID ID: E.ID) -> Binding<E>? {
+        if self.contains(ID) {
+            return Binding<E>(
+                get: {
+                    self.items.first(where: { ID == $0.id})!
+                },
+                set: { item in
+                    self.update(with: item)
+                }
+            )
+        } else {
+            return nil
+        }
     }
 }
 
@@ -235,7 +252,7 @@ extension JsonCodableArray where E: Ordered {
     ///   - item: nouvel item à insérer
     ///   - itemsID: une liste d'IDs d'item
     func insert(item         : E,
-                `in` itemsID : inout [UUID]) {
+                `in` itemsID : inout [E.ID]) {
         guard itemsID.isNotEmpty else {
             itemsID = [item.id]
             return

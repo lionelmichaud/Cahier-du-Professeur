@@ -19,6 +19,7 @@ struct ObservBrowserRow: View {
                     .symbolRenderingMode(.monochrome)
                     .foregroundColor(observ.color)
                 Text("\(observ.date.stringShortDate) à \(observ.date.stringTime)")
+                    .font(.callout)
 
                 Spacer()
 
@@ -27,11 +28,11 @@ struct ObservBrowserRow: View {
             }
 
             EleveLabel(eleve: eleve)
-                .font(.caption)
+                .font(.callout)
                 .foregroundColor(.secondary)
 
             MotifLabel(motif: observ.motif)
-                .font(.caption)
+                .font(.callout)
                 //.foregroundColor(.secondary)
         }
     }

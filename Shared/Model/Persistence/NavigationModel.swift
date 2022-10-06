@@ -18,12 +18,16 @@ final class NavigationModel: ObservableObject, Codable {
     private lazy var decoder = JSONDecoder()
     private lazy var encoder = JSONEncoder()
 
-    init(columnVisibility : NavigationSplitViewVisibility = .automatic,
-         selectedTab      : UIState.Tab                   = .school
+    init(columnVisibility : NavigationSplitViewVisibility = .doubleColumn,
+         selectedTab      : UIState.Tab                   = .school,
+         selectedObservId : Observation.ID?               = nil,
+         selectedColleId  : Colle.ID?                     = nil
 //         recipePath       : [Recipe]                      = []
     ) {
         self.columnVisibility = columnVisibility
         self.selectedTab      = selectedTab
+        self.selectedObservId = selectedObservId
+        self.selectedColleId  = selectedColleId
 //        self.recipePath     = recipePath
     }
 

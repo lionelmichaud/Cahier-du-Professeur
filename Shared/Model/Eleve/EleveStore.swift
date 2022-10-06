@@ -126,6 +126,39 @@ extension EleveStore {
         return found
     }
 
+    /// Retourne la liste des `Observation` associées aux élèves de la `classe`
+    /// et qui sont stockées dans `observStore`
+    /// et qui satsiafont aux critères: `isConsignee` et `isVerified`
+    /// - Parameters:
+    ///   - isConsignee: si `nil` on ne filtre pas, sinon on filtre sur la valeur booléenne
+    ///   - isVerified: si `nil` on ne filtre pas, sinon on filtre sur la valeur booléenne
+    /// - Returns: liste des `Observation` associées aux élèves de la `classe`
+    func filteredSortedObservations
+    (dans classe : Classe,
+     observStore : ObservationStore,
+     isConsignee : Bool? = nil,
+     isVerified  : Bool? = nil) -> [Observation] {
+        var observs = [Observation]()
+
+        self.items.filter { eleve in
+            eleve.classeId != nil && eleve.classeId == classe.id
+        }
+        .forEach { eleve in
+            observs += observStore.observations(de          : eleve,
+                                                isConsignee : isConsignee,
+                                                isVerified  : isVerified)
+        }
+
+        return observs.sorted(by: <)
+    }
+
+    /// Retourne une liste de Binding sur des `Observation` associées aux élèves de la `classe`
+    /// et qui sont stockées dans `observStore`
+    /// et qui satsiafont aux critères: `isConsignee` et `isVerified`
+    /// - Parameters:
+    ///   - isConsignee: si `nil` on ne filtre pas, sinon on filtre sur la valeur booléenne
+    ///   - isVerified: si `nil` on ne filtre pas, sinon on filtre sur la valeur booléenne
+    /// - Returns: liste des `Observation` associées aux élèves de la `classe`
     func filteredSortedObservations
     (dans classe : Classe,
      observStore : ObservationStore,

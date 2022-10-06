@@ -167,14 +167,12 @@ struct EleveDetail: View {
             // édition de la liste des colles
             ForEach(colleStore.sortedColles(de          : eleve,
                                             isConsignee : filterColle ? false : nil)) { $colle in
-                NavigationLink {
-                    ColleEditor(classe      : classe,
-                                eleve       : $eleve,
-                                colle       : $colle,
-                                isNew       : false)
-                } label: {
-                    EleveColleRow(colle: colle)
-                }
+                EleveColleRow(colle: colle)
+                    .onTapGesture {
+                        // Programatic Navigation
+                        navigationModel.selectedTab     = .colle
+                        navigationModel.selectedColleId = colle.id
+                    }
                 .swipeActions {
                     // supprimer un élève
                     Button(role: .destructive) {
@@ -260,10 +258,7 @@ struct EleveDetail: View {
         }
         .sheet(isPresented: $isAddingNewColle) {
             NavigationView {
-                ColleEditor(classe : classe,
-                            eleve  : $eleve,
-                            colle  : $newColle,
-                            isNew  : true)
+                ColleCreator(eleve: $eleve)
             }
         }
     }

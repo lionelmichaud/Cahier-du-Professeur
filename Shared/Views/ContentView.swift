@@ -44,7 +44,7 @@ struct ContentView: View {
                 .badge(observStore.nbOfItemsToCheck)
 
             /// actifs & passifs du patrimoine de la famille
-            ColleSidebarView()
+            ColleSplitView()
                 .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
                 .tag(UIState.Tab.colle)
                 .badge(colleStore.nbOfItemsToCheck)

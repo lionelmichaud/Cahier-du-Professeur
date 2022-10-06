@@ -10,13 +10,9 @@ import HelpersView
 
 struct ColleDetail: View {
     @Binding
-    var eleve     : Eleve
-    @Binding
-    var colle     : Colle
-    let isEditing : Bool
-    var isNew     : Bool
-    @Binding
-    var isModified: Bool
+    var colle: Colle
+
+    @EnvironmentObject private var eleveStore : EleveStore
 
     var isConsigneeLabel: some View {
         Label(
@@ -40,73 +36,65 @@ struct ColleDetail: View {
         )
    }
 
+    var eleve: Eleve? {
+        guard let eleveId = colle.eleveId else {
+            return nil
+        }
+        return eleveStore.item(withID: eleveId)
+    }
+
     var body: some View {
         VStack {
             // élève
-            EleveLabelWithTrombineFlag(eleve     : $eleve,
-                                       isModified: $isModified,
-                                       font      : .title2,
-                                       fontWeight: .regular)
+            if let eleve {
+                EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
+                                           isModified : .constant(false),
+                                           isEditable : false,
+                                           font      : .title2,
+                                           fontWeight: .regular)
+            }
+
+            // colles
             List {
                 HStack {
                     Image(systemName: "lock")
                         .sfSymbolStyling()
                         .foregroundColor(colle.color)
                     // date
-                    if isNew || isEditing {
-                        DatePicker("Date", selection: $colle.date)
-                            .labelsHidden()
-                            .listRowSeparator(.hidden)
-                            .environment(\.locale, Locale.init(identifier: "fr_FR"))
-                    } else {
-                        Text("Le " + colle.date.stringLongDateTime)
-                    }
+                    DatePicker("Date", selection: $colle.date)
+                        .labelsHidden()
+                        .listRowSeparator(.hidden)
+                        .environment(\.locale, Locale.init(identifier: "fr_FR"))
                 }
 
                 // motif
-                if isNew || isEditing {
-                    MotifEditor(motif: $colle.motif)
-                } else {
-                    MotifView(motif: colle.motif)
-                }
+                MotifEditor(motif: $colle.motif)
 
                 // Durée
-                if isNew || isEditing {
-                    HStack {
-                        Stepper("Durée",
-                                value : $colle.duree,
-                                in    : 1 ... 4,
-                                step  : 1)
-                        Text("\(colle.duree) heures")
-                    }
-                    .frame(width: 225)
-                } else {
-                    Text("Durée: \(colle.duree) heures")
+                HStack {
+                    Stepper("Durée",
+                            value : $colle.duree,
+                            in    : 1 ... 4,
+                            step  : 1)
+                    Text("\(colle.duree) heures")
                 }
+                .frame(width: 225)
 
                 // checkbox isConsignee
-                if isNew || isEditing {
-                    Button {
-                        colle.isConsignee.toggle()
-                    } label: {
-                        isConsigneeLabel
-                    }
-                    .buttonStyle(.plain)
-                } else {
+                Button {
+                    colle.isConsignee.toggle()
+                } label: {
                     isConsigneeLabel
                 }
+                .buttonStyle(.plain)
 
                 // checkbox isVerified
-                if isNew || isEditing {
-                    Button {
-                        colle.isVerified.toggle()
-                    } label: {
-                        isVerifiedLabel
-                    }
-                    .buttonStyle(.plain)
-                } else {
+                Button {
+                    colle.isVerified.toggle()
+                } label: {
                     isVerifiedLabel
                 }
+                .buttonStyle(.plain)
             }
         }
         #if os(iOS)
@@ -120,31 +108,21 @@ struct ColleDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ColleDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
-                        colle      : .constant(TestEnvir.colleStore.items.first!),
-                        isEditing  : false,
-                        isNew      : true,
-                        isModified : .constant(false))
+            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!))
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
-            .previewDisplayName("Colle isNew")
 
-            ColleDetail(eleve      : .constant(TestEnvir.eleveStore.items.first!),
-                        colle      : .constant(TestEnvir.colleStore.items.first!),
-                        isEditing  : false,
-                        isNew      : true,
-                        isModified : .constant(false))
+            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!))
             .environmentObject(TestEnvir.schoolStore)
             .environmentObject(TestEnvir.classeStore)
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPhone Xs")
-            .previewDisplayName("Colle isNew")
+            .previewDevice("iPhone 13")
         }
     }
 }

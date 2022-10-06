@@ -217,6 +217,25 @@ extension EleveStore {
     (dans classe : Classe,
      colleStore  : ColleStore,
      isConsignee : Bool? = nil,
+     isVerified  : Bool? = nil) -> [Colle] {
+        var colles = [Colle]()
+
+        self.items.filter { eleve in
+            eleve.classeId != nil && eleve.classeId == classe.id
+        }
+        .forEach { eleve in
+            colles += colleStore.colles(de          : eleve,
+                                        isConsignee : isConsignee,
+                                        isVerified  : isVerified)
+        }
+
+        return colles.sorted(by: <)
+    }
+
+    func filteredSortedColles
+    (dans classe : Classe,
+     colleStore  : ColleStore,
+     isConsignee : Bool? = nil,
      isVerified  : Bool? = nil) -> Binding<[Colle]> {
 
         Binding<[Colle]>(

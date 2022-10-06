@@ -83,10 +83,7 @@ struct TrombinoscopeView: View {
                                         }
                                         .sheet(isPresented: $isAddingNewColle) {
                                             NavigationView {
-                                                ColleEditor(classe : classe,
-                                                            eleve  : $eleve,
-                                                            colle  : $newColle,
-                                                            isNew  : true)
+                                                ColleCreator(eleve: $eleve)
                                             }
                                         }
                                 }

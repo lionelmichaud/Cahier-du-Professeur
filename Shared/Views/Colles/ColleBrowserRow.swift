@@ -19,6 +19,7 @@ struct ColleBrowserRow: View {
                     .symbolRenderingMode(.monochrome)
                     .foregroundColor(colle.color)
                 Text("\(colle.date.stringShortDate) à \(colle.date.stringTime)")
+                    .font(.callout)
 
                 Spacer()
 
@@ -26,11 +27,11 @@ struct ColleBrowserRow: View {
             }
 
             EleveLabel(eleve: eleve)
-                .font(.caption)
+                .font(.callout)
                 .foregroundColor(.secondary)
 
             MotifLabel(motif: colle.motif)
-                .font(.caption)
+                .font(.callout)
             //.foregroundColor(.secondary)
         }
     }

@@ -68,8 +68,8 @@ struct ObservBrowserSchoolSubiew : View {
                         /// pour chaque Observation
                         if let eleveId = observ.eleveId,
                            let eleve = eleveStore.item(withID: eleveId) {
-                                ObservBrowserRow(eleve  : eleve,
-                                                 observ : observ)
+                            ObservBrowserRow(eleve  : eleve,
+                                             observ : observ)
                             .swipeActions {
                                 // supprimer l'observation
                                 Button(role: .destructive) {

@@ -17,18 +17,6 @@ extension ColleStore {
         }.count
     }
 
-    /// True si une colle existe déjà avec le même ID
-    /// - Parameter item: Eleve
-    func isPresent(_ item: Colle) -> Bool {
-        items.contains(where: { item.id == $0.id})
-    }
-
-    /// True si une colle existe déjà avec le même ID
-    /// - Parameter ID: ID de l'élève
-    func isPresent(_ ID: UUID) -> Bool {
-        items.contains(where: { ID == $0.id})
-    }
-
     func deleteColle(withID: UUID) {
         items.removeAll {
             $0.id == withID
@@ -53,9 +41,7 @@ extension ColleStore {
                     .sorted(by: <)
             },
             set: { items in
-                for item in items {
-                    self.update(with: item)
-                }
+                self.update(with: items)
             }
         )
     }

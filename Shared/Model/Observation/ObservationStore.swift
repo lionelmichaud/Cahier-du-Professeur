@@ -69,5 +69,6 @@ extension ObservationStore {
                 return false
             }
         }
+        .sorted(by: <)
     }
 }

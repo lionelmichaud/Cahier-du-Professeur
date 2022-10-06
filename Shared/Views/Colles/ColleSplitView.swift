@@ -1,5 +1,5 @@
 //
-//  ObservSidebarView.swift
+//  ColleSidebarView.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 14/04/2022.
@@ -7,23 +7,22 @@
 
 import SwiftUI
 
-struct ObservSplitView: View {
+struct ColleSplitView: View {
     @EnvironmentObject private var navigationModel : NavigationModel
 
     var body: some View {
         NavigationSplitView(
             columnVisibility: $navigationModel.columnVisibility
         ) {
-            ObservSidebarView()
+            ColleSidebarView()
         } detail: {
-            ObservEditor()
+            ColleEditor()
         }
-        .navigationSplitViewStyle(.balanced)
     }
 }
 
-struct ObservSidebarView_Previews: PreviewProvider {
+struct ColleSidebarView_Previews: PreviewProvider {
     static var previews: some View {
-        ObservSplitView()
+        ColleSplitView()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ObservCreator.swift
+//  ColleEditor.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 23/04/2022.
@@ -8,19 +8,19 @@
 import SwiftUI
 import HelpersView
 
-struct ObservCreator: View {
+struct ColleCreator: View {
     @Binding
     var eleve: Eleve
 
     @State
-    private var observ: Observation = Observation()
+    var colle: Colle = Colle()
 
-    @EnvironmentObject private var eleveStore  : EleveStore
-    @EnvironmentObject private var observStore : ObservationStore
+    @EnvironmentObject private var eleveStore : EleveStore
+    @EnvironmentObject private var colleStore : ColleStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ObservDetail(observ: $observ)
+        ColleDetail(colle: $colle)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Annuler", role: .cancel) {
@@ -29,12 +29,12 @@ struct ObservCreator: View {
                 }
                 ToolbarItem {
                     Button("Ajouter") {
-                        // Ajouter une nouvelle observation à l'élève
+                        // Ajouter une nouvelle colle à l'élève
                         withAnimation {
                             EleveManager()
-                                .ajouter(observation : &observ,
-                                         aEleve      : &eleve,
-                                         observStore : observStore)
+                                .ajouter(colle      : &colle,
+                                         aEleve     : &eleve,
+                                         colleStore : colleStore)
                         }
                         dismiss()
                     }
@@ -43,12 +43,12 @@ struct ObservCreator: View {
     }
 }
 
-struct ObservCreator_Previews: PreviewProvider {
+struct ColleCreator_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
             NavigationStack {
-                ObservCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
+                ColleCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
                 .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
@@ -58,7 +58,7 @@ struct ObservCreator_Previews: PreviewProvider {
             }
 
             NavigationStack {
-                ObservCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
+                ColleCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
                 .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)

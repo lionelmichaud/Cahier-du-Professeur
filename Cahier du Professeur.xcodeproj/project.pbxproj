@@ -33,8 +33,8 @@
 		791C26D528142D7100686F0C /* ColleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D328142D7100686F0C /* ColleStore.swift */; };
 		791C26D72814378A00686F0C /* EleveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D62814378A00686F0C /* EleveManager.swift */; };
 		791C26D82814378A00686F0C /* EleveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26D62814378A00686F0C /* EleveManager.swift */; };
-		791C26DC281447BD00686F0C /* EleveBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26DB281447BD00686F0C /* EleveBrowserView.swift */; };
-		791C26DD281447BD00686F0C /* EleveBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26DB281447BD00686F0C /* EleveBrowserView.swift */; };
+		791C26DC281447BD00686F0C /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26DB281447BD00686F0C /* EleveSidebarView.swift */; };
+		791C26DD281447BD00686F0C /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26DB281447BD00686F0C /* EleveSidebarView.swift */; };
 		791C26DF28144BE800686F0C /* EleveBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26DE28144BE800686F0C /* EleveBrowserRow.swift */; };
 		791C26E028144BE800686F0C /* EleveBrowserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26DE28144BE800686F0C /* EleveBrowserRow.swift */; };
 		791C26E228145E4700686F0C /* EleveColleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26E128145E4700686F0C /* EleveColleLabel.swift */; };
@@ -57,11 +57,15 @@
 		791C26FC2814A43400686F0C /* ColleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FA2814A43400686F0C /* ColleCreator.swift */; };
 		791C26FE2814A64E00686F0C /* ColleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FD2814A64E00686F0C /* ColleDetail.swift */; };
 		791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C26FD2814A64E00686F0C /* ColleDetail.swift */; };
+		791C416D28F0678C009B5B27 /* EleveCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C416C28F0678C009B5B27 /* EleveCreator.swift */; };
+		791C416E28F0678C009B5B27 /* EleveCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C416C28F0678C009B5B27 /* EleveCreator.swift */; };
 		7925C48F283D413E00A6BF31 /* MarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925C48E283D413E00A6BF31 /* MarkView.swift */; };
 		792F75D228EF3AC10053FECF /* ObservEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F75D128EF3AC10053FECF /* ObservEditor.swift */; };
 		792F75D328EF3AC10053FECF /* ObservEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F75D128EF3AC10053FECF /* ObservEditor.swift */; };
 		792F75D528EF4A290053FECF /* ColleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F75D428EF4A290053FECF /* ColleEditor.swift */; };
 		792F75D628EF4A290053FECF /* ColleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F75D428EF4A290053FECF /* ColleEditor.swift */; };
+		792F75D828EF63C70053FECF /* EleveSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F75D728EF63C70053FECF /* EleveSplitView.swift */; };
+		792F75D928EF63C70053FECF /* EleveSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F75D728EF63C70053FECF /* EleveSplitView.swift */; };
 		7935E64F285CAE9600111936 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935E64E285CAE9600111936 /* AnnotationView.swift */; };
 		7935E652285CB42500111936 /* AppreciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935E651285CB42500111936 /* AppreciationView.swift */; };
 		7935E654285CC05900111936 /* EleveLabelWithTrombineFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7935E653285CC05900111936 /* EleveLabelWithTrombineFlag.swift */; };
@@ -324,8 +328,6 @@
 		79F3AC042808CA2500D068D9 /* SchoolSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC032808CA2500D068D9 /* SchoolSidebarView.swift */; };
 		79F3AC072808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */; };
 		79F3AC082808CA4C00D068D9 /* ClasseSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */; };
-		79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */; };
-		79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */; };
 		79F3AC0D2808CA8700D068D9 /* ColleSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0C2808CA8700D068D9 /* ColleSplitView.swift */; };
 		79F3AC0E2808CA8700D068D9 /* ColleSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0C2808CA8700D068D9 /* ColleSplitView.swift */; };
 		79F3AC102808CAA600D068D9 /* ObservSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSplitView.swift */; };
@@ -464,7 +466,7 @@
 		791C26D028142B6300686F0C /* ObservationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationStore.swift; sourceTree = "<group>"; };
 		791C26D328142D7100686F0C /* ColleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleStore.swift; sourceTree = "<group>"; };
 		791C26D62814378A00686F0C /* EleveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveManager.swift; sourceTree = "<group>"; };
-		791C26DB281447BD00686F0C /* EleveBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveBrowserView.swift; sourceTree = "<group>"; };
+		791C26DB281447BD00686F0C /* EleveSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveSidebarView.swift; sourceTree = "<group>"; };
 		791C26DE28144BE800686F0C /* EleveBrowserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveBrowserRow.swift; sourceTree = "<group>"; };
 		791C26E128145E4700686F0C /* EleveColleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveColleLabel.swift; sourceTree = "<group>"; };
 		791C26E428145F8E00686F0C /* EleveObservLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveObservLabel.swift; sourceTree = "<group>"; };
@@ -476,9 +478,11 @@
 		791C26F728149E7E00686F0C /* ObservDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservDetail.swift; sourceTree = "<group>"; };
 		791C26FA2814A43400686F0C /* ColleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleCreator.swift; sourceTree = "<group>"; };
 		791C26FD2814A64E00686F0C /* ColleDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleDetail.swift; sourceTree = "<group>"; };
+		791C416C28F0678C009B5B27 /* EleveCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveCreator.swift; sourceTree = "<group>"; };
 		7925C48E283D413E00A6BF31 /* MarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView.swift; sourceTree = "<group>"; };
 		792F75D128EF3AC10053FECF /* ObservEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservEditor.swift; sourceTree = "<group>"; };
 		792F75D428EF4A290053FECF /* ColleEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleEditor.swift; sourceTree = "<group>"; };
+		792F75D728EF63C70053FECF /* EleveSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveSplitView.swift; sourceTree = "<group>"; };
 		7935E64E285CAE9600111936 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7935E651285CB42500111936 /* AppreciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppreciationView.swift; sourceTree = "<group>"; };
 		7935E653285CC05900111936 /* EleveLabelWithTrombineFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveLabelWithTrombineFlag.swift; sourceTree = "<group>"; };
@@ -677,7 +681,6 @@
 		79F3AC002808C76A00D068D9 /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		79F3AC032808CA2500D068D9 /* SchoolSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC062808CA4C00D068D9 /* ClasseSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseSidebarView.swift; sourceTree = "<group>"; };
-		79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveSidebarView.swift; sourceTree = "<group>"; };
 		79F3AC0C2808CA8700D068D9 /* ColleSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleSplitView.swift; sourceTree = "<group>"; };
 		79F3AC0F2808CAA600D068D9 /* ObservSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSplitView.swift; sourceTree = "<group>"; };
 		79F3F78B282E7E9500DC26FC /* ExamEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEditor.swift; sourceTree = "<group>"; };
@@ -856,9 +859,9 @@
 				79D583FF2820535B00371EB3 /* ColleBrowserRow.swift */,
 				791C26EB28146F8F00686F0C /* EleveColleRow.swift */,
 				791C26FA2814A43400686F0C /* ColleCreator.swift */,
+				792F75D428EF4A290053FECF /* ColleEditor.swift */,
 				791C26FD2814A64E00686F0C /* ColleDetail.swift */,
 				79D58402282053C300371EB3 /* ColleNotifIcon.swift */,
-				792F75D428EF4A290053FECF /* ColleEditor.swift */,
 			);
 			path = Colles;
 			sourceTree = "<group>";
@@ -890,10 +893,11 @@
 		795BC3DD2813102A00C22271 /* Eleve */ = {
 			isa = PBXGroup;
 			children = (
-				79F3AC092808CA6E00D068D9 /* EleveSidebarView.swift */,
-				791C26DB281447BD00686F0C /* EleveBrowserView.swift */,
+				792F75D728EF63C70053FECF /* EleveSplitView.swift */,
+				791C26DB281447BD00686F0C /* EleveSidebarView.swift */,
 				791C26DE28144BE800686F0C /* EleveBrowserRow.swift */,
 				795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */,
+				791C416C28F0678C009B5B27 /* EleveCreator.swift */,
 				795BC3E12813277B00C22271 /* EleveEditor.swift */,
 				795BC3E4281337E600C22271 /* EleveDetail.swift */,
 				791C26E128145E4700686F0C /* EleveColleLabel.swift */,
@@ -1837,7 +1841,6 @@
 				79E6C5B428DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */,
 				79F3ABD6280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */,
-				79F3AC0A2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				7935E652285CB42500111936 /* AppreciationView.swift in Sources */,
 				79C1274F283A929B002F243E /* SettingsView.swift in Sources */,
 				79502BAA2820407500DA798F /* EleveLabel.swift in Sources */,
@@ -1846,7 +1849,7 @@
 				79BB0B492816FAE5002AAABA /* Motif.swift in Sources */,
 				79D583F728204A3A00371EB3 /* ObservNotifIcon.swift in Sources */,
 				79F3ABEA28086C4F00D068D9 /* SchoolManager.swift in Sources */,
-				791C26DC281447BD00686F0C /* EleveBrowserView.swift in Sources */,
+				791C26DC281447BD00686F0C /* EleveSidebarView.swift in Sources */,
 				79F3F78C282E7E9500DC26FC /* ExamEditor.swift in Sources */,
 				79AACD9928E21525009B5AE4 /* TroubleDys.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
@@ -1874,10 +1877,12 @@
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
 				79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */,
 				79AACD9228E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,
+				791C416D28F0678C009B5B27 /* EleveCreator.swift in Sources */,
 				791C26D72814378A00686F0C /* EleveManager.swift in Sources */,
 				791C26F828149E7E00686F0C /* ObservDetail.swift in Sources */,
 				7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */,
 				791C26F22814847B00686F0C /* ClasseColleLabel.swift in Sources */,
+				792F75D828EF63C70053FECF /* EleveSplitView.swift in Sources */,
 				7918D2012810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79D58403282053C300371EB3 /* ColleNotifIcon.swift in Sources */,
 				79F3AC042808CA2500D068D9 /* SchoolSidebarView.swift in Sources */,
@@ -1935,7 +1940,6 @@
 				79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,
-				79F3AC0B2808CA6E00D068D9 /* EleveSidebarView.swift in Sources */,
 				7913562928D77C2900480771 /* Interoperability.swift in Sources */,
 				792F75D628EF4A290053FECF /* ColleEditor.swift in Sources */,
 				79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */,
@@ -1974,7 +1978,7 @@
 				791C26E328145E4700686F0C /* EleveColleLabel.swift in Sources */,
 				7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				79AACD9A28E21525009B5AE4 /* TroubleDys.swift in Sources */,
-				791C26DD281447BD00686F0C /* EleveBrowserView.swift in Sources */,
+				791C26DD281447BD00686F0C /* EleveSidebarView.swift in Sources */,
 				79F3ABE8280844C000D068D9 /* ClasseManager.swift in Sources */,
 				791C26EA28146B4300686F0C /* EleveObservRow.swift in Sources */,
 				7918D1FB2810997700C24C5A /* ColorOptions.swift in Sources */,
@@ -1989,6 +1993,7 @@
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				7986E7E0282918320011FF21 /* Persistence.swift in Sources */,
+				792F75D928EF63C70053FECF /* EleveSplitView.swift in Sources */,
 				790DA9FC28E3A95F009FB7C6 /* GroupManager.swift in Sources */,
 				79F3F78D282E7E9500DC26FC /* ExamEditor.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
@@ -2002,6 +2007,7 @@
 				79502BA52818716500DA798F /* ObservSidebarView.swift in Sources */,
 				791C26D228142B6300686F0C /* ObservationStore.swift in Sources */,
 				79D583F828204A3A00371EB3 /* ObservNotifIcon.swift in Sources */,
+				791C416E28F0678C009B5B27 /* EleveCreator.swift in Sources */,
 				7918D1FF2810A60400C24C5A /* ClasseEditor.swift in Sources */,
 				79536320280DC4D800AB8600 /* ClassStore.swift in Sources */,
 				791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */,

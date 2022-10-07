@@ -9,27 +9,21 @@ import SwiftUI
 import HelpersView
 
 struct EleveDetail: View {
-    var classe            : Classe
     @Binding
-    var eleve             : Eleve
-    let isEditing         : Bool
-    var isNew             : Bool
-    var filterObservation : Bool
-    var filterColle       : Bool
-    @Binding
-    var isModified: Bool
+    var eleve: Eleve
 
     @EnvironmentObject private var navigationModel : NavigationModel
-    @EnvironmentObject private var eleveStore  : EleveStore
-    @EnvironmentObject private var colleStore  : ColleStore
-    @EnvironmentObject private var observStore : ObservationStore
+    @EnvironmentObject private var eleveStore      : EleveStore
+    @EnvironmentObject private var colleStore      : ColleStore
+    @EnvironmentObject private var observStore     : ObservationStore
 
+    // true si le mode édition est engagé
+    @State
+    private var isEditing = false
     @State
     private var isAddingNewObserv = false
     @State
     private var isAddingNewColle  = false
-    @State
-    private var newColle  = Colle.exemple
     @State
     private var appreciationIsExpanded = false
     @State
@@ -42,21 +36,30 @@ struct EleveDetail: View {
     private var hasPAP = false
 
     @Preference(\.eleveAppreciationEnabled)
-    var eleveAppreciationEnabled
+    private var eleveAppreciationEnabled
     @Preference(\.eleveAnnotationEnabled)
-    var eleveAnnotationEnabled
+    private var eleveAnnotationEnabled
     @Preference(\.eleveBonusEnabled)
-    var eleveBonusEnabled
+    private var eleveBonusEnabled
     @Preference(\.maxBonusMalus)
-    var maxBonusMalus
+    private var maxBonusMalus
     @Preference(\.maxBonusIncrement)
-    var maxBonusIncrement
+    private var maxBonusIncrement
     @Preference(\.eleveTrombineEnabled)
-    var eleveTrombineEnabled
+    private var eleveTrombineEnabled
 
-    var name: some View {
+    // MARK: - Computed properties
+
+    private var filterObservation : Bool {
+        navigationModel.filterObservation
+    }
+    private var filterColle : Bool {
+        navigationModel.filterColle
+    }
+
+    private var name: some View {
         HStack {
-            if isNew || isEditing {
+            if isEditing {
                 HStack {
                     Image(systemName: "person.fill")
                         .sfSymbolStyling()
@@ -79,7 +82,6 @@ struct EleveDetail: View {
                 }
             } else {
                 EleveLabelWithTrombineFlag(eleve     : $eleve,
-                                           isModified: $isModified,
                                            font      : .title2,
                                            fontWeight: .regular)
             }
@@ -88,7 +90,7 @@ struct EleveDetail: View {
         .listRowSeparator(.hidden)
     }
 
-    var bonus: some View {
+    private var bonus: some View {
         DisclosureGroup(isExpanded: $bonusIsExpanded) {
             Stepper(value : $eleve.bonus,
                     in    : -maxBonusMalus ... maxBonusMalus,
@@ -106,12 +108,9 @@ struct EleveDetail: View {
                 .fontWeight(.bold)
         }
         .listRowSeparator(.hidden)
-        .onChange(of: eleve.bonus) { _ in
-            isModified = true
-        }
     }
 
-    var observations: some View {
+    private var observations: some View {
         Section {
             // édition de la liste des observations
             ForEach(observStore.sortedObservations(de          : eleve,
@@ -149,7 +148,6 @@ struct EleveDetail: View {
                 Spacer()
                 // ajouter une observation
                 Button {
-                    isModified        = true
                     isAddingNewObserv = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
@@ -162,7 +160,7 @@ struct EleveDetail: View {
         //.font(.headline)
     }
 
-    var colles: some View {
+    private var colles: some View {
         Section {
             // édition de la liste des colles
             ForEach(colleStore.sortedColles(de          : eleve,
@@ -196,8 +194,6 @@ struct EleveDetail: View {
                 Spacer()
                 // ajouter une colle
                 Button {
-                    isModified       = true
-                    newColle         = Colle()
                     isAddingNewColle = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
@@ -214,29 +210,45 @@ struct EleveDetail: View {
         VStack {
             // nom
             name
+                .padding(.top)
 
             List {
-                if !isNew {
-                    // appréciation sur l'élève
-                    if eleveAppreciationEnabled {
-                        AppreciationView(isExpanded  : $appreciationIsExpanded,
-                                         isModified  : $isModified,
-                                         appreciation: $eleve.appreciation)
+                // appréciation sur l'élève
+                if eleveAppreciationEnabled {
+                    AppreciationView(isExpanded  : $appreciationIsExpanded,
+                                     appreciation: $eleve.appreciation)
+                }
+                // annotation sur l'élève
+                if eleveAnnotationEnabled {
+                    AnnotationView(isExpanded: $noteIsExpanded,
+                                   annotation: $eleve.annotation)
+                }
+                // bonus/malus de l'élève
+                if eleveBonusEnabled {
+                    bonus
+                }
+                // observations sur l'élève
+                observations
+                // colles de l'élève
+                colles
+            }
+        }
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    // Appliquer les modifications faites à l'élève
+                    if isEditing {
+                        // supprimer les caractères blancs au début et à la fin
+                        if eleve.name.familyName != nil {
+                            eleve.name.familyName = eleve.name.familyName!.trimmed.uppercased()
+                        }
+                        if eleve.name.givenName != nil {
+                            eleve.name.givenName!.trim()
+                        }
                     }
-                    // annotation sur l'élève
-                    if eleveAnnotationEnabled {
-                        AnnotationView(isExpanded: $noteIsExpanded,
-                                       isModified: $isModified,
-                                       annotation: $eleve.annotation)
-                    }
-                    // bonus/malus de l'élève
-                    if eleveBonusEnabled {
-                        bonus
-                    }
-                    // observations sur l'élève
-                    observations
-                    // colles de l'élève
-                    colles
+                    isEditing.toggle()
+                } label: {
+                    Text(isEditing ? "Ok" : "Modifier")
                 }
             }
         }
@@ -265,13 +277,13 @@ struct EleveDetail: View {
 
     // MARK: - Methods
 
-    func deleteObserv(index: Int) {
+    private func deleteObserv(index: Int) {
         EleveManager().retirer(observIndex : index,
                                deEleve     : &eleve,
                                observStore : observStore)
     }
 
-    func deleteColle(index: Int) {
+    private func deleteColle(index: Int) {
         EleveManager().retirer(colleIndex : index,
                                deEleve    : &eleve,
                                colleStore : colleStore)
@@ -282,37 +294,28 @@ struct EleveDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            NavigationView {
-                //EmptyView()
-                EleveDetail(classe            : TestEnvir.classeStore.items.first!,
-                            eleve             : .constant(TestEnvir.eleveStore.items.first!),
-                            isEditing         : false,
-                            isNew             : true,
-                            filterObservation : false,
-                            filterColle       : false,
-                            isModified        : .constant(false))
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
+            //EmptyView()
+            NavigationStack {
+                EleveDetail(eleve: .constant(TestEnvir.eleveStore.items.first!))
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
             }
-            .previewDevice("iPhone Xs Pro")
-            .previewDisplayName("New Classe")
+            .previewDevice("iPad mini (6th generation)")
 
-            NavigationView {
-                //EmptyView()
-                EleveDetail(classe            : TestEnvir.classeStore.items.first!,
-                            eleve             : .constant(TestEnvir.eleveStore.items.first!),
-                            isEditing         : false,
-                            isNew             : false,
-                            filterObservation : false,
-                            filterColle       : false,
-                            isModified        : .constant(false))
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
+            NavigationStack {
+                EleveDetail(eleve: .constant(TestEnvir.eleveStore.items.first!))
+                    .environmentObject(NavigationModel(selectedEleveId: TestEnvir.eleveStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
             }
-            .previewDevice("iPhone Xs")
-            .previewDisplayName("Display Classe")
+            .previewDevice("iPhone 13")
         }
     }
 }

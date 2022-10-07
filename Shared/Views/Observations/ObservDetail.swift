@@ -48,7 +48,6 @@ struct ObservDetail: View {
             // élève
             if let eleve {
                 EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
-                                           isModified : .constant(false),
                                            isEditable : false,
                                            font       : .title2,
                                            fontWeight : .regular)
@@ -151,10 +150,10 @@ struct ObservDetail2: View {
                 /// élève
                 if let eleve {
                     EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
-                                               isModified : .constant(false),
                                                isEditable : false,
                                                font       : .title2,
                                                fontWeight : .regular)
+                    .padding(.top)
                 } else {
                     Text("Elève introubale !").foregroundColor(.red)
                 }
@@ -215,21 +214,27 @@ struct ObservDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPad mini (6th generation)")
+            NavigationStack {
+                ObservDetail(observ: .constant(TestEnvir.observStore.items.first!))
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
 
-            ObservDetail(observ: .constant(TestEnvir.observStore.items.first!))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPhone 13")
+            NavigationStack {
+                ObservDetail(observ: .constant(TestEnvir.observStore.items.first!))
+                    .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPhone 13")
         }
     }
 }

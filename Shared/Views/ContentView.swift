@@ -32,7 +32,7 @@ struct ContentView: View {
                 .badge(classeStore.nbOfItems)
 
             /// dépenses de la famille
-            EleveSidebarView()
+            EleveSplitView()
                 .tabItem { Label("Elèves", systemImage: "person").symbolVariant(.none) }
                 .tag(UIState.Tab.eleve)
                 .badge(eleveStore.nbOfItems)

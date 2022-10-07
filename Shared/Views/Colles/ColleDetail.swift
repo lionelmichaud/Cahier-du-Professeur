@@ -48,10 +48,10 @@ struct ColleDetail: View {
             // élève
             if let eleve {
                 EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
-                                           isModified : .constant(false),
                                            isEditable : false,
-                                           font      : .title2,
-                                           fontWeight: .regular)
+                                           font       : .title2,
+                                           fontWeight : .regular)
+                .padding(.top)
             }
 
             // colles
@@ -99,7 +99,7 @@ struct ColleDetail: View {
         }
         #if os(iOS)
         .navigationTitle("Colle")
-        //.navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)
         #endif
     }
 }
@@ -108,20 +108,26 @@ struct ColleDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!))
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
+            NavigationStack {
+                ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!))
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
             .previewDevice("iPad mini (6th generation)")
 
-            ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!))
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
+            NavigationStack {
+                ColleDetail(colle: .constant(TestEnvir.colleStore.items.first!))
+                    .environmentObject(NavigationModel(selectedColleId: TestEnvir.eleveStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
             .previewDevice("iPhone 13")
         }
     }

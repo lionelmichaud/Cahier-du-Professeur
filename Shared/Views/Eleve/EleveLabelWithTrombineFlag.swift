@@ -12,9 +12,6 @@ struct EleveLabelWithTrombineFlag: View {
     @Binding
     var eleve      : Eleve
 
-    @Binding
-    var isModified : Bool
-
     var isEditable : Bool        = true
     var font       : Font        = .title2
     var fontWeight : Font.Weight = .semibold
@@ -62,9 +59,6 @@ struct EleveLabelWithTrombineFlag: View {
                             .foregroundColor(.orange)
                     }
                 }
-                .onChange(of: eleve.isFlagged) { _ in
-                    isModified = true
-                }
                 // PAP
                 Toggle(isOn: isEditable ? $hasPAP : .constant(hasPAP)) {
                     Text("PAP")
@@ -79,7 +73,6 @@ struct EleveLabelWithTrombineFlag: View {
                     } else {
                         eleve.troubleDys = nil
                     }
-                    isModified = true
                 }
             }
 
@@ -90,9 +83,6 @@ struct EleveLabelWithTrombineFlag: View {
                     if isEditable {
                         CasePicker(pickedCase: $eleve.troubleDys.bound, label: "Trouble")
                             .pickerStyle(.menu)
-                            .onChange(of: eleve.troubleDys.bound) { _ in
-                                isModified = true
-                            }
                     } else if let troubleDys = eleve.troubleDys {
                         Text(troubleDys.displayString + ":")
                     }
@@ -122,13 +112,11 @@ struct EleveLabelWithTrombineFlag_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
-                                       isModified : .constant(false),
                                        fontWeight : .regular,
                                        imageSize  : .small)
             .previewLayout(.sizeThatFits)
 
-            EleveLabelWithTrombineFlag(eleve: .constant(Eleve.exemple),
-                                       isModified : .constant(false))
+            EleveLabelWithTrombineFlag(eleve: .constant(Eleve.exemple))
                 .previewLayout(.sizeThatFits)
         }
     }

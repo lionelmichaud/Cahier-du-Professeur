@@ -49,23 +49,25 @@ struct ColleCreator_Previews: PreviewProvider {
         return Group {
             NavigationStack {
                 ColleCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPad mini (6th generation)")
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
             }
+            .previewDevice("iPad mini (6th generation)")
 
             NavigationStack {
                 ColleCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPhone 13")
+                    .environmentObject(NavigationModel(selectedColleId: TestEnvir.eleveStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
             }
+            .previewDevice("iPhone 13")
         }
     }
 }

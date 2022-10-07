@@ -11,7 +11,9 @@ struct ObservSidebarView: View {
     @EnvironmentObject private var navigationModel : NavigationModel
     @EnvironmentObject private var schoolStore     : SchoolStore
     @EnvironmentObject private var observStore     : ObservationStore
-    @State private var filterObservation = true
+
+    @State
+    private var filterObservation = true
 
     var body: some View {
         List(selection: $navigationModel.selectedObservId) {
@@ -60,12 +62,12 @@ struct ObservBrowserSchoolSubiew : View {
     @EnvironmentObject private var observStore     : ObservationStore
 
     var body: some View {
+        /// pour chaque Classe
         ForEach(classeStore.sortedClasses(dans: school)) { $classe in
             if someObservations(dans: classe) {
                 DisclosureGroup(isExpanded: .constant(true)) {
-                    /// pour chaque Elève
+                    /// pour chaque Observation
                     ForEach(filteredSortedObservs(dans: classe)) { observ in
-                        /// pour chaque Observation
                         if let eleveId = observ.eleveId,
                            let eleve = eleveStore.item(withID: eleveId) {
                             ObservBrowserRow(eleve  : eleve,

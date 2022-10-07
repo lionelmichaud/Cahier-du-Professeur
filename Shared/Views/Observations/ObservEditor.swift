@@ -36,23 +36,27 @@ struct ObservEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ObservEditor()
-                .environmentObject(NavigationModel())
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPad mini (6th generation)")
+            NavigationStack {
+                ObservEditor()
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
 
-            ObservEditor()
-                .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPhone 13")
+            NavigationStack {
+                ObservEditor()
+                    .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPhone 13")
         }
     }
 }

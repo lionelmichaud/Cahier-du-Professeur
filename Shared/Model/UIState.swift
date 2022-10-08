@@ -8,7 +8,7 @@
 import Foundation
 
 final class UIState: ObservableObject {
-    enum Tab: Int, Hashable {
+    enum Tab: Int, Hashable, Codable {
         case userSettings, school, classe, eleve, colle, observation
     }
 }

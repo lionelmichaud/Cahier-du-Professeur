@@ -1,7 +1,8 @@
 included:
-
 - Shared
 excluded:
+- JSON
+- Photos
 - Tests iOS
 - Tests macOS
 

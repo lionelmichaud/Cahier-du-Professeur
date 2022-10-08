@@ -40,7 +40,7 @@ enum MotifEnum: PickableEnumP, Codable {
     }
 }
 
-struct Motif: Codable {
+struct Motif: Codable, Hashable {
     var nature           : MotifEnum = .autre
     var descriptionMotif : String    = "motif"
 }

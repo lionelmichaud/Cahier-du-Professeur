@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AppreciationView: View {
     @Binding var isExpanded: Bool
-    @Binding var isModified: Bool
     @Binding var appreciation: String
     @Environment(\.horizontalSizeClass)
     private var hClass
@@ -34,16 +33,12 @@ struct AppreciationView: View {
                 .fontWeight(.bold)
         }
         .listRowSeparator(.hidden)
-        .onChange(of: appreciation) { _ in
-            isModified = true
-        }
     }
 }
 
 struct AppreciationView_Previews: PreviewProvider {
     static var previews: some View {
         AppreciationView(isExpanded: .constant(true),
-                         isModified: .constant(false),
                          appreciation: .constant("Ceci est une appréciation"))
     }
 }

@@ -123,7 +123,6 @@ struct SchoolEditor: View {
             // note sur la classe
             if schoolAnnotation {
                 AnnotationView(isExpanded: $noteIsExpanded,
-                               isModified: $isModified,
                                annotation: $school.annotation)
             }
             // édition de la liste des classes

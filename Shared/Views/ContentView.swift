@@ -14,11 +14,11 @@ struct ContentView: View {
     @EnvironmentObject var colleStore  : ColleStore
     @EnvironmentObject var observStore : ObservationStore
 
-    @SceneStorage("selectedTab")
-    var selection = UIState.Tab.school
-    
+    @SceneStorage("navigation") private var navigationData: Data?
+    @StateObject private var navigationModel = NavigationModel()
+
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $navigationModel.selectedTab) {
             /// gestion des dossiers
             SchoolSidebarView()
                 .tabItem { Label("Etablissement", systemImage: "building.2").symbolVariant(.none) }
@@ -32,25 +32,33 @@ struct ContentView: View {
                 .badge(classeStore.nbOfItems)
 
             /// dépenses de la famille
-            EleveSidebarView()
+            EleveSplitView()
                 .tabItem { Label("Elèves", systemImage: "person").symbolVariant(.none) }
                 .tag(UIState.Tab.eleve)
                 .badge(eleveStore.nbOfItems)
 
             /// scenario paramètrique de simulation
-            ObservSidebarView()
+            ObservSplitView()
                 .tabItem { Label("Observations", systemImage: "rectangle.and.text.magnifyingglass").symbolVariant(.none) }
                 .tag(UIState.Tab.observation)
                 .badge(observStore.nbOfItemsToCheck)
 
             /// actifs & passifs du patrimoine de la famille
-            ColleSidebarView()
+            ColleSplitView()
                 .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
                 .tag(UIState.Tab.colle)
                 .badge(colleStore.nbOfItemsToCheck)
         }
-        .onAppear {
+        .environmentObject(navigationModel)
+        .task {
             eleveStore.sort()
+
+            if let navigationData {
+                navigationModel.jsonData = navigationData
+            }
+            for await _ in navigationModel.objectWillChangeSequence {
+                navigationData = navigationModel.jsonData
+            }
         }
     }
 }

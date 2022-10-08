@@ -30,7 +30,7 @@ struct ClasseEditor: View {
     private var importCsvFile = false
 
     private var isItemDeleted: Bool {
-        !classeStore.isPresent(classe)
+        !classeStore.contains(classe)
     }
 
     @Preference(\.interoperability)

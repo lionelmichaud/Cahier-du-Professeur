@@ -19,6 +19,7 @@ struct ObservBrowserRow: View {
                     .symbolRenderingMode(.monochrome)
                     .foregroundColor(observ.color)
                 Text("\(observ.date.stringShortDate) à \(observ.date.stringTime)")
+                    .font(.callout)
 
                 Spacer()
 
@@ -27,11 +28,11 @@ struct ObservBrowserRow: View {
             }
 
             EleveLabel(eleve: eleve)
-                .font(.caption)
+                .font(.callout)
                 .foregroundColor(.secondary)
 
             MotifLabel(motif: observ.motif)
-                .font(.caption)
+                .font(.callout)
                 //.foregroundColor(.secondary)
         }
     }
@@ -39,8 +40,35 @@ struct ObservBrowserRow: View {
 
 struct ObservBrowserRow_Previews: PreviewProvider {
     static var previews: some View {
-        ObservBrowserRow(eleve  : Eleve.exemple,
-                         observ : Observation.exemple)
-        .previewLayout(.sizeThatFits)
+        TestEnvir.createFakes()
+        return Group {
+            List {
+                DisclosureGroup("Group", isExpanded: .constant(true)) {
+                    ObservBrowserRow(eleve  : TestEnvir.eleveStore.items.first!,
+                                     observ : TestEnvir.observStore.items.first!)
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+                }
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            List {
+                DisclosureGroup("Group", isExpanded: .constant(true)) {
+                    ObservBrowserRow(eleve  : TestEnvir.eleveStore.items.first!,
+                                     observ : TestEnvir.observStore.items.first!)
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+                }
+            }
+            .previewDevice("iPhone 13")
+        }
     }
 }

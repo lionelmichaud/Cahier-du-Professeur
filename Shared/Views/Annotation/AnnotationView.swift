@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AnnotationView: View {
     @Binding var isExpanded: Bool
-    @Binding var isModified: Bool
     @Binding var annotation: String
     @Environment(\.horizontalSizeClass)
     private var hClass
@@ -34,16 +33,12 @@ struct AnnotationView: View {
                 .fontWeight(.bold)
         }
         .listRowSeparator(.hidden)
-        .onChange(of: annotation) { _ in
-            isModified = true
-        }
     }
 }
 
 struct AnnotationView_Previews: PreviewProvider {
     static var previews: some View {
         AnnotationView(isExpanded: .constant(true),
-                       isModified: .constant(false),
                        annotation: .constant("Ceci est une annotation"))
     }
 }

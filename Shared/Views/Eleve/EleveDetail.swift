@@ -274,7 +274,9 @@ struct EleveDetail: View {
                             eleve.name.givenName!.trim()
                         }
                     }
-                    isEditing.toggle()
+                    withAnimation {
+                        isEditing.toggle()
+                    }
                 } label: {
                     Text(isEditing ? "Ok" : "Modifier")
                 }

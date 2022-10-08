@@ -33,7 +33,7 @@ struct ClassCreator: View {
                     }
                 }
                 .pickerStyle(.menu)
-                Toggle(isOn: $newClasse.segpa) {
+                Toggle(isOn: $newClasse.segpa.animation()) {
                     Text("SEGPA")
                         .font(.caption)
                 }

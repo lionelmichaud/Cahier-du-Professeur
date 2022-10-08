@@ -36,10 +36,12 @@ struct EleveLabelWithTrombineFlag: View {
     var body: some View {
         VStack {
             HStack {
-                // Trombine
+                /// Trombine
                 Button {
                     if eleveTrombineEnabled {
-                        showTrombine.toggle()
+                        withAnimation {
+                            showTrombine.toggle()
+                        }
                     }
                 } label: {
                     Image(systemName: "person.fill")
@@ -48,7 +50,7 @@ struct EleveLabelWithTrombineFlag: View {
                         .foregroundColor(eleve.sexe.color)
                 }
 
-                // Nom
+                /// Nom
                 if hClass == .compact {
                     Text(eleve.displayName2lines(nameDisplayOrder))
                         .font(font)
@@ -56,7 +58,7 @@ struct EleveLabelWithTrombineFlag: View {
                 } else {
                     Text(eleve.displayName)
                 }
-                // Flag
+                /// Flag
                 Button {
                     eleve.isFlagged.toggle()
                 } label: {
@@ -70,8 +72,8 @@ struct EleveLabelWithTrombineFlag: View {
                 }
                 .disabled(!isEditable)
 
-                // PAP
-                Toggle(isOn: $hasPAP) {
+                /// PAP
+                Toggle(isOn: $hasPAP.animation()) {
                     Text("PAP")
                 }
                 .toggleStyle(.button)

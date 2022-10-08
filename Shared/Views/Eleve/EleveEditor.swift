@@ -50,7 +50,7 @@ struct EleveEditor_Previews: PreviewProvider {
         return Group {
             NavigationStack {
                 EleveEditor()
-                    .environmentObject(NavigationModel())
+                    .environmentObject(NavigationModel(selectedEleveId: TestEnvir.eleveStore.items.first!.id))
                     .environmentObject(TestEnvir.schoolStore)
                     .environmentObject(TestEnvir.classeStore)
                     .environmentObject(TestEnvir.eleveStore)

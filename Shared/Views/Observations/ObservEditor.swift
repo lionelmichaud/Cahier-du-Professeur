@@ -11,6 +11,8 @@ struct ObservEditor: View {
     @EnvironmentObject private var navigationModel : NavigationModel
     @EnvironmentObject private var observStore     : ObservationStore
 
+    // MARK: - Computed properties
+
     private var selectedItemExists: Bool {
         guard let selectedObservId = navigationModel.selectedObservId else {
             return false
@@ -38,7 +40,7 @@ struct ObservEditor_Previews: PreviewProvider {
         return Group {
             NavigationStack {
                 ObservEditor()
-                    .environmentObject(NavigationModel())
+                    .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
                     .environmentObject(TestEnvir.schoolStore)
                     .environmentObject(TestEnvir.classeStore)
                     .environmentObject(TestEnvir.eleveStore)

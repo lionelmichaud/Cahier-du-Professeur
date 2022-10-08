@@ -14,6 +14,8 @@ struct ObservDetail: View {
 
     @EnvironmentObject private var eleveStore : EleveStore
 
+    // MARK: - Computed properties
+
     var isConsigneeLabel: some View {
         Label(
             title: {
@@ -47,10 +49,10 @@ struct ObservDetail: View {
         VStack {
             // élève
             if let eleve {
-                EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
-                                           isEditable : false,
-                                           font       : .title2,
-                                           fontWeight : .regular)
+                GroupBox {
+                    EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
+                                               isEditable : false)
+                }
             }
 
             // observation
@@ -150,9 +152,7 @@ struct ObservDetail2: View {
                 /// élève
                 if let eleve {
                     EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
-                                               isEditable : false,
-                                               font       : .title2,
-                                               fontWeight : .regular)
+                                               isEditable : false)
                     .padding(.top)
                 } else {
                     Text("Elève introubale !").foregroundColor(.red)
@@ -216,7 +216,7 @@ struct ObservDetail_Previews: PreviewProvider {
         return Group {
             NavigationStack {
                 ObservDetail(observ: .constant(TestEnvir.observStore.items.first!))
-                    .environmentObject(NavigationModel())
+                    .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
                     .environmentObject(TestEnvir.schoolStore)
                     .environmentObject(TestEnvir.classeStore)
                     .environmentObject(TestEnvir.eleveStore)

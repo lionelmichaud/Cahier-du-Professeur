@@ -39,8 +39,12 @@ struct ColleBrowserRow: View {
 
 struct ColleBrowserRow_Previews: PreviewProvider {
     static var previews: some View {
-        ColleBrowserRow(eleve: Eleve.exemple,
-                        colle: Colle.exemple)
-        .previewLayout(.sizeThatFits)
+        List {
+            DisclosureGroup("Group", isExpanded: .constant(true)) {
+                ColleBrowserRow(eleve: Eleve.exemple,
+                                colle: Colle.exemple)
+            }
+            .previewLayout(.sizeThatFits)
+        }
     }
 }

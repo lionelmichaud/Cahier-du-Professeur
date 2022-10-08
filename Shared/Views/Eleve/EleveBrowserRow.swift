@@ -32,6 +32,9 @@ struct EleveBrowserRow_Previews: PreviewProvider {
             List {
                 DisclosureGroup("Group", isExpanded: .constant(true)) {
                     EleveBrowserRow(eleve: Eleve.exemple)
+                        .environmentObject(NavigationModel())
+                        .environmentObject(TestEnvir.schoolStore)
+                        .environmentObject(TestEnvir.classeStore)
                         .environmentObject(TestEnvir.eleveStore)
                         .environmentObject(TestEnvir.colleStore)
                         .environmentObject(TestEnvir.observStore)
@@ -42,12 +45,15 @@ struct EleveBrowserRow_Previews: PreviewProvider {
             List {
                 DisclosureGroup("Group", isExpanded: .constant(true)) {
                     EleveBrowserRow(eleve: Eleve.exemple)
+                        .environmentObject(NavigationModel())
+                        .environmentObject(TestEnvir.schoolStore)
+                        .environmentObject(TestEnvir.classeStore)
                         .environmentObject(TestEnvir.eleveStore)
                         .environmentObject(TestEnvir.colleStore)
                         .environmentObject(TestEnvir.observStore)
                 }
             }
-            .previewDevice("iPhone Xs")
+            .previewDevice("iPhone 13")
         }
     }
 }

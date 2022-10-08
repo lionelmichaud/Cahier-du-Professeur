@@ -49,7 +49,7 @@ struct ColleCreator_Previews: PreviewProvider {
         return Group {
             NavigationStack {
                 ColleCreator(eleve: .constant(TestEnvir.eleveStore.items.first!))
-                    .environmentObject(NavigationModel())
+                    .environmentObject(NavigationModel(selectedColleId: TestEnvir.eleveStore.items.first!.id))
                     .environmentObject(TestEnvir.schoolStore)
                     .environmentObject(TestEnvir.classeStore)
                     .environmentObject(TestEnvir.eleveStore)

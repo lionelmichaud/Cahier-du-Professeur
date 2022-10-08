@@ -29,6 +29,7 @@ struct LoadableImage: View {
                     image
                         .resizable()
                         .scaledToFit()
+                        .frame(height: 320)
                         .cornerRadius(15)
                         .shadow(radius: 5)
                         .accessibility(hidden: false)

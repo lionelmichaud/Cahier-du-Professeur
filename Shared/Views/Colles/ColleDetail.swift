@@ -47,11 +47,10 @@ struct ColleDetail: View {
         VStack {
             // élève
             if let eleve {
-                EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
-                                           isEditable : false,
-                                           font       : .title2,
-                                           fontWeight : .regular)
-                .padding(.top)
+                GroupBox {
+                    EleveLabelWithTrombineFlag(eleve      : .constant(eleve),
+                                               isEditable : false)
+                }
             }
 
             // colles

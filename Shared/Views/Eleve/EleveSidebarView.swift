@@ -160,13 +160,24 @@ struct EleveBrowserSchoolSubview : View {
 struct EleveBrowserView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return NavigationView {
+        return Group {
             EleveSidebarView()
+                .environmentObject(NavigationModel(selectedEleveId: TestEnvir.eleveStore.items.first!.id))
                 .environmentObject(TestEnvir.schoolStore)
                 .environmentObject(TestEnvir.classeStore)
                 .environmentObject(TestEnvir.eleveStore)
                 .environmentObject(TestEnvir.colleStore)
                 .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPad mini (6th generation)")
+
+            EleveSidebarView()
+                .environmentObject(NavigationModel(selectedEleveId: TestEnvir.eleveStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPiPhone 13")
         }
     }
 }

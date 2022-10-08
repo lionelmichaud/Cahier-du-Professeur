@@ -47,6 +47,8 @@ struct EleveDetail: View {
     private var maxBonusIncrement
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
+    @Preference(\.nameDisplayOrder)
+    private var nameDisplayOrder
 
     // MARK: - Computed properties
 
@@ -57,33 +59,60 @@ struct EleveDetail: View {
         navigationModel.filterColle
     }
 
-    private var name: some View {
+    private var sex: some View {
         HStack {
+            Image(systemName: "person.fill")
+                .sfSymbolStyling()
+                .foregroundColor(eleve.sexe.color)
+            // Sexe de cet eleve
+            CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
+                .pickerStyle(.menu)
+        }
+    }
+    private var prenom: some View {
+        TextField("Prénom", text: $eleve.name.givenName.bound)
+            .onSubmit {
+                eleve.name.givenName.bound.trim()
+            }
+            .textFieldStyle(.roundedBorder)
+            .disableAutocorrection(true)
+    }
+    private var nom: some View {
+        TextField("Nom", text: $eleve.name.familyName.bound)
+            .onSubmit {
+                eleve.name.familyName.bound.trim()
+            }
+            .textFieldStyle(.roundedBorder)
+            .disableAutocorrection(true)
+    }
+
+    private var name: some View {
+        GroupBox {
             if isEditing {
-                HStack {
-                    Image(systemName: "person.fill")
-                        .sfSymbolStyling()
-                        .foregroundColor(eleve.sexe.color)
-                    // Sexe de cet eleve
-                    CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
-                        .pickerStyle(.menu)
-                    TextField("Prénom", text: $eleve.name.givenName.bound)
-                        .onSubmit {
-                            eleve.name.givenName.bound.trim()
+                ViewThatFits(in: .horizontal) {
+                    HStack {
+                        sex
+                        if nameDisplayOrder == .nomPrenom {
+                            nom
+                            prenom
+                        } else {
+                            prenom
+                            nom
                         }
-                        .textFieldStyle(.roundedBorder)
-                        .disableAutocorrection(true)
-                    TextField("Nom", text: $eleve.name.familyName.bound)
-                        .onSubmit {
-                            eleve.name.familyName.bound.trim()
+                    }
+                    VStack {
+                        sex
+                        if nameDisplayOrder == .nomPrenom {
+                            nom
+                            prenom
+                        } else {
+                            prenom
+                            nom
                         }
-                        .textFieldStyle(.roundedBorder)
-                        .disableAutocorrection(true)
+                    }
                 }
             } else {
-                EleveLabelWithTrombineFlag(eleve     : $eleve,
-                                           font      : .title2,
-                                           fontWeight: .regular)
+                EleveLabelWithTrombineFlag(eleve: $eleve)
             }
         }
         .padding(.horizontal)
@@ -210,7 +239,6 @@ struct EleveDetail: View {
         VStack {
             // nom
             name
-                .padding(.top)
 
             List {
                 // appréciation sur l'élève
@@ -246,7 +274,9 @@ struct EleveDetail: View {
                             eleve.name.givenName!.trim()
                         }
                     }
-                    isEditing.toggle()
+                    withAnimation {
+                        isEditing.toggle()
+                    }
                 } label: {
                     Text(isEditing ? "Ok" : "Modifier")
                 }

@@ -121,6 +121,15 @@ struct ObservBrowserSchoolSubiew : View {
 
 struct ObservBrowserView_Previews: PreviewProvider {
     static var previews: some View {
-        ObservSidebarView()
+        TestEnvir.createFakes()
+        return Group {
+            ObservSidebarView()
+                .environmentObject(NavigationModel(selectedObservId: TestEnvir.observStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+        }
     }
 }

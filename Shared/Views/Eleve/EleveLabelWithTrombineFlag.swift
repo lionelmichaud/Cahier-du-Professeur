@@ -13,13 +13,19 @@ struct EleveLabelWithTrombineFlag: View {
     var eleve      : Eleve
 
     var isEditable : Bool        = true
-    var font       : Font        = .title2
+    var font       : Font        = .title3
     var fontWeight : Font.Weight = .semibold
     var imageSize  : Image.Scale = .large
     var flagSize   : Image.Scale = .medium
 
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
+
+    @Preference(\.nameDisplayOrder)
+    private var nameDisplayOrder
+
+    @Environment(\.horizontalSizeClass)
+    var hClass
 
     @State
     private var showTrombine = false
@@ -30,10 +36,12 @@ struct EleveLabelWithTrombineFlag: View {
     var body: some View {
         VStack {
             HStack {
-                // Trombine
+                /// Trombine
                 Button {
                     if eleveTrombineEnabled {
-                        showTrombine.toggle()
+                        withAnimation {
+                            showTrombine.toggle()
+                        }
                     }
                 } label: {
                     Image(systemName: "person.fill")
@@ -41,15 +49,18 @@ struct EleveLabelWithTrombineFlag: View {
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(eleve.sexe.color)
                 }
-                // Nom
-                Text(eleve.displayName)
-                    .font(font)
-                    .fontWeight(fontWeight)
-                // Flag
+
+                /// Nom
+                if hClass == .compact {
+                    Text(eleve.displayName2lines(nameDisplayOrder))
+                        .font(font)
+                        .fontWeight(fontWeight)
+                } else {
+                    Text(eleve.displayName)
+                }
+                /// Flag
                 Button {
-                    if isEditable {
-                        eleve.isFlagged.toggle()
-                    }
+                    eleve.isFlagged.toggle()
                 } label: {
                     if eleve.isFlagged {
                         Image(systemName: "flag.fill")
@@ -59,12 +70,15 @@ struct EleveLabelWithTrombineFlag: View {
                             .foregroundColor(.orange)
                     }
                 }
-                // PAP
-                Toggle(isOn: isEditable ? $hasPAP : .constant(hasPAP)) {
+                .disabled(!isEditable)
+
+                /// PAP
+                Toggle(isOn: $hasPAP.animation()) {
                     Text("PAP")
                 }
                 .toggleStyle(.button)
                 .controlSize(.small)
+                .disabled(!isEditable)
                 .onChange(of: hasPAP) { newValue in
                     if newValue {
                         if eleve.troubleDys == nil {
@@ -112,12 +126,12 @@ struct EleveLabelWithTrombineFlag_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
-                                       fontWeight : .regular,
-                                       imageSize  : .small)
-            .previewLayout(.sizeThatFits)
+                                       isEditable : false)
+            .previewDevice("iPhone 13")
 
-            EleveLabelWithTrombineFlag(eleve: .constant(Eleve.exemple))
-                .previewLayout(.sizeThatFits)
+            EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
+                                       isEditable : true)
+            .previewDevice("iPad mini (6th generation)")
         }
     }
 }

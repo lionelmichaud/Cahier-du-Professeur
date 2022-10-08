@@ -117,6 +117,15 @@ struct ColleBrowserSchoolSubiew : View {
 
 struct ColleBrowserView_Previews: PreviewProvider {
     static var previews: some View {
-        ColleSidebarView()
+        TestEnvir.createFakes()
+        return Group {
+            ColleSidebarView()
+                .environmentObject(NavigationModel(selectedColleId: TestEnvir.eleveStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+        }
     }
 }

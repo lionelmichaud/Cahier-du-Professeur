@@ -24,6 +24,25 @@ struct ObservSplitView: View {
 
 struct ObservSidebarView_Previews: PreviewProvider {
     static var previews: some View {
-        ObservSplitView()
+        TestEnvir.createFakes()
+        return Group {
+            ObservSplitView()
+                .environmentObject(NavigationModel())
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPad mini (6th generation)")
+            
+            ObservSplitView()
+                .environmentObject(NavigationModel())
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPhone 13")
+        }
     }
 }

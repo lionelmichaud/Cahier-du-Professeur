@@ -57,7 +57,7 @@ struct ClasseDetail: View {
             }
 
             // SEGPA ou pas
-            Toggle(isOn: $classe.segpa) {
+            Toggle(isOn: $classe.segpa.animation()) {
                 Text("SEGPA")
                     .font(.caption)
             }

@@ -15,20 +15,14 @@ struct SchoolEditor: View {
     @State
     var isModified: Bool = false
 
-    @EnvironmentObject var schoolStore : SchoolStore
-    @EnvironmentObject var classeStore : ClasseStore
-    @EnvironmentObject var eleveStore  : EleveStore
-    @EnvironmentObject var colleStore  : ColleStore
-    @EnvironmentObject var observStore : ObservationStore
+    @EnvironmentObject private var schoolStore : SchoolStore
+    @EnvironmentObject private var classeStore : ClasseStore
 
     @State
     private var isAddingNewClasse = false
 
     @State
     private var noteIsExpanded = false
-
-    @State
-    private var alertItem : AlertItem?
 
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
@@ -146,28 +140,8 @@ struct SchoolEditor: View {
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
             NavigationStack {
-                ClassCreator { classe in
-                    /// Ajouter une nouvelle classe
-                    if classeStore.exists(classe: classe, in: school.id) {
-                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                                   message       : Text("Cette classe existe déjà dans cet établissement"),
-                                                   dismissButton : .default(Text("OK")))
-                    } else if !isCompatible(classe, school) {
-                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                                   message       : Text("Cette niveau de classe n'existe pas dans ce type d'établissement"),
-                                                   dismissButton : .default(Text("OK")))
-                    } else {
-                        var _classe = classe
-                        withAnimation {
-                            SchoolManager()
-                                .ajouter(classe      : &_classe,
-                                         aSchool     : &school,
-                                         classeStore : classeStore)
-                        }
-                    }
-                }
+                ClassCreator(inSchool: $school)
             }
-            .alert(item: $alertItem, content: newAlert)
         }
         .overlay(alignment: .center) {
             if isItemDeleted {

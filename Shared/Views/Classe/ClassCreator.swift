@@ -9,7 +9,13 @@ import SwiftUI
 import HelpersView
 
 struct ClassCreator: View {
-    let addNewItem: (Classe) -> Void
+    @Binding
+    var inSchool: School
+
+    @EnvironmentObject private var classeStore : ClasseStore
+
+    @State
+    private var alertItem : AlertItem?
 
     @State
     private var newClasse: Classe = Classe(niveau: .n6ieme, numero: 1)
@@ -85,6 +91,7 @@ struct ClassCreator: View {
             .focused($isHoursFocused)
 
         }
+        .alert(item: $alertItem, content: newAlert)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Annuler") {
@@ -93,11 +100,25 @@ struct ClassCreator: View {
             }
             ToolbarItem {
                 Button("Ok") {
-                    // Ajouter le nouvel établissement
-                    withAnimation {
-                        addNewItem(newClasse)
+                    /// Ajouter une nouvelle classe
+                    if classeStore.exists(classe: newClasse, in: inSchool.id) {
+                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                   message       : Text("Cette classe existe déjà dans cet établissement"),
+                                                   dismissButton : .default(Text("OK")))
+                    } else if !isCompatible(newClasse, inSchool) {
+                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
+                                                   message       : Text("Ce niveau de classe n'existe pas dans ce type d'établissement"),
+                                                   dismissButton : .default(Text("OK")))
+                    } else {
+                        var _classe = newClasse
+                        withAnimation {
+                            SchoolManager()
+                                .ajouter(classe      : &_classe,
+                                         aSchool     : &inSchool,
+                                         classeStore : classeStore)
+                        }
+                        dismiss()
                     }
-                    dismiss()
                 }
             }
         }
@@ -108,6 +129,16 @@ struct ClassCreator: View {
             isHoursFocused = true
         }
     }
+
+    func isCompatible(_ classe: Classe, _ school: School) -> Bool {
+        switch classe.niveau {
+            case .n6ieme, .n5ieme, .n4ieme, .n3ieme:
+                return school.niveau == .college
+
+            case .n2nd, .n1ere, .n0terminale:
+                return school.niveau == .lycee
+        }
+    }
 }
 
 struct ClassCreator_Previews: PreviewProvider {
@@ -115,7 +146,7 @@ struct ClassCreator_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return Group {
             NavigationStack {
-                ClassCreator(addNewItem: { _ in })
+                ClassCreator(inSchool: .constant(TestEnvir.schoolStore.items.first!))
                     .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
                     .environmentObject(TestEnvir.schoolStore)
                     .environmentObject(TestEnvir.classeStore)
@@ -126,7 +157,7 @@ struct ClassCreator_Previews: PreviewProvider {
             .previewDevice("iPad mini (6th generation)")
 
             NavigationStack {
-                ClassCreator(addNewItem: { _ in })
+                ClassCreator(inSchool: .constant(TestEnvir.schoolStore.items.first!))
                     .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
                     .environmentObject(TestEnvir.schoolStore)
                     .environmentObject(TestEnvir.classeStore)

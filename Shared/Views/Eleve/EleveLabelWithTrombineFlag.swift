@@ -18,6 +18,8 @@ struct EleveLabelWithTrombineFlag: View {
     var imageSize  : Image.Scale = .large
     var flagSize   : Image.Scale = .medium
 
+    @EnvironmentObject private var classeStore: ClasseStore
+
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
 
@@ -30,12 +32,41 @@ struct EleveLabelWithTrombineFlag: View {
     @State
     private var showTrombine = false
 
-    @State
-    private var hasPAP = false
+    // MARK: - Computed Properties
+
+    private var classe: Classe? {
+        guard let classeId = eleve.classeId else {
+            return nil
+        }
+        return classeStore.item(withID: classeId)
+    }
+
+    private var hasPAP : Binding<Bool> {
+        Binding(
+            get: {
+                self.eleve.troubleDys != nil
+            },
+            set: { newValue in
+                if newValue {
+                    if eleve.troubleDys == nil {
+                        eleve.troubleDys = .undefined
+                    }
+                } else {
+                    eleve.troubleDys = nil
+                }
+            }
+        )
+    }
 
     var body: some View {
         VStack {
             HStack {
+                /// Classe
+                if let classe {
+                    Text(classe.displayString)
+                        .font(font)
+                        .fontWeight(.semibold)
+                }
                 /// Trombine
                 Button {
                     if eleveTrombineEnabled {
@@ -58,6 +89,7 @@ struct EleveLabelWithTrombineFlag: View {
                 } else {
                     Text(eleve.displayName)
                 }
+
                 /// Flag
                 Button {
                     eleve.isFlagged.toggle()
@@ -73,20 +105,12 @@ struct EleveLabelWithTrombineFlag: View {
                 .disabled(!isEditable)
 
                 /// PAP
-                Toggle(isOn: $hasPAP.animation()) {
-                    Text("PAP")
-                }
-                .toggleStyle(.button)
-                .controlSize(.small)
-                .disabled(!isEditable)
-                .onChange(of: hasPAP) { newValue in
-                    if newValue {
-                        if eleve.troubleDys == nil {
-                            eleve.troubleDys = .undefined
-                        }
-                    } else {
-                        eleve.troubleDys = nil
+                if isEditable {
+                    Toggle(isOn: hasPAP.animation()) {
+                        Text("PAP")
                     }
+                    .toggleStyle(.button)
+                    .controlSize(.small)
                 }
             }
 
@@ -97,11 +121,16 @@ struct EleveLabelWithTrombineFlag: View {
                     if isEditable {
                         CasePicker(pickedCase: $eleve.troubleDys.bound, label: "Trouble")
                             .pickerStyle(.menu)
+                        if trouble.additionalTime {
+                            Text("1/3 de temps aditionnel")
+                        }
                     } else if let troubleDys = eleve.troubleDys {
                         Text(troubleDys.displayString + ":")
-                    }
-                    if trouble.additionalTime {
-                        Text("1/3 de temps aditionnel")
+                            .padding(.top)
+                        if trouble.additionalTime {
+                            Text("1/3 de temps aditionnel")
+                                .padding(.top)
+                         }
                     }
                 }
             }
@@ -117,20 +146,31 @@ struct EleveLabelWithTrombineFlag: View {
             }
         }
         .onAppear {
-            hasPAP = eleve.troubleDys != nil
+//            hasPAP = eleve.troubleDys != nil
         }
     }
 }
 
 struct EleveLabelWithTrombineFlag_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
+        TestEnvir.createFakes()
+        return Group {
+            EleveLabelWithTrombineFlag(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                                        isEditable : false)
+            .environmentObject(NavigationModel())
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDevice("iPhone 13")
 
-            EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
+            EleveLabelWithTrombineFlag(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                                        isEditable : true)
+            .environmentObject(NavigationModel())
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
         }
     }

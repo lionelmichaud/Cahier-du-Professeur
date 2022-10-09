@@ -19,7 +19,7 @@ struct ColleSidebarView: View {
                 Text("Aucune colle actuellement")
             } else {
                 /// pour chaque Etablissement
-                ForEach(schoolStore.sortedSchools()) { $school in
+                ForEach(schoolStore.sortedSchools()) { school in
                     if school.nbOfClasses != 0 {
                         Section {
                             /// pour chaque Classe
@@ -60,7 +60,7 @@ struct ColleBrowserSchoolSubiew : View {
     @EnvironmentObject private var colleStore      : ColleStore
 
     var body: some View {
-        ForEach(classeStore.sortedClasses(dans: school)) { $classe in
+        ForEach(classeStore.sortedClasses(dans: school)) { classe in
             if someColles(dans: classe) {
                 DisclosureGroup(isExpanded: .constant(true)) {
                     /// pour chaque Elève

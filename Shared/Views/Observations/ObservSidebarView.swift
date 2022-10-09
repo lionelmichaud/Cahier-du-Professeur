@@ -21,7 +21,7 @@ struct ObservSidebarView: View {
                 Text("Aucune observation actuellement")
             } else {
                 /// pour chaque Etablissement
-                ForEach(schoolStore.sortedSchools()) { $school in
+                ForEach(schoolStore.sortedSchools()) { school in
                     if school.nbOfClasses != 0 {
                         Section {
                             /// pour chaque Classe
@@ -63,7 +63,7 @@ struct ObservBrowserSchoolSubiew : View {
 
     var body: some View {
         /// pour chaque Classe
-        ForEach(classeStore.sortedClasses(dans: school)) { $classe in
+        ForEach(classeStore.sortedClasses(dans: school)) { classe in
             if someObservations(dans: classe) {
                 DisclosureGroup(isExpanded: .constant(true)) {
                     /// pour chaque Observation

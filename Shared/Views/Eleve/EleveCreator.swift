@@ -46,6 +46,7 @@ struct EleveCreator: View {
                 .textFieldStyle(.roundedBorder)
                 .disableAutocorrection(true)
         }
+        .alert(item: $alertItem, content: newAlert)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Annuler") {

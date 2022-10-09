@@ -15,7 +15,7 @@ enum NiveauClasse: String, PickableEnumP, Codable {
     case n3ieme
     case n2nd
     case n1ere
-    case terminale
+    case n0terminale
 
     var pickerString: String {
         switch self {
@@ -31,7 +31,7 @@ enum NiveauClasse: String, PickableEnumP, Codable {
                 return "2nd"
             case .n1ere:
                 return "1ère"
-            case .terminale:
+            case .n0terminale:
                 return "Terminale"
         }
     }
@@ -50,7 +50,7 @@ enum NiveauClasse: String, PickableEnumP, Codable {
                 return "2E"
             case .n1ere:
                 return "1E"
-            case .terminale:
+            case .n0terminale:
                 return "T"
         }
     }
@@ -69,7 +69,7 @@ enum NiveauClasse: String, PickableEnumP, Codable {
                 return ColorOptions.all[4]
             case .n1ere:
                 return ColorOptions.all[5]
-            case .terminale:
+            case .n0terminale:
                 return ColorOptions.all[6]
         }
     }

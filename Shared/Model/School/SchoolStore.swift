@@ -49,6 +49,11 @@ extension SchoolStore {
         )
     }
 
+    func sortedSchools() -> [School] {
+        self.items
+            .sorted(by: <)
+    }
+
     func sortedSchools() -> Binding<[School]> {
         Binding<[School]>(
             get: {

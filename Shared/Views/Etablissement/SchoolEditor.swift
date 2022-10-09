@@ -11,20 +11,19 @@ import HelpersView
 struct SchoolEditor: View {
     @Binding
     var school    : School
+
     @State
     var isModified: Bool = false
 
-    @EnvironmentObject var schoolStore : SchoolStore
-    @EnvironmentObject var classeStore : ClasseStore
-    @EnvironmentObject var eleveStore  : EleveStore
-    @EnvironmentObject var colleStore  : ColleStore
-    @EnvironmentObject var observStore : ObservationStore
+    @EnvironmentObject private var schoolStore : SchoolStore
+    @EnvironmentObject private var classeStore : ClasseStore
+
     @State
     private var isAddingNewClasse = false
+
     @State
     private var noteIsExpanded = false
-    @State
-    private var alertItem : AlertItem?
+
     @Preference(\.schoolAnnotationEnabled)
     var schoolAnnotation
     // si l'item va être détruit
@@ -140,23 +139,8 @@ struct SchoolEditor: View {
         .disabled(isItemDeleted)
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isAddingNewClasse) {
-            NavigationView {
-                ClassCreator { classe in
-                    /// Ajouter une nouvelle classe
-                    if classeStore.exists(classe: classe, in: school.id) {
-                        self.alertItem = AlertItem(title         : Text("Ajout impossible"),
-                                                   message       : Text("Cette classe existe déjà dans cet établissement"),
-                                                   dismissButton : .default(Text("OK")))
-                    } else {
-                        var _classe = classe
-                        withAnimation {
-                            SchoolManager()
-                                .ajouter(classe      : &_classe,
-                                         aSchool     : &school,
-                                         classeStore : classeStore)
-                        }
-                    }
-                }
+            NavigationStack {
+                ClassCreator(inSchool: $school)
             }
         }
         .overlay(alignment: .center) {
@@ -165,6 +149,16 @@ struct SchoolEditor: View {
                 Text("Etablissement supprimé. Sélectionner un établissement.")
                     .foregroundStyle(.secondary)
             }
+        }
+    }
+
+    func isCompatible(_ classe: Classe, _ school: School) -> Bool {
+        switch classe.niveau {
+            case .n6ieme, .n5ieme, .n4ieme, .n3ieme:
+                return school.niveau == .college
+
+            case .n2nd, .n1ere, .n0terminale:
+                return school.niveau == .lycee
         }
     }
 }

@@ -30,8 +30,22 @@ struct EleveLabelWithTrombineFlag: View {
     @State
     private var showTrombine = false
 
-    @State
-    private var hasPAP = false
+    private var hasPAP : Binding<Bool> {
+        Binding(
+            get: {
+                self.eleve.troubleDys != nil
+            },
+            set: { newValue in
+                if newValue {
+                    if eleve.troubleDys == nil {
+                        eleve.troubleDys = .undefined
+                    }
+                } else {
+                    eleve.troubleDys = nil
+                }
+            }
+        )
+    }
 
     var body: some View {
         VStack {
@@ -58,6 +72,7 @@ struct EleveLabelWithTrombineFlag: View {
                 } else {
                     Text(eleve.displayName)
                 }
+
                 /// Flag
                 Button {
                     eleve.isFlagged.toggle()
@@ -73,20 +88,12 @@ struct EleveLabelWithTrombineFlag: View {
                 .disabled(!isEditable)
 
                 /// PAP
-                Toggle(isOn: $hasPAP.animation()) {
-                    Text("PAP")
-                }
-                .toggleStyle(.button)
-                .controlSize(.small)
-                .disabled(!isEditable)
-                .onChange(of: hasPAP) { newValue in
-                    if newValue {
-                        if eleve.troubleDys == nil {
-                            eleve.troubleDys = .undefined
-                        }
-                    } else {
-                        eleve.troubleDys = nil
+                if isEditable {
+                    Toggle(isOn: hasPAP.animation()) {
+                        Text("PAP")
                     }
+                    .toggleStyle(.button)
+                    .controlSize(.small)
                 }
             }
 
@@ -97,11 +104,16 @@ struct EleveLabelWithTrombineFlag: View {
                     if isEditable {
                         CasePicker(pickedCase: $eleve.troubleDys.bound, label: "Trouble")
                             .pickerStyle(.menu)
+                        if trouble.additionalTime {
+                            Text("1/3 de temps aditionnel")
+                        }
                     } else if let troubleDys = eleve.troubleDys {
                         Text(troubleDys.displayString + ":")
-                    }
-                    if trouble.additionalTime {
-                        Text("1/3 de temps aditionnel")
+                            .padding(.top)
+                        if trouble.additionalTime {
+                            Text("1/3 de temps aditionnel")
+                                .padding(.top)
+                         }
                     }
                 }
             }
@@ -117,7 +129,7 @@ struct EleveLabelWithTrombineFlag: View {
             }
         }
         .onAppear {
-            hasPAP = eleve.troubleDys != nil
+//            hasPAP = eleve.troubleDys != nil
         }
     }
 }

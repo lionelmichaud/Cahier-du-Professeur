@@ -26,7 +26,7 @@ struct ContentView: View {
                 .badge(schoolStore.nbOfItems)
 
             /// composition de la famille
-            ClasseSidebarView()
+            ClasseSplitView()
                 .tabItem { Label("Classes", systemImage: "person.3").symbolVariant(.none) }
                 .tag(UIState.Tab.classe)
                 .badge(classeStore.nbOfItems)

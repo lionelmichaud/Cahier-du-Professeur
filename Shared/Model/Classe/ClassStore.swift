@@ -92,6 +92,18 @@ extension ClasseStore {
         )
     }
 
+    func sortedClasses(dans school: School) -> [Classe] {
+        self.items
+            .filter {
+                if let schoolId = $0.schoolId {
+                    return schoolId == school.id
+                } else {
+                    return false
+                }
+            }
+            .sorted(by: <)
+    }
+
     func filteredClasses(dans school: School,
                          _ isIncluded: @escaping (Classe) -> Bool) -> Binding<[Classe]> {
         Binding<[Classe]>(

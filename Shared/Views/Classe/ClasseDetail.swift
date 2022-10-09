@@ -17,8 +17,20 @@ struct ClasseDetail: View {
     @EnvironmentObject private var eleveStore      : EleveStore
     @EnvironmentObject private var colleStore      : ColleStore
     @EnvironmentObject private var observStore     : ObservationStore
+
+    // true si le mode édition est engagé
     @State
-    var isModified: Bool = false
+    private var isEditing = false
+    @State
+    private var alertItem : AlertItem?
+    @State
+    private var isShowingImportListeDialog = false
+    @State
+    private var importCsvFile = false
+
+    @Preference(\.interoperability)
+    var interoperability
+
     @State
     private var isAddingNewEleve = false
     @State
@@ -35,45 +47,47 @@ struct ClasseDetail: View {
     private var eleveTrombineEnabled
 
     private var name: some View {
-        HStack {
-            Image(systemName: "person.3.fill")
-                .sfSymbolStyling()
-                .foregroundColor(classe.niveau.color)
-            Text(classe.displayString)
-                .font(.title2)
-                .fontWeight(.semibold)
+        GroupBox {
+            HStack {
+                Image(systemName: "person.3.fill")
+                    .sfSymbolStyling()
+                    .foregroundColor(classe.niveau.color)
+                Text(classe.displayString)
+                    .font(.title2)
+                    .fontWeight(.semibold)
 
-            // Flag de la classe
-            Button {
-                classe.isFlagged.toggle()
-            } label: {
-                if classe.isFlagged {
-                    Image(systemName: "flag.fill")
-                        .foregroundColor(.orange)
-                } else {
-                    Image(systemName: "flag")
-                        .foregroundColor(.orange)
+                // Flag de la classe
+                Button {
+                    classe.isFlagged.toggle()
+                } label: {
+                    if classe.isFlagged {
+                        Image(systemName: "flag.fill")
+                            .foregroundColor(.orange)
+                    } else {
+                        Image(systemName: "flag")
+                            .foregroundColor(.orange)
+                    }
                 }
+
+                // SEGPA ou pas
+                Toggle(isOn: $classe.segpa.animation()) {
+                    Text("SEGPA")
+                        .font(.caption)
+                }
+                .toggleStyle(.button)
+                .controlSize(.regular)
+
+                Spacer()
+
+                // Nombre d'heures d'enseignement pour cette classe
+                AmountEditView(label: "Heures",
+                               amount: $classe.heures,
+                               validity: .poz,
+                               currency: false)
+                .frame(maxWidth: 150)
             }
-
-            // SEGPA ou pas
-            Toggle(isOn: $classe.segpa.animation()) {
-                Text("SEGPA")
-                    .font(.caption)
-            }
-            .toggleStyle(.button)
-            .controlSize(.small)
-
-            Spacer()
-
-            // Nombre d'heures d'enseignement pour cette classe
-            AmountEditView(label: "Heures",
-                           amount: $classe.heures,
-                           validity: .poz,
-                           currency: false)
-            .frame(maxWidth: 150)
         }
-        .listRowSeparator(.hidden)
+        .padding(.horizontal)
     }
 
     private var elevesList: some View {
@@ -206,49 +220,94 @@ struct ClasseDetail: View {
     }
 
     var body: some View {
-        List {
+        VStack {
             /// nom
             name
 
-            /// appréciation sur la classe
-            if classeAppreciationEnabled {
-                AppreciationView(isExpanded  : $appreciationIsExpanded,
-                                 appreciation: $classe.appreciation)
+            List {
+                /// appréciation sur la classe
+                if classeAppreciationEnabled {
+                    AppreciationView(isExpanded  : $appreciationIsExpanded,
+                                     appreciation: $classe.appreciation)
+                }
+                /// annotation sur la classe
+                if classeAnnotationEnabled {
+                    AnnotationView(isExpanded: $noteIsExpanded,
+                                   annotation: $classe.annotation)
+                }
+
+                /// édition de la liste des élèves
+                elevesList
+
+                /// trombinoscope
+                if eleveTrombineEnabled {
+                    trombinoscope
+                }
+
+                /// gestion des groupes
+                groups
+
+                /// édition de la liste des examens
+                examsList
             }
-            /// annotation sur la classe
-            if classeAnnotationEnabled {
-                AnnotationView(isExpanded: $noteIsExpanded,
-                               annotation: $classe.annotation)
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                /// Importation des données
+                /// Importer une liste d'élèves d'une classe depuis un fichier CSV au format PRONOTE
+                Button {
+                    isShowingImportListeDialog.toggle()
+                } label: {
+                    Image(systemName: "square.and.arrow.down")
+                        .imageScale(.large)
+                }
+                /// Confirmation de l'importation d'une liste d'élèves d'une classe
+                .confirmationDialog("Importer une liste d'élèves",
+                                    isPresented     : $isShowingImportListeDialog,
+                                    titleVisibility : .visible) {
+                    Button("Importer et ajouter") {
+                        withAnimation {
+                            importCsvFile = true
+                        }
+                    }
+                    Button("Importer et remplacer", role: .destructive) {
+                        withAnimation {
+                            ClasseManager().retirerTousLesEleves(deClasse    : &classe,
+                                                                 eleveStore  : eleveStore,
+                                                                 observStore : observStore,
+                                                                 colleStore  : colleStore)
+                        }
+                        importCsvFile = true
+                    }
+                } message: {
+                    Text("La liste des élèves importée doit être au format CSV de \(interoperability == .proNote ? "PRONOTE" : "EcoleDirecte").") +
+                    Text("Cette action ne peut pas être annulée.")
+                }
             }
-
-            /// édition de la liste des élèves
-            elevesList
-
-            /// trombinoscope
-            if eleveTrombineEnabled {
-                trombinoscope
-            }
-
-            /// gestion des groupes
-            groups
-
-            /// édition de la liste des examens
-            examsList
+        }
+        .alert(item: $alertItem, content: newAlert)
+        /// Importer un fichier CSV au format PRONOTE ou EcoleDirecte
+        .fileImporter(isPresented             : $importCsvFile,
+                      allowedContentTypes     : [.commaSeparatedText],
+                      allowsMultipleSelection : false) { result in
+            importCsvFiles(result: result)
         }
         #if os(iOS)
         .navigationTitle("Classe")
+        .navigationBarTitleDisplayMode(.inline)
         #endif
         .onAppear {
             appreciationIsExpanded = classe.appreciation.isNotEmpty
             noteIsExpanded         = classe.annotation.isNotEmpty
         }
         .sheet(isPresented: $isAddingNewEleve) {
-            NavigationView {
+            NavigationStack {
                 EleveCreator(classe: $classe)
             }
+            .presentationDetents([.medium])
         }
         .sheet(isPresented: $isAddingNewExam) {
-            NavigationView {
+            NavigationStack {
                 ExamCreator(elevesId: classe.elevesID) { newExam in
                     /// Ajouter une nouvelle évaluation
                     withAnimation {
@@ -256,6 +315,54 @@ struct ClasseDetail: View {
                     }
                 }
             }
+            .presentationDetents([.medium])
+        }
+    }
+
+    // MARK: - Methods
+
+    private func importCsvFiles(result: Result<[URL], Error>) {
+        switch result {
+            case .failure(let error):
+                self.alertItem = AlertItem(title         : Text("Échec"),
+                                           message       : Text("L'importation du fichier a échouée"),
+                                           dismissButton : .default(Text("OK")))
+                print("Error selecting file: \(error.localizedDescription)")
+
+            case .success(let filesUrl):
+                filesUrl.forEach { fileUrl in
+                    guard fileUrl.startAccessingSecurityScopedResource() else { return }
+
+                    if let data = try? Data(contentsOf: fileUrl) {
+                        do {
+                            var eleves = [Eleve]()
+
+                            switch interoperability {
+                                case .ecoleDirecte:
+                                    eleves = try CsvImporter().importElevesFromEcoleDirecte(from: data)
+
+                                case .proNote:
+                                    eleves = try CsvImporter().importElevesFromPRONOTE(from: data)
+                            }
+
+                            for idx in eleves.startIndex...eleves.endIndex-1 {
+                                withAnimation {
+                                    ClasseManager()
+                                        .ajouter(eleve      : &eleves[idx],
+                                                 aClasse    : &classe,
+                                                 eleveStore : eleveStore)
+                                }
+                            }
+                        } catch let error {
+                            self.alertItem = AlertItem(title         : Text("Échec"),
+                                                       message       : Text("L'importation du fichier a échouée"),
+                                                       dismissButton : .default(Text("OK")))
+                            print("Error reading file \(error.localizedDescription)")
+                        }
+                    }
+
+                    fileUrl.stopAccessingSecurityScopedResource()
+                }
         }
     }
 }
@@ -264,13 +371,27 @@ struct ClassDetail_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ClasseDetail(classe: .constant(TestEnvir.classeStore.items.first!))
-                .environmentObject(TestEnvir.schoolStore)
-                .environmentObject(TestEnvir.classeStore)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDisplayName("NewClasse")
+            NavigationStack {
+                ClasseDetail(classe: .constant(TestEnvir.classeStore.items.first!))
+                    .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            NavigationStack {
+                ClasseDetail(classe: .constant(TestEnvir.classeStore.items.first!))
+                    .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPhone 13")
         }
     }
 }

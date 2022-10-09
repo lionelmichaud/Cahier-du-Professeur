@@ -27,7 +27,7 @@ struct EleveSidebarView: View {
                 Text("Aucun élève actuellement")
             } else {
                 /// pour chaque Etablissement
-                ForEach(schoolStore.sortedSchools()) { $school in
+                ForEach(schoolStore.sortedSchools()) { school in
                     if school.nbOfClasses != 0 {
                         Section {
                             /// pour chaque Classe

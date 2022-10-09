@@ -15,12 +15,16 @@ struct EleveEditor: View {
     @EnvironmentObject private var observStore     : ObservationStore
 
     // true si le mode édition est engagé
-    @State private var isEditing  = false
+    @State
+    private var isEditing  = false
     // true les modifs faites en mode édition sont sauvegardées
-    @State private var isSaved    = false
+    @State
+    private var isSaved    = false
     // true si des modifiction sont faites hors du mode édition
-    @State private var isModified = false
-    @State private var alertItem : AlertItem?
+    @State
+    private var isModified = false
+    @State
+    private var alertItem : AlertItem?
 
     private var selectedItemExists: Bool {
         guard let selectedEleve = navigationModel.selectedEleveId else {
@@ -32,7 +36,7 @@ struct EleveEditor: View {
     var body: some View {
         if selectedItemExists {
             EleveDetail(eleve: eleveStore.itemBinding(withID: navigationModel.selectedEleveId!)!)
-            .alert(item: $alertItem, content: newAlert)
+                .alert(item: $alertItem, content: newAlert)
         } else {
             VStack(alignment: .center) {
                 Text("Aucun élève sélectionné.")

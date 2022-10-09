@@ -22,7 +22,7 @@ struct ClasseSidebarView: View {
                     if school.nbOfClasses != 0 {
                         Section {
                             /// pour chaque Classe
-                            ClasseBrowserSchoolSubview(school: $school)
+                            ClasseSidebarSchoolSubview(school: $school)
                         } header: {
                             Text(school.displayString)
                                 .font(.callout)
@@ -37,7 +37,7 @@ struct ClasseSidebarView: View {
     }
 }
 
-struct ClasseBrowserSchoolSubview : View {
+struct ClasseSidebarSchoolSubview : View {
     @Binding
     var school: School
 
@@ -85,7 +85,7 @@ struct ClasseBrowserSchoolSubview : View {
     }
 }
 
-struct ClasseBrowserView_Previews: PreviewProvider {
+struct ClasseSidebarView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {

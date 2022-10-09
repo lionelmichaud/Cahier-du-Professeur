@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $navigationModel.selectedTab) {
             /// gestion des dossiers
-            SchoolSidebarView()
+            SchoolSplitView()
                 .tabItem { Label("Etablissement", systemImage: "building.2").symbolVariant(.none) }
                 .tag(UIState.Tab.school)
                 .badge(schoolStore.nbOfItems)

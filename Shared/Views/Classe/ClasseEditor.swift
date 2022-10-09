@@ -11,11 +11,9 @@ import HelpersView
 
 struct ClasseEditor: View {
     @EnvironmentObject private var navigationModel : NavigationModel
-    @EnvironmentObject private var schoolStore     : SchoolStore
     @EnvironmentObject private var classeStore     : ClasseStore
-    @EnvironmentObject private var eleveStore      : EleveStore
-    @EnvironmentObject private var colleStore      : ColleStore
-    @EnvironmentObject private var observStore     : ObservationStore
+
+    // MARK: - Computed Properties
 
     private var selectedItemExists: Bool {
         guard let selectedClasse = navigationModel.selectedClasseId else {

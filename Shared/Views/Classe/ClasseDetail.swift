@@ -18,9 +18,6 @@ struct ClasseDetail: View {
     @EnvironmentObject private var colleStore      : ColleStore
     @EnvironmentObject private var observStore     : ObservationStore
 
-    // true si le mode édition est engagé
-    @State
-    private var isEditing = false
     @State
     private var alertItem : AlertItem?
     @State
@@ -45,50 +42,6 @@ struct ClasseDetail: View {
     var classeAnnotationEnabled
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
-
-    private var name: some View {
-        GroupBox {
-            HStack {
-                Image(systemName: "person.3.fill")
-                    .sfSymbolStyling()
-                    .foregroundColor(classe.niveau.color)
-                Text(classe.displayString)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-
-                // Flag de la classe
-                Button {
-                    classe.isFlagged.toggle()
-                } label: {
-                    if classe.isFlagged {
-                        Image(systemName: "flag.fill")
-                            .foregroundColor(.orange)
-                    } else {
-                        Image(systemName: "flag")
-                            .foregroundColor(.orange)
-                    }
-                }
-
-                // SEGPA ou pas
-                Toggle(isOn: $classe.segpa.animation()) {
-                    Text("SEGPA")
-                        .font(.caption)
-                }
-                .toggleStyle(.button)
-                .controlSize(.regular)
-
-                Spacer()
-
-                // Nombre d'heures d'enseignement pour cette classe
-                AmountEditView(label: "Heures",
-                               amount: $classe.heures,
-                               validity: .poz,
-                               currency: false)
-                .frame(maxWidth: 150)
-            }
-        }
-        .padding(.horizontal)
-    }
 
     private var elevesList: some View {
         Section {
@@ -222,7 +175,7 @@ struct ClasseDetail: View {
     var body: some View {
         VStack {
             /// nom
-            name
+            ClasseNameGroupBox(classe: $classe)
 
             List {
                 /// appréciation sur la classe

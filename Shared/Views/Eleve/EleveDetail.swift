@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import HelpersView
 
 struct EleveDetail: View {
     @Binding
@@ -30,10 +29,6 @@ struct EleveDetail: View {
     private var noteIsExpanded = false
     @State
     private var bonusIsExpanded = false
-    @State
-    private var showTrombine = false
-    @State
-    private var hasPAP = false
 
     @Preference(\.eleveAppreciationEnabled)
     private var eleveAppreciationEnabled
@@ -47,8 +42,6 @@ struct EleveDetail: View {
     private var maxBonusIncrement
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
-    @Preference(\.nameDisplayOrder)
-    private var nameDisplayOrder
 
     // MARK: - Computed properties
 
@@ -57,66 +50,6 @@ struct EleveDetail: View {
     }
     private var filterColle : Bool {
         navigationModel.filterColle
-    }
-
-    private var sex: some View {
-        HStack {
-            Image(systemName: "person.fill")
-                .sfSymbolStyling()
-                .foregroundColor(eleve.sexe.color)
-            // Sexe de cet eleve
-            CasePicker(pickedCase: $eleve.sexe, label: "Sexe")
-                .pickerStyle(.menu)
-        }
-    }
-    private var prenom: some View {
-        TextField("Prénom", text: $eleve.name.givenName.bound)
-            .onSubmit {
-                eleve.name.givenName.bound.trim()
-            }
-            .textFieldStyle(.roundedBorder)
-            .disableAutocorrection(true)
-    }
-    private var nom: some View {
-        TextField("Nom", text: $eleve.name.familyName.bound)
-            .onSubmit {
-                eleve.name.familyName.bound.trim()
-            }
-            .textFieldStyle(.roundedBorder)
-            .disableAutocorrection(true)
-    }
-
-    private var name: some View {
-        GroupBox {
-            if isEditing {
-                ViewThatFits(in: .horizontal) {
-                    // priorité 1
-                    HStack {
-                        sex
-                        if nameDisplayOrder == .nomPrenom {
-                            nom
-                            prenom
-                        } else {
-                            prenom
-                            nom
-                        }
-                    }
-                    // priorité 2
-                    VStack {
-                        sex
-                        if nameDisplayOrder == .nomPrenom {
-                            nom
-                            prenom
-                        } else {
-                            prenom
-                            nom
-                        }
-                    }
-                }
-            } else {
-                EleveLabelWithTrombineFlag(eleve: $eleve)
-            }
-        }
     }
 
     private var bonus: some View {
@@ -238,7 +171,8 @@ struct EleveDetail: View {
     var body: some View {
         VStack {
             /// nom
-            name
+            EleveNameGroupBox(eleve: $eleve,
+                              isEditing: isEditing)
 
             List {
                 /// appréciation sur l'élève
@@ -290,7 +224,6 @@ struct EleveDetail: View {
             appreciationIsExpanded = eleve.appreciation.isNotEmpty
             noteIsExpanded         = eleve.annotation.isNotEmpty
             bonusIsExpanded        = (eleve.bonus != 0)
-            hasPAP                 = eleve.troubleDys != nil
         }
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationStack {

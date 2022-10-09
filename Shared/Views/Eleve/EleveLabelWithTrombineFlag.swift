@@ -18,6 +18,8 @@ struct EleveLabelWithTrombineFlag: View {
     var imageSize  : Image.Scale = .large
     var flagSize   : Image.Scale = .medium
 
+    @EnvironmentObject private var classeStore: ClasseStore
+
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
 
@@ -29,6 +31,15 @@ struct EleveLabelWithTrombineFlag: View {
 
     @State
     private var showTrombine = false
+
+    // MARK: - Computed Properties
+
+    private var classe: Classe? {
+        guard let classeId = eleve.classeId else {
+            return nil
+        }
+        return classeStore.item(withID: classeId)
+    }
 
     private var hasPAP : Binding<Bool> {
         Binding(
@@ -50,6 +61,12 @@ struct EleveLabelWithTrombineFlag: View {
     var body: some View {
         VStack {
             HStack {
+                /// Classe
+                if let classe {
+                    Text(classe.displayString)
+                        .font(font)
+                        .fontWeight(.semibold)
+                }
                 /// Trombine
                 Button {
                     if eleveTrombineEnabled {
@@ -136,13 +153,24 @@ struct EleveLabelWithTrombineFlag: View {
 
 struct EleveLabelWithTrombineFlag_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
+        TestEnvir.createFakes()
+        return Group {
+            EleveLabelWithTrombineFlag(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                                        isEditable : false)
+            .environmentObject(NavigationModel())
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDevice("iPhone 13")
 
-            EleveLabelWithTrombineFlag(eleve      : .constant(Eleve.exemple),
+            EleveLabelWithTrombineFlag(eleve      : .constant(TestEnvir.eleveStore.items.first!),
                                        isEditable : true)
+            .environmentObject(NavigationModel())
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
         }
     }

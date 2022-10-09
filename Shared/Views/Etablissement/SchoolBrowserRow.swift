@@ -29,13 +29,13 @@ struct SchoolBrowserRow: View {
                 HStack {
                     Text(school.classesLabel)
                     Spacer()
-                    Text(heures == 0 ? "Aucune heure" : "\(heures.formatted(.number.precision(.fractionLength(1)))) h")
+                    Text(heures == 0 ? "Aucune heure" : "\(heures.formatted(.number.precision(.fractionLength(1)))) heures")
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
             }
         }
-        .badge(school.nbOfClasses)
+       // .badge(school.nbOfClasses)
     }
 }
 
@@ -43,8 +43,11 @@ struct SchoolRow_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return SchoolBrowserRow(school: TestEnvir.schoolStore.items.first!)
-            .preferredColorScheme(.dark)
-            .previewLayout(.sizeThatFits)
+            .environmentObject(TestEnvir.schoolStore)
+            .environmentObject(TestEnvir.classeStore)
+            .environmentObject(TestEnvir.eleveStore)
+            .environmentObject(TestEnvir.colleStore)
+            .environmentObject(TestEnvir.observStore)
 
     }
 }

@@ -31,7 +31,7 @@ struct EleveSidebarView: View {
                     if school.nbOfClasses != 0 {
                         Section {
                             /// pour chaque Classe
-                            EleveBrowserSchoolSubview(school       : school,
+                            EleveSidebarSchoolSubview(school       : school,
                                                       searchString : searchString)
                         } header: {
                             Text(school.displayString)
@@ -79,7 +79,7 @@ struct EleveSidebarView: View {
     }
 }
 
-struct EleveBrowserSchoolSubview : View {
+struct EleveSidebarSchoolSubview : View {
     let school       : School
     let searchString : String
 

@@ -46,6 +46,11 @@ struct GroupsView: View {
                             ForEach(group.elevesID, id: \.self) { eleveID in
                                 if let eleve = eleveStore.item(withID: eleveID) {
                                     EleveLabel(eleve: eleve)
+                                        .onTapGesture {
+                                            // Programatic Navigation
+                                            navigationModel.selectedTab     = .eleve
+                                            navigationModel.selectedEleveId = eleve.id
+                                        }
                                 }
                             }
                         } label: {

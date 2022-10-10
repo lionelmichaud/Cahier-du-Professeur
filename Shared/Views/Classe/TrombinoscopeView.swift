@@ -11,8 +11,68 @@ struct TrombinoscopeView: View {
     @Binding
     var classe: Classe
 
-    @EnvironmentObject
-    var eleveStore  : EleveStore
+    @EnvironmentObject private var eleveStore: EleveStore
+
+    let smallColumns = [GridItem(.adaptive(minimum: 120, maximum: 200))]
+    let largeColumns = [GridItem(.adaptive(minimum: 180, maximum: 300))]
+
+    @Preference(\.nameDisplayOrder)
+    private var nameDisplayOrder
+
+    let font       : Font        = .title3
+    let fontWeight : Font.Weight = .semibold
+
+    @State
+    private var pictureSize = "Small picture"
+
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: true) {
+            LazyVGrid(columns: pictureSize == "Small picture" ? smallColumns : largeColumns,
+                      spacing: 4) {
+                ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
+                    VStack {
+                        TrombineView(eleve: $eleve)
+
+                        /// Nom de l'élève
+                        if eleve.troubleDys == nil {
+                            Text(eleve.displayName2lines(nameDisplayOrder))
+                                .multilineTextAlignment(.center)
+                                .fontWeight(fontWeight)
+                        } else {
+                            Text(eleve.displayName2lines(nameDisplayOrder))
+                                .multilineTextAlignment(.center)
+                                .fontWeight(fontWeight)
+                                .padding(2)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .foregroundColor(.gray)
+                                }
+                        }
+                    }
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .automatic) {
+                Picker("Présentation", selection: $pictureSize.animation()) {
+                    Image(systemName: "minus.magnifyingglass").tag("Small picture")
+                    Image(systemName: "plus.magnifyingglass").tag("Largepicture")
+                }
+                .pickerStyle(.segmented)
+            }
+        }
+        #if os(iOS)
+        .navigationTitle(classe.displayString + " (\(classe.nbOfEleves) élèves)")
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
+    }
+}
+
+struct TrombineView : View {
+    @Binding
+    var eleve: Eleve
+
+    @EnvironmentObject private var navigationModel : NavigationModel
 
     @State
     private var isAddingNewObserv = false
@@ -23,21 +83,18 @@ struct TrombinoscopeView: View {
     @State
     private var newColle  = Colle.exemple
 
-    @Preference(\.nameDisplayOrder)
-    var nameDisplayOrder
-
-    let font       : Font        = .title3
-    let fontWeight : Font.Weight = .semibold
-
     private var menu: some View {
         Menu {
+            // aller à la fiche élève
             Button {
+                // Programatic Navigation
+                navigationModel.selectedTab     = .eleve
+                navigationModel.selectedEleveId = eleve.id
             } label: {
-                Label("A propos", systemImage: "info.circle")
+                Label("Fiche élève", systemImage: "info.circle")
             }
             // ajouter une observation
             Button {
-//                isModified        = true
                 newObserv         = Observation()
                 isAddingNewObserv = true
             } label: {
@@ -45,7 +102,6 @@ struct TrombinoscopeView: View {
             }
             // ajouter une colle
             Button {
-//                isModified       = true
                 newColle         = Colle()
                 isAddingNewColle = true
             } label: {
@@ -60,73 +116,46 @@ struct TrombinoscopeView: View {
     }
 
     var body: some View {
-        let columns = [GridItem(.adaptive(minimum: 120, maximum: 200))]
-        ScrollView(.vertical, showsIndicators: true) {
-            LazyVGrid(columns: columns, spacing: 4, pinnedViews: .sectionFooters) {
-                ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
-                    if let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
-                        VStack {
-                            // si le dossier Document existe
-                            ZStack(alignment: .topLeading) {
-                                ZStack(alignment: .topTrailing) {
-                                    ZStack(alignment: .bottom) {
-                                        LoadableImage(imageUrl: trombine)
-                                        /// Points +/-
-                                        TrombinoscopeFooterView(eleve: $eleve)
-                                    }
-                                    /// Coin supérieur droit: Menu
-                                    menu
-                                        .sheet(isPresented: $isAddingNewObserv) {
-                                            NavigationView {
-                                                ObservCreator(eleve: $eleve)
-                                            }
-                                        }
-                                        .sheet(isPresented: $isAddingNewColle) {
-                                            NavigationView {
-                                                ColleCreator(eleve: $eleve)
-                                            }
-                                        }
+        if let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
+                // si le dossier Document existe
+                ZStack(alignment: .topLeading) {
+                    ZStack(alignment: .topTrailing) {
+                        ZStack(alignment: .bottom) {
+                            LoadableImage(imageUrl: trombine)
+                            /// Points +/-
+                            TrombinoscopeFooterView(eleve: $eleve)
+                        }
+                        /// Coin supérieur droit: Menu
+                        menu
+                            .sheet(isPresented: $isAddingNewObserv) {
+                                NavigationStack {
+                                    ObservCreator(eleve: $eleve)
                                 }
-                                
-                                /// Coin supérieur gauche: Flag
-                                Button {
-                                    eleve.isFlagged.toggle()
-                                } label: {
-                                    if eleve.isFlagged {
-                                        Image(systemName: "flag.fill")
-                                            .foregroundColor(.orange)
-                                    } else {
-                                        Image(systemName: "flag")
-                                            .foregroundColor(.orange)
-                                    }
-                                }
-                                .buttonStyle(.bordered)
+                                .presentationDetents([.medium])
                             }
+                            .sheet(isPresented: $isAddingNewColle) {
+                                NavigationStack {
+                                    ColleCreator(eleve: $eleve)
+                                }
+                                .presentationDetents([.medium])
+                            }
+                    }
 
-                            /// Nom de l'élève
-                            if eleve.troubleDys == nil {
-                                Text(eleve.displayName2lines(nameDisplayOrder))
-                                    .multilineTextAlignment(.center)
-                                    .fontWeight(fontWeight)
-                            } else {
-                                Text(eleve.displayName2lines(nameDisplayOrder))
-                                    .multilineTextAlignment(.center)
-                                    .fontWeight(fontWeight)
-                                    .padding(2)
-                                    .background {
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(.gray)
-                                    }
-                            }
+                    /// Coin supérieur gauche: Flag
+                    Button {
+                        eleve.isFlagged.toggle()
+                    } label: {
+                        if eleve.isFlagged {
+                            Image(systemName: "flag.fill")
+                                .foregroundColor(.orange)
+                        } else {
+                            Image(systemName: "flag")
+                                .foregroundColor(.orange)
                         }
                     }
+                    .buttonStyle(.bordered)
                 }
-            }
         }
-        #if os(iOS)
-        .navigationTitle(classe.displayString + " (\(classe.nbOfEleves) Élèves)")
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
 }
 
@@ -160,9 +189,40 @@ struct TrombinoscopeFooterView: View {
     }
 }
 
+struct TrombinoscopeFooterView_Previews: PreviewProvider {
+    static var previews: some View {
+        TrombinoscopeFooterView(eleve: .constant(Eleve.exemple))
+            .previewLayout(.sizeThatFits)
+            .previewDisplayName("Footer")
+            //.previewDevice("iPhone 13")
+    }
+}
+
 struct TrombinoscopeView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return TrombinoscopeView(classe: .constant(TestEnvir.classeStore.items.first!))
+        return Group {
+            NavigationStack {
+                TrombinoscopeView(classe: .constant(TestEnvir.classeStore.items.first!))
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            NavigationStack {
+                TrombinoscopeView(classe: .constant(TestEnvir.classeStore.items.first!))
+                    .environmentObject(NavigationModel())
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPhone 13")
+        }
     }
 }

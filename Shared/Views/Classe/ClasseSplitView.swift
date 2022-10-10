@@ -16,7 +16,21 @@ struct ClasseSplitView: View {
         ) {
             ClasseSidebarView()
         } detail: {
-            ClasseEditor()
+            NavigationStack {
+                ClasseEditor()
+                    .navigationDestination(for: ClasseSubview.self) { classeSubview in
+                        switch classeSubview.subviewType {
+                            case .groups:
+                                GroupsView(classe: classeSubview.classe)
+
+                            case .trombinoscope:
+                                TrombinoscopeView(classe : classeSubview.classe)
+                        }
+                    }
+                    .navigationDestination(for: ExamSubview.self) { examSubview in
+                        ExamEditor(exam: examSubview.exam)
+                    }
+            }
         }
     }
 }

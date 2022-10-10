@@ -143,6 +143,7 @@ struct EleveLabelWithTrombineFlag: View {
             /// Trombine
             if showTrombine, let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
                 LoadableImage(imageUrl: trombine)
+                .frame(height: 320)
             }
         }
         .onAppear {

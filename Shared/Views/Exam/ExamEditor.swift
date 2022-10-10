@@ -9,17 +9,10 @@ import SwiftUI
 
 struct ExamEditor: View {
     @Binding
-    var classe : Classe
-
-    @Binding
     var exam   : Exam
 
     @State
     private var searchString: String = ""
-
-    private var isItemDeleted: Bool {
-        !classe.exams.contains(where: { $0.id == exam.id })
-    }
 
     var body: some View {
         List {
@@ -35,14 +28,6 @@ struct ExamEditor: View {
         #if os(iOS)
         .navigationTitle("Évaluation")
         #endif
-        .disabled(isItemDeleted)
-        .overlay(alignment: .center) {
-            if isItemDeleted {
-                Color(UIColor.systemBackground)
-                Text("Évaluation supprimée. Sélectionner une évaluation.")
-                    .foregroundStyle(.secondary)
-            }
-        }
     }
 }
 
@@ -177,15 +162,13 @@ struct ExamEditor_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ExamEditor(classe         : .constant(TestEnvir.classeStore.items.first!),
-                       exam           : .constant(Exam()))
+            ExamEditor(exam: .constant(Exam()))
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)
             .previewDevice("iPad mini (6th generation)")
 
-            ExamEditor(classe         : .constant(TestEnvir.classeStore.items.first!),
-                       exam           : .constant(Exam()))
+            ExamEditor(exam: .constant(Exam()))
             .environmentObject(TestEnvir.eleveStore)
             .environmentObject(TestEnvir.colleStore)
             .environmentObject(TestEnvir.observStore)

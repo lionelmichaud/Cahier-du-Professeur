@@ -9,6 +9,38 @@ import SwiftUI
 import AppFoundation
 import HelpersView
 
+enum ClasseSubviewEnum {
+    case trombinoscope
+    case groups
+}
+
+struct ClasseSubview: Hashable {
+    var classe      : Binding<Classe>
+    var subviewType : ClasseSubviewEnum
+
+    static func == (lhs: ClasseSubview, rhs: ClasseSubview) -> Bool {
+        lhs.subviewType == rhs.subviewType &&
+        lhs.classe.wrappedValue.id == rhs.classe.wrappedValue.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(subviewType)
+        hasher.combine(classe.wrappedValue)
+    }
+}
+
+struct ExamSubview: Hashable {
+    var exam: Binding<Exam>
+
+    static func == (lhs: ExamSubview, rhs: ExamSubview) -> Bool {
+        lhs.exam.wrappedValue.id == rhs.exam.wrappedValue.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(exam.wrappedValue.id)
+    }
+}
+
 struct ClasseDetail: View {
     @Binding
     var classe: Classe
@@ -106,9 +138,8 @@ struct ClasseDetail: View {
 
     private var trombinoscope: some View {
         Section {
-            NavigationLink {
-                TrombinoscopeView(classe : $classe)
-            } label: {
+            NavigationLink(value: ClasseSubview(classe      : $classe,
+                                                subviewType : .trombinoscope)) {
                 Text("Trombinoscope")
                     .font(.title3)
                     .fontWeight(.bold)
@@ -118,9 +149,8 @@ struct ClasseDetail: View {
 
     private var groups: some View {
         Section {
-            NavigationLink {
-                GroupsView(classe : $classe)
-            } label: {
+            NavigationLink(value: ClasseSubview(classe      : $classe,
+                                                subviewType : .groups)) {
                 Text("Groupes")
                     .font(.title3)
                     .fontWeight(.bold)
@@ -144,10 +174,7 @@ struct ClasseDetail: View {
 
                 // édition de la liste des examen
                 ForEach($classe.exams) { $exam in
-                    NavigationLink {
-                        ExamEditor(classe : $classe,
-                                   exam   : $exam)
-                    } label: {
+                    NavigationLink(value: ExamSubview(exam: $exam)) {
                         ClasseExamRow(exam: exam)
                     }
                     .swipeActions {

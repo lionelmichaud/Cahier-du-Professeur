@@ -17,6 +17,8 @@
 		790E0F8A28DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8628DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg */; };
 		790E0F8B28DBD2EE00A17AA2 /* VINKEN_Noor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8728DBD2EE00A17AA2 /* VINKEN_Noor.jpg */; };
 		790E0F8C28DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F8828DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg */; };
+		790EF99828F47039007E2D62 /* NOMDEFAMILLE_Prénom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790EF99728F47039007E2D62 /* NOMDEFAMILLE_Prénom.jpg */; };
+		790EF99928F475CD007E2D62 /* NOMDEFAMILLE_Prénom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790EF99728F47039007E2D62 /* NOMDEFAMILLE_Prénom.jpg */; };
 		7913562828D77C2900480771 /* Interoperability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913562728D77C2900480771 /* Interoperability.swift */; };
 		7913562928D77C2900480771 /* Interoperability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913562728D77C2900480771 /* Interoperability.swift */; };
 		7913562B28D7814600480771 /* UIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913562A28D7814600480771 /* UIPreferences.swift */; };
@@ -465,6 +467,7 @@
 		790E0F8628DBD2EE00A17AA2 /* VERMEERSCH_Paul.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = VERMEERSCH_Paul.jpg; sourceTree = "<group>"; };
 		790E0F8728DBD2EE00A17AA2 /* VINKEN_Noor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = VINKEN_Noor.jpg; sourceTree = "<group>"; };
 		790E0F8828DBD2EE00A17AA2 /* TRACEY_Grace-Lily.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "TRACEY_Grace-Lily.jpg"; sourceTree = "<group>"; };
+		790EF99728F47039007E2D62 /* NOMDEFAMILLE_Prénom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "NOMDEFAMILLE_Prénom.jpg"; sourceTree = "<group>"; };
 		7913562728D77C2900480771 /* Interoperability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interoperability.swift; sourceTree = "<group>"; };
 		7913562A28D7814600480771 /* UIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPreferences.swift; sourceTree = "<group>"; };
 		7918D1F92810997700C24C5A /* ColorOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptions.swift; sourceTree = "<group>"; };
@@ -948,6 +951,7 @@
 		7984334B283E92B100C5E51E /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				790EF99728F47039007E2D62 /* NOMDEFAMILLE_Prénom.jpg */,
 				79FC12A728DB9D6500F64F7D /* ABADLA_Nesrine.jpg */,
 				79FC133128DBAF8C00F64F7D /* ANDRE-MIQUEL_Emma.jpg */,
 				79FC12A028DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg */,
@@ -1657,6 +1661,7 @@
 				7955964128DBBCAF00FB6A95 /* GIRARDEAU_Pablo.jpg in Resources */,
 				79FC133728DBAF8C00F64F7D /* BACOU_Léo.jpg in Resources */,
 				79A5254F28DBC70500E69ACD /* DURAND_Brune.jpg in Resources */,
+				790EF99828F47039007E2D62 /* NOMDEFAMILLE_Prénom.jpg in Resources */,
 				7955964C28DBBD5F00FB6A95 /* MILLIEZ_Maylis.jpg in Resources */,
 				79AA30C528DBBB660091E8FB /* ELTVEDT_Charles.jpg in Resources */,
 				79FC12B428DB9D6500F64F7D /* DUFOSSET_Margaux.jpg in Resources */,
@@ -1782,6 +1787,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790EF99928F475CD007E2D62 /* NOMDEFAMILLE_Prénom.jpg in Resources */,
 				79F102EB28232F36005E5D9C /* Classe.json in Resources */,
 				79B7F3FF28E88EC100CD3730 /* DORNIC_Salomé.jpg in Resources */,
 				7986E7E328291DA00011FF21 /* AppVersion.json in Resources */,

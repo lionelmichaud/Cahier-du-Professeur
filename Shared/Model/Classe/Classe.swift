@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Classe: Identifiable, Codable, Ordered {
+struct Classe: Identifiable, Codable, Ordered, Hashable {
 
     // MARK: - Type Methods
 
@@ -43,11 +43,11 @@ struct Classe: Identifiable, Codable, Ordered {
 
     var elevesListLabel: String {
         if nbOfEleves == 0 {
-            return "Aucun Élève"
+            return "Aucun élève"
         } else if nbOfEleves == 1 {
-            return "Liste de 1 Élève"
+            return "Liste de 1 élève"
         } else {
-            return "Liste des \(nbOfEleves) Élèves"
+            return "Liste des \(nbOfEleves) élèves"
         }
     }
 

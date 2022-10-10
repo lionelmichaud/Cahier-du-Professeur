@@ -51,10 +51,15 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     init(sexe      : Sexe,
          nom       : String,
          prenom    : String,
-         isFlagged : Bool = false) {
+         isFlagged : Bool = false,
+         bonus     : Double = 0,
+         group     : Int? = nil
+    ) {
         self.sexe      = sexe
         self.name      = PersonNameComponents(givenName : prenom, familyName : nom)
         self.isFlagged = isFlagged
+        self.bonus     = bonus
+        self.group     = group
     }
 
     // MARK: - Methods
@@ -149,9 +154,11 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     }
 
     static let exemple = Eleve(sexe      : .male,
-                               nom       : "NomDeFamille",
+                               nom       : "NOMDEFAMILLE",
                                prenom    : "Prénom",
-                               isFlagged : true)
+                               isFlagged : true,
+                               bonus     : 1,
+                               group     : 2)
 }
 
 extension Eleve: CustomStringConvertible {

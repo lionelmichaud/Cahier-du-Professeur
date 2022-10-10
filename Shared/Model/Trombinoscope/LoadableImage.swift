@@ -29,7 +29,7 @@ struct LoadableImage: View {
                     image
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 320)
+                        //.frame(height: 320)
                         .cornerRadius(15)
                         .shadow(radius: 5)
                         .accessibility(hidden: false)
@@ -70,7 +70,7 @@ struct PlaceholderPortrait : View {
 
 struct LoadableImage_Previews: PreviewProvider {
     static func testImageUrl() -> URL {
-        return try! Folder.application!.file(named: "test_image.jpg").url
+        return try! Folder.application!.file(named: "NOMDEFAMILLE_Prénom.jpg").url
     }
     static var previews: some View {
         LoadableImage(imageUrl: testImageUrl())

@@ -1,7 +1,7 @@
 {
   "items" : [
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "48AACB6E-C515-4B36-97A8-5B63300EA895",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -27,6 +27,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 8,
       "collesID" : [
 
       ],
@@ -78,7 +79,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "13CB347D-CE80-4259-8CD9-079EECA4D7F2",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -136,24 +137,25 @@
       "troubleDys" : "dysorthographie"
     },
     {
-      "bonus" : 0,
+      "id" : "44358F05-2799-4C2B-8D90-50E940268487",
+      "appreciation" : "",
+      "troubleDys" : "migraines",
+      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
+      "sexe" : "female",
+      "annotation" : "",
+      "group" : 1,
       "observsID" : [
 
       ],
-      "id" : "44358F05-2799-4C2B-8D90-50E940268487",
-      "isFlagged" : false,
-      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
-      "appreciation" : "",
-      "sexe" : "female",
-      "annotation" : "",
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "ASHER",
         "givenName" : "Isabel"
       },
-      "troubleDys" : "migraines"
+      "bonus" : 0
     },
     {
       "bonus" : 0,
@@ -239,6 +241,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 1,
       "collesID" : [
 
       ],
@@ -309,24 +312,25 @@
       ]
     },
     {
-      "bonus" : 0,
+      "id" : "34FF142C-3645-4291-865E-A5B4A141C25A",
+      "appreciation" : "",
+      "troubleDys" : "dyschromatopsie",
+      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
+      "sexe" : "male",
+      "annotation" : "",
+      "group" : 1,
       "observsID" : [
 
       ],
-      "id" : "34FF142C-3645-4291-865E-A5B4A141C25A",
-      "isFlagged" : false,
-      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
-      "appreciation" : "",
-      "sexe" : "male",
-      "annotation" : "",
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "BELLOT",
         "givenName" : "Louis"
       },
-      "troubleDys" : "dyschromatopsie"
+      "bonus" : 0
     },
     {
       "bonus" : -1,
@@ -355,6 +359,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 1,
       "collesID" : [
 
       ],
@@ -481,7 +486,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "0270D262-44E3-48F0-8B5E-5E99593BB0AD",
       "isFlagged" : true,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -507,6 +512,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 2,
       "collesID" : [
 
       ],
@@ -564,6 +570,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 2,
       "collesID" : [
 
       ],
@@ -602,6 +609,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 2,
       "collesID" : [
 
       ],
@@ -747,24 +755,25 @@
       ]
     },
     {
-      "bonus" : 0,
+      "id" : "734EBF3A-A070-42D7-B2B4-DF9FFC25B234",
+      "appreciation" : "",
+      "troubleDys" : "dyslexie",
+      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
+      "sexe" : "female",
+      "annotation" : "",
+      "group" : 8,
       "observsID" : [
 
       ],
-      "id" : "734EBF3A-A070-42D7-B2B4-DF9FFC25B234",
-      "isFlagged" : false,
-      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
-      "appreciation" : "",
-      "sexe" : "female",
-      "annotation" : "",
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "COLNAT",
         "givenName" : "Claire"
       },
-      "troubleDys" : "dyslexie"
+      "bonus" : 0
     },
     {
       "bonus" : 0,
@@ -812,6 +821,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 2,
       "collesID" : [
 
       ],
@@ -844,24 +854,25 @@
       "troubleDys" : "dysphasie"
     },
     {
-      "bonus" : 0,
+      "id" : "055C4A9E-4446-4F6E-938E-D7BF882A643F",
+      "appreciation" : "",
+      "troubleDys" : "epilepsie",
+      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
+      "sexe" : "female",
+      "annotation" : "",
+      "group" : 3,
       "observsID" : [
 
       ],
-      "id" : "055C4A9E-4446-4F6E-938E-D7BF882A643F",
-      "isFlagged" : false,
-      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
-      "appreciation" : "",
-      "sexe" : "female",
-      "annotation" : "",
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "COURTHIEU",
         "givenName" : "Pauline"
       },
-      "troubleDys" : "epilepsie"
+      "bonus" : 0
     },
     {
       "bonus" : 0,
@@ -883,33 +894,37 @@
       ]
     },
     {
-      "bonus" : 0,
+      "id" : "11D75711-D67E-4797-9A76-E9DAC01A242E",
+      "appreciation" : "",
+      "troubleDys" : "autreAd",
+      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
+      "sexe" : "male",
+      "annotation" : "",
+      "group" : 3,
       "observsID" : [
 
       ],
-      "id" : "11D75711-D67E-4797-9A76-E9DAC01A242E",
-      "isFlagged" : false,
-      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
-      "appreciation" : "",
-      "sexe" : "male",
-      "annotation" : "",
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "CRETE",
         "givenName" : "Jean-Baptiste"
       },
-      "troubleDys" : "autreAd"
+      "bonus" : 0
     },
     {
       "bonus" : 0,
+      "observsID" : [
+
+      ],
       "id" : "12D7191C-DB62-46B1-B212-1001BB29CD1B",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
-      "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "annotation" : "",
       "collesID" : [
 
       ],
@@ -917,9 +932,7 @@
         "familyName" : "CRUZ-SEMEDO",
         "givenName" : "Inna"
       },
-      "observsID" : [
-
-      ]
+      "troubleDys" : "dyslexie"
     },
     {
       "bonus" : 0,
@@ -1122,6 +1135,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 3,
       "collesID" : [
 
       ],
@@ -1217,6 +1231,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 3,
       "collesID" : [
 
       ],
@@ -1229,7 +1244,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "A55272FA-AB3C-4A42-9477-AC5D024F5040",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -1332,6 +1347,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 4,
       "collesID" : [
 
       ],
@@ -1408,6 +1424,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 4,
       "collesID" : [
 
       ],
@@ -1446,6 +1463,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 8,
       "collesID" : [
 
       ],
@@ -1655,6 +1673,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 8,
       "collesID" : [
 
       ],
@@ -1705,7 +1724,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "95B27930-27D3-4D1A-BD10-0B4C3300A292",
       "isFlagged" : false,
       "classeId" : "49819899-4614-42CC-82BE-50F6483AC241",
@@ -1744,7 +1763,7 @@
       "troubleDys" : "dysorthographie"
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "observsID" : [
 
       ],
@@ -1803,7 +1822,7 @@
       "troubleDys" : "dyslexie"
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "09FB3411-9BBD-4E57-B688-FC202026F828",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -1848,6 +1867,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 4,
       "collesID" : [
 
       ],
@@ -1924,6 +1944,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 4,
       "collesID" : [
 
       ],
@@ -1962,6 +1983,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 5,
       "collesID" : [
 
       ],
@@ -1974,7 +1996,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "CA11DB9D-EFB7-4D19-8803-FF96615CF582",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -2031,7 +2053,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "AC1F21DF-9705-472F-96E6-A79814A564CF",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -2070,7 +2092,7 @@
       "troubleDys" : "dyslexie"
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "AF340CCB-54F4-494F-97CC-3A48DA0AC064",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -2115,6 +2137,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 5,
       "collesID" : [
 
       ],
@@ -2146,7 +2169,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "5D455DAC-FD07-4CF3-822D-9B6B0E3CE839",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -2172,6 +2195,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 9,
       "collesID" : [
 
       ],
@@ -2248,6 +2272,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 5,
       "collesID" : [
 
       ],
@@ -2298,7 +2323,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 2,
       "id" : "A78E0656-5E78-4566-95E1-CB79527DC61E",
       "isFlagged" : false,
       "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
@@ -2362,6 +2387,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 5,
       "collesID" : [
 
       ],
@@ -2457,6 +2483,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 6,
       "collesID" : [
 
       ],
@@ -2469,7 +2496,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "95485A6E-34BA-4728-844D-7DF250349240",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -2488,7 +2515,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "37C00AE4-8181-4180-BC9C-D16D1226493A",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -2583,7 +2610,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "F79D4139-5E88-4BB6-9A36-17C10F8D04C0",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -2598,7 +2625,7 @@
         "givenName" : "Martin"
       },
       "observsID" : [
-
+        "DEA474DC-E166-409A-854D-DD95BDDE3497"
       ]
     },
     {
@@ -2736,7 +2763,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "D12F892F-33F2-4A8C-9CF0-DE47D6296E8B",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -2793,7 +2820,7 @@
       ]
     },
     {
-      "bonus" : -2,
+      "bonus" : -1,
       "id" : "80AC31EB-0C10-47E0-992F-F4C98A05ECEA",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -2819,6 +2846,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 6,
       "collesID" : [
 
       ],
@@ -3326,7 +3354,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "608AFB84-E82E-480F-B5D6-016787E9B7E4",
       "isFlagged" : false,
       "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
@@ -3341,31 +3369,32 @@
         "givenName" : "Jack"
       },
       "observsID" : [
-
+        "477AE608-E5B0-4971-A8A4-460FC3EF2442"
       ]
     },
     {
-      "bonus" : 0,
+      "id" : "32420987-F01B-4B57-9FC6-8C76E2D06C24",
+      "appreciation" : "",
+      "troubleDys" : "deficienceAd",
+      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
+      "sexe" : "male",
+      "annotation" : "",
+      "group" : 6,
       "observsID" : [
 
       ],
-      "id" : "32420987-F01B-4B57-9FC6-8C76E2D06C24",
-      "isFlagged" : false,
-      "classeId" : "F2DD54DD-793D-4AFA-92ED-D7E19B33E463",
-      "appreciation" : "",
-      "sexe" : "male",
-      "annotation" : "",
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "REMARK",
         "givenName" : "Olivier"
       },
-      "troubleDys" : "deficienceAd"
+      "bonus" : 0
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "E57ACE2D-B236-4ED8-AC9E-0128E892EF41",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -3410,6 +3439,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 6,
       "collesID" : [
 
       ],
@@ -3422,7 +3452,7 @@
       ]
     },
     {
-      "bonus" : -1,
+      "bonus" : -2,
       "id" : "6FFF0E7F-E307-430A-9904-879D16A4B9A4",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -3460,7 +3490,7 @@
       ]
     },
     {
-      "bonus" : -1,
+      "bonus" : -2,
       "id" : "FB2F8D03-1BBF-4DE2-8598-5D7AD325C18D",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -3543,6 +3573,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 7,
       "collesID" : [
 
       ],
@@ -3594,7 +3625,7 @@
       "troubleDys" : "dyslexie"
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "D49CF471-D5BF-4787-B97A-EDC7FE797DA9",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -3677,6 +3708,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 7,
       "collesID" : [
 
       ],
@@ -3772,6 +3804,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 7,
       "collesID" : [
 
       ],
@@ -3791,6 +3824,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 7,
       "collesID" : [
 
       ],
@@ -3810,6 +3844,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 9,
       "collesID" : [
 
       ],
@@ -3867,6 +3902,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 9,
       "collesID" : [
 
       ],
@@ -3879,7 +3915,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "387F0E7B-EEBE-4F59-8D96-A85E7A010C9A",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -3905,6 +3941,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 9,
       "collesID" : [
 
       ],

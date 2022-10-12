@@ -23,6 +23,9 @@ struct GroupsView: View {
     private var expanded = true
 
     @State
+    private var isEditing = false
+
+    @State
     private var searchString: String = ""
 
     @State
@@ -42,6 +45,8 @@ struct GroupsView: View {
                                 GroupManager.formOrderedGroups(nbEleveParGroupe : 2,
                                                                dans             : classe,
                                                                eleveStore       : eleveStore)
+                                updateGroups()
+
                             }
                         }
                         Button("3 élèves") {
@@ -49,6 +54,7 @@ struct GroupsView: View {
                                 GroupManager.formOrderedGroups(nbEleveParGroupe: 3,
                                                                dans             : classe,
                                                                eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                         Button("4 élèves") {
@@ -56,6 +62,7 @@ struct GroupsView: View {
                                 GroupManager.formOrderedGroups(nbEleveParGroupe: 4,
                                                                dans             : classe,
                                                                eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                         Button("5 élèves") {
@@ -63,6 +70,7 @@ struct GroupsView: View {
                                 GroupManager.formOrderedGroups(nbEleveParGroupe: 5,
                                                                dans             : classe,
                                                                eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                     }
@@ -73,6 +81,7 @@ struct GroupsView: View {
                                 GroupManager.formRandomGroups(nbEleveParGroupe: 2,
                                                               dans             : classe,
                                                               eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                         Button("3 élèves") {
@@ -80,6 +89,7 @@ struct GroupsView: View {
                                 GroupManager.formRandomGroups(nbEleveParGroupe: 3,
                                                               dans             : classe,
                                                               eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                         Button("4 élèves") {
@@ -87,6 +97,7 @@ struct GroupsView: View {
                                 GroupManager.formRandomGroups(nbEleveParGroupe: 4,
                                                               dans             : classe,
                                                               eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                         Button("5 élèves") {
@@ -94,12 +105,17 @@ struct GroupsView: View {
                                 GroupManager.formRandomGroups(nbEleveParGroupe: 5,
                                                               dans             : classe,
                                                               eleveStore       : eleveStore)
+                                updateGroups()
                             }
                         }
                     }
                 }
 
-                Button("Manuellement", action: {})
+                Button("Manuellement") {
+                    withAnimation {
+                        isEditing.toggle()
+                    }
+                }
 
             } label: {
                 Label("Générer les groupes", systemImage: "person.line.dotted.person.fill")
@@ -135,7 +151,8 @@ struct GroupsView: View {
                                                 eleveStore : eleveStore)) { group in
                         DisclosureGroup(isExpanded: $expanded) {
                             if presentation == "Liste" {
-                                GroupListView(group: group)
+                                GroupListView(group: group,
+                                              isEditing: isEditing)
                             } else {
                                 GroupPicturesView(group: group)
                             }
@@ -173,6 +190,8 @@ struct GroupsView: View {
                             withAnimation {
                                 GroupManager.disolveGroups(dans       : classe,
                                                            eleveStore : eleveStore)
+                                groups = GroupManager.groups(dans       : classe,
+                                                             eleveStore : eleveStore)
                             }
                         }
                     } message: {
@@ -181,28 +200,60 @@ struct GroupsView: View {
             }
         }
         .task {
-            groups = GroupManager.groups(dans       : classe,
-                                         eleveStore : eleveStore)
+            updateGroups()
         }
+    }
+
+    private func updateGroups() {
+        groups = GroupManager.groups(dans       : classe,
+                                     eleveStore : eleveStore)
     }
 }
 
 struct GroupListView : View {
     let group: GroupOfEleves
+    let isEditing: Bool
 
     @EnvironmentObject private var navigationModel : NavigationModel
     @EnvironmentObject private var eleveStore      : EleveStore
 
     var body: some View {
-        /// pour chaque Elève
-        ForEach(group.elevesID, id: \.self) { eleveID in
-            if let eleve = eleveStore.item(withID: eleveID) {
-                EleveLabel(eleve: eleve)
-                    .onTapGesture {
-                        // Programatic Navigation
-                        navigationModel.selectedTab     = .eleve
-                        navigationModel.selectedEleveId = eleve.id
+        Group {
+            if isEditing {
+                // ajouter une évaluation
+                Button {
+
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter un élève")
                     }
+                }
+                .buttonStyle(.borderless)
+            }
+
+            /// pour chaque Elève
+            ForEach(group.elevesID, id: \.self) { eleveID in
+                if let eleve = eleveStore.itemBinding(withID: eleveID) {
+                    EleveLabel(eleve: eleve.wrappedValue)
+                        .onTapGesture {
+                            // Programatic Navigation
+                            navigationModel.selectedTab     = .eleve
+                            navigationModel.selectedEleveId = eleve.id
+                        }
+                        .swipeActions {
+                            if isEditing {
+                                // supprimer une évaluation
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        eleve.wrappedValue.group = nil
+                                    }
+                                } label: {
+                                    Label("Supprimer du groupe", systemImage: "trash")
+                                }
+                            }
+                        }
+                }
             }
         }
     }

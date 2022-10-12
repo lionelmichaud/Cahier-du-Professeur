@@ -14,10 +14,14 @@ struct ExamEditor: View {
     @State
     private var searchString: String = ""
 
+    @Environment(\.isSearching)
+    private var isSearching
+
     var body: some View {
         List {
-            ExamDetail(exam: $exam)
-
+            if !isSearching {
+                ExamDetail(exam: $exam)
+            }
             // notes
             MarkListView(exam: $exam, searchString: searchString)
         }
@@ -103,9 +107,6 @@ struct ExamDetail : View {
     @Binding
     var exam: Exam
 
-    @Environment(\.isSearching)
-    private var isSearching
-
     private var name: some View {
         HStack {
             Image(systemName: "doc.plaintext")
@@ -121,38 +122,36 @@ struct ExamDetail : View {
     }
 
     var body: some View {
-        if !isSearching {
-            // nom
-            name
+        // nom
+        name
 
-            // date
-            DatePicker("Date", selection: $exam.date)
-                .labelsHidden()
-                .listRowSeparator(.hidden)
-                .environment(\.locale, Locale.init(identifier: "fr_FR"))
+        // date
+        DatePicker("Date", selection: $exam.date)
+            .labelsHidden()
+            .listRowSeparator(.hidden)
+            .environment(\.locale, Locale.init(identifier: "fr_FR"))
 
-            // barême
-            Stepper(value : $exam.maxMark,
-                    in    : 1 ... 20,
-                    step  : 1) {
-                HStack {
-                    Text("Barême")
-                    Spacer()
-                    Text("\(exam.maxMark) points")
-                        .foregroundColor(.secondary)
-                }
+        // barême
+        Stepper(value : $exam.maxMark,
+                in    : 1 ... 20,
+                step  : 1) {
+            HStack {
+                Text("Barême")
+                Spacer()
+                Text("\(exam.maxMark) points")
+                    .foregroundColor(.secondary)
             }
+        }
 
-            // coefficient
-            Stepper(value : $exam.coef,
-                    in    : 0.0 ... 5.0,
-                    step  : 0.25) {
-                HStack {
-                    Text("Coefficient")
-                    Spacer()
-                    Text("\(exam.coef.formatted(.number.precision(.fractionLength(2))))")
-                        .foregroundColor(.secondary)
-                }
+        // coefficient
+        Stepper(value : $exam.coef,
+                in    : 0.0 ... 5.0,
+                step  : 0.25) {
+            HStack {
+                Text("Coefficient")
+                Spacer()
+                Text("\(exam.coef.formatted(.number.precision(.fractionLength(2))))")
+                    .foregroundColor(.secondary)
             }
         }
     }
@@ -163,16 +162,16 @@ struct ExamEditor_Previews: PreviewProvider {
         TestEnvir.createFakes()
         return Group {
             ExamEditor(exam: .constant(Exam()))
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPad mini (6th generation)")
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPad mini (6th generation)")
 
             ExamEditor(exam: .constant(Exam()))
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
-            .previewDevice("iPhone Xs")
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPhone Xs")
         }
     }
 }

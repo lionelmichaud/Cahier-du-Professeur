@@ -183,6 +183,7 @@ struct SchoolDetail: View {
                 NavigationStack {
                     ClassCreator(inSchool: $school)
                 }
+                .presentationDetents([.medium])
             }
         } else {
             VStack(alignment: .center) {

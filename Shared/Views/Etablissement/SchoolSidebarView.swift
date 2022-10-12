@@ -233,6 +233,7 @@ struct SchoolSidebarView: View {
                         schoolStore.add(school)
                     }
                 }
+                .presentationDetents([.medium])
             }
         }
         /// Importer des fichiers JPEG

@@ -47,7 +47,6 @@ struct SchoolDetail: View {
 
     private var classeList: some View {
         Section {
-            DisclosureGroup {
                 // ajouter une classe
                 Button {
                     isAddingNewClasse = true
@@ -98,52 +97,50 @@ struct SchoolDetail: View {
                             }.tint(.orange)
                         }
                 }
-            } label: {
-                // titre
-                HStack {
-                    Text(school.classesLabel)
-                        .fontWeight(.bold)
-                    Spacer()
-                    Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
-                        .fontWeight(.bold)
-                }
-                .font(.title3)
+        } header: {
+            // titre
+            HStack {
+                Text("Classes")
+                Spacer()
+                Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
             }
+            .font(.callout)
+            .foregroundColor(.secondary)
+            .fontWeight(.bold)
         }
     }
 
     private var ressourceList: some View {
         Section {
-            DisclosureGroup {
-                // ajouter une évaluation
-                Button {
-                    withAnimation {
-                        school.ressources.insert(Ressource(), at: 0)
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Ajouter une ressource")
-                    }
+            // ajouter une évaluation
+            Button {
+                withAnimation {
+                    school.ressources.insert(Ressource(), at: 0)
                 }
-                .buttonStyle(.borderless)
-
-                // édition de la liste des examen
-                ForEach($school.ressources) { $res in
-                    RessourceEditor(ressource: $res)
-                }
-                .onDelete { indexSet in
-                    school.ressources.remove(atOffsets: indexSet)
-                }
-                .onMove { fromOffsets, toOffset in
-                    school.ressources.move(fromOffsets: fromOffsets, toOffset: toOffset)
-                }
-
             } label: {
-                Text(school.ressourcesLabel)
-                    .font(.title3)
-                    .fontWeight(.bold)
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter une ressource")
+                }
             }
+            .buttonStyle(.borderless)
+
+            // édition de la liste des examen
+            ForEach($school.ressources) { $res in
+                RessourceEditor(ressource: $res)
+            }
+            .onDelete { indexSet in
+                school.ressources.remove(atOffsets: indexSet)
+            }
+            .onMove { fromOffsets, toOffset in
+                school.ressources.move(fromOffsets: fromOffsets, toOffset: toOffset)
+            }
+
+        } header: {
+            Text("Ressources")
+                .font(.callout)
+                .foregroundColor(.secondary)
+                .fontWeight(.bold)
         }
     }
 
@@ -155,43 +152,45 @@ struct SchoolDetail: View {
     }
 
     var body: some View {
-        if selectedItemExists {
-            List {
-                // nom de l'établissement
-                name
+        VStack {
+            if selectedItemExists {
+                List {
+                    // nom de l'établissement
+                    name
 
-                // note sur la classe
-                if schoolAnnotation {
-                    AnnotationView(isExpanded: $noteIsExpanded,
-                                   annotation: $school.annotation)
-                }
-                // édition de la liste des classes
-                classeList
+                    // note sur la classe
+                    if schoolAnnotation {
+                        AnnotationView(isExpanded: $noteIsExpanded,
+                                       annotation: $school.annotation)
+                    }
+                    // édition de la liste des classes
+                    classeList
 
-                // édition de la liste des ressources
-                ressourceList
-            }
-            #if os(iOS)
-            .navigationTitle("Etablissement")
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .onAppear {
-                noteIsExpanded = school.annotation.isNotEmpty
-            }
-            // Modal: ajout d'une nouvelle classe
-            .sheet(isPresented: $isAddingNewClasse) {
-                NavigationStack {
-                    ClassCreator(inSchool: $school)
+                    // édition de la liste des ressources
+                    ressourceList
                 }
-                .presentationDetents([.medium])
+                #if os(iOS)
+                .navigationTitle("Etablissement")
+                .navigationBarTitleDisplayMode(.inline)
+                #endif
+                .onAppear {
+                    noteIsExpanded = school.annotation.isNotEmpty
+                }
+                // Modal: ajout d'une nouvelle classe
+                .sheet(isPresented: $isAddingNewClasse) {
+                    NavigationStack {
+                        ClassCreator(inSchool: $school)
+                    }
+                    .presentationDetents([.medium])
+                }
+            } else {
+                VStack(alignment: .center) {
+                    Text("Aucun établissement sélectionné.")
+                    Text("Sélectionner un établissement.")
+                }
+                .foregroundStyle(.secondary)
+                .font(.title)
             }
-        } else {
-            VStack(alignment: .center) {
-                Text("Aucun établissement sélectionné.")
-                Text("Sélectionner un établissement.")
-            }
-            .foregroundStyle(.secondary)
-            .font(.title)
         }
     }
 }

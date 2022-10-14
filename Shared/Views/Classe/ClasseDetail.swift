@@ -207,7 +207,7 @@ struct ClasseDetail: View {
                                    annotation: $classe.annotation)
                 }
 
-                Section("Elèves") {
+                Section {
                     /// édition de la liste des élèves
                     elevesList
 
@@ -218,11 +218,21 @@ struct ClasseDetail: View {
 
                     /// gestion des groupes
                     groups
+                } header: {
+                    Text("Elèves")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                        .fontWeight(.bold)
                 }
 
                 /// édition de la liste des examens
-                Section("Evaluations") {
+                Section {
                     examsList
+                } header: {
+                    Text("Evaluations")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                        .fontWeight(.bold)
                 }
             }
         }

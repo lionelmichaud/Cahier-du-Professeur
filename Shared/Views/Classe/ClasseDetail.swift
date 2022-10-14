@@ -79,126 +79,113 @@ struct ClasseDetail: View {
     private var eleveTrombineEnabled
 
     private var elevesList: some View {
-        Section {
-            DisclosureGroup {
-                // ajouter un élève
-                Button {
-                    isAddingNewEleve = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Ajouter un élève")
-                    }
-                }
-                .buttonStyle(.borderless)
-
-                // édition de la liste des élèves
-                ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
-                    ClasseEleveRow(eleve: eleve)
-                        .onTapGesture {
-                            // Programatic Navigation
-                            navigationModel.selectedTab     = .eleve
-                            navigationModel.selectedEleveId = eleve.id
-                        }
-                        .swipeActions {
-                            // supprimer un élève
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    // supprimer l'élève et tous ses descendants
-                                    // puis retirer l'élève de la classe auquelle il appartient
-                                    ClasseManager().retirer(eleve       : eleve,
-                                                            deClasse    : &classe,
-                                                            eleveStore  : eleveStore,
-                                                            observStore : observStore,
-                                                            colleStore  : colleStore)
-                                }
-                            } label: {
-                                Label("Supprimer", systemImage: "trash")
-                            }
-
-                            // flager un élève
-                            Button {
-                                withAnimation {
-                                    eleve.isFlagged.toggle()
-                                }
-                            } label: {
-                                if eleve.isFlagged {
-                                    Label("Sans drapeau", systemImage: "flag.slash")
-                                } else {
-                                    Label("Avec drapeau", systemImage: "flag.fill")
-                                }
-                            }.tint(.orange)
-                        }
-                }
-
+        DisclosureGroup {
+            // ajouter un élève
+            Button {
+                isAddingNewEleve = true
             } label: {
-                Text(classe.elevesListLabel)
-                    .font(.title3)
-                    .fontWeight(.bold)
-            }
-        }
-    }
-
-    private var trombinoscope: some View {
-        Section {
-            NavigationLink(value: ClasseSubview(classe      : $classe,
-                                                subviewType : .trombinoscope)) {
-                Text("Trombinoscope")
-                    .font(.title3)
-                    .fontWeight(.bold)
-            }
-        }
-    }
-
-    private var groups: some View {
-        Section {
-            NavigationLink(value: ClasseSubview(classe      : $classe,
-                                                subviewType : .groups)) {
-                Text("Groupes")
-                    .font(.title3)
-                    .fontWeight(.bold)
-            }
-        }
-    }
-
-    private var examsList: some View {
-        Section {
-            DisclosureGroup {
-                // ajouter une évaluation
-                Button {
-                    isAddingNewExam = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Ajouter une évaluation")
-                    }
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter un élève")
                 }
-                .buttonStyle(.borderless)
+            }
+            .buttonStyle(.borderless)
 
-                // édition de la liste des examen
-                ForEach($classe.exams) { $exam in
-                    NavigationLink(value: ExamSubview(classe: $classe,
-                                                      examId: exam.id)) {
-                        ClasseExamRow(exam: exam)
+            // édition de la liste des élèves
+            ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
+                ClasseEleveRow(eleve: eleve)
+                    .onTapGesture {
+                        // Programatic Navigation
+                        navigationModel.selectedTab     = .eleve
+                        navigationModel.selectedEleveId = eleve.id
                     }
                     .swipeActions {
-                        // supprimer une évaluation
+                        // supprimer un élève
                         Button(role: .destructive) {
                             withAnimation {
-                                classe.exams.removeAll {
-                                    $0.id == exam.id
-                                }
+                                // supprimer l'élève et tous ses descendants
+                                // puis retirer l'élève de la classe auquelle il appartient
+                                ClasseManager().retirer(eleve       : eleve,
+                                                        deClasse    : &classe,
+                                                        eleveStore  : eleveStore,
+                                                        observStore : observStore,
+                                                        colleStore  : colleStore)
                             }
                         } label: {
                             Label("Supprimer", systemImage: "trash")
                         }
+
+                        // flager un élève
+                        Button {
+                            withAnimation {
+                                eleve.isFlagged.toggle()
+                            }
+                        } label: {
+                            if eleve.isFlagged {
+                                Label("Sans drapeau", systemImage: "flag.slash")
+                            } else {
+                                Label("Avec drapeau", systemImage: "flag.fill")
+                            }
+                        }.tint(.orange)
+                    }
+            }
+
+        } label: {
+            Text(classe.elevesListLabel)
+//                .font(.title3)
+                .fontWeight(.bold)
+        }
+    }
+
+    private var trombinoscope: some View {
+        NavigationLink(value: ClasseSubview(classe      : $classe,
+                                            subviewType : .trombinoscope)) {
+            Text("Trombinoscope")
+//                .font(.title3)
+                .fontWeight(.bold)
+        }
+    }
+
+    private var groups: some View {
+        NavigationLink(value: ClasseSubview(classe      : $classe,
+                                            subviewType : .groups)) {
+            Text("Groupes")
+//                .font(.title3)
+                .fontWeight(.bold)
+        }
+    }
+
+    private var examsList: some View {
+        Group {
+            // ajouter une évaluation
+            Button {
+                isAddingNewExam = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter une évaluation")
+                }
+            }
+            .buttonStyle(.borderless)
+
+            // édition de la liste des examen
+            ForEach($classe.exams) { $exam in
+                NavigationLink(value: ExamSubview(classe: $classe,
+                                                  examId: exam.id)) {
+                    ClasseExamRow(exam: exam)
+                }
+                .swipeActions {
+                    // supprimer une évaluation
+                    Button(role: .destructive) {
+                        withAnimation {
+                            classe.exams.removeAll {
+                                $0.id == exam.id
+                            }
+                        }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
                     }
                 }
-
-            } label: {
-                Text(classe.examsListLabel)
-                    .font(.title3)
-                    .fontWeight(.bold)
             }
         }
     }
@@ -220,19 +207,23 @@ struct ClasseDetail: View {
                                    annotation: $classe.annotation)
                 }
 
-                /// édition de la liste des élèves
-                elevesList
+                Section("Elèves") {
+                    /// édition de la liste des élèves
+                    elevesList
 
-                /// trombinoscope
-                if eleveTrombineEnabled {
-                    trombinoscope
+                    /// trombinoscope
+                    if eleveTrombineEnabled {
+                        trombinoscope
+                    }
+
+                    /// gestion des groupes
+                    groups
                 }
 
-                /// gestion des groupes
-                groups
-
                 /// édition de la liste des examens
-                examsList
+                Section("Evaluations") {
+                    examsList
+                }
             }
         }
         .toolbar {

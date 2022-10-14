@@ -30,14 +30,17 @@ struct ClasseSubview: Hashable {
 }
 
 struct ExamSubview: Hashable {
-    var exam: Binding<Exam>
+    var classe : Binding<Classe>
+    var examId : UUID
 
     static func == (lhs: ExamSubview, rhs: ExamSubview) -> Bool {
-        lhs.exam.wrappedValue.id == rhs.exam.wrappedValue.id
+        lhs.examId == rhs.examId &&
+        lhs.classe.wrappedValue.id == rhs.classe.wrappedValue.id
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(exam.wrappedValue.id)
+        hasher.combine(examId)
+        hasher.combine(classe.wrappedValue.id)
     }
 }
 
@@ -174,7 +177,8 @@ struct ClasseDetail: View {
 
                 // édition de la liste des examen
                 ForEach($classe.exams) { $exam in
-                    NavigationLink(value: ExamSubview(exam: $exam)) {
+                    NavigationLink(value: ExamSubview(classe: $classe,
+                                                      examId: exam.id)) {
                         ClasseExamRow(exam: exam)
                     }
                     .swipeActions {

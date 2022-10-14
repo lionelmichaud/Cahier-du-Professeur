@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ExamEditor: View {
     @Binding
-    var exam   : Exam
+    var classe : Classe
+    let examId : UUID
+
+    @State private var exam = Exam()
 
     @State
     private var searchString: String = ""
@@ -25,6 +28,12 @@ struct ExamEditor: View {
             // notes
             MarkListView(exam: $exam, searchString: searchString)
         }
+        .onChange(of: exam) { newValue in
+            if let idx = classe.exams.firstIndex(where: { $0.id == examId }) {
+                classe.exams[idx] = exam
+                print("newvalue \(newValue)")
+            }
+        }
         .searchable(text      : $searchString,
                     placement : .navigationBarDrawer(displayMode : .automatic),
                     prompt    : "Nom, Prénom ou n° de groupe")
@@ -32,6 +41,9 @@ struct ExamEditor: View {
         #if os(iOS)
         .navigationTitle("Évaluation")
         #endif
+        .task {
+            exam = classe.exams.first(where: { $0.id == examId })!
+        }
     }
 }
 
@@ -157,21 +169,21 @@ struct ExamDetail : View {
     }
 }
 
-struct ExamEditor_Previews: PreviewProvider {
-    static var previews: some View {
-        TestEnvir.createFakes()
-        return Group {
-            ExamEditor(exam: .constant(Exam()))
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPad mini (6th generation)")
-
-            ExamEditor(exam: .constant(Exam()))
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.colleStore)
-                .environmentObject(TestEnvir.observStore)
-                .previewDevice("iPhone Xs")
-        }
-    }
-}
+//struct ExamEditor_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TestEnvir.createFakes()
+//        return Group {
+//            ExamEditor(exam: .constant(Exam()))
+//                .environmentObject(TestEnvir.eleveStore)
+//                .environmentObject(TestEnvir.colleStore)
+//                .environmentObject(TestEnvir.observStore)
+//                .previewDevice("iPad mini (6th generation)")
+//
+//            ExamEditor(exam: .constant(Exam()))
+//                .environmentObject(TestEnvir.eleveStore)
+//                .environmentObject(TestEnvir.colleStore)
+//                .environmentObject(TestEnvir.observStore)
+//                .previewDevice("iPhone Xs")
+//        }
+//    }
+//}

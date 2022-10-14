@@ -28,7 +28,8 @@ struct ClasseSplitView: View {
                         }
                     }
                     .navigationDestination(for: ExamSubview.self) { examSubview in
-                        ExamEditor(exam: examSubview.exam)
+                        ExamEditor(classe: examSubview.classe,
+                                   examId: examSubview.examId)
                     }
             }
         }

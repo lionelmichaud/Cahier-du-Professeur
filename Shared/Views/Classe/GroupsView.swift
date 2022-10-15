@@ -38,91 +38,99 @@ struct GroupsView: View {
         Menu {
             /// Générer les groupes
             Menu {
-                Menu("Automatiquement") {
-                    Menu("Par ordre alphabétique") {
-                        Button("2 élèves") {
-                            withAnimation {
-                                GroupManager.formOrderedGroups(nbEleveParGroupe : 2,
-                                                               dans             : classe,
-                                                               eleveStore       : eleveStore)
-                                updateGroups()
+                Menu {
+                    Button("2 élèves") {
+                        withAnimation {
+                            GroupManager.formOrderedGroups(nbEleveParGroupe : 2,
+                                                           dans             : classe,
+                                                           eleveStore       : eleveStore)
+                            updateGroups()
 
-                            }
-                        }
-                        Button("3 élèves") {
-                            withAnimation {
-                                GroupManager.formOrderedGroups(nbEleveParGroupe: 3,
-                                                               dans             : classe,
-                                                               eleveStore       : eleveStore)
-                                updateGroups()
-                            }
-                        }
-                        Button("4 élèves") {
-                            withAnimation {
-                                GroupManager.formOrderedGroups(nbEleveParGroupe: 4,
-                                                               dans             : classe,
-                                                               eleveStore       : eleveStore)
-                                updateGroups()
-                            }
-                        }
-                        Button("5 élèves") {
-                            withAnimation {
-                                GroupManager.formOrderedGroups(nbEleveParGroupe: 5,
-                                                               dans             : classe,
-                                                               eleveStore       : eleveStore)
-                                updateGroups()
-                            }
                         }
                     }
-
-                    Menu("Aléatoirement") {
-                        Button("2 élèves") {
-                            withAnimation {
-                                GroupManager.formRandomGroups(nbEleveParGroupe: 2,
-                                                              dans             : classe,
-                                                              eleveStore       : eleveStore)
-                                updateGroups()
-                            }
-                        }
-                        Button("3 élèves") {
-                            withAnimation {
-                                GroupManager.formRandomGroups(nbEleveParGroupe: 3,
-                                                              dans             : classe,
-                                                              eleveStore       : eleveStore)
-                                updateGroups()
-                            }
-                        }
-                        Button("4 élèves") {
-                            withAnimation {
-                                GroupManager.formRandomGroups(nbEleveParGroupe: 4,
-                                                              dans             : classe,
-                                                              eleveStore       : eleveStore)
-                                updateGroups()
-                            }
-                        }
-                        Button("5 élèves") {
-                            withAnimation {
-                                GroupManager.formRandomGroups(nbEleveParGroupe: 5,
-                                                              dans             : classe,
-                                                              eleveStore       : eleveStore)
-                                updateGroups()
-                            }
+                    Button("3 élèves") {
+                        withAnimation {
+                            GroupManager.formOrderedGroups(nbEleveParGroupe: 3,
+                                                           dans             : classe,
+                                                           eleveStore       : eleveStore)
+                            updateGroups()
                         }
                     }
+                    Button("4 élèves") {
+                        withAnimation {
+                            GroupManager.formOrderedGroups(nbEleveParGroupe: 4,
+                                                           dans             : classe,
+                                                           eleveStore       : eleveStore)
+                            updateGroups()
+                        }
+                    }
+                    Button("5 élèves") {
+                        withAnimation {
+                            GroupManager.formOrderedGroups(nbEleveParGroupe: 5,
+                                                           dans             : classe,
+                                                           eleveStore       : eleveStore)
+                            updateGroups()
+                        }
+                    }
+                } label: {
+                    Label("Par ordre alphabétique", systemImage: "textformat.size.larger")
                 }
 
-                Button("Manuellement") {
-                    withAnimation {
-                        isEditing.toggle()
+                Menu {
+                    Button("2 élèves") {
+                        withAnimation {
+                            GroupManager.formRandomGroups(nbEleveParGroupe: 2,
+                                                          dans             : classe,
+                                                          eleveStore       : eleveStore)
+                            updateGroups()
+                        }
                     }
+                    Button("3 élèves") {
+                        withAnimation {
+                            GroupManager.formRandomGroups(nbEleveParGroupe: 3,
+                                                          dans             : classe,
+                                                          eleveStore       : eleveStore)
+                            updateGroups()
+                        }
+                    }
+                    Button("4 élèves") {
+                        withAnimation {
+                            GroupManager.formRandomGroups(nbEleveParGroupe: 4,
+                                                          dans             : classe,
+                                                          eleveStore       : eleveStore)
+                            updateGroups()
+                        }
+                    }
+                    Button("5 élèves") {
+                        withAnimation {
+                            GroupManager.formRandomGroups(nbEleveParGroupe: 5,
+                                                          dans             : classe,
+                                                          eleveStore       : eleveStore)
+                            updateGroups()
+                        }
+                    }
+                } label: {
+                    Label("Aléatoirement", systemImage: "die.face.5")
                 }
 
             } label: {
                 Label("Générer les groupes", systemImage: "person.line.dotted.person.fill")
             }
 
+            /// Modifier les groupes
+            if presentation == "Liste" {
+                Button {
+                    withAnimation {
+                        isEditing.toggle()
+                    }
+                } label: {
+                    Label(isEditing ? "Valider les modifications" : "Modifier les groupes",
+                          systemImage: isEditing ? "checkmark" : "pencil")
+                }
+            }
+
             /// Supprimer les groupes
-            Button {
+            Button(role: .destructive) {
                 isShowingDeleteGroupsDialog.toggle()
             } label: {
                 Label("Suprimer les groupes", systemImage: "trash")
@@ -151,7 +159,8 @@ struct GroupsView: View {
                                                 eleveStore : eleveStore)) { group in
                         DisclosureGroup(isExpanded: $expanded) {
                             if presentation == "Liste" {
-                                GroupListView(group: group,
+                                GroupListView(group    : group,
+                                              classe   : classe,
                                               isEditing: isEditing)
                             } else {
                                 GroupPicturesView(group: group)
@@ -211,18 +220,31 @@ struct GroupsView: View {
 }
 
 struct GroupListView : View {
-    let group: GroupOfEleves
+    let group    : GroupOfEleves
+    var classe   : Classe
     let isEditing: Bool
 
     @EnvironmentObject private var navigationModel : NavigationModel
     @EnvironmentObject private var eleveStore      : EleveStore
 
+    @Preference(\.nameDisplayOrder)
+    private var nameDisplayOrder
+
     var body: some View {
         Group {
             if isEditing {
-                // ajouter une évaluation
-                Button {
-
+                /// ajouter un élève au groupe parmis ceux qui ne sont pas encore affectés
+                Menu {
+                    ForEach(GroupManager.unGroupedEleves(dans: classe, eleveStore: eleveStore), id: \.self) { eleveID in
+                        Button {
+                            if var eleve = eleveStore.item(withID: eleveID) {
+                                eleve.group = group.number
+                                eleveStore.update(with: eleve)
+                            }
+                        } label: {
+                            Label((eleveStore.item(withID: eleveID)?.displayName(nameDisplayOrder))!, systemImage: "person.fill")
+                        }
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "plus.circle.fill")
@@ -249,7 +271,7 @@ struct GroupListView : View {
                                         eleve.wrappedValue.group = nil
                                     }
                                 } label: {
-                                    Label("Supprimer du groupe", systemImage: "trash")
+                                    Label("Retirer", systemImage: "person.fill.badge.minus")
                                 }
                             }
                         }

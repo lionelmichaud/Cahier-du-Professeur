@@ -273,7 +273,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "observsID" : [
 
       ],
@@ -372,7 +372,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "9576B815-6E54-4D67-8DA8-D7B6153866F6",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -410,7 +410,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "28F818B5-0425-4FF8-AEE9-58151CAB464F",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -525,7 +525,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "77DCD0DB-F540-4460-B27A-5DE860640797",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -641,7 +641,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "8339506C-D715-4C77-94AE-3A64BED48344",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -679,7 +679,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "8DA5142A-A25C-4B11-98FA-4360A041EC4F",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -1089,7 +1089,7 @@
       "troubleDys" : "dyslexie"
     },
     {
-      "bonus" : 0,
+      "bonus" : 2,
       "id" : "960A70CA-0A3C-46B5-848E-7BCCF25D26F8",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -1186,7 +1186,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "84C777BF-66D9-4106-B2D0-FB27CCDD1DCD",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -1201,11 +1201,11 @@
         "givenName" : "Lucile"
       },
       "observsID" : [
-
+        "8FF1C6B4-209B-4DEB-8915-9EA38CAD5679"
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 2,
       "id" : "D518BB55-F9F2-4693-A429-54020273D90A",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -2553,7 +2553,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "356A05A6-3E52-4F0A-BF0C-803CE7EA9CF0",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -2629,7 +2629,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "F945D488-3F2B-4F15-A64F-51E48B3F3FEA",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -2782,7 +2782,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "6FA4362E-9E56-4BC9-B07B-4D8A21D1B216",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -2993,7 +2993,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "2A8396AC-6127-4489-B5CB-ECC24C2A5B87",
       "isFlagged" : false,
       "classeId" : "5D150C9E-9B00-49B1-A422-FAC3254B6B21",
@@ -3625,12 +3625,12 @@
       "troubleDys" : "dyslexie"
     },
     {
-      "bonus" : 1,
+      "bonus" : 0,
       "id" : "D49CF471-D5BF-4787-B97A-EDC7FE797DA9",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
       "annotation" : "Tient des propos racistes (il n’y a qu’à virer les voyous des ￼cités)",
-      "appreciation" : "",
+      "appreciation" : "Manque de sérieux en cours ￼",
       "sexe" : "male",
       "collesID" : [
 
@@ -3740,7 +3740,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "20CFE368-ADA7-48DF-83BF-0F220E52E89F",
       "isFlagged" : false,
       "classeId" : "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
@@ -3915,12 +3915,12 @@
       ]
     },
     {
-      "bonus" : 1,
+      "bonus" : 0,
       "id" : "387F0E7B-EEBE-4F59-8D96-A85E7A010C9A",
       "isFlagged" : false,
       "classeId" : "FF8AA65D-3CAC-4844-BB28-335178359125",
       "annotation" : "",
-      "appreciation" : "",
+      "appreciation" : "Manque de sérieux en cours ￼",
       "sexe" : "male",
       "collesID" : [
 

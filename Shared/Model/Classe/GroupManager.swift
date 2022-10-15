@@ -74,6 +74,17 @@ struct GroupManager {
         return groups
     }
 
+    static func unGroupedEleves(dans classe : Classe,
+                                eleveStore  : EleveStore) -> [Eleve.ID] {
+        classe.elevesID.compactMap { eleveID in
+            if let eleve = eleveStore.item(withID: eleveID), eleve.group == nil {
+                return eleve.id
+            } else {
+                return nil
+            }
+        }
+    }
+
     /// Plus grand numéro de groupe dans la classe
     static func largestGroupNumber(dans classe : Classe,
                                    eleveStore  : EleveStore) -> Int {

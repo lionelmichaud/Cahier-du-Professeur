@@ -9,6 +9,10 @@ import Foundation
 
 struct Exam: Identifiable, Hashable, Codable {
 
+    // MARK: - Type Properties
+
+    static let exemple = Exam(sujet: "Evaluation")
+
     // MARK: - Properties
 
     var id = UUID()

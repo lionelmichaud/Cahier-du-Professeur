@@ -23,11 +23,19 @@ struct TestEnvir {
             let etabManager   = SchoolManager()
             let classeManager = ClasseManager()
             let eleveManager  = EleveManager()
-            var classe = Classe.exemple
             var school = School.exemple
+            let ressource = Ressource.exemple
+            var classe = Classe.exemple
+            let exam   = Exam.exemple
             var eleve  = Eleve.exemple
             var observ = Observation.exemple
             var colle  = Colle.exemple
+
+            // ajouter un examen à la classe
+            classe.exams.append(exam)
+
+            // ajouter une ressource à l'établissement
+            school.ressources.append(ressource)
 
             // ajouter une classe à l'établissement
             etabManager.ajouter(classe      : &classe,
@@ -69,11 +77,19 @@ struct TestEnvir {
         let etabManager   = SchoolManager()
         let classeManager = ClasseManager()
         let eleveManager  = EleveManager()
-        var classe = Classe.exemple
         var school = School.exemple
+        let ressource = Ressource.exemple
+        var classe = Classe.exemple
+        let exam   = Exam.exemple
         var eleve  = Eleve.exemple
         var observ = Observation.exemple
         var colle  = Colle.exemple
+
+        // ajouter un examen à la classe
+        classe.exams.append(exam)
+
+        // ajouter une ressource à l'établissement
+        school.ressources.append(ressource)
 
         // ajouter une classe à l'établissement
         etabManager.ajouter(classe      : &classe,

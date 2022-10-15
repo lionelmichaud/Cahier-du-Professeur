@@ -10,6 +10,10 @@ import Foundation
 /// Ressources disponible en quantité limitée dans un établissement
 struct Ressource: Identifiable, Hashable, Codable {
 
+    // MARK: - Type Properties
+
+    static let exemple = Ressource(name: "Ressource",
+                                   maxNumber: 2)
     // MARK: - Properties
 
     var id = UUID()

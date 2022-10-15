@@ -131,7 +131,7 @@ struct ClasseDetail: View {
             }
 
         } label: {
-            Text(classe.elevesListLabel)
+            Text("Liste")
 //                .font(.title3)
                 .fontWeight(.bold)
         }
@@ -219,7 +219,7 @@ struct ClasseDetail: View {
                     /// gestion des groupes
                     groups
                 } header: {
-                    Text("Elèves")
+                    Text("Elèves (\(classe.nbOfEleves))")
                         .font(.callout)
                         .foregroundColor(.secondary)
                         .fontWeight(.bold)
@@ -229,7 +229,7 @@ struct ClasseDetail: View {
                 Section {
                     examsList
                 } header: {
-                    Text("Evaluations")
+                    Text("Evaluations (\(classe.nbOfExams))")
                         .font(.callout)
                         .foregroundColor(.secondary)
                         .fontWeight(.bold)

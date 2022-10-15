@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7903E24D28FAFF1100542586 /* MarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7903E24C28FAFF1100542586 /* MarkListView.swift */; };
+		7903E25028FAFF7800542586 /* ExamDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7903E24F28FAFF7800542586 /* ExamDetail.swift */; };
+		7903E25128FAFF7800542586 /* ExamDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7903E24F28FAFF7800542586 /* ExamDetail.swift */; };
 		790DA9FB28E3A95F009FB7C6 /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790DA9FA28E3A95F009FB7C6 /* GroupManager.swift */; };
 		790DA9FC28E3A95F009FB7C6 /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790DA9FA28E3A95F009FB7C6 /* GroupManager.swift */; };
 		790E0F8128DBD24200A17AA2 /* RIMAUD_Maxence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 790E0F7D28DBD24200A17AA2 /* RIMAUD_Maxence.jpg */; };
@@ -458,6 +461,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7903E24C28FAFF1100542586 /* MarkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkListView.swift; sourceTree = "<group>"; };
+		7903E24F28FAFF7800542586 /* ExamDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamDetail.swift; sourceTree = "<group>"; };
 		790DA9FA28E3A95F009FB7C6 /* GroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManager.swift; sourceTree = "<group>"; };
 		790E0F7D28DBD24200A17AA2 /* RIMAUD_Maxence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RIMAUD_Maxence.jpg; sourceTree = "<group>"; };
 		790E0F7E28DBD24200A17AA2 /* SOUIFA_Célia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "SOUIFA_Célia.jpg"; sourceTree = "<group>"; };
@@ -885,6 +890,7 @@
 		7925C48D283D412100A6BF31 /* Mark */ = {
 			isa = PBXGroup;
 			children = (
+				7903E24C28FAFF1100542586 /* MarkListView.swift */,
 				7925C48E283D413E00A6BF31 /* MarkView.swift */,
 			);
 			path = Mark;
@@ -944,6 +950,7 @@
 				7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */,
 				7971D6BF28634FDC00ECA9CA /* ExamCreator.swift */,
 				79F3F78B282E7E9500DC26FC /* ExamEditor.swift */,
+				7903E24F28FAFF7800542586 /* ExamDetail.swift */,
 			);
 			path = Exam;
 			sourceTree = "<group>";
@@ -1851,6 +1858,7 @@
 				79C12751283A9620002F243E /* AppVersionView.swift in Sources */,
 				7918D1FA2810997700C24C5A /* ColorOptions.swift in Sources */,
 				79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */,
+				7903E25028FAFF7800542586 /* ExamDetail.swift in Sources */,
 				790DA9FB28E3A95F009FB7C6 /* GroupManager.swift in Sources */,
 				7974C4C9282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				79CC5715285F9906001D56F5 /* RessourceEditor.swift in Sources */,
@@ -1891,6 +1899,7 @@
 				795BC3E5281337E600C22271 /* EleveDetail.swift in Sources */,
 				79F3AC102808CAA600D068D9 /* ObservSplitView.swift in Sources */,
 				795BC3D22812E0B100C22271 /* ClasseSidebarView.swift in Sources */,
+				7903E24D28FAFF1100542586 /* MarkListView.swift in Sources */,
 				79F3ABDC280826A400D068D9 /* Sexe.swift in Sources */,
 				79D29A2B28F339640058FF09 /* SchoolDetail.swift in Sources */,
 				79C1275A283AB1C5002F243E /* SettingsSchool.swift in Sources */,
@@ -1959,6 +1968,7 @@
 				79F3AC0E2808CA8700D068D9 /* ColleSplitView.swift in Sources */,
 				79D29A2328F2E2A60058FF09 /* EleveNameGroupBox.swift in Sources */,
 				7971D6C128634FDD00ECA9CA /* ExamCreator.swift in Sources */,
+				7903E25128FAFF7800542586 /* ExamDetail.swift in Sources */,
 				79CC5716285F9906001D56F5 /* RessourceEditor.swift in Sources */,
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,

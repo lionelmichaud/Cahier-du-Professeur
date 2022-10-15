@@ -100,7 +100,7 @@ struct SchoolDetail: View {
         } header: {
             // titre
             HStack {
-                Text("Classes")
+                Text("Classes (\(school.nbOfClasses))")
                 Spacer()
                 Text("\(heures.formatted(.number.precision(.fractionLength(1)))) h")
             }
@@ -137,7 +137,7 @@ struct SchoolDetail: View {
             }
 
         } header: {
-            Text("Ressources")
+            Text("Ressources (\(school.nbOfRessources))")
                 .font(.callout)
                 .foregroundColor(.secondary)
                 .fontWeight(.bold)

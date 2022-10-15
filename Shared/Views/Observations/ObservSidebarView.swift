@@ -65,7 +65,7 @@ struct ObservBrowserSchoolSubiew : View {
         /// pour chaque Classe
         ForEach(classeStore.sortedClasses(dans: school)) { classe in
             if someObservations(dans: classe) {
-                DisclosureGroup(isExpanded: .constant(true)) {
+                DisclosureGroup {
                     /// pour chaque Observation
                     ForEach(filteredSortedObservs(dans: classe)) { observ in
                         if let eleveId = observ.eleveId,

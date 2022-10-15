@@ -9,6 +9,11 @@ import Foundation
 
 struct Classe: Identifiable, Codable, Ordered, Hashable {
 
+    // MARK: - Type Properties
+
+    static let exemple = Classe(niveau : .n6ieme,
+                                numero : 1,
+                                heures : 1.5)
     // MARK: - Type Methods
 
     static func < (lhs: Classe, rhs: Classe) -> Bool {
@@ -106,11 +111,6 @@ struct Classe: Identifiable, Codable, Ordered, Hashable {
     mutating func moveEleve(from indexes: IndexSet, to destination: Int) {
         elevesID.move(fromOffsets: indexes, toOffset: destination)
     }
-
-   static let exemple = Classe(niveau : .n6ieme,
-                                numero : 1,
-                                heures : 1.5)
-
 }
 
 extension Classe: CustomStringConvertible {

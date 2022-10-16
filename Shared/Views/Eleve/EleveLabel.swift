@@ -49,7 +49,7 @@ struct EleveLabel_Previews: PreviewProvider {
         Group {
             EleveLabel(eleve      : Eleve.exemple,
                        fontWeight : .regular,
-                       imageSize  : .small)
+                       imageSize  : .large)
             .previewLayout(.sizeThatFits)
 
             EleveLabel(eleve: Eleve.exemple)

@@ -1444,6 +1444,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 1,
       "collesID" : [
 
       ],
@@ -1578,6 +1579,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 2,
       "collesID" : [
 
       ],
@@ -1964,6 +1966,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 3,
       "collesID" : [
 
       ],
@@ -2041,6 +2044,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 3,
       "collesID" : [
 
       ],
@@ -2253,6 +2257,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 4,
       "collesID" : [
 
       ],
@@ -2311,6 +2316,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 4,
       "collesID" : [
 
       ],
@@ -2330,6 +2336,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 5,
       "collesID" : [
 
       ],
@@ -2368,6 +2375,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 5,
       "collesID" : [
 
       ],
@@ -2445,6 +2453,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 6,
       "collesID" : [
 
       ],
@@ -2541,6 +2550,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 6,
       "collesID" : [
 
       ],
@@ -2694,6 +2704,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 7,
       "collesID" : [
 
       ],
@@ -2751,6 +2762,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 7,
       "collesID" : [
 
       ],
@@ -2866,6 +2878,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 8,
       "collesID" : [
 
       ],
@@ -2962,6 +2975,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 8,
       "collesID" : [
 
       ],
@@ -3266,6 +3280,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 9,
       "collesID" : [
 
       ],
@@ -3342,6 +3357,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 9,
       "collesID" : [
 
       ],
@@ -3361,6 +3377,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 10,
       "collesID" : [
 
       ],
@@ -3535,6 +3552,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 10,
       "collesID" : [
 
       ],
@@ -3670,6 +3688,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 11,
       "collesID" : [
 
       ],
@@ -3689,6 +3708,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 11,
       "collesID" : [
 
       ],
@@ -3785,6 +3805,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "male",
+      "group" : 12,
       "collesID" : [
 
       ],
@@ -3864,6 +3885,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 12,
       "collesID" : [
 
       ],
@@ -3981,6 +4003,7 @@
       "annotation" : "",
       "appreciation" : "",
       "sexe" : "female",
+      "group" : 13,
       "collesID" : [
 
       ],

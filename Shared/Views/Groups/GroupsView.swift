@@ -209,6 +209,7 @@ struct GroupsView: View {
             }
         }
         .task {
+            isEditing = false
             updateGroups()
         }
     }
@@ -219,127 +220,27 @@ struct GroupsView: View {
     }
 }
 
-struct GroupListView : View {
-    let group    : GroupOfEleves
-    var classe   : Classe
-    let isEditing: Bool
-
-    @EnvironmentObject private var navigationModel : NavigationModel
-    @EnvironmentObject private var eleveStore      : EleveStore
-
-    @Preference(\.nameDisplayOrder)
-    private var nameDisplayOrder
-
-    var body: some View {
-        Group {
-            if isEditing {
-                /// ajouter un élève au groupe parmis ceux qui ne sont pas encore affectés
-                Menu {
-                    ForEach(GroupManager.unGroupedEleves(dans: classe, eleveStore: eleveStore), id: \.self) { eleveID in
-                        Button {
-                            if var eleve = eleveStore.item(withID: eleveID) {
-                                eleve.group = group.number
-                                eleveStore.update(with: eleve)
-                            }
-                        } label: {
-                            Label((eleveStore.item(withID: eleveID)?.displayName(nameDisplayOrder))!, systemImage: "person.fill")
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Ajouter un élève")
-                    }
-                }
-                .buttonStyle(.borderless)
-            }
-
-            /// pour chaque Elève
-            ForEach(group.elevesID, id: \.self) { eleveID in
-                if let eleve = eleveStore.itemBinding(withID: eleveID) {
-                    EleveLabel(eleve: eleve.wrappedValue)
-                        .onTapGesture {
-                            // Programatic Navigation
-                            navigationModel.selectedTab     = .eleve
-                            navigationModel.selectedEleveId = eleve.id
-                        }
-                        .swipeActions {
-                            if isEditing {
-                                // supprimer une évaluation
-                                Button(role: .destructive) {
-                                    withAnimation {
-                                        eleve.wrappedValue.group = nil
-                                    }
-                                } label: {
-                                    Label("Retirer", systemImage: "person.fill.badge.minus")
-                                }
-                            }
-                        }
-                }
-            }
-        }
-    }
-}
-
-struct GroupPicturesView : View {
-    let group: GroupOfEleves
-
-    @EnvironmentObject private var navigationModel : NavigationModel
-    @EnvironmentObject private var eleveStore      : EleveStore
-
-    @Preference(\.nameDisplayOrder)
-    private var nameDisplayOrder
-
-    let smallColumns = [GridItem(.adaptive(minimum: 120, maximum: 200))]
-    let font       : Font        = .title3
-    let fontWeight : Font.Weight = .semibold
-
-    var body: some View {
-        LazyVGrid(columns: smallColumns,
-                  spacing: 4) {
-            ForEach(group.elevesID, id: \.self) { eleveID in
-                if let eleve = eleveStore.item(withID: eleveID) {
-                    VStack {
-                        if let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleve) {
-                            LoadableImage(imageUrl: trombine)
-                        }
-
-                        /// Nom de l'élève
-                        if eleve.troubleDys == nil {
-                            Text(eleve.displayName2lines(nameDisplayOrder))
-                                .multilineTextAlignment(.center)
-                                .fontWeight(fontWeight)
-                        } else {
-                            Text(eleve.displayName2lines(nameDisplayOrder))
-                                .multilineTextAlignment(.center)
-                                .fontWeight(fontWeight)
-                                .padding(2)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .foregroundColor(.gray)
-                                }
-                        }
-                    }
-                        .onTapGesture {
-                            // Programatic Navigation
-                            navigationModel.selectedTab     = .eleve
-                            navigationModel.selectedEleveId = eleve.id
-                        }
-                }
-            }
-        }
-    }
-}
-
 struct GroupsView_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
-        return GroupsView(classe: .constant(TestEnvir.classeStore.items.first!))
-            .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
-            .environmentObject(TestEnvir.schoolStore)
-            .environmentObject(TestEnvir.classeStore)
-            .environmentObject(TestEnvir.eleveStore)
-            .environmentObject(TestEnvir.colleStore)
-            .environmentObject(TestEnvir.observStore)
+        return Group {
+            GroupsView(classe: .constant(TestEnvir.classeStore.items.first!))
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPad mini (6th generation)")
+
+            GroupsView(classe: .constant(TestEnvir.classeStore.items.first!))
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+                .previewDevice("iPhone 13")
+        }
     }
 }

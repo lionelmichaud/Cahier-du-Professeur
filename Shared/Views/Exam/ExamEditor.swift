@@ -30,7 +30,7 @@ struct ExamEditor: View {
                         ExamDetail(exam: $exam)
                     }
                     // notes
-                    MarkListView(classe       : $classe,
+                    MarkListView(classe       : classe,
                                  exam         : $exam,
                                  searchString : searchString)
                 }

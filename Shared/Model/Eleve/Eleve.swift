@@ -9,6 +9,16 @@ import Foundation
 
 struct Eleve: Identifiable, Hashable, Codable, Ordered {
 
+    // MARK: - Static Properties
+
+    static let exemple = Eleve(sexe       : .male,
+                               nom        : "NOMDEFAMILLE",
+                               prenom     : "Prénom",
+                               isFlagged  : true,
+                               troubleDys : TroubleDys.dyslexie,
+                               bonus      : -1,
+                               group      : 1)
+
     // MARK: - Type Methods
 
     static func < (lhs: Eleve, rhs: Eleve) -> Bool {
@@ -48,18 +58,20 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
 
     // MARK: - Initializers
 
-    init(sexe      : Sexe,
-         nom       : String,
-         prenom    : String,
-         isFlagged : Bool = false,
-         bonus     : Double = 0,
-         group     : Int? = nil
+    init(sexe        : Sexe,
+         nom         : String,
+         prenom      : String,
+         isFlagged   : Bool = false,
+         troubleDys  : TroubleDys? = nil,
+         bonus       : Double = 0,
+         group       : Int? = nil
     ) {
-        self.sexe      = sexe
-        self.name      = PersonNameComponents(givenName : prenom, familyName : nom)
-        self.isFlagged = isFlagged
-        self.bonus     = bonus
-        self.group     = group
+        self.sexe       = sexe
+        self.name       = PersonNameComponents(givenName : prenom, familyName : nom)
+        self.isFlagged  = isFlagged
+        self.troubleDys = troubleDys
+        self.bonus      = bonus
+        self.group      = group
     }
 
     // MARK: - Methods
@@ -152,13 +164,6 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     mutating func moveColle(from indexes: IndexSet, to destination: Int) {
         collesID.move(fromOffsets: indexes, toOffset: destination)
     }
-
-    static let exemple = Eleve(sexe      : .male,
-                               nom       : "NOMDEFAMILLE",
-                               prenom    : "Prénom",
-                               isFlagged : true,
-                               bonus     : 1,
-                               group     : 2)
 }
 
 extension Eleve: CustomStringConvertible {

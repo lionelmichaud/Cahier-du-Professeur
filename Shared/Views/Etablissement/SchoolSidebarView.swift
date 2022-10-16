@@ -216,19 +216,21 @@ struct SchoolSidebarView: View {
             }
 
             .sheet(isPresented: $isShowingAbout) {
-                NavigationView {
+                NavigationStack {
                     AppVersionView()
                 }
+                .presentationDetents([.large])
             }
 
             .sheet(isPresented: $isEditingPreferences) {
-                NavigationView {
+                NavigationStack {
                     SettingsView()
                 }
+                .presentationDetents([.large])
             }
 
             .sheet(isPresented: $isAddingNewEtab) {
-                NavigationView {
+                NavigationStack {
                     SchoolCreator { school in
                         schoolStore.add(school)
                     }

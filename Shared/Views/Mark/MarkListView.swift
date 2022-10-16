@@ -10,7 +10,6 @@ import HelpersView
 
 /// Liste des notes éditables de chaque élève de la classe
 struct MarkListView : View {
-    @Binding
     var classe : Classe
 
     @Binding
@@ -38,10 +37,10 @@ struct MarkListView : View {
         Section {
             ForEach(filtredMarks()) { $eleveMark in
                 if let eleve = eleveStore.item(withID: eleveMark.eleveId) {
-                    MarkView(eleveName : eleve.displayName,
-                             maxMark   : exam.maxMark,
-                             type      : $eleveMark.type,
-                             mark      : $eleveMark.mark)
+                    MarkView(eleve   : eleve,
+                             maxMark : exam.maxMark,
+                             type    : $eleveMark.type,
+                             mark    : $eleveMark.mark)
                 }
             }
         } header: {
@@ -85,7 +84,7 @@ struct MarkListView : View {
                                 maxMark        : exam.maxMark,
                                 nbGroupInClasse: nbGroupInClasse)
             }
-            .presentationDetents([.medium])
+            .presentationDetents([.large])
         }
     }
 
@@ -151,16 +150,23 @@ struct GroupMarkDialog : View {
     @EnvironmentObject
     private var eleveStore: EleveStore
 
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
 
-    @State private var mark     : Double = 0
-    @State private var groupeNb : Int = 0
+    @State
+    private var mark     : Double = 0
+
+    @State
+    private var groupeNb : Int = 0
+
+    @State
+    private var grpTable = [Int]()
+
+    // MARK: - Computed Properties
 
     private var grpRange: Range<Int> {
         1 ..< (nbGroupInClasse+1)
     }
-
-    @State private var grpTable = [Int]()
 
     var body: some View {
         Form {
@@ -184,6 +190,10 @@ struct GroupMarkDialog : View {
             }
             .pickerStyle(.inline)
         }
+        #if os(iOS)
+        .navigationTitle("Note de groupe")
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Annuler") {
@@ -192,7 +202,9 @@ struct GroupMarkDialog : View {
             }
             ToolbarItem {
                 Button("Attribuer") {
-                    attribuer(note: mark, auGroupe: groupeNb)
+                    withAnimation {
+                        attribuer(note: mark, auGroupe: groupeNb)
+                    }
                     dismiss()
                 }
             }
@@ -220,18 +232,35 @@ struct GroupMarkDialog : View {
     }
 }
 
-//struct MarkListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            List {
-//                MarkListView(exam: .constant(Exam.exemple), searchString: "")
-//            }
-//            .previewDevice("iPad mini (6th generation)")
-//
-//            List {
-//                MarkListView(exam: .constant(Exam.exemple), searchString: "")
-//            }
-//            .previewDevice("iPhone 13")
-//        }
-//    }
-//}
+struct MarkListView_Previews: PreviewProvider {
+    static var previews: some View {
+        TestEnvir.createFakes()
+        return Group {
+            List {
+                MarkListView(classe       : TestEnvir.classeStore.items.first!,
+                             exam         : .constant(Exam.exemple),
+                             searchString : "")
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            List {
+                MarkListView(classe       : TestEnvir.classeStore.items.first!,
+                             exam         : .constant(Exam.exemple),
+                             searchString : "")
+                    .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                    .environmentObject(TestEnvir.schoolStore)
+                    .environmentObject(TestEnvir.classeStore)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.colleStore)
+                    .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPhone 13")
+        }
+    }
+}

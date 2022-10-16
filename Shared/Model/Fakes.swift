@@ -13,6 +13,7 @@ struct TestEnvir {
     static var eleveStore  : EleveStore!
     static var observStore : ObservationStore!
     static var colleStore  : ColleStore!
+    static var group       : GroupOfEleves!
 
     static func populateWithFakes(
         schoolStore : SchoolStore,
@@ -26,10 +27,10 @@ struct TestEnvir {
             var school = School.exemple
             let ressource = Ressource.exemple
             var classe = Classe.exemple
-            let exam   = Exam.exemple
             var eleve  = Eleve.exemple
             var observ = Observation.exemple
             var colle  = Colle.exemple
+            let exam   = Exam(elevesId: [eleve.id])
 
             // ajouter un examen à la classe
             classe.exams.append(exam)
@@ -77,13 +78,14 @@ struct TestEnvir {
         let etabManager   = SchoolManager()
         let classeManager = ClasseManager()
         let eleveManager  = EleveManager()
-        var school = School.exemple
+        var school    = School.exemple
         let ressource = Ressource.exemple
-        var classe = Classe.exemple
-        let exam   = Exam.exemple
-        var eleve  = Eleve.exemple
-        var observ = Observation.exemple
-        var colle  = Colle.exemple
+        var classe    = Classe.exemple
+        var eleve     = Eleve.exemple
+        var observ    = Observation.exemple
+        var colle     = Colle.exemple
+        let exam      = Exam(elevesId: [eleve.id])
+        group = GroupOfEleves(number: 1, elevesID: [eleve.id])
 
         // ajouter un examen à la classe
         classe.exams.append(exam)

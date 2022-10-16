@@ -9,12 +9,16 @@ import SwiftUI
 import HelpersView
 
 struct MarkView: View {
-    let eleveName     : String
+    let eleve         : Eleve
     let maxMark       : Int
     @Binding var type : MarkEnum
     @Binding var mark : Double?
 
-    @Environment(\.horizontalSizeClass) private var hClass
+    @Preference(\.nameDisplayOrder)
+    private var nameDisplayOrder
+
+    @Environment(\.horizontalSizeClass)
+    private var hClass
 
     var body: some View {
         Group {
@@ -22,8 +26,8 @@ struct MarkView: View {
                 case .note:
                     if hClass == .compact {
                         VStack(alignment: .leading) {
-                            CasePicker(pickedCase: $type,
-                                       label: eleveName)
+                            CasePicker(pickedCase : $type,
+                                       label      : eleve.displayName(nameDisplayOrder))
                             .pickerStyle(.menu)
                             HStack {
                                 AmountEditView(label    : "Note",
@@ -42,7 +46,7 @@ struct MarkView: View {
                         }
                     } else {
                         HStack {
-                            AmountEditView(label    : eleveName,
+                            AmountEditView(label    : eleve.displayName(nameDisplayOrder),
                                            amount   : $mark.bound,
                                            validity : .within(range: 0.0 ... Double(maxMark)),
                                            currency : false)
@@ -73,19 +77,9 @@ struct MarkView: View {
                     }
 
                 default:
-                    if #available(iOS 16.0, macOS 13.0, *) {
-                        CasePicker(pickedCase: $type,
-                                   label: eleveName)
-                        .pickerStyle(.menu)
-                    } else {
-                        HStack {
-                            Text(eleveName)
-                            Spacer()
-                            CasePicker(pickedCase: $type,
-                                       label: eleveName)
-                            .pickerStyle(.menu)
-                        }
-                    }
+                    CasePicker(pickedCase: $type,
+                               label: eleve.displayName(nameDisplayOrder))
+                    .pickerStyle(.menu)
             }
         }
     }
@@ -94,16 +88,16 @@ struct MarkView: View {
 struct MarkView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            MarkView(eleveName : "Lionel MICHAUD",
-                     maxMark   : 20,
-                     type      : .constant(.nonNote),
-                     mark      : .constant(0.0))
+            MarkView(eleve   : Eleve.exemple,
+                     maxMark : 20,
+                     type    : .constant(.nonNote),
+                     mark    : .constant(0.0))
         }
         List {
-            MarkView(eleveName : "Lionel MICHAUD",
-                     maxMark   : 20,
-                     type      : .constant(.note),
-                     mark      : .constant(10.0))
+            MarkView(eleve   : Eleve.exemple,
+                     maxMark : 20,
+                     type    : .constant(.note),
+                     mark    : .constant(10.0))
         }
     }
 }

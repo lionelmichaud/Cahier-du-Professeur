@@ -35,7 +35,7 @@ struct EleveNameGroupBox: View {
                 eleve.name.givenName.bound.trim()
             }
             .textFieldStyle(.roundedBorder)
-            .disableAutocorrection(true)
+            .autocorrectionDisabled()
     }
     private var nom: some View {
         TextField("Nom", text: $eleve.name.familyName.bound)
@@ -43,7 +43,7 @@ struct EleveNameGroupBox: View {
                 eleve.name.familyName.bound.trim()
             }
             .textFieldStyle(.roundedBorder)
-            .disableAutocorrection(true)
+            .autocorrectionDisabled()
     }
 
     var body: some View {

@@ -37,7 +37,7 @@ struct ExamEditor: View {
                 .searchable(text      : $searchString,
                             placement : .navigationBarDrawer(displayMode : .automatic),
                             prompt    : "Nom, Prénom ou n° de groupe")
-                .disableAutocorrection(true)
+                .autocorrectionDisabled()
                 .onChange(of: exam) { _ in
                     if let idx = classe.exams.firstIndex(where: { $0.id == examId }) {
                         classe.exams[idx] = exam

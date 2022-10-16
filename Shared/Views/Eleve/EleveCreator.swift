@@ -38,13 +38,13 @@ struct EleveCreator: View {
                     eleve.name.givenName.bound.trim()
                 }
                 .textFieldStyle(.roundedBorder)
-                .disableAutocorrection(true)
+                .autocorrectionDisabled()
             TextField("Nom", text: $eleve.name.familyName.bound)
                 .onSubmit {
                     eleve.name.familyName.bound.trim()
                 }
                 .textFieldStyle(.roundedBorder)
-                .disableAutocorrection(true)
+                .autocorrectionDisabled()
         }
         .alert(item: $alertItem, content: newAlert)
         .toolbar {

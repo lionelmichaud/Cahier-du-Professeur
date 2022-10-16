@@ -174,7 +174,7 @@ struct GroupsView: View {
                 .searchable(text      : $searchString,
                             placement : .navigationBarDrawer(displayMode : .automatic),
                             prompt    : "Nom ou Prénom de l'élève")
-                .disableAutocorrection(true)
+                .autocorrectionDisabled()
             }
         }
         #if os(iOS)

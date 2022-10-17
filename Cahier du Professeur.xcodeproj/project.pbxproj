@@ -941,7 +941,6 @@
 				792F75D728EF63C70053FECF /* EleveSplitView.swift */,
 				791C26DB281447BD00686F0C /* EleveSidebarView.swift */,
 				791C26DE28144BE800686F0C /* EleveBrowserRow.swift */,
-				795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */,
 				791C416C28F0678C009B5B27 /* EleveCreator.swift */,
 				795BC3E12813277B00C22271 /* EleveEditor.swift */,
 				795BC3E4281337E600C22271 /* EleveDetail.swift */,
@@ -1470,6 +1469,7 @@
 			isa = PBXGroup;
 			children = (
 				79FB57D228FDC37100B38D88 /* ElevesListView.swift */,
+				795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */,
 			);
 			path = Liste;
 			sourceTree = "<group>";

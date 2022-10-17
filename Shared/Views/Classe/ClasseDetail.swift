@@ -115,10 +115,7 @@ struct ClasseDetail: View {
             Button {
                 isAddingNewExam = true
             } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une évaluation")
-                }
+                Label("Ajouter une évaluation", systemImage: "plus.circle.fill")
             }
             .buttonStyle(.borderless)
 

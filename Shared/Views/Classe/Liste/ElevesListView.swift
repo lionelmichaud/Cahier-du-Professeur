@@ -25,10 +25,7 @@ struct ElevesListView: View {
             Button {
                 isAddingNewEleve = true
             } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter un élève")
-                }
+                Label("Ajouter un élève", systemImage: "plus.circle.fill")
             }
             .buttonStyle(.borderless)
 

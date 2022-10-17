@@ -182,6 +182,7 @@
         "AF340CCB-54F4-494F-97CC-3A48DA0AC064",
         "BAD16573-7817-4576-B39B-3511F5610B88",
         "95485A6E-34BA-4728-844D-7DF250349240",
+        "58910040-3F8F-487E-ACFD-684F3EF9331B",
         "37C00AE4-8181-4180-BC9C-D16D1226493A",
         "2256E86F-D487-462C-8539-8ADEDAA81323",
         "F10C6958-4E6D-40B6-A714-4B9A0B93991D",
@@ -338,92 +339,84 @@
             {
               "eleveId" : "39CA2543-466A-4760-849B-7D3DD2419C28",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
               },
-              "mark" : 15
+              "mark" : 18
             },
             {
               "eleveId" : "44358F05-2799-4C2B-8D90-50E940268487",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
               },
-              "mark" : 17
+              "mark" : 18
             },
             {
               "eleveId" : "4436D446-3DF1-40EF-8A36-F77267C3C176",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 17
+              }
             },
             {
               "eleveId" : "34FF142C-3645-4291-865E-A5B4A141C25A",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 17
+              }
             },
             {
               "eleveId" : "63B4CC44-000B-4CC8-B096-C3B653F12D88",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 17
+              }
             },
             {
               "eleveId" : "F834F8E7-D930-4742-82DB-D819F289F1D1",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 20
+              }
             },
             {
               "eleveId" : "884EC11C-2995-465C-9C8C-75031DB19C57",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 20
+              }
             },
             {
               "eleveId" : "3B6D3205-FA36-4807-AC3F-6230423E377B",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 20
+              }
             },
             {
               "eleveId" : "734EBF3A-A070-42D7-B2B4-DF9FFC25B234",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 15
+              }
             },
             {
               "eleveId" : "150B49A2-A177-4878-9C10-ABEC2984AA96",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 20
+              }
             },
             {
               "eleveId" : "055C4A9E-4446-4F6E-938E-D7BF882A643F",
@@ -476,20 +469,18 @@
             {
               "eleveId" : "5FB22470-4F74-45B1-A9DF-0F93F55B151E",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 15
+              }
             },
             {
               "eleveId" : "81447805-1B3B-4F87-B407-0C257A7E5F80",
               "type" : {
-                "note" : {
+                "nonRendu" : {
 
                 }
-              },
-              "mark" : 15
+              }
             },
             {
               "eleveId" : "EAB4F45D-ED51-4370-B21E-DCF98F15A2B1",
@@ -513,7 +504,8 @@
                 "nonRendu" : {
 
                 }
-              }
+              },
+              "mark" : 17
             },
             {
               "eleveId" : "2382845F-73EC-4535-86CD-14F17E5FBD8D",
@@ -521,7 +513,8 @@
                 "nonRendu" : {
 
                 }
-              }
+              },
+              "mark" : 17
             },
             {
               "eleveId" : "409FE23F-A42B-47E8-9A4C-9BF7D8708BA6",
@@ -537,7 +530,8 @@
                 "nonRendu" : {
 
                 }
-              }
+              },
+              "mark" : 17
             },
             {
               "eleveId" : "6B1D7943-A1A8-403E-A8B5-ED940FD0C66A",
@@ -545,7 +539,8 @@
                 "nonRendu" : {
 
                 }
-              }
+              },
+              "mark" : 17
             },
             {
               "eleveId" : "B21D8767-A1DE-4E6F-86DD-F2B59F88268C",

@@ -350,6 +350,10 @@
 		79F3AC112808CAA600D068D9 /* ObservSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3AC0F2808CAA600D068D9 /* ObservSplitView.swift */; };
 		79F3F78C282E7E9500DC26FC /* ExamEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3F78B282E7E9500DC26FC /* ExamEditor.swift */; };
 		79F3F78D282E7E9500DC26FC /* ExamEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F3F78B282E7E9500DC26FC /* ExamEditor.swift */; };
+		79FB57CF28FDC26400B38D88 /* TrombineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57CE28FDC26400B38D88 /* TrombineView.swift */; };
+		79FB57D028FDC26400B38D88 /* TrombineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57CE28FDC26400B38D88 /* TrombineView.swift */; };
+		79FB57D328FDC37100B38D88 /* ElevesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57D228FDC37100B38D88 /* ElevesListView.swift */; };
+		79FB57D428FDC37100B38D88 /* ElevesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57D228FDC37100B38D88 /* ElevesListView.swift */; };
 		79FC12AE28DB9D6500F64F7D /* ARNAUD_Victor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */; };
 		79FC12AF28DB9D6500F64F7D /* BEDEL_Maxence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */; };
 		79FC12B028DB9D6500F64F7D /* DEVIN_Anouk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */; };
@@ -709,6 +713,8 @@
 		79F3AC0C2808CA8700D068D9 /* ColleSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleSplitView.swift; sourceTree = "<group>"; };
 		79F3AC0F2808CAA600D068D9 /* ObservSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservSplitView.swift; sourceTree = "<group>"; };
 		79F3F78B282E7E9500DC26FC /* ExamEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEditor.swift; sourceTree = "<group>"; };
+		79FB57CE28FDC26400B38D88 /* TrombineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrombineView.swift; sourceTree = "<group>"; };
+		79FB57D228FDC37100B38D88 /* ElevesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevesListView.swift; sourceTree = "<group>"; };
 		79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARNAUD_Victor.jpg; sourceTree = "<group>"; };
 		79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BEDEL_Maxence.jpg; sourceTree = "<group>"; };
 		79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DEVIN_Anouk.jpg; sourceTree = "<group>"; };
@@ -855,6 +861,9 @@
 		7918D1FC2810A5C400C24C5A /* Classe */ = {
 			isa = PBXGroup;
 			children = (
+				79FB57D128FDC34100B38D88 /* Liste */,
+				79FB57CD28FDC24000B38D88 /* Trombinoscope */,
+				790C97E928FC3F5B003E562B /* Groups */,
 				79F3AC062808CA4C00D068D9 /* ClasseSplitView.swift */,
 				795BC3D12812E0B100C22271 /* ClasseSidebarView.swift */,
 				795BC3D42812E0D700C22271 /* ClassBrowserRow.swift */,
@@ -865,7 +874,6 @@
 				79D29A2428F2E6730058FF09 /* ClasseNameGroupBox.swift */,
 				791C26EE281475CC00686F0C /* ClasseObservLabel.swift */,
 				791C26F12814847B00686F0C /* ClasseColleLabel.swift */,
-				79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */,
 				79D29A2728F2E80C0058FF09 /* ClasseAcronym.swift */,
 			);
 			path = Classe;
@@ -1374,7 +1382,6 @@
 				795FAB272809C4D0004CB120 /* Etablissement */,
 				79CC5710285F90E9001D56F5 /* Ressource */,
 				7918D1FC2810A5C400C24C5A /* Classe */,
-				790C97E928FC3F5B003E562B /* Groups */,
 				7974C4C7282C7CBE00217CD5 /* Exam */,
 				7925C48D283D412100A6BF31 /* Mark */,
 				795BC3DD2813102A00C22271 /* Eleve */,
@@ -1448,6 +1455,23 @@
 				79F3ABF128087D5600D068D9 /* Observation.swift */,
 			);
 			path = Observation;
+			sourceTree = "<group>";
+		};
+		79FB57CD28FDC24000B38D88 /* Trombinoscope */ = {
+			isa = PBXGroup;
+			children = (
+				79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */,
+				79FB57CE28FDC26400B38D88 /* TrombineView.swift */,
+			);
+			path = Trombinoscope;
+			sourceTree = "<group>";
+		};
+		79FB57D128FDC34100B38D88 /* Liste */ = {
+			isa = PBXGroup;
+			children = (
+				79FB57D228FDC37100B38D88 /* ElevesListView.swift */,
+			);
+			path = Liste;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1882,6 +1906,7 @@
 				79D29A2528F2E6730058FF09 /* ClasseNameGroupBox.swift in Sources */,
 				791C26FB2814A43400686F0C /* ColleCreator.swift in Sources */,
 				79D584002820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
+				79FB57CF28FDC26400B38D88 /* TrombineView.swift in Sources */,
 				791C26DF28144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				79502BA72818945200DA798F /* ObservBrowserRow.swift in Sources */,
 				79E6C5B428DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */,
@@ -1922,6 +1947,7 @@
 				791C26E928146B4300686F0C /* EleveObservRow.swift in Sources */,
 				795FAB292809C4E2004CB120 /* SchoolSidebarView.swift in Sources */,
 				79DB78A228E9DE86004E240E /* NavigationModel.swift in Sources */,
+				79FB57D328FDC37100B38D88 /* ElevesListView.swift in Sources */,
 				796F69AB28625384005E323D /* ClassCreator.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
 				79BB0B4D28170CEC002AAABA /* MotifView.swift in Sources */,
@@ -2048,11 +2074,13 @@
 				7992D0AE282B0B2100B31186 /* Exam.swift in Sources */,
 				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
+				79FB57D028FDC26400B38D88 /* TrombineView.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				7986E7E0282918320011FF21 /* Persistence.swift in Sources */,
 				792F75D928EF63C70053FECF /* EleveSplitView.swift in Sources */,
 				790DA9FC28E3A95F009FB7C6 /* GroupManager.swift in Sources */,
 				79F3F78D282E7E9500DC26FC /* ExamEditor.swift in Sources */,
+				79FB57D428FDC37100B38D88 /* ElevesListView.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FC2814A43400686F0C /* ColleCreator.swift in Sources */,
 				79AACD9328E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,

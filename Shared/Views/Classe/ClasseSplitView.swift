@@ -20,6 +20,9 @@ struct ClasseSplitView: View {
                 ClasseEditor()
                     .navigationDestination(for: ClasseSubview.self) { classeSubview in
                         switch classeSubview.subviewType {
+                            case .liste:
+                                ElevesListView(classe: classeSubview.classe)
+
                             case .groups:
                                 GroupsView(classe: classeSubview.classe)
 

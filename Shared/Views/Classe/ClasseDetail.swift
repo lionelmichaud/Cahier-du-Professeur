@@ -10,6 +10,7 @@ import AppFoundation
 import HelpersView
 
 enum ClasseSubviewEnum {
+    case liste
     case trombinoscope
     case groups
 }
@@ -48,91 +49,46 @@ struct ClasseDetail: View {
     @Binding
     var classe: Classe
 
-    @EnvironmentObject private var navigationModel : NavigationModel
     @EnvironmentObject private var eleveStore      : EleveStore
     @EnvironmentObject private var colleStore      : ColleStore
     @EnvironmentObject private var observStore     : ObservationStore
 
-    @State
-    private var alertItem : AlertItem?
-    @State
-    private var isShowingImportListeDialog = false
-    @State
-    private var importCsvFile = false
-
     @Preference(\.interoperability)
-    var interoperability
+    private var interoperability
 
-    @State
-    private var isAddingNewEleve = false
-    @State
-    private var isAddingNewExam = false
-    @State
-    private var appreciationIsExpanded = false
-    @State
-    private var noteIsExpanded = false
     @Preference(\.classeAppreciationEnabled)
-    var classeAppreciationEnabled
+    private var classeAppreciationEnabled
+
     @Preference(\.classeAnnotationEnabled)
-    var classeAnnotationEnabled
+    private var classeAnnotationEnabled
+
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
 
+    @State
+    private var alertItem : AlertItem?
+
+    @State
+    private var isShowingImportListeDialog = false
+
+    @State
+    private var importCsvFile = false
+
+    @State
+    private var isAddingNewExam = false
+
+    @State
+    private var appreciationIsExpanded = false
+
+    @State
+    private var noteIsExpanded = false
+
+    // MARK: - Computed Properties
+
     private var elevesList: some View {
-        DisclosureGroup {
-            // ajouter un élève
-            Button {
-                isAddingNewEleve = true
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter un élève")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des élèves
-            ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
-                ClasseEleveRow(eleve: eleve)
-                    .onTapGesture {
-                        // Programatic Navigation
-                        navigationModel.selectedTab     = .eleve
-                        navigationModel.selectedEleveId = eleve.id
-                    }
-                    .swipeActions {
-                        // supprimer un élève
-                        Button(role: .destructive) {
-                            withAnimation {
-                                // supprimer l'élève et tous ses descendants
-                                // puis retirer l'élève de la classe auquelle il appartient
-                                ClasseManager().retirer(eleve       : eleve,
-                                                        deClasse    : &classe,
-                                                        eleveStore  : eleveStore,
-                                                        observStore : observStore,
-                                                        colleStore  : colleStore)
-                            }
-                        } label: {
-                            Label("Supprimer", systemImage: "trash")
-                        }
-
-                        // flager un élève
-                        Button {
-                            withAnimation {
-                                eleve.isFlagged.toggle()
-                            }
-                        } label: {
-                            if eleve.isFlagged {
-                                Label("Sans drapeau", systemImage: "flag.slash")
-                            } else {
-                                Label("Avec drapeau", systemImage: "flag.fill")
-                            }
-                        }.tint(.orange)
-                    }
-            }
-
-        } label: {
+        NavigationLink(value: ClasseSubview(classe      : $classe,
+                                            subviewType : .liste)) {
             Text("Liste")
-//                .font(.title3)
                 .fontWeight(.bold)
         }
     }
@@ -141,7 +97,6 @@ struct ClasseDetail: View {
         NavigationLink(value: ClasseSubview(classe      : $classe,
                                             subviewType : .trombinoscope)) {
             Text("Trombinoscope")
-//                .font(.title3)
                 .fontWeight(.bold)
         }
     }
@@ -150,7 +105,6 @@ struct ClasseDetail: View {
         NavigationLink(value: ClasseSubview(classe      : $classe,
                                             subviewType : .groups)) {
             Text("Groupes")
-//                .font(.title3)
                 .fontWeight(.bold)
         }
     }
@@ -284,12 +238,6 @@ struct ClasseDetail: View {
         .onAppear {
             appreciationIsExpanded = classe.appreciation.isNotEmpty
             noteIsExpanded         = classe.annotation.isNotEmpty
-        }
-        .sheet(isPresented: $isAddingNewEleve) {
-            NavigationStack {
-                EleveCreator(classe: $classe)
-            }
-            .presentationDetents([.medium])
         }
         .sheet(isPresented: $isAddingNewExam) {
             NavigationStack {

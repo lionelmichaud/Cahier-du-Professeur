@@ -62,7 +62,7 @@ struct TrombinoscopeView: View {
             }
         }
         #if os(iOS)
-        .navigationTitle(classe.displayString + " (\(classe.nbOfEleves) élèves)")
+        .navigationTitle("Trombines \(classe.displayString) (\(classe.nbOfEleves))")
         .navigationBarTitleDisplayMode(.inline)
         #endif
     }

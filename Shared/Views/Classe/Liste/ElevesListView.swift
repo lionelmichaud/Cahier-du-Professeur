@@ -21,7 +21,7 @@ struct ElevesListView: View {
 
     var body: some View {
         List {
-            // ajouter un élève
+            /// ajouter un élève
             Button {
                 isAddingNewEleve = true
             } label: {
@@ -32,16 +32,16 @@ struct ElevesListView: View {
             }
             .buttonStyle(.borderless)
 
-            // édition de la liste des élèves
+            /// liste des élèves
             ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
                 ClasseEleveRow(eleve: eleve)
                     .onTapGesture {
-                        // Programatic Navigation
+                        /// Programatic Navigation
                         navigationModel.selectedTab     = .eleve
                         navigationModel.selectedEleveId = eleve.id
                     }
                     .swipeActions {
-                        // supprimer un élève
+                        /// supprimer un élève
                         Button(role: .destructive) {
                             withAnimation {
                                 // supprimer l'élève et tous ses descendants
@@ -56,7 +56,7 @@ struct ElevesListView: View {
                             Label("Supprimer", systemImage: "trash")
                         }
 
-                        // flager un élève
+                        /// flager un élève
                         Button {
                             withAnimation {
                                 eleve.isFlagged.toggle()

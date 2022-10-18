@@ -354,6 +354,8 @@
 		79FB57D028FDC26400B38D88 /* TrombineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57CE28FDC26400B38D88 /* TrombineView.swift */; };
 		79FB57D328FDC37100B38D88 /* ElevesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57D228FDC37100B38D88 /* ElevesListView.swift */; };
 		79FB57D428FDC37100B38D88 /* ElevesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57D228FDC37100B38D88 /* ElevesListView.swift */; };
+		79FB57D628FDD2C100B38D88 /* ElevesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57D528FDD2C100B38D88 /* ElevesTableView.swift */; };
+		79FB57D728FDD2C100B38D88 /* ElevesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB57D528FDD2C100B38D88 /* ElevesTableView.swift */; };
 		79FC12AE28DB9D6500F64F7D /* ARNAUD_Victor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */; };
 		79FC12AF28DB9D6500F64F7D /* BEDEL_Maxence.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */; };
 		79FC12B028DB9D6500F64F7D /* DEVIN_Anouk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */; };
@@ -715,6 +717,7 @@
 		79F3F78B282E7E9500DC26FC /* ExamEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEditor.swift; sourceTree = "<group>"; };
 		79FB57CE28FDC26400B38D88 /* TrombineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrombineView.swift; sourceTree = "<group>"; };
 		79FB57D228FDC37100B38D88 /* ElevesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevesListView.swift; sourceTree = "<group>"; };
+		79FB57D528FDD2C100B38D88 /* ElevesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevesTableView.swift; sourceTree = "<group>"; };
 		79FC129828DB9D6500F64F7D /* ARNAUD_Victor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARNAUD_Victor.jpg; sourceTree = "<group>"; };
 		79FC129928DB9D6500F64F7D /* BEDEL_Maxence.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BEDEL_Maxence.jpg; sourceTree = "<group>"; };
 		79FC129A28DB9D6500F64F7D /* DEVIN_Anouk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DEVIN_Anouk.jpg; sourceTree = "<group>"; };
@@ -1470,6 +1473,7 @@
 			children = (
 				79FB57D228FDC37100B38D88 /* ElevesListView.swift */,
 				795BC3DE2813105A00C22271 /* ClasseEleveRow.swift */,
+				79FB57D528FDD2C100B38D88 /* ElevesTableView.swift */,
 			);
 			path = Liste;
 			sourceTree = "<group>";
@@ -1971,6 +1975,7 @@
 				79F3ABFE2808C68700D068D9 /* UIState.swift in Sources */,
 				79CC5712285F9105001D56F5 /* SchoolRessourceRow.swift in Sources */,
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
+				79FB57D628FDD2C100B38D88 /* ElevesTableView.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
 				790C97EB28FC3FA9003E562B /* GroupListView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
@@ -2063,6 +2068,7 @@
 				791C26DD281447BD00686F0C /* EleveSidebarView.swift in Sources */,
 				79F3ABE8280844C000D068D9 /* ClasseManager.swift in Sources */,
 				791C26EA28146B4300686F0C /* EleveObservRow.swift in Sources */,
+				79FB57D728FDD2C100B38D88 /* ElevesTableView.swift in Sources */,
 				7918D1FB2810997700C24C5A /* ColorOptions.swift in Sources */,
 				791C26ED28146F8F00686F0C /* EleveColleRow.swift in Sources */,
 				79D29A2928F2E80C0058FF09 /* ClasseAcronym.swift in Sources */,

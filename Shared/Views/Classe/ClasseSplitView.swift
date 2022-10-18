@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ClasseSplitView: View {
+    @Environment(\.horizontalSizeClass)
+    var horizontalSizeClass
+
     @EnvironmentObject private var navigationModel : NavigationModel
 
     var body: some View {
@@ -21,7 +24,12 @@ struct ClasseSplitView: View {
                     .navigationDestination(for: ClasseSubview.self) { classeSubview in
                         switch classeSubview.subviewType {
                             case .liste:
-                                ElevesListView(classe: classeSubview.classe)
+                                switch horizontalSizeClass {
+                                    case .compact:
+                                        ElevesListView(classe: classeSubview.classe)
+                                    default:
+                                        ElevesTableView(classe: classeSubview.classe)
+                                }
 
                             case .groups:
                                 GroupsView(classe: classeSubview.classe)

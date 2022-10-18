@@ -9,12 +9,14 @@ import SwiftUI
 import AppFoundation
 import HelpersView
 
+// TODO: - Remplacer les Struct par des routes: https://swiftwithmajid.com/2022/06/15/mastering-navigationstack-in-swiftui-navigator-pattern/
 enum ClasseSubviewEnum {
     case liste
     case trombinoscope
     case groups
 }
 
+// TODO: - Remplacer les Struct par des routes: https://swiftwithmajid.com/2022/06/15/mastering-navigationstack-in-swiftui-navigator-pattern/
 struct ClasseSubview: Hashable {
     var classe      : Binding<Classe>
     var subviewType : ClasseSubviewEnum
@@ -30,6 +32,7 @@ struct ClasseSubview: Hashable {
     }
 }
 
+// TODO: - Remplacer les Struct par des routes: https://swiftwithmajid.com/2022/06/15/mastering-navigationstack-in-swiftui-navigator-pattern/
 struct ExamSubview: Hashable {
     var classe : Binding<Classe>
     var examId : UUID
@@ -49,9 +52,9 @@ struct ClasseDetail: View {
     @Binding
     var classe: Classe
 
-    @EnvironmentObject private var eleveStore      : EleveStore
-    @EnvironmentObject private var colleStore      : ColleStore
-    @EnvironmentObject private var observStore     : ObservationStore
+    @EnvironmentObject private var eleveStore  : EleveStore
+    @EnvironmentObject private var colleStore  : ColleStore
+    @EnvironmentObject private var observStore : ObservationStore
 
     @Preference(\.interoperability)
     private var interoperability
@@ -115,10 +118,7 @@ struct ClasseDetail: View {
             Button {
                 isAddingNewExam = true
             } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une évaluation")
-                }
+                Label("Ajouter une évaluation", systemImage: "plus.circle.fill")
             }
             .buttonStyle(.borderless)
 
@@ -145,6 +145,8 @@ struct ClasseDetail: View {
     }
 
     var body: some View {
+        // TODO: - Rempacer par NavigationStack(path: $path) et garder la navigation vers les subview locale à cette View en utilisant @State private var path = NavigationPath()
+        // https://swiftwithmajid.com/2022/10/05/mastering-navigationstack-in-swiftui-navigationpath/
         VStack {
             /// nom
             ClasseNameGroupBox(classe: $classe)

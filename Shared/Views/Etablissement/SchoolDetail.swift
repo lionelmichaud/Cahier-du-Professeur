@@ -51,10 +51,7 @@ struct SchoolDetail: View {
                 Button {
                     isAddingNewClasse = true
                 } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Ajouter une classe")
-                    }
+                    Label("Ajouter une classe", systemImage: "plus.circle.fill")
                 }
                 .buttonStyle(.borderless)
 

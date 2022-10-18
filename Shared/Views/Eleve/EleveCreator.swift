@@ -80,6 +80,9 @@ struct EleveCreator: View {
                 }
             }
         }
+        #if os(iOS)
+        .navigationTitle("Ajouter un élève")
+        #endif
     }
 }
 

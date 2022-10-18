@@ -26,11 +26,11 @@ struct ElevesTableView: View {
     @ViewBuilder
     private func tappableName(_ eleve: Eleve) -> some View {
         EleveLabel(eleve: eleve)
-            .onTapGesture {
-                /// Programatic Navigation
-                navigationModel.selectedTab     = .eleve
-                navigationModel.selectedEleveId = eleve.id
-            }
+//            .onTapGesture {
+//                /// Programatic Navigation
+//                navigationModel.selectedTab     = .eleve
+//                navigationModel.selectedEleveId = eleve.id
+//            }
     }
 
     @ViewBuilder
@@ -103,6 +103,16 @@ struct ElevesTableView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
+                /// aller à la fiche élève
+                Button {
+                    // Programatic Navigation
+                    navigationModel.selectedTab     = .eleve
+                    navigationModel.selectedEleveId = selection.first!
+                } label: {
+                    Label("Fiche élève", systemImage: "info.circle")
+                }
+                .disabled(selection.count != 1)
+
                 /// supprimer des élèves
                 Button(role: .destructive) {
                     withAnimation {
@@ -121,7 +131,7 @@ struct ElevesTableView: View {
                 } label: {
                     Label("Supprimer", systemImage: "trash")
                 }
-                .disabled(selection.count == 0)
+                .disabled(selection.isEmpty)
 
                 /// ajouter un élève
                 Button {
@@ -129,6 +139,35 @@ struct ElevesTableView: View {
                 } label: {
                     Label("Ajouter", systemImage: "plus.circle.fill")
                 }
+            }
+            ToolbarItemGroup(placement: .secondaryAction) {
+                /// flager les élèves
+                Button {
+                    withAnimation {
+                        selection.forEach { eleveId in
+                            if let eleve = eleveStore.itemBinding(withID: eleveId) {
+                                eleve.wrappedValue.isFlagged = true
+                            }
+                        }
+                    }
+                } label: {
+                    Label("Marquer", systemImage: "flag.fill")
+                }
+                .disabled(selection.isEmpty)
+
+                /// supprimer le flage des élèves
+                Button {
+                    withAnimation {
+                        selection.forEach { eleveId in
+                            if let eleve = eleveStore.itemBinding(withID: eleveId) {
+                                eleve.wrappedValue.isFlagged = false
+                            }
+                        }
+                    }
+                } label: {
+                    Label("Supprimer marque", systemImage: "flag.slash")
+                }
+                .disabled(selection.isEmpty)
             }
         }
         #if os(iOS)

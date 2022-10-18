@@ -15,10 +15,13 @@ struct TrombineView : View {
 
     @State
     private var isAddingNewObserv = false
+
     @State
     private var isAddingNewColle  = false
+
     @State
     private var newObserv = Observation.exemple
+
     @State
     private var newColle  = Colle.exemple
 

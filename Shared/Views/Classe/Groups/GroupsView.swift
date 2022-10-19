@@ -38,9 +38,12 @@ struct GroupsView: View {
     private var groups = [GroupOfEleves]()
 
     @State
+    private var ungrouped = GroupOfEleves(number: 0)
+
+    @State
     private var presentation: ViewMode = .list
 
-    private var menu: some View {
+    private var toolbarMenu: some View {
         Menu {
             /// Générer les groupes
             Menu {
@@ -149,6 +152,28 @@ struct GroupsView: View {
         }
     }
 
+    private var ungroupedEleves: some View {
+        Group {
+            if !ungrouped.isEmpty {
+                DisclosureGroup(isExpanded: $expanded) {
+                    switch presentation {
+                        case .list:
+                            GroupListView(group    : ungrouped,
+                                          classe   : classe,
+                                          isEditing: isEditing)
+                        case .picture:
+                            GroupPicturesView(group: ungrouped)
+                    }
+                } label: {
+                    Text("Sans groupe")
+                        .foregroundColor(.red)
+                }
+            } else {
+                EmptyView()
+            }
+        }
+    }
+
     var body: some View {
         Group {
             if groups.count == 0 {
@@ -177,6 +202,7 @@ struct GroupsView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
+                    ungroupedEleves
                 }
                 .searchable(text      : $searchString,
                             placement : .navigationBarDrawer(displayMode : .automatic),
@@ -196,7 +222,7 @@ struct GroupsView: View {
                 .pickerStyle(.segmented)
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                menu
+                toolbarMenu
                 /// Confirmation de suppresssion de tous les groupes
                 .confirmationDialog(
                     "Supression de tous les groupes",
@@ -222,8 +248,14 @@ struct GroupsView: View {
     }
 
     private func updateGroups() {
-        groups = GroupManager.groups(dans       : classe,
-                                     eleveStore : eleveStore)
+        groups = GroupManager.groups(
+            dans       : classe,
+            eleveStore : eleveStore
+        )
+        ungrouped.elevesID = GroupManager.unGroupedEleves(
+            dans       : classe,
+            eleveStore : eleveStore
+        )
     }
 }
 

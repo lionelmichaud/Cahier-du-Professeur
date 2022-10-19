@@ -15,6 +15,12 @@ struct GroupOfEleves: Identifiable {
     var number   : Int
     var elevesID : [UUID] = []
 
+    // MARK: - ComputedProperties
+
+    var isEmpty: Bool {
+        elevesID.isEmpty
+    }
+
     // MARK: - Initializers
 
     init(number   : Int,

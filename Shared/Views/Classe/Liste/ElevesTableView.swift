@@ -37,6 +37,9 @@ struct ElevesTableView: View {
     @State
     private var isAddingNewColle  = false
 
+    @State
+    private var searchString: String = ""
+
     // MARK: - Computed Properties
 
     private var eleves: [Eleve] {
@@ -45,6 +48,18 @@ struct ElevesTableView: View {
 
     private var sortedEleves: [Eleve] {
         eleves.sorted(using: sortOrder)
+    }
+
+    private var filteredSortedEleves: [Eleve] {
+        sortedEleves.filter { eleve in
+            if searchString.isNotEmpty {
+                let string = searchString.lowercased()
+                return eleve.name.familyName!.lowercased().contains(string) ||
+                eleve.name.givenName!.lowercased().contains(string)
+            } else {
+                return true
+            }
+        }
     }
 
     @ViewBuilder
@@ -83,7 +98,9 @@ struct ElevesTableView: View {
 
    var body: some View {
         VStack {
-            Table(sortedEleves, selection: $selection, sortOrder: $sortOrder) {
+            Table(filteredSortedEleves,
+                  selection: $selection,
+                  sortOrder: $sortOrder) {
                 // nom
                 TableColumn("Nom", value: \Eleve.sortName) { eleve in
                     tappableName(eleve)
@@ -119,6 +136,10 @@ struct ElevesTableView: View {
                 }
                 .width(70)
             }
+            .searchable(text      : $searchString,
+                        placement : .navigationBarDrawer(displayMode : .automatic),
+                        prompt    : "Nom, Prénom ou n° de groupe")
+            .autocorrectionDisabled()
             #if os(macOS)
             .tableStyle(.bordered(alternatesRowBackgrounds: true))
             #endif
@@ -170,33 +191,36 @@ struct ElevesTableView: View {
 
             ToolbarItemGroup(placement: .secondaryAction) {
                 /// flager les élèves
-                Button {
-                    withAnimation {
-                        selection.forEach { eleveId in
-                            if let eleve = eleveStore.itemBinding(withID: eleveId) {
-                                eleve.wrappedValue.isFlagged = true
+                if selection.count > 1 ||
+                    (selection.count == 1 && (!(eleveStore.item(withID: selection.first!)?.isFlagged ?? false))) {
+                    Button {
+                        withAnimation {
+                            selection.forEach { eleveId in
+                                if let eleve = eleveStore.itemBinding(withID: eleveId) {
+                                    eleve.wrappedValue.isFlagged = true
+                                }
                             }
                         }
+                    } label: {
+                        Label("Marquer", systemImage: "flag.fill")
                     }
-                } label: {
-                    Label("Marquer", systemImage: "flag.fill")
                 }
-                .disabled(selection.isEmpty)
 
                 /// supprimer le flage des élèves
-                Button {
-                    withAnimation {
-                        selection.forEach { eleveId in
-                            if let eleve = eleveStore.itemBinding(withID: eleveId) {
-                                eleve.wrappedValue.isFlagged = false
+                if selection.count > 1 ||
+                    (selection.count == 1 && ((eleveStore.item(withID: selection.first!)?.isFlagged ?? false))) {
+                    Button {
+                        withAnimation {
+                            selection.forEach { eleveId in
+                                if let eleve = eleveStore.itemBinding(withID: eleveId) {
+                                    eleve.wrappedValue.isFlagged = false
+                                }
                             }
                         }
+                    } label: {
+                        Label("Supprimer marque", systemImage: "flag.slash")
                     }
-                } label: {
-                    Label("Supprimer marque", systemImage: "flag.slash")
                 }
-                .disabled(selection.isEmpty)
-
                 /// ajouter une observation
                 Button {
                     isAddingNewObserv = true

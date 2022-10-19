@@ -19,6 +19,29 @@ struct ElevesListView: View {
     @State
     private var isAddingNewEleve = false
 
+    @State
+    private var searchString: String = ""
+
+    private var filteredEleves: Binding<[Eleve]> {
+        eleveStore
+            .filteredEleves(dans: classe) { eleve in
+                if searchString.isNotEmpty {
+                    if searchString.containsOnlyDigits {
+                        // filtrage sur numéro de groupe
+                        let groupNum = Int(searchString)!
+                        return eleve.group == groupNum
+
+                    } else {
+                        let string = searchString.lowercased()
+                        return eleve.name.familyName!.lowercased().contains(string) ||
+                        eleve.name.givenName!.lowercased().contains(string)
+                    }
+                } else {
+                    return true
+                }
+            }
+    }
+
     var body: some View {
         List {
             /// ajouter un élève
@@ -30,7 +53,7 @@ struct ElevesListView: View {
             .buttonStyle(.borderless)
 
             /// liste des élèves
-            ForEach(eleveStore.filteredEleves(dans: classe)) { $eleve in
+            ForEach(filteredEleves) { $eleve in
                 ClasseEleveRow(eleve: eleve)
                     .onTapGesture {
                         /// Programatic Navigation
@@ -68,6 +91,10 @@ struct ElevesListView: View {
                     }
             }
         }
+        .searchable(text      : $searchString,
+                    placement : .navigationBarDrawer(displayMode : .automatic),
+                    prompt    : "Nom, Prénom ou n° de groupe")
+        .autocorrectionDisabled()
         #if os(iOS)
         .navigationTitle("Liste " + classe.displayString + " (\(classe.nbOfEleves))")
         #endif

@@ -53,9 +53,16 @@ struct ElevesTableView: View {
     private var filteredSortedEleves: [Eleve] {
         sortedEleves.filter { eleve in
             if searchString.isNotEmpty {
-                let string = searchString.lowercased()
-                return eleve.name.familyName!.lowercased().contains(string) ||
-                eleve.name.givenName!.lowercased().contains(string)
+                if searchString.containsOnlyDigits {
+                    // filtrage sur numéro de groupe
+                    let groupNum = Int(searchString)!
+                    return eleve.group == groupNum
+
+                } else {
+                    let string = searchString.lowercased()
+                    return eleve.name.familyName!.lowercased().contains(string) ||
+                    eleve.name.givenName!.lowercased().contains(string)
+                }
             } else {
                 return true
             }

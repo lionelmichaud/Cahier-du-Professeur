@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import AppFoundation
 
 struct GroupsView: View {
     @Binding
     var classe: Classe
+
+    enum ViewMode: Int {
+        case list
+        case picture
+    }
 
     @Preference(\.nameDisplayOrder)
     private var nameDisplayOrder
@@ -32,7 +38,7 @@ struct GroupsView: View {
     private var groups = [GroupOfEleves]()
 
     @State
-    private var presentation = "Liste"
+    private var presentation: ViewMode = .list
 
     private var menu: some View {
         Menu {
@@ -118,7 +124,7 @@ struct GroupsView: View {
             }
 
             /// Modifier les groupes
-            if presentation == "Liste" {
+            if presentation == .list {
                 Button {
                     withAnimation {
                         isEditing.toggle()
@@ -158,12 +164,13 @@ struct GroupsView: View {
                                                 including  : searchString,
                                                 eleveStore : eleveStore)) { group in
                         DisclosureGroup(isExpanded: $expanded) {
-                            if presentation == "Liste" {
-                                GroupListView(group    : group,
-                                              classe   : classe,
-                                              isEditing: isEditing)
-                            } else {
-                                GroupPicturesView(group: group)
+                            switch presentation {
+                                case .list:
+                                    GroupListView(group    : group,
+                                                  classe   : classe,
+                                                  isEditing: isEditing)
+                                case .picture:
+                                    GroupPicturesView(group: group)
                             }
                         } label: {
                             Text("Groupe \(group.number.formatted())")
@@ -183,8 +190,8 @@ struct GroupsView: View {
         .toolbar {
             ToolbarItemGroup(placement: .automatic) {
                 Picker("Présentation", selection: $presentation) {
-                    Image(systemName: "list.bullet").tag("Liste")
-                    Image(systemName: "person.crop.square.fill").tag("Pictures")
+                    Image(systemName: "list.bullet").tag(ViewMode.list)
+                    Image(systemName: "person.crop.square.fill").tag(ViewMode.picture)
                 }
                 .pickerStyle(.segmented)
             }

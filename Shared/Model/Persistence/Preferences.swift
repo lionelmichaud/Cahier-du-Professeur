@@ -185,7 +185,10 @@ public final class Preferences {
     public var interoperability: Interoperability = .ecoleDirecte
 
     @UserEnumDefault("name_display_order")
-    public var nameDisplayOrder: NameDisplayOrder = .prenomNom
+    public var nameDisplayOrder: NameOrdering = .nomPrenom
+
+    @UserEnumDefault("name_sort_order")
+    public var nameSortOrder: NameOrdering = .nomPrenom
 
     /// School
     // Champ annotation

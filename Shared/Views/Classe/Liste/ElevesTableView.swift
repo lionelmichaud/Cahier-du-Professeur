@@ -15,22 +15,41 @@ struct ElevesTableView: View {
     @EnvironmentObject private var colleStore      : ColleStore
     @EnvironmentObject private var observStore     : ObservationStore
 
-    @State private var isAddingNewEleve = false
+    @State
+    private var isAddingNewEleve = false
 
-    @State private var selection: Set<Eleve.ID> = []
+    @State
+    private var selection: Set<Eleve.ID> = []
+
+    @State
+    private var sortOrder =
+    [KeyPathComparator(\Eleve.sortName),
+     KeyPathComparator(\Eleve.groupInt),
+     KeyPathComparator(\Eleve.bonus),
+     KeyPathComparator(\Eleve.additionalTimeInt),
+     KeyPathComparator(\Eleve.nbOfObservs),
+     KeyPathComparator(\Eleve.nbOfColles)
+    ]
+
+    @State
+    private var isAddingNewObserv = false
+
+    @State
+    private var isAddingNewColle  = false
+
+    // MARK: - Computed Properties
 
     private var eleves: [Eleve] {
         eleveStore.filteredEleves(dans: classe)
     }
 
+    private var sortedEleves: [Eleve] {
+        eleves.sorted(using: sortOrder)
+    }
+
     @ViewBuilder
     private func tappableName(_ eleve: Eleve) -> some View {
         EleveLabel(eleve: eleve)
-//            .onTapGesture {
-//                /// Programatic Navigation
-//                navigationModel.selectedTab     = .eleve
-//                navigationModel.selectedEleveId = eleve.id
-//            }
     }
 
     @ViewBuilder
@@ -64,42 +83,45 @@ struct ElevesTableView: View {
 
    var body: some View {
         VStack {
-            Table(eleves, selection: $selection) {
+            Table(sortedEleves, selection: $selection, sortOrder: $sortOrder) {
                 // nom
-                TableColumn("Nom") { eleve in
+                TableColumn("Nom", value: \Eleve.sortName) { eleve in
                     tappableName(eleve)
                 }
 
                 // groupe
-                TableColumn("Groupe") { eleve in
+                TableColumn("Groupe", value: \Eleve.groupInt) { eleve in
                     groupe(eleve)
                 }
-                .width(100)
+                .width(80)
 
                 // temps additionel
-                TableColumn("PAP") { eleve in
+                TableColumn("PAP", value: \Eleve.additionalTimeInt) { eleve in
                     tpsSup(eleve)
                 }
                 .width(100)
 
                 // bonus / malus
-                TableColumn("Bonus") { eleve in
+                TableColumn("Bonus", value: \Eleve.bonus) { eleve in
                     bonus(eleve)
                 }
-                .width(100)
+                .width(70)
 
                 // colles
-                TableColumn("Colles") { eleve in
+                TableColumn("Colles", value: \Eleve.nbOfColles) { eleve in
                     EleveColleLabel(eleve: eleve, scale: .medium)
                 }
-                .width(50)
+                .width(70)
 
                 // observations
-                TableColumn("Obs") { eleve in
+                TableColumn("Obs.", value: \Eleve.nbOfObservs) { eleve in
                     EleveObservLabel(eleve: eleve, scale: .medium)
                 }
-                .width(50)
+                .width(70)
             }
+            #if os(macOS)
+            .tableStyle(.bordered(alternatesRowBackgrounds: true))
+            #endif
         }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
@@ -112,34 +134,40 @@ struct ElevesTableView: View {
                     Label("Fiche élève", systemImage: "info.circle")
                 }
                 .disabled(selection.count != 1)
+            }
 
-                /// supprimer des élèves
-                Button(role: .destructive) {
-                    withAnimation {
-                        selection.forEach { eleveId in
-                            if let eleve = eleveStore.item(withID: eleveId) {
-                                // supprimer l'élève et tous ses descendants
-                                // puis retirer l'élève de la classe auquelle il appartient
-                                ClasseManager().retirer(eleve       : eleve,
-                                                        deClasse    : &classe,
-                                                        eleveStore  : eleveStore,
-                                                        observStore : observStore,
-                                                        colleStore  : colleStore)
+            ToolbarItem(placement: .primaryAction) {
+                // pour rapprocher les icones
+                ControlGroup {
+                    /// supprimer des élèves
+                    Button(role: .destructive) {
+                        withAnimation {
+                            selection.forEach { eleveId in
+                                if let eleve = eleveStore.item(withID: eleveId) {
+                                    // supprimer l'élève et tous ses descendants
+                                    // puis retirer l'élève de la classe auquelle il appartient
+                                    ClasseManager().retirer(eleve       : eleve,
+                                                            deClasse    : &classe,
+                                                            eleveStore  : eleveStore,
+                                                            observStore : observStore,
+                                                            colleStore  : colleStore)
+                                }
                             }
                         }
+                    } label: {
+                        Label("Supprimer", systemImage: "trash")
                     }
-                } label: {
-                    Label("Supprimer", systemImage: "trash")
-                }
-                .disabled(selection.isEmpty)
+                    .disabled(selection.isEmpty)
 
-                /// ajouter un élève
-                Button {
-                    isAddingNewEleve = true
-                } label: {
-                    Label("Ajouter", systemImage: "plus.circle.fill")
-                }
+                    /// ajouter un élève
+                    Button {
+                        isAddingNewEleve = true
+                    } label: {
+                        Label("Ajouter", systemImage: "plus.circle.fill")
+                    }
+                }.controlGroupStyle(.navigation)
             }
+
             ToolbarItemGroup(placement: .secondaryAction) {
                 /// flager les élèves
                 Button {
@@ -168,6 +196,22 @@ struct ElevesTableView: View {
                     Label("Supprimer marque", systemImage: "flag.slash")
                 }
                 .disabled(selection.isEmpty)
+
+                /// ajouter une observation
+                Button {
+                    isAddingNewObserv = true
+                } label: {
+                    Label("Nouvelle observation", systemImage: "rectangle.and.text.magnifyingglass")
+                }
+                .disabled(selection.count != 1)
+
+                /// ajouter une colle
+                Button {
+                    isAddingNewColle = true
+                } label: {
+                    Label("Nouvelle colle", systemImage: "lock.fill")
+                }
+                .disabled(selection.count != 1)
             }
         }
         #if os(iOS)
@@ -177,6 +221,22 @@ struct ElevesTableView: View {
         .sheet(isPresented: $isAddingNewEleve) {
             NavigationStack {
                 EleveCreator(classe: $classe)
+            }
+            .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isAddingNewObserv) {
+            NavigationStack {
+                if let eleve = eleveStore.itemBinding(withID: selection.first!) {
+                    ObservCreator(eleve: eleve)
+                }
+            }
+            .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isAddingNewColle) {
+            NavigationStack {
+                if let eleve = eleveStore.itemBinding(withID: selection.first!) {
+                    ColleCreator(eleve: eleve)
+                }
             }
             .presentationDetents([.medium])
         }

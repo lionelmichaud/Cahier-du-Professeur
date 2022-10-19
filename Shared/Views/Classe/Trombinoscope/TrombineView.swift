@@ -19,12 +19,6 @@ struct TrombineView : View {
     @State
     private var isAddingNewColle  = false
 
-    @State
-    private var newObserv = Observation.exemple
-
-    @State
-    private var newColle  = Colle.exemple
-
     private var menu: some View {
         Menu {
             // aller à la fiche élève
@@ -37,14 +31,12 @@ struct TrombineView : View {
             }
             // ajouter une observation
             Button {
-                newObserv         = Observation()
                 isAddingNewObserv = true
             } label: {
                 Label("Nouvelle observation", systemImage: "rectangle.and.text.magnifyingglass")
             }
             // ajouter une colle
             Button {
-                newColle         = Colle()
                 isAddingNewColle = true
             } label: {
                 Label("Nouvelle colle", systemImage: "lock.fill")

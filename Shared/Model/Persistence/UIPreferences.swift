@@ -8,7 +8,7 @@
 import Foundation
 import AppFoundation
 
-public enum NameDisplayOrder: Int, PickableEnumP {
+public enum NameOrdering: Int, PickableEnumP {
     case nomPrenom
     case prenomNom
 

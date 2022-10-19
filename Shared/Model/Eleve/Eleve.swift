@@ -11,6 +11,12 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
 
     // MARK: - Static Properties
 
+    @Preference(\.nameSortOrder)
+    static private var nameSortOrder
+
+    @Preference(\.nameDisplayOrder)
+    static private var nameDisplayOrder
+
     static let exemple = Eleve(sexe       : .male,
                                nom        : "NOMDEFAMILLE",
                                prenom     : "Prénom",
@@ -44,16 +50,44 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     var collesID     : [UUID] = [ ]
     var observsID    : [UUID] = [ ]
 
-    var nbOfColles: Int {
-        collesID.count
+    // MARK: - Computed Properties
+
+    var additionalTime: Bool {
+        troubleDys?.additionalTime ?? false
+    }
+
+    var additionalTimeInt: Int {
+        additionalTime ? 0 : 1
+    }
+
+    var groupInt: Int {
+        group == nil ? 0 : group!
     }
 
     var nbOfObservs: Int {
         observsID.count
     }
 
+    var nbOfColles: Int {
+        observsID.count
+    }
+
     var displayName : String {
-        name.formatted(.name(style: .medium))
+        switch Eleve.nameDisplayOrder {
+            case .prenomNom:
+                return "\(name.givenName ?? "") \(name.familyName ?? "")"
+            case .nomPrenom:
+                return "\(name.familyName ?? "") \(name.givenName ?? "")"
+        }
+    }
+
+    var sortName : String {
+        switch Eleve.nameSortOrder {
+            case .prenomNom:
+                return "\(name.givenName ?? "") \(name.familyName ?? "")"
+            case .nomPrenom:
+                return "\(name.familyName ?? "") \(name.givenName ?? "")"
+        }
     }
 
     // MARK: - Initializers
@@ -76,7 +110,7 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
 
     // MARK: - Methods
 
-    func displayName(_ order: NameDisplayOrder = .prenomNom) -> String {
+    func displayName(_ order: NameOrdering = .prenomNom) -> String {
         switch order {
             case .prenomNom:
                 return "\(name.givenName ?? "") \(name.familyName ?? "")"
@@ -85,7 +119,7 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
         }
     }
 
-    func displayName2lines(_ order: NameDisplayOrder = .prenomNom) -> String {
+    func displayName2lines(_ order: NameOrdering = .prenomNom) -> String {
         switch order {
             case .prenomNom:
                 return "\(name.givenName ?? "")\n\(name.familyName ?? "")"

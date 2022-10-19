@@ -140,7 +140,7 @@ struct MoveEleveDialog : View {
             ToolbarItem {
                 Button("Déplacer") {
                     withAnimation {
-                        print("\(eleve.displayName) déplacé de \(eleve.group) vers \(groupeNb)")
+                        print("\(eleve.displayName) déplacé de \(String(describing: eleve.group)) vers \(groupeNb)")
                         eleve.group = groupeNb
                     }
                     dismiss()

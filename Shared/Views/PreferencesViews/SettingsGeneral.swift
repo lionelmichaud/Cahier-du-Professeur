@@ -15,6 +15,9 @@ struct SettingsGeneral: View {
     @Preference(\.nameDisplayOrder)
     var nameDisplayOrder
 
+    @Preference(\.nameSortOrder)
+    var nameSortOrder
+
     var body: some View {
         List {
             // Type d'interopérabilité avec les ENT
@@ -24,10 +27,15 @@ struct SettingsGeneral: View {
             .pickerStyle(.segmented)
 
             Section {
-                // Ordre d'affichage des nms des élèves
-                Text("Ordre d'affichage des nms des élèves")
+                // Ordre d'affichage des noms des élèves
+                Text("Ordre d'affichage des noms des élèves")
                 CasePicker(pickedCase: $nameDisplayOrder,
                            label: "Ordre d'affichage des noms")
+                .pickerStyle(.segmented)
+                // Ordre de tri des noms des élèves
+                Text("Ordre de tri des noms des élèves")
+                CasePicker(pickedCase: $nameSortOrder,
+                           label: "Ordre de tri des noms")
                 .pickerStyle(.segmented)
             } header: {
                 Text("Affichage")

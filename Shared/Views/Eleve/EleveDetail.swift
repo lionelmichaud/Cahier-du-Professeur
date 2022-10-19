@@ -19,27 +19,37 @@ struct EleveDetail: View {
     // true si le mode édition est engagé
     @State
     private var isEditing = false
+
     @State
     private var isAddingNewObserv = false
+
     @State
     private var isAddingNewColle  = false
+
     @State
     private var appreciationIsExpanded = false
+
     @State
     private var noteIsExpanded = false
+    
     @State
     private var bonusIsExpanded = false
 
     @Preference(\.eleveAppreciationEnabled)
     private var eleveAppreciationEnabled
+
     @Preference(\.eleveAnnotationEnabled)
     private var eleveAnnotationEnabled
+
     @Preference(\.eleveBonusEnabled)
     private var eleveBonusEnabled
+
     @Preference(\.maxBonusMalus)
     private var maxBonusMalus
+
     @Preference(\.maxBonusIncrement)
     private var maxBonusIncrement
+
     @Preference(\.eleveTrombineEnabled)
     private var eleveTrombineEnabled
 

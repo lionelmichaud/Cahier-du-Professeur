@@ -87,7 +87,7 @@ struct EleveLabelWithTrombineFlag: View {
                         .font(font)
                         .fontWeight(fontWeight)
                 } else {
-                    Text(eleve.displayName)
+                    Text(eleve.displayName(nameDisplayOrder))
                 }
 
                 /// Flag

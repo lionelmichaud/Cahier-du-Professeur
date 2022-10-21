@@ -141,6 +141,40 @@ struct SchoolDetail: View {
         }
     }
 
+    private var roomList: some View {
+        Section {
+            // ajouter une évaluation
+            Button {
+                withAnimation {
+                    school.rooms.insert(Room(), at: 0)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter une salle de classe")
+                }
+            }
+            .buttonStyle(.borderless)
+
+            // édition de la liste des examen
+            ForEach($school.rooms) { $room in
+                RoomEditor(room: $room)
+            }
+            .onDelete { indexSet in
+                school.rooms.remove(atOffsets: indexSet)
+            }
+            .onMove { fromOffsets, toOffset in
+                school.rooms.move(fromOffsets: fromOffsets, toOffset: toOffset)
+            }
+
+        } header: {
+            Text("Ressources (\(school.nbOfRessources))")
+                .font(.callout)
+                .foregroundColor(.secondary)
+                .fontWeight(.bold)
+        }
+    }
+
     private var selectedItemExists: Bool {
         guard let selectedSchool = navigationModel.selectedSchoolId else {
             return false
@@ -165,6 +199,9 @@ struct SchoolDetail: View {
 
                     // édition de la liste des ressources
                     ressourceList
+
+                    // édition de la liste des salles de classe
+                    roomList
                 }
                 #if os(iOS)
                 .navigationTitle("Etablissement")

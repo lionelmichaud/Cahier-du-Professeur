@@ -21,26 +21,26 @@ struct ClasseSplitView: View {
         } detail: {
             NavigationStack {
                 ClasseEditor()
-                    .navigationDestination(for: ClasseSubview.self) { classeSubview in
-                        switch classeSubview.subviewType {
-                            case .liste:
+                    .navigationDestination(for: ClasseNavigationRoute.self) { route in
+                        switch route {
+                            case .liste(let classe):
                                 switch horizontalSizeClass {
                                     case .compact:
-                                        ElevesListView(classe: classeSubview.classe)
+                                        ElevesListView(classe: classe)
                                     default:
-                                        ElevesTableView(classe: classeSubview.classe)
+                                        ElevesTableView(classe: classe)
                                 }
 
-                            case .groups:
-                                GroupsView(classe: classeSubview.classe)
+                            case .trombinoscope(let classe):
+                                TrombinoscopeView(classe : classe)
 
-                            case .trombinoscope:
-                                TrombinoscopeView(classe : classeSubview.classe)
+                            case .groups(let classe):
+                                GroupsView(classe: classe)
+
+                            case .exam(let classe, let examId):
+                                ExamEditor(classe: classe,
+                                           examId: examId)
                         }
-                    }
-                    .navigationDestination(for: ExamSubview.self) { examSubview in
-                        ExamEditor(classe: examSubview.classe,
-                                   examId: examSubview.examId)
                     }
             }
         }

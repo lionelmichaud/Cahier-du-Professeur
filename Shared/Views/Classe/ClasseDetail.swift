@@ -9,42 +9,46 @@ import SwiftUI
 import AppFoundation
 import HelpersView
 
-// TODO: - Remplacer les Struct par des routes: https://swiftwithmajid.com/2022/06/15/mastering-navigationstack-in-swiftui-navigator-pattern/
-enum ClasseSubviewEnum {
-    case liste
-    case trombinoscope
-    case groups
-}
+enum ClasseNavigationRoute: Hashable {
+    case liste(Binding<Classe>)
+    case trombinoscope(Binding<Classe>)
+    case groups(Binding<Classe>)
+    case exam(Binding<Classe>, UUID)
 
-// TODO: - Remplacer les Struct par des routes: https://swiftwithmajid.com/2022/06/15/mastering-navigationstack-in-swiftui-navigator-pattern/
-struct ClasseSubview: Hashable {
-    var classe      : Binding<Classe>
-    var subviewType : ClasseSubviewEnum
+    static func == (lhs: ClasseNavigationRoute, rhs: ClasseNavigationRoute) -> Bool {
+        switch (lhs, rhs) {
+            case (.liste(let classel), .liste(let classer)):
+                return classel.wrappedValue.id == classer.wrappedValue.id
 
-    static func == (lhs: ClasseSubview, rhs: ClasseSubview) -> Bool {
-        lhs.subviewType == rhs.subviewType &&
-        lhs.classe.wrappedValue.id == rhs.classe.wrappedValue.id
+            case (.trombinoscope(let classel), .trombinoscope(let classer)):
+                return classel.wrappedValue.id == classer.wrappedValue.id
+
+            case (.groups(let classel), .groups(let classer)):
+                return classel.wrappedValue.id == classer.wrappedValue.id
+
+            case (.exam(let classel, let idl), .exam(let classer, let idr)):
+                return (classel.wrappedValue.id == classer.wrappedValue.id) &&
+                (idl == idr)
+                
+            default : return false
+        }
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(subviewType)
-        hasher.combine(classe.wrappedValue)
-    }
-}
-
-// TODO: - Remplacer les Struct par des routes: https://swiftwithmajid.com/2022/06/15/mastering-navigationstack-in-swiftui-navigator-pattern/
-struct ExamSubview: Hashable {
-    var classe : Binding<Classe>
-    var examId : UUID
-
-    static func == (lhs: ExamSubview, rhs: ExamSubview) -> Bool {
-        lhs.examId == rhs.examId &&
-        lhs.classe.wrappedValue.id == rhs.classe.wrappedValue.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(examId)
-        hasher.combine(classe.wrappedValue.id)
+        switch self {
+            case .liste(let classe):
+                hasher.combine("liste")
+                hasher.combine(classe.wrappedValue.id)
+            case .trombinoscope(let classe):
+                hasher.combine("trombinoscope")
+                hasher.combine(classe.wrappedValue.id)
+            case .groups(let classe):
+                hasher.combine("groups")
+                hasher.combine(classe.wrappedValue.id)
+            case .exam(let classe, let id):
+                hasher.combine(classe.wrappedValue.id)
+                hasher.combine(id)
+        }
     }
 }
 
@@ -89,24 +93,21 @@ struct ClasseDetail: View {
     // MARK: - Computed Properties
 
     private var elevesList: some View {
-        NavigationLink(value: ClasseSubview(classe      : $classe,
-                                            subviewType : .liste)) {
+        NavigationLink(value: ClasseNavigationRoute.liste($classe)) {
             Text("Liste")
                 .fontWeight(.bold)
         }
     }
 
     private var trombinoscope: some View {
-        NavigationLink(value: ClasseSubview(classe      : $classe,
-                                            subviewType : .trombinoscope)) {
+        NavigationLink(value: ClasseNavigationRoute.trombinoscope($classe)) {
             Text("Trombinoscope")
                 .fontWeight(.bold)
         }
     }
 
     private var groups: some View {
-        NavigationLink(value: ClasseSubview(classe      : $classe,
-                                            subviewType : .groups)) {
+        NavigationLink(value: ClasseNavigationRoute.groups($classe)) {
             Text("Groupes")
                 .fontWeight(.bold)
         }
@@ -124,8 +125,7 @@ struct ClasseDetail: View {
 
             // édition de la liste des examen
             ForEach($classe.exams) { $exam in
-                NavigationLink(value: ExamSubview(classe: $classe,
-                                                  examId: exam.id)) {
+                NavigationLink(value: ClasseNavigationRoute.exam($classe, exam.id)) {
                     ClasseExamRow(exam: exam)
                 }
                 .swipeActions {

@@ -129,6 +129,12 @@
 		7971D6C128634FDD00ECA9CA /* ExamCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971D6BF28634FDC00ECA9CA /* ExamCreator.swift */; };
 		7974C4C9282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */; };
 		7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */; };
+		7975C604290311A600530E5A /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C603290311A600530E5A /* Room.swift */; };
+		7975C605290311A600530E5A /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C603290311A600530E5A /* Room.swift */; };
+		7975C6072903124900530E5A /* Plan Salle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7975C6062903124900530E5A /* Plan Salle.png */; };
+		7975C6082903124900530E5A /* Plan Salle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7975C6062903124900530E5A /* Plan Salle.png */; };
+		7975C60B2903176100530E5A /* RoomEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C60A2903176100530E5A /* RoomEditor.swift */; };
+		7975C60C2903176100530E5A /* RoomEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C60A2903176100530E5A /* RoomEditor.swift */; };
 		797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		7984335D283E97C000C5E51E /* Trombinoscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984335C283E97C000C5E51E /* Trombinoscope.swift */; };
@@ -290,6 +296,7 @@
 		79E109F328219AF700689212 /* Stateful in Frameworks */ = {isa = PBXBuildFile; productRef = 79E109F228219AF700689212 /* Stateful */; };
 		79E6C5B428DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */; };
 		79E6C5B528DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */; };
+		79EA9A9E2902FCC40086C904 /* Plan TECHNO-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */; };
 		79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102E228232F36005E5D9C /* Eleve.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DD28232F36005E5D9C /* Eleve.json */; };
@@ -549,6 +556,9 @@
 		796F69AA28625384005E323D /* ClassCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCreator.swift; sourceTree = "<group>"; };
 		7971D6BF28634FDC00ECA9CA /* ExamCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCreator.swift; sourceTree = "<group>"; };
 		7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseExamRow.swift; sourceTree = "<group>"; };
+		7975C603290311A600530E5A /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		7975C6062903124900530E5A /* Plan Salle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plan Salle.png"; sourceTree = "<group>"; };
+		7975C60A2903176100530E5A /* RoomEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEditor.swift; sourceTree = "<group>"; };
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		7984335C283E97C000C5E51E /* Trombinoscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trombinoscope.swift; sourceTree = "<group>"; };
 		7984335F283EA37000C5E51E /* LoadableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableImage.swift; sourceTree = "<group>"; };
@@ -677,6 +687,7 @@
 		79D58402282053C300371EB3 /* ColleNotifIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColleNotifIcon.swift; sourceTree = "<group>"; };
 		79DB78A128E9DE86004E240E /* NavigationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrombinoscopeView.swift; sourceTree = "<group>"; };
+		79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plan TECHNO-2.png"; sourceTree = "<group>"; };
 		79F102D02821B816005E5D9C /* JsonCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonCodableArray.swift; sourceTree = "<group>"; };
 		79F102DD28232F36005E5D9C /* Eleve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Eleve.json; sourceTree = "<group>"; };
 		79F102DE28232F36005E5D9C /* Colle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Colle.json; sourceTree = "<group>"; };
@@ -980,6 +991,14 @@
 			path = Exam;
 			sourceTree = "<group>";
 		};
+		7975C6092903172000530E5A /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				7975C60A2903176100530E5A /* RoomEditor.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
 		7984334B283E92B100C5E51E /* Photos */ = {
 			isa = PBXGroup;
 			children = (
@@ -1275,6 +1294,15 @@
 			path = Ressource;
 			sourceTree = "<group>";
 		};
+		79EA9A9A2902FAF00086C904 /* Plans */ = {
+			isa = PBXGroup;
+			children = (
+				7975C6062903124900530E5A /* Plan Salle.png */,
+				79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */,
+			);
+			path = Plans;
+			sourceTree = "<group>";
+		};
 		79F102D32823199E005E5D9C /* JSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -1294,6 +1322,7 @@
 				794370CA28D8C72A000830EC /* Cahier-du-Professeur--iOS--Info.plist */,
 				79F3ABE528083A3100D068D9 /* Playground.playground */,
 				7984334B283E92B100C5E51E /* Photos */,
+				79EA9A9A2902FAF00086C904 /* Plans */,
 				79F102D32823199E005E5D9C /* JSON */,
 				79F3AB8D2808218100D068D9 /* Shared */,
 				79F3AB9C2808218300D068D9 /* macOS */,
@@ -1363,6 +1392,7 @@
 				79FFDCD52825E94F009D7452 /* CsvImporter.swift */,
 				79C12752283A98E8002F243E /* Persistence */,
 				79F3ABE1280830D000D068D9 /* School */,
+				79FEC6412902F7DA0083B74C /* Room */,
 				79CC570C285F895F001D56F5 /* Ressource */,
 				79F3ABE2280830E000D068D9 /* Classe */,
 				7984335B283E979700C5E51E /* Trombinoscope */,
@@ -1383,6 +1413,7 @@
 				79C1274D283A91E8002F243E /* PreferencesViews */,
 				795FAB272809C4D0004CB120 /* Etablissement */,
 				79CC5710285F90E9001D56F5 /* Ressource */,
+				7975C6092903172000530E5A /* Room */,
 				7918D1FC2810A5C400C24C5A /* Classe */,
 				7974C4C7282C7CBE00217CD5 /* Exam */,
 				7925C48D283D412100A6BF31 /* Mark */,
@@ -1476,6 +1507,14 @@
 				79FB57D528FDD2C100B38D88 /* ElevesTableView.swift */,
 			);
 			path = Liste;
+			sourceTree = "<group>";
+		};
+		79FEC6412902F7DA0083B74C /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				7975C603290311A600530E5A /* Room.swift */,
+			);
+			path = Room;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1698,6 +1737,7 @@
 				79FC12F128DBA38000F64F7D /* HABRIAS_Ulysse.jpg in Resources */,
 				79A5259A28DBD0CC00E69ACD /* REMARK_Olivier.jpg in Resources */,
 				79F102E628232F36005E5D9C /* Observation.json in Resources */,
+				7975C6072903124900530E5A /* Plan Salle.png in Resources */,
 				79A5257028DBCCF600E69ACD /* CABIAC_Achille.jpg in Resources */,
 				79A5253128DBC47700E69ACD /* ROUMAGNAC_Alice.jpg in Resources */,
 				79AA30C228DBBA980091E8FB /* SATGE_Maxence.jpg in Resources */,
@@ -1741,6 +1781,7 @@
 				79A5251028DBC1B000E69ACD /* CHATRY_Mathilde.jpg in Resources */,
 				79AA30BA28DBBA560091E8FB /* PERCIE_Edouard.jpg in Resources */,
 				79FC135428DBB13C00F64F7D /* DUPRE_Tiago.jpg in Resources */,
+				79EA9A9E2902FCC40086C904 /* Plan TECHNO-2.png in Resources */,
 				79A5255228DBC70500E69ACD /* DUTECH_Robin.jpg in Resources */,
 				79A5253028DBC47700E69ACD /* VILLARDI_Paul.jpg in Resources */,
 				79A5252128DBC35600E69ACD /* LOUPSENS_Naël.jpg in Resources */,
@@ -1843,6 +1884,7 @@
 				79B7F3FF28E88EC100CD3730 /* DORNIC_Salomé.jpg in Resources */,
 				7986E7E328291DA00011FF21 /* AppVersion.json in Resources */,
 				79F102E928232F36005E5D9C /* School.json in Resources */,
+				7975C6082903124900530E5A /* Plan Salle.png in Resources */,
 				79F102E728232F36005E5D9C /* Observation.json in Resources */,
 				79F3ABBB2808218300D068D9 /* Assets.xcassets in Resources */,
 				79F102E328232F36005E5D9C /* Eleve.json in Resources */,
@@ -1895,6 +1937,7 @@
 			files = (
 				795FAB2B2809C813004CB120 /* SchoolBrowserRow.swift in Sources */,
 				79F3ABCD2808222C00D068D9 /* School.swift in Sources */,
+				7975C604290311A600530E5A /* Room.swift in Sources */,
 				79F3AC0D2808CA8700D068D9 /* ColleSplitView.swift in Sources */,
 				795BC3DF2813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				79AACD8F28DF5430009B5AE4 /* GroupsView.swift in Sources */,
@@ -1977,6 +2020,7 @@
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79FB57D628FDD2C100B38D88 /* ElevesTableView.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
+				7975C60B2903176100530E5A /* RoomEditor.swift in Sources */,
 				790C97EB28FC3FA9003E562B /* GroupListView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
 				79CC570E285F8975001D56F5 /* Ressource.swift in Sources */,
@@ -2058,6 +2102,7 @@
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
 				79FFDCD72825E950009D7452 /* CsvImporter.swift in Sources */,
 				791C26E628145F8E00686F0C /* EleveObservLabel.swift in Sources */,
+				7975C60C2903176100530E5A /* RoomEditor.swift in Sources */,
 				79DB78A328E9DE86004E240E /* NavigationModel.swift in Sources */,
 				79D583FB28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,
@@ -2104,6 +2149,7 @@
 				79536320280DC4D800AB8600 /* ClassStore.swift in Sources */,
 				791C26FF2814A64E00686F0C /* ColleDetail.swift in Sources */,
 				79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */,
+				7975C605290311A600530E5A /* Room.swift in Sources */,
 				79843361283EA37000C5E51E /* LoadableImage.swift in Sources */,
 				79502BAB2820407500DA798F /* EleveLabel.swift in Sources */,
 				79D58404282053C300371EB3 /* ColleNotifIcon.swift in Sources */,
@@ -2282,7 +2328,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.0;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaud.lionel.Cahier-du-Professeur";
 				PRODUCT_NAME = "Cahier du Professeur";
 				SDKROOT = iphoneos;
@@ -2315,7 +2361,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.0;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaud.lionel.Cahier-du-Professeur";
 				PRODUCT_NAME = "Cahier du Professeur";
 				SDKROOT = iphoneos;

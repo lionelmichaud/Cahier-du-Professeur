@@ -7,52 +7,45 @@ import Files
 
 struct LoadableImage: View {
     var imageUrl: URL
-    @State private var placeholderPortrait: Image = Image(systemName: "person.fill.questionmark")
+
+    @Binding
+    var placeholderImage: Image// = Image(systemName: "person.fill.questionmark")
     
     var body: some View {
-        VStack {
-//            PlaceholderPortrait(portrait: $placeholderPortrait)
-//                .draggable(placeholderPortrait)
-//                .dropDestination(for: Image.self) { (images: [Image], _) in
-//                    if let portrait = images.first {
-//                        placeholderPortrait = portrait
-//                        return true
-//                    }
-//                    return false
-//                }
-//            PasteButton(payloadType: Image.self) { images in
-//                placeholderPortrait = images.first!
-//            }
+        //            PlaceholderPortrait(portrait: $placeholderPortrait)
+        //                .draggable(placeholderPortrait)
+        //                .dropDestination(for: Image.self) { (images: [Image], _) in
+        //                    if let portrait = images.first {
+        //                        placeholderPortrait = portrait
+        //                        return true
+        //                    }
+        //                    return false
+        //                }
+        //            PasteButton(payloadType: Image.self) { images in
+        //                placeholderPortrait = images.first!
+        //            }
 
-            AsyncImage(url: imageUrl) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        //.frame(height: 320)
-                        .cornerRadius(15)
-                        .shadow(radius: 5)
-                        .accessibility(hidden: false)
+        AsyncImage(url: imageUrl) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(15)
+                    .shadow(radius: 5)
+                    .accessibility(hidden: false)
 
-                } else if phase.error != nil {
-                    PlaceholderPortrait(portrait: $placeholderPortrait)
-//                        .draggable(placeholderPortrait)
-                        .dropDestination(for: Image.self) { (images: [Image], _) in
-                            if let portrait = images.first {
-                                placeholderPortrait = portrait
-                                return true
-                            }
-                            return false
-                        }
-                } else {
-                    ProgressView()
-                }
+            } else if phase.error != nil {
+                placeholderImage
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                ProgressView()
             }
         }
     }
 }
 
-struct PlaceholderPortrait : View {
+struct PlaceholderImage : View {
     @Binding var portrait: Image
     
     var body: some View {
@@ -60,10 +53,6 @@ struct PlaceholderPortrait : View {
             portrait
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 100)
-//            PasteButton(payloadType: Image.self) { images in
-//                portrait = images.first!
-//            }
         }
     }
 }
@@ -73,6 +62,7 @@ struct LoadableImage_Previews: PreviewProvider {
         return try! Folder.application!.file(named: "NOMDEFAMILLE_Prénom.jpg").url
     }
     static var previews: some View {
-        LoadableImage(imageUrl: testImageUrl())
+        LoadableImage(imageUrl: testImageUrl(),
+                      placeholderImage: .constant(Image(systemName: "person.fill.questionmark")))
     }
 }

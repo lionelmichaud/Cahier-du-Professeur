@@ -41,11 +41,19 @@ struct MainScene: Scene {
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase {
                 case .active:
-                    ()
+                    // An app or custom scene in this phase contains at least one active scene instance.
+                    print("Scene Phase = .active")
+
+                case .inactive:
+                    // An app or custom scene in this phase contains no scene instances in the ScenePhase.active phase.
+                    print("Scene Phase = .inactive")
+
                 case .background:
-                    ()
-                default:
-                    break
+                    // Expect an app that enters the background phase to terminate.
+                    print("Scene Phase = .background")
+
+                @unknown default:
+                    fatalError()
             }
         }
         #if os(macOS)

@@ -158,9 +158,10 @@ struct SchoolDetail: View {
 
             // édition de la liste des examen
             ForEach($school.rooms) { $room in
-                RoomEditor(room: $room)
+                RoomCreator(room: $room)
             }
             .onDelete { indexSet in
+                // TODO: - Dissocier les classes utilisant cette salle
                 school.rooms.remove(atOffsets: indexSet)
             }
             .onMove { fromOffsets, toOffset in
@@ -168,7 +169,7 @@ struct SchoolDetail: View {
             }
 
         } header: {
-            Text("Ressources (\(school.nbOfRessources))")
+            Text("Salles de classe (\(school.nbOfRessources))")
                 .font(.callout)
                 .foregroundColor(.secondary)
                 .fontWeight(.bold)

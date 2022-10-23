@@ -133,8 +133,8 @@
 		7975C605290311A600530E5A /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C603290311A600530E5A /* Room.swift */; };
 		7975C6072903124900530E5A /* Plan Salle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7975C6062903124900530E5A /* Plan Salle.png */; };
 		7975C6082903124900530E5A /* Plan Salle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7975C6062903124900530E5A /* Plan Salle.png */; };
-		7975C60B2903176100530E5A /* RoomEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C60A2903176100530E5A /* RoomEditor.swift */; };
-		7975C60C2903176100530E5A /* RoomEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C60A2903176100530E5A /* RoomEditor.swift */; };
+		7975C60B2903176100530E5A /* RoomCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C60A2903176100530E5A /* RoomCreator.swift */; };
+		7975C60C2903176100530E5A /* RoomCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C60A2903176100530E5A /* RoomCreator.swift */; };
 		797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797FA2E7280ACFD7002524F3 /* Fakes.swift */; };
 		7984335D283E97C000C5E51E /* Trombinoscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984335C283E97C000C5E51E /* Trombinoscope.swift */; };
@@ -297,6 +297,16 @@
 		79E6C5B428DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */; };
 		79E6C5B528DA4BF9000D4F79 /* TrombinoscopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */; };
 		79EA9A9E2902FCC40086C904 /* Plan TECHNO-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */; };
+		79EF94C2290489190024348E /* RoomPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C1290489190024348E /* RoomPlacement.swift */; };
+		79EF94C3290489190024348E /* RoomPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C1290489190024348E /* RoomPlacement.swift */; };
+		79EF94C5290582AE0024348E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C4290582AE0024348E /* Place.swift */; };
+		79EF94C6290582AE0024348E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C4290582AE0024348E /* Place.swift */; };
+		79EF94C829058C1F0024348E /* RoomPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C729058C1F0024348E /* RoomPlan.swift */; };
+		79EF94C929058C1F0024348E /* RoomPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C729058C1F0024348E /* RoomPlan.swift */; };
+		79F00E432903D712005D718F /* RoomEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F00E422903D712005D718F /* RoomEditor.swift */; };
+		79F00E442903D712005D718F /* RoomEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F00E422903D712005D718F /* RoomEditor.swift */; };
+		79F00E4629040FF5005D718F /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F00E4529040FF5005D718F /* RoomManager.swift */; };
+		79F00E4729040FF5005D718F /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F00E4529040FF5005D718F /* RoomManager.swift */; };
 		79F102D12821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102D22821B816005E5D9C /* JsonCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F102D02821B816005E5D9C /* JsonCodableArray.swift */; };
 		79F102E228232F36005E5D9C /* Eleve.json in Resources */ = {isa = PBXBuildFile; fileRef = 79F102DD28232F36005E5D9C /* Eleve.json */; };
@@ -558,7 +568,7 @@
 		7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseExamRow.swift; sourceTree = "<group>"; };
 		7975C603290311A600530E5A /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7975C6062903124900530E5A /* Plan Salle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plan Salle.png"; sourceTree = "<group>"; };
-		7975C60A2903176100530E5A /* RoomEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEditor.swift; sourceTree = "<group>"; };
+		7975C60A2903176100530E5A /* RoomCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreator.swift; sourceTree = "<group>"; };
 		797FA2E7280ACFD7002524F3 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		7984335C283E97C000C5E51E /* Trombinoscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trombinoscope.swift; sourceTree = "<group>"; };
 		7984335F283EA37000C5E51E /* LoadableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableImage.swift; sourceTree = "<group>"; };
@@ -688,6 +698,11 @@
 		79DB78A128E9DE86004E240E /* NavigationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrombinoscopeView.swift; sourceTree = "<group>"; };
 		79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plan TECHNO-2.png"; sourceTree = "<group>"; };
+		79EF94C1290489190024348E /* RoomPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPlacement.swift; sourceTree = "<group>"; };
+		79EF94C4290582AE0024348E /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		79EF94C729058C1F0024348E /* RoomPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPlan.swift; sourceTree = "<group>"; };
+		79F00E422903D712005D718F /* RoomEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEditor.swift; sourceTree = "<group>"; };
+		79F00E4529040FF5005D718F /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
 		79F102D02821B816005E5D9C /* JsonCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonCodableArray.swift; sourceTree = "<group>"; };
 		79F102DD28232F36005E5D9C /* Eleve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Eleve.json; sourceTree = "<group>"; };
 		79F102DE28232F36005E5D9C /* Colle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Colle.json; sourceTree = "<group>"; };
@@ -994,7 +1009,11 @@
 		7975C6092903172000530E5A /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				7975C60A2903176100530E5A /* RoomEditor.swift */,
+				7975C60A2903176100530E5A /* RoomCreator.swift */,
+				79F00E422903D712005D718F /* RoomEditor.swift */,
+				79EF94C1290489190024348E /* RoomPlacement.swift */,
+				79EF94C4290582AE0024348E /* Place.swift */,
+				79EF94C729058C1F0024348E /* RoomPlan.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1513,6 +1532,7 @@
 			isa = PBXGroup;
 			children = (
 				7975C603290311A600530E5A /* Room.swift */,
+				79F00E4529040FF5005D718F /* RoomManager.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -1961,6 +1981,7 @@
 				79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */,
 				7935E652285CB42500111936 /* AppreciationView.swift in Sources */,
 				79C1274F283A929B002F243E /* SettingsView.swift in Sources */,
+				79EF94C5290582AE0024348E /* Place.swift in Sources */,
 				79502BAA2820407500DA798F /* EleveLabel.swift in Sources */,
 				7935E654285CC05900111936 /* EleveLabelWithTrombineFlag.swift in Sources */,
 				795FAB2D2809C830004CB120 /* SchoolEditor.swift in Sources */,
@@ -1970,7 +1991,9 @@
 				79F3ABEA28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				791C26DC281447BD00686F0C /* EleveSidebarView.swift in Sources */,
 				79F3F78C282E7E9500DC26FC /* ExamEditor.swift in Sources */,
+				79F00E432903D712005D718F /* RoomEditor.swift in Sources */,
 				79AACD9928E21525009B5AE4 /* TroubleDys.swift in Sources */,
+				79F00E4629040FF5005D718F /* RoomManager.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
 				792F75D528EF4A290053FECF /* ColleEditor.swift in Sources */,
 				792F75D228EF3AC10053FECF /* ObservEditor.swift in Sources */,
@@ -2005,10 +2028,12 @@
 				7918D1FE2810A60400C24C5A /* ClasseEditor.swift in Sources */,
 				791C26F22814847B00686F0C /* ClasseColleLabel.swift in Sources */,
 				792F75D828EF63C70053FECF /* EleveSplitView.swift in Sources */,
+				79EF94C829058C1F0024348E /* RoomPlan.swift in Sources */,
 				7918D2012810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				79D58403282053C300371EB3 /* ColleNotifIcon.swift in Sources */,
 				79F3AC042808CA2500D068D9 /* SchoolSplitView.swift in Sources */,
 				79F3AC012808C76B00D068D9 /* MainScene.swift in Sources */,
+				79EF94C2290489190024348E /* RoomPlacement.swift in Sources */,
 				791C26F528148D2D00686F0C /* ObservCreator.swift in Sources */,
 				79F3ABF228087D5600D068D9 /* Observation.swift in Sources */,
 				79B5BD4728340C9400034115 /* MotifLabel.swift in Sources */,
@@ -2020,7 +2045,7 @@
 				79F3ABE7280844C000D068D9 /* ClasseManager.swift in Sources */,
 				79FB57D628FDD2C100B38D88 /* ElevesTableView.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
-				7975C60B2903176100530E5A /* RoomEditor.swift in Sources */,
+				7975C60B2903176100530E5A /* RoomCreator.swift in Sources */,
 				790C97EB28FC3FA9003E562B /* GroupListView.swift in Sources */,
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
 				79CC570E285F8975001D56F5 /* Ressource.swift in Sources */,
@@ -2066,6 +2091,7 @@
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
+				79EF94C6290582AE0024348E /* Place.swift in Sources */,
 				79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,
@@ -2093,16 +2119,18 @@
 				79F3ABDD280826A400D068D9 /* Sexe.swift in Sources */,
 				795BC3D32812E0B100C22271 /* ClasseSidebarView.swift in Sources */,
 				79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */,
+				79F00E4729040FF5005D718F /* RoomManager.swift in Sources */,
 				7992D0AB282B0AF200B31186 /* EleveMark.swift in Sources */,
 				790C97EF28FC3FE1003E562B /* GroupPicturesView.swift in Sources */,
 				79CC5713285F9105001D56F5 /* SchoolRessourceRow.swift in Sources */,
+				79F00E442903D712005D718F /* RoomEditor.swift in Sources */,
 				791C26F628148D2D00686F0C /* ObservCreator.swift in Sources */,
 				79CC570F285F8975001D56F5 /* Ressource.swift in Sources */,
 				79F3AC022808C76B00D068D9 /* MainScene.swift in Sources */,
 				79F3ABF328087D5600D068D9 /* Observation.swift in Sources */,
 				79FFDCD72825E950009D7452 /* CsvImporter.swift in Sources */,
 				791C26E628145F8E00686F0C /* EleveObservLabel.swift in Sources */,
-				7975C60C2903176100530E5A /* RoomEditor.swift in Sources */,
+				7975C60C2903176100530E5A /* RoomCreator.swift in Sources */,
 				79DB78A328E9DE86004E240E /* NavigationModel.swift in Sources */,
 				79D583FB28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,
@@ -2135,10 +2163,12 @@
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FC2814A43400686F0C /* ColleCreator.swift in Sources */,
 				79AACD9328E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,
+				79EF94C929058C1F0024348E /* RoomPlan.swift in Sources */,
 				79F3ABB72808218300D068D9 /* CahierDuProfesseurApp.swift in Sources */,
 				795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				791C26F928149E7E00686F0C /* ObservDetail.swift in Sources */,
 				79F3ABF02808709100D068D9 /* Colle.swift in Sources */,
+				79EF94C3290489190024348E /* RoomPlacement.swift in Sources */,
 				791C26E028144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				79502BA52818716500DA798F /* ObservSidebarView.swift in Sources */,
 				791C26D228142B6300686F0C /* ObservationStore.swift in Sources */,

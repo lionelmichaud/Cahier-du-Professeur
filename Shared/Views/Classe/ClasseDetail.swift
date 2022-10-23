@@ -10,6 +10,7 @@ import AppFoundation
 import HelpersView
 
 enum ClasseNavigationRoute: Hashable {
+    case room(Binding<Classe>)
     case liste(Binding<Classe>)
     case trombinoscope(Binding<Classe>)
     case groups(Binding<Classe>)
@@ -17,6 +18,9 @@ enum ClasseNavigationRoute: Hashable {
 
     static func == (lhs: ClasseNavigationRoute, rhs: ClasseNavigationRoute) -> Bool {
         switch (lhs, rhs) {
+            case (.room(let classel), .room(let classer)):
+                return (classel.wrappedValue.id == classer.wrappedValue.id)
+
             case (.liste(let classel), .liste(let classer)):
                 return classel.wrappedValue.id == classer.wrappedValue.id
 
@@ -29,13 +33,16 @@ enum ClasseNavigationRoute: Hashable {
             case (.exam(let classel, let idl), .exam(let classer, let idr)):
                 return (classel.wrappedValue.id == classer.wrappedValue.id) &&
                 (idl == idr)
-                
+
             default : return false
         }
     }
 
     func hash(into hasher: inout Hasher) {
         switch self {
+            case .room(let classe):
+                hasher.combine("room")
+                hasher.combine(classe.wrappedValue.id)
             case .liste(let classe):
                 hasher.combine("liste")
                 hasher.combine(classe.wrappedValue.id)
@@ -91,6 +98,13 @@ struct ClasseDetail: View {
     private var noteIsExpanded = false
 
     // MARK: - Computed Properties
+
+    private var room: some View {
+        NavigationLink(value: ClasseNavigationRoute.room($classe)) {
+            Text("Salle de classe")
+                .fontWeight(.bold)
+        }
+    }
 
     private var elevesList: some View {
         NavigationLink(value: ClasseNavigationRoute.liste($classe)) {
@@ -152,6 +166,8 @@ struct ClasseDetail: View {
             ClasseNameGroupBox(classe: $classe)
 
             List {
+                room
+
                 /// appréciation sur la classe
                 if classeAppreciationEnabled {
                     AppreciationView(isExpanded  : $appreciationIsExpanded,

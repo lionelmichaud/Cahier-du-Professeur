@@ -12,6 +12,7 @@ struct ClasseSplitView: View {
     var horizontalSizeClass
 
     @EnvironmentObject private var navigationModel : NavigationModel
+    @State private var path = NavigationPath()
 
     var body: some View {
         NavigationSplitView(
@@ -19,10 +20,13 @@ struct ClasseSplitView: View {
         ) {
             ClasseSidebarView()
         } detail: {
-            NavigationStack {
+            NavigationStack(path: $path) {
                 ClasseEditor()
                     .navigationDestination(for: ClasseNavigationRoute.self) { route in
                         switch route {
+                            case .room(let classe):
+                                RoomEditor(classe: classe)
+
                             case .liste(let classe):
                                 switch horizontalSizeClass {
                                     case .compact:

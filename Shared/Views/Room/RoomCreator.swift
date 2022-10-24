@@ -19,7 +19,7 @@ struct RoomCreator: View {
 
     var name: some View {
         HStack {
-            Image(systemName: "door.left.hand.closed")
+            Image(systemName: "chair")
                 .sfSymbolStyling()
                 .foregroundColor(.accentColor)
             TextField("Nom de la salle", text: $room.name)
@@ -41,30 +41,38 @@ struct RoomCreator: View {
     }
 
     var body: some View {
-        if hClass == .regular {
-            HStack {
-                name
-                    .padding(.trailing)
-                nbPlaces
-                    .frame(maxWidth: 275)
-                    .padding(.trailing)
-                Button("Placer") {
-                    isPlacing.toggle()
+        Group {
+            if hClass == .regular {
+                HStack {
+                    name
+                        .padding(.trailing)
+                    nbPlaces
+                        .frame(maxWidth: 275)
+                        .padding(.trailing)
+                    Button("Plan") {
+                        isPlacing.toggle()
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.bordered)
-            }
-            // Modal: ajout d'une nouvelle classe
-            .sheet(isPresented: $isPlacing) {
-                NavigationStack {
-                    RoomPlacement(room: $room)
+            } else {
+                GroupBox {
+                    HStack {
+                        name
+                        Button("Plan") {
+                            isPlacing.toggle()
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    nbPlaces
                 }
-                .presentationDetents([.medium])
             }
-        } else {
-            GroupBox {
-                name
-                nbPlaces
+        }
+        // Modal: ajout d'une nouvelle classe
+        .sheet(isPresented: $isPlacing) {
+            NavigationStack {
+                RoomPlacement(room: $room)
             }
+            .presentationDetents([.medium])
         }
     }
 }

@@ -38,6 +38,8 @@ struct CahierDuProfesseurApp: App {
     /// Si l'application et les documents utilisateurs ne sont pas compatible alors
     /// importer les documents contenus dans le Bundle application.
     init() {
+        URLCache.shared.memoryCapacity = 100_000_000 // ~100 MB memory space
+
         /// vérifier l'existance du dossier `Documents`
         guard let documentsFolder = Folder.documents else {
             let error = FileError.failedToResolveDocuments

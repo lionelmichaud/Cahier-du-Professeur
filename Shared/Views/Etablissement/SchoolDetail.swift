@@ -107,6 +107,40 @@ struct SchoolDetail: View {
         }
     }
 
+    private var eventList: some View {
+        Section {
+            // ajouter une évaluation
+            Button {
+                withAnimation {
+                    school.events.insert(Event(), at: 0)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter un événement")
+                }
+            }
+            .buttonStyle(.borderless)
+
+            // édition de la liste des événements
+            ForEach($school.events) { $event in
+                EventEditor(event: $event)
+            }
+            .onDelete { indexSet in
+                school.events.remove(atOffsets: indexSet)
+            }
+            .onMove { fromOffsets, toOffset in
+                school.events.move(fromOffsets: fromOffsets, toOffset: toOffset)
+            }
+
+        } header: {
+            Text("Événements (\(school.nbOfEvents))")
+                .font(.callout)
+                .foregroundColor(.secondary)
+                .fontWeight(.bold)
+        }
+    }
+
     private var ressourceList: some View {
         Section {
             // ajouter une évaluation
@@ -195,14 +229,18 @@ struct SchoolDetail: View {
                         AnnotationView(isExpanded: $noteIsExpanded,
                                        annotation: $school.annotation)
                     }
+
                     // édition de la liste des classes
                     classeList
 
-                    // édition de la liste des ressources
-                    ressourceList
+                    // édition de la liste des événements
+                    eventList
 
                     // édition de la liste des salles de classe
                     roomList
+
+                    // édition de la liste des ressources
+                    ressourceList
                 }
                 #if os(iOS)
                 .navigationTitle("Etablissement")

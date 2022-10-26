@@ -55,17 +55,21 @@ struct Room: Identifiable, Codable, Equatable {
    var planURL: URL? {
         let planName = "Plan " + name + ".png"
 
-        // vérifier l'existence du Folder Document
-        guard let documentsFolder = Folder.documents else {
-            let error = FileError.failedToResolveDocuments
-            customLog.log(level: .fault,
-                          "\(error.rawValue))")
-            return nil
+       return URL.documentsDirectory
+           .appending(path: planName)
+   }
+
+    /// Retourne les dimensions de l'image
+    var imageSize : CGSize? {
+        if let planURL,
+           let imageSource = CGImageSourceCreateWithURL(planURL as CFURL, nil),
+           let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
+            let pixelWidth  = imageProperties[kCGImagePropertyPixelWidth] as! Int
+            let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! Int
+            print("Width: \(pixelWidth), Height: \(pixelHeight)")
+            return CGSize(width: pixelWidth, height: pixelHeight)
         }
-
-        let planURL = documentsFolder.url.appendingPathComponent(planName)
-
-        return planURL
+        return nil
     }
 
     // MARK: - Initializers
@@ -83,7 +87,7 @@ extension Room: CustomStringConvertible {
     var description: String {
         """
 
-        Nom : \(name)
+        Salle de classe : \(name)
         Capacité de la salle : \(capacity)
         """
     }

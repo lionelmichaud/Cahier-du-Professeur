@@ -15,7 +15,7 @@ struct RoomPlacement: View {
 
     var body: some View {
         if room.planURL != nil {
-            RoomPlan(room: $room)
+            RoomPlanView(room: $room)
             .navigationTitle("Places non positionnées: \(room.nbPlacesUndefined)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleMenu {

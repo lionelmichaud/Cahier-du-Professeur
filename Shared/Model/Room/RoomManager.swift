@@ -9,7 +9,7 @@ import Foundation
 
 struct RoomManager {
     static func room(withId roomID : UUID,
-                     in school : School) -> Room? {
+                     in school     : School) -> Room? {
         school.rooms.first { room in
             room.id == roomID
         }

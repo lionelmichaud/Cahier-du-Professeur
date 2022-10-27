@@ -66,7 +66,7 @@ struct Room: Identifiable, Codable, Equatable {
            let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
             let pixelWidth  = imageProperties[kCGImagePropertyPixelWidth] as! Int
             let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! Int
-            print("Width: \(pixelWidth), Height: \(pixelHeight)")
+            //print("Width: \(pixelWidth), Height: \(pixelHeight)")
             return CGSize(width: pixelWidth, height: pixelHeight)
         }
         return nil

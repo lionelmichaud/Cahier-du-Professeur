@@ -299,8 +299,8 @@
 		79EA9A9E2902FCC40086C904 /* Plan TECHNO-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */; };
 		79EF94C2290489190024348E /* RoomPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C1290489190024348E /* RoomPlacement.swift */; };
 		79EF94C3290489190024348E /* RoomPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C1290489190024348E /* RoomPlacement.swift */; };
-		79EF94C5290582AE0024348E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C4290582AE0024348E /* Place.swift */; };
-		79EF94C6290582AE0024348E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C4290582AE0024348E /* Place.swift */; };
+		79EF94C5290582AE0024348E /* PlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C4290582AE0024348E /* PlaceLabel.swift */; };
+		79EF94C6290582AE0024348E /* PlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C4290582AE0024348E /* PlaceLabel.swift */; };
 		79EF94C829058C1F0024348E /* RoomPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C729058C1F0024348E /* RoomPlanView.swift */; };
 		79EF94C929058C1F0024348E /* RoomPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94C729058C1F0024348E /* RoomPlanView.swift */; };
 		79EF94CC2907339F0024348E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94CB2907339F0024348E /* Event.swift */; };
@@ -705,7 +705,7 @@
 		79E6C5B328DA4BF9000D4F79 /* TrombinoscopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrombinoscopeView.swift; sourceTree = "<group>"; };
 		79EA9A9D2902FCC40086C904 /* Plan TECHNO-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plan TECHNO-2.png"; sourceTree = "<group>"; };
 		79EF94C1290489190024348E /* RoomPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPlacement.swift; sourceTree = "<group>"; };
-		79EF94C4290582AE0024348E /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		79EF94C4290582AE0024348E /* PlaceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceLabel.swift; sourceTree = "<group>"; };
 		79EF94C729058C1F0024348E /* RoomPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPlanView.swift; sourceTree = "<group>"; };
 		79EF94CB2907339F0024348E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		79EF94CE2907367C0024348E /* EventEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditor.swift; sourceTree = "<group>"; };
@@ -1021,7 +1021,7 @@
 				7975C60A2903176100530E5A /* RoomCreator.swift */,
 				79F00E422903D712005D718F /* RoomEditor.swift */,
 				79EF94C1290489190024348E /* RoomPlacement.swift */,
-				79EF94C4290582AE0024348E /* Place.swift */,
+				79EF94C4290582AE0024348E /* PlaceLabel.swift */,
 				79EF94C729058C1F0024348E /* RoomPlanView.swift */,
 			);
 			path = Room;
@@ -2011,7 +2011,7 @@
 				79C12756283A9C31002F243E /* SettingsEleve.swift in Sources */,
 				7935E652285CB42500111936 /* AppreciationView.swift in Sources */,
 				79C1274F283A929B002F243E /* SettingsView.swift in Sources */,
-				79EF94C5290582AE0024348E /* Place.swift in Sources */,
+				79EF94C5290582AE0024348E /* PlaceLabel.swift in Sources */,
 				79502BAA2820407500DA798F /* EleveLabel.swift in Sources */,
 				7935E654285CC05900111936 /* EleveLabelWithTrombineFlag.swift in Sources */,
 				795FAB2D2809C830004CB120 /* SchoolEditor.swift in Sources */,
@@ -2122,7 +2122,7 @@
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
-				79EF94C6290582AE0024348E /* Place.swift in Sources */,
+				79EF94C6290582AE0024348E /* PlaceLabel.swift in Sources */,
 				79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,
 				795BC3E32813277B00C22271 /* EleveEditor.swift in Sources */,

@@ -7,9 +7,18 @@
 
 import SwiftUI
 
+public func + (lhs: CGSize, rhs: CGSize) -> CGSize {
+    return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+}
+
 struct RoomPlanView: View {
     @Binding
     var room: Room
+
+    @State
+    private var translation = CGSize.zero
+
+    // MARK: - Computd Properties
 
     private var imageSize: CGSize? {
         room.imageSize
@@ -19,14 +28,38 @@ struct RoomPlanView: View {
         if let roomPlanURL = room.planURL,
         let imageSize {
             ZStack(alignment: .topLeading) {
-                GeometryReader { geometry in
+                GeometryReader { viewGeometry in
+                    // Image du plan de la salle
                     LoadableImage(imageUrl         : roomPlanURL,
                                   placeholderImage : .constant(Image(systemName : "questionmark.app.dashed")))
-                    ForEach(room.places, id:\.self) { place in
-                        Place(position: place, text: nil)
-                            .offset(offset(relativePos  : place,
-                                           geometrySize : geometry.size,
-                                           imageSize    : imageSize))
+
+                    // Symboles des places des élèves dans la salle
+                    ForEach($room.places, id:\.self) { $place in
+                        PlaceLabel(position: place, text: nil)
+                            .offset(posInView(relativePos  : place,
+                                              geometrySize : viewGeometry.size,
+                                              imageSize    : imageSize) + translation
+                            )
+                            .gesture(DragGesture()
+                                .onChanged { value in
+                                    translation = value.translation
+                                }
+                                .onEnded { value in
+                                    translation = value.translation
+
+                                    let lastPositionInView =
+                                    posInView(relativePos  : place,
+                                              geometrySize : viewGeometry.size,
+                                              imageSize    : imageSize) + translation
+                                    place = relativePosInImage(
+                                        posInView    : lastPositionInView,
+                                        geometrySize : viewGeometry.size,
+                                        imageSize    : imageSize
+                                    )
+
+                                    translation = CGSize.zero
+                                }
+                            )
                     }
                 }
             }
@@ -35,11 +68,25 @@ struct RoomPlanView: View {
 
     // MARK: - Methods
 
-    private func offset(relativePos  : CGPoint,
-                        geometrySize : CGSize,
-                        imageSize    : CGSize) -> CGSize {
+    /// Convertit la position de l'objet situé à une position relative (%) `relativePos` à l'intérieur de l'image de taille `imageSize`
+    /// dans une position absolue en pixels dans la vue définie par `geometrySize`.
+    /// - Parameters:
+    ///   - relativePos: position relative (%) de l'objet dans l'image de taille `imageSize`
+    ///   - geometrySize: taille de la vue contenant l'image (alignée .topLeading)
+    ///   - imageSize: taille de l'image dans laquelle se situe l'objet
+    /// - Returns: position absolue en pixels de l'objet dans la vue définie par `geometrySize`
+    private func posInView(relativePos  : CGPoint,
+                           geometrySize : CGSize,
+                           imageSize    : CGSize) -> CGSize {
         CGSize(width  : relativePos.x * geometrySize.width,
-               height : relativePos.y * imageSize.height * geometrySize.width / imageSize.width)
+               height : relativePos.y * (geometrySize.width * imageSize.height / imageSize.width))
+    }
+
+    private func relativePosInImage(posInView    : CGSize,
+                                    geometrySize : CGSize,
+                                    imageSize    : CGSize) -> CGPoint {
+        CGPoint(x: posInView.width / geometrySize.width,
+                y: posInView.height / (geometrySize.width * imageSize.height / imageSize.width))
     }
 }
 

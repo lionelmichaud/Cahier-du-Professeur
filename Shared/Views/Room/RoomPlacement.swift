@@ -21,9 +21,9 @@ struct RoomPlacement: View {
             .toolbarTitleMenu {
                 /// positionner une nouvelle place au centre du plan de la salle de classe
                 Button("Positionner nouvelle place") {
-                    //withAnimation {
+                    withAnimation {
                         room.places.append(CGPoint(x: 0.5, y: 0.5))
-                    //}
+                    }
                 }
                 /// supprimer tous les positionnements de places dans la salle de classe
                 Button(role: .destructive) {

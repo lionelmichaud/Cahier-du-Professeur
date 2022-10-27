@@ -35,7 +35,7 @@ struct RoomPlanView: View {
 
                     // Symboles des places des élèves dans la salle
                     ForEach($room.places, id:\.self) { $place in
-                        PlaceLabel(position: place, text: nil)
+                        PlaceLabel(text: nil)
                             .offset(posInView(relativePos  : place,
                                               geometrySize : viewGeometry.size,
                                               imageSize    : imageSize) + translation

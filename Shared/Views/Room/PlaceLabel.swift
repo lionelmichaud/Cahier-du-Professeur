@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PlaceLabel: View {
-    var position: CGPoint
     var text : String?
 
     private let backgoundColor = Color.blue
@@ -35,9 +34,9 @@ struct PlaceLabel: View {
 struct Place_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PlaceLabel(position: CGPoint(x: 0.5, y: 0.5), text: "Une place")
+            PlaceLabel(text: "Une place")
                 .previewLayout(.fixed(width: 400, height: 400))
-            PlaceLabel(position: CGPoint(x: 0.5, y: 0.5), text: nil)
+            PlaceLabel(text: nil)
                 .previewLayout(.fixed(width: 400, height: 400))
         }
     }

@@ -253,6 +253,8 @@
 		79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4C28170CEC002AAABA /* MotifView.swift */; };
 		79BB0B502817138D002AAABA /* MotifEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4F2817138D002AAABA /* MotifEditor.swift */; };
 		79BB0B512817138D002AAABA /* MotifEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BB0B4F2817138D002AAABA /* MotifEditor.swift */; };
+		79BF996E290B49BF002FBA04 /* DraggablePlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF996D290B49BF002FBA04 /* DraggablePlaceLabel.swift */; };
+		79BF996F290B49BF002FBA04 /* DraggablePlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BF996D290B49BF002FBA04 /* DraggablePlaceLabel.swift */; };
 		79C1274F283A929B002F243E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C1274E283A929B002F243E /* SettingsView.swift */; };
 		79C12751283A9620002F243E /* AppVersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12750283A9620002F243E /* AppVersionView.swift */; };
 		79C12754283A9925002F243E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C12753283A9925002F243E /* Preferences.swift */; };
@@ -677,6 +679,7 @@
 		79BB0B482816FAE5002AAABA /* Motif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
 		79BB0B4C28170CEC002AAABA /* MotifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifView.swift; sourceTree = "<group>"; };
 		79BB0B4F2817138D002AAABA /* MotifEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifEditor.swift; sourceTree = "<group>"; };
+		79BF996D290B49BF002FBA04 /* DraggablePlaceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePlaceLabel.swift; sourceTree = "<group>"; };
 		79C1274E283A929B002F243E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79C12750283A9620002F243E /* AppVersionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
 		79C12753283A9925002F243E /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -1021,8 +1024,9 @@
 				7975C60A2903176100530E5A /* RoomCreator.swift */,
 				79F00E422903D712005D718F /* RoomEditor.swift */,
 				79EF94C1290489190024348E /* RoomPlacement.swift */,
-				79EF94C4290582AE0024348E /* PlaceLabel.swift */,
 				79EF94C729058C1F0024348E /* RoomPlanView.swift */,
+				79EF94C4290582AE0024348E /* PlaceLabel.swift */,
+				79BF996D290B49BF002FBA04 /* DraggablePlaceLabel.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -2097,6 +2101,7 @@
 				7935E64F285CAE9600111936 /* AnnotationView.swift in Sources */,
 				797FA2E8280ACFD7002524F3 /* Fakes.swift in Sources */,
 				79502BA42818716500DA798F /* ObservSidebarView.swift in Sources */,
+				79BF996E290B49BF002FBA04 /* DraggablePlaceLabel.swift in Sources */,
 				79F3ABEF2808709100D068D9 /* Colle.swift in Sources */,
 				79F3ABD9280823D900D068D9 /* NiveauSchool.swift in Sources */,
 				79FFDCD62825E950009D7452 /* CsvImporter.swift in Sources */,
@@ -2117,6 +2122,7 @@
 				79F3AC0E2808CA8700D068D9 /* ColleSplitView.swift in Sources */,
 				79D29A2328F2E2A60058FF09 /* EleveNameGroupBox.swift in Sources */,
 				7971D6C128634FDD00ECA9CA /* ExamCreator.swift in Sources */,
+				79BF996F290B49BF002FBA04 /* DraggablePlaceLabel.swift in Sources */,
 				7903E25128FAFF7800542586 /* ExamDetail.swift in Sources */,
 				79CC5716285F9906001D56F5 /* RessourceEditor.swift in Sources */,
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,

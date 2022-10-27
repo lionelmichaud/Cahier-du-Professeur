@@ -15,9 +15,6 @@ struct RoomPlanView: View {
     @Binding
     var room: Room
 
-    @State
-    private var translation = CGSize.zero
-
     // MARK: - Computd Properties
 
     private var imageSize: CGSize? {
@@ -35,31 +32,9 @@ struct RoomPlanView: View {
 
                     // Symboles des places des élèves dans la salle
                     ForEach($room.places, id:\.self) { $place in
-                        PlaceLabel(text: nil)
-                            .offset(posInView(relativePos  : place,
-                                              geometrySize : viewGeometry.size,
-                                              imageSize    : imageSize) + translation
-                            )
-                            .gesture(DragGesture()
-                                .onChanged { value in
-                                    translation = value.translation
-                                }
-                                .onEnded { value in
-                                    translation = value.translation
-
-                                    let lastPositionInView =
-                                    posInView(relativePos  : place,
-                                              geometrySize : viewGeometry.size,
-                                              imageSize    : imageSize) + translation
-                                    place = relativePosInImage(
-                                        posInView    : lastPositionInView,
-                                        geometrySize : viewGeometry.size,
-                                        imageSize    : imageSize
-                                    )
-
-                                    translation = CGSize.zero
-                                }
-                            )
+                        DraggablePlaceLabel(place            : $place,
+                                            viewGeometrySize : viewGeometry.size,
+                                            imageSize        : imageSize)
                     }
                 }
             }

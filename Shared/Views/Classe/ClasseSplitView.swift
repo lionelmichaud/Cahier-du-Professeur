@@ -25,7 +25,7 @@ struct ClasseSplitView: View {
                     .navigationDestination(for: ClasseNavigationRoute.self) { route in
                         switch route {
                             case .room(let classe):
-                                RoomEditor(classe: classe)
+                                RoomElevePlacement(classe: classe)
 
                             case .liste(let classe):
                                 switch horizontalSizeClass {

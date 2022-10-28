@@ -57,15 +57,31 @@ struct DraggablePlaceLabel: View {
     private func posInView(relativePos  : CGPoint,
                            geometrySize : CGSize,
                            imageSize    : CGSize) -> CGSize {
-        CGSize(width  : relativePos.x * geometrySize.width,
-               height : relativePos.y * (geometrySize.width * imageSize.height / imageSize.width))
+        let imageSizeRatio    = imageSize.width / imageSize.height
+        let geometrySizeRatio = geometrySize.width / geometrySize.height
+
+        if imageSizeRatio >= geometrySizeRatio {
+            return CGSize(width  : relativePos.x * geometrySize.width,
+                          height : relativePos.y * (geometrySize.width * imageSize.height / imageSize.width))
+        } else {
+            return CGSize(width  : relativePos.x * (geometrySize.height * imageSize.width / imageSize.height),
+                          height : relativePos.y * geometrySize.height)
+        }
     }
 
     private func relativePosInImage(posInView    : CGSize,
                                     geometrySize : CGSize,
                                     imageSize    : CGSize) -> CGPoint {
-        CGPoint(x: posInView.width / geometrySize.width,
-                y: posInView.height / (geometrySize.width * imageSize.height / imageSize.width))
+        let imageSizeRatio    = imageSize.width / imageSize.height
+        let geometrySizeRatio = geometrySize.width / geometrySize.height
+
+        if imageSizeRatio >= geometrySizeRatio {
+            return CGPoint(x: posInView.width / geometrySize.width,
+                           y: posInView.height / (geometrySize.width * imageSize.height / imageSize.width))
+        } else {
+            return CGPoint(x: posInView.width / (geometrySize.height * imageSize.width / imageSize.height),
+                           y: posInView.height / geometrySize.height)
+        }
     }
 }
 

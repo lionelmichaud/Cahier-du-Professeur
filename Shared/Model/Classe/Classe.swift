@@ -133,6 +133,7 @@ extension Classe: CustomStringConvertible {
            Appréciation: \(appreciation)
            Annotation  : \(annotation)
            SchoolID: \(String(describing: schoolId))
+           RoomID  : \(String(describing: roomId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
            Examens : \(String(describing: exams).withPrefixedSplittedLines("     "))
         """

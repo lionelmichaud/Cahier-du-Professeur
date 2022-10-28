@@ -70,7 +70,7 @@ struct RoomCreator: View {
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isPlacing) {
             NavigationStack {
-                RoomPlacement(room: $room)
+                RoomEditor(room: $room)
             }
             .presentationDetents([.medium])
         }

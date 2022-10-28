@@ -11,7 +11,7 @@ public func + (lhs: CGSize, rhs: CGSize) -> CGSize {
     return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
 }
 
-struct RoomPlanView: View {
+struct RoomPlanEditView: View {
     @Binding
     var room: Room
 
@@ -40,29 +40,6 @@ struct RoomPlanView: View {
             }
         }
     }
-
-    // MARK: - Methods
-
-    /// Convertit la position de l'objet situé à une position relative (%) `relativePos` à l'intérieur de l'image de taille `imageSize`
-    /// dans une position absolue en pixels dans la vue définie par `geometrySize`.
-    /// - Parameters:
-    ///   - relativePos: position relative (%) de l'objet dans l'image de taille `imageSize`
-    ///   - geometrySize: taille de la vue contenant l'image (alignée .topLeading)
-    ///   - imageSize: taille de l'image dans laquelle se situe l'objet
-    /// - Returns: position absolue en pixels de l'objet dans la vue définie par `geometrySize`
-    private func posInView(relativePos  : CGPoint,
-                           geometrySize : CGSize,
-                           imageSize    : CGSize) -> CGSize {
-        CGSize(width  : relativePos.x * geometrySize.width,
-               height : relativePos.y * (geometrySize.width * imageSize.height / imageSize.width))
-    }
-
-    private func relativePosInImage(posInView    : CGSize,
-                                    geometrySize : CGSize,
-                                    imageSize    : CGSize) -> CGPoint {
-        CGPoint(x: posInView.width / geometrySize.width,
-                y: posInView.height / (geometrySize.width * imageSize.height / imageSize.width))
-    }
 }
 
 struct RoomPlan_Previews: PreviewProvider {
@@ -78,12 +55,12 @@ struct RoomPlan_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationStack {
-                RoomPlanView(room: .constant(room))
+                RoomPlanEditView(room: .constant(room))
             }
             .previewDevice("iPad mini (6th generation)")
 
             NavigationStack {
-                RoomPlanView(room: .constant(room))
+                RoomPlanEditView(room: .constant(room))
             }
             .previewDevice("iPhone 13")
         }

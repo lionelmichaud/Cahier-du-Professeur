@@ -12,13 +12,13 @@ import Files
 private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Professeur",
                                category  : "Room")
 
-/// Salle de classe
+/// Salle de classe dans un établissement
 struct Room: Identifiable, Codable, Equatable {
 
     enum CodingKeys: String, CodingKey {
         case id
         case name
-        case places
+        case seats
         case capacity
     }
 
@@ -29,13 +29,13 @@ struct Room: Identifiable, Codable, Equatable {
     // MARK: - Properties
 
     var id = UUID()
-    var name     : String    = ""
-    var places   : [CGPoint] = []
+    var name     : String = ""
+    var seats    : [Seat] = []
     var image    : Image? // cache
     var capacity : Int {
         willSet(newCapacity) {
-            if newCapacity < places.count {
-                places = places.dropLast(places.count - newCapacity)
+            if newCapacity < seats.count {
+                seats = seats.dropLast(seats.count - newCapacity)
             }
         }
     }
@@ -44,12 +44,12 @@ struct Room: Identifiable, Codable, Equatable {
 
     /// Nombre de places positionnées sur la le plan de la salle de classe
     var nbPlacesDefined: Int {
-        places.count
+        seats.count
     }
 
     /// Nombre de places non encore positionnées sur la le plan de la salle de classe
     var nbPlacesUndefined: Int {
-        capacity - places.count
+        capacity - seats.count
     }
 
     /// URL du fichier image PNG contenant le plan de la salle de classe

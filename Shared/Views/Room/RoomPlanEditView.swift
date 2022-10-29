@@ -31,10 +31,10 @@ struct RoomPlanEditView: View {
                                   placeholderImage : .constant(Image(systemName : "questionmark.app.dashed")))
 
                     // Symboles des places des élèves dans la salle
-                    ForEach($room.places, id:\.self) { $place in
-                        DraggablePlaceLabel(place            : $place,
-                                            viewGeometrySize : viewGeometry.size,
-                                            imageSize        : imageSize)
+                    ForEach($room.seats, id:\.self) { $seat in
+                        DraggableSeatLabel(seatLocInRoom    : $seat.locInRoom,
+                                           viewGeometrySize : viewGeometry.size,
+                                           imageSize        : imageSize)
                     }
                 }
             }
@@ -45,11 +45,11 @@ struct RoomPlanEditView: View {
 struct RoomPlan_Previews: PreviewProvider {
     static var room: Room = {
         var r = Room(name: "TECHNO-2", capacity: 12)
-        r.places.append(CGPoint(x: 0.0, y: 0.0))
-        r.places.append(CGPoint(x: 0.25, y: 0.25))
-        r.places.append(CGPoint(x: 0.5, y: 0.5))
-        r.places.append(CGPoint(x: 0.75, y: 0.75))
-        r.places.append(CGPoint(x: 0.98, y: 0.98))
+        r.seats.append(Seat(x: 0.0, y: 0.0))
+        r.seats.append(Seat(x: 0.25, y: 0.25))
+        r.seats.append(Seat(x: 0.5, y: 0.5))
+        r.seats.append(Seat(x: 0.75, y: 0.75))
+        r.seats.append(Seat(x: 0.98, y: 0.98))
         return r
     }()
     static var previews: some View {

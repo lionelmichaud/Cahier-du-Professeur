@@ -1,5 +1,5 @@
 //
-//  Place.swift
+//  SeatLabel.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 23/10/2022.
@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct PlaceLabel: View {
-    var text : String?
+struct SeatLabel: View {
+    var label : String?
 
     private let backgoundColor = Color.blue
     private let foregoundColor = Color.white
 
     var body: some View {
         Group {
-            if let text {
-                Text(text)
+            if let label {
+                Text(label)
                     .foregroundColor(foregoundColor)
             } else {
                 Text("Wandrille")
@@ -35,9 +35,9 @@ struct PlaceLabel: View {
 struct Place_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PlaceLabel(text: "Une place")
+            SeatLabel(label: "Une place")
                 .previewLayout(.fixed(width: 400, height: 400))
-            PlaceLabel(text: nil)
+            SeatLabel(label: nil)
                 .previewLayout(.fixed(width: 400, height: 400))
         }
     }

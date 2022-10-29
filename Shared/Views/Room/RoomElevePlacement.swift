@@ -66,9 +66,9 @@ struct RoomElevePlacement: View {
                                           placeholderImage: .constant(Image(systemName: "questionmark.app.dashed")))
 
                             // Symboles des places des élèves dans la salle
-                            ForEach(room!.places, id:\.self) { place in
-                                PlaceLabel(text: "Prénom")
-                                    .offset(posInView(relativePos  : place,
+                            ForEach(room!.seats, id:\.self) { seat in
+                                SeatLabel(label: "Prénom")
+                                    .offset(posInView(relativePos  : seat.locInRoom,
                                                       geometrySize : viewGeometry.size,
                                                       imageSize    : imageSize)
                                     )

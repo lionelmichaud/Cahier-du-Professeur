@@ -1,5 +1,5 @@
 //
-//  DraggablePlaceLabel.swift
+//  DraggableSeatLabel.swift
 //  Cahier du Professeur
 //
 //  Created by Lionel MICHAUD on 28/10/2022.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct DraggablePlaceLabel: View {
+struct DraggableSeatLabel: View {
     @Binding
-    var place: CGPoint
-
+    var seatLocInRoom    : CGPoint
     var viewGeometrySize : CGSize
     var imageSize        : CGSize
 
@@ -18,8 +17,8 @@ struct DraggablePlaceLabel: View {
     private var translation = CGSize.zero
 
     var body: some View {
-        PlaceLabel(text: nil)
-            .offset(posInView(relativePos  : place,
+        SeatLabel(label: nil)
+            .offset(posInView(relativePos  : seatLocInRoom,
                               geometrySize : viewGeometrySize,
                               imageSize    : imageSize) + translation
             )
@@ -31,10 +30,10 @@ struct DraggablePlaceLabel: View {
                     translation = value.translation
 
                     let lastPositionInView =
-                    posInView(relativePos  : place,
+                    posInView(relativePos  : seatLocInRoom,
                               geometrySize : viewGeometrySize,
                               imageSize    : imageSize) + translation
-                    place = relativePosInImage(
+                    seatLocInRoom = relativePosInImage(
                         posInView    : lastPositionInView,
                         geometrySize : viewGeometrySize,
                         imageSize    : imageSize

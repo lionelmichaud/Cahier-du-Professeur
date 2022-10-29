@@ -5,7 +5,7 @@
 //  Created by Lionel MICHAUD on 22/10/2022.
 //
 
-import Foundation
+import SwiftUI
 
 struct RoomManager {
 
@@ -28,15 +28,37 @@ struct RoomManager {
     /// La liste sera vide si la classe n'a pas de salle de classe définie.
     /// - Returns: Liste des élèves sans place affectée dans leur salle de classe
     static func unSeatedEleves(dans classe : Classe,
-                               eleveStore  : EleveStore) -> [Eleve.ID] {
-        classe.elevesID.compactMap { eleveID in
-            if let eleve = eleveStore.item(withID: eleveID),
-               classe.roomId != nil,
-               eleve.seatId == nil {
-                return eleve.id
+                               eleveStore  : EleveStore) -> [Binding<Eleve>] {
+        guard classe.roomId != nil else { return [] }
+
+        return classe.elevesID.compactMap { eleveID in
+            if let eleve = eleveStore.itemBinding(withID: eleveID),
+               eleve.wrappedValue.seatId == nil {
+                return eleve
             } else {
                 return nil
             }
         }
+    }
+
+    /// Retourne le premier élève de la `classe` assis à la place `seatID`.
+    /// - Parameters:
+    ///   - seatID: Identifiant de la place de la salle de classe.
+    /// - Returns: Premier élève de la `classe` assis à la place `seatID`.
+    ///             Retourne `nil` si aucun élève n'est assis à cette place.
+    static func eleveOnSeat(seatID      : UUID,
+                            dans classe : Classe,
+                            eleveStore  : EleveStore) -> Eleve? {
+
+        guard classe.roomId != nil else { return nil }
+
+        return classe.elevesID.compactMap { eleveID in
+            if let eleve = eleveStore.item(withID: eleveID),
+               eleve.seatId == seatID {
+                return eleve
+            } else {
+                return nil
+            }
+        }.first
     }
 }

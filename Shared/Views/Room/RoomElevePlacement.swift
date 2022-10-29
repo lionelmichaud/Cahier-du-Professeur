@@ -40,7 +40,7 @@ struct RoomElevePlacement: View {
         room?.imageSize
     }
 
-    private var associateMenu: some View {
+    private var associateClasseToRoomMenu: some View {
         Menu {
             ForEach(school!.rooms) { room in
                 Button(room.name) {
@@ -68,6 +68,7 @@ struct RoomElevePlacement: View {
                             // Symboles des places des élèves dans la salle
                             ForEach(room!.seats, id:\.self) { seat in
                                 EditableSeatLabel(
+                                    classe           : classe,
                                     seat             : seat,
                                     viewGeometrySize : viewGeometry.size,
                                     imageSize        : imageSize)
@@ -109,7 +110,7 @@ struct RoomElevePlacement: View {
                     }
                 } else if school != nil {
                     /// associer la classe à une salle de classe
-                    associateMenu
+                    associateClasseToRoomMenu
                 }
             }
         }

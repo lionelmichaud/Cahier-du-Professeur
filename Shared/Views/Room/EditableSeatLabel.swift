@@ -8,12 +8,49 @@
 import SwiftUI
 
 struct EditableSeatLabel: View {
+    var classe           : Classe
     var seat             : Seat
     var viewGeometrySize : CGSize
     var imageSize        : CGSize
 
+    @EnvironmentObject
+    private var eleveStore : EleveStore
+
+    @Preference(\.nameDisplayOrder)
+    private var nameDisplayOrder
+
+    // MARK: - ComputedProperties
+
+    private var unSeatedEleves: [Binding<Eleve>] {
+        RoomManager.unSeatedEleves(dans: classe,
+                                   eleveStore: eleveStore)
+    }
+
+    private var nameOfEleveOnSeat: String {
+        RoomManager.eleveOnSeat(
+            seatID: seat.id,
+            dans: classe,
+            eleveStore: eleveStore
+        )?.displayName(nameDisplayOrder) ?? "Associer"
+    }
+
+    private var associateEleveToSeatMenu: some View {
+        Menu {
+            ForEach(unSeatedEleves, id:\.wrappedValue) { $eleve in
+                Button(eleve.displayName(nameDisplayOrder)) {
+                    withAnimation {
+                        eleve.seatId = seat.id
+                    }
+                }
+            }
+        } label: {
+            SeatLabel(label: nameOfEleveOnSeat)
+        }
+    }
+
     var body: some View {
-        SeatLabel(label: "Prénom")
+        associateEleveToSeatMenu
+        //SeatLabel(label: "Prénom")
             .offset(posInView(relativePos  : seat.locInRoom,
                               geometrySize : viewGeometrySize,
                               imageSize    : imageSize)

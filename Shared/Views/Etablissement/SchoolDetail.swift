@@ -112,6 +112,7 @@ struct SchoolDetail: View {
             // ajouter une évaluation
             Button {
                 withAnimation {
+                    // TODO: - Gérer le classement temporel des événements
                     school.events.insert(Event(), at: 0)
                 }
             } label: {

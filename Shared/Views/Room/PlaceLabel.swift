@@ -20,6 +20,7 @@ struct PlaceLabel: View {
                     .foregroundColor(foregoundColor)
             } else {
                 Text("Wandrille")
+                    .font(.callout)
                     .foregroundColor(backgoundColor)
             }
         }

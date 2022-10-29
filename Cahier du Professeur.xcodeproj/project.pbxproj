@@ -151,6 +151,8 @@
 		7992D0AE282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
 		79935D372824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
 		79935D382824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
+		79962A10290D2E9100EFA3EC /* EditablePlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79962A0F290D2E9100EFA3EC /* EditablePlaceLabel.swift */; };
+		79962A11290D2E9100EFA3EC /* EditablePlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79962A0F290D2E9100EFA3EC /* EditablePlaceLabel.swift */; };
 		79A5250728DBC15300E69ACD /* ARKWRIGHT_Wandrille.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5250328DBC15200E69ACD /* ARKWRIGHT_Wandrille.jpg */; };
 		79A5250828DBC15300E69ACD /* BENOIT_Jules.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5250428DBC15200E69ACD /* BENOIT_Jules.jpg */; };
 		79A5250928DBC15300E69ACD /* BILLARD_Louise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79A5250528DBC15200E69ACD /* BILLARD_Louise.jpg */; };
@@ -585,6 +587,7 @@
 		7992D0A9282B0AF200B31186 /* EleveMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveMark.swift; sourceTree = "<group>"; };
 		7992D0AC282B0B2100B31186 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		79935D362824906B005C20BD /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		79962A0F290D2E9100EFA3EC /* EditablePlaceLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePlaceLabel.swift; sourceTree = "<group>"; };
 		79A5250328DBC15200E69ACD /* ARKWRIGHT_Wandrille.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARKWRIGHT_Wandrille.jpg; sourceTree = "<group>"; };
 		79A5250428DBC15200E69ACD /* BENOIT_Jules.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BENOIT_Jules.jpg; sourceTree = "<group>"; };
 		79A5250528DBC15200E69ACD /* BILLARD_Louise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BILLARD_Louise.jpg; sourceTree = "<group>"; };
@@ -1027,6 +1030,7 @@
 				79BF996D290B49BF002FBA04 /* DraggablePlaceLabel.swift */,
 				79EF94C4290582AE0024348E /* PlaceLabel.swift */,
 				79F00E422903D712005D718F /* RoomElevePlacement.swift */,
+				79962A0F290D2E9100EFA3EC /* EditablePlaceLabel.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -2051,6 +2055,7 @@
 				791C26E928146B4300686F0C /* EleveObservRow.swift in Sources */,
 				795FAB292809C4E2004CB120 /* SchoolSidebarView.swift in Sources */,
 				79DB78A228E9DE86004E240E /* NavigationModel.swift in Sources */,
+				79962A10290D2E9100EFA3EC /* EditablePlaceLabel.swift in Sources */,
 				79FB57D328FDC37100B38D88 /* ElevesListView.swift in Sources */,
 				796F69AB28625384005E323D /* ClassCreator.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
@@ -2136,6 +2141,7 @@
 				792F75D628EF4A290053FECF /* ColleEditor.swift in Sources */,
 				79CC57192860B7C4001D56F5 /* SchoolCreator.swift in Sources */,
 				796F69AC28625384005E323D /* ClassCreator.swift in Sources */,
+				79962A11290D2E9100EFA3EC /* EditablePlaceLabel.swift in Sources */,
 				79F3ABEB28086C4F00D068D9 /* SchoolManager.swift in Sources */,
 				79502BA82818945200DA798F /* ObservBrowserRow.swift in Sources */,
 				79B5BD4828340C9400034115 /* MotifLabel.swift in Sources */,

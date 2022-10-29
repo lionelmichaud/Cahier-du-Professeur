@@ -16,6 +16,7 @@ private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Profess
 struct Room: Identifiable, Codable, Equatable {
 
     enum CodingKeys: String, CodingKey {
+        case id
         case name
         case places
         case capacity

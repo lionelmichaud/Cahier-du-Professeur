@@ -47,7 +47,7 @@ struct GroupManager {
         }
     }
 
-    /// Retourne les groupes constitués dans la classe
+    /// Retourne les groupes constitués dans la `classe`.
     /// - Returns: Les groupes constitués dans la classe
     static func groups(dans classe : Classe,
                        eleveStore  : EleveStore) -> [GroupOfEleves] {
@@ -74,6 +74,7 @@ struct GroupManager {
         return groups
     }
 
+    /// Retourne la liste des élèves de la `classe` qui n'appartiennent à aucun groupe.
     static func unGroupedEleves(dans classe : Classe,
                                 eleveStore  : EleveStore) -> [Eleve.ID] {
         classe.elevesID.compactMap { eleveID in
@@ -100,7 +101,7 @@ struct GroupManager {
         return nb
     }
 
-    /// Former les groupes par ordre alphabétique dans une classe
+    /// Former les groupes par ordre alphabétique dans la `classe`.
     /// - Parameters:
     ///   - nbEleveParGroupe: nombre d'élève idéal par groupe
     ///   - classe: dans cette classe
@@ -146,7 +147,7 @@ struct GroupManager {
         }
     }
 
-    /// Former les groupes aléatoirement dans une classe
+    /// Former les groupes aléatoirement dans la `classe`.
     /// - Parameters:
     ///   - nbEleveParGroupe: nombre d'élève idéal par groupe
     ///   - classe: dans cette classe
@@ -156,7 +157,7 @@ struct GroupManager {
 
     }
 
-    /// Dissoudre les groupes formés dans une classe
+    /// Dissoudre les groupes formés dans la `classe`.
     /// - Parameters:
     ///   - classe: dans cette classe
     static func disolveGroups(dans classe : Classe,

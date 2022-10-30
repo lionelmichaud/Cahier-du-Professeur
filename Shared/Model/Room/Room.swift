@@ -26,39 +26,37 @@ struct Room: Identifiable, Codable, Equatable {
 
     static let exemple = Room(name     : "Salle",
                               capacity : 24)
+
     // MARK: - Properties
 
     var id = UUID()
+    /// Nom de la salle de classe
     var name     : String = ""
-    var seats    : [Seat] = []
+    /// Plan de la salle de classe
     var image    : Image? // cache
-    var capacity : Int {
-        willSet(newCapacity) {
-            if newCapacity < seats.count {
-                seats = seats.dropLast(seats.count - newCapacity)
-            }
-        }
-    }
+    /// Places déjà positionnées sur le plan
+    private var seats: [Seat] = []
+    private (set) var capacity: Int
 
     // MARK: - Computed Properties
 
     /// Nombre de places positionnées sur la le plan de la salle de classe
-    var nbPlacesDefined: Int {
+    var nbSeatPositionned: Int {
         seats.count
     }
 
     /// Nombre de places non encore positionnées sur la le plan de la salle de classe
-    var nbPlacesUndefined: Int {
+    var nbSeatUnpositionned: Int {
         capacity - seats.count
     }
 
     /// URL du fichier image PNG contenant le plan de la salle de classe
-   var planURL: URL? {
+    var planURL: URL? {
         let planName = "Plan " + name + ".png"
 
-       return URL.documentsDirectory
-           .appending(path: planName)
-   }
+        return URL.documentsDirectory
+            .appending(path: planName)
+    }
 
     /// Retourne les dimensions de l'image
     var imageSize : CGSize? {
@@ -73,6 +71,16 @@ struct Room: Identifiable, Codable, Equatable {
         return nil
     }
 
+    // MARK: - Subscript
+
+    subscript(seatIndex idx: Int) -> Seat {
+        get {
+            return seats[idx]
+        }
+        set(newValue) {
+            seats[idx] = newValue
+        }
+    }
     // MARK: - Initializers
 
     init(id       : UUID   = UUID(),
@@ -81,6 +89,91 @@ struct Room: Identifiable, Codable, Equatable {
         self.id       = id
         self.name     = name
         self.capacity = capacity
+    }
+
+    // MARK: - Methods
+
+    /// Positionner un siège supplémentaires `seat` sur le plan de la salle de classe.
+    /// - Parameter seat: Le siège à ajouter.
+    ///
+    /// Si le nombre de place déjà positionnées est égale à la capacité max de la salle de classe,
+    /// alors ne fait rien.
+    mutating func addSeatToPlan(_ seat: Seat) {
+        guard nbSeatUnpositionned.isPositive else {
+            return
+        }
+        seats.append(seat)
+    }
+
+    /// Supprimer tous les sièges positionnés sur le plan de la salle de classe
+    mutating func removeAllSeatsFromPlan(dans school : School,
+                                         classStore  : ClasseStore,
+                                         eleveStore  : EleveStore) {
+        if seats.isNotEmpty {
+            for idxSeat in seats.indices {
+                // pour chaque place à retirer
+                school.classesID.forEach { classeID in
+                    // pour chaque classe dans l'étabissement
+                    if let classe = classStore.item(withID: classeID) {
+                        RoomManager
+                            .removeEleveFromSeat(seatID     : seats[idxSeat].id,
+                                                 dans       : classe,
+                                                 eleveStore : eleveStore)
+                    }
+                }
+            }
+            seats = []
+        }
+    }
+
+    /// Augmenter la capacité de la salle de classe
+    /// - Parameter increment: Nobre de places à ajouter
+    ///
+    /// Si `increment`est ≤ 0, alors ne fait rien
+    mutating func incrementCapacity(increment: Int = 1) {
+        guard increment.isPositive else {
+            return
+        }
+        capacity += increment
+    }
+
+    /// Réduire la capacité de la salle de classe
+    /// - Parameter decrement: Nobre de places à supprimer (>0)
+    ///
+    /// Si `decrement`est ≤ 0, alors ne fait rien
+    mutating func decrementCapacity(decrement   : Int = 1,
+                                    dans school : School,
+                                    classStore  : ClasseStore,
+                                    eleveStore  : EleveStore) {
+        guard decrement.isPositive else {
+            return
+        }
+        setCapacity(newCapacity : capacity - decrement,
+                    dans        : school,
+                    classStore  : classStore,
+                    eleveStore  : eleveStore)
+    }
+
+    mutating func setCapacity(newCapacity : Int,
+                              dans school : School,
+                              classStore  : ClasseStore,
+                              eleveStore  : EleveStore) {
+        if newCapacity < seats.count {
+            for idxSeat in newCapacity ... (seats.count - 1) {
+                // pour chaque place à retirer
+                school.classesID.forEach { classeID in
+                    // pour chaque classe dans l'étabissement
+                    if let classe = classStore.item(withID: classeID) {
+                        RoomManager
+                            .removeEleveFromSeat(seatID     : seats[idxSeat].id,
+                                                 dans       : classe,
+                                                 eleveStore : eleveStore)
+                    }
+                }
+            }
+            seats = seats.dropLast(seats.count - newCapacity)
+        }
+        capacity = newCapacity
     }
 }
 

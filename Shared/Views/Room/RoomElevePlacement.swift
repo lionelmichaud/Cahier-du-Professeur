@@ -66,12 +66,14 @@ struct RoomElevePlacement: View {
                                           placeholderImage: .constant(Image(systemName: "questionmark.app.dashed")))
 
                             // Symboles des places des élèves dans la salle
-                            ForEach(room!.seats, id:\.self) { seat in
-                                EditableSeatLabel(
-                                    classe           : classe,
-                                    seat             : seat,
-                                    viewGeometrySize : viewGeometry.size,
-                                    imageSize        : imageSize)
+                            if room!.nbSeatPositionned > 0 {
+                                ForEach(0 ... (room!.nbSeatPositionned - 1), id:\.self) { idxSeat in
+                                    EditableSeatLabel(
+                                        classe           : classe,
+                                        seat             : room![seatIndex: idxSeat],
+                                        viewGeometrySize : viewGeometry.size,
+                                        imageSize        : imageSize)
+                                }
                             }
                         }
                     }

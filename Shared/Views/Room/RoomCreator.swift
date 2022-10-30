@@ -11,6 +11,14 @@ struct RoomCreator: View {
     @Binding
     var room: Room
 
+    var school: School
+
+    @EnvironmentObject
+    private var classStore  : ClasseStore
+
+    @EnvironmentObject
+    private var eleveStore : EleveStore
+
     @Environment(\.horizontalSizeClass)
     var hClass
 
@@ -28,15 +36,19 @@ struct RoomCreator: View {
     }
 
     var nbPlaces: some View {
-        Stepper(value : $room.capacity,
-                in    : 1 ... 100,
-                step  : 1) {
+        Stepper {
             HStack {
                 Text(hClass == .regular ? "Nombre de places" : "Nombre de places")
                 Spacer()
                 Text("\(room.capacity)")
                     .foregroundColor(.secondary)
             }
+        } onIncrement: {
+            room.incrementCapacity()
+        } onDecrement: {
+            room.decrementCapacity(dans       : school,
+                                   classStore : classStore,
+                                   eleveStore : eleveStore)
         }
     }
 
@@ -70,16 +82,29 @@ struct RoomCreator: View {
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isPlacing) {
             NavigationStack {
-                RoomEditor(room: $room)
+                RoomEditor(room: $room, school: school)
             }
-            .presentationDetents([.medium])
+            .presentationDetents([.large])
         }
     }
 }
 
 struct RoomCreator_Previews: PreviewProvider {
     static var previews: some View {
-        RoomCreator(room: .constant(Room(name: "TECHNO-2",
-                                         capacity: 12)))
+        TestEnvir.createFakes()
+        return Group {
+            NavigationStack {
+                RoomCreator(room: .constant(Room(name: "TECHNO-2",
+                                                 capacity: 12)),
+                            school: TestEnvir.schoolStore.items.first!)
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
+        }
     }
 }

@@ -48,17 +48,30 @@ struct RoomManager {
     ///             Retourne `nil` si aucun élève n'est assis à cette place.
     static func eleveOnSeat(seatID      : UUID,
                             dans classe : Classe,
-                            eleveStore  : EleveStore) -> Eleve? {
+                            eleveStore  : EleveStore) -> Binding<Eleve>? {
 
         guard classe.roomId != nil else { return nil }
 
         return classe.elevesID.compactMap { eleveID in
-            if let eleve = eleveStore.item(withID: eleveID),
-               eleve.seatId == seatID {
+            if let eleve = eleveStore.itemBinding(withID: eleveID),
+               eleve.wrappedValue.seatId == seatID {
                 return eleve
             } else {
                 return nil
             }
         }.first
+    }
+
+    static func removeEleveFromSeat(seatID      : UUID,
+                                    dans classe : Classe,
+                                    eleveStore  : EleveStore) {
+        if let eleveOnSeat = eleveOnSeat(
+            seatID     : seatID,
+            dans       : classe,
+            eleveStore : eleveStore
+        ) {
+            // enlever l'élève qui était assis à cette place
+            eleveOnSeat.wrappedValue.seatId = nil
+        }
     }
 }

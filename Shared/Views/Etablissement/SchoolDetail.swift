@@ -193,7 +193,7 @@ struct SchoolDetail: View {
 
             // édition de la liste des examen
             ForEach($school.rooms) { $room in
-                RoomCreator(room: $room)
+                RoomCreator(room: $room, school: school)
             }
             .onDelete { indexSet in
                 // TODO: - Dissocier les classes utilisant cette salle

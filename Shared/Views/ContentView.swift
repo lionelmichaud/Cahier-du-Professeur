@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HelpersView
 
 struct ContentView: View {
     @EnvironmentObject var schoolStore : SchoolStore
@@ -14,43 +15,61 @@ struct ContentView: View {
     @EnvironmentObject var colleStore  : ColleStore
     @EnvironmentObject var observStore : ObservationStore
 
-    @SceneStorage("navigation") private var navigationData: Data?
-    @StateObject private var navigationModel = NavigationModel()
+    @SceneStorage("navigation")
+    private var navigationData: Data?
+    @StateObject
+    private var navigationModel = NavigationModel()
+
+    @State
+    private var alertItem: AlertItem?
 
     var body: some View {
         TabView(selection: $navigationModel.selectedTab) {
             /// gestion des dossiers
             SchoolSplitView()
                 .tabItem { Label("Etablissement", systemImage: "building.2").symbolVariant(.none) }
-                .tag(UIState.Tab.school)
+                .tag(NavigationModel.Tab.school)
                 .badge(schoolStore.nbOfItems)
 
             /// composition de la famille
             ClasseSplitView()
                 .tabItem { Label("Classes", systemImage: "person.3").symbolVariant(.none) }
-                .tag(UIState.Tab.classe)
+                .tag(NavigationModel.Tab.classe)
                 .badge(classeStore.nbOfItems)
 
             /// dépenses de la famille
             EleveSplitView()
                 .tabItem { Label("Elèves", systemImage: "person").symbolVariant(.none) }
-                .tag(UIState.Tab.eleve)
+                .tag(NavigationModel.Tab.eleve)
                 .badge(eleveStore.nbOfItems)
 
             /// scenario paramètrique de simulation
             ObservSplitView()
                 .tabItem { Label("Observations", systemImage: "rectangle.and.text.magnifyingglass").symbolVariant(.none) }
-                .tag(UIState.Tab.observation)
+                .tag(NavigationModel.Tab.observation)
                 .badge(observStore.nbOfItemsToCheck)
 
             /// actifs & passifs du patrimoine de la famille
             ColleSplitView()
                 .tabItem { Label("Colles", systemImage: "lock").symbolVariant(.none) }
-                .tag(UIState.Tab.colle)
+                .tag(NavigationModel.Tab.colle)
                 .badge(colleStore.nbOfItemsToCheck)
         }
         .environmentObject(navigationModel)
+        .alert(item: $alertItem, content: newAlert)
         .task {
+            switch AppState.shared.initError {
+                case .none:
+                    break
+
+                case .failedToLoadUserData,
+                        .failedToInitialize,
+                        .failedToLoadApplicationData,
+                        .failedToCheckCompatibility:
+                    self.alertItem = AlertItem(title         : Text("Erreur"),
+                                               message       : Text(AppState.shared.initError!.rawValue),
+                                               dismissButton : .default(Text("OK")))
+            }
             eleveStore.sort()
 
             if let navigationData {

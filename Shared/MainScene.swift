@@ -23,7 +23,7 @@ struct MainScene: Scene {
     @ObservedObject var observStore : ObservationStore
 
     /// object that you want to use throughout your views and that will be specific to each scene
-    @StateObject private var uiState = UIState()
+    //@StateObject private var uiState = UIState()
 
     var body: some Scene {
         WindowGroup {

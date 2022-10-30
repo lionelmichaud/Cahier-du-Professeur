@@ -11,27 +11,43 @@ struct RoomEditor: View {
     @Binding
     var room: Room
 
-    @Environment(\.dismiss) private var dismiss
+    var school: School
+
+    @EnvironmentObject
+    private var classStore  : ClasseStore
+
+    @EnvironmentObject
+    private var eleveStore : EleveStore
+
+    @Environment(\.dismiss)
+    private var dismiss
 
     var body: some View {
         if room.planURL != nil {
             RoomPlanEditView(room: $room)
-            .navigationTitle("Places non positionnées: \(room.nbPlacesUndefined)")
+            .navigationTitle("Places non positionnées: \(room.nbSeatUnpositionned)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleMenu {
                 /// positionner une nouvelle place au centre du plan de la salle de classe
-                Button("Positionner nouvelle place") {
-                    withAnimation {
-                        room.seats.append(Seat(x: 0.5, y: 0.5))
+                if room.nbSeatUnpositionned > 0 {
+                    Button("Positionner nouvelle place") {
+                        withAnimation {
+                            room.addSeatToPlan(Seat(x: 0.5, y: 0.5))
+                        }
                     }
                 }
                 /// supprimer tous les positionnements de places dans la salle de classe
-                Button(role: .destructive) {
-                    withAnimation {
-                        room.seats = []
+                if room.nbSeatPositionned > 0 {
+                    Button(role: .destructive) {
+                        withAnimation {
+                            // TODO: - Supprimer les pointeur des élèves de la classe vers les placces
+                            room.removeAllSeatsFromPlan(dans       : school,
+                                                        classStore : classStore,
+                                                        eleveStore : eleveStore)
+                        }
+                    } label: {
+                        Label("Tout effacer", systemImage: "trash.fill")
                     }
-                } label: {
-                    Label("Tout effacer", systemImage: "trash.fill")
                 }
             }
             .toolbar {
@@ -52,23 +68,38 @@ struct RoomEditor: View {
 struct RoomPlacement_Previews: PreviewProvider {
     static var room: Room = {
         var r = Room(name: "TECHNO-2", capacity: 12)
-        r.seats.append(Seat(x: 0.0, y: 0.0))
-        r.seats.append(Seat(x: 0.25, y: 0.25))
-        r.seats.append(Seat(x: 0.5, y: 0.5))
-        r.seats.append(Seat(x: 0.75, y: 0.75))
-        r.seats.append(Seat(x: 0.98, y: 0.98))
+        r.addSeatToPlan(Seat(x: 0.0, y: 0.0))
+        r.addSeatToPlan(Seat(x: 0.25, y: 0.25))
+        r.addSeatToPlan(Seat(x: 0.5, y: 0.5))
+        r.addSeatToPlan(Seat(x: 0.75, y: 0.75))
+        r.addSeatToPlan(Seat(x: 0.98, y: 0.98))
         return r
     }()
     static var previews: some View {
-        Group {
+        TestEnvir.createFakes()
+        return Group {
             NavigationStack {
-                RoomEditor(room: .constant(room))
+                RoomEditor(room: .constant(room),
+                           school: TestEnvir.schoolStore.items.first!)
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPad mini (6th generation)")
 
             NavigationStack {
                 RoomEditor(room: .constant(Room(name: "TECHNO-2",
-                                                   capacity: 12)))
+                                                capacity: 12)),
+                           school: TestEnvir.schoolStore.items.first!)
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPhone 13")
         }

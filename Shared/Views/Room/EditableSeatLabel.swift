@@ -26,25 +26,54 @@ struct EditableSeatLabel: View {
                                    eleveStore: eleveStore)
     }
 
-    private var nameOfEleveOnSeat: String {
+    private var eleveOnSeat: Binding<Eleve>? {
         RoomManager.eleveOnSeat(
-            seatID: seat.id,
-            dans: classe,
-            eleveStore: eleveStore
-        )?.displayName(nameDisplayOrder) ?? "Associer"
+            seatID     : seat.id,
+            dans       : classe,
+            eleveStore : eleveStore
+        )
     }
 
+    private var nameOfEleveOnSeat: String {
+        eleveOnSeat?
+            .wrappedValue
+            .displayName(nameDisplayOrder) ?? "Associer"
+    }
+
+    /// Menu de placement d'un élève sur une place de la salle de classe
     private var associateEleveToSeatMenu: some View {
         Menu {
-            ForEach(unSeatedEleves, id:\.wrappedValue) { $eleve in
-                Button(eleve.displayName(nameDisplayOrder)) {
+            if let eleveOnSeat {
+                // enlever l'élève qui était assis à cette place
+                Button(role: .destructive) {
                     withAnimation {
-                        eleve.seatId = seat.id
+                        // enlever l'élève qui était assis à cette place
+                        eleveOnSeat.wrappedValue.seatId = nil
+                    }
+                } label: {
+                    Label("Libérer la place", systemImage: "chair")
+                }
+            }
+
+            Section {
+                ForEach(unSeatedEleves, id:\.wrappedValue) { $eleve in
+                    Button(eleve.displayName(nameDisplayOrder)) {
+                        withAnimation {
+                            // enlever l'élève qui était assis à cette place
+                            eleveOnSeat?.wrappedValue.seatId = nil
+                            // pour y mettre cet élève là
+                            eleve.seatId = seat.id
+                        }
                     }
                 }
             }
         } label: {
             SeatLabel(label: nameOfEleveOnSeat)
+            // TODO: - vérifier
+                .background {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(.gray)
+                }
         }
     }
 

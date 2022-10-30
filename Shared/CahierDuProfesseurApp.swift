@@ -21,8 +21,6 @@ struct CahierDuProfesseurApp: App {
     @StateObject private var eleveStore  = EleveStore(fromFolder: nil)
     @StateObject private var colleStore  = ColleStore(fromFolder: nil)
     @StateObject private var observStore = ObservationStore(fromFolder: nil)
-    @State
-    private var alertItem: AlertItem?
 
     var body: some Scene {
         MainScene(schoolStore : schoolStore,
@@ -57,16 +55,15 @@ struct CahierDuProfesseurApp: App {
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "png")
+                    
                 } catch {
-                    self.alertItem = AlertItem(title         : Text("Erreur"),
-                                               message       : Text("L'importation des fichiers a échouée!"),
-                                               dismissButton : .default(Text("OK")))
+                    AppState.shared.initError = .failedToLoadApplicationData
                 }
             }
         } catch {
             let error = FileError.failedToCheckCompatibility
             customLog.log(level: .fault, "\(error.rawValue))")
-            fatalError()
+            AppState.shared.initError = .failedToCheckCompatibility
         }
     }
 }

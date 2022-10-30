@@ -57,6 +57,7 @@ E: CustomStringConvertible {
 
     // MARK: - Subscript
 
+    /// Permet de sauvegarder l'objet au moment de l'affectation d'une nouvelle valeur
     public subscript(idx: Int) -> E {
         get {
             return items[idx]
@@ -69,6 +70,7 @@ E: CustomStringConvertible {
 
     // MARK: - Initializers
 
+    /// Initialiser à vide
     public init() { }
 
     /// Initialiser à partir d'un fichier JSON portant le nom de la Class `E`
@@ -89,6 +91,7 @@ E: CustomStringConvertible {
 
         } else {
             self.init()
+            AppState.shared.initError = .failedToLoadUserData
             return
         }
         do {
@@ -98,6 +101,7 @@ E: CustomStringConvertible {
                           dateDecodingStrategy : .iso8601,
                           keyDecodingStrategy  : .useDefaultKeys)
         } catch {
+            AppState.shared.initError = .failedToLoadUserData
             self.init()
         }
     }

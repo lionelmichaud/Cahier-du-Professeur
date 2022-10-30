@@ -22,10 +22,23 @@ struct RoomEditor: View {
     @Environment(\.dismiss)
     private var dismiss
 
+    @Environment(\.horizontalSizeClass)
+    private var hClass
+
+    // MARK: - Computed Properties
+
+    private var title: String {
+        if hClass == .regular {
+            return "Places  - positionnées \(room.nbSeatPositionned) - non positionnées: \(room.nbSeatUnpositionned)"
+        } else {
+            return "Places non positionnées: \(room.nbSeatUnpositionned)"
+        }
+    }
+
     var body: some View {
         if room.planURL != nil {
             RoomPlanEditView(room: $room)
-            .navigationTitle("Places non positionnées: \(room.nbSeatUnpositionned)")
+            .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleMenu {
                 /// positionner une nouvelle place au centre du plan de la salle de classe

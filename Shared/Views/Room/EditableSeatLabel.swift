@@ -14,10 +14,19 @@ struct EditableSeatLabel: View {
     var imageSize        : CGSize
 
     @EnvironmentObject
+    private var navigationModel : NavigationModel
+
+    @EnvironmentObject
     private var eleveStore : EleveStore
 
     @Preference(\.nameDisplayOrder)
     private var nameDisplayOrder
+
+    @State
+    private var isAddingNewObserv = false
+
+    @State
+    private var isAddingNewColle  = false
 
     // MARK: - ComputedProperties
 
@@ -53,6 +62,29 @@ struct EditableSeatLabel: View {
                 } label: {
                     Label("Libérer la place", systemImage: "chair")
                 }
+
+                Section {
+                    // aller à la fiche élève
+                    Button {
+                        // Programatic Navigation
+                        navigationModel.selectedTab     = .eleve
+                        navigationModel.selectedEleveId = eleveOnSeat.wrappedValue.id
+                    } label: {
+                        Label("Fiche élève", systemImage: "info.circle")
+                    }
+                    // ajouter une observation
+                    Button {
+                        isAddingNewObserv = true
+                    } label: {
+                        Label("Nouvelle observation", systemImage: "rectangle.and.text.magnifyingglass")
+                    }
+                    // ajouter une colle
+                    Button {
+                        isAddingNewColle = true
+                    } label: {
+                        Label("Nouvelle colle", systemImage: "lock.fill")
+                    }
+                }
             }
 
             Section {
@@ -70,6 +102,18 @@ struct EditableSeatLabel: View {
         } label: {
             SeatLabel(label          : nameOfEleveOnSeat,
                       backgoundColor : eleveOnSeat == nil ? .pink  : .blue)
+        }
+        .sheet(isPresented: $isAddingNewObserv) {
+            NavigationStack {
+                ObservCreator(eleve: eleveOnSeat!)
+            }
+            .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isAddingNewColle) {
+            NavigationStack {
+                ColleCreator(eleve: eleveOnSeat!)
+            }
+            .presentationDetents([.medium])
         }
     }
 

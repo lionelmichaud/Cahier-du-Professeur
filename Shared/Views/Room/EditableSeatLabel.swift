@@ -50,8 +50,8 @@ struct EditableSeatLabel: View {
     }
 
     /// Menu de placement d'un élève sur une place de la salle de classe
-    private var associateEleveToSeatMenu: some View {
-        Menu {
+    private var seatMenu: some View {
+        Group {
             if let eleveOnSeat {
                 Section {
                     // aller à la fiche élève
@@ -114,10 +114,25 @@ struct EditableSeatLabel: View {
                     }
                 }
             }
-        } label: {
-            SeatLabel(label          : nameOfEleveOnSeat,
-                      backgoundColor : eleveOnSeat == nil ? .pink  : .blue)
         }
+    }
+
+    var body: some View {
+        SeatLabel(label          : nameOfEleveOnSeat,
+                  backgoundColor : eleveOnSeat == nil ? .pink  : .blue)
+        .contextMenu {
+            seatMenu
+        } preview: {
+            if eleveOnSeat != nil,
+               let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleveOnSeat!.wrappedValue) {
+                LoadableImage(imageUrl         : trombine,
+                              placeholderImage : .constant(Image(systemName: "person.fill.questionmark")))
+            }
+        }
+        .offset(posInView(relativePos  : seat.locInRoom,
+                          geometrySize : viewGeometrySize,
+                          imageSize    : imageSize)
+        )
         .sheet(isPresented: $isAddingNewObserv) {
             NavigationStack {
                 ObservCreator(eleve: eleveOnSeat!)
@@ -130,15 +145,6 @@ struct EditableSeatLabel: View {
             }
             .presentationDetents([.medium])
         }
-    }
-
-    var body: some View {
-        associateEleveToSeatMenu
-        //SeatLabel(label: "Prénom")
-            .offset(posInView(relativePos  : seat.locInRoom,
-                              geometrySize : viewGeometrySize,
-                              imageSize    : imageSize)
-            )
     }
 
     // MARK: - Methods

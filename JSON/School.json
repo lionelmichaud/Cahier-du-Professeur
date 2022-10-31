@@ -1,25 +1,64 @@
 {
   "items" : [
     {
-      "id" : "624A549C-9D11-402B-B308-640E30189FD6",
       "niveau" : "lycee",
-      "annotation" : "",
-      "nom" : "Le Caousou",
       "classesID" : [
         "F2DD54DD-793D-4AFA-92ED-D7E19B33E463"
       ],
       "events" : [
+        {
+          "id" : "AF931475-7397-49CC-AFEA-AECE71FB6643",
+          "date" : "2023-03-17T16:14:00Z",
+          "name" : "Groupe 2 avec Sandrine GEOFFROY Réseaux Sociaux"
+        },
+        {
+          "id" : "BFAD78EC-864C-44E3-A011-E5B8DF3FC6AB",
+          "date" : "2023-02-03T16:13:00Z",
+          "name" : "Groupe 2 avec Sandrine GEOFFROY Réseaux Sociaux"
+        },
+        {
+          "id" : "764F27BF-A433-4D46-B693-BB3DCACF9DFB",
+          "date" : "2023-01-20T16:12:00Z",
+          "name" : "Groupe 2 avec Sandrine GEOFFROY Réseaux Sociaux"
+        },
+        {
+          "id" : "7FBF19B6-BE48-4823-AC27-D6FDD1666DC6",
+          "date" : "2023-03-31T15:16:00Z",
+          "name" : "Groupe 2 avec Sandrine GEOFFROY Réseaux Sociaux"
+        },
+        {
+          "id" : "B582A74F-F1E1-441E-9F0E-C7CA65917F7E",
+          "date" : "2023-04-07T15:12:00Z",
+          "name" : "Groupe 1 avec Lucie BEDOS Réseaux Sociaux"
+        },
+        {
+          "id" : "6E881179-E27F-4658-B07D-54984EEE6958",
+          "date" : "2023-03-24T16:11:00Z",
+          "name" : "Groupe 1 avec Lucie BEDOS Réseaux Sociaux"
+        },
+        {
+          "id" : "6D316456-B68D-4588-B2F2-D6DDA343CB84",
+          "date" : "2023-01-27T16:09:00Z",
+          "name" : "Groupe 1 avec Lucie BEDOS Réseaux Sociaux"
+        },
+        {
+          "id" : "CE327D17-313B-4062-8B67-23B866D15893",
+          "date" : "2023-01-13T16:08:00Z",
+          "name" : "Groupe 1 avec Lucie BEDOS Réseaux Sociaux"
+        }
+      ],
+      "id" : "624A549C-9D11-402B-B308-640E30189FD6",
+      "nom" : "Le Caousou",
+      "annotation" : "",
+      "rooms" : [
+
       ],
       "ressources" : [
-      ],
-      "rooms" : [
+
       ]
     },
     {
-      "id" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
       "niveau" : "college",
-      "annotation" : "",
-      "nom" : "Le Caousou",
       "classesID" : [
         "00067A1B-4802-4657-A1F9-72CB19A74500",
         "FF8AA65D-3CAC-4844-BB28-335178359125",
@@ -30,10 +69,89 @@
         "49819899-4614-42CC-82BE-50F6483AC241"
       ],
       "events" : [
+        {
+          "id" : "2FC045C3-16B8-4565-A08C-F1351E95D9CD",
+          "date" : "2022-11-22T17:21:00Z",
+          "name" : "2nd - Conseils de classe"
+        },
+        {
+          "id" : "86C1078C-2874-44E7-8F19-552E30A8BAB0",
+          "date" : "2022-11-29T17:20:00Z",
+          "name" : "3E - Conseils de classe"
+        },
+        {
+          "id" : "0E7AF196-147D-4594-A359-1A7619B9F5A6",
+          "date" : "2023-01-06T17:19:00Z",
+          "name" : "2nd - Arrêt des note 1er Semestre"
+        },
+        {
+          "id" : "8D868AED-69F6-49DF-9BA5-9BB8F1A99A5B",
+          "date" : "2022-11-28T17:18:00Z",
+          "name" : "2nd - Réunion parents - prof mi-1er semestre"
+        },
+        {
+          "id" : "91ADD698-672D-4BDF-8D7A-76403A185CA8",
+          "date" : "2022-11-12T17:17:00Z",
+          "name" : "4E - Réunion parents - prof mi-1er semestre"
+        },
+        {
+          "id" : "E5B8F0D1-5A0E-4238-9316-9E52743B5BE4",
+          "date" : "2023-01-13T17:16:00Z",
+          "name" : "4E\/3E - Arrêt des note 1er Semestre"
+        },
+        {
+          "id" : "DCDF0F0B-D365-415D-9BFA-3AEDBFA266B7",
+          "date" : "2022-11-21T17:14:00Z",
+          "name" : "3E - Réunion parents - prof mi-1er semestre"
+        },
+        {
+          "id" : "9092991F-B9B3-40A1-97BF-9C383FC7BEFE",
+          "date" : "2022-11-07T17:12:00Z",
+          "name" : "Début du bilan mi-1erSemestre"
+        }
+      ],
+      "id" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
+      "nom" : "Le Caousou",
+      "annotation" : "",
+      "rooms" : [
+        {
+          "seats" : [
+            {
+              "id" : "C7BB7DC6-B272-45B9-9F3A-EC2AF956B960",
+              "locInRoom" : [
+                0.36589719430485762,
+                0.018333333333333333
+              ]
+            },
+            {
+              "id" : "8CEE2437-A47C-4432-9BD9-813834EA35DC",
+              "locInRoom" : [
+                0.36589719430485762,
+                0.090833333333333321
+              ]
+            },
+            {
+              "id" : "3F84669A-8BBE-475E-A0B9-F7924F359C12",
+              "locInRoom" : [
+                0.46772927135678394,
+                0.050833333333333341
+              ]
+            },
+            {
+              "id" : "4580EBD1-C250-40D7-9F0F-8936B81E5E2E",
+              "locInRoom" : [
+                0.47203203517587938,
+                0.10833333333333334
+              ]
+            }
+          ],
+          "id" : "B4360445-AFF9-427E-A03D-9E40663ED3BB",
+          "name" : "TECHNO-2",
+          "capacity" : 24
+        }
       ],
       "ressources" : [
-      ],
-      "rooms" : [
+
       ]
     }
   ]

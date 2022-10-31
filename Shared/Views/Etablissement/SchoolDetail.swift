@@ -220,10 +220,13 @@ struct SchoolDetail: View {
     var body: some View {
         VStack {
             if selectedItemExists {
-                List {
-                    // nom de l'établissement
+                // nom de l'établissement
+                GroupBox {
                     name
+                }
+                .padding(.horizontal, 60)
 
+                List {
                     // note sur la classe
                     if schoolAnnotation {
                         AnnotationView(isExpanded: $noteIsExpanded,

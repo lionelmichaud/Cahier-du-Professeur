@@ -667,7 +667,7 @@
       ]
     },
     {
-      "bonus" : 1,
+      "bonus" : 0,
       "id" : "8339506C-D715-4C77-94AE-3A64BED48344",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -1416,7 +1416,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "0B331281-CB36-486A-86B8-2FA38C3151FD",
       "isFlagged" : false,
       "classeId" : "49819899-4614-42CC-82BE-50F6483AC241",
@@ -1556,7 +1556,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "8B9364E4-199F-4C38-AB51-19A8D88489A6",
       "isFlagged" : false,
       "classeId" : "49819899-4614-42CC-82BE-50F6483AC241",
@@ -1856,7 +1856,7 @@
         "familyName" : "FERRIER",
         "givenName" : "Raphaël"
       },
-      "bonus" : -1
+      "bonus" : -2
     },
     {
       "bonus" : 0,
@@ -1900,7 +1900,7 @@
       "bonus" : 0
     },
     {
-      "bonus" : 1,
+      "bonus" : 2,
       "id" : "09FB3411-9BBD-4E57-B688-FC202026F828",
       "isFlagged" : false,
       "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
@@ -2321,7 +2321,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : 1,
       "id" : "BAD16573-7817-4576-B39B-3511F5610B88",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",
@@ -2800,6 +2800,26 @@
         "givenName" : "Naël"
       },
       "bonus" : 0
+    },
+    {
+      "bonus" : 0,
+      "id" : "A2C5BC58-5A0C-4AED-9B89-E6C0BBA993DF",
+      "isFlagged" : false,
+      "classeId" : "9D62EA55-2FB5-4728-9315-A6B4F96D845F",
+      "annotation" : "",
+      "appreciation" : "",
+      "sexe" : "male",
+      "group" : 7,
+      "collesID" : [
+
+      ],
+      "name" : {
+        "familyName" : "LUCA",
+        "givenName" : "FERNANDEZ"
+      },
+      "observsID" : [
+
+      ]
     },
     {
       "bonus" : 0,
@@ -3483,12 +3503,12 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -3,
       "id" : "31C04EE6-2791-482C-815D-F839C1733326",
       "isFlagged" : false,
       "classeId" : "49819899-4614-42CC-82BE-50F6483AC241",
       "annotation" : "",
-      "appreciation" : "",
+      "appreciation" : "Comportement inapproprié en classe et irrespectueux envers le professeur. Copie sur ses camarades pendant les évaluations. Manque de travail. ",
       "sexe" : "male",
       "group" : 13,
       "collesID" : [
@@ -3825,7 +3845,7 @@
       ]
     },
     {
-      "bonus" : 0,
+      "bonus" : -1,
       "id" : "323E0F46-DDA1-4A4D-81A6-0AAD9A20D218",
       "isFlagged" : false,
       "classeId" : "E11B767C-5EE8-484F-B6B3-19B22A771BBA",

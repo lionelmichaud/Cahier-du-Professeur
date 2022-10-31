@@ -33,7 +33,7 @@ struct EventEditor: View {
         if hClass == .regular {
             HStack {
                 date
-                    .frame(maxWidth: 150)
+                    .frame(maxWidth: 175)
                 TextField("Événement", text: $event.name)
                     .lineLimit(2...3)
                     .font(hClass == .compact ? .callout : .body)
@@ -53,6 +53,18 @@ struct EventEditor: View {
 
 struct EventEditor_Previews: PreviewProvider {
     static var previews: some View {
-        EventEditor(event: .constant(Event.exemple))
+        Group {
+            List {
+                EventEditor(event: .constant(Event.exemple))
+                EventEditor(event: .constant(Event.exemple))
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            List {
+                EventEditor(event: .constant(Event.exemple))
+                EventEditor(event: .constant(Event.exemple))
+            }
+            .previewDevice("iPhone 13")
+        }
     }
 }

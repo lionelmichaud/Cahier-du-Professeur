@@ -17,9 +17,6 @@ struct GroupsView: View {
         case picture
     }
 
-    @Preference(\.nameDisplayOrder)
-    private var nameDisplayOrder
-
     @EnvironmentObject var eleveStore: EleveStore
 
     @State

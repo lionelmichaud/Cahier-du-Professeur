@@ -42,6 +42,7 @@ struct TrombinoscopeView: View {
                             Text(eleve.displayName2lines(nameDisplayOrder))
                                 .multilineTextAlignment(.center)
                                 .fontWeight(fontWeight)
+                                .foregroundColor(.white)
                                 .padding(2)
                                 .background {
                                     RoundedRectangle(cornerRadius: 5)

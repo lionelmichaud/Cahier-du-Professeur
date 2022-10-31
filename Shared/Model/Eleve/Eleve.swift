@@ -41,6 +41,7 @@ struct Eleve: Identifiable, Hashable, Codable, Ordered {
     var sexe         : Sexe = .male
     var name         : PersonNameComponents = PersonNameComponents()
     var classeId     : UUID?
+    var seatId       : UUID?
     var isFlagged    : Bool   = false
     var troubleDys   : TroubleDys?
     var appreciation : String = ""

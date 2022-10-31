@@ -256,11 +256,13 @@ struct SchoolSidebarView: View {
                    geometry: geometry)
     }
 
-    /// Importer les fichiers JSON et JPEG depuis le Bundle Application
+    /// Importer tous les fichiers JSON, JPEG et PNG depuis le Bundle Application
     private func `import`() {
+        // Copier les fichiers contenus dans le Bundle de l'application vers le répertoire Document de l'utilisateur
         do {
             try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
             try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
+            try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "png")
         } catch {
             /// trigger second alert
             DispatchQueue.main.async {
@@ -270,6 +272,7 @@ struct SchoolSidebarView: View {
             }
         }
         do {
+            // Initialiser les objets du model à partir des fichiers JSON
             try schoolStore.loadFromJSON(fromFolder: nil)
             try classeStore.loadFromJSON(fromFolder: nil)
             try eleveStore.loadFromJSON(fromFolder: nil)

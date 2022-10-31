@@ -28,6 +28,7 @@ struct Classe: Identifiable, Codable, Ordered, Hashable {
 
     var id = UUID()
     var schoolId     : UUID?
+    var roomId       : UUID?
     var niveau       : NiveauClasse = .n6ieme
     var numero       : Int    = 1
     var heures       : Double = 0
@@ -37,6 +38,12 @@ struct Classe: Identifiable, Codable, Ordered, Hashable {
     var annotation   : String = ""
     var elevesID     : [UUID] = []
     var exams        : [Exam] = []
+
+    // MARK: - Computed Properties
+
+    var hasAssociatedRoom: Bool {
+        roomId != nil
+    }
 
     var nbOfEleves: Int {
         elevesID.count
@@ -126,6 +133,7 @@ extension Classe: CustomStringConvertible {
            Appréciation: \(appreciation)
            Annotation  : \(annotation)
            SchoolID: \(String(describing: schoolId))
+           RoomID  : \(String(describing: roomId))
            Eleves  : \(String(describing: elevesID).withPrefixedSplittedLines("     "))
            Examens : \(String(describing: exams).withPrefixedSplittedLines("     "))
         """

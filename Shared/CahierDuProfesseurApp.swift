@@ -21,8 +21,6 @@ struct CahierDuProfesseurApp: App {
     @StateObject private var eleveStore  = EleveStore(fromFolder: nil)
     @StateObject private var colleStore  = ColleStore(fromFolder: nil)
     @StateObject private var observStore = ObservationStore(fromFolder: nil)
-    @State
-    private var alertItem: AlertItem?
 
     var body: some Scene {
         MainScene(schoolStore : schoolStore,
@@ -32,13 +30,22 @@ struct CahierDuProfesseurApp: App {
                   observStore : observStore)
     }
 
+    /// Vérifier l'existance du dossier `Documents`.
+    /// Vérifier la compatibilité de version entre l'application et les documents utilisateurs
+    ///
+    /// Si l'application et les documents utilisateurs ne sont pas compatible alors
+    /// importer les documents contenus dans le Bundle application.
     init() {
+        URLCache.shared.memoryCapacity = 100_000_000 // ~100 MB memory space
+
+        /// vérifier l'existance du dossier `Documents`
         guard let documentsFolder = Folder.documents else {
             let error = FileError.failedToResolveDocuments
             customLog.log(level: .fault, "\(error.rawValue))")
             fatalError()
         }
 
+        /// vérifier la compatibilité de version entre l'application et les documents utilisateurs
         do {
             let documentsAreCompatibleWithAppVersion = try PersistenceManager.checkCompatibilityWithAppVersion(of: documentsFolder)
             print("Compatibilité : \(documentsAreCompatibleWithAppVersion)")
@@ -47,16 +54,16 @@ struct CahierDuProfesseurApp: App {
                     print("Importation des fichiers du Bundle de l'Application")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
+                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "png")
+                    
                 } catch {
-                    self.alertItem = AlertItem(title         : Text("Erreur"),
-                                               message       : Text("L'importation des fichiers a échouée!"),
-                                               dismissButton : .default(Text("OK")))
+                    AppState.shared.initError = .failedToLoadApplicationData
                 }
             }
         } catch {
             let error = FileError.failedToCheckCompatibility
             customLog.log(level: .fault, "\(error.rawValue))")
-            fatalError()
+            AppState.shared.initError = .failedToCheckCompatibility
         }
     }
 }

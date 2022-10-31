@@ -55,7 +55,9 @@ struct TrombineView : View {
             ZStack(alignment: .topLeading) {
                 ZStack(alignment: .topTrailing) {
                     ZStack(alignment: .bottom) {
-                        LoadableImage(imageUrl: trombine)
+                        // TODO: - Gérer ici la mise à jour de la photo par drag and drop
+                        LoadableImage(imageUrl: trombine,
+                                      placeholderImage: .constant(Image(systemName: "person.fill.questionmark")))
                         /// Points +/-
                         TrombinoscopeFooterView(eleve: $eleve)
                     }

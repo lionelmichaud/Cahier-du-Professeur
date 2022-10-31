@@ -41,6 +41,7 @@ struct Trombinoscope {
         return fileURL
     }
 
+    /// Supprimer le fichier photo JPEG associé à `eleve`
     static func deleteTrombine(eleve: Eleve) {
         guard let familyName = eleve.name.familyName, let givenName = eleve.name.givenName else {
             return
@@ -59,9 +60,13 @@ struct Trombinoscope {
             let file = try documentsFolder.file(named: name)
             try file.delete()
         } catch {
+            // TODO: - Gérer l'exception
+            customLog.log(level: .fault,
+                          "\(error))")
         }
     }
 
+    /// Supprimer tous les fichiers photo JPEG associés aux élèves
     static func deleteAllTrombines() {
         // vérifier l'existence du Folder Document
         guard let documentsFolder = Folder.documents else {
@@ -76,12 +81,11 @@ struct Trombinoscope {
                 do {
                     try file.delete()
                 } catch {
+                    // TODO: - Gérer l'exception
+                    customLog.log(level: .fault,
+                                  "\(error))")
                 }
             }
         }
-    }
-
-    static func importTrombines() {
-        
     }
 }

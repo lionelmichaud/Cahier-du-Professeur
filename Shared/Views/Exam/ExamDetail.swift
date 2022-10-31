@@ -78,4 +78,3 @@ struct ExamDetail_Previews: PreviewProvider {
         }
     }
 }
-

@@ -9,8 +9,11 @@ import SwiftUI
 import Combine
 
 final class NavigationModel: ObservableObject, Codable {
+    enum Tab: Int, Hashable, Codable {
+        case userSettings, school, classe, eleve, colle, observation
+    }
     @Published var columnVisibility  : NavigationSplitViewVisibility
-    @Published var selectedTab       : UIState.Tab
+    @Published var selectedTab       : Tab
     @Published var selectedObservId  : Observation.ID?
     @Published var selectedColleId   : Colle.ID?
     @Published var selectedEleveId   : Eleve.ID?
@@ -25,7 +28,7 @@ final class NavigationModel: ObservableObject, Codable {
     private lazy var encoder = JSONEncoder()
 
     init(columnVisibility  : NavigationSplitViewVisibility = .doubleColumn,
-         selectedTab       : UIState.Tab      = .school,
+         selectedTab       : Tab              = .school,
          selectedObservId  : Observation.ID?  = nil,
          selectedColleId   : Colle.ID?        = nil,
          selectedEleveId   : Eleve.ID?        = nil,
@@ -83,7 +86,7 @@ final class NavigationModel: ObservableObject, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.selectedTab = try container.decode(
-            UIState.Tab.self, forKey: .selectedTab)
+            NavigationModel.Tab.self, forKey: .selectedTab)
 
         self.selectedObservId = try container.decodeIfPresent(
             Observation.ID.self, forKey: .selectedObservId)

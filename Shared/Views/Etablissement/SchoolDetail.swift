@@ -60,9 +60,9 @@ struct SchoolDetail: View {
             .onDelete { indexSet in
                 school.events.remove(atOffsets: indexSet)
             }
-            .onMove { fromOffsets, toOffset in
-                school.events.move(fromOffsets: fromOffsets, toOffset: toOffset)
-            }
+//            .onMove { fromOffsets, toOffset in
+//                school.events.move(fromOffsets: fromOffsets, toOffset: toOffset)
+//            }
 
         } header: {
             Text("Événements (\(school.nbOfEvents))")

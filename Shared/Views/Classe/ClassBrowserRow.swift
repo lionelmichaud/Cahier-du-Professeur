@@ -11,7 +11,38 @@ import HelpersView
 struct ClassBrowserRow: View {
     let classe: Classe
 
-    var body: some View {
+    private var regularRow: some View {
+        HStack {
+            Image(systemName: "person.3.fill")
+                .sfSymbolStyling()
+                .foregroundColor(classe.niveau.color)
+
+            Text(classe.displayString)
+                .fontWeight(.bold)
+            if classe.isFlagged {
+                Image(systemName: "flag.fill")
+                    .imageScale(.small)
+                    .foregroundColor(.orange)
+            } else {
+                Image(systemName: "flag.fill")
+                    .imageScale(.small)
+                    .foregroundColor(.orange)
+                    .hidden()
+            }
+
+            Text("\(classe.nbOfEleves) élèves")
+                .foregroundStyle(.secondary)
+            Image(systemName: "clock")
+            Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) heures")
+                .foregroundStyle(.secondary)
+            Spacer()
+
+            ClasseColleLabel(classe: classe, scale: .medium)
+            ClasseObservLabel(classe: classe, scale: .medium)
+        }
+    }
+
+    private var compactRow: some View {
         HStack {
             Image(systemName: "person.3.fill")
                 .sfSymbolStyling()
@@ -28,7 +59,7 @@ struct ClassBrowserRow: View {
                     }
 
                     Spacer()
-                    
+
                     ClasseColleLabel(classe: classe, scale: .medium)
                     ClasseObservLabel(classe: classe, scale: .medium)
                 }
@@ -43,17 +74,34 @@ struct ClassBrowserRow: View {
             }
         }
     }
+
+    var body: some View {
+        ViewThatFits {
+            regularRow
+            compactRow
+        }
+    }
 }
 
 struct ClassRow_Previews: PreviewProvider {
     static var previews: some View {
         TestEnvir.createFakes()
         return Group {
-            ClassBrowserRow(classe: TestEnvir.classeStore.items.first!)
-                .environmentObject(TestEnvir.eleveStore)
-                .environmentObject(TestEnvir.observStore)
-                .environmentObject(TestEnvir.colleStore)
-                .previewLayout(.sizeThatFits)
+            List {
+                ClassBrowserRow(classe: TestEnvir.classeStore.items.first!)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.observStore)
+                    .environmentObject(TestEnvir.colleStore)
+            }
+            .previewDevice("iPad mini (6th generation)")
+
+            List {
+                ClassBrowserRow(classe: TestEnvir.classeStore.items.first!)
+                    .environmentObject(TestEnvir.eleveStore)
+                    .environmentObject(TestEnvir.observStore)
+                    .environmentObject(TestEnvir.colleStore)
+            }
+            .previewDevice("iPhone 13")
         }
     }
 }

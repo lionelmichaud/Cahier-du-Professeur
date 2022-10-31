@@ -105,6 +105,28 @@ struct Room: Identifiable, Codable, Equatable {
         seats.append(seat)
     }
 
+    /// Supprimer le siège `seatIndex` positionnés sur le plan de la salle de classe
+    /// - Parameters:
+    ///   - seatIndex: Indice de la place à supprimer du plan
+    mutating func removeSeatFromPlan(seatIndex   : Int,
+                                     dans school : School,
+                                     classStore  : ClasseStore,
+                                     eleveStore  : EleveStore) {
+        guard seats.indices.contains(seatIndex) else {
+            return
+        }
+        school.classesID.forEach { classeID in
+            // pour chaque classe dans l'étabissement
+            if let classe = classStore.item(withID: classeID) {
+                RoomManager
+                    .removeEleveFromSeat(seatID     : seats[seatIndex].id,
+                                         dans       : classe,
+                                         eleveStore : eleveStore)
+            }
+        }
+        seats.remove(at: seatIndex)
+    }
+
     /// Supprimer tous les sièges positionnés sur le plan de la salle de classe
     mutating func removeAllSeatsFromPlan(dans school : School,
                                          classStore  : ClasseStore,

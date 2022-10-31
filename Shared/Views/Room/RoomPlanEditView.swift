@@ -15,6 +15,17 @@ struct RoomPlanEditView: View {
     @Binding
     var room: Room
 
+    var school: School
+
+    @EnvironmentObject
+    private var classStore  : ClasseStore
+
+    @EnvironmentObject
+    private var eleveStore : EleveStore
+
+    @State
+    private var showLongPressMenu = false
+
     // MARK: - Computd Properties
 
     private var imageSize: CGSize? {
@@ -23,7 +34,7 @@ struct RoomPlanEditView: View {
 
     var body: some View {
         if let roomPlanURL = room.planURL,
-        let imageSize {
+           let imageSize {
             ZStack(alignment: .topLeading) {
                 GeometryReader { viewGeometry in
                     // Image du plan de la salle
@@ -36,7 +47,15 @@ struct RoomPlanEditView: View {
                             DraggableSeatLabel(
                                 seatLocInRoom    : $room[seatIndex: idxSeat].locInRoom,
                                 viewGeometrySize : viewGeometry.size,
-                                imageSize        : imageSize
+                                imageSize        : imageSize,
+                                delete: {
+                                    withAnimation {
+                                        room.removeSeatFromPlan(seatIndex  : idxSeat,
+                                                                dans       : school,
+                                                                classStore : classStore,
+                                                                eleveStore : eleveStore)
+                                    }
+                                }
                             )
                         }
                     }
@@ -60,14 +79,29 @@ struct RoomPlan_Previews: PreviewProvider {
         return r
     }()
     static var previews: some View {
-        Group {
+        TestEnvir.createFakes()
+        return Group {
             NavigationStack {
-                RoomPlanEditView(room: .constant(room))
+                RoomPlanEditView(room  : .constant(room),
+                                 school: TestEnvir.schoolStore.items.first!)
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPad mini (6th generation)")
 
             NavigationStack {
-                RoomPlanEditView(room: .constant(room))
+                RoomPlanEditView(room  : .constant(room),
+                                 school: TestEnvir.schoolStore.items.first!)
+                .environmentObject(NavigationModel(selectedClasseId: TestEnvir.classeStore.items.first!.id))
+                .environmentObject(TestEnvir.schoolStore)
+                .environmentObject(TestEnvir.classeStore)
+                .environmentObject(TestEnvir.eleveStore)
+                .environmentObject(TestEnvir.colleStore)
+                .environmentObject(TestEnvir.observStore)
             }
             .previewDevice("iPhone 13")
         }

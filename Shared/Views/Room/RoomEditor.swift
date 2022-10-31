@@ -37,7 +37,7 @@ struct RoomEditor: View {
 
     var body: some View {
         if room.planURL != nil {
-            RoomPlanEditView(room: $room)
+            RoomPlanEditView(room: $room, school: school)
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleMenu {

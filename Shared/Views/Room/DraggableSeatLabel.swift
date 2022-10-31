@@ -12,12 +12,20 @@ struct DraggableSeatLabel: View {
     var seatLocInRoom    : CGPoint
     var viewGeometrySize : CGSize
     var imageSize        : CGSize
+    let delete           : () -> Void
 
     @State
     private var translation = CGSize.zero
 
     var body: some View {
         SeatLabel(label: nil)
+            .contextMenu {
+                Button(role: .destructive) {
+                    delete()
+                } label: {
+                    Label("Supprimer", systemImage: "trash")
+                }
+            }
             .offset(posInView(relativePos  : seatLocInRoom,
                               geometrySize : viewGeometrySize,
                               imageSize    : imageSize) + translation

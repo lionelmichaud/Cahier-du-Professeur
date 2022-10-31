@@ -22,8 +22,8 @@ struct EditableSeatLabel: View {
     // MARK: - ComputedProperties
 
     private var unSeatedEleves: [Binding<Eleve>] {
-        RoomManager.unSeatedEleves(dans: classe,
-                                   eleveStore: eleveStore)
+        RoomManager.unSeatedEleves(dans       : classe,
+                                   eleveStore : eleveStore)
     }
 
     private var eleveOnSeat: Binding<Eleve>? {
@@ -37,7 +37,7 @@ struct EditableSeatLabel: View {
     private var nameOfEleveOnSeat: String {
         eleveOnSeat?
             .wrappedValue
-            .displayName(nameDisplayOrder) ?? "Associer"
+            .name.givenName ?? "Associer"
     }
 
     /// Menu de placement d'un élève sur une place de la salle de classe
@@ -68,12 +68,8 @@ struct EditableSeatLabel: View {
                 }
             }
         } label: {
-            SeatLabel(label: nameOfEleveOnSeat)
-            // TODO: - vérifier
-                .background {
-                    RoundedRectangle(cornerRadius: 5)
-                        .foregroundColor(.gray)
-                }
+            SeatLabel(label          : nameOfEleveOnSeat,
+                      backgoundColor : eleveOnSeat == nil ? .pink  : .blue)
         }
     }
 

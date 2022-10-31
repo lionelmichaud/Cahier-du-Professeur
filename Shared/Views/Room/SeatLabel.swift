@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SeatLabel: View {
     var label : String?
+    var backgoundColor = Color.blue
 
-    private let backgoundColor = Color.blue
     private let foregoundColor = Color.white
 
     var body: some View {
@@ -18,6 +18,7 @@ struct SeatLabel: View {
             if let label {
                 Text(label)
                     .foregroundColor(foregoundColor)
+                    .font(.callout)
             } else {
                 Text("Wandrille")
                     .font(.callout)

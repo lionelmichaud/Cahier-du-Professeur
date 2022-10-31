@@ -55,7 +55,6 @@ struct RoomEditor: View {
                 if room.nbSeatPositionned > 0 {
                     Button(role: .destructive) {
                         withAnimation {
-                            // TODO: - Supprimer les pointeur des élèves de la classe vers les placces
                             room.removeAllSeatsFromPlan(dans       : school,
                                                         classStore : classStore,
                                                         eleveStore : eleveStore)

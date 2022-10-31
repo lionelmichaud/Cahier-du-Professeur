@@ -43,10 +43,12 @@ struct RoomEditor: View {
             .toolbarTitleMenu {
                 /// positionner une nouvelle place au centre du plan de la salle de classe
                 if room.nbSeatUnpositionned > 0 {
-                    Button("Positionner nouvelle place") {
+                    Button {
                         withAnimation {
                             room.addSeatToPlan(Seat(x: 0.5, y: 0.5))
                         }
+                    } label: {
+                        Label("Positionner nouvelle place", systemImage: "chair")
                     }
                 }
                 /// supprimer tous les positionnements de places dans la salle de classe

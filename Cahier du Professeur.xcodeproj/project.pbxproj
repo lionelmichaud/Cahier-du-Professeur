@@ -127,6 +127,8 @@
 		796F69AC28625384005E323D /* ClassCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F69AA28625384005E323D /* ClassCreator.swift */; };
 		7971D6C028634FDD00ECA9CA /* ExamCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971D6BF28634FDC00ECA9CA /* ExamCreator.swift */; };
 		7971D6C128634FDD00ECA9CA /* ExamCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971D6BF28634FDC00ECA9CA /* ExamCreator.swift */; };
+		7973A5D7291045DE004F67BA /* ClassList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973A5D6291045DE004F67BA /* ClassList.swift */; };
+		7973A5D8291045DE004F67BA /* ClassList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7973A5D6291045DE004F67BA /* ClassList.swift */; };
 		7974C4C9282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */; };
 		7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */; };
 		7975C604290311A600530E5A /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7975C603290311A600530E5A /* Room.swift */; };
@@ -577,6 +579,7 @@
 		795FAB2C2809C830004CB120 /* SchoolEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEditor.swift; sourceTree = "<group>"; };
 		796F69AA28625384005E323D /* ClassCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCreator.swift; sourceTree = "<group>"; };
 		7971D6BF28634FDC00ECA9CA /* ExamCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamCreator.swift; sourceTree = "<group>"; };
+		7973A5D6291045DE004F67BA /* ClassList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassList.swift; sourceTree = "<group>"; };
 		7974C4C8282C7D3C00217CD5 /* ClasseExamRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasseExamRow.swift; sourceTree = "<group>"; };
 		7975C603290311A600530E5A /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7975C6062903124900530E5A /* Plan Salle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plan Salle.png"; sourceTree = "<group>"; };
@@ -1009,6 +1012,7 @@
 				79CC57172860B7C4001D56F5 /* SchoolCreator.swift */,
 				795FAB2C2809C830004CB120 /* SchoolEditor.swift */,
 				79D29A2A28F339640058FF09 /* SchoolDetail.swift */,
+				7973A5D6291045DE004F67BA /* ClassList.swift */,
 			);
 			path = Etablissement;
 			sourceTree = "<group>";
@@ -2097,6 +2101,7 @@
 				79FB57D628FDD2C100B38D88 /* ElevesTableView.swift in Sources */,
 				79F3ABB82808218300D068D9 /* ContentView.swift in Sources */,
 				79962A17290D7EFD00EFA3EC /* AppState.swift in Sources */,
+				7973A5D7291045DE004F67BA /* ClassList.swift in Sources */,
 				79EF94D329074EB70024348E /* RoomLayout.swift in Sources */,
 				7975C60B2903176100530E5A /* RoomCreator.swift in Sources */,
 				790C97EB28FC3FA9003E562B /* GroupListView.swift in Sources */,
@@ -2146,6 +2151,7 @@
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
 				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
+				7973A5D8291045DE004F67BA /* ClassList.swift in Sources */,
 				79EF94C6290582AE0024348E /* SeatLabel.swift in Sources */,
 				79BB0B4E28170CEC002AAABA /* MotifView.swift in Sources */,
 				79F3ABD7280822BD00D068D9 /* NiveauClasse.swift in Sources */,

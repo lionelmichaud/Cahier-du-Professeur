@@ -53,16 +53,6 @@ struct EditableSeatLabel: View {
     private var associateEleveToSeatMenu: some View {
         Menu {
             if let eleveOnSeat {
-                // enlever l'élève qui était assis à cette place
-                Button(role: .destructive) {
-                    withAnimation {
-                        // enlever l'élève qui était assis à cette place
-                        eleveOnSeat.wrappedValue.seatId = nil
-                    }
-                } label: {
-                    Label("Libérer la place", systemImage: "chair")
-                }
-
                 Section {
                     // aller à la fiche élève
                     Button {
@@ -72,6 +62,19 @@ struct EditableSeatLabel: View {
                     } label: {
                         Label("Fiche élève", systemImage: "info.circle")
                     }
+                    // ajouter un point de bonus
+                    Button {
+                        eleveOnSeat.wrappedValue.bonus += 1.0
+                    } label: {
+                        Label("Ajouter bonus", systemImage: "hand.thumbsup")
+                    }
+                    // ajouter un point de malus
+                    Button {
+                        eleveOnSeat.wrappedValue.bonus -= 1.0
+                    } label: {
+                        Label("Ajouter malus", systemImage: "hand.thumbsdown")
+                    }
+
                     // ajouter une observation
                     Button {
                         isAddingNewObserv = true
@@ -83,6 +86,18 @@ struct EditableSeatLabel: View {
                         isAddingNewColle = true
                     } label: {
                         Label("Nouvelle colle", systemImage: "lock.fill")
+                    }
+                }
+
+                Section {
+                    // enlever l'élève qui était assis à cette place
+                    Button(role: .destructive) {
+                        withAnimation {
+                            // enlever l'élève qui était assis à cette place
+                            eleveOnSeat.wrappedValue.seatId = nil
+                        }
+                    } label: {
+                        Label("Libérer la place", systemImage: "chair")
                     }
                 }
             }

@@ -112,7 +112,6 @@ struct SchoolDetail: View {
             // ajouter une évaluation
             Button {
                 withAnimation {
-                    // TODO: - Gérer le classement temporel des événements
                     school.events.insert(Event(), at: 0)
                 }
             } label: {
@@ -124,7 +123,7 @@ struct SchoolDetail: View {
             .buttonStyle(.borderless)
 
             // édition de la liste des événements
-            ForEach($school.events) { $event in
+            ForEach($school.events.sorted(by: { $0.wrappedValue.date < $1.wrappedValue.date })) { $event in
                 EventEditor(event: $event)
             }
             .onDelete { indexSet in

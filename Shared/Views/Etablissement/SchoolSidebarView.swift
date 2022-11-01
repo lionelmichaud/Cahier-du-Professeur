@@ -31,6 +31,8 @@ struct SchoolSidebarView: View {
     @State
     private var isShowingImportTrombineDialog = false
     @State
+    private var isShowingRepairDBDialog = false
+    @State
     private var isShowingAbout = false
     @State
     private var isImportingJpegFile = false
@@ -156,7 +158,7 @@ struct SchoolSidebarView: View {
 
                         /// Reconstruire la BDD
                         Button(role: .destructive) {
-                            repairDataBase()
+                            isShowingRepairDBDialog.toggle()
                         } label: {
                             Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
                         }
@@ -170,49 +172,59 @@ struct SchoolSidebarView: View {
                     } label: {
                         Image(systemName: "ellipsis.circle")
                     }
-                }
-            }
-            
-            /// Confirmation importation de tous les fichiers depuis l'App
-            .confirmationDialog("Importation des fichiers de l'App",
-                                isPresented: $isShowingImportConfirmDialog,
-                                titleVisibility : .visible) {
-                Button("Importer", role: .destructive) {
-                    withAnimation {
-                        self.import()
+                    /// Confirmation importation de tous les fichiers depuis l'App
+                    .confirmationDialog("Importation des fichiers de l'App",
+                                        isPresented: $isShowingImportConfirmDialog,
+                                        titleVisibility : .visible) {
+                        Button("Importer", role: .destructive) {
+                            withAnimation {
+                                self.import()
+                            }
+                        }
+                    } message: {
+                        Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application. ") +
+                        Text("Cette action ne peut pas être annulée.")
+                    }
+                    /// Confirmation importation des fichiers JPEG pour le trombinoscope
+                    .confirmationDialog("Importer des photos d'élèves",
+                                        isPresented     : $isShowingImportTrombineDialog,
+                                        titleVisibility : .visible) {
+                        Button("Importer") {
+                            withAnimation {
+                                isImportingJpegFile = true
+                            }
+                        }
+                    } message: {
+                        Text("Les photos importées doivent être au format JPEG ") +
+                        Text("et être nommées NOM_Prénom.jpg. ") +
+                        Text("Cette action ne peut pas être annulée.")
+                    }
+                    /// Confirmation de Suppression de toutes vos données
+                    .confirmationDialog("Suppression de toutes vos données",
+                                        isPresented: $isShowingDeleteConfirmDialog,
+                                        titleVisibility : .visible) {
+                        Button("Supprimer", role: .destructive) {
+                            withAnimation {
+                                self.clearAllUserData()
+                            }
+                        }
+                    } message: {
+                        Text("Cette action ne peut pas être annulée.")
+                    }
+                    /// Confirmation de la réparation de la base de données
+                    .confirmationDialog("Réparation de la base de données",
+                                        isPresented: $isShowingRepairDBDialog,
+                                        titleVisibility : .visible) {
+                        Button("Réparer", role: .destructive) {
+                            withAnimation {
+                                self.repairDataBase()
+                            }
+                        }
+                    } message: {
+                        Text("Cette opération peut prendre plusieurs minutes. ") +
+                        Text("Cette action ne peut pas être annulée.")
                     }
                 }
-            } message: {
-                Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application.") +
-                Text("Cette action ne peut pas être annulée.")
-            }
-
-            /// Confirmation importation des fichiers JPEG pour le trombinoscope
-            .confirmationDialog("Importer des photos d'élèves",
-                                isPresented     : $isShowingImportTrombineDialog,
-                                titleVisibility : .visible) {
-                Button("Importer") {
-                    withAnimation {
-                        isImportingJpegFile = true
-                    }
-                }
-            } message: {
-                Text("Les photos importées doivent être au format JPEG ") +
-                Text("et être nommées NOM_Prénom.jpg. ") +
-                Text("Cette action ne peut pas être annulée.")
-            }
-
-            /// Confirmation de Suppression de toutes vos données
-            .confirmationDialog("Suppression de toutes vos données",
-                                isPresented: $isShowingDeleteConfirmDialog,
-                                titleVisibility : .visible) {
-                Button("Supprimer", role: .destructive) {
-                    withAnimation {
-                        self.clearAllUserData()
-                    }
-                }
-            } message: {
-                Text("Cette action ne peut pas être annulée.")
             }
 
             .sheet(isPresented: $isShowingAbout) {

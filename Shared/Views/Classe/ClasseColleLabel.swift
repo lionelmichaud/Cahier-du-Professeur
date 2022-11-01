@@ -13,6 +13,8 @@ struct ClasseColleLabel: View {
     @EnvironmentObject private var eleveStore : EleveStore
     @EnvironmentObject private var colleStore : ColleStore
 
+    // MARK: - Computed Properties
+
     private var nbCollesNonNotifee: Int {
         ClasseManager().nbOfColles(de          : classe,
                                    isConsignee : false,
@@ -21,10 +23,23 @@ struct ClasseColleLabel: View {
     }
 
     var body: some View {
-        let nb = nbCollesNonNotifee
-        return HStack {
-            if nb > 0 {
-                Text("\(nb)")
+        let number = nbCollesNonNotifee
+        ViewThatFits {
+            template(number: number, large: true)
+            template(number: number, large: false)
+        }
+    }
+
+    // MARK: - Methods
+
+    @ViewBuilder
+    private func template(number: Int, large: Bool) -> some View {
+        HStack {
+            if number > 0 {
+                Text("\(number)")
+                if large {
+                    Text("colle" + (number > 1 ? "s" : ""))
+                }
                 Image(systemName: "lock.fill")
                     .imageScale(scale)
                     .foregroundColor(.red)

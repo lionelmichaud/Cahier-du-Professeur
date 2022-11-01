@@ -55,7 +55,8 @@ struct CahierDuProfesseurApp: App {
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
                     try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "png")
-                    
+                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "pdf")
+
                 } catch {
                     AppState.shared.initError = .failedToLoadApplicationData
                 }

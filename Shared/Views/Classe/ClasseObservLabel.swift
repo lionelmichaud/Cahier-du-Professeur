@@ -13,6 +13,8 @@ struct ClasseObservLabel: View {
     @EnvironmentObject private var eleveStore : EleveStore
     @EnvironmentObject private var obserStore : ObservationStore
 
+    // MARK: - Computed Properties
+
     private var nbObservNonNotifee: Int {
         ClasseManager().nbOfObservations(de          : classe,
                                          isConsignee : false,
@@ -22,10 +24,23 @@ struct ClasseObservLabel: View {
     }
 
     var body: some View {
-        let nb = nbObservNonNotifee
-        return HStack {
-            if nb > 0 {
-                Text("\(nb)")
+        let number = nbObservNonNotifee
+        ViewThatFits {
+            template(number: number, large: true)
+            template(number: number, large: false)
+        }
+    }
+
+    // MARK: - Methods
+
+    @ViewBuilder
+    private func template(number: Int, large: Bool) -> some View {
+        HStack {
+            if number > 0 {
+                Text("\(number)")
+                if large {
+                    Text("observation" + (number > 1 ? "s" : ""))
+                }
                 Image(systemName: "magnifyingglass")
                     .imageScale(scale)
                     .foregroundColor(.red)

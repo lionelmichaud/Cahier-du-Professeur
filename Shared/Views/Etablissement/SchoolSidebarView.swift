@@ -43,6 +43,19 @@ struct SchoolSidebarView: View {
         ImportExportManager.documentsURLsToShare(fileNames: [".json"])
     }
 
+    private var shareMenuItem: some View {
+        Group {
+            if jsonURLsToShare.isNotEmpty {
+                ShareLink("Exporter vos données",
+                          items: jsonURLsToShare,
+                          subject: Text("Cahier du professeur"),
+                          message: Text("Base de données"))
+            } else {
+                EmptyView()
+            }
+        }
+    }
+
     var body: some View {
         List(selection: $navigationModel.selectedSchoolId) {
             if schoolStore.items.isEmpty {
@@ -109,133 +122,7 @@ struct SchoolSidebarView: View {
         }
         .navigationTitle("Établissements")
         //.navigationViewStyle(.columns)
-        .toolbar {
-            /// Ajouter un établissement
-            ToolbarItemGroup(placement: .status) {
-                Button {
-                    isAddingNewEtab = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Ajouter un établissement")
-                        Spacer()
-                    }
-                }
-            }
-
-            /// Menu
-            ToolbarItemGroup(placement: .automatic) {
-                Menu {
-                    /// A propos
-                    Button {
-                        isShowingAbout = true
-                    } label: {
-                        Label("A propos", systemImage: "info.circle")
-                    }
-
-                    /// Edition des préférences utilisateur
-                    Button {
-                        isEditingPreferences = true
-                    } label: {
-                        Label("Préférences", systemImage: "gear")
-                    }
-
-                    /// Exporter les fichiers JSON utilisateurs
-                    //                        Button {
-                    //                            share(geometry: geometry)
-                    //                        } label: {
-                    //                            Label("Exporter vos données", systemImage: "square.and.arrow.up")
-                    //                        }
-                    shareMenuItem
-
-                    /// Importer des fichiers JPEG pour le trombinoscope
-                    Button {
-                        isShowingImportTrombineDialog.toggle()
-                    } label: {
-                        Label("Importer des photos du trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
-                    }
-
-                    /// Importer les fichiers JSON depuis le Bundle Application
-                    Button(role: .destructive) {
-                        isShowingImportConfirmDialog.toggle()
-                    } label: {
-                        Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
-                    }
-
-                    /// Reconstruire la BDD
-                    Button(role: .destructive) {
-                        isShowingRepairDBDialog.toggle()
-                    } label: {
-                        Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
-                    }
-
-                    /// Effacer toutes les données utilisateur
-                    Button(role: .destructive) {
-                        isShowingDeleteConfirmDialog.toggle()
-                    } label: {
-                        Label("supprimer toutes vos données", systemImage: "trash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                }
-
-                /// Confirmation importation de tous les fichiers depuis l'App
-                .confirmationDialog("Importation des fichiers de l'App",
-                                    isPresented: $isShowingImportConfirmDialog,
-                                    titleVisibility : .visible) {
-                    Button("Importer", role: .destructive) {
-                        withAnimation {
-                            self.import()
-                        }
-                    }
-                } message: {
-                    Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application. ") +
-                    Text("Cette action ne peut pas être annulée.")
-                }
-
-                /// Confirmation importation des fichiers JPEG pour le trombinoscope
-                .confirmationDialog("Importer des photos d'élèves",
-                                    isPresented     : $isShowingImportTrombineDialog,
-                                    titleVisibility : .visible) {
-                    Button("Importer") {
-                        withAnimation {
-                            isImportingJpegFile = true
-                        }
-                    }
-                } message: {
-                    Text("Les photos importées doivent être au format JPEG ") +
-                    Text("et être nommées NOM_Prénom.jpg. ") +
-                    Text("Cette action ne peut pas être annulée.")
-                }
-
-                /// Confirmation de Suppression de toutes vos données
-                .confirmationDialog("Suppression de toutes vos données",
-                                    isPresented: $isShowingDeleteConfirmDialog,
-                                    titleVisibility : .visible) {
-                    Button("Supprimer", role: .destructive) {
-                        withAnimation {
-                            self.clearAllUserData()
-                        }
-                    }
-                } message: {
-                    Text("Cette action ne peut pas être annulée.")
-                }
-
-                /// Confirmation de la réparation de la base de données
-                .confirmationDialog("Réparation de la base de données",
-                                    isPresented: $isShowingRepairDBDialog,
-                                    titleVisibility : .visible) {
-                    Button("Réparer", role: .destructive) {
-                        withAnimation {
-                            self.repairDataBase()
-                        }
-                    }
-                } message: {
-                    Text("Cette opération peut prendre plusieurs minutes. ") +
-                    Text("Cette action ne peut pas être annulée.")
-                }
-            }
-        }
+        .toolbar(content: myToolBarContent)
 
         .sheet(isPresented: $isShowingAbout) {
             NavigationStack {
@@ -270,15 +157,131 @@ struct SchoolSidebarView: View {
 
     // MARK: - Methods
 
-    private var shareMenuItem: some View {
-        Group {
-            if jsonURLsToShare.isNotEmpty {
-                ShareLink("Exporter vos données",
-                          items: jsonURLsToShare,
-                          subject: Text("Cahier du professeur"),
-                          message: Text("Base de données"))
-            } else {
-                EmptyView()
+    @ToolbarContentBuilder
+    func myToolBarContent() -> some ToolbarContent {
+        /// Ajouter un établissement
+        ToolbarItemGroup(placement: .status) {
+            Button {
+                isAddingNewEtab = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Ajouter un établissement")
+                    Spacer()
+                }
+            }
+        }
+
+        /// Menu
+        ToolbarItemGroup(placement: .automatic) {
+            Menu {
+                /// A propos
+                Button {
+                    isShowingAbout = true
+                } label: {
+                    Label("A propos", systemImage: "info.circle")
+                }
+
+                /// Edition des préférences utilisateur
+                Button {
+                    isEditingPreferences = true
+                } label: {
+                    Label("Préférences", systemImage: "gear")
+                }
+
+                /// Exporter les fichiers JSON utilisateurs
+                //                        Button {
+                //                            share(geometry: geometry)
+                //                        } label: {
+                //                            Label("Exporter vos données", systemImage: "square.and.arrow.up")
+                //                        }
+                shareMenuItem
+
+                /// Importer des fichiers JPEG pour le trombinoscope
+                Button {
+                    isShowingImportTrombineDialog.toggle()
+                } label: {
+                    Label("Importer des photos du trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
+                }
+
+                /// Importer les fichiers JSON depuis le Bundle Application
+                Button(role: .destructive) {
+                    isShowingImportConfirmDialog.toggle()
+                } label: {
+                    Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
+                }
+
+                /// Reconstruire la BDD
+                Button(role: .destructive) {
+                    isShowingRepairDBDialog.toggle()
+                } label: {
+                    Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
+                }
+
+                /// Effacer toutes les données utilisateur
+                Button(role: .destructive) {
+                    isShowingDeleteConfirmDialog.toggle()
+                } label: {
+                    Label("supprimer toutes vos données", systemImage: "trash")
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+            }
+
+            /// Confirmation importation de tous les fichiers depuis l'App
+            .confirmationDialog("Importation des fichiers de l'App",
+                                isPresented: $isShowingImportConfirmDialog,
+                                titleVisibility : .visible) {
+                Button("Importer", role: .destructive) {
+                    withAnimation {
+                        self.import()
+                    }
+                }
+            } message: {
+                Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application. ") +
+                Text("Cette action ne peut pas être annulée.")
+            }
+
+            /// Confirmation importation des fichiers JPEG pour le trombinoscope
+            .confirmationDialog("Importer des photos d'élèves",
+                                isPresented     : $isShowingImportTrombineDialog,
+                                titleVisibility : .visible) {
+                Button("Importer") {
+                    withAnimation {
+                        isImportingJpegFile = true
+                    }
+                }
+            } message: {
+                Text("Les photos importées doivent être au format JPEG ") +
+                Text("et être nommées NOM_Prénom.jpg. ") +
+                Text("Cette action ne peut pas être annulée.")
+            }
+
+            /// Confirmation de Suppression de toutes vos données
+            .confirmationDialog("Suppression de toutes vos données",
+                                isPresented: $isShowingDeleteConfirmDialog,
+                                titleVisibility : .visible) {
+                Button("Supprimer", role: .destructive) {
+                    withAnimation {
+                        self.clearAllUserData()
+                    }
+                }
+            } message: {
+                Text("Cette action ne peut pas être annulée.")
+            }
+
+            /// Confirmation de la réparation de la base de données
+            .confirmationDialog("Réparation de la base de données",
+                                isPresented: $isShowingRepairDBDialog,
+                                titleVisibility : .visible) {
+                Button("Réparer", role: .destructive) {
+                    withAnimation {
+                        self.repairDataBase()
+                    }
+                }
+            } message: {
+                Text("Cette opération peut prendre plusieurs minutes. ") +
+                Text("Cette action ne peut pas être annulée.")
             }
         }
     }

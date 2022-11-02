@@ -37,19 +37,22 @@ struct SchoolSidebarView: View {
     @State
     private var isImportingJpegFile = false
 
+    private var jsonURLsToShare: [URL] {
+        ShareManager.documentsURLsToShare(fileNames: [".json"])
+    }
+
     var body: some View {
-        GeometryReader { geometry in
-            List(selection: $navigationModel.selectedSchoolId) {
-                if schoolStore.items.isEmpty {
-                    Text("Aucun établissement actuellement")
-                }
-                /// pour chaque Type d'établissement
-                ForEach(NiveauSchool.allCases) { niveau in
-                    if !schoolStore.sortedSchools(niveau: niveau).isEmpty {
-                        Section {
-                            /// pour chaque Etablissement
-                            ForEach(schoolStore.sortedSchools(niveau: niveau)) { $school in
-                                SchoolBrowserRow(school: school)
+        List(selection: $navigationModel.selectedSchoolId) {
+            if schoolStore.items.isEmpty {
+                Text("Aucun établissement actuellement")
+            }
+            /// pour chaque Type d'établissement
+            ForEach(NiveauSchool.allCases) { niveau in
+                if !schoolStore.sortedSchools(niveau: niveau).isEmpty {
+                    Section {
+                        /// pour chaque Etablissement
+                        ForEach(schoolStore.sortedSchools(niveau: niveau)) { $school in
+                            SchoolBrowserRow(school: school)
                                 .swipeActions {
                                     // supprimer l'établissement
                                     Button(role: .destructive) {
@@ -80,175 +83,179 @@ struct SchoolSidebarView: View {
                                         }.tint(school.niveau == .college ? .mint : .orange)
                                     }
                                 }
-                            }
-                        } header: {
-                            Text(niveau.displayString)
-                                .font(.callout)
-                                .foregroundColor(.secondary)
-                                .fontWeight(.bold)
                         }
+                    } header: {
+                        Text(niveau.displayString)
+                            .font(.callout)
+                            .foregroundColor(.secondary)
+                            .fontWeight(.bold)
                     }
                 }
-                #if targetEnvironment(simulator)
+            }
+            #if targetEnvironment(simulator)
+            Button {
+                TestEnvir.populateWithFakes(
+                    schoolStore : schoolStore,
+                    classeStore : classeStore,
+                    eleveStore  : eleveStore,
+                    observStore : observStore,
+                    colleStore  : colleStore)
+            } label: {
+                Text("Test").foregroundColor(.primary)
+            }
+            #endif
+        }
+        .navigationTitle("Établissements")
+        //.navigationViewStyle(.columns)
+        .toolbar {
+            /// Ajouter un établissement
+            ToolbarItemGroup(placement: .status) {
                 Button {
-                    TestEnvir.populateWithFakes(
-                        schoolStore : schoolStore,
-                        classeStore : classeStore,
-                        eleveStore  : eleveStore,
-                        observStore : observStore,
-                        colleStore  : colleStore)
+                    isAddingNewEtab = true
                 } label: {
-                    Text("Test").foregroundColor(.primary)
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Ajouter un établissement")
+                        Spacer()
+                    }
                 }
-                #endif
             }
-            .navigationTitle("Établissements")
-            //.navigationViewStyle(.columns)
-            .toolbar {
-                /// Ajouter un établissement
-                ToolbarItemGroup(placement: .status) {
+
+            /// Menu
+            ToolbarItemGroup(placement: .automatic) {
+                Menu {
+                    /// A propos
                     Button {
-                        isAddingNewEtab = true
+                        isShowingAbout = true
                     } label: {
-                        HStack {
-                            Image(systemName: "plus.circle.fill")
-                            Text("Ajouter un établissement")
-                            Spacer()
-                        }
+                        Label("A propos", systemImage: "info.circle")
                     }
-                }
 
-                /// Menu
-                ToolbarItemGroup(placement: .automatic) {
-                    Menu {
-                        /// A propos
-                        Button {
-                            isShowingAbout = true
-                        } label: {
-                            Label("A propos", systemImage: "info.circle")
-                        }
-
-                        /// Edition des préférences utilisateur
-                        Button {
-                            isEditingPreferences = true
-                        } label: {
-                            Label("Préférences", systemImage: "gear")
-                        }
-
-                        /// Exporter les fichiers JSON utilisateurs
-                        Button {
-                            share(geometry: geometry)
-                        } label: {
-                            Label("Exporter vos données", systemImage: "square.and.arrow.up")
-                        }
-
-                        /// Importer des fichiers JPEG pour le trombinoscope
-                        Button {
-                            isShowingImportTrombineDialog.toggle()
-                        } label: {
-                            Label("Importer des photos du trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
-                        }
-
-                        /// Importer les fichiers JSON depuis le Bundle Application
-                        Button(role: .destructive) {
-                            isShowingImportConfirmDialog.toggle()
-                        } label: {
-                            Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
-                        }
-
-                        /// Reconstruire la BDD
-                        Button(role: .destructive) {
-                            isShowingRepairDBDialog.toggle()
-                        } label: {
-                            Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
-                        }
-
-                        /// Effacer toutes les données utilisateur
-                        Button(role: .destructive) {
-                            isShowingDeleteConfirmDialog.toggle()
-                        } label: {
-                            Label("supprimer toutes vos données", systemImage: "trash")
-                        }
+                    /// Edition des préférences utilisateur
+                    Button {
+                        isEditingPreferences = true
                     } label: {
-                        Image(systemName: "ellipsis.circle")
+                        Label("Préférences", systemImage: "gear")
                     }
-                    /// Confirmation importation de tous les fichiers depuis l'App
-                    .confirmationDialog("Importation des fichiers de l'App",
-                                        isPresented: $isShowingImportConfirmDialog,
-                                        titleVisibility : .visible) {
-                        Button("Importer", role: .destructive) {
-                            withAnimation {
-                                self.import()
-                            }
-                        }
-                    } message: {
-                        Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application. ") +
-                        Text("Cette action ne peut pas être annulée.")
-                    }
-                    /// Confirmation importation des fichiers JPEG pour le trombinoscope
-                    .confirmationDialog("Importer des photos d'élèves",
-                                        isPresented     : $isShowingImportTrombineDialog,
-                                        titleVisibility : .visible) {
-                        Button("Importer") {
-                            withAnimation {
-                                isImportingJpegFile = true
-                            }
-                        }
-                    } message: {
-                        Text("Les photos importées doivent être au format JPEG ") +
-                        Text("et être nommées NOM_Prénom.jpg. ") +
-                        Text("Cette action ne peut pas être annulée.")
-                    }
-                    /// Confirmation de Suppression de toutes vos données
-                    .confirmationDialog("Suppression de toutes vos données",
-                                        isPresented: $isShowingDeleteConfirmDialog,
-                                        titleVisibility : .visible) {
-                        Button("Supprimer", role: .destructive) {
-                            withAnimation {
-                                self.clearAllUserData()
-                            }
-                        }
-                    } message: {
-                        Text("Cette action ne peut pas être annulée.")
-                    }
-                    /// Confirmation de la réparation de la base de données
-                    .confirmationDialog("Réparation de la base de données",
-                                        isPresented: $isShowingRepairDBDialog,
-                                        titleVisibility : .visible) {
-                        Button("Réparer", role: .destructive) {
-                            withAnimation {
-                                self.repairDataBase()
-                            }
-                        }
-                    } message: {
-                        Text("Cette opération peut prendre plusieurs minutes. ") +
-                        Text("Cette action ne peut pas être annulée.")
-                    }
-                }
-            }
 
-            .sheet(isPresented: $isShowingAbout) {
-                NavigationStack {
-                    AppVersionView()
-                }
-                .presentationDetents([.large])
-            }
+                    /// Exporter les fichiers JSON utilisateurs
+                    //                        Button {
+                    //                            share(geometry: geometry)
+                    //                        } label: {
+                    //                            Label("Exporter vos données", systemImage: "square.and.arrow.up")
+                    //                        }
+                    shareMenuItem
 
-            .sheet(isPresented: $isEditingPreferences) {
-                NavigationStack {
-                    SettingsView()
-                }
-                .presentationDetents([.large])
-            }
-
-            .sheet(isPresented: $isAddingNewEtab) {
-                NavigationStack {
-                    SchoolCreator { school in
-                        schoolStore.add(school)
+                    /// Importer des fichiers JPEG pour le trombinoscope
+                    Button {
+                        isShowingImportTrombineDialog.toggle()
+                    } label: {
+                        Label("Importer des photos du trombinoscope", systemImage: "person.crop.rectangle.stack.fill")
                     }
+
+                    /// Importer les fichiers JSON depuis le Bundle Application
+                    Button(role: .destructive) {
+                        isShowingImportConfirmDialog.toggle()
+                    } label: {
+                        Label("Importer les données de l'App", systemImage: "square.and.arrow.down")
+                    }
+
+                    /// Reconstruire la BDD
+                    Button(role: .destructive) {
+                        isShowingRepairDBDialog.toggle()
+                    } label: {
+                        Label("Réparer la base de donnée", systemImage: "wrench.adjustable")
+                    }
+
+                    /// Effacer toutes les données utilisateur
+                    Button(role: .destructive) {
+                        isShowingDeleteConfirmDialog.toggle()
+                    } label: {
+                        Label("supprimer toutes vos données", systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
-                .presentationDetents([.medium])
+
+                /// Confirmation importation de tous les fichiers depuis l'App
+                .confirmationDialog("Importation des fichiers de l'App",
+                                    isPresented: $isShowingImportConfirmDialog,
+                                    titleVisibility : .visible) {
+                    Button("Importer", role: .destructive) {
+                        withAnimation {
+                            self.import()
+                        }
+                    }
+                } message: {
+                    Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application. ") +
+                    Text("Cette action ne peut pas être annulée.")
+                }
+
+                /// Confirmation importation des fichiers JPEG pour le trombinoscope
+                .confirmationDialog("Importer des photos d'élèves",
+                                    isPresented     : $isShowingImportTrombineDialog,
+                                    titleVisibility : .visible) {
+                    Button("Importer") {
+                        withAnimation {
+                            isImportingJpegFile = true
+                        }
+                    }
+                } message: {
+                    Text("Les photos importées doivent être au format JPEG ") +
+                    Text("et être nommées NOM_Prénom.jpg. ") +
+                    Text("Cette action ne peut pas être annulée.")
+                }
+
+                /// Confirmation de Suppression de toutes vos données
+                .confirmationDialog("Suppression de toutes vos données",
+                                    isPresented: $isShowingDeleteConfirmDialog,
+                                    titleVisibility : .visible) {
+                    Button("Supprimer", role: .destructive) {
+                        withAnimation {
+                            self.clearAllUserData()
+                        }
+                    }
+                } message: {
+                    Text("Cette action ne peut pas être annulée.")
+                }
+                
+                /// Confirmation de la réparation de la base de données
+                .confirmationDialog("Réparation de la base de données",
+                                    isPresented: $isShowingRepairDBDialog,
+                                    titleVisibility : .visible) {
+                    Button("Réparer", role: .destructive) {
+                        withAnimation {
+                            self.repairDataBase()
+                        }
+                    }
+                } message: {
+                    Text("Cette opération peut prendre plusieurs minutes. ") +
+                    Text("Cette action ne peut pas être annulée.")
+                }
             }
+        }
+
+        .sheet(isPresented: $isShowingAbout) {
+            NavigationStack {
+                AppVersionView()
+            }
+            .presentationDetents([.large])
+        }
+
+        .sheet(isPresented: $isEditingPreferences) {
+            NavigationStack {
+                SettingsView()
+            }
+            .presentationDetents([.large])
+        }
+
+        .sheet(isPresented: $isAddingNewEtab) {
+            NavigationStack {
+                SchoolCreator { school in
+                    schoolStore.add(school)
+                }
+            }
+            .presentationDetents([.medium])
         }
         /// Importer des fichiers JPEG
         .fileImporter(isPresented             : $isImportingJpegFile,
@@ -256,16 +263,22 @@ struct SchoolSidebarView: View {
                       allowsMultipleSelection : true) { result in
             importJpegFiles(result: result)
         }
-        .alert(item: $alertItem, content: newAlert)
+                      .alert(item: $alertItem, content: newAlert)
     }
 
     // MARK: - Methods
 
-    /// Exporter tous les fichiers JSON utilisateur
-    private func share(geometry: GeometryProxy) {
-        shareFiles(fileNames: [".json"],
-                   alertItem: &alertItem,
-                   geometry: geometry)
+    private var shareMenuItem: some View {
+        Group {
+            if jsonURLsToShare.isNotEmpty {
+                ShareLink("Exporter vos données",
+                          items: jsonURLsToShare,
+                          subject: Text("Cahier du professeur"),
+                          message: Text("Base de données"))
+            } else {
+                EmptyView()
+            }
+        }
     }
 
     /// Importer tous les fichiers JSON, JPEG et PNG depuis le Bundle Application

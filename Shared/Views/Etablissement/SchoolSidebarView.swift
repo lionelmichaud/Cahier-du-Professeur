@@ -37,8 +37,10 @@ struct SchoolSidebarView: View {
     @State
     private var isImportingJpegFile = false
 
+    // MARK: - Computed Properties
+
     private var jsonURLsToShare: [URL] {
-        ShareManager.documentsURLsToShare(fileNames: [".json"])
+        ImportExportManager.documentsURLsToShare(fileNames: [".json"])
     }
 
     var body: some View {
@@ -218,7 +220,7 @@ struct SchoolSidebarView: View {
                 } message: {
                     Text("Cette action ne peut pas être annulée.")
                 }
-                
+
                 /// Confirmation de la réparation de la base de données
                 .confirmationDialog("Réparation de la base de données",
                                     isPresented: $isShowingRepairDBDialog,
@@ -335,23 +337,7 @@ struct SchoolSidebarView: View {
                 print("Error selecting file: \(error.localizedDescription)")
 
             case .success(let filesUrl):
-                guard let documentsFolder = Folder.documents else { return }
-
-                filesUrl.forEach { fileUrl in
-                    guard fileUrl.startAccessingSecurityScopedResource() else { return }
-
-                    if let imageFile = try? File(path: fileUrl.path) {
-                        do {
-                            if !documentsFolder.contains(imageFile) {
-                                try imageFile.copy(to: documentsFolder)
-                            }
-                        } catch let error {
-                            print("Error reading file \(error.localizedDescription)")
-                        }
-                    }
-
-                    fileUrl.stopAccessingSecurityScopedResource()
-                }
+                ImportExportManager.importURLsToDocumentsFolder(filesUrl: filesUrl)
         }
     }
 

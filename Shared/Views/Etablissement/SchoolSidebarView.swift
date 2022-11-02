@@ -263,7 +263,7 @@ struct SchoolSidebarView: View {
         .fileImporter(isPresented             : $isImportingJpegFile,
                       allowedContentTypes     : [.jpeg],
                       allowsMultipleSelection : true) { result in
-            importJpegFiles(result: result)
+            importFiles(result: result)
         }
                       .alert(item: $alertItem, content: newAlert)
     }
@@ -326,9 +326,9 @@ struct SchoolSidebarView: View {
         Trombinoscope.deleteAllTrombines()
     }
 
-    /// Coppier les fichier Image sélectionnés dans le dossier Document de l'application.
-    /// - Parameter result: résultat de la sélection des fichiers issu de fileImporter.
-    private func importJpegFiles(result: Result<[URL], Error>) {
+    /// Coppier les fichiers  sélectionnés dans le dossier Document de l'application.
+    /// - Parameter result: résultat de la sélection des fichiers issue de fileImporter.
+    private func importFiles(result: Result<[URL], Error>) {
         switch result {
             case .failure(let error):
                 self.alertItem = AlertItem(title         : Text("Échec"),

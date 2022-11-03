@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79006FFD2912CD2E00F5CB3C /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79006FFC2912CD2E00F5CB3C /* Document.swift */; };
+		79006FFE2912CD2E00F5CB3C /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79006FFC2912CD2E00F5CB3C /* Document.swift */; };
+		79007002291327DA00F5CB3C /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79007001291327DA00F5CB3C /* DocumentList.swift */; };
+		79007003291327DA00F5CB3C /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79007001291327DA00F5CB3C /* DocumentList.swift */; };
+		7900700529132A6E00F5CB3C /* PdfDocumentViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700429132A6E00F5CB3C /* PdfDocumentViewer.swift */; };
+		7900700629132A6E00F5CB3C /* PdfDocumentViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700429132A6E00F5CB3C /* PdfDocumentViewer.swift */; };
+		7900700829132AC300F5CB3C /* DocumentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700729132AC300F5CB3C /* DocumentRow.swift */; };
+		7900700929132AC300F5CB3C /* DocumentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700729132AC300F5CB3C /* DocumentRow.swift */; };
+		7900700B29133DAD00F5CB3C /* RoomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700A29133DAD00F5CB3C /* RoomList.swift */; };
+		7900700C29133DAD00F5CB3C /* RoomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700A29133DAD00F5CB3C /* RoomList.swift */; };
+		7900700E29133EB800F5CB3C /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700D29133EB800F5CB3C /* EventList.swift */; };
+		7900700F29133EB800F5CB3C /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900700D29133EB800F5CB3C /* EventList.swift */; };
+		790070112913401100F5CB3C /* RessourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790070102913401100F5CB3C /* RessourceList.swift */; };
+		790070122913401100F5CB3C /* RessourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790070102913401100F5CB3C /* RessourceList.swift */; };
 		7903E24D28FAFF1100542586 /* MarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7903E24C28FAFF1100542586 /* MarkListView.swift */; };
 		7903E25028FAFF7800542586 /* ExamDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7903E24F28FAFF7800542586 /* ExamDetail.swift */; };
 		7903E25128FAFF7800542586 /* ExamDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7903E24F28FAFF7800542586 /* ExamDetail.swift */; };
@@ -502,6 +516,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		79006FFC2912CD2E00F5CB3C /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		79007001291327DA00F5CB3C /* DocumentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentList.swift; sourceTree = "<group>"; };
+		7900700429132A6E00F5CB3C /* PdfDocumentViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfDocumentViewer.swift; sourceTree = "<group>"; };
+		7900700729132AC300F5CB3C /* DocumentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentRow.swift; sourceTree = "<group>"; };
+		7900700A29133DAD00F5CB3C /* RoomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomList.swift; sourceTree = "<group>"; };
+		7900700D29133EB800F5CB3C /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
+		790070102913401100F5CB3C /* RessourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RessourceList.swift; sourceTree = "<group>"; };
 		7903E24C28FAFF1100542586 /* MarkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkListView.swift; sourceTree = "<group>"; };
 		7903E24F28FAFF7800542586 /* ExamDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamDetail.swift; sourceTree = "<group>"; };
 		790C97EA28FC3FA9003E562B /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
@@ -898,6 +919,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79006FFF2912CD7300F5CB3C /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				79006FFC2912CD2E00F5CB3C /* Document.swift */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		79007000291327B800F5CB3C /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				79007001291327DA00F5CB3C /* DocumentList.swift */,
+				7900700729132AC300F5CB3C /* DocumentRow.swift */,
+				7900700429132A6E00F5CB3C /* PdfDocumentViewer.swift */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
 		790C97E928FC3F5B003E562B /* Groups */ = {
 			isa = PBXGroup;
 			children = (
@@ -1013,6 +1052,10 @@
 				795FAB2C2809C830004CB120 /* SchoolEditor.swift */,
 				79D29A2A28F339640058FF09 /* SchoolDetail.swift */,
 				7973A5D6291045DE004F67BA /* ClassList.swift */,
+				79EF94D1290736C20024348E /* Event */,
+				79007000291327B800F5CB3C /* Document */,
+				7975C6092903172000530E5A /* Room */,
+				79CC5710285F90E9001D56F5 /* Ressource */,
 			);
 			path = Etablissement;
 			sourceTree = "<group>";
@@ -1031,6 +1074,7 @@
 		7975C6092903172000530E5A /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				7900700A29133DAD00F5CB3C /* RoomList.swift */,
 				7975C60A2903176100530E5A /* RoomCreator.swift */,
 				79EF94C1290489190024348E /* RoomEditor.swift */,
 				79EF94C729058C1F0024348E /* RoomPlanEditView.swift */,
@@ -1341,6 +1385,7 @@
 			children = (
 				79CC5711285F9105001D56F5 /* SchoolRessourceRow.swift */,
 				79CC5714285F9906001D56F5 /* RessourceEditor.swift */,
+				790070102913401100F5CB3C /* RessourceList.swift */,
 			);
 			path = Ressource;
 			sourceTree = "<group>";
@@ -1365,6 +1410,7 @@
 		79EF94D1290736C20024348E /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				7900700D29133EB800F5CB3C /* EventList.swift */,
 				79EF94CE2907367C0024348E /* EventEditor.swift */,
 			);
 			path = Event;
@@ -1459,10 +1505,6 @@
 				79FFDCD52825E94F009D7452 /* CsvImporter.swift */,
 				79C12752283A98E8002F243E /* Persistence */,
 				79F3ABE1280830D000D068D9 /* School */,
-				79FEC6412902F7DA0083B74C /* Room */,
-				79962A12290D319F00EFA3EC /* Seat */,
-				79CC570C285F895F001D56F5 /* Ressource */,
-				79EF94CA290733890024348E /* Event */,
 				79F3ABE2280830E000D068D9 /* Classe */,
 				7984335B283E979700C5E51E /* Trombinoscope */,
 				7992D0A7282B0A4200B31186 /* Exam */,
@@ -1481,9 +1523,6 @@
 				79F3AB8F2808218100D068D9 /* ContentView.swift */,
 				79C1274D283A91E8002F243E /* PreferencesViews */,
 				795FAB272809C4D0004CB120 /* Etablissement */,
-				79EF94D1290736C20024348E /* Event */,
-				7975C6092903172000530E5A /* Room */,
-				79CC5710285F90E9001D56F5 /* Ressource */,
 				7918D1FC2810A5C400C24C5A /* Classe */,
 				7974C4C7282C7CBE00217CD5 /* Exam */,
 				7925C48D283D412100A6BF31 /* Mark */,
@@ -1511,6 +1550,11 @@
 				7953631B280DC44B00AB8600 /* SchoolStore.swift */,
 				79F3ABCC2808222C00D068D9 /* School.swift */,
 				79F3ABD8280823D900D068D9 /* NiveauSchool.swift */,
+				79006FFF2912CD7300F5CB3C /* Document */,
+				79EF94CA290733890024348E /* Event */,
+				79FEC6412902F7DA0083B74C /* Room */,
+				79962A12290D319F00EFA3EC /* Seat */,
+				79CC570C285F895F001D56F5 /* Ressource */,
 			);
 			path = School;
 			sourceTree = "<group>";
@@ -2047,7 +2091,9 @@
 				79F3F78C282E7E9500DC26FC /* ExamEditor.swift in Sources */,
 				79F00E432903D712005D718F /* RoomElevePlacement.swift in Sources */,
 				79AACD9928E21525009B5AE4 /* TroubleDys.swift in Sources */,
+				79006FFD2912CD2E00F5CB3C /* Document.swift in Sources */,
 				79F00E4629040FF5005D718F /* RoomManager.swift in Sources */,
+				7900700E29133EB800F5CB3C /* EventList.swift in Sources */,
 				79F3ABF82808818D00D068D9 /* ColleManager.swift in Sources */,
 				792F75D528EF4A290053FECF /* ColleEditor.swift in Sources */,
 				792F75D228EF3AC10053FECF /* ObservEditor.swift in Sources */,
@@ -2072,6 +2118,8 @@
 				795FAB292809C4E2004CB120 /* SchoolSidebarView.swift in Sources */,
 				79DB78A228E9DE86004E240E /* NavigationModel.swift in Sources */,
 				79962A10290D2E9100EFA3EC /* EditableSeatLabel.swift in Sources */,
+				790070112913401100F5CB3C /* RessourceList.swift in Sources */,
+				7900700B29133DAD00F5CB3C /* RoomList.swift in Sources */,
 				79FB57D328FDC37100B38D88 /* ElevesListView.swift in Sources */,
 				796F69AB28625384005E323D /* ClassCreator.swift in Sources */,
 				795BC3DB2813055200C22271 /* EleveStore.swift in Sources */,
@@ -2108,6 +2156,7 @@
 				79F3ABD02808225800D068D9 /* Classe.swift in Sources */,
 				79CC570E285F8975001D56F5 /* Ressource.swift in Sources */,
 				7953631C280DC44C00AB8600 /* SchoolStore.swift in Sources */,
+				79007002291327DA00F5CB3C /* DocumentList.swift in Sources */,
 				7913562B28D7814600480771 /* UIPreferences.swift in Sources */,
 				7986E7DF282918320011FF21 /* Persistence.swift in Sources */,
 				79FC342328D7721500EFCE3D /* SettingsGeneral.swift in Sources */,
@@ -2130,8 +2179,10 @@
 				79FFDCD62825E950009D7452 /* CsvImporter.swift in Sources */,
 				79D29A2828F2E80C0058FF09 /* ClasseAcronym.swift in Sources */,
 				7971D6C028634FDD00ECA9CA /* ExamCreator.swift in Sources */,
+				7900700529132A6E00F5CB3C /* PdfDocumentViewer.swift in Sources */,
 				79843360283EA37000C5E51E /* LoadableImage.swift in Sources */,
 				7984335D283E97C000C5E51E /* Trombinoscope.swift in Sources */,
+				7900700829132AC300F5CB3C /* DocumentRow.swift in Sources */,
 				79C12758283AA9CB002F243E /* SettingsClasse.swift in Sources */,
 				791C26D428142D7100686F0C /* ColleStore.swift in Sources */,
 			);
@@ -2150,6 +2201,7 @@
 				79CC5716285F9906001D56F5 /* RessourceEditor.swift in Sources */,
 				7974C4CA282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				795BC3E02813105A00C22271 /* ClasseEleveRow.swift in Sources */,
+				7900700929132AC300F5CB3C /* DocumentRow.swift in Sources */,
 				791C26F32814847B00686F0C /* ClasseColleLabel.swift in Sources */,
 				7973A5D8291045DE004F67BA /* ClassList.swift in Sources */,
 				79EF94C6290582AE0024348E /* SeatLabel.swift in Sources */,
@@ -2168,6 +2220,7 @@
 				79F3ABF92808818D00D068D9 /* ColleManager.swift in Sources */,
 				79BB0B4A2816FAE5002AAABA /* Motif.swift in Sources */,
 				79F3AC082808CA4C00D068D9 /* ClasseSplitView.swift in Sources */,
+				7900700F29133EB800F5CB3C /* EventList.swift in Sources */,
 				79EF94D02907367C0024348E /* EventEditor.swift in Sources */,
 				790C97EC28FC3FA9003E562B /* GroupListView.swift in Sources */,
 				79D583FE28204EBE00371EB3 /* ColleSidebarView.swift in Sources */,
@@ -2200,6 +2253,7 @@
 				79D583FB28204A6A00371EB3 /* ObservSignIcon.swift in Sources */,
 				7918D2022810A86100C24C5A /* ClasseDetail.swift in Sources */,
 				791C26E328145E4700686F0C /* EleveColleLabel.swift in Sources */,
+				79006FFE2912CD2E00F5CB3C /* Document.swift in Sources */,
 				7953631D280DC44C00AB8600 /* SchoolStore.swift in Sources */,
 				79AACD9A28E21525009B5AE4 /* TroubleDys.swift in Sources */,
 				791C26DD281447BD00686F0C /* EleveSidebarView.swift in Sources */,
@@ -2217,22 +2271,26 @@
 				79AACD9028DF5430009B5AE4 /* GroupsView.swift in Sources */,
 				7992D0AE282B0B2100B31186 /* Exam.swift in Sources */,
 				791C26F0281475CC00686F0C /* ClasseObservLabel.swift in Sources */,
+				7900700629132A6E00F5CB3C /* PdfDocumentViewer.swift in Sources */,
 				79F3ABD12808225800D068D9 /* Classe.swift in Sources */,
 				79FB57D028FDC26400B38D88 /* TrombineView.swift in Sources */,
 				79F3ABF6280880CC00D068D9 /* ObservationManager.swift in Sources */,
 				7986E7E0282918320011FF21 /* Persistence.swift in Sources */,
 				792F75D928EF63C70053FECF /* EleveSplitView.swift in Sources */,
 				790DA9FC28E3A95F009FB7C6 /* GroupManager.swift in Sources */,
+				7900700C29133DAD00F5CB3C /* RoomList.swift in Sources */,
 				79F3F78D282E7E9500DC26FC /* ExamEditor.swift in Sources */,
 				79FB57D428FDC37100B38D88 /* ElevesListView.swift in Sources */,
 				79F3ABD42808229A00D068D9 /* Eleve.swift in Sources */,
 				791C26FC2814A43400686F0C /* ColleCreator.swift in Sources */,
 				79AACD9328E0BF51009B5AE4 /* GroupOfEleves.swift in Sources */,
+				79007003291327DA00F5CB3C /* DocumentList.swift in Sources */,
 				79EF94C929058C1F0024348E /* RoomPlanEditView.swift in Sources */,
 				79F3ABB72808218300D068D9 /* CahierDuProfesseurApp.swift in Sources */,
 				795BC3D92812E0FF00C22271 /* SchoolClasseRow.swift in Sources */,
 				791C26F928149E7E00686F0C /* ObservDetail.swift in Sources */,
 				79F3ABF02808709100D068D9 /* Colle.swift in Sources */,
+				790070122913401100F5CB3C /* RessourceList.swift in Sources */,
 				79EF94C3290489190024348E /* RoomEditor.swift in Sources */,
 				791C26E028144BE800686F0C /* EleveBrowserRow.swift in Sources */,
 				79502BA52818716500DA798F /* ObservSidebarView.swift in Sources */,

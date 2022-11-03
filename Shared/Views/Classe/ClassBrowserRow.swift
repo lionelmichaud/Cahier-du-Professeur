@@ -32,7 +32,10 @@ struct ClassBrowserRow: View {
 
             Text("\(classe.nbOfEleves) élèves")
                 .foregroundStyle(.secondary)
+                .padding(.leading)
+
             Image(systemName: "clock")
+                .padding(.leading)
             Text("\(classe.heures.formatted(.number.precision(.fractionLength(1)))) heures")
                 .foregroundStyle(.secondary)
             Spacer()

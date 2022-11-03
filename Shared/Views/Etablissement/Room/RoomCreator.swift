@@ -52,32 +52,37 @@ struct RoomCreator: View {
         }
     }
 
-    var body: some View {
-        Group {
-            if hClass == .regular {
-                HStack {
-                    name
-                        .padding(.trailing)
-                    nbPlaces
-                        .frame(maxWidth: 275)
-                        .padding(.trailing)
-                    Button("Plan") {
-                        isPlacing.toggle()
-                    }
-                    .buttonStyle(.bordered)
+    private var compactView: some View {
+        VStack {
+            HStack {
+                name
+                Button("Plan") {
+                    isPlacing.toggle()
                 }
-            } else {
-                GroupBox {
-                    HStack {
-                        name
-                        Button("Plan") {
-                            isPlacing.toggle()
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    nbPlaces
-                }
+                .buttonStyle(.bordered)
             }
+            nbPlaces
+        }
+    }
+
+    private var largeView: some View {
+        HStack {
+            name
+                .padding(.trailing)
+            nbPlaces
+                .frame(maxWidth: 275)
+                .padding(.trailing)
+            Button("Plan") {
+                isPlacing.toggle()
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            largeView
+            compactView
         }
         // Modal: ajout d'une nouvelle classe
         .sheet(isPresented: $isPlacing) {

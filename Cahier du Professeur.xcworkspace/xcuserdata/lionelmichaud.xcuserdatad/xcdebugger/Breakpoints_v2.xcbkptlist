@@ -321,5 +321,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6D3F4E74-999C-4789-8DC6-95F88DF83E06"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/Cahier_du_Professeur-bvccqdmdlsdyxtcynbyvmqagrozj/SourcePackages/checkouts/Files/Sources/Files.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "init(path:fileManager:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A582E233-4012-4785-B17F-C0C597D25AAF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/Cahier_du_Professeur-bvccqdmdlsdyxtcynbyvmqagrozj/SourcePackages/checkouts/Files/Sources/Files.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "validatePath()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4FFC4358-24BD-475F-AC33-ED5CB895E672"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/Cahier_du_Professeur-bvccqdmdlsdyxtcynbyvmqagrozj/SourcePackages/checkouts/Files/Sources/Files.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1017"
+            endingLineNumber = "1017"
+            landmarkName = "locationExists(at:kind:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

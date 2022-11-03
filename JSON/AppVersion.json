@@ -1,10 +1,15 @@
 {
     "version" : {
         "name"    : "",
-        "version" : "6.0.0",
-        "date"    : "2022-10-24T22:00:00Z"
+        "version" : "7.0.0",
+        "date"    : "2022-11-02T22:00:00Z"
     },
     "revisionHistory" : [
+        {
+            "version" : "7.0.0",
+            "date"    : "2022-11-02T22:00:00Z",
+            "comment" : "Ajout des documents à un établissement"
+        },
         {
             "version" : "6.0.0",
             "date"    : "2022-10-24T22:00:00Z",

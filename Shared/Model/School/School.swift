@@ -26,12 +26,17 @@ struct School: Identifiable, Equatable, Codable {
     var nom        : String       = ""
     var annotation : String       = ""
     var classesID  : [UUID]       = []
+    var documents  : [Document]   = []
     var ressources : [Ressource]  = []
     var rooms      : [Room]       = []
-    var events     : [Event]       = []
+    var events     : [Event]      = []
 
     var nbOfClasses: Int {
         classesID.count
+    }
+
+    var nbOfDocuments: Int {
+        documents.count
     }
 
     var nbOfEvents: Int {

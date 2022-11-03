@@ -10,10 +10,13 @@ import HelpersView
 
 struct SchoolCreator: View {
     let addNewItem: (School) -> Void
+
     @State
     private var newSchool: School = School()
+
     @FocusState
     private var isNameFocused: Bool
+
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {

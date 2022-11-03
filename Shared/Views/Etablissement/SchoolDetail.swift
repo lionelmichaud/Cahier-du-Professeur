@@ -6,6 +6,12 @@
 //
 
 import SwiftUI
+import os
+import HelpersView
+import Files
+
+private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Professeur",
+                               category  : "SchoolDetail")
 
 struct SchoolDetail: View {
     @Binding
@@ -21,11 +27,15 @@ struct SchoolDetail: View {
     @State
     private var noteIsExpanded = false
 
+    @State
+    private var alertItem: AlertItem?
+
     @Preference(\.schoolAnnotationEnabled)
     private var schoolAnnotation
 
     // MARK: - Computed Properties
 
+    /// Vue du nom de l'établissement
     private var name: some View {
         HStack {
             Image(systemName: school.niveau == .lycee ? "building.2" : "building")
@@ -36,109 +46,6 @@ struct SchoolDetail: View {
                 .textFieldStyle(.roundedBorder)
         }
         .listRowSeparator(.hidden)
-    }
-
-    private var eventList: some View {
-        Section {
-            // ajouter une évaluation
-            Button {
-                withAnimation {
-                    school.events.insert(Event(), at: 0)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter un événement")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des événements
-            ForEach($school.events.sorted(by: { $0.wrappedValue.date < $1.wrappedValue.date })) { $event in
-                EventEditor(event: $event)
-            }
-            .onDelete { indexSet in
-                school.events.remove(atOffsets: indexSet)
-            }
-//            .onMove { fromOffsets, toOffset in
-//                school.events.move(fromOffsets: fromOffsets, toOffset: toOffset)
-//            }
-
-        } header: {
-            Text("Événements (\(school.nbOfEvents))")
-                .font(.callout)
-                .foregroundColor(.secondary)
-                .fontWeight(.bold)
-        }
-    }
-
-    private var ressourceList: some View {
-        Section {
-            // ajouter une évaluation
-            Button {
-                withAnimation {
-                    school.ressources.insert(Ressource(), at: 0)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une ressource")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des examen
-            ForEach($school.ressources) { $res in
-                RessourceEditor(ressource: $res)
-            }
-            .onDelete { indexSet in
-                school.ressources.remove(atOffsets: indexSet)
-            }
-            .onMove { fromOffsets, toOffset in
-                school.ressources.move(fromOffsets: fromOffsets, toOffset: toOffset)
-            }
-
-        } header: {
-            Text("Ressources (\(school.nbOfRessources))")
-                .font(.callout)
-                .foregroundColor(.secondary)
-                .fontWeight(.bold)
-        }
-    }
-
-    private var roomList: some View {
-        Section {
-            // ajouter une évaluation
-            Button {
-                withAnimation {
-                    school.rooms.insert(Room(), at: 0)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Ajouter une salle de classe")
-                }
-            }
-            .buttonStyle(.borderless)
-
-            // édition de la liste des examen
-            ForEach($school.rooms) { $room in
-                RoomCreator(room: $room, school: school)
-            }
-            .onDelete { indexSet in
-                // TODO: - Dissocier les classes utilisant cette salle
-                school.rooms.remove(atOffsets: indexSet)
-            }
-            .onMove { fromOffsets, toOffset in
-                school.rooms.move(fromOffsets: fromOffsets, toOffset: toOffset)
-            }
-
-        } header: {
-            Text("Salles de classe (\(school.nbOfRessources))")
-                .font(.callout)
-                .foregroundColor(.secondary)
-                .fontWeight(.bold)
-        }
     }
 
     private var selectedItemExists: Bool {
@@ -168,13 +75,16 @@ struct SchoolDetail: View {
                     ClassList(school: $school)
 
                     // édition de la liste des événements
-                    eventList
+                    EventList(school: $school)
+
+                    // édition de la liste des documents utiles
+                    DocumentList(school: $school)
 
                     // édition de la liste des salles de classe
-                    roomList
+                    RoomList(school: $school)
 
                     // édition de la liste des ressources
-                    ressourceList
+                    RessourceList(school: $school)
                 }
                 #if os(iOS)
                 .navigationTitle("Etablissement")

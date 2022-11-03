@@ -50,6 +50,9 @@
       "id" : "624A549C-9D11-402B-B308-640E30189FD6",
       "nom" : "Le Caousou",
       "annotation" : "",
+      "documents" : [
+
+      ],
       "rooms" : [
 
       ],
@@ -113,6 +116,9 @@
       "id" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
       "nom" : "Le Caousou",
       "annotation" : "",
+      "documents" : [
+
+      ],
       "rooms" : [
         {
           "seats" : [

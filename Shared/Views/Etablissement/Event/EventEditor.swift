@@ -30,23 +30,20 @@ struct EventEditor: View {
     }
 
     var body: some View {
-        if hClass == .regular {
-            HStack {
+        let layout = hClass == .regular ?
+        AnyLayout(HStackLayout()) : AnyLayout(VStackLayout())
+
+        layout {
+            if hClass == .regular {
                 date
                     .frame(maxWidth: 175)
-                TextField("Événement", text: $event.name)
-                    .lineLimit(2...3)
-                    .font(hClass == .compact ? .callout : .body)
-                    .textFieldStyle(.roundedBorder)
-            }
-        } else {
-            GroupBox {
+            } else {
                 date
-                TextField("Événement", text: $event.name)
-                    .lineLimit(2...3)
-                    .font(hClass == .compact ? .callout : .body)
-                    .textFieldStyle(.roundedBorder)
             }
+            TextField("Événement", text: $event.name)
+                .lineLimit(2...3)
+                .font(hClass == .compact ? .callout : .body)
+                .textFieldStyle(.roundedBorder)
         }
     }
 }

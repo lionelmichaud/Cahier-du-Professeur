@@ -71,18 +71,24 @@ struct ImportExportManager {
         }
     }
 
-    /// Importer les fichiers dont les URL sont `filesUrl`vers le dossier Document
+    /// Importer les fichiers dont les URL sont `filesUrl`vers le dossier Document.
+    /// Exécute l'`action` pour chaque fichier importé.
     /// - Parameter filesUrl: URLs des fichiers à importer
-    static func importURLsToDocumentsFolder(filesUrl: [URL]) {
+    /// - Parameter action: Action à exécuter pur chaque fichier importé
+    static func importURLsToDocumentsFolder(filesUrl: [URL],
+                                            action: ((File) -> Void)? = nil) {
         guard let documentsFolder = Folder.documents else { return }
 
         filesUrl.forEach { fileUrl in
             guard fileUrl.startAccessingSecurityScopedResource() else { return }
 
-            if let imageFile = try? File(path: fileUrl.path) {
+            if let file = try? File(path: fileUrl.path) {
                 do {
-                    if !documentsFolder.contains(imageFile) {
-                        try imageFile.copy(to: documentsFolder)
+                    if !documentsFolder.contains(file) {
+                        try file.copy(to: documentsFolder)
+                    }
+                    if let action {
+                        action(file)
                     }
                 } catch let error {
                     print("Error reading file \(error.localizedDescription)")

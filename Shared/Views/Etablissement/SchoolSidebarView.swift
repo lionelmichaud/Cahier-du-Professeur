@@ -150,7 +150,7 @@ struct SchoolSidebarView: View {
         .fileImporter(isPresented             : $isImportingJpegFile,
                       allowedContentTypes     : [.jpeg],
                       allowsMultipleSelection : true) { result in
-            importFiles(result: result)
+            importUserSelectedFiles(result: result)
         }
                       .alert(item: $alertItem, content: newAlert)
     }
@@ -190,11 +190,6 @@ struct SchoolSidebarView: View {
                 }
 
                 /// Exporter les fichiers JSON utilisateurs
-                //                        Button {
-                //                            share(geometry: geometry)
-                //                        } label: {
-                //                            Label("Exporter vos données", systemImage: "square.and.arrow.up")
-                //                        }
                 shareMenuItem
 
                 /// Importer des fichiers JPEG pour le trombinoscope
@@ -329,13 +324,13 @@ struct SchoolSidebarView: View {
         Trombinoscope.deleteAllTrombines()
     }
 
-    /// Coppier les fichiers  sélectionnés dans le dossier Document de l'application.
+    /// Copier les fichiers  sélectionnés dans le dossier Document de l'application.
     /// - Parameter result: résultat de la sélection des fichiers issue de fileImporter.
-    private func importFiles(result: Result<[URL], Error>) {
+    private func importUserSelectedFiles(result: Result<[URL], Error>) {
         switch result {
             case .failure(let error):
                 self.alertItem = AlertItem(title         : Text("Échec"),
-                                           message       : Text("L'importation des fichiers a échouée"),
+                                           message       : Text("L'importation des fichiers a échoué"),
                                            dismissButton : .default(Text("OK")))
                 print("Error selecting file: \(error.localizedDescription)")
 

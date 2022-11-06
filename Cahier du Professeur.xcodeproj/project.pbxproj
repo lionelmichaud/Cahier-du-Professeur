@@ -1390,6 +1390,13 @@
 			path = Ressource;
 			sourceTree = "<group>";
 		};
+		79E96CD12916CBD00041F1F5 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Docs;
+			sourceTree = "<group>";
+		};
 		79EA9A9A2902FAF00086C904 /* Plans */ = {
 			isa = PBXGroup;
 			children = (
@@ -1435,8 +1442,9 @@
 				794370CA28D8C72A000830EC /* Cahier-du-Professeur--iOS--Info.plist */,
 				79F3ABE528083A3100D068D9 /* Playground.playground */,
 				7984334B283E92B100C5E51E /* Photos */,
-				79EA9A9A2902FAF00086C904 /* Plans */,
 				79F102D32823199E005E5D9C /* JSON */,
+				79EA9A9A2902FAF00086C904 /* Plans */,
+				79E96CD12916CBD00041F1F5 /* Docs */,
 				79F3AB8D2808218100D068D9 /* Shared */,
 				79F3AB9C2808218300D068D9 /* macOS */,
 				79F3ABA52808218300D068D9 /* Tests iOS */,

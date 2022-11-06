@@ -26,7 +26,7 @@ struct DocumentList: View {
 
     var body: some View {
         Section {
-            // ajouter une évaluation
+            /// ajouter un ou plusieurs documents utiles
             Button {
                 isImportingPdfFile.toggle()
             } label: {
@@ -36,7 +36,7 @@ struct DocumentList: View {
                 }
             }
             .buttonStyle(.borderless)
-            /// Importer des fichiers JPEG
+            /// Importer des fichiers PDF
             .fileImporter(isPresented             : $isImportingPdfFile,
                           allowedContentTypes     : [.pdf],
                           allowsMultipleSelection : true) { result in
@@ -44,7 +44,7 @@ struct DocumentList: View {
             }
                           .alert(item: $alertItem, content: newAlert)
 
-            // édition de la liste des événements
+            /// Visualisation de la liste des événements
             ForEach($school.documents) { $document in
                 DocumentRow(document: document)
             }
@@ -55,9 +55,11 @@ struct DocumentList: View {
 
                     // vérifier l'existence du Folder Document
                     guard let documentsFolder = Folder.documents else {
+                        self.alertItem = AlertItem(title         : Text("Échec"),
+                                                   message       : Text("La suppression du fichier a échouée"),
+                                                   dismissButton : .default(Text("OK")))
                         let error = FileError.failedToResolveDocuments
-                        customLog.log(level: .fault,
-                                      "\(error.rawValue))")
+                        customLog.log(level: .fault, "\(error.rawValue))")
                         return
                     }
 
@@ -65,9 +67,10 @@ struct DocumentList: View {
                         let file = try documentsFolder.file(named: name)
                         try file.delete()
                     } catch {
-                        // TODO: - Gérer l'exception
-                        customLog.log(level: .fault,
-                                      "\(error))")
+                        self.alertItem = AlertItem(title         : Text("Échec"),
+                                                   message       : Text("La suppression du fichier a échouée"),
+                                                   dismissButton : .default(Text("OK")))
+                        customLog.log(level: .fault, "\(error))")
                     }
                 }
                 school.documents.remove(atOffsets: indexSet)
@@ -93,21 +96,30 @@ struct DocumentList: View {
         switch result {
             case .failure(let error):
                 self.alertItem = AlertItem(title         : Text("Échec"),
-                                           message       : Text("L'importation des fichiers a échoué"),
+                                           message       : Text("L'importation des fichiers a échouée"),
                                            dismissButton : .default(Text("OK")))
-                print("Error selecting file: \(error.localizedDescription)")
+                customLog.log(level: .fault,
+                              "Error selecting file: \(error.localizedDescription)")
 
             case .success(let filesUrl):
-                ImportExportManager
-                    .importURLsToDocumentsFolder(filesUrl: filesUrl) { file in
-                        withAnimation {
-                            // créer le document associé à l'établissement
-                            school
-                                .documents
-                                .append(Document(filenameExcludingExtension : file.nameExcludingExtension,
-                                                 fileExtension              : file.extension))
+                do {
+                    try ImportExportManager
+                        .importURLsToDocumentsFolder(filesUrl             : filesUrl,
+                                                     importIfAlreadyExist : false) { file in
+                            withAnimation {
+                                // créer le document associé à l'établissement
+                                school
+                                    .documents
+                                    .append(Document(filenameExcludingExtension : file.nameExcludingExtension,
+                                                     fileExtension              : file.extension))
+                            }
                         }
-                    }
+
+                } catch {
+                    self.alertItem = AlertItem(title         : Text("Échec"),
+                                               message       : Text("L'importation des fichiers a échouée"),
+                                               dismissButton : .default(Text("OK")))
+                }
         }
     }
 }

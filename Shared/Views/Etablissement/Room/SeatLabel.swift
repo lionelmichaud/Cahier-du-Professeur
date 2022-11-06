@@ -20,9 +20,9 @@ struct SeatLabel: View {
                     .foregroundColor(foregoundColor)
                     .font(.callout)
             } else {
-                Text("Wandrille")
+                Text("Positionner")
+                    .foregroundColor(foregoundColor)
                     .font(.callout)
-                    .foregroundColor(backgoundColor)
             }
         }
         .padding(2)

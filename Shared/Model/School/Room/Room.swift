@@ -50,18 +50,23 @@ struct Room: Identifiable, Codable, Equatable {
         capacity - seats.count
     }
 
-    /// URL du fichier image PNG contenant le plan de la salle de classe
-    var planURL: URL? {
-        let planName = "Plan " + name + ".png"
+    var fileName: String {
+        "Plan " + name + ".png"
+    }
 
-        return URL.documentsDirectory
-            .appending(path: planName)
+    /// URL du fichier image PNG contenant le plan de la salle de classe
+    var planURL: URL {
+        URL.documentsDirectory
+            .appending(path: fileName)
+    }
+
+    var planExists: Bool {
+        CGImageSourceCreateWithURL(planURL as CFURL, nil) != nil
     }
 
     /// Retourne les dimensions de l'image
     var imageSize : CGSize? {
-        if let planURL,
-           let imageSource = CGImageSourceCreateWithURL(planURL as CFURL, nil),
+        if let imageSource = CGImageSourceCreateWithURL(planURL as CFURL, nil),
            let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
             let pixelWidth  = imageProperties[kCGImagePropertyPixelWidth] as! Int
             let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! Int
@@ -106,8 +111,10 @@ struct Room: Identifiable, Codable, Equatable {
     }
 
     /// Supprimer le siège `seatIndex` positionnés sur le plan de la salle de classe
+    /// Le siège sera libérés des élèves assis dessus dans l'ensemble des classes.
     /// - Parameters:
     ///   - seatIndex: Indice de la place à supprimer du plan
+    ///   - school: Etablissement dans lequel la salle de classe se trouve
     mutating func removeSeatFromPlan(seatIndex   : Int,
                                      dans school : School,
                                      classStore  : ClasseStore,
@@ -127,7 +134,10 @@ struct Room: Identifiable, Codable, Equatable {
         seats.remove(at: seatIndex)
     }
 
-    /// Supprimer tous les sièges positionnés sur le plan de la salle de classe
+    /// Supprimer tous les sièges positionnés sur le plan de la salle de classe.
+    /// Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
+    /// - Parameters:
+    ///   - school: Etablissement dans lequel la salle de classe se trouve
     mutating func removeAllSeatsFromPlan(dans school : School,
                                          classStore  : ClasseStore,
                                          eleveStore  : EleveStore) {
@@ -145,6 +155,20 @@ struct Room: Identifiable, Codable, Equatable {
                 }
             }
             seats = []
+        }
+    }
+
+    /// Retirer tous les éléves de la `classe` des sièges de la salle de classe.
+    func removeAllSeatedEleve(dans classe : Classe,
+                              eleveStore  : EleveStore) {
+        if seats.isNotEmpty {
+            for idxSeat in seats.indices {
+                // pour chaque place à retirer
+                RoomManager
+                    .removeEleveFromSeat(seatID     : seats[idxSeat].id,
+                                         dans       : classe,
+                                         eleveStore : eleveStore)
+            }
         }
     }
 

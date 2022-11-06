@@ -63,6 +63,7 @@ struct ClasseDetail: View {
     @Binding
     var classe: Classe
 
+    @EnvironmentObject private var schoolStore : SchoolStore
     @EnvironmentObject private var eleveStore  : EleveStore
     @EnvironmentObject private var colleStore  : ColleStore
     @EnvironmentObject private var observStore : ObservationStore
@@ -100,9 +101,34 @@ struct ClasseDetail: View {
     // MARK: - Computed Properties
 
     private var room: some View {
-        NavigationLink(value: ClasseNavigationRoute.room($classe)) {
-            Text("Salle de classe")
-                .fontWeight(.bold)
+        var school: School? {
+            guard let schoolId = classe.schoolId else {
+                return nil
+            }
+            return schoolStore.item(withID: schoolId)
+        }
+
+        var room: Room? {
+            guard let school, let roomId = classe.roomId else {
+                return nil
+            }
+            return RoomManager.room(withId: roomId, in: school)
+        }
+
+        var roomName: String {
+            room?.name ?? ""
+        }
+
+        return NavigationLink(value: ClasseNavigationRoute.room($classe)) {
+            HStack {
+                Text("Salle de classe")
+                    .fontWeight(.bold)
+                if classe.hasAssociatedRoom {
+                    Spacer()
+                    Text(roomName)
+                        .foregroundColor(.secondary)
+                }
+            }
         }
     }
 

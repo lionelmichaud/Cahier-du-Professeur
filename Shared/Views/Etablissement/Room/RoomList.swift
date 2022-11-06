@@ -12,9 +12,15 @@ struct RoomList: View {
     @Binding
     var school: School
 
+    @State
+    private var isShowingDeleteRoomDialog = false
+
+    @State
+    private var indexSet: IndexSet = []
+
     var body: some View {
         Section {
-            // ajouter une évaluation
+            /// Ajouter une nouvelle salle de classe
             Button {
                 withAnimation {
                     school.rooms.insert(Room(), at: 0)
@@ -27,16 +33,27 @@ struct RoomList: View {
             }
             .buttonStyle(.borderless)
 
-            // édition de la liste des examen
+            /// Editer la liste des salles de classe
             ForEach($school.rooms) { $room in
                 RoomCreator(room: $room, school: school)
             }
             .onDelete { indexSet in
-                // TODO: - Dissocier les classes utilisant cette salle
-                school.rooms.remove(atOffsets: indexSet)
+                self.indexSet = indexSet
+                isShowingDeleteRoomDialog.toggle()
             }
             .onMove { fromOffsets, toOffset in
                 school.rooms.move(fromOffsets: fromOffsets, toOffset: toOffset)
+            }
+            .confirmationDialog("Supprimer cette salle de classe?",
+                                isPresented: $isShowingDeleteRoomDialog) {
+                Button("Dissocier", role: .destructive) {
+                    withAnimation {
+                        // TODO: - Dissocier les classes utilisant cette salle
+                        school.rooms.remove(atOffsets: indexSet)
+                    }
+                }
+            } message: {
+                Text("Cette action ne peut pas être annulée.")
             }
 
         } header: {

@@ -28,21 +28,25 @@ struct PdfDocumentViewer: View {
                    showsIndicators: true) {
             pdfImage
         }
-        #if os(iOS)
-                   .navigationTitle("\(document.docName)")
-                   .navigationBarTitleDisplayMode(.inline)
-        #endif
-                   .toolbar {
-                       ToolbarItem(placement: .navigation) {
-                           Button("OK") {
-                               dismiss()
-                           }
-                       }
-                   }
+         #if os(iOS)
+        .navigationTitle("\(document.docName)")
+        .navigationBarTitleDisplayMode(.inline)
+         #endif
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                Button("OK") {
+                    dismiss()
+                }
+            }
+        }
     }
 
     // MARK: - Methods
 
+    /// Retourne une Image créée à partir d'un document PDF.
+    /// - Parameter url: URL du document PDF à convertir
+    /// - Returns: Image créée à partir d'un document PDF
+    // TODO: - Ajouter la possibilité multi-pages
     private func drawPDFfromURL(url: URL) -> UIImage? {
         guard let document = CGPDFDocument(url as CFURL) else { return nil }
         guard let page = document.page(at: 1) else { return nil }

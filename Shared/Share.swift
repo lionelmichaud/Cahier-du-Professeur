@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import os
 import HelpersView
 import Files
+
+private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Professeur",
+                               category  : "ImportExportManager")
 
 struct ImportExportManager {
 
@@ -73,26 +77,45 @@ struct ImportExportManager {
 
     /// Importer les fichiers dont les URL sont `filesUrl`vers le dossier Document.
     /// Exécute l'`action` pour chaque fichier importé.
-    /// - Parameter filesUrl: URLs des fichiers à importer
-    /// - Parameter action: Action à exécuter pur chaque fichier importé
-    static func importURLsToDocumentsFolder(filesUrl: [URL],
-                                            action: ((File) -> Void)? = nil) {
+    /// - Parameters:
+    ///   - filesUrl: URLs des fichiers à importer
+    ///   - action: Action à exécuter pour chaque fichier importé
+    ///   - importIfAlreadyExist: Si true alors importe le fichier même s'il existe déjà dans le dossier Document
+    /// - throws: `FileError.failedToReadFile` si un des fichiers ne peut pas être trouvé.
+    /// `FileError.failedToCopyFile` si un des fichiers ne peut pas être copier.
+    static func importURLsToDocumentsFolder(filesUrl             : [URL],
+                                            importIfAlreadyExist : Bool,
+                                            action               : ((File) -> Void)? = nil) throws {
         guard let documentsFolder = Folder.documents else { return }
 
-        filesUrl.forEach { fileUrl in
+        try filesUrl.forEach { fileUrl in
             guard fileUrl.startAccessingSecurityScopedResource() else { return }
 
-            if let file = try? File(path: fileUrl.path) {
-                do {
-                    if !documentsFolder.contains(file) {
-                        try file.copy(to: documentsFolder)
-                    }
-                    if let action {
-                        action(file)
-                    }
-                } catch let error {
-                    print("Error reading file \(error.localizedDescription)")
+            var file: File
+
+            /// Trouver le fichier correspondant à l'URL
+            do {
+                file = try File(path: fileUrl.path)
+            } catch {
+                fileUrl.stopAccessingSecurityScopedResource()
+                let errorStr = String(describing: (error as! LocationError))
+                customLog.log(level: .error, "\(errorStr)")
+                throw FileError.failedToReadFile
+            }
+
+            /// Copier le fichier trouvé vers le dossier Document
+            do {
+                if importIfAlreadyExist || !documentsFolder.contains(file) {
+                    try file.copy(to: documentsFolder)
                 }
+                if let action {
+                    action(file)
+                }
+            } catch {
+                fileUrl.stopAccessingSecurityScopedResource()
+                let errorStr = String(describing: (error as! LocationError))
+                customLog.log(level: .error, "\(errorStr)")
+                throw FileError.failedToCopyFile
             }
 
             fileUrl.stopAccessingSecurityScopedResource()

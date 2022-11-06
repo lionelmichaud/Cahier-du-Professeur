@@ -25,44 +25,49 @@ struct RoomEditor: View {
     @Environment(\.horizontalSizeClass)
     private var hClass
 
+    @State
+    private var isShowingDeletePlantConfirmDialog: Bool = false
+
     // MARK: - Computed Properties
 
     private var title: String {
         if hClass == .regular {
-            return "Places  - positionnées \(room.nbSeatPositionned) - non positionnées: \(room.nbSeatUnpositionned)"
+            return "Places: positionnées \(room.nbSeatPositionned) - non positionnées: \(room.nbSeatUnpositionned)"
         } else {
             return "Places non positionnées: \(room.nbSeatUnpositionned)"
         }
     }
 
     var body: some View {
-        if room.planURL != nil {
-            RoomPlanEditView(room: $room, school: school)
+        RoomPlanEditView(room: $room, school: school)
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleMenu {
-                /// positionner une nouvelle place au centre du plan de la salle de classe
+                /// Positionner une nouvelle place au centre du plan de la salle de classe
                 if room.nbSeatUnpositionned > 0 {
                     Button {
                         withAnimation {
                             room.addSeatToPlan(Seat(x: 0.5, y: 0.5))
                         }
                     } label: {
-                        Label("Positionner nouvelle place", systemImage: "chair")
+                        Label("Ajouter une place", systemImage: "chair")
                     }
                 }
-                /// supprimer tous les positionnements de places dans la salle de classe
+                /// Supprimer tous les positionnements de places dans la salle de classe
                 if room.nbSeatPositionned > 0 {
                     Button(role: .destructive) {
                         withAnimation {
-                            room.removeAllSeatsFromPlan(dans       : school,
-                                                        classStore : classStore,
-                                                        eleveStore : eleveStore)
+                            // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
+                            // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
+                            room.removeAllSeatsFromPlan(dans: school,
+                                                        classStore: classStore,
+                                                        eleveStore: eleveStore)
                         }
                     } label: {
                         Label("Tout effacer", systemImage: "trash.fill")
                     }
                 }
+                // TODO: - Ajouter un item pour changer le plan de la salle
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
@@ -70,12 +75,43 @@ struct RoomEditor: View {
                         dismiss()
                     }
                 }
+                if room.planExists {
+                    ToolbarItemGroup(placement: .automatic) {
+                        Menu {
+                            /// Suppression du plan de la salle de classe
+                            Button(role: .destructive) {
+                                isShowingDeletePlantConfirmDialog.toggle()
+                            } label: {
+                                Label("Supprimer le plan", systemImage: "trash")
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                        }
+                        /// Confirmation de Suppression de la salle de classe
+                        .confirmationDialog("Suppression du plan",
+                                            isPresented: $isShowingDeletePlantConfirmDialog,
+                                            titleVisibility : .visible) {
+                            Button("Supprimer", role: .destructive) {
+                                withAnimation {
+                                    // TODO: - Dissocier toutes les classes/élèves de ce plan
+                                    // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
+                                    // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
+                                    room.removeAllSeatsFromPlan(dans: school,
+                                                                classStore: classStore,
+                                                                eleveStore: eleveStore)
+                                    // Supprimer l'image du plan de la salle de classe
+                                    // TODO: - Supprimer le fichier de l'image du plan de la salle de classe
+                                }
+                            }
+                        } message: {
+                            VStack {
+                                Text("Supprimer le plan de la saalle de classe ainsi que toutes les places associées.")
+                                Text("Cette action ne peut pas être annulée.")
+                            }
+                        }
+                    }
+                }
             }
-        } else {
-            Text("Plan de salle introuvable")
-                .foregroundStyle(.secondary)
-                .font(.title)
-        }
     }
 }
 

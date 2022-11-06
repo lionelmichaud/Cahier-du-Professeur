@@ -335,7 +335,15 @@ struct SchoolSidebarView: View {
                 print("Error selecting file: \(error.localizedDescription)")
 
             case .success(let filesUrl):
-                ImportExportManager.importURLsToDocumentsFolder(filesUrl: filesUrl)
+                do {
+                    try ImportExportManager.importURLsToDocumentsFolder(filesUrl             : filesUrl,
+                                                                        importIfAlreadyExist : true)
+
+                } catch {
+                    self.alertItem = AlertItem(title         : Text("Échec"),
+                                               message       : Text("L'importation des fichiers a échoué"),
+                                               dismissButton : .default(Text("OK")))
+                }
         }
     }
 

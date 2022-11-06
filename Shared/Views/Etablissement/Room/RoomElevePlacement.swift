@@ -16,7 +16,11 @@ struct RoomElevePlacement: View {
         case picture
     }
 
-    @EnvironmentObject private var schoolStore : SchoolStore
+    @EnvironmentObject
+    private var schoolStore : SchoolStore
+
+    @EnvironmentObject
+    private var eleveStore : EleveStore
 
     @State
     private var isShowingDissociateDialog = false
@@ -115,10 +119,18 @@ struct RoomElevePlacement: View {
                     } label: {
                         Label("Dissocier", systemImage: "minus.circle.fill")
                     }
-                    .confirmationDialog("Dissocier la classe de cette salle de cours?",
+                    .confirmationDialog("Dissocier la classe de cette salle de classe?",
                                         isPresented: $isShowingDissociateDialog) {
                         Button("Dissocier", role: .destructive) {
                             withAnimation {
+                                // TODO: - A tester
+                                if let room {
+                                    // Retirer tous les éléves de la `classe` des sièges de la salle de classe.
+                                    room.removeAllSeatedEleve(dans       : classe,
+                                                              eleveStore : eleveStore)
+                                } else {
+                                    // TODO: - Logger une erreur
+                                }
                                 classe.roomId = nil
                             }
                         }

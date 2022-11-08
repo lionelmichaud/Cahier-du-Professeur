@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+import os
+import Files
+
+private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Professeur",
+                               category  : "RoomEditor")
 
 struct RoomEditor: View {
     @Binding
@@ -26,7 +31,7 @@ struct RoomEditor: View {
     private var hClass
 
     @State
-    private var isShowingDeletePlantConfirmDialog: Bool = false
+    private var isShowingDeletePlanConfirmDialog: Bool = false
 
     // MARK: - Computed Properties
 
@@ -80,7 +85,7 @@ struct RoomEditor: View {
                         Menu {
                             /// Suppression du plan de la salle de classe
                             Button(role: .destructive) {
-                                isShowingDeletePlantConfirmDialog.toggle()
+                                isShowingDeletePlanConfirmDialog.toggle()
                             } label: {
                                 Label("Supprimer le plan", systemImage: "trash")
                             }
@@ -89,29 +94,37 @@ struct RoomEditor: View {
                         }
                         /// Confirmation de Suppression de la salle de classe
                         .confirmationDialog("Suppression du plan",
-                                            isPresented: $isShowingDeletePlantConfirmDialog,
+                                            isPresented: $isShowingDeletePlanConfirmDialog,
                                             titleVisibility : .visible) {
                             Button("Supprimer", role: .destructive) {
                                 withAnimation {
-                                    // TODO: - Dissocier toutes les classes/élèves de ce plan
+                                    // TODO: - A tester
                                     // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
                                     // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
                                     room.removeAllSeatsFromPlan(dans: school,
                                                                 classStore: classStore,
                                                                 eleveStore: eleveStore)
+
                                     // Supprimer l'image du plan de la salle de classe
-                                    // TODO: - Supprimer le fichier de l'image du plan de la salle de classe
+                                    deletePlanFile(roomPlanURL: room.planURL)
                                 }
                             }
                         } message: {
                             VStack {
-                                Text("Supprimer le plan de la saalle de classe ainsi que toutes les places associées.")
+                                Text("Cette action supprimera le plan de la salle de classe ainsi que toutes les places associées.\n") +
+                                Text("Cette action ne supprimera pas la salle de classe elle-même.\n") +
                                 Text("Cette action ne peut pas être annulée.")
                             }
                         }
                     }
                 }
             }
+    }
+
+    // MARK: - Methods
+
+    func deletePlanFile(roomPlanURL: URL) {
+        try? PersistenceManager().deleteFile(withURL: roomPlanURL)
     }
 }
 

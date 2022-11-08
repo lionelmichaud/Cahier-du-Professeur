@@ -1,15 +1,16 @@
 {
   "items" : [
     {
-      "niveau" : "n5ieme",
-      "numero" : 2,
-      "heures" : 1.5,
       "id" : "00067A1B-4802-4657-A1F9-72CB19A74500",
+      "appreciation" : "",
+      "schoolId" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
+      "annotation" : "",
+      "roomId" : "B4360445-AFF9-427E-A03D-9E40663ED3BB",
+      "niveau" : "n5ieme",
       "segpa" : false,
       "isFlagged" : false,
-      "schoolId" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
-      "appreciation" : "",
-      "annotation" : "",
+      "numero" : 2,
+      "heures" : 1.5,
       "elevesID" : [
         "55211765-9FA7-474B-A183-E8E5D7128F8F",
         "67A714C3-0333-40F6-94B7-DC3BCC38A4D7",

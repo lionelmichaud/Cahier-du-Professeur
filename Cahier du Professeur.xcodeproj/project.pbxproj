@@ -161,12 +161,16 @@
 		7986E7E0282918320011FF21 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986E7DE282918320011FF21 /* Persistence.swift */; };
 		7986E7E228291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
 		7986E7E328291DA00011FF21 /* AppVersion.json in Resources */ = {isa = PBXBuildFile; fileRef = 7986E7E128291DA00011FF21 /* AppVersion.json */; };
+		7987615E2919DA4B00A88E59 /* TROMBINOSCOPE personnel 2022-2023.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7987615A2919DA4B00A88E59 /* TROMBINOSCOPE personnel 2022-2023.pdf */; };
+		7987615F2919DA4B00A88E59 /* Doc Prof Caousou.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7987615B2919DA4B00A88E59 /* Doc Prof Caousou.pdf */; };
+		798761602919DA4B00A88E59 /* TROMBINSCOPE PROFS 2022.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7987615C2919DA4B00A88E59 /* TROMBINSCOPE PROFS 2022.pdf */; };
+		798761612919DA4B00A88E59 /* COORDINATEURS MATIERES 2022.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7987615D2919DA4B00A88E59 /* COORDINATEURS MATIERES 2022.pdf */; };
 		7992D0AA282B0AF200B31186 /* EleveMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* EleveMark.swift */; };
 		7992D0AB282B0AF200B31186 /* EleveMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0A9282B0AF200B31186 /* EleveMark.swift */; };
 		7992D0AD282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
 		7992D0AE282B0B2100B31186 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D0AC282B0B2100B31186 /* Exam.swift */; };
-		79935D372824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
-		79935D382824906B005C20BD /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* Share.swift */; };
+		79935D372824906B005C20BD /* ImportExportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* ImportExportManager.swift */; };
+		79935D382824906B005C20BD /* ImportExportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79935D362824906B005C20BD /* ImportExportManager.swift */; };
 		79962A10290D2E9100EFA3EC /* EditableSeatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79962A0F290D2E9100EFA3EC /* EditableSeatLabel.swift */; };
 		79962A11290D2E9100EFA3EC /* EditableSeatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79962A0F290D2E9100EFA3EC /* EditableSeatLabel.swift */; };
 		79962A14290D31CB00EFA3EC /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79962A13290D31CB00EFA3EC /* Seat.swift */; };
@@ -610,9 +614,13 @@
 		7984335F283EA37000C5E51E /* LoadableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableImage.swift; sourceTree = "<group>"; };
 		7986E7DE282918320011FF21 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7986E7E128291DA00011FF21 /* AppVersion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppVersion.json; sourceTree = "<group>"; };
+		7987615A2919DA4B00A88E59 /* TROMBINOSCOPE personnel 2022-2023.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "TROMBINOSCOPE personnel 2022-2023.pdf"; sourceTree = "<group>"; };
+		7987615B2919DA4B00A88E59 /* Doc Prof Caousou.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Doc Prof Caousou.pdf"; sourceTree = "<group>"; };
+		7987615C2919DA4B00A88E59 /* TROMBINSCOPE PROFS 2022.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "TROMBINSCOPE PROFS 2022.pdf"; sourceTree = "<group>"; };
+		7987615D2919DA4B00A88E59 /* COORDINATEURS MATIERES 2022.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "COORDINATEURS MATIERES 2022.pdf"; sourceTree = "<group>"; };
 		7992D0A9282B0AF200B31186 /* EleveMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EleveMark.swift; sourceTree = "<group>"; };
 		7992D0AC282B0B2100B31186 /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
-		79935D362824906B005C20BD /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		79935D362824906B005C20BD /* ImportExportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportExportManager.swift; sourceTree = "<group>"; };
 		79962A0F290D2E9100EFA3EC /* EditableSeatLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableSeatLabel.swift; sourceTree = "<group>"; };
 		79962A13290D31CB00EFA3EC /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
 		79962A16290D7EFD00EFA3EC /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -1393,6 +1401,10 @@
 		79E96CD12916CBD00041F1F5 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
+				7987615D2919DA4B00A88E59 /* COORDINATEURS MATIERES 2022.pdf */,
+				7987615B2919DA4B00A88E59 /* Doc Prof Caousou.pdf */,
+				7987615A2919DA4B00A88E59 /* TROMBINOSCOPE personnel 2022-2023.pdf */,
+				7987615C2919DA4B00A88E59 /* TROMBINSCOPE PROFS 2022.pdf */,
 			);
 			path = Docs;
 			sourceTree = "<group>";
@@ -1457,7 +1469,7 @@
 		79F3AB8D2808218100D068D9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				79935D362824906B005C20BD /* Share.swift */,
+				79935D362824906B005C20BD /* ImportExportManager.swift */,
 				79962A16290D7EFD00EFA3EC /* AppState.swift */,
 				79F3AB8E2808218100D068D9 /* CahierDuProfesseurApp.swift */,
 				79F3AC002808C76A00D068D9 /* MainScene.swift */,
@@ -1829,6 +1841,7 @@
 				79FC132528DBA8AD00F64F7D /* LOPEZ_Martin.jpg in Resources */,
 				79FC12D228DB9F7F00F64F7D /* POPOVA_Sofia.jpg in Resources */,
 				7955965728DBBE4B00FB6A95 /* SAINT-EXUPERY_Gaston.jpg in Resources */,
+				798761602919DA4B00A88E59 /* TROMBINSCOPE PROFS 2022.pdf in Resources */,
 				79A5250828DBC15300E69ACD /* BENOIT_Jules.jpg in Resources */,
 				79FC134B28DBB0B500F64F7D /* COURTOIS_Dorian.jpg in Resources */,
 				79A5259028DBCFFA00E69ACD /* GERMAIN_Alice.jpg in Resources */,
@@ -1967,15 +1980,18 @@
 				79A5254828DBC68300E69ACD /* DESSAPT-HUBLOT_Lucile.jpg in Resources */,
 				79A5254928DBC68300E69ACD /* DESSART_Achille.jpg in Resources */,
 				79A5255A28DBC79000E69ACD /* GARNIER_Louis.jpg in Resources */,
+				798761612919DA4B00A88E59 /* COORDINATEURS MATIERES 2022.pdf in Resources */,
 				79A5257A28DBCDD700E69ACD /* COURTHIEU_Pauline.jpg in Resources */,
 				79FC12D028DB9F6500F64F7D /* PINEAU_Charlotte.jpg in Resources */,
 				79FC12CA28DB9F1E00F64F7D /* MATHIEU_Eugénie.jpg in Resources */,
+				7987615E2919DA4B00A88E59 /* TROMBINOSCOPE personnel 2022-2023.pdf in Resources */,
 				79A5251828DBC29A00E69ACD /* DI-BACCO_Paolo.jpg in Resources */,
 				79FC12FA28DBA3E200F64F7D /* MARTIN_Eva.jpg in Resources */,
 				79FC12B628DB9D6500F64F7D /* ARMENGAUD_Pauline.jpg in Resources */,
 				79FC132028DBA86A00F64F7D /* LEWIN-FLEUR_Aubin.jpg in Resources */,
 				79A5256128DBC81700E69ACD /* LEMOINE_Eliott.jpg in Resources */,
 				79FC135928DBB18E00F64F7D /* GOUGEON_Martin.jpg in Resources */,
+				7987615F2919DA4B00A88E59 /* Doc Prof Caousou.pdf in Resources */,
 				79FC136128DBB1D700F64F7D /* MAUREL_Louise.jpg in Resources */,
 				79A5255028DBC70500E69ACD /* DINH_Niccolo.jpg in Resources */,
 				79A5257928DBCDD700E69ACD /* COLNAT_Claire.jpg in Resources */,
@@ -2075,7 +2091,7 @@
 				79EF94CC2907339F0024348E /* Event.swift in Sources */,
 				7974C4C9282C7D3C00217CD5 /* ClasseExamRow.swift in Sources */,
 				79CC5715285F9906001D56F5 /* RessourceEditor.swift in Sources */,
-				79935D372824906B005C20BD /* Share.swift in Sources */,
+				79935D372824906B005C20BD /* ImportExportManager.swift in Sources */,
 				79D29A2528F2E6730058FF09 /* ClasseNameGroupBox.swift in Sources */,
 				791C26FB2814A43400686F0C /* ColleCreator.swift in Sources */,
 				79D584002820535B00371EB3 /* ColleBrowserRow.swift in Sources */,
@@ -2236,7 +2252,7 @@
 				795BC3E6281337E600C22271 /* EleveDetail.swift in Sources */,
 				79EF94D429074EB70024348E /* RoomLayout.swift in Sources */,
 				7984335E283E97C000C5E51E /* Trombinoscope.swift in Sources */,
-				79935D382824906B005C20BD /* Share.swift in Sources */,
+				79935D382824906B005C20BD /* ImportExportManager.swift in Sources */,
 				795BC3D62812E0D700C22271 /* ClassBrowserRow.swift in Sources */,
 				797FA2E9280ACFD7002524F3 /* Fakes.swift in Sources */,
 				791C26D82814378A00686F0C /* EleveManager.swift in Sources */,

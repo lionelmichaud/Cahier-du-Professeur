@@ -263,7 +263,7 @@ struct ClasseDetail: View {
                         importCsvFile = true
                     }
                 } message: {
-                    Text("La liste des élèves importée doit être au format CSV de \(interoperability == .proNote ? "PRONOTE" : "EcoleDirecte").") +
+                    Text("La liste des élèves importée doit être au format CSV de \(interoperability == .proNote ? "PRONOTE" : "EcoleDirecte").\n") +
                     Text("Cette action ne peut pas être annulée.")
                 }
             }

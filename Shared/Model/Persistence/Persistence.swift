@@ -21,6 +21,7 @@ public enum FileError: String, Error {
     case directoryToDuplicateDoesNotExist  = "Le répertoire à dupliquer n'est pas défini"
     case failedToReadFile                  = "Echec de lecture du fichier"
     case failedToCopyFile                  = "Echec de la copie du fichier"
+    case failedToDeleteFile                = "Echec de la suppression du fichier"
     case failedToDuplicateFiles            = "Echec de la duplication des fichiers"
     case templatesDossierNotInitialized    = "Dossier 'templates' non initializé"
     case failedToImportTemplates           = "Echec de l'importation des templates depuis Bundle.Main vers 'Library'"
@@ -80,7 +81,7 @@ public struct PersistenceManager {
     /// Importer les fichiers dont le nom contient `fileExt`
     /// depuis le `Bundle Main` de l'Application
     /// vers le répertoire `Documents` même si'ils y sont déjà présents.
-    public func forcedImportAllFilesFromApp(fileExt: String) throws {
+    public func forcedImportAllFilesFromApp(fileExtensions: [String]) throws {
         guard let originFolder = Folder.application else {
             let error = FileError.failedToResolveAppBundle
             customLog.log(level: .fault, "\(error.rawValue))")
@@ -94,10 +95,12 @@ public struct PersistenceManager {
         }
 
         do {
-            try duplicateAllFiles(from        : originFolder,
-                                  to          : documentsFolder,
-                                  fileExt     : fileExt,
-                                  forceUpdate : true)
+            try fileExtensions.forEach { fileExtension in
+                try duplicateAllFiles(from        : originFolder,
+                                      to          : documentsFolder,
+                                      fileExt     : fileExtension,
+                                      forceUpdate : true)
+            }
         } catch {
             let error = FileError.failedToImportTemplates
             customLog.log(level: .fault, "\(error.rawValue))")
@@ -291,4 +294,33 @@ public struct PersistenceManager {
         return success
     }
     // swiftlint:enable cyclomatic_complexity
+
+    /// Suprimer el fichier désigné par `url`.
+    /// - Parameter url: URL du fichier à supprimer
+    func deleteFile(withURL url: URL) throws {
+        guard url.startAccessingSecurityScopedResource() else { return }
+
+        var file: File
+
+        /// Trouver le fichier correspondant à l'URL
+        do {
+            file = try File(path: url.path)
+
+            /// Supprimer le fichier trouvé
+            do {
+                try file.delete()
+            } catch {
+                url.stopAccessingSecurityScopedResource()
+                let errorStr = String(describing: (error as! LocationError))
+                customLog.log(level: .fault, "\(errorStr)")
+                throw FileError.failedToReadFile
+            }
+
+        } catch {
+            url.stopAccessingSecurityScopedResource()
+            let errorStr = String(describing: (error as! LocationError))
+            customLog.log(level: .fault, "\(errorStr)")
+            throw FileError.failedToDeleteFile
+        }
+    }
 }

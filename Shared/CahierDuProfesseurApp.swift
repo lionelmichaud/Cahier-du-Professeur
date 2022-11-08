@@ -52,10 +52,7 @@ struct CahierDuProfesseurApp: App {
             if !documentsAreCompatibleWithAppVersion {
                 do {
                     print("Importation des fichiers du Bundle de l'Application")
-                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
-                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
-                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "png")
-                    try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "pdf")
+                    try PersistenceManager().forcedImportAllFilesFromApp(fileExtensions: ["json", "jpg", "png", "pdf"])
 
                 } catch {
                     AppState.shared.initError = .failedToLoadApplicationData

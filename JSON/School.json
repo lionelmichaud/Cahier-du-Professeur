@@ -5,6 +5,11 @@
       "classesID" : [
         "F2DD54DD-793D-4AFA-92ED-D7E19B33E463"
       ],
+      "documents" : [
+
+      ],
+      "id" : "624A549C-9D11-402B-B308-640E30189FD6",
+      "nom" : "Le Caousou",
       "events" : [
         {
           "id" : "AF931475-7397-49CC-AFEA-AECE71FB6643",
@@ -47,12 +52,7 @@
           "name" : "Groupe 1 avec Lucie BEDOS Réseaux Sociaux"
         }
       ],
-      "id" : "624A549C-9D11-402B-B308-640E30189FD6",
-      "nom" : "Le Caousou",
       "annotation" : "",
-      "documents" : [
-
-      ],
       "rooms" : [
 
       ],
@@ -71,6 +71,34 @@
         "F6363577-2EAF-4E0E-B725-AE8BEAF31D9A",
         "49819899-4614-42CC-82BE-50F6483AC241"
       ],
+      "documents" : [
+        {
+          "id" : "7867DEFB-8B73-4A80-8D44-7A5C9785179E",
+          "docName" : "Doc Prof Caousou",
+          "fileExtension" : "pdf",
+          "filenameExcludingExtension" : "Doc Prof Caousou"
+        },
+        {
+          "id" : "5A5D36A8-06A3-473B-BCA0-9E06212CF455",
+          "docName" : "COORDINATEURS MATIERES 2022",
+          "fileExtension" : "pdf",
+          "filenameExcludingExtension" : "COORDINATEURS MATIERES 2022"
+        },
+        {
+          "id" : "89819073-A9BF-4750-80DD-10BB7EE87229",
+          "docName" : "TROMBINOSCOPE personnel 2022-2023",
+          "fileExtension" : "pdf",
+          "filenameExcludingExtension" : "TROMBINOSCOPE personnel 2022-2023"
+        },
+        {
+          "id" : "E73F79AE-6CAE-492D-9A29-482E5D4104FB",
+          "docName" : "TROMBINSCOPE PROFS 2022",
+          "fileExtension" : "pdf",
+          "filenameExcludingExtension" : "TROMBINSCOPE PROFS 2022"
+        }
+      ],
+      "id" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
+      "nom" : "Le Caousou",
       "events" : [
         {
           "id" : "2FC045C3-16B8-4565-A08C-F1351E95D9CD",
@@ -113,13 +141,16 @@
           "name" : "Début du bilan mi-1erSemestre"
         }
       ],
-      "id" : "0F272F97-09DB-4048-B6D7-8817EA195A4A",
-      "nom" : "Le Caousou",
       "annotation" : "",
-      "documents" : [
-
-      ],
       "rooms" : [
+        {
+          "seats" : [
+
+          ],
+          "id" : "4A3C4C56-0D28-4F12-ACB9-72660249BDB2",
+          "name" : "",
+          "capacity" : 24
+        },
         {
           "seats" : [
             {
@@ -146,13 +177,21 @@
             {
               "id" : "4580EBD1-C250-40D7-9F0F-8936B81E5E2E",
               "locInRoom" : [
-                0.47203203517587938,
-                0.10833333333333334
+                0.47579452782726095,
+                0.11083333333333334
               ]
             }
           ],
           "id" : "B4360445-AFF9-427E-A03D-9E40663ED3BB",
           "name" : "TECHNO-2",
+          "capacity" : 24
+        },
+        {
+          "seats" : [
+
+          ],
+          "id" : "235B6C43-60A4-42F6-917F-F41784DE671C",
+          "name" : "TECHNO-2  - actuelle",
           "capacity" : 24
         }
       ],

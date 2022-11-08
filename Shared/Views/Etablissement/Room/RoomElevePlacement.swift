@@ -126,8 +126,8 @@ struct RoomElevePlacement: View {
                                 // TODO: - A tester
                                 if let room {
                                     // Retirer tous les éléves de la `classe` des sièges de la salle de classe.
-                                    room.removeAllSeatedEleve(dans       : classe,
-                                                              eleveStore : eleveStore)
+                                    room.removeAllSeatedEleve(dans: classe,
+                                                              eleveStore: eleveStore)
                                 } else {
                                     // TODO: - Logger une erreur
                                 }

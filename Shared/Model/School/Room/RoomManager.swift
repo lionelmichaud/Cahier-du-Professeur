@@ -62,6 +62,10 @@ struct RoomManager {
         }.first
     }
 
+    /// Si un élève de la `classe` est assis à la place `seatID` alors il est retiré de cette place.
+    /// - Parameters:
+    ///   - seatID: Identifiant de la place de la salle de classe
+    ///   - classe: classe considérée
     static func removeEleveFromSeat(seatID      : UUID,
                                     dans classe : Classe,
                                     eleveStore  : EleveStore) {
@@ -72,6 +76,22 @@ struct RoomManager {
         ) {
             // enlever l'élève qui était assis à cette place
             eleveOnSeat.wrappedValue.seatId = nil
+        }
+    }
+
+    /// Retourne la liste des classes de `school` qui utilisent la salle de classe d'identifiant `roomID`.
+    static func classesUsing(roomID      : UUID,
+                             dans school : School,
+                             classeStore : ClasseStore) -> [Classe] {
+        school.classesID.compactMap { classeID in
+            guard let classe = classeStore.item(withID: classeID) else {
+                return nil
+            }
+            if classe.roomId == roomID {
+                return classe
+            } else {
+                return nil
+            }
         }
     }
 }

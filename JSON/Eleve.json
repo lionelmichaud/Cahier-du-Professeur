@@ -1378,22 +1378,23 @@
     {
       "bonus" : 0,
       "id" : "55211765-9FA7-474B-A183-E8E5D7128F8F",
-      "isFlagged" : false,
-      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
-      "annotation" : "",
       "appreciation" : "",
+      "classeId" : "00067A1B-4802-4657-A1F9-72CB19A74500",
       "sexe" : "female",
+      "annotation" : "",
       "group" : 1,
+      "observsID" : [
+
+      ],
       "collesID" : [
 
       ],
+      "isFlagged" : false,
       "name" : {
         "familyName" : "DORNIC",
         "givenName" : "Salomé"
       },
-      "observsID" : [
-
-      ]
+      "seatId" : "C7BB7DC6-B272-45B9-9F3A-EC2AF956B960"
     },
     {
       "bonus" : 0,

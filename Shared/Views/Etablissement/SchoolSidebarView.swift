@@ -233,7 +233,7 @@ struct SchoolSidebarView: View {
                     }
                 }
             } message: {
-                Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application. ") +
+                Text("L'importation va remplacer vos données actuelles par celles contenues dans l'Application.\n") +
                 Text("Cette action ne peut pas être annulée.")
             }
 
@@ -248,7 +248,7 @@ struct SchoolSidebarView: View {
                 }
             } message: {
                 Text("Les photos importées doivent être au format JPEG ") +
-                Text("et être nommées NOM_Prénom.jpg. ") +
+                Text("et être nommées NOM_Prénom.jpg.\n") +
                 Text("Cette action ne peut pas être annulée.")
             }
 
@@ -275,7 +275,7 @@ struct SchoolSidebarView: View {
                     }
                 }
             } message: {
-                Text("Cette opération peut prendre plusieurs minutes. ") +
+                Text("Cette opération peut prendre plusieurs minutes.\n") +
                 Text("Cette action ne peut pas être annulée.")
             }
         }
@@ -285,9 +285,7 @@ struct SchoolSidebarView: View {
     private func `import`() {
         // Copier les fichiers contenus dans le Bundle de l'application vers le répertoire Document de l'utilisateur
         do {
-            try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "json")
-            try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "jpg")
-            try PersistenceManager().forcedImportAllFilesFromApp(fileExt: "png")
+            try PersistenceManager().forcedImportAllFilesFromApp(fileExtensions: ["json", "jpg", "png", "pdf"])
         } catch {
             /// trigger second alert
             DispatchQueue.main.async {

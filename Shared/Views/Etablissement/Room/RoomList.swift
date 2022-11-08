@@ -12,6 +12,12 @@ struct RoomList: View {
     @Binding
     var school: School
 
+    @EnvironmentObject
+    private var classStore  : ClasseStore
+
+    @EnvironmentObject
+    private var eleveStore : EleveStore
+
     @State
     private var isShowingDeleteRoomDialog = false
 
@@ -46,13 +52,34 @@ struct RoomList: View {
             }
             .confirmationDialog("Supprimer cette salle de classe?",
                                 isPresented: $isShowingDeleteRoomDialog) {
-                Button("Dissocier", role: .destructive) {
+                Button("Supprimer", role: .destructive) {
                     withAnimation {
-                        // TODO: - Dissocier les classes utilisant cette salle
+                        // TODO: - A tester
+                        indexSet.forEach { roomIndex in
+                            var room = school.rooms[roomIndex]
+                            // Dissocier les classes utilisant cette salle de classe
+                            var classesUsingRoom = RoomManager.classesUsing(roomID      : room.id,
+                                                                            dans        : school,
+                                                                            classeStore : classStore)
+                            for classeIdx in classesUsingRoom.indices {
+                                classesUsingRoom[classeIdx].roomId = nil
+                            }
+
+                            // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
+                            // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
+                            room.removeAllSeatsFromPlan(dans: school,
+                                                        classStore: classStore,
+                                                        eleveStore: eleveStore)
+
+                            // Supprimer l'image du plan de la salle de classe
+                            deletePlanFile(roomPlanURL: room.planURL)
+                        }
                         school.rooms.remove(atOffsets: indexSet)
                     }
                 }
             } message: {
+                Text("Cette action supprimera le plan de la salle de classe ainsi que toutes les places associées.\n") +
+                Text("Cette action supprimera aussi la salle de classe elle-même.\n") +
                 Text("Cette action ne peut pas être annulée.")
             }
 
@@ -62,6 +89,12 @@ struct RoomList: View {
                 .foregroundColor(.secondary)
                 .fontWeight(.bold)
         }
+    }
+
+    // MARK: - Methods
+
+    func deletePlanFile(roomPlanURL: URL) {
+        try? PersistenceManager().deleteFile(withURL: roomPlanURL)
     }
 }
 

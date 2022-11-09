@@ -188,7 +188,8 @@ E: CustomStringConvertible {
         saveAsJSON()
     }
 
-    /// Met à jour l'item de `self.items` dont l'`id` est le même que celui de `updatedItem`
+    /// Met à jour l'item de `self.items` dont l'`id` est le même que celui de `updatedItem`.
+    /// Les autres restent inchangés.
     public func update(with updatedItem: E) {
         if let index = items.firstIndex(where: { $0.id == updatedItem.id }) {
             items[index] = updatedItem
@@ -197,7 +198,8 @@ E: CustomStringConvertible {
     }
 
     /// Met à jour tous les item de `self.items` dont l'`id` est le même que celui
-    /// d'un des éléments de`updatedItems`
+    /// d'un des éléments de`updatedItems`.
+    /// Les autres restent inchangés.
     public func update(with updatedItems: [E]) {
         for updatedItem in updatedItems {
             if let index = self.items.firstIndex(where: { $0.id == updatedItem.id }) {

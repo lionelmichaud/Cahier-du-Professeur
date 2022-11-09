@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HelpersView
 
 /// Vue de la liste des salles de classe de l'établissement
 struct RoomList: View {
@@ -13,13 +14,16 @@ struct RoomList: View {
     var school: School
 
     @EnvironmentObject
-    private var classStore  : ClasseStore
+    private var classeStore  : ClasseStore
 
     @EnvironmentObject
     private var eleveStore : EleveStore
 
+//    @State
+//    private var isShowingDeleteRoomDialog = false
+
     @State
-    private var isShowingDeleteRoomDialog = false
+    private var alertItem: AlertItem?
 
     @State
     private var indexSet: IndexSet = []
@@ -45,43 +49,29 @@ struct RoomList: View {
             }
             .onDelete { indexSet in
                 self.indexSet = indexSet
-                isShowingDeleteRoomDialog.toggle()
+                self.alertItem = AlertItem(
+                    title         : Text("Supprimer cette salle de classe?"),
+                    message       : Text("Cette action supprimera le plan de la salle de classe ainsi que toutes les places associées.\n") +
+                    Text("Cette action supprimera aussi la salle de classe elle-même.\n") +
+                    Text("Cette action ne peut pas être annulée."),
+                    primaryButton  : .destructive(Text("Supprimer"),
+                                                  action: {
+                                                      indexSet.forEach { roomIndex in
+                                                          RoomManager.deleteRoomPlan(
+                                                            de: &school.rooms[roomIndex],
+                                                            dans: school,
+                                                            classeStore: classeStore,
+                                                            eleveStore: eleveStore)
+                                                      }
+                                                      school.rooms.remove(atOffsets: indexSet)
+                                                  }),
+                    secondaryButton: .cancel()
+                )
             }
             .onMove { fromOffsets, toOffset in
                 school.rooms.move(fromOffsets: fromOffsets, toOffset: toOffset)
             }
-            .confirmationDialog("Supprimer cette salle de classe?",
-                                isPresented: $isShowingDeleteRoomDialog) {
-                Button("Supprimer", role: .destructive) {
-                    withAnimation {
-                        // TODO: - A tester
-                        indexSet.forEach { roomIndex in
-                            var room = school.rooms[roomIndex]
-                            // Dissocier les classes utilisant cette salle de classe
-                            var classesUsingRoom = RoomManager.classesUsing(roomID      : room.id,
-                                                                            dans        : school,
-                                                                            classeStore : classStore)
-                            for classeIdx in classesUsingRoom.indices {
-                                classesUsingRoom[classeIdx].roomId = nil
-                            }
-
-                            // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
-                            // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
-                            room.removeAllSeatsFromPlan(dans: school,
-                                                        classStore: classStore,
-                                                        eleveStore: eleveStore)
-
-                            // Supprimer l'image du plan de la salle de classe
-                            deletePlanFile(roomPlanURL: room.planURL)
-                        }
-                        school.rooms.remove(atOffsets: indexSet)
-                    }
-                }
-            } message: {
-                Text("Cette action supprimera le plan de la salle de classe ainsi que toutes les places associées.\n") +
-                Text("Cette action supprimera aussi la salle de classe elle-même.\n") +
-                Text("Cette action ne peut pas être annulée.")
-            }
+            .alert(item: $alertItem, content: newAlert)
 
         } header: {
             Text("Salles de classe (\(school.nbOfRessources))")
@@ -89,12 +79,6 @@ struct RoomList: View {
                 .foregroundColor(.secondary)
                 .fontWeight(.bold)
         }
-    }
-
-    // MARK: - Methods
-
-    func deletePlanFile(roomPlanURL: URL) {
-        try? PersistenceManager().deleteFile(withURL: roomPlanURL)
     }
 }
 

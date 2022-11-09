@@ -83,15 +83,14 @@ struct RoomPlanEditView: View {
                     Label("Importer un plan au format '\(room.planURL.pathExtension)' et nommé '\(room.fileName)'",
                           systemImage: "square.and.arrow.down")
                 }
-                /// Importer des fichiers PDF
+                /// Importer un fichier PNG
                 .fileImporter(isPresented             : $isImportingPngFile,
                               allowedContentTypes     : [.png],
                               allowsMultipleSelection : false) { result in
                     importUserSelectedFiles(result: result)
-                    // TODO: - renommer le fichier si le nom du fichier imprté n'est pas le bon
+                    // TODO: - renommer le fichier si le nom du fichier importé n'est pas le bon
                 }
                 .alert(item: $alertItem, content: newAlert)
-
             }
         }
     }

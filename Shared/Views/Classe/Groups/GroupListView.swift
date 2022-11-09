@@ -40,7 +40,7 @@ struct GroupListView : View {
                                 eleveStore.update(with: eleve)
                             }
                         } label: {
-                            Label((eleveStore.item(withID: eleveID)?.displayName(nameDisplayOrder))!, systemImage: "person.fill")
+                            Label((eleveStore.item(withID: eleveID)?.displayName(nameDisplayOrder))!, systemImage: "graduationcap")
                         }
                     }
                 } label: {

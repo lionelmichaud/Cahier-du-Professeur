@@ -52,7 +52,7 @@ struct MarkListView : View {
                 Button(role: .destructive) {
                     isShowingResetConfirmDialog = true
                 } label: {
-                    Image(systemName: "person.3.fill")
+                    Image(systemName: "person.3.sequence.fill")
                 }
                 /// Confirmation de Suppression de toutes vos données
                 .confirmationDialog("Remettre toutes les notes à \"Non rendu\" ?",

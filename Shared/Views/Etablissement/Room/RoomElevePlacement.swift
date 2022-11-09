@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import os
+
+private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Professeur",
+                               category  : "RoomElevePlacement")
 
 struct RoomElevePlacement: View {
     @Binding
@@ -104,37 +108,39 @@ struct RoomElevePlacement: View {
             }
         }
         .toolbar {
-            ToolbarItemGroup(placement: .automatic) {
-                Picker("Présentation", selection: $presentation) {
-                    Image(systemName: "list.bullet").tag(ViewMode.list)
-                    Image(systemName: "person.crop.square.fill").tag(ViewMode.picture)
-                }
-                .pickerStyle(.segmented)
-            }
+//            ToolbarItemGroup(placement: .automatic) {
+//                Picker("Présentation", selection: $presentation) {
+//                    Image(systemName: "list.bullet").tag(ViewMode.list)
+//                    Image(systemName: "person.crop.square.fill").tag(ViewMode.picture)
+//                }
+//                .pickerStyle(.segmented)
+//            }
             ToolbarItemGroup(placement: .primaryAction) {
                 if classe.hasAssociatedRoom {
                     /// Dissocier la classe de la salle de classe
                     Button(role: .destructive) {
                         isShowingDissociateDialog.toggle()
                     } label: {
-                        Label("Dissocier", systemImage: "minus.circle.fill")
+                        Label("Dissocier de cette salle", systemImage: "minus.circle.fill")
                     }
-                    .confirmationDialog("Dissocier la classe de cette salle de classe?",
-                                        isPresented: $isShowingDissociateDialog) {
-                        Button("Dissocier", role: .destructive) {
+                    .confirmationDialog("Dissocier la classe de cette salle?",
+                                        isPresented: $isShowingDissociateDialog,
+                                        titleVisibility: .visible) {
+                        Button("Dissocier de cette salle de classe", role: .destructive) {
                             withAnimation {
-                                // TODO: - A tester
                                 if let room {
                                     // Retirer tous les éléves de la `classe` des sièges de la salle de classe.
                                     room.removeAllSeatedEleve(dans: classe,
                                                               eleveStore: eleveStore)
                                 } else {
-                                    // TODO: - Logger une erreur
+                                    customLog.log(level: .fault,
+                                                  "Dissocier: Le plan associé à la salle de classe n'a pas été trouvé")
                                 }
                                 classe.roomId = nil
                             }
                         }
                     } message: {
+                        Text("La classe de \(classe.displayString) ne sera plus associée à la salle de classe \(room!.name).\n") +
                         Text("Cette action ne peut pas être annulée.")
                     }
                 } else if school != nil {

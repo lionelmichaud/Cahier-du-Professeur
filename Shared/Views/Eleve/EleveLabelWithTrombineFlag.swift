@@ -75,7 +75,7 @@ struct EleveLabelWithTrombineFlag: View {
                         }
                     }
                 } label: {
-                    Image(systemName: "person.fill")
+                    Image(systemName: "graduationcap")
                         .imageScale(imageSize)
                         .symbolRenderingMode(.monochrome)
                         .foregroundColor(eleve.sexe.color)

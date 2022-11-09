@@ -33,13 +33,13 @@ struct ContentView: View {
 
             /// composition de la famille
             ClasseSplitView()
-                .tabItem { Label("Classes", systemImage: "person.3").symbolVariant(.none) }
+                .tabItem { Label("Classes", systemImage: "person.3.sequence").symbolVariant(.none) }
                 .tag(NavigationModel.Tab.classe)
                 .badge(classeStore.nbOfItems)
 
             /// dépenses de la famille
             EleveSplitView()
-                .tabItem { Label("Elèves", systemImage: "person").symbolVariant(.none) }
+                .tabItem { Label("Elèves", systemImage: "graduationcap").symbolVariant(.none) }
                 .tag(NavigationModel.Tab.eleve)
                 .badge(eleveStore.nbOfItems)
 

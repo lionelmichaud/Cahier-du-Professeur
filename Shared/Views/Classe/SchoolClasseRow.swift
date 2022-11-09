@@ -13,7 +13,7 @@ struct SchoolClasseRow: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "person.3.fill")
+            Image(systemName: "person.3.sequence.fill")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
             Text(classe.displayString)
@@ -26,7 +26,7 @@ struct SchoolClasseRow: View {
             Spacer()
 
             Text("\(classe.nbOfEleves)")
-            Image(systemName: "person.fill")
+            Image(systemName: "graduationcap")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
 

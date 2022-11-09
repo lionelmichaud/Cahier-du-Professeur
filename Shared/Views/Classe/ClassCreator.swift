@@ -27,7 +27,7 @@ struct ClassCreator: View {
     var niveau: some View {
         HStack {
             // niveau de cette classe
-            Image(systemName: "person.3.fill")
+            Image(systemName: "person.3.sequence.fill")
                 .sfSymbolStyling()
                 .foregroundColor(newClasse.niveau.color)
 

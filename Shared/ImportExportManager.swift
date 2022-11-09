@@ -70,7 +70,7 @@ struct ImportExportManager {
         do {
             return try PersistenceManager().collectedURLs(fileNames: fileNames)
         } catch {
-            // TODO: - Logger une ereur
+            customLog.log(level: .info, "Echec de la recherche des URL des fichiers contenus dans le dossier Document \(error)")
             return [ ]
         }
     }

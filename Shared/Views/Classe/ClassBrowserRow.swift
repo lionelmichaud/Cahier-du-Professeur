@@ -13,7 +13,7 @@ struct ClassBrowserRow: View {
 
     private var regularRow: some View {
         HStack {
-            Image(systemName: "person.3.fill")
+            Image(systemName: "person.3.sequence.fill")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
 
@@ -47,7 +47,7 @@ struct ClassBrowserRow: View {
 
     private var compactRow: some View {
         HStack {
-            Image(systemName: "person.3.fill")
+            Image(systemName: "person.3.sequence.fill")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
 

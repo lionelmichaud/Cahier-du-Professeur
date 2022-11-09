@@ -94,4 +94,39 @@ struct RoomManager {
             }
         }
     }
+
+    /// Supprime le plan de salle de classe `room` de l'établissement `school`.
+    ///
+    /// Supprimera tous les sièges positionnés sur le plan de la salle de classe `room`.
+    ///
+    /// Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
+    /// - Parameters:
+    ///   - room: Salle de classe dont il faut supprimer le plan.
+    ///   - school: Etablissement auquel appartient la salle de classe.
+    static func deleteRoomPlan(de room: inout Room,
+                               dans school : School,
+                               classeStore : ClasseStore,
+                               eleveStore  : EleveStore) {
+        // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
+        // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
+        room.removeAllSeatsFromPlan(
+            dans: school,
+            classStore: classeStore,
+            eleveStore: eleveStore
+        )
+
+        // Supprimer le lien entre les classe et cette salle de classe
+        var classes = RoomManager.classesUsing(
+            roomID: room.id,
+            dans: school,
+            classeStore: classeStore
+        )
+        for idx in classes.indices {
+            classes[idx].roomId = nil
+        }
+        classeStore.update(with: classes)
+
+        // Supprimer l'image du plan de la salle de classe
+        try? PersistenceManager().deleteFile(withURL: room.planURL)
+    }
 }

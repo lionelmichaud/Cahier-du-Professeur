@@ -8,6 +8,7 @@
 import SwiftUI
 import os
 import Files
+import HelpersView
 
 private let customLog = Logger(subsystem : "com.michaud.lionel.Cahier-du-Professeur",
                                category  : "RoomEditor")
@@ -19,7 +20,7 @@ struct RoomEditor: View {
     var school: School
 
     @EnvironmentObject
-    private var classStore  : ClasseStore
+    private var classeStore  : ClasseStore
 
     @EnvironmentObject
     private var eleveStore : EleveStore
@@ -32,6 +33,15 @@ struct RoomEditor: View {
 
     @State
     private var isShowingDeletePlanConfirmDialog: Bool = false
+
+    @State
+    private var isShowingChangePlanConfirmDialog: Bool = false
+
+    @State
+    private var isImportingPngFile = false
+
+    @State
+    private var alertItem: AlertItem?
 
     // MARK: - Computed Properties
 
@@ -62,18 +72,18 @@ struct RoomEditor: View {
                 if room.nbSeatPositionned > 0 {
                     Button(role: .destructive) {
                         withAnimation {
-                            // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
+                            // Supprime le plan de salle de classe `room` de l'établissement `school`..
                             // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
                             room.removeAllSeatsFromPlan(dans: school,
-                                                        classStore: classStore,
+                                                        classStore: classeStore,
                                                         eleveStore: eleveStore)
                         }
                     } label: {
-                        Label("Tout effacer", systemImage: "trash.fill")
+                        Label("Effacer toutes les places", systemImage: "trash.fill")
                     }
                 }
-                // TODO: - Ajouter un item pour changer le plan de la salle
             }
+            .alert(item: $alertItem, content: newAlert)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button("OK") {
@@ -89,31 +99,67 @@ struct RoomEditor: View {
                             } label: {
                                 Label("Supprimer le plan", systemImage: "trash")
                             }
+                            /// Suppression du plan de la salle de classe
+                            Button(role: .destructive) {
+                                isShowingChangePlanConfirmDialog.toggle()
+                            } label: {
+                                Text("Changer de plan")
+                            }
+
                         } label: {
                             Image(systemName: "ellipsis.circle")
                         }
-                        /// Confirmation de Suppression de la salle de classe
+                        /// Confirmation de Suppression du plan de la salle de classe
                         .confirmationDialog("Suppression du plan",
                                             isPresented: $isShowingDeletePlanConfirmDialog,
                                             titleVisibility : .visible) {
                             Button("Supprimer", role: .destructive) {
                                 withAnimation {
-                                    // TODO: - A tester
-                                    // Supprimer tous les sièges positionnés sur le plan de la salle de classe.
-                                    // Tous les sièges seront libérés des élèves assis dessus dans l'ensemble des classes.
-                                    room.removeAllSeatsFromPlan(dans: school,
-                                                                classStore: classStore,
-                                                                eleveStore: eleveStore)
-
-                                    // Supprimer l'image du plan de la salle de classe
-                                    deletePlanFile(roomPlanURL: room.planURL)
+                                    RoomManager.deleteRoomPlan(
+                                        de: &room,
+                                        dans: school,
+                                        classeStore: classeStore,
+                                        eleveStore: eleveStore
+                                    )
                                 }
                             }
                         } message: {
-                            VStack {
-                                Text("Cette action supprimera le plan de la salle de classe ainsi que toutes les places associées.\n") +
-                                Text("Cette action ne supprimera pas la salle de classe elle-même.\n") +
-                                Text("Cette action ne peut pas être annulée.")
+                            Text("Cette action supprimera le plan de la salle de classe ainsi que toutes les places associées.\n") +
+                            Text("Cette action ne supprimera pas la salle de classe elle-même.\n") +
+                            Text("Cette action ne peut pas être annulée.")
+                        }
+                        // TODO: - A tester
+                        /// Confirmation de changement du plan de la salle de classe
+                        .confirmationDialog("Changement du plan",
+                                            isPresented: $isShowingChangePlanConfirmDialog,
+                                            titleVisibility : .visible) {
+                            Button("Changer", role: .destructive) {
+                                isImportingPngFile.toggle()
+                            }
+                        } message: {
+                            Text("Cette action supprimera le plan actuel de la salle de classe ainsi que toutes les places associées.\n") +
+                            Text("Cette action ne supprimera pas la salle de classe elle-même.\n") +
+                            Text("Cette action ne peut pas être annulée.")
+                        }
+                        /// Importer un fichier PNG
+                        .fileImporter(isPresented             : $isImportingPngFile,
+                                      allowedContentTypes     : [.png],
+                                      allowsMultipleSelection : false) { result in
+                            withAnimation {
+                                // supprimer le plan existant
+                                switch result {
+                                    case .success:
+                                        RoomManager.deleteRoomPlan(
+                                            de: &room,
+                                            dans: school,
+                                            classeStore: classeStore,
+                                            eleveStore: eleveStore
+                                        )
+                                    case .failure:
+                                        break
+                                }
+                                // pour le remplacer par un autre
+                                importUserSelectedFiles(result: result)
                             }
                         }
                     }
@@ -123,8 +169,40 @@ struct RoomEditor: View {
 
     // MARK: - Methods
 
-    func deletePlanFile(roomPlanURL: URL) {
-        try? PersistenceManager().deleteFile(withURL: roomPlanURL)
+    /// Copier les fichiers  sélectionnés dans le dossier Document de l'application.
+    /// Ajouter un document à l'établissement pour chaque fichier importé.
+    /// - Parameter result: résultat de la sélection des fichiers issue de fileImporter.
+    private func importUserSelectedFiles(result: Result<[URL], Error>) {
+        switch result {
+            case .failure(let error):
+                self.alertItem = AlertItem(title         : Text("Échec"),
+                                           message       : Text("L'importation du fichier a échouée"),
+                                           dismissButton : .default(Text("OK")))
+                customLog.log(level: .fault,
+                              "Error selecting file: \(error.localizedDescription)")
+
+            case .success(let filesUrl):
+                if let theFileURL = filesUrl.first {
+                    // Si le fichier ne porte le bon nom, arrêter l'importation
+                    guard theFileURL.pathComponents.last == room.fileName else {
+                        self.alertItem = AlertItem(title         : Text("Échec"),
+                                                   message       : Text("Le nom du fichier importé ne correspond pas au nom de la salle de classe."),
+                                                   dismissButton : .default(Text("OK")))
+                        return
+                    }
+
+                    do {
+                        try ImportExportManager
+                            .importURLsToDocumentsFolder(filesUrl             : [theFileURL],
+                                                         importIfAlreadyExist : true)
+
+                    } catch {
+                        self.alertItem = AlertItem(title         : Text("Échec"),
+                                                   message       : Text("L'importation du fichier a échouée"),
+                                                   dismissButton : .default(Text("OK")))
+                    }
+                }
+        }
     }
 }
 

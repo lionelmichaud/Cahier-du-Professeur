@@ -26,7 +26,7 @@ struct EleveCreator: View {
     var body: some View {
         Form {
             HStack {
-                Image(systemName: "person.fill")
+                Image(systemName: "graduationcap")
                     .sfSymbolStyling()
                     .foregroundColor(eleve.sexe.color)
                 // Sexe de cet eleve

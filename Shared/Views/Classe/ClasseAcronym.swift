@@ -12,7 +12,7 @@ struct ClasseAcronym: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "person.3.fill")
+            Image(systemName: "person.3.sequence.fill")
                 .sfSymbolStyling()
                 .foregroundColor(classe.niveau.color)
             Text(classe.displayString)

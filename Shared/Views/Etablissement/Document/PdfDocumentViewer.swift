@@ -12,30 +12,63 @@ struct PdfDocumentViewer: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    @State
+    private var pgNumber: Int = 0
+
+    @State
+    private var pdfImages = [Image]()
+
     // MARK: - Computed Properties
 
-    private var pdfImage: Image {
-        let uiImage = drawPDFfromURL(url: document.url)
-        if let uiImage {
-            return Image(uiImage: uiImage)
+    private func getPdfImages() -> [Image] {
+        if let uiImages = imagesFromPDF(at: document.url) {
+            return uiImages.map { uiImage in
+                Image(uiImage: uiImage)
+            }
         } else {
-            return Image(systemName: "doc.richtext").resizable()
+            return [Image(systemName: "doc.richtext").resizable()]
         }
     }
 
     var body: some View {
-        ScrollView([.vertical,.horizontal],
-                   showsIndicators: true) {
-            pdfImage
+        Group {
+            if pdfImages.isNotEmpty {
+                ScrollView([.vertical, .horizontal],
+                           showsIndicators: true) {
+                    pdfImages[pgNumber]
+                }
+            } else {
+                Text("Chargement")
+            }
         }
-         #if os(iOS)
+        #if os(iOS)
         .navigationTitle("\(document.docName)")
         .navigationBarTitleDisplayMode(.inline)
-         #endif
+        #endif
+        .onAppear {
+            pdfImages = getPdfImages()
+        }
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button("OK") {
                     dismiss()
+                }
+            }
+            if pdfImages.count > 1 {
+                ToolbarItemGroup(placement: .automatic) {
+                    Button {
+                        pgNumber = max(0, pgNumber - 1)
+                    } label: {
+                        Image(systemName: "arrow.backward.circle", variableValue: 1)
+                    }
+                    .disabled(pgNumber == pdfImages.startIndex)
+                    Text("\(pgNumber+1)/\(pdfImages.count)")
+                    Button {
+                        pgNumber = min(pdfImages.count-1, pgNumber + 1)
+                    } label: {
+                        Image(systemName: "arrow.forward.circle", variableValue: 0)
+                    }
+                    .disabled(pgNumber == pdfImages.endIndex-1)
                 }
             }
         }
@@ -43,27 +76,37 @@ struct PdfDocumentViewer: View {
 
     // MARK: - Methods
 
-    /// Retourne une Image créée à partir d'un document PDF.
+    /// Retourne une suite d'images créées à partir d'un document PDF.
     /// - Parameter url: URL du document PDF à convertir
-    /// - Returns: Image créée à partir d'un document PDF
-    // TODO: - Ajouter la possibilité multi-pages
-    private func drawPDFfromURL(url: URL) -> UIImage? {
+    /// - Returns: Une image pour chaque page du PDF.
+    private func imagesFromPDF(at url: URL) -> [UIImage]? {
         guard let document = CGPDFDocument(url as CFURL) else { return nil }
-        guard let page = document.page(at: 1) else { return nil }
 
-        let pageRect = page.getBoxRect(.mediaBox)
-        let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-        let img = renderer.image { ctx in
-            UIColor.white.set()
-            ctx.fill(pageRect)
+        let numberOfPages = document.numberOfPages
+        guard numberOfPages.isPositive else { return nil }
 
-            ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-            ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+        let pagesRange = 1 ... numberOfPages
+        var images = [UIImage]()
 
-            ctx.cgContext.drawPDFPage(page)
+        pagesRange.forEach { pageNumber in
+            guard let page = document.page(at: pageNumber) else { return }
+
+            let pageRect = page.getBoxRect(.mediaBox)
+            let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+            let img = renderer.image { ctx in
+                UIColor.white.set()
+                ctx.fill(pageRect)
+
+                ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+                ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+
+                ctx.cgContext.drawPDFPage(page)
+            }
+
+            images.append(img)
         }
 
-        return img
+        return images
     }
 }
 

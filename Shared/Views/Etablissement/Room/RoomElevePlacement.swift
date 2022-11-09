@@ -15,11 +15,6 @@ struct RoomElevePlacement: View {
     @Binding
     var classe: Classe
 
-    enum ViewMode: Int {
-        case list
-        case picture
-    }
-
     @EnvironmentObject
     private var schoolStore : SchoolStore
 
@@ -28,9 +23,6 @@ struct RoomElevePlacement: View {
 
     @State
     private var isShowingDissociateDialog = false
-
-    @State
-    private var presentation: ViewMode = .list
 
     // MARK: - ComputedProperties
 
@@ -108,13 +100,6 @@ struct RoomElevePlacement: View {
             }
         }
         .toolbar {
-//            ToolbarItemGroup(placement: .automatic) {
-//                Picker("Présentation", selection: $presentation) {
-//                    Image(systemName: "list.bullet").tag(ViewMode.list)
-//                    Image(systemName: "person.crop.square.fill").tag(ViewMode.picture)
-//                }
-//                .pickerStyle(.segmented)
-//            }
             ToolbarItemGroup(placement: .primaryAction) {
                 if classe.hasAssociatedRoom {
                     /// Dissocier la classe de la salle de classe

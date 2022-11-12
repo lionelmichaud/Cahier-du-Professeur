@@ -45,10 +45,11 @@ extension Exam: CustomStringConvertible {
     var description: String {
         """
 
-        Sujet      : \(sujet)
-        Noté sur   : \(maxMark)
-        Coefficient: \(coef.formatted(.number.precision(.fractionLength(2))))
-        Date       : \(date.stringLongDate)
+        EVALUATION: \(sujet)
+           Noté sur   : \(maxMark)
+           Coefficient: \(coef.formatted(.number.precision(.fractionLength(2))))
+           Date       : \(date.stringLongDate)
+           Notes: \(String(describing: marks).withPrefixedSplittedLines("     "))
         """
     }
 }

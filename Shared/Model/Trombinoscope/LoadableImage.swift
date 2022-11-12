@@ -38,6 +38,13 @@ struct LoadableImage: View {
                 placeholderImage
                     .resizable()
                     .scaledToFit()
+                    .dropDestination(for: Image.self) { (images: [Image], _) in
+                        if let portrait = images.first {
+                            placeholderImage = portrait
+                            return true
+                        }
+                        return false
+                    }
             } else {
                 ProgressView()
             }

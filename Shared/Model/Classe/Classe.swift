@@ -128,6 +128,7 @@ extension Classe: CustomStringConvertible {
            ID      : \(id)
            Niveau  : \(niveau.displayString)
            Numéro  : \(numero)
+           SEGPA   : \(segpa.frenchString)
            Heures  : \(heures)
            Flagged : \(isFlagged.frenchString)
            Appréciation: \(appreciation)

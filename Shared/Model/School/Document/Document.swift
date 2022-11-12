@@ -56,3 +56,14 @@ struct Document : Identifiable, Hashable, Codable {
         }
     }
 }
+
+extension Document: CustomStringConvertible {
+    var description: String {
+        """
+        
+        DOCUMENT: \(docName)
+           Fichier: \(fileName)
+           ID     : \(id)
+        """
+    }
+}

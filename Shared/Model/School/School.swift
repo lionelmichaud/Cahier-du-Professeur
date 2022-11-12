@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Etablissement scolaire
 struct School: Identifiable, Equatable, Codable {
 
     // MARK: - Type Methods
@@ -89,6 +90,12 @@ struct School: Identifiable, Equatable, Codable {
         self.classesID.contains(classeId)
     }
 
+    func contains(roomId: UUID) -> Bool {
+        self.rooms.contains { room in
+            room.id == roomId
+        }
+    }
+
     mutating func addClasse(withID classeID: UUID) {
         classesID.insert(classeID, at: 0)
     }
@@ -119,6 +126,10 @@ extension School: CustomStringConvertible {
            Note   : \(annotation)
            Nombre de classes: \(nbOfClasses)
            ClassesID: \(String(describing: classesID).withPrefixedSplittedLines("     "))
+           Evénements: \(String(describing: events).withPrefixedSplittedLines("     "))
+           Documents: \(String(describing: documents).withPrefixedSplittedLines("     "))
+           Salles: \(String(describing: rooms).withPrefixedSplittedLines("     "))
+           Ressources: \(String(describing: ressources).withPrefixedSplittedLines("     "))
         """
     }
 }

@@ -33,7 +33,7 @@ struct Room: Identifiable, Codable, Equatable {
     /// Nom de la salle de classe
     var name     : String = ""
     /// Plan de la salle de classe
-    var image    : Image? // cache
+    var image    : Image? //= Image(systemName : "questionmark.app.dashed")
     /// Places déjà positionnées sur le plan
     private var seats: [Seat] = []
     private (set) var capacity: Int
@@ -227,8 +227,9 @@ extension Room: CustomStringConvertible {
     var description: String {
         """
 
-        Salle de classe : \(name)
-        Capacité de la salle : \(capacity)
+        SALLE DE CLASSE : \(name)
+           Capacité de la salle : \(capacity)
+           Places: \(String(describing: seats).withPrefixedSplittedLines("     "))
         """
     }
 }

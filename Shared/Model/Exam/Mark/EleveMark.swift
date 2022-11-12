@@ -45,3 +45,15 @@ extension MarkEnum: PickableEnumP {
         }
     }
 }
+
+extension EleveMark: CustomStringConvertible {
+    var description: String {
+        """
+
+        NOTE:
+           Elève : \(eleveId)
+           \(type.displayString)
+           Note  : \(String(describing: mark))
+        """
+    }
+}

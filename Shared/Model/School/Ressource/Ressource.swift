@@ -34,9 +34,8 @@ struct Ressource: Identifiable, Hashable, Codable {
 extension Ressource: CustomStringConvertible {
     var description: String {
         """
-
-        Nom        : \(name)
-        Quantité   : \(maxNumber)
+        RESSOURCE: \(name)
+           Quantité   : \(maxNumber)
         """
     }
 }

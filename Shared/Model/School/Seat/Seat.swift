@@ -35,3 +35,12 @@ struct Seat: Identifiable, Codable, Hashable {
         self.locInRoom = CGPoint(x: x, y: y)
     }
 }
+
+extension Seat: CustomStringConvertible {
+    var description: String {
+        """
+
+        PLACE ASSISE : \(id)
+        """
+    }
+}

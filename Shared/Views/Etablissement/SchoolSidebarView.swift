@@ -36,6 +36,10 @@ struct SchoolSidebarView: View {
     private var isShowingAbout = false
     @State
     private var isImportingJpegFile = false
+    @State
+    private var progress = 0.0
+    @State
+    private var isProgressing = false
 
     // MARK: - Computed Properties
 
@@ -57,6 +61,12 @@ struct SchoolSidebarView: View {
     }
 
     var body: some View {
+        if progress > 0.0 {
+            ProgressView(value: progress)
+        }
+        if isProgressing {
+            ProgressView()
+        }
         List(selection: $navigationModel.selectedSchoolId) {
             if schoolStore.items.isEmpty {
                 Text("Aucun établissement actuellement")
@@ -107,6 +117,7 @@ struct SchoolSidebarView: View {
                     }
                 }
             }
+
             #if targetEnvironment(simulator)
             Button {
                 TestEnvir.populateWithFakes(
@@ -314,12 +325,27 @@ struct SchoolSidebarView: View {
 
     /// Suppression de toutes les données utilisateur
     private func clearAllUserData() {
+        //        DispatchQueue.global(qos: .background).async {
+        let nbSteps = 6.0
+        progress = 0.0
+
         schoolStore.clear()
+        //        DispatchQueue.main.async {
+        progress += 1.0/nbSteps
+        //        }
+        //        sleep(1)
         classeStore.clear()
+        progress += 1.0/nbSteps
         eleveStore.clear()
+        progress += 1.0/nbSteps
         colleStore.clear()
+        progress += 1.0/nbSteps
         observStore.clear()
+        progress += 1.0/nbSteps
         Trombinoscope.deleteAllTrombines()
+        progress += 1.0/nbSteps
+        progress = 0.0
+        //        }
     }
 
     /// Copier les fichiers  sélectionnés dans le dossier Document de l'application.
@@ -346,11 +372,13 @@ struct SchoolSidebarView: View {
     }
 
     private func repairDataBase() {
+        isProgressing.toggle()
         let success = PersistenceManager.repairDataBase(schoolStore: schoolStore,
                                                         classeStore: classeStore,
                                                         eleveStore : eleveStore,
                                                         colleStore : colleStore,
                                                         observStore: observStore)
+        isProgressing.toggle()
         if !success {
             self.alertItem = AlertItem(title: Text("Erreur"),
                                        message: Text("La base de donnée n'a pas pu être complètement réparée !"),

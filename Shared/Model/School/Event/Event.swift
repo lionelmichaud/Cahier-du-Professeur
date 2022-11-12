@@ -33,9 +33,9 @@ struct Event: Identifiable, Hashable, Codable {
 extension Event: CustomStringConvertible {
     var description: String {
         """
-
-        Nom    : \(name)
-        Date   : \(date.stringShortDate)
+        
+        EVENEMENT: \(name)
+           Date   : \(date.stringShortDate)
         """
     }
 }

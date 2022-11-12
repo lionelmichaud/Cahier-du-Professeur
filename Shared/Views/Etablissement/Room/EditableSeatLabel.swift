@@ -127,6 +127,11 @@ struct EditableSeatLabel: View {
                let trombine = Trombinoscope.eleveTrombineUrl(eleve: eleveOnSeat!.wrappedValue) {
                 LoadableImage(imageUrl         : trombine,
                               placeholderImage : .constant(Image(systemName: "person.fill.questionmark")))
+            } else {
+                Image(systemName: "questionmark.app.dashed")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(minWidth: 75, minHeight: 75)
             }
         }
         .offset(posInView(relativePos  : seat.locInRoom,
